@@ -104,6 +104,7 @@ The following properties form the theoretical basis for computing determinants.
     $\det(A^T) = \det(A)$.
 
 ??? proof "Proof"
+
     $$
     \det(A^T) = \sum_{\sigma} \operatorname{sgn}(\sigma) a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}.
     $$
@@ -158,6 +159,7 @@ The following properties form the theoretical basis for computing determinants.
     Adding $c$ times row $j$ to row $i$ does not change the determinant.
 
 ??? proof "Proof"
+
     $$
     \det(\ldots, \mathbf{r}_i + c\mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots) = \det(\ldots, \mathbf{r}_i, \ldots, \mathbf{r}_j, \ldots) + c \cdot \det(\ldots, \mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots).
     $$

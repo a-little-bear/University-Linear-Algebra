@@ -35,9 +35,11 @@
     当 $A$ 可逆时，唯一解为 $X = A^{-1}B$。
 
     一般情况下，设 $A^+$ 为 $A$ 的 Moore-Penrose 伪逆，则通解为：
+
     $$
     X = A^+ B + (I - A^+ A)Z,
     $$
+
     其中 $Z$ 为任意 $n \times p$ 矩阵。
 
 ??? proof "证明"
@@ -53,29 +55,35 @@
     当 $A$ 和 $B$ 均可逆时，唯一解为 $X = A^{-1}CB^{-1}$。
 
     一般情况下，通解为：
+
     $$
     X = A^+ C B^+ + Z - A^+ A Z B B^+,
     $$
+
     其中 $Z$ 为任意大小适当的矩阵。
 
 ??? proof "证明"
     **必要性**：若 $AXB = C$，则 $AA^+CB^+B = AA^+(AXB)B^+B = (AA^+A)X(BB^+B) = AXB = C$。
 
     **充分性**：设 $AA^+CB^+B = C$。令 $X_0 = A^+CB^+$，则：
+
     $$
     AX_0B = A(A^+CB^+)B = (AA^+)C(B^+B) = AA^+CB^+B = C.
     $$
 
     **通解**：设 $AXB = C$，则 $A(X - X_0)B = 0$。需要找到 $A\tilde{X}B = 0$ 的通解。$\tilde{X} = Z - A^+AZB B^+$ 满足：
+
     $$
     A(Z - A^+AZBB^+)B = AZB - (AA^+A)Z(BB^+B) = AZB - AZB = 0. \quad \blacksquare
     $$
 
 !!! definition "定义 20.2 (矩阵方程的算子形式)"
     一般的线性矩阵方程可以写成算子形式 $\mathcal{L}(X) = C$，其中 $\mathcal{L}: \mathbb{C}^{m \times n} \to \mathbb{C}^{m \times n}$ 为线性算子。利用 Vec 算子和 Kronecker 积，这等价于：
+
     $$
     L \operatorname{vec}(X) = \operatorname{vec}(C),
     $$
+
     其中 $L$ 为 $mn \times mn$ 矩阵（见第 19 章）。
 
 !!! example "例 20.1"
@@ -111,20 +119,24 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 !!! definition "定义 20.3 (Sylvester 方程)"
     **Sylvester 方程**是如下形式的线性矩阵方程：
+
     $$
     AX + XB = C,
     $$
+
     其中 $A \in \mathbb{C}^{m \times m}$，$B \in \mathbb{C}^{n \times n}$，$C \in \mathbb{C}^{m \times n}$ 为已知矩阵，$X \in \mathbb{C}^{m \times n}$ 为未知矩阵。
     当 $A = -B^*$ 时，Sylvester 方程退化为 Lyapunov 方程。
 
 !!! theorem "定理 20.3 (Sylvester 方程的可解性 —— Sylvester-Rosenblum 定理)"
     Sylvester 方程 $AX + XB = C$ 对任意 $C$ 有唯一解 $X$，当且仅当 $A$ 与 $-B$ 无公共特征值，即：
+
     $$
     \sigma(A) \cap \sigma(-B) = \emptyset.
     $$
 
 ??? proof "证明"
     **Kronecker 积方法**：由第 19 章，方程 $AX + XB = C$ 等价于：
+
     $$
     (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
@@ -137,6 +149,7 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 !!! theorem "定理 20.4 (Sylvester 方程的积分表示)"
     若 $A$ 的所有特征值实部为负（$A$ 稳定），$B$ 的所有特征值实部为正，则 Sylvester 方程 $AX + XB = C$ 的唯一解为：
+
     $$
     X = \int_0^{\infty} e^{At} C e^{Bt} \, dt.
     $$
@@ -149,9 +162,11 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
     实际上，标准条件是 $\operatorname{Re}\lambda_i(A) + \operatorname{Re}\mu_j(B) < 0$。此时：
 
     令 $X = \int_0^{\infty} e^{At} C e^{Bt} \, dt$。对 $AX + XB$：
+
     $$
     AX + XB = \int_0^{\infty} (Ae^{At})Ce^{Bt} \, dt + \int_0^{\infty} e^{At}C(e^{Bt}B) \, dt
     $$
+
     $$
     = \int_0^{\infty} \frac{d}{dt}\left(e^{At}Ce^{Bt}\right) dt = \left[e^{At}Ce^{Bt}\right]_0^{\infty} = 0 - C = -C.
     $$
@@ -165,9 +180,11 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 !!! theorem "定理 20.5 (交换矩阵的结构)"
     设 $A$ 为 $n \times n$ 矩阵，有 $k$ 个不同的特征值 $\lambda_1, \ldots, \lambda_k$，对应的 Jordan 块大小分别为 $n_{i,1} \geq n_{i,2} \geq \cdots$（$i = 1,\ldots,k$）。则与 $A$ 交换的矩阵空间的维数为：
+
     $$
     \dim\{X : AX = XA\} = \sum_{i=1}^{k} \sum_{j} (2j - 1) n_{i,j}',
     $$
+
     其中 $n_{i,j}'$ 是特征值 $\lambda_i$ 对应的 Jordan 块大小的共轭分拆。
 
     特别地，当 $A$ 有 $n$ 个不同特征值时（即 $A$ 的最小多项式等于特征多项式），与 $A$ 交换的矩阵恰好是 $A$ 的多项式 $p(A)$，维数为 $n$。
@@ -181,6 +198,7 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 !!! example "例 20.2"
     求解 Sylvester 方程 $AX + XB = C$，其中：
+
     $$
     A = \begin{pmatrix} 1 & 0 \\ 0 & 3 \end{pmatrix}, \quad B = \begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}, \quad C = \begin{pmatrix} 6 & 10 \\ 15 & 35 \end{pmatrix}.
     $$
@@ -226,32 +244,40 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
 
 !!! definition "定义 20.5 (连续 Lyapunov 方程)"
     **连续 Lyapunov 方程**（continuous Lyapunov equation）为：
+
     $$
     AX + XA^* = Q,
     $$
+
     其中 $A \in \mathbb{C}^{n \times n}$，$Q \in \mathbb{C}^{n \times n}$（$Q = Q^*$），$X \in \mathbb{C}^{n \times n}$ 为未知 Hermite 矩阵。
 
 !!! definition "定义 20.6 (离散 Lyapunov 方程)"
     **离散 Lyapunov 方程**（discrete Lyapunov equation，也称 **Stein 方程**）为：
+
     $$
     AXA^* - X = Q,
     $$
+
     或等价地 $X - AXA^* = -Q$。其中 $A, Q, X \in \mathbb{C}^{n \times n}$。
 
 !!! theorem "定理 20.6 (连续 Lyapunov 方程与稳定性)"
     设 $A \in \mathbb{C}^{n \times n}$。
 
     1. 若 $A$ **稳定**（即所有特征值实部为负：$\operatorname{Re}\lambda_i(A) < 0$），则对任意半正定 $Q \succeq 0$，连续 Lyapunov 方程 $AX + XA^* = -Q$ 有唯一的半正定解：
+
     $$
     X = \int_0^{\infty} e^{At} Q e^{A^*t} \, dt \succeq 0.
     $$
+
     2. 反之，若对某个 $Q \succ 0$，存在 $X \succ 0$ 满足 $AX + XA^* = -Q$，则 $A$ 稳定。
 
 ??? proof "证明"
     **(1)**：由 $A$ 稳定，$e^{At} \to 0$（$t \to \infty$）以指数速度，因此积分收敛。验证：
+
     $$
     AX + XA^* = \int_0^{\infty} (Ae^{At})Qe^{A^*t} \, dt + \int_0^{\infty} e^{At}Q(e^{A^*t}A^*) \, dt
     $$
+
     $$
     = \int_0^{\infty} \frac{d}{dt}(e^{At}Qe^{A^*t}) \, dt = [e^{At}Qe^{A^*t}]_0^{\infty} = 0 - Q = -Q.
     $$
@@ -261,6 +287,7 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
     唯一性由 Sylvester-Rosenblum 定理保证（$\sigma(A) \cap \sigma(-A^*) = \emptyset$，因为 $A$ 的特征值实部为负而 $-A^*$ 的特征值 $-\overline{\lambda_i(A)}$ 实部为正）。
 
     **(2)**：设 $A\mathbf{v} = \lambda\mathbf{v}$（$\mathbf{v} \neq 0$），则：
+
     $$
     \mathbf{v}^*(AX + XA^*)\mathbf{v} = \lambda(\mathbf{v}^*X\mathbf{v}) + \bar{\lambda}(\mathbf{v}^*X\mathbf{v}) = 2\operatorname{Re}(\lambda)(\mathbf{v}^*X\mathbf{v}) = -\mathbf{v}^*Q\mathbf{v}.
     $$
@@ -271,13 +298,16 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
     设 $A \in \mathbb{C}^{n \times n}$。
 
     1. 若 $A$ **Schur 稳定**（即所有特征值模小于 1：$|\lambda_i(A)| < 1$），则对任意 $Q \succeq 0$，离散方程 $X - AXA^* = Q$ 有唯一的半正定解：
+
     $$
     X = \sum_{k=0}^{\infty} A^k Q (A^*)^k \succeq 0.
     $$
+
     2. 反之，若对某个 $Q \succ 0$，存在 $X \succ 0$ 满足 $X - AXA^* = Q$，则 $A$ Schur 稳定。
 
 ??? proof "证明"
     **(1)**：由 $|\lambda_i(A)| < 1$，级数 $\sum_{k=0}^{\infty} A^k Q (A^*)^k$ 绝对收敛。验证：
+
     $$
     X - AXA^* = \sum_{k=0}^{\infty} A^k Q (A^*)^k - A\left(\sum_{k=0}^{\infty} A^k Q (A^*)^k\right)A^* = \sum_{k=0}^{\infty} A^k Q (A^*)^k - \sum_{k=1}^{\infty} A^k Q (A^*)^k = A^0 Q (A^*)^0 = Q.
     $$
@@ -286,14 +316,17 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
 
 !!! example "例 20.4"
     求解连续 Lyapunov 方程 $AX + XA^T = -Q$，其中：
+
     $$
     A = \begin{pmatrix} -1 & 0 \\ 0 & -2 \end{pmatrix}, \quad Q = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}.
     $$
 
     $A$ 稳定（特征值 $-1, -2$）。利用积分公式：
+
     $$
     X = \int_0^{\infty} e^{At} Q e^{A^Tt} \, dt = \int_0^{\infty} \begin{pmatrix} e^{-t} & 0 \\ 0 & e^{-2t} \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} e^{-t} & 0 \\ 0 & e^{-2t} \end{pmatrix} dt.
     $$
+
     $$
     = \int_0^{\infty} \begin{pmatrix} 2e^{-2t} & 0 \\ 0 & 2e^{-4t} \end{pmatrix} dt = \begin{pmatrix} 1 & 0 \\ 0 & 1/2 \end{pmatrix}.
     $$
@@ -302,6 +335,7 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
 
 !!! example "例 20.5"
     求解离散 Lyapunov 方程 $X - AXA^T = Q$，其中：
+
     $$
     A = \begin{pmatrix} 1/2 & 0 \\ 0 & 1/3 \end{pmatrix}, \quad Q = I_2.
     $$
@@ -332,30 +366,37 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
 
 !!! definition "定义 20.7 (代数 Riccati 方程)"
     **连续代数 Riccati 方程**（continuous algebraic Riccati equation, CARE）为：
+
     $$
     A^*X + XA - XBR^{-1}B^*X + Q = 0,
     $$
+
     其中 $A \in \mathbb{C}^{n \times n}$，$B \in \mathbb{C}^{n \times m}$，$Q = Q^* \in \mathbb{C}^{n \times n}$（$Q \succeq 0$），$R = R^* \in \mathbb{C}^{m \times m}$（$R \succ 0$），$X = X^* \in \mathbb{C}^{n \times n}$ 为未知 Hermite 矩阵。
 
     **离散代数 Riccati 方程**（discrete algebraic Riccati equation, DARE）为：
+
     $$
     X = A^*XA - A^*XB(R + B^*XB)^{-1}B^*XA + Q.
     $$
 
 !!! definition "定义 20.8 (Hamiltonian 矩阵)"
     与连续 Riccati 方程相关联的 **Hamilton 矩阵**（Hamiltonian matrix）为：
+
     $$
     H = \begin{pmatrix} A & -BR^{-1}B^* \\ -Q & -A^* \end{pmatrix}.
     $$
+
     Hamilton 矩阵的一个重要性质是：若 $\lambda$ 是 $H$ 的特征值，则 $-\bar{\lambda}$ 也是。
 
 !!! theorem "定理 20.8 (CARE 与 Hamilton 矩阵)"
     设 Hamilton 矩阵 $H$ 没有纯虚数特征值。将 $H$ 的 $2n$ 个特征值分为稳定部分（实部为负）和不稳定部分（实部为正），各 $n$ 个。
 
     设 $\begin{pmatrix} U_1 \\ U_2 \end{pmatrix}$ 为 $H$ 的稳定不变子空间的基（$U_1, U_2$ 均为 $n \times n$），若 $U_1$ 可逆，则 CARE 的**稳定化解**为：
+
     $$
     X = U_2 U_1^{-1}.
     $$
+
     此解使得闭环矩阵 $A - BR^{-1}B^*X$ 稳定。
 
 ??? proof "证明"
@@ -433,6 +474,7 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
     **步骤 1**：计算 Schur 分解 $A = U_A T_A U_A^*$，$B = U_B T_B U_B^*$。
 
     **步骤 2**：变量替换 $Y = U_A^* X U_B$，$D = U_A^* C U_B$，方程变为：
+
     $$
     T_A Y + Y T_B = D.
     $$
@@ -449,6 +491,7 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
     **逐列求解**：设 $T_B$ 的第 $j$ 列为 $\mathbf{t}_j$（仅前 $j$ 个分量可能非零），$Y$ 的第 $j$ 列为 $\mathbf{y}_j$，$D$ 的第 $j$ 列为 $\mathbf{d}_j$。
 
     方程 $T_A Y + Y T_B = D$ 的第 $j$ 列为：
+
     $$
     T_A \mathbf{y}_j + \sum_{k=1}^{j} (T_B)_{kj} \mathbf{y}_k = \mathbf{d}_j.
     $$
@@ -471,6 +514,7 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
 
 !!! example "例 20.8"
     用 Bartels-Stewart 算法求解 $AX + XB = C$，其中：
+
     $$
     A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}, \quad B = \begin{pmatrix} 1 & 2 \\ 0 & 4 \end{pmatrix}, \quad C = \begin{pmatrix} 10 & 26 \\ 9 & 28 \end{pmatrix}.
     $$
@@ -480,15 +524,19 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
     直接逐列求解 $T_A Y + Y T_B = D$（即 $AX + XB = C$）。
 
     **第 1 列**（$j = 1$）：$(A + b_{11}I)\mathbf{x}_1 = \mathbf{c}_1$。
+
     $$
     \begin{pmatrix} 3 & 1 \\ 0 & 4 \end{pmatrix}\begin{pmatrix} x_{11} \\ x_{21} \end{pmatrix} = \begin{pmatrix} 10 \\ 9 \end{pmatrix}.
     $$
+
     回代：$x_{21} = 9/4$，$x_{11} = (10 - 9/4)/3 = 31/12$。
 
     **第 2 列**（$j = 2$）：$(A + b_{22}I)\mathbf{x}_2 = \mathbf{c}_2 - b_{12}\mathbf{x}_1$。
+
     $$
     \begin{pmatrix} 6 & 1 \\ 0 & 7 \end{pmatrix}\begin{pmatrix} x_{12} \\ x_{22} \end{pmatrix} = \begin{pmatrix} 26 \\ 28 \end{pmatrix} - 2\begin{pmatrix} 31/12 \\ 9/4 \end{pmatrix} = \begin{pmatrix} 26 - 31/6 \\ 28 - 9/2 \end{pmatrix} = \begin{pmatrix} 125/6 \\ 47/2 \end{pmatrix}.
     $$
+
     回代：$x_{22} = 47/14$，$x_{12} = (125/6 - 47/14)/6 = (875/42 - 141/42)/6 = (734/42)/6 = 734/252 = 367/126$。
 
     验证可代回原方程。（数值较复杂但过程正确。）
@@ -524,6 +572,7 @@ Penrose 方程组给出了 Moore-Penrose 伪逆的公理化刻画。
 
 !!! definition "定义 20.10 (Penrose 方程组)"
     设 $A$ 为 $m \times n$ 矩阵。**Penrose 方程组**（Penrose equations）是关于 $n \times m$ 矩阵 $X$ 的以下四个方程：
+
     $$
     \begin{aligned}
     &(1)\quad AXA = A, \\
@@ -593,15 +642,19 @@ Penrose 方程组给出了 Moore-Penrose 伪逆的公理化刻画。
 
 !!! theorem "定理 20.14 ($\{1\}$-逆的通解)"
     对 $m \times n$ 矩阵 $A$（$\operatorname{rank}(A) = r$），方程 $AXA = A$ 的通解为：
+
     $$
     X = A^+ + (I - A^+A)W_1 + W_2(I - AA^+),
     $$
+
     其中 $W_1, W_2$ 为任意大小适当的矩阵。
 
     等价地，设 $A = P\begin{pmatrix} I_r & 0 \\ 0 & 0 \end{pmatrix}Q$（$P, Q$ 可逆），则 $\{1\}$-逆的一般形式为：
+
     $$
     X = Q^{-1}\begin{pmatrix} I_r & L \\ M & N \end{pmatrix}P^{-1},
     $$
+
     其中 $L, M, N$ 为任意矩阵。
 
 ??? proof "证明"

@@ -37,25 +37,31 @@ An invariant subspace is a fundamental tool for understanding the structure of l
 
 !!! definition "Definition 12.2 (Direct sum decomposition into invariant subspaces)"
     Let $W_1, W_2, \ldots, W_k$ all be invariant subspaces of $A$. If
+
     $$
     \mathbb{R}^n = W_1 \oplus W_2 \oplus \cdots \oplus W_k
     $$
+
     (i.e., every $\mathbf{x} \in \mathbb{R}^n$ can be uniquely written as $\mathbf{x} = \mathbf{w}_1 + \cdots + \mathbf{w}_k$ with $\mathbf{w}_i \in W_i$), then $\mathbb{R}^n$ is called a **direct sum decomposition** of invariant subspaces of $A$.
 
 !!! theorem "Theorem 12.1 (Invariant subspaces and block diagonalization)"
     Let $\mathbb{R}^n = W_1 \oplus W_2 \oplus \cdots \oplus W_k$ be a direct sum decomposition of invariant subspaces of $A$. Choose a basis $\mathcal{B}_i$ for $W_i$ and combine them into $\mathcal{B} = \mathcal{B}_1 \cup \cdots \cup \mathcal{B}_k$. Let $P$ be the matrix of basis $\mathcal{B}$ (with columns being the basis vectors). Then
+
     $$
     P^{-1}AP = \begin{pmatrix} A_1 & & \\ & A_2 & \\ & & \ddots & \\ & & & A_k \end{pmatrix},
     $$
+
     where $A_i$ is the matrix representation of $A$ restricted to $W_i$ ($\dim W_i \times \dim W_i$).
 
 ??? proof "Proof"
     Let $\dim W_i = n_i$ and $\mathcal{B}_i = \{\mathbf{w}_{i,1}, \ldots, \mathbf{w}_{i,n_i}\}$. Since $W_i$ is an invariant subspace of $A$, $A\mathbf{w}_{i,j} \in W_i$, so $A\mathbf{w}_{i,j}$ can be expressed as a linear combination of vectors in $\mathcal{B}_i$.
 
     Let $P = [\mathbf{w}_{1,1}, \ldots, \mathbf{w}_{1,n_1}, \ldots, \mathbf{w}_{k,1}, \ldots, \mathbf{w}_{k,n_k}]$. Then
+
     $$
     AP = P \begin{pmatrix} A_1 & & \\ & \ddots & \\ & & A_k \end{pmatrix},
     $$
+
     where the $j$-th column of $A_i$ is the coordinate vector of $A\mathbf{w}_{i,j}$ with respect to the basis $\mathcal{B}_i$. Since $P$ is invertible, the result follows. $\blacksquare$
 
 !!! theorem "Theorem 12.2 (Eigenspaces are invariant subspaces)"
@@ -80,23 +86,29 @@ When the geometric multiplicity of an eigenvalue is less than its algebraic mult
 
 !!! definition "Definition 12.3 (Generalized Eigenvector)"
     Let $\lambda$ be an eigenvalue of matrix $A$. A nonzero vector $\mathbf{v}$ satisfying
+
     $$
     (A - \lambda I)^k \mathbf{v} = \mathbf{0}
     $$
+
     for some positive integer $k$ is called a **generalized eigenvector** of $A$ corresponding to $\lambda$ (of rank $k$, if $(A-\lambda I)^{k-1}\mathbf{v} \neq \mathbf{0}$).
 
 !!! definition "Definition 12.4 (Generalized Eigenspace)"
     The **generalized eigenspace** of matrix $A$ corresponding to eigenvalue $\lambda$ is
+
     $$
     G_\lambda = \ker(A - \lambda I)^n = \{\mathbf{v} \in \mathbb{R}^n : (A - \lambda I)^n \mathbf{v} = \mathbf{0}\},
     $$
+
     where $n$ is the order of the matrix. Equivalently, $G_\lambda = \bigcup_{k=1}^{\infty} \ker(A - \lambda I)^k$.
 
 !!! theorem "Theorem 12.3 (Dimension of the generalized eigenspace)"
     Let $\lambda$ be an eigenvalue of $A$ with algebraic multiplicity $m$. Then
+
     $$
     \dim G_\lambda = m.
     $$
+
     That is, the dimension of the generalized eigenspace equals the algebraic multiplicity of the eigenvalue.
 
 ??? proof "Proof"
@@ -104,6 +116,7 @@ When the geometric multiplicity of an eigenvalue is less than its algebraic mult
 
 !!! theorem "Theorem 12.4 (Direct sum decomposition of generalized eigenspaces)"
     Let $A$ be an $n \times n$ matrix (over the complex numbers) with distinct eigenvalues $\lambda_1, \ldots, \lambda_s$. Then
+
     $$
     \mathbb{C}^n = G_{\lambda_1} \oplus G_{\lambda_2} \oplus \cdots \oplus G_{\lambda_s}.
     $$
@@ -165,16 +178,20 @@ Nilpotent matrices are the key to understanding the Jordan normal form. Every Jo
     Let $N = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}$. Verify that $N$ is nilpotent and find its nilpotency index.
 
     **Solution:**
+
     $$
     N^2 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \qquad N^3 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
     $$
+
     $N^2 \neq 0$ but $N^3 = 0$, so the nilpotency index is $3$.
 
 !!! theorem "Theorem 12.6 (Jordan normal form of a nilpotent matrix)"
     Let $N$ be an $n \times n$ nilpotent matrix with nilpotency index $k$. Then $N$ is similar to a block diagonal matrix
+
     $$
     J = \operatorname{diag}(J_{n_1}(0), J_{n_2}(0), \ldots, J_{n_t}(0)),
     $$
+
     where $J_{n_i}(0)$ is an $n_i \times n_i$ nilpotent Jordan block (zeros on the diagonal, ones on the superdiagonal), $n_1 \ge n_2 \ge \cdots \ge n_t \ge 1$, $\sum n_i = n$, $n_1 = k$.
 
 ??? proof "Proof"
@@ -194,6 +211,7 @@ Jordan blocks are the basic building units of the Jordan normal form.
 
 !!! definition "Definition 12.6 (Jordan Block)"
     The $k \times k$ **Jordan block** $J_k(\lambda)$ is defined as
+
     $$
     J_k(\lambda) = \begin{pmatrix}
     \lambda & 1 & 0 & \cdots & 0 \\
@@ -203,6 +221,7 @@ Jordan blocks are the basic building units of the Jordan normal form.
     0 & \cdots & 0 & 0 & \lambda
     \end{pmatrix} = \lambda I_k + N_k,
     $$
+
     where $N_k$ is the $k \times k$ **basic nilpotent matrix** (all superdiagonal entries equal to 1, the rest zero).
 
 !!! theorem "Theorem 12.7 (Properties of Jordan blocks)"
@@ -228,9 +247,11 @@ Jordan blocks are the basic building units of the Jordan normal form.
     **Solution:** $J_3(2) = 2I + N_3$, where $N_3 = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}$.
 
     By the formula:
+
     $$
     J_3(2)^4 = \sum_{j=0}^{2} \binom{4}{j} 2^{4-j} N_3^j = \binom{4}{0}2^4 I + \binom{4}{1}2^3 N_3 + \binom{4}{2}2^2 N_3^2
     $$
+
     $$
     = 16I + 32N_3 + 24N_3^2 = \begin{pmatrix}16&32&24\\0&16&32\\0&0&16\end{pmatrix}.
     $$
@@ -247,9 +268,11 @@ Jordan blocks are the basic building units of the Jordan normal form.
 
 !!! definition "Definition 12.7 (Jordan Matrix)"
     A **Jordan matrix** is a block diagonal matrix
+
     $$
     J = \operatorname{diag}(J_{k_1}(\lambda_1), J_{k_2}(\lambda_2), \ldots, J_{k_s}(\lambda_s)),
     $$
+
     where each $J_{k_i}(\lambda_i)$ is a Jordan block. Different blocks may have the same $\lambda$ value.
 
 <div class="context-flow" markdown>
@@ -260,9 +283,11 @@ Jordan blocks are the basic building units of the Jordan normal form.
 
 !!! theorem "Theorem 12.8 (Jordan Normal Form Theorem)"
     Let $A$ be an $n \times n$ complex matrix. Then there exists an invertible matrix $P$ such that
+
     $$
     P^{-1}AP = J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s)),
     $$
+
     where $J$ is a Jordan matrix.
 
     Moreover, $J$ is unique **up to permutation of the Jordan blocks**. That is, the sizes of the Jordan blocks and their corresponding eigenvalues are uniquely determined by $A$.
@@ -279,9 +304,11 @@ Jordan blocks are the basic building units of the Jordan normal form.
     Step 3 (Jordan form of nilpotent matrices): Let $N$ be a $d \times d$ nilpotent matrix. By constructing Jordan chains, one can find a basis under which $N$ has Jordan form.
 
     Specifically, choose $\mathbf{v}$ such that $(A-\lambda I)^{k-1}\mathbf{v} \neq \mathbf{0}$ but $(A-\lambda I)^k\mathbf{v} = \mathbf{0}$. Define the Jordan chain:
+
     $$
     \mathbf{v}, (A-\lambda I)\mathbf{v}, (A-\lambda I)^2\mathbf{v}, \ldots, (A-\lambda I)^{k-1}\mathbf{v}.
     $$
+
     These $k$ vectors are linearly independent, and $A$ restricted to their span is represented by $J_k(\lambda)$.
 
     Repeating this process decomposes the entire generalized eigenspace into a direct sum of Jordan chains.
@@ -289,13 +316,17 @@ Jordan blocks are the basic building units of the Jordan normal form.
     **Uniqueness:**
 
     The Jordan block structure is determined by the following invariants: for each eigenvalue $\lambda$ and each positive integer $j$,
+
     $$
     r_j = \operatorname{rank}(A - \lambda I)^j
     $$
+
     is a similarity invariant. The number of Jordan blocks of size $k$ associated with $J_k(\lambda)$ is
+
     $$
     n_k = r_{k-2} - 2r_{k-1} + r_k
     $$
+
     (with the convention $r_{-1} = n$, $r_0 = n - \dim\ker(A-\lambda I)$), which is uniquely determined by $A$. $\blacksquare$
 
 !!! theorem "Theorem 12.9 (Jordan normal form and matrix properties)"
@@ -325,6 +356,7 @@ Jordan blocks are the basic building units of the Jordan normal form.
     For $\lambda_2 = -1$: algebraic multiplicity 2, geometric multiplicity 1, so there is 1 Jordan block of size 2.
 
     The Jordan normal form is
+
     $$
     J = \begin{pmatrix}
     2 & 1 & & & \\
@@ -368,6 +400,7 @@ The minimal polynomial has a close connection with the Jordan normal form.
 
 !!! theorem "Theorem 12.11 (Relationship between minimal polynomial and Jordan form)"
     Let $d_i$ be the size of the largest Jordan block corresponding to eigenvalue $\lambda_i$ in the Jordan normal form of $A$. Then
+
     $$
     m_A(\lambda) = \prod_{i=1}^{s} (\lambda - \lambda_i)^{d_i}.
     $$
@@ -404,9 +437,11 @@ This section demonstrates how to compute the Jordan normal form and the transiti
 
 !!! definition "Definition 12.9 (Jordan Chain)"
     Let $\lambda$ be an eigenvalue of $A$. If the vector sequence $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$ satisfies
+
     $$
     (A - \lambda I)\mathbf{v}_1 = \mathbf{0}, \quad (A - \lambda I)\mathbf{v}_j = \mathbf{v}_{j-1}, \quad j = 2, \ldots, k,
     $$
+
     then $\{\mathbf{v}_k, \mathbf{v}_{k-1}, \ldots, \mathbf{v}_1\}$ is called a **Jordan chain** of length $k$. Here $\mathbf{v}_1$ is an eigenvector, and $\mathbf{v}_2, \ldots, \mathbf{v}_k$ are generalized eigenvectors.
 
 !!! definition "Definition 12.10 (Steps for computing the Jordan normal form)"
@@ -423,15 +458,19 @@ This section demonstrates how to compute the Jordan normal form and the transiti
     **Solution:**
 
     **Step 1:** The characteristic polynomial (computed via determinant expansion or other methods):
+
     $$
     p_A(\lambda) = (\lambda - 1)^2(\lambda - 4)(\lambda - 3).
     $$
+
     Eigenvalues: $\lambda_1 = 1$ (algebraic multiplicity 2), $\lambda_2 = 4$ (algebraic multiplicity 1), $\lambda_3 = 3$ (algebraic multiplicity 1).
 
     **Step 2:** For $\lambda_1 = 1$:
+
     $$
     A - I = \begin{pmatrix} 4&4&2&1 \\ 0&0&-1&-1 \\ -1&-1&2&0 \\ 1&1&-1&1 \end{pmatrix}.
     $$
+
     Computing $\operatorname{rank}(A-I)$: by row reduction, $\operatorname{rank}(A-I) = 3$, so $\dim\ker(A-I) = 1$.
 
     The geometric multiplicity is 1 < algebraic multiplicity 2, so there is one $2 \times 2$ Jordan block $J_2(1)$.
@@ -439,6 +478,7 @@ This section demonstrates how to compute the Jordan normal form and the transiti
     For $\lambda_2 = 4$ and $\lambda_3 = 3$: both have algebraic multiplicity 1, so each has a single $1 \times 1$ block.
 
     **Step 3:** The Jordan normal form is
+
     $$
     J = \begin{pmatrix}
     1 & 1 & & \\
@@ -458,6 +498,7 @@ This section demonstrates how to compute the Jordan normal form and the transiti
     $(A - 2I) = \begin{pmatrix}0&1\\0&0\end{pmatrix}$, $\ker(A-2I) = \operatorname{span}\left\{\begin{pmatrix}1\\0\end{pmatrix}\right\}$.
 
     Eigenvector $\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}$. Generalized eigenvector $\mathbf{v}_2$ satisfying $(A-2I)\mathbf{v}_2 = \mathbf{v}_1$:
+
     $$
     \begin{pmatrix}0&1\\0&0\end{pmatrix}\mathbf{v}_2 = \begin{pmatrix}1\\0\end{pmatrix}, \quad \Rightarrow \quad \mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}.
     $$
@@ -470,9 +511,11 @@ This section demonstrates how to compute the Jordan normal form and the transiti
     Find the Jordan normal form of the matrix $A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 8 & -12 & 6 \end{pmatrix}$.
 
     **Solution:** The characteristic polynomial is
+
     $$
     p_A(\lambda) = -\lambda^3 + 6\lambda^2 - 12\lambda + 8 = -(\lambda - 2)^3.
     $$
+
     The unique eigenvalue is $\lambda = 2$ with algebraic multiplicity 3.
 
     $$
@@ -482,9 +525,11 @@ This section demonstrates how to compute the Jordan normal form and the transiti
     Row reduction gives $\operatorname{rank}(A - 2I) = 2$, $\dim\ker(A-2I) = 1$, so the geometric multiplicity is 1.
 
     Rank of $(A-2I)^2$: computing
+
     $$
     (A-2I)^2 = \begin{pmatrix}4&-4&1\\-8&8&-2\\-16&16&-4\end{pmatrix} + \cdots
     $$
+
     Actual computation gives $\operatorname{rank}(A-2I)^2 = 1$, $\dim\ker(A-2I)^2 = 2$.
 
     $(A-2I)^3 = 0$, $\dim\ker(A-2I)^3 = 3$.
@@ -511,10 +556,13 @@ $A^n = PJ^nP^{-1}$ (matrix powers) · $e^{At} = Pe^{Jt}P^{-1}$ (differential equ
 
 !!! theorem "Theorem 12.12 (Computing matrix powers via the Jordan form)"
     Let $A = PJP^{-1}$. Then $A^n = PJ^nP^{-1}$, where
+
     $$
     J^n = \operatorname{diag}(J_{k_1}(\lambda_1)^n, \ldots, J_{k_s}(\lambda_s)^n),
     $$
+
     and
+
     $$
     J_k(\lambda)^n = \begin{pmatrix}
     \lambda^n & \binom{n}{1}\lambda^{n-1} & \binom{n}{2}\lambda^{n-2} & \cdots & \binom{n}{k-1}\lambda^{n-k+1} \\
@@ -527,15 +575,18 @@ $A^n = PJ^nP^{-1}$ (matrix powers) · $e^{At} = Pe^{Jt}P^{-1}$ (differential equ
 
 ??? proof "Proof"
     $J_k(\lambda)^n = (\lambda I + N_k)^n = \sum_{j=0}^{k-1}\binom{n}{j}\lambda^{n-j}N_k^j$. The $(p,q)$ entry of $N_k^j$ is $\delta_{p+j,q}$ (the $j$-th superdiagonal is all 1's). Therefore the $(p,q)$ entry of $J_k(\lambda)^n$ is:
+
     $$
     [J_k(\lambda)^n]_{pq} = \begin{cases} \binom{n}{q-p}\lambda^{n-q+p} & \text{if } q \ge p, \\ 0 & \text{if } q < p. \end{cases}
     $$
+
     Here the convention is $\binom{n}{j} = 0$ when $j > n$ or $j < 0$. $\blacksquare$
 
 !!! example "Example 12.10"
     Let $A = \begin{pmatrix}3&1\\0&3\end{pmatrix}$. Compute $A^{100}$.
 
     **Solution:** $A = J_2(3)$, so
+
     $$
     A^{100} = J_2(3)^{100} = \begin{pmatrix} 3^{100} & 100 \cdot 3^{99} \\ 0 & 3^{100} \end{pmatrix}.
     $$
@@ -544,10 +595,13 @@ $A^n = PJ^nP^{-1}$ (matrix powers) · $e^{At} = Pe^{Jt}P^{-1}$ (differential equ
 
 !!! theorem "Theorem 12.13 (Jordan form and linear constant-coefficient ODE systems)"
     The solution of the linear constant-coefficient ODE system $\mathbf{x}'(t) = A\mathbf{x}(t)$ is $\mathbf{x}(t) = e^{At}\mathbf{x}(0)$. Using the Jordan decomposition $A = PJP^{-1}$:
+
     $$
     e^{At} = Pe^{Jt}P^{-1} = P \operatorname{diag}(e^{J_{k_1}(\lambda_1)t}, \ldots, e^{J_{k_s}(\lambda_s)t}) P^{-1},
     $$
+
     where
+
     $$
     e^{J_k(\lambda)t} = e^{\lambda t}\begin{pmatrix}
     1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{k-1}}{(k-1)!} \\
@@ -569,6 +623,7 @@ $A^n = PJ^nP^{-1}$ (matrix powers) · $e^{At} = Pe^{Jt}P^{-1}$ (differential equ
     Solve the ODE system $\mathbf{x}' = \begin{pmatrix}2&1\\0&2\end{pmatrix}\mathbf{x}$ with initial condition $\mathbf{x}(0) = \begin{pmatrix}1\\3\end{pmatrix}$.
 
     **Solution:** $A = J_2(2)$, so
+
     $$
     e^{At} = e^{2t}\begin{pmatrix}1&t\\0&1\end{pmatrix}.
     $$

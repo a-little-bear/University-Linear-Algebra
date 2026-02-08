@@ -26,19 +26,23 @@
 
 !!! definition "定义 18.1 (Hermite 矩阵的特征值排序)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，即 $A = A^*$。其 $n$ 个实特征值按降序排列：
+
     $$
     \lambda_1(A) \geq \lambda_2(A) \geq \cdots \geq \lambda_n(A).
     $$
+
     我们用 $\lambda_{\max}(A) = \lambda_1(A)$ 和 $\lambda_{\min}(A) = \lambda_n(A)$ 分别表示最大和最小特征值。
 
 !!! definition "定义 18.2 (Rayleigh 商)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，对非零向量 $\mathbf{x} \in \mathbb{C}^n$，**Rayleigh 商**（Rayleigh quotient）定义为：
+
     $$
     R_A(\mathbf{x}) = \frac{\mathbf{x}^* A \mathbf{x}}{\mathbf{x}^* \mathbf{x}}.
     $$
 
 !!! theorem "定理 18.1 (Courant-Fischer 极小极大定理)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，特征值 $\lambda_1(A) \geq \cdots \geq \lambda_n(A)$，则对 $k = 1, 2, \ldots, n$：
+
     $$
     \lambda_k(A) = \max_{\dim S = k} \min_{\mathbf{x} \in S, \mathbf{x} \neq \mathbf{0}} \frac{\mathbf{x}^* A \mathbf{x}}{\mathbf{x}^* \mathbf{x}} = \min_{\dim T = n-k+1} \max_{\mathbf{x} \in T, \mathbf{x} \neq \mathbf{0}} \frac{\mathbf{x}^* A \mathbf{x}}{\mathbf{x}^* \mathbf{x}}.
     $$
@@ -49,33 +53,41 @@
     **第一步**：证明 $\lambda_k \geq \max_{\dim S=k} \min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x})$ 的一个方向。
 
     取 $S_0 = \operatorname{span}\{\mathbf{u}_1, \ldots, \mathbf{u}_k\}$，则 $\dim S_0 = k$。对任意 $\mathbf{x} = \sum_{i=1}^k c_i \mathbf{u}_i \in S_0$，有：
+
     $$
     R_A(\mathbf{x}) = \frac{\sum_{i=1}^k \lambda_i |c_i|^2}{\sum_{i=1}^k |c_i|^2} \geq \lambda_k.
     $$
+
     因此 $\min_{\mathbf{x} \in S_0 \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \geq \lambda_k$，从而 $\max_{\dim S=k} \min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \geq \lambda_k$。
 
     **第二步**：证明对任意 $k$ 维子空间 $S$，$\min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \leq \lambda_k$。
 
     取 $T_0 = \operatorname{span}\{\mathbf{u}_k, \ldots, \mathbf{u}_n\}$，则 $\dim T_0 = n - k + 1$。由维数公式，$\dim(S \cap T_0) \geq k + (n-k+1) - n = 1$，因此存在非零 $\mathbf{x} \in S \cap T_0$。对这样的 $\mathbf{x} = \sum_{i=k}^n c_i \mathbf{u}_i$：
+
     $$
     R_A(\mathbf{x}) = \frac{\sum_{i=k}^n \lambda_i |c_i|^2}{\sum_{i=k}^n |c_i|^2} \leq \lambda_k.
     $$
+
     因此 $\min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \leq \lambda_k$。
 
     综合两步即得第一个等式。第二个等式的证明完全类似。$\blacksquare$
 
 !!! theorem "定理 18.2 (Weyl 不等式)"
     设 $A, B$ 为 $n \times n$ Hermite 矩阵，则对所有满足 $i + j - 1 \leq n$ 的 $i, j$：
+
     $$
     \lambda_{i+j-1}(A + B) \leq \lambda_i(A) + \lambda_j(B).
     $$
+
     对所有满足 $i + j - n \geq 1$ 的 $i, j$：
+
     $$
     \lambda_{i+j-n}(A + B) \geq \lambda_i(A) + \lambda_j(B).
     $$
 
 ??? proof "证明"
     我们证明第一个不等式。由 Courant-Fischer 定理的 min-max 形式：
+
     $$
     \lambda_{i+j-1}(A+B) = \min_{\dim T = n-i-j+2} \max_{\mathbf{x} \in T \setminus \{\mathbf{0}\}} R_{A+B}(\mathbf{x}).
     $$
@@ -83,19 +95,23 @@
     设 $A$ 的前 $i$ 个特征向量张成子空间 $S_A$（$\dim S_A = i$），$B$ 的前 $j$ 个特征向量张成子空间 $S_B$（$\dim S_B = j$）。
 
     对任意 $(n-i-j+2)$ 维子空间 $T$，由维数公式：
+
     $$
     \dim(S_A \cap T) \geq i + (n-i-j+2) - n = n - j + 2 - n + i + i - i = 2 - j + i \geq 1,
     $$
+
     即 $\dim(T \cap S_A) \geq 1$（当 $i + j - 1 \leq n$ 时）。类似地 $\dim(T \cap S_B) \geq 1$。
 
     更直接地，取 $T_0 = \operatorname{span}\{\mathbf{u}_i, \ldots, \mathbf{u}_n\} \cap \operatorname{span}\{\mathbf{v}_j, \ldots, \mathbf{v}_n\}$，其中 $\mathbf{u}_k, \mathbf{v}_k$ 分别为 $A, B$ 的特征向量。由 Courant-Fischer 定理：
 
     对任意非零 $\mathbf{x}$：
+
     $$
     R_{A+B}(\mathbf{x}) = R_A(\mathbf{x}) + R_B(\mathbf{x}).
     $$
 
     取使得 $R_A(\mathbf{x}) \leq \lambda_i(A)$ 和 $R_B(\mathbf{x}) \leq \lambda_j(B)$ 同时成立的子空间（维数关系保证其非空），即得：
+
     $$
     \lambda_{i+j-1}(A+B) \leq \lambda_i(A) + \lambda_j(B). \quad \blacksquare
     $$
@@ -105,17 +121,20 @@
 
 !!! theorem "定理 18.3 (Cauchy 交错定理)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，$B$ 为 $A$ 的 $m \times m$ 主子矩阵（即 $B = P^* A P$，其中 $P$ 是 $n \times m$ 矩阵且 $P^* P = I_m$），$m < n$。则 $A$ 和 $B$ 的特征值满足**交错关系**（interlacing）：
+
     $$
     \lambda_i(A) \geq \lambda_i(B) \geq \lambda_{i+n-m}(A), \quad i = 1, 2, \ldots, m.
     $$
 
 ??? proof "证明"
     由 Courant-Fischer 定理，对 $B = P^* A P$：
+
     $$
     \lambda_i(B) = \max_{\substack{S \subset \mathbb{C}^m \\ \dim S = i}} \min_{\mathbf{y} \in S \setminus \{\mathbf{0}\}} \frac{\mathbf{y}^* B \mathbf{y}}{\mathbf{y}^* \mathbf{y}} = \max_{\substack{S \subset \mathbb{C}^m \\ \dim S = i}} \min_{\mathbf{y} \in S \setminus \{\mathbf{0}\}} \frac{(P\mathbf{y})^* A (P\mathbf{y})}{(P\mathbf{y})^* (P\mathbf{y})}.
     $$
 
     令 $\mathbf{x} = P \mathbf{y}$，由于 $P$ 是等距嵌入，当 $S$ 遍历 $\mathbb{C}^m$ 的所有 $i$ 维子空间时，$PS$ 遍历 $P(\mathbb{C}^m)$ 的所有 $i$ 维子空间。由于 $P(\mathbb{C}^m)$ 是 $\mathbb{C}^n$ 的一个 $m$ 维子空间，而 $\mathbb{C}^n$ 的所有 $i$ 维子空间的集合包含 $P(\mathbb{C}^m)$ 的所有 $i$ 维子空间，因此：
+
     $$
     \lambda_i(B) \leq \max_{\substack{S \subset \mathbb{C}^n \\ \dim S = i}} \min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} \frac{\mathbf{x}^* A \mathbf{x}}{\mathbf{x}^* \mathbf{x}} = \lambda_i(A).
     $$
@@ -124,6 +143,7 @@
 
 !!! theorem "定理 18.4 (Poincare 分离定理)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，$U$ 为 $n \times k$ 矩阵满足 $U^* U = I_k$（$k \leq n$），令 $B = U^* A U$，则：
+
     $$
     \lambda_i(A) \geq \lambda_i(B) \geq \lambda_{i+n-k}(A), \quad i = 1, \ldots, k.
     $$
@@ -137,12 +157,15 @@
     取左上 $2 \times 2$ 主子矩阵 $B = \begin{pmatrix} 5 & 1 \\ 1 & 3 \end{pmatrix}$，其特征值为 $\lambda_1(B) = 3 + \sqrt{2} \approx 4.414$，$\lambda_2(B) = 3 - \sqrt{2} \approx 1.586$。
 
     验证交错性：
+
     $$
     \lambda_1(A) \approx 5.414 \geq \lambda_1(B) \approx 4.414 \geq \lambda_2(A) \approx 2.828,
     $$
+
     $$
     \lambda_2(A) \approx 2.828 \geq \lambda_2(B) \approx 1.586 \geq \lambda_3(A) \approx 0.758.
     $$
+
     交错关系成立。
 
 !!! example "例 18.2"
@@ -172,16 +195,20 @@
 
 !!! definition "定义 18.3 (奇异值排序)"
     设 $A$ 为 $m \times n$ 矩阵，其奇异值按降序排列为：
+
     $$
     \sigma_1(A) \geq \sigma_2(A) \geq \cdots \geq \sigma_{\min(m,n)}(A) \geq 0.
     $$
+
     其中 $\sigma_i(A) = \sqrt{\lambda_i(A^* A)}$。
 
 !!! theorem "定理 18.5 (奇异值的次可乘性)"
     设 $A, B$ 为 $n \times n$ 矩阵，则对 $i + j - 1 \leq n$：
+
     $$
     \sigma_{i+j-1}(AB) \leq \sigma_i(A) \sigma_j(B).
     $$
+
     特别地，取 $i = j = 1$：$\sigma_1(AB) \leq \sigma_1(A) \sigma_1(B)$，即 $\|AB\|_2 \leq \|A\|_2 \|B\|_2$。
 
 ??? proof "证明"
@@ -190,6 +217,7 @@
     设 $A = U_1 \Sigma_1 V_1^*$，$B = U_2 \Sigma_2 V_2^*$ 为奇异值分解。考虑 $AB$ 的奇异值平方，即 $B^* A^* A B$ 的特征值。
 
     利用 Fan 的极值原理：
+
     $$
     \sigma_k(AB) = \min_{\substack{S \subset \mathbb{C}^n \\ \operatorname{codim} S = k-1}} \max_{\mathbf{x} \in S, \|\mathbf{x}\|=1} \|AB\mathbf{x}\|.
     $$
@@ -202,30 +230,37 @@
 
 !!! definition "定义 18.4 (Ky Fan 范数)"
     设 $A$ 为 $m \times n$ 矩阵，对 $k = 1, 2, \ldots, \min(m,n)$，**Ky Fan $k$-范数**定义为前 $k$ 个奇异值之和：
+
     $$
     \|A\|_{(k)} = \sum_{i=1}^{k} \sigma_i(A).
     $$
+
     特别地，$\|A\|_{(1)} = \sigma_1(A) = \|A\|_2$（谱范数），$\|A\|_{(\min(m,n))} = \|A\|_*$（核范数）。
 
 !!! theorem "定理 18.6 (Fan 不等式)"
     设 $A, B$ 为 $n \times n$ 矩阵，则对 $k = 1, 2, \ldots, n$：
+
     $$
     \sum_{i=1}^{k} \sigma_i(A + B) \leq \sum_{i=1}^{k} \sigma_i(A) + \sum_{i=1}^{k} \sigma_i(B).
     $$
+
     即 Ky Fan $k$-范数满足三角不等式：$\|A + B\|_{(k)} \leq \|A\|_{(k)} + \|B\|_{(k)}$。
 
 ??? proof "证明"
     对任意 $n \times n$ 矩阵 $M$，由奇异值的极值表征：
+
     $$
     \sum_{i=1}^{k} \sigma_i(M) = \max \{ |\operatorname{tr}(U^* M)| : U \text{ 为 } n \times k \text{ 的等距映射} \}.
     $$
 
     更精确地，存在 Fan 的定理：
+
     $$
     \sum_{i=1}^{k} \sigma_i(M) = \max \{ \operatorname{Re}\operatorname{tr}(U^* M) : U^* U = I_k, U \in \mathbb{C}^{n \times k} \}.
     $$
 
     设 $U_0$ 是使得 $\sum_{i=1}^k \sigma_i(A+B) = \operatorname{Re}\operatorname{tr}(U_0^*(A+B))$ 的最优等距映射，则：
+
     $$
     \sum_{i=1}^{k} \sigma_i(A+B) = \operatorname{Re}\operatorname{tr}(U_0^* A) + \operatorname{Re}\operatorname{tr}(U_0^* B) \leq \sum_{i=1}^{k} \sigma_i(A) + \sum_{i=1}^{k} \sigma_i(B). \quad \blacksquare
     $$
@@ -263,22 +298,28 @@
 
 !!! theorem "定理 18.7 (von Neumann 迹不等式)"
     设 $A, B$ 为 $n \times n$ 复矩阵，则：
+
     $$
     |\operatorname{tr}(AB)| \leq \sum_{i=1}^{n} \sigma_i(A) \sigma_i(B).
     $$
+
     更一般地：
+
     $$
     |\operatorname{tr}(A^* B)| \leq \sum_{i=1}^{n} \sigma_i(A) \sigma_i(B).
     $$
 
 ??? proof "证明"
     设 $A = U_A \Sigma_A V_A^*$ 和 $B = U_B \Sigma_B V_B^*$ 为奇异值分解。则：
+
     $$
     \operatorname{tr}(A^* B) = \operatorname{tr}(V_A \Sigma_A U_A^* U_B \Sigma_B V_B^*) = \operatorname{tr}(\Sigma_A W \Sigma_B Z),
     $$
+
     其中 $W = U_A^* U_B$ 和 $Z = V_B^* V_A$ 为酉矩阵。令 $P = WZ$，则 $P$ 也是酉矩阵。
 
     由于 $\operatorname{tr}(\Sigma_A W \Sigma_B Z) = \sum_{i,j} (\sigma_i(A))(\sigma_j(B)) w_{ij} z_{ji}$，我们需要证明：
+
     $$
     \left|\sum_{i,j} \sigma_i(A) \sigma_j(B) w_{ij} z_{ji}\right| \leq \sum_i \sigma_i(A)\sigma_i(B).
     $$
@@ -286,13 +327,16 @@
     注意 $|w_{ij} z_{ji}| \leq |w_{ij}| |z_{ji}|$，而矩阵 $C$ 定义为 $c_{ij} = |w_{ij}||z_{ji}|$ 是一个双随机矩阵（doubly stochastic matrix）。
 
     由 Birkhoff 定理，$C$ 是置换矩阵的凸组合，因此：
+
     $$
     |\operatorname{tr}(A^* B)| \leq \sum_{i,j} \sigma_i(A) \sigma_j(B) c_{ij} \leq \max_{\pi} \sum_i \sigma_i(A) \sigma_{\pi(i)}(B) = \sum_i \sigma_i(A) \sigma_i(B),
     $$
+
     最后一个等式由排序不等式（rearrangement inequality）得到。$\blacksquare$
 
 !!! theorem "定理 18.8 (Golden-Thompson 不等式)"
     设 $A, B$ 为 $n \times n$ Hermite 矩阵，则：
+
     $$
     \operatorname{tr}(e^{A+B}) \leq \operatorname{tr}(e^A e^B).
     $$
@@ -303,6 +347,7 @@
     **第一步**：利用 Lie-Trotter 乘积公式：$e^{A+B} = \lim_{m \to \infty} (e^{A/m} e^{B/m})^m$。
 
     **第二步**：由 von Neumann 迹不等式，对 Hermite 矩阵 $A, B$：
+
     $$
     \operatorname{tr}(e^{A+B}) = \operatorname{tr}\left(\lim_{m\to\infty}(e^{A/m}e^{B/m})^m\right).
     $$
@@ -310,9 +355,11 @@
     **第三步**：关键的不等式来自于以下事实：对于半正定矩阵 $P, Q$，$\operatorname{tr}(PQ) \leq \operatorname{tr}(P) \cdot \|Q\|_2$ 不够精确。需要更精细的论证。
 
     利用特征值的对数凸性：设 $\lambda_i = \lambda_i(e^{A+B})$，$\alpha_i = \lambda_i(e^A)$，$\beta_i = \lambda_i(e^B)$，由 Weyl 不等式和特征值-奇异值关系：
+
     $$
     \sum_i \lambda_i(e^{A+B}) \leq \sum_i \sigma_i(e^{A/2} \cdot e^B \cdot e^{A/2}) \leq \sum_i \sigma_i(e^A) \sigma_i(e^B) = \sum_i \lambda_i(e^A) \lambda_i(e^B),
     $$
+
     其中最后一步利用了 $e^A, e^B$ 为正定矩阵，其奇异值等于特征值。
 
     而 $\operatorname{tr}(e^A e^B) = \operatorname{tr}(e^{A/2} e^B e^{A/2}) \geq \sum_i \lambda_i(e^{A/2} e^B e^{A/2}) = \sum_i \lambda_i(e^{A+B})$（在适当的不等式方向上），由此得到结论。$\blacksquare$
@@ -362,28 +409,35 @@
 
 !!! definition "定义 18.6 (正定矩阵上的偏序)"
     设 $A, B$ 为 $n \times n$ Hermite 矩阵。定义 **Löwner 偏序**（Loewner partial order）为：
+
     $$
     A \succeq B \iff A - B \text{ 半正定}.
     $$
+
     记作 $A \succ B$ 若 $A - B$ 正定。
 
 !!! theorem "定理 18.9 (Hadamard 不等式)"
     设 $A = (a_{ij})$ 为 $n \times n$ 正半定 Hermite 矩阵，则：
+
     $$
     \det(A) \leq \prod_{i=1}^{n} a_{ii}.
     $$
+
     等号成立当且仅当 $A$ 为对角矩阵或 $A$ 有零行。
 
 ??? proof "证明"
     **方法一**（利用 Schur 补）：对 $A$ 作分块：
+
     $$
     A = \begin{pmatrix} A_{n-1} & \mathbf{a} \\ \mathbf{a}^* & a_{nn} \end{pmatrix},
     $$
+
     其中 $A_{n-1}$ 为前 $n-1$ 阶主子矩阵。
 
     若 $A_{n-1}$ 奇异，则 $\det(A) = 0 \leq \prod a_{ii}$ 显然成立。
 
     若 $A_{n-1}$ 非奇异，由 Schur 补公式：
+
     $$
     \det(A) = \det(A_{n-1})(a_{nn} - \mathbf{a}^* A_{n-1}^{-1} \mathbf{a}).
     $$
@@ -398,10 +452,13 @@
 
 !!! theorem "定理 18.10 (Fischer 不等式)"
     设 $A$ 为 $n \times n$ 正半定 Hermite 矩阵，分块为：
+
     $$
     A = \begin{pmatrix} B & C \\ C^* & D \end{pmatrix},
     $$
+
     其中 $B$ 为 $k \times k$，$D$ 为 $(n-k) \times (n-k)$。则：
+
     $$
     \det(A) \leq \det(B) \cdot \det(D).
     $$
@@ -410,6 +467,7 @@
     若 $B$ 奇异，则由 $A \succeq 0$ 可以证明 $\det(A) = 0$，不等式显然成立。
 
     设 $B$ 非奇异。由 Schur 补公式：
+
     $$
     \det(A) = \det(B) \cdot \det(D - C^* B^{-1} C).
     $$
@@ -417,6 +475,7 @@
     由于 $A \succeq 0$，其 Schur 补 $D - C^* B^{-1} C \succeq 0$，因此 $D - C^* B^{-1} C \preceq D$（因为 $C^* B^{-1} C \succeq 0$）。
 
     由正半定矩阵行列式的单调性（$0 \preceq X \preceq Y$ 蕴含 $\det X \leq \det Y$）：
+
     $$
     \det(D - C^* B^{-1} C) \leq \det(D).
     $$
@@ -425,6 +484,7 @@
 
 !!! theorem "定理 18.11 (Minkowski 行列式不等式)"
     设 $A, B$ 为 $n \times n$ 正半定 Hermite 矩阵，则：
+
     $$
     [\det(A + B)]^{1/n} \geq [\det(A)]^{1/n} + [\det(B)]^{1/n}.
     $$
@@ -433,17 +493,21 @@
     若 $A$ 或 $B$ 奇异，不等式变为 $[\det(A+B)]^{1/n} \geq [\det(A)]^{1/n}$（或类似地关于 $B$），由 $A + B \succeq A$ 和行列式单调性即得。
 
     设 $A$ 正定（$A \succ 0$）。则：
+
     $$
     \det(A + B) = \det(A) \cdot \det(I + A^{-1/2} B A^{-1/2}).
     $$
 
     令 $C = A^{-1/2} B A^{-1/2} \succeq 0$，设其特征值为 $\mu_1, \ldots, \mu_n \geq 0$。则：
+
     $$
     [\det(I + C)]^{1/n} = \left[\prod_{i=1}^n (1 + \mu_i)\right]^{1/n} \geq 1 + \left[\prod_{i=1}^n \mu_i\right]^{1/n},
     $$
+
     最后一步由 AM-GM 不等式的推广形式得到（具体地，这是对 $(1+\mu_i)$ 应用几何-算术均值不等式的结果）。
 
     因此：
+
     $$
     [\det(A+B)]^{1/n} = [\det A]^{1/n} \cdot [\det(I+C)]^{1/n} \geq [\det A]^{1/n}(1 + [\det C]^{1/n}).
     $$
@@ -484,13 +548,16 @@ Majorization（优超）是一个统一多种不等式的核心概念，它精�
 
 !!! definition "定义 18.7 (优超关系)"
     设 $\mathbf{x} = (x_1, \ldots, x_n)$ 和 $\mathbf{y} = (y_1, \ldots, y_n)$ 为实向量，将其分量按降序排列得 $x_{[1]} \geq \cdots \geq x_{[n]}$ 和 $y_{[1]} \geq \cdots \geq y_{[n]}$。称 $\mathbf{x}$ **被 $\mathbf{y}$ 优超**（$\mathbf{x}$ is majorized by $\mathbf{y}$），记作 $\mathbf{x} \prec \mathbf{y}$，若：
+
     $$
     \sum_{i=1}^{k} x_{[i]} \leq \sum_{i=1}^{k} y_{[i]}, \quad k = 1, 2, \ldots, n-1,
     $$
+
     且 $\sum_{i=1}^{n} x_i = \sum_{i=1}^{n} y_i$。
 
 !!! definition "定义 18.8 (双随机矩阵)"
     一个 $n \times n$ 非负实矩阵 $D = (d_{ij})$ 称为**双随机矩阵**（doubly stochastic matrix），若其每行和每列之和均为 $1$：
+
     $$
     \sum_{j=1}^{n} d_{ij} = 1 \quad \forall i, \qquad \sum_{i=1}^{n} d_{ij} = 1 \quad \forall j.
     $$
@@ -513,15 +580,18 @@ Majorization（优超）是一个统一多种不等式的核心概念，它精�
 
 !!! theorem "定理 18.13 (Schur-Horn 定理)"
     设 $A$ 为 $n \times n$ Hermite 矩阵，特征值 $\lambda_1 \geq \cdots \geq \lambda_n$，对角元素 $a_{11}, \ldots, a_{nn}$，则：
+
     $$
     (a_{11}, \ldots, a_{nn}) \prec (\lambda_1, \ldots, \lambda_n).
     $$
+
     即对角元素向量被特征值向量优超。
 
     反之，给定实向量 $\mathbf{d} \prec \boldsymbol{\lambda}$，存在 Hermite 矩阵以 $\boldsymbol{\lambda}$ 为特征值、以 $\mathbf{d}$ 为对角。
 
 ??? proof "证明"
     **必要性**：设 $A = U \Lambda U^*$，其中 $U = (u_{ij})$ 为酉矩阵。则：
+
     $$
     a_{ii} = (U \Lambda U^*)_{ii} = \sum_{j=1}^n \lambda_j |u_{ij}|^2.
     $$
@@ -532,6 +602,7 @@ Majorization（优超）是一个统一多种不等式的核心概念，它精�
 
 !!! theorem "定理 18.14 (Birkhoff 定理)"
     双随机矩阵的集合 $\mathcal{D}_n$ 是一个凸紧集，其极点恰好是所有 $n \times n$ **置换矩阵**（permutation matrix）。即每个双随机矩阵可以写成置换矩阵的凸组合：
+
     $$
     D = \sum_{k=1}^{N} \alpha_k P_{\pi_k}, \quad \alpha_k \geq 0, \quad \sum_k \alpha_k = 1.
     $$
@@ -579,9 +650,11 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 !!! definition "定义 18.9 (Schur 凸函数与 Schur 凹函数)"
     函数 $f: \mathbb{R}^n \to \mathbb{R}$ 称为 **Schur 凸函数**（Schur-convex function），若对所有满足 $\mathbf{x} \prec \mathbf{y}$ 的 $\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$，有：
+
     $$
     f(\mathbf{x}) \leq f(\mathbf{y}).
     $$
+
     称为 **Schur 凹函数**（Schur-concave function），若 $\mathbf{x} \prec \mathbf{y}$ 蕴含 $f(\mathbf{x}) \geq f(\mathbf{y})$。
 
 !!! definition "定义 18.10 (对称函数)"
@@ -589,9 +662,11 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 !!! theorem "定理 18.15 (Schur 凸性的判别条件)"
     设 $f: \mathbb{R}^n \to \mathbb{R}$ 连续可微且对称，则 $f$ 为 Schur 凸函数当且仅当对所有 $i \neq j$：
+
     $$
     (x_i - x_j)\left(\frac{\partial f}{\partial x_i} - \frac{\partial f}{\partial x_j}\right) \geq 0.
     $$
+
     此条件称为 **Schur 条件**（Schur's condition）。
 
 ??? proof "证明"
@@ -605,6 +680,7 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 !!! theorem "定理 18.16 (特征值的 Schur 凸性)"
     设 $\phi: \mathbb{R} \to \mathbb{R}$ 为凸函数，$A$ 为 $n \times n$ Hermite 矩阵，特征值 $\lambda_1 \geq \cdots \geq \lambda_n$，对角元素 $a_{11}, \ldots, a_{nn}$。则：
+
     $$
     \sum_{i=1}^{n} \phi(a_{ii}) \leq \sum_{i=1}^{n} \phi(\lambda_i).
     $$
@@ -613,9 +689,11 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
     由 Schur-Horn 定理（定理 18.13），$(a_{11}, \ldots, a_{nn}) \prec (\lambda_1, \ldots, \lambda_n)$。
 
     函数 $F(\mathbf{x}) = \sum_{i=1}^n \phi(x_i)$ 是 Schur 凸函数（当 $\phi$ 为凸函数时）。验证：
+
     $$
     (x_i - x_j)\left(\frac{\partial F}{\partial x_i} - \frac{\partial F}{\partial x_j}\right) = (x_i - x_j)(\phi'(x_i) - \phi'(x_j)) \geq 0,
     $$
+
     最后一步由 $\phi$ 的凸性（即 $\phi'$ 单调递增）得到。
 
     因此 $F(\mathbf{a}) \leq F(\boldsymbol{\lambda})$，即 $\sum \phi(a_{ii}) \leq \sum \phi(\lambda_i)$。$\blacksquare$
@@ -652,13 +730,16 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 !!! definition "定义 18.11 (矩阵凸函数)"
     设 $f: (a, b) \to \mathbb{R}$ 为连续函数。称 $f$ 为**矩阵凸函数**（matrix convex function），若对所有特征值在 $(a,b)$ 中的 $n \times n$ Hermite 矩阵 $A, B$ 和 $t \in [0,1]$：
+
     $$
     f(tA + (1-t)B) \preceq t f(A) + (1-t) f(B).
     $$
+
     这里 $f(A)$ 表示矩阵函数（通过谱映射定义）。
 
 !!! definition "定义 18.12 (矩阵单调函数)"
     设 $f: (a,b) \to \mathbb{R}$ 为连续函数。称 $f$ 为**矩阵单调函数**（matrix monotone function），或**算子单调函数**（operator monotone function），若对所有特征值在 $(a,b)$ 中的 $n \times n$ Hermite 矩阵 $A, B$：
+
     $$
     A \preceq B \implies f(A) \preceq f(B).
     $$
@@ -695,9 +776,11 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
     函数 $f: (a,b) \to \mathbb{R}$ 对所有 $n$（任意维数）都是矩阵单调的，当且仅当 $f$ 可以解析延拓到上半平面 $\mathbb{C}^+$，且 $f(\mathbb{C}^+) \subset \overline{\mathbb{C}^+}$（即 $f$ 将上半平面映入上半平面的闭包）。
 
     等价地，$f$ 具有积分表示：
+
     $$
     f(t) = \alpha + \beta t + \int_{-\infty}^{\infty} \frac{t\mu + 1}{\mu - t} \, d\nu(\mu),
     $$
+
     其中 $\alpha \in \mathbb{R}$，$\beta \geq 0$，$\nu$ 为正 Borel 测度。
 
 ??? proof "证明"
@@ -709,6 +792,7 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 !!! theorem "定理 18.19 (Jensen 矩阵不等式)"
     设 $f$ 为 $(a,b)$ 上的矩阵凸函数，$A_1, \ldots, A_k$ 为 Hermite 矩阵（特征值在 $(a,b)$ 中），$\omega_1, \ldots, \omega_k > 0$ 且 $\sum \omega_i = 1$，则：
+
     $$
     f\left(\sum_{i=1}^{k} \omega_i A_i\right) \preceq \sum_{i=1}^{k} \omega_i f(A_i).
     $$
@@ -717,16 +801,19 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
     对 $k$ 使用数学归纳法。$k = 2$ 时即为矩阵凸函数的定义。
 
     设 $k \geq 3$，令 $\omega = \omega_1 + \cdots + \omega_{k-1}$，$B = \frac{1}{\omega}\sum_{i=1}^{k-1}\omega_i A_i$。则：
+
     $$
     \sum_{i=1}^k \omega_i A_i = \omega B + \omega_k A_k.
     $$
 
     由矩阵凸性：
+
     $$
     f(\omega B + \omega_k A_k) \preceq \omega f(B) + \omega_k f(A_k).
     $$
 
     由归纳假设：
+
     $$
     f(B) = f\left(\sum_{i=1}^{k-1}\frac{\omega_i}{\omega} A_i\right) \preceq \sum_{i=1}^{k-1}\frac{\omega_i}{\omega} f(A_i).
     $$
@@ -741,9 +828,11 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
     展开左边：$t^2 A^2 + t(1-t)(AB + BA) + (1-t)^2 B^2$。
 
     右边减左边：
+
     $$
     t(1-t)A^2 + t(1-t)B^2 - t(1-t)(AB+BA) = t(1-t)(A-B)^2 \succeq 0,
     $$
+
     因为 $(A-B)^2$ 半正定。因此 $f(t) = t^2$ 确实是矩阵凸的。
 
 !!! example "例 18.13"

@@ -104,6 +104,7 @@
     $\det(A^T) = \det(A)$。
 
 ??? proof "证明"
+
     $$
     \det(A^T) = \sum_{\sigma} \operatorname{sgn}(\sigma) a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}.
     $$
@@ -158,6 +159,7 @@
     将矩阵的第 $j$ 行的 $c$ 倍加到第 $i$ 行上，行列式不变。
 
 ??? proof "证明"
+
     $$
     \det(\ldots, \mathbf{r}_i + c\mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots) = \det(\ldots, \mathbf{r}_i, \ldots, \mathbf{r}_j, \ldots) + c \cdot \det(\ldots, \mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots).
     $$

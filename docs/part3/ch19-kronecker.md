@@ -22,6 +22,7 @@
 
 !!! definition "定义 19.1 (Kronecker 积)"
     设 $A = (a_{ij})$ 为 $m \times n$ 矩阵，$B$ 为 $p \times q$ 矩阵。$A$ 与 $B$ 的 **Kronecker 积**（又称**张量积**，tensor product），记作 $A \otimes B$，定义为 $mp \times nq$ **分块矩阵**：
+
     $$
     A \otimes B = \begin{pmatrix}
     a_{11}B & a_{12}B & \cdots & a_{1n}B \\
@@ -36,6 +37,7 @@
 
 !!! example "例 19.1"
     设 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$，$B = \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix}$，则：
+
     $$
     A \otimes B = \begin{pmatrix}
     1 \cdot \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix} & 2 \cdot \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix} \\[6pt]
@@ -63,9 +65,11 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
 
 !!! theorem "定理 19.1 (混合积性质)"
     设 $A, C$ 为可相乘的矩阵对，$B, D$ 为可相乘的矩阵对，则：
+
     $$
     (A \otimes B)(C \otimes D) = (AC) \otimes (BD).
     $$
+
     此性质称为**混合积性质**（mixed-product property）。
 
 ??? proof "证明"
@@ -74,6 +78,7 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
     $(A \otimes B)$ 的第 $(i,j)$ 块（$p \times q$ 大小）为 $a_{ij}B$，$(C \otimes D)$ 的第 $(j,k)$ 块（$q \times s$ 大小）为 $c_{jk}D$。
 
     乘积的第 $(i,k)$ 块为：
+
     $$
     \sum_{j=1}^{n} (a_{ij}B)(c_{jk}D) = \sum_{j=1}^{n} a_{ij}c_{jk}(BD) = \left(\sum_{j=1}^n a_{ij}c_{jk}\right)(BD) = (AC)_{ik}(BD).
     $$
@@ -92,6 +97,7 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
 
 ??? proof "证明"
     我们证明第 6 条。由混合积性质：
+
     $$
     (A \otimes B)(A^{-1} \otimes B^{-1}) = (AA^{-1}) \otimes (BB^{-1}) = I_m \otimes I_p = I_{mp}.
     $$
@@ -109,11 +115,13 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
 
 ??? proof "证明"
     **(1) 迹**：$A \otimes B$ 的对角块为 $a_{ii}B$（$i = 1,\ldots,m$），因此：
+
     $$
     \operatorname{tr}(A \otimes B) = \sum_{i=1}^m \operatorname{tr}(a_{ii}B) = \sum_{i=1}^m a_{ii} \operatorname{tr}(B) = \operatorname{tr}(A) \cdot \operatorname{tr}(B).
     $$
 
     **(2) 行列式**：利用混合积性质和分块对角化。设 $A$ 有特征值 $\lambda_1, \ldots, \lambda_m$，$B$ 有特征值 $\mu_1, \ldots, \mu_n$（计入重数）。由定理 19.5（后面将证明），$A \otimes B$ 的特征值为 $\{\lambda_i \mu_j\}$。因此：
+
     $$
     \det(A \otimes B) = \prod_{i=1}^m \prod_{j=1}^n \lambda_i \mu_j = \left(\prod_{i=1}^m \lambda_i\right)^n \left(\prod_{j=1}^n \mu_j\right)^m = (\det A)^n (\det B)^m.
     $$
@@ -137,9 +145,11 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
 
 !!! definition "定义 19.2 (Kronecker 幂)"
     对方阵 $A$，定义 $k$ 次 **Kronecker 幂**为：
+
     $$
     A^{\otimes k} = \underbrace{A \otimes A \otimes \cdots \otimes A}_{k \text{ 个}}.
     $$
+
     若 $A$ 为 $n \times n$，则 $A^{\otimes k}$ 为 $n^k \times n^k$。
 
 ---
@@ -156,30 +166,37 @@ Vec 算子将矩阵按列堆叠为向量，是连接矩阵方程与向量方程�
 
 !!! definition "定义 19.3 (Vec 算子)"
     设 $A = (\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n)$ 为 $m \times n$ 矩阵，其中 $\mathbf{a}_j$ 为第 $j$ 列。**Vec 算子**（vectorization）将 $A$ 映为 $mn \times 1$ 列向量：
+
     $$
     \operatorname{vec}(A) = \begin{pmatrix} \mathbf{a}_1 \\ \mathbf{a}_2 \\ \vdots \\ \mathbf{a}_n \end{pmatrix}.
     $$
+
     即将 $A$ 的各列从左到右依次堆叠。
 
 !!! theorem "定理 19.4 (Vec 算子的核心公式)"
     设 $A$ 为 $m \times n$ 矩阵，$X$ 为 $n \times p$ 矩阵，$B$ 为 $p \times q$ 矩阵。则：
+
     $$
     \operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X).
     $$
 
 ??? proof "证明"
     **方法一**（利用列向量）：令 $B = (\mathbf{b}_1, \ldots, \mathbf{b}_q)$，$Y = AXB$，则 $Y$ 的第 $j$ 列为：
+
     $$
     \mathbf{y}_j = AX\mathbf{b}_j = A \sum_{k=1}^p b_{kj} \mathbf{x}_k = \sum_{k=1}^p b_{kj} A \mathbf{x}_k,
     $$
+
     其中 $\mathbf{x}_k$ 为 $X$ 的第 $k$ 列。
 
     因此：
+
     $$
     \operatorname{vec}(Y) = \begin{pmatrix} \mathbf{y}_1 \\ \vdots \\ \mathbf{y}_q \end{pmatrix} = \begin{pmatrix} \sum_k b_{k1} A\mathbf{x}_k \\ \vdots \\ \sum_k b_{kq} A\mathbf{x}_k \end{pmatrix}.
     $$
 
     另一方面：
+
     $$
     (B^T \otimes A)\operatorname{vec}(X) = \begin{pmatrix} b_{11}A & b_{21}A & \cdots & b_{p1}A \\ b_{12}A & b_{22}A & \cdots & b_{p2}A \\ \vdots & & \ddots & \vdots \\ b_{1q}A & b_{2q}A & \cdots & b_{pq}A \end{pmatrix} \begin{pmatrix} \mathbf{x}_1 \\ \mathbf{x}_2 \\ \vdots \\ \mathbf{x}_p \end{pmatrix}.
     $$
@@ -205,6 +222,7 @@ Vec 算子将矩阵按列堆叠为向量，是连接矩阵方程与向量方程�
 
 !!! definition "定义 19.4 (half-vectorization 算子)"
     对 $n \times n$ 对称矩阵 $A$，**半向量化算子** $\operatorname{vech}(A)$ 将 $A$ 的下三角部分（含对角线）按列堆叠为 $\frac{n(n+1)}{2} \times 1$ 向量：
+
     $$
     \operatorname{vech}(A) = (a_{11}, a_{21}, \ldots, a_{n1}, a_{22}, a_{32}, \ldots, a_{nn})^T.
     $$
@@ -255,13 +273,17 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
 
 !!! definition "定义 19.5 (置换矩阵 / 交换矩阵)"
     **置换矩阵**（commutation matrix）$K_{m,n}$ 是 $mn \times mn$ 的置换矩阵，满足对任意 $m \times n$ 矩阵 $A$：
+
     $$
     K_{m,n} \operatorname{vec}(A) = \operatorname{vec}(A^T).
     $$
+
     等价地，$K_{m,n}$ 可以用基矩阵表示为：
+
     $$
     K_{m,n} = \sum_{i=1}^{m} \sum_{j=1}^{n} E_{ij} \otimes E_{ji},
     $$
+
     其中 $E_{ij}$ 为 $m \times n$ 的基矩阵（第 $(i,j)$ 元素为 1，其余为 0），$E_{ji}$ 为 $n \times m$ 的基矩阵。
 
 !!! theorem "定理 19.6 (置换矩阵的性质)"
@@ -279,6 +301,7 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
     又 $K_{m,n}$ 为置换矩阵，故 $K_{m,n}^T = K_{m,n}^{-1} = K_{n,m}$。
 
     **(2)**：对任意 $n \times q$ 矩阵 $X$，取 $p \times m$ 矩阵的情形：
+
     $$
     K_{m,n}(A \otimes B)\operatorname{vec}(X) = K_{m,n}\operatorname{vec}(BXA^T) \quad \text{(需要调整大小)}.
     $$
@@ -289,10 +312,13 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
 
 !!! theorem "定理 19.7 (Vec 与转置的关系)"
     对任意 $m \times n$ 矩阵 $A$：
+
     $$
     \operatorname{vec}(A^T) = K_{m,n}\operatorname{vec}(A).
     $$
+
     进而，对矩阵乘积的转置：
+
     $$
     \operatorname{vec}((AXB)^T) = \operatorname{vec}(B^T X^T A^T) = (A \otimes B^T)\operatorname{vec}(X^T) = (A \otimes B^T)K_{n,p}\operatorname{vec}(X).
     $$
@@ -308,6 +334,7 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
     $\operatorname{vec}(A^T) = (a_{11}, a_{12}, a_{13}, a_{21}, a_{22}, a_{23})^T$。
 
     因此 $K_{2,3}$ 将位置 $(1,2,3,4,5,6)$ 映射到 $(1,3,5,2,4,6)$：
+
     $$
     K_{2,3} = \begin{pmatrix}
     1 & 0 & 0 & 0 & 0 & 0 \\
@@ -333,24 +360,29 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 !!! definition "定义 19.6 (线性矩阵方程)"
     形如
+
     $$
     \sum_{k=1}^{K} A_k X B_k = C
     $$
+
     的方程称为**线性矩阵方程**（linear matrix equation），其中 $A_k, B_k, C$ 已知，$X$ 为未知矩阵。
 
 !!! theorem "定理 19.8 (矩阵方程的向量化)"
     线性矩阵方程 $\sum_{k=1}^K A_k X B_k = C$ 等价于向量方程：
+
     $$
     \left(\sum_{k=1}^{K} B_k^T \otimes A_k\right) \operatorname{vec}(X) = \operatorname{vec}(C).
     $$
 
 ??? proof "证明"
     对每一项 $A_k X B_k$ 应用定理 19.4：
+
     $$
     \operatorname{vec}(A_k X B_k) = (B_k^T \otimes A_k)\operatorname{vec}(X).
     $$
 
     对方程两边取 Vec：
+
     $$
     \operatorname{vec}\left(\sum_{k=1}^K A_k X B_k\right) = \sum_{k=1}^K \operatorname{vec}(A_k X B_k) = \sum_{k=1}^K (B_k^T \otimes A_k)\operatorname{vec}(X) = \left(\sum_{k=1}^K B_k^T \otimes A_k\right)\operatorname{vec}(X).
     $$
@@ -359,13 +391,16 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 !!! theorem "定理 19.9 (Sylvester 方程的 Kronecker 积形式)"
     Sylvester 方程 $AX + XB = C$（其中 $A$ 为 $m \times m$，$B$ 为 $n \times n$，$X, C$ 为 $m \times n$）等价于：
+
     $$
     (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
+
     该方程有唯一解当且仅当 $I_n \otimes A + B^T \otimes I_m$ 非奇异，即 $A$ 与 $-B$ 无公共特征值。
 
 ??? proof "证明"
     由定理 19.8，取 $K = 2$，$A_1 = A$，$B_1 = I$，$A_2 = I$，$B_2 = B$：
+
     $$
     (I^T \otimes A + B^T \otimes I)\operatorname{vec}(X) = (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
@@ -374,9 +409,11 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 !!! example "例 19.6"
     求解 Sylvester 方程 $AX + XB = C$，其中：
+
     $$
     A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}, \quad B = (3), \quad C = \begin{pmatrix} 4 \\ 10 \end{pmatrix}.
     $$
+
     这里 $A$ 为 $2 \times 2$，$B$ 为 $1 \times 1$（标量 3），$X$ 为 $2 \times 1$。
 
     向量化：$(I_1 \otimes A + B^T \otimes I_2)\operatorname{vec}(X) = \operatorname{vec}(C)$。
@@ -414,29 +451,35 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 !!! definition "定义 19.7 (Kronecker 积的谱)"
     设 $A$ 为 $m \times m$ 矩阵，特征值 $\lambda_1, \ldots, \lambda_m$；$B$ 为 $n \times n$ 矩阵，特征值 $\mu_1, \ldots, \mu_n$。则 $A \otimes B$ 的 $mn$ 个特征值为：
+
     $$
     \sigma(A \otimes B) = \{\lambda_i \mu_j : i = 1,\ldots,m;\; j = 1,\ldots,n\}.
     $$
 
 !!! theorem "定理 19.10 (Kronecker 积的特征值与特征向量)"
     设 $A\mathbf{u} = \lambda\mathbf{u}$，$B\mathbf{v} = \mu\mathbf{v}$，则：
+
     $$
     (A \otimes B)(\mathbf{u} \otimes \mathbf{v}) = \lambda\mu(\mathbf{u} \otimes \mathbf{v}).
     $$
+
     即 $\mathbf{u} \otimes \mathbf{v}$ 是 $A \otimes B$ 对应特征值 $\lambda\mu$ 的特征向量。
 
     若 $A$ 和 $B$ 均可对角化，$A = P \operatorname{diag}(\lambda_1,\ldots,\lambda_m) P^{-1}$，$B = Q \operatorname{diag}(\mu_1,\ldots,\mu_n) Q^{-1}$，则：
+
     $$
     A \otimes B = (P \otimes Q) \operatorname{diag}(\lambda_1\mu_1, \lambda_1\mu_2, \ldots, \lambda_m\mu_n) (P \otimes Q)^{-1}.
     $$
 
 ??? proof "证明"
     由混合积性质：
+
     $$
     (A \otimes B)(\mathbf{u} \otimes \mathbf{v}) = (A\mathbf{u}) \otimes (B\mathbf{v}) = (\lambda\mathbf{u}) \otimes (\mu\mathbf{v}) = \lambda\mu(\mathbf{u} \otimes \mathbf{v}).
     $$
 
     对于对角化的情形：
+
     $$
     A \otimes B = (P \Lambda_A P^{-1}) \otimes (Q \Lambda_B Q^{-1}) = (P \otimes Q)(\Lambda_A \otimes \Lambda_B)(P^{-1} \otimes Q^{-1}).
     $$
@@ -445,13 +488,16 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 !!! theorem "定理 19.11 (Kronecker 积的奇异值分解)"
     设 $A = U_A \Sigma_A V_A^*$，$B = U_B \Sigma_B V_B^*$ 为 $A, B$ 的奇异值分解，则：
+
     $$
     A \otimes B = (U_A \otimes U_B)(\Sigma_A \otimes \Sigma_B)(V_A \otimes V_B)^*.
     $$
+
     因此 $A \otimes B$ 的奇异值为 $\{\sigma_i(A)\sigma_j(B)\}$。
 
 ??? proof "证明"
     由混合积性质：
+
     $$
     A \otimes B = (U_A \Sigma_A V_A^*) \otimes (U_B \Sigma_B V_B^*) = (U_A \otimes U_B)(\Sigma_A \otimes \Sigma_B)(V_A^* \otimes V_B^*).
     $$
@@ -481,23 +527,29 @@ Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵�
 
 !!! definition "定义 19.8 (Kronecker 和)"
     设 $A$ 为 $m \times m$ 矩阵，$B$ 为 $n \times n$ 矩阵。$A$ 与 $B$ 的 **Kronecker 和**（Kronecker sum）定义为：
+
     $$
     A \oplus B = A \otimes I_n + I_m \otimes B.
     $$
+
     它是 $mn \times mn$ 矩阵。
 
 !!! theorem "定理 19.12 (Kronecker 和的特征值)"
     设 $A$ 的特征值为 $\lambda_1, \ldots, \lambda_m$，$B$ 的特征值为 $\mu_1, \ldots, \mu_n$。则 $A \oplus B$ 的 $mn$ 个特征值为：
+
     $$
     \sigma(A \oplus B) = \{\lambda_i + \mu_j : i = 1,\ldots,m;\; j = 1,\ldots,n\}.
     $$
+
     对应的特征向量为 $\mathbf{u}_i \otimes \mathbf{v}_j$。
 
 ??? proof "证明"
     设 $A\mathbf{u}_i = \lambda_i \mathbf{u}_i$，$B\mathbf{v}_j = \mu_j \mathbf{v}_j$。则：
+
     $$
     (A \oplus B)(\mathbf{u}_i \otimes \mathbf{v}_j) = (A \otimes I_n + I_m \otimes B)(\mathbf{u}_i \otimes \mathbf{v}_j)
     $$
+
     $$
     = (A\mathbf{u}_i) \otimes (I_n\mathbf{v}_j) + (I_m\mathbf{u}_i) \otimes (B\mathbf{v}_j) = \lambda_i(\mathbf{u}_i \otimes \mathbf{v}_j) + \mu_j(\mathbf{u}_i \otimes \mathbf{v}_j) = (\lambda_i + \mu_j)(\mathbf{u}_i \otimes \mathbf{v}_j).
     $$
@@ -506,17 +558,20 @@ Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵�
 
 !!! theorem "定理 19.13 (Kronecker 和与矩阵指数)"
     设 $A$ 为 $m \times m$ 矩阵，$B$ 为 $n \times n$ 矩阵。则：
+
     $$
     e^{A \oplus B} = e^A \otimes e^B.
     $$
 
 ??? proof "证明"
     关键观察是 $A \otimes I$ 和 $I \otimes B$ **可交换**：
+
     $$
     (A \otimes I)(I \otimes B) = A \otimes B = (I \otimes B)(A \otimes I).
     $$
 
     由于 $A \oplus B = A \otimes I + I \otimes B$，且这两个矩阵可交换，因此矩阵指数满足：
+
     $$
     e^{A \oplus B} = e^{A \otimes I + I \otimes B} = e^{A \otimes I} \cdot e^{I \otimes B}.
     $$
@@ -529,9 +584,11 @@ Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵�
 
 !!! theorem "定理 19.14 (Kronecker 和与 Lyapunov 方程)"
     Lyapunov 方程 $AX + XA^T = C$ 等价于：
+
     $$
     (A \oplus A^T)\operatorname{vec}(X) = (I \otimes A + A^* \otimes I)\operatorname{vec}(X) = \operatorname{vec}(C),
     $$
+
     其中我们注意到 $(A^T)^T = A$，故 $I \otimes A + (A^T)^T \otimes I = I \otimes A + A \otimes I$。
 
     更准确地写：向量化后为 $(I_n \otimes A + \bar{A} \otimes I_n)\operatorname{vec}(X) = \operatorname{vec}(C)$（实数情形下 $\bar{A} = A$）。
@@ -540,6 +597,7 @@ Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵�
 
 ??? proof "证明"
     对 $AX + XA^T = C$ 两边取 Vec：
+
     $$
     \operatorname{vec}(AX) + \operatorname{vec}(XA^T) = \operatorname{vec}(C).
     $$

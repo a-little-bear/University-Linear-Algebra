@@ -59,7 +59,7 @@ plugins:
             第7章 正交性与最小二乘: "Ch 7  Orthogonality and Least Squares"
             第二部分 中级线性代数: "Part II  Intermediate"
             第8章 内积空间: "Ch 8  Inner Product Spaces"
-            第9章 二次型: "Ch 9  Quadratic Forms"
+            第9章 二次型与双线性型: "Ch 9  Quadratic and Bilinear Forms"
             第10章 矩阵分解: "Ch 10  Matrix Decompositions"
             第11章 奇异值分解: "Ch 11  Singular Value Decomposition"
             第12章 Jordan标准形: "Ch 12  Jordan Normal Form"
@@ -77,7 +77,16 @@ plugins:
             第22章 数值线性代数: "Ch 22  Numerical Linear Algebra"
             第23章 随机矩阵初步: "Ch 23  Introduction to Random Matrices"
             第24章 矩阵流形: "Ch 24  Matrix Manifolds"
+            第0章 多项式代数: "Ch 0  Polynomial Algebra"
+            第13A章 商空间与对偶空间: "Ch 13A  Quotient Spaces & Dual Spaces"
+            第13B章 λ-矩阵与有理标准形: "Ch 13B  Lambda-Matrices & Rational Canonical Form"
             第25章 线性代数在优化中的应用: "Ch 25  Linear Algebra in Optimization"
+            第五部分 应用专题: "Part V  Applications"
+            第26章 线性代数在微分方程中的应用: "Ch 26  Linear Algebra in Differential Equations"
+            第27章 线性代数在图论与网络中的应用: "Ch 27  Linear Algebra in Graph Theory & Networks"
+            第28章 线性代数在量子信息中的应用: "Ch 28  Linear Algebra in Quantum Information"
+            第29章 线性代数在统计与机器学习中的应用: "Ch 29  Linear Algebra in Statistics & ML"
+            第30章 线性代数在信号处理与编码中的应用: "Ch 30  Linear Algebra in Signal Processing & Coding"
   - search:
       separator: '[\s\-\.\u200b\u3000]+'
       lang:
@@ -124,6 +133,7 @@ extra:
 nav:
   - 首页: index.md
   - 第一部分 基础线性代数:
+    - 第0章 多项式代数: part1/ch00-polynomials.md
     - 第1章 线性方程组: part1/ch01-linear-equations.md
     - 第2章 矩阵与矩阵运算: part1/ch02-matrices.md
     - 第3章 行列式: part1/ch03-determinants.md
@@ -133,11 +143,13 @@ nav:
     - 第7章 正交性与最小二乘: part1/ch07-orthogonality.md
   - 第二部分 中级线性代数:
     - 第8章 内积空间: part2/ch08-inner-product-spaces.md
-    - 第9章 二次型: part2/ch09-quadratic-forms.md
+    - 第9章 二次型与双线性型: part2/ch09-quadratic-forms.md
     - 第10章 矩阵分解: part2/ch10-matrix-decompositions.md
     - 第11章 奇异值分解: part2/ch11-svd.md
     - 第12章 Jordan标准形: part2/ch12-jordan-form.md
     - 第13章 矩阵函数: part2/ch13-matrix-functions.md
+    - 第13A章 商空间与对偶空间: part2/ch13a-quotient-dual-spaces.md
+    - 第13B章 λ-矩阵与有理标准形: part2/ch13b-lambda-rational-form.md
   - 第三部分 高级线性代数:
     - 第14章 矩阵分析: part3/ch14-matrix-analysis.md
     - 第15章 范数与扰动理论: part3/ch15-norms-perturbation.md
@@ -152,3 +164,9 @@ nav:
     - 第23章 随机矩阵初步: part4/ch23-random-matrices.md
     - 第24章 矩阵流形: part4/ch24-matrix-manifolds.md
     - 第25章 线性代数在优化中的应用: part4/ch25-optimization.md
+  - 第五部分 应用专题:
+    - 第26章 线性代数在微分方程中的应用: part5/ch26-differential-equations.md
+    - 第27章 线性代数在图论与网络中的应用: part5/ch27-graph-theory.md
+    - 第28章 线性代数在量子信息中的应用: part5/ch28-quantum-computing.md
+    - 第29章 线性代数在统计与机器学习中的应用: part5/ch29-statistics-ml.md
+    - 第30章 线性代数在信号处理与编码中的应用: part5/ch30-signal-processing.md

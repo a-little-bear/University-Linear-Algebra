@@ -23,9 +23,11 @@ Matrix polynomials are the most basic way to define matrix functions and the sta
 
 !!! definition "Definition 13.1 (Matrix Polynomial)"
     Let $p(\lambda) = a_k \lambda^k + a_{k-1}\lambda^{k-1} + \cdots + a_1\lambda + a_0$ be a scalar polynomial and $A$ an $n \times n$ matrix. The **matrix polynomial** is defined as
+
     $$
     p(A) = a_k A^k + a_{k-1}A^{k-1} + \cdots + a_1 A + a_0 I,
     $$
+
     where $A^0 = I$ (the identity matrix).
 
 !!! theorem "Theorem 13.1 (Basic properties of matrix polynomials)"
@@ -43,6 +45,7 @@ Matrix polynomials are the most basic way to define matrix functions and the sta
     **(3)** By (2), $p(A)q(A) = (pq)(A) = (qp)(A) = q(A)p(A)$ (using commutativity of scalar polynomial multiplication).
 
     **(4)** $A^k = PB^kP^{-1}$ (easily proved by induction), so
+
     $$
     p(A) = \sum a_i A^i = \sum a_i PB^iP^{-1} = P\left(\sum a_i B^i\right)P^{-1} = Pp(B)P^{-1}.
     $$
@@ -57,36 +60,45 @@ Matrix polynomials are the most basic way to define matrix functions and the sta
 
 !!! theorem "Theorem 13.2 (Cayley-Hamilton Theorem)"
     Let $A$ be an $n \times n$ matrix with characteristic polynomial $p_A(\lambda) = \det(\lambda I - A)$. Then
+
     $$
     p_A(A) = 0.
     $$
+
     That is, every matrix satisfies its own characteristic equation.
 
 ??? proof "Proof"
     Let $p_A(\lambda) = \lambda^n + c_{n-1}\lambda^{n-1} + \cdots + c_0$.
 
     **Method 1 (Adjugate matrix method):** Let $B(\lambda) = \operatorname{adj}(\lambda I - A)$ be the adjugate of $\lambda I - A$. Then
+
     $$
     (\lambda I - A)B(\lambda) = \det(\lambda I - A) \cdot I = p_A(\lambda) I.
     $$
+
     Each entry of $B(\lambda)$ is a polynomial in $\lambda$ of degree at most $(n-1)$, so we can write
+
     $$
     B(\lambda) = B_{n-1}\lambda^{n-1} + B_{n-2}\lambda^{n-2} + \cdots + B_0,
     $$
+
     where $B_i$ are constant matrices. Expanding $(\lambda I - A)B(\lambda) = p_A(\lambda) I$ and comparing coefficients of each power of $\lambda$ yields a system of matrix equations. Left-multiplying the $k$-th equation by $A^k$ and summing all equations, the cancellations give $p_A(A) = 0$. $\blacksquare$
 
 !!! example "Example 13.1"
     Verify the Cayley-Hamilton theorem for $A = \begin{pmatrix}1&2\\3&4\end{pmatrix}$.
 
     **Solution:** Characteristic polynomial:
+
     $$
     p_A(\lambda) = \lambda^2 - 5\lambda - 2.
     $$
 
     Compute $p_A(A) = A^2 - 5A - 2I$:
+
     $$
     A^2 = \begin{pmatrix}7&10\\15&22\end{pmatrix}, \quad 5A = \begin{pmatrix}5&10\\15&20\end{pmatrix}, \quad 2I = \begin{pmatrix}2&0\\0&2\end{pmatrix}.
     $$
+
     $$
     p_A(A) = \begin{pmatrix}7&10\\15&22\end{pmatrix} - \begin{pmatrix}5&10\\15&20\end{pmatrix} - \begin{pmatrix}2&0\\0&2\end{pmatrix} = \begin{pmatrix}0&0\\0&0\end{pmatrix}. \quad \checkmark
     $$
@@ -105,38 +117,47 @@ Extending polynomials to power series requires introducing the concept of conver
 
 !!! definition "Definition 13.2 (Convergence of Matrix Series)"
     Let $\{A_k\}$ be a sequence of $m \times n$ matrices. The series $\sum_{k=0}^{\infty} A_k$ is said to **converge** if the scalar series at each entry position converges, i.e., for all $1 \le i \le m$, $1 \le j \le n$, $\sum_{k=0}^{\infty} [A_k]_{ij}$ converges. In this case, we define
+
     $$
     \sum_{k=0}^{\infty} A_k = \left[\sum_{k=0}^{\infty} [A_k]_{ij}\right]_{m \times n}.
     $$
 
 !!! definition "Definition 13.3 (Spectral Radius)"
     The **spectral radius** of a matrix $A$ is defined as
+
     $$
     \rho(A) = \max\{|\lambda| : \lambda \text{ is an eigenvalue of } A\}.
     $$
 
 !!! theorem "Theorem 13.3 (Convergence criterion for matrix power series)"
     Let $f(z) = \sum_{k=0}^{\infty} c_k z^k$ be a power series with radius of convergence $R$, and let $A$ be an $n \times n$ matrix. A sufficient condition for the matrix power series
+
     $$
     f(A) = \sum_{k=0}^{\infty} c_k A^k
     $$
+
     to converge is $\rho(A) < R$.
 
 ??? proof "Proof"
     Let $A = PJP^{-1}$, where $J$ is the Jordan normal form. Then $A^k = PJ^kP^{-1}$, so
+
     $$
     f(A) = P\left(\sum_{k=0}^{\infty} c_k J^k\right)P^{-1} = Pf(J)P^{-1}.
     $$
+
     Since $J$ is block diagonal, $f(J) = \operatorname{diag}(f(J_{n_1}(\lambda_1)), \ldots)$.
 
     For a Jordan block $J_m(\lambda)$, the $(p,q)$ entry ($q \ge p$) of $f(J_m(\lambda))$ is
+
     $$
     \frac{f^{(q-p)}(\lambda)}{(q-p)!} = \sum_{k=q-p}^{\infty} c_k \binom{k}{q-p} \lambda^{k-q+p}.
     $$
+
     When $|\lambda| < R$, all derivatives of $f$ at $\lambda$ converge, so the expression above converges. $\rho(A) < R$ ensures all eigenvalues $\lambda$ satisfy $|\lambda| < R$. $\blacksquare$
 
 !!! theorem "Theorem 13.4 (Neumann Series)"
     Let $A$ be an $n \times n$ matrix. If $\rho(A) < 1$, then $I - A$ is invertible and
+
     $$
     (I - A)^{-1} = \sum_{k=0}^{\infty} A^k = I + A + A^2 + \cdots.
     $$
@@ -145,9 +166,11 @@ Extending polynomials to power series requires introducing the concept of conver
     This is the matrix version of $f(z) = \frac{1}{1-z} = \sum_{k=0}^{\infty} z^k$ (radius of convergence $R = 1$).
 
     By Theorem 13.3, when $\rho(A) < 1$, $\sum A^k$ converges. Let $S_N = \sum_{k=0}^N A^k$. Then
+
     $$
     (I - A)S_N = I - A^{N+1}.
     $$
+
     Since $\rho(A) < 1$, one can show $A^{N+1} \to 0$ (entrywise), so $(I - A) \lim S_N = I$, i.e., $(I-A)^{-1} = \sum_{k=0}^{\infty} A^k$. $\blacksquare$
 
 !!! example "Example 13.2"
@@ -156,11 +179,13 @@ Extending polynomials to power series requires introducing the concept of conver
     **Solution:** The eigenvalues of $A$ are $0.5$ and $0.3$, so $\rho(A) = 0.5 < 1$ and the Neumann series converges.
 
     Direct computation:
+
     $$
     I - A = \begin{pmatrix}0.5&-0.1\\0&0.7\end{pmatrix}, \quad (I-A)^{-1} = \begin{pmatrix}2&\frac{2}{7}\\0&\frac{10}{7}\end{pmatrix}.
     $$
 
     Verification (approximation by the first few terms of the Neumann series):
+
     $$
     I + A + A^2 + A^3 + \cdots \approx \begin{pmatrix}2&0.2857\\0&1.4286\end{pmatrix} \approx \begin{pmatrix}2&\frac{2}{7}\\0&\frac{10}{7}\end{pmatrix}. \quad \checkmark
     $$
@@ -179,9 +204,11 @@ The matrix exponential is the most important matrix function, playing a central 
 
 !!! definition "Definition 13.4 (Matrix Exponential)"
     For an $n \times n$ matrix $A$, the **matrix exponential** is defined as
+
     $$
     e^A = \exp(A) = \sum_{k=0}^{\infty} \frac{A^k}{k!} = I + A + \frac{A^2}{2!} + \frac{A^3}{3!} + \cdots.
     $$
+
     This series converges absolutely for any matrix $A$ (since the radius of convergence of $e^z$ is $\infty$).
 
 !!! theorem "Theorem 13.5 (Basic properties of the matrix exponential)"
@@ -202,13 +229,17 @@ The matrix exponential is the most important matrix function, playing a central 
     **(3)** $sA$ and $tA$ commute, so by (4), $e^{sA}e^{tA} = e^{sA+tA} = e^{(s+t)A}$.
 
     **(4)** When $AB = BA$, the binomial theorem applies:
+
     $$
     (A+B)^k = \sum_{j=0}^k \binom{k}{j}A^j B^{k-j}.
     $$
+
     Therefore
+
     $$
     e^{A+B} = \sum_{k=0}^{\infty}\frac{(A+B)^k}{k!} = \sum_{k=0}^{\infty}\sum_{j=0}^k \frac{A^j B^{k-j}}{j!(k-j)!} = \left(\sum_{j=0}^{\infty}\frac{A^j}{j!}\right)\left(\sum_{l=0}^{\infty}\frac{B^l}{l!}\right) = e^A e^B.
     $$
+
     (Cauchy product; absolute convergence justifies rearrangement.)
 
     **(5)** Let the Jordan normal form of $A$ be $J$, with $A = PJP^{-1}$. Then $e^A = Pe^JP^{-1}$ and $\det(e^A) = \det(e^J)$. $e^J = \operatorname{diag}(e^{J_{k_i}(\lambda_i)})$, and $\det(e^{J_k(\lambda)}) = (e^\lambda)^k = e^{k\lambda}$. Therefore $\det(e^A) = e^{\sum k_i\lambda_i} = e^{\operatorname{tr}(A)}$.
@@ -222,14 +253,17 @@ The matrix exponential is the most important matrix function, playing a central 
     Compute $e^A$, where $A = \begin{pmatrix}0&-\theta\\\theta&0\end{pmatrix}$.
 
     **Solution:** Note that
+
     $$
     A^2 = \begin{pmatrix}-\theta^2&0\\0&-\theta^2\end{pmatrix} = -\theta^2 I, \quad A^3 = -\theta^2 A, \quad A^4 = \theta^4 I, \ldots
     $$
+
     In general, $A^{2k} = (-1)^k \theta^{2k} I$, $A^{2k+1} = (-1)^k \theta^{2k} A$.
 
     $$
     e^A = \sum_{k=0}^{\infty} \frac{A^k}{k!} = \left(\sum_{k=0}^{\infty} \frac{(-1)^k \theta^{2k}}{(2k)!}\right) I + \left(\sum_{k=0}^{\infty} \frac{(-1)^k \theta^{2k}}{(2k+1)!}\right) \frac{A}{\theta}
     $$
+
     $$
     = \cos\theta \cdot I + \frac{\sin\theta}{\theta} \cdot A = \begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix}.
     $$
@@ -252,16 +286,20 @@ Computing the matrix exponential is a central problem in applications. This sect
 
 !!! theorem "Theorem 13.6 (Exponential of a diagonal matrix)"
     If $A = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$, then
+
     $$
     e^A = \operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n}).
     $$
+
     More generally, if $A = P\operatorname{diag}(\lambda_1, \ldots, \lambda_n)P^{-1}$ ($A$ is diagonalizable), then
+
     $$
     e^A = P\operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n})P^{-1}.
     $$
 
 ??? proof "Proof"
     $A^k = \operatorname{diag}(\lambda_1^k, \ldots, \lambda_n^k)$, so
+
     $$
     e^A = \sum_{k=0}^{\infty}\frac{A^k}{k!} = \operatorname{diag}\left(\sum_{k=0}^{\infty}\frac{\lambda_1^k}{k!}, \ldots, \sum_{k=0}^{\infty}\frac{\lambda_n^k}{k!}\right) = \operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n}). \qquad \blacksquare
     $$
@@ -270,6 +308,7 @@ Computing the matrix exponential is a central problem in applications. This sect
     Compute $e^{At}$, where $A = \begin{pmatrix}1&0\\0&-2\end{pmatrix}$.
 
     **Solution:** $A$ is a diagonal matrix, so
+
     $$
     e^{At} = \begin{pmatrix}e^t&0\\0&e^{-2t}\end{pmatrix}.
     $$
@@ -278,6 +317,7 @@ Computing the matrix exponential is a central problem in applications. This sect
 
 !!! theorem "Theorem 13.7 (Exponential of a Jordan block)"
     For a Jordan block $J_k(\lambda)$,
+
     $$
     e^{J_k(\lambda)t} = e^{\lambda t}\begin{pmatrix}
     1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{k-1}}{(k-1)!} \\
@@ -290,15 +330,18 @@ Computing the matrix exponential is a central problem in applications. This sect
 
 ??? proof "Proof"
     $J_k(\lambda)t = \lambda t I + N_k t$, where $\lambda t I$ and $N_k t$ commute. Therefore
+
     $$
     e^{J_k(\lambda)t} = e^{\lambda t I}e^{N_k t} = e^{\lambda t}\sum_{j=0}^{k-1}\frac{(N_k t)^j}{j!} = e^{\lambda t}\sum_{j=0}^{k-1}\frac{t^j}{j!}N_k^j.
     $$
+
     Since $N_k^j$ has ones on the $j$-th superdiagonal and zeros elsewhere, substituting gives the result. $\blacksquare$
 
 !!! example "Example 13.5"
     Compute $e^{At}$, where $A = \begin{pmatrix}3&1&0\\0&3&1\\0&0&3\end{pmatrix} = J_3(3)$.
 
     **Solution:** By Theorem 13.7,
+
     $$
     e^{At} = e^{3t}\begin{pmatrix}1&t&\frac{t^2}{2}\\0&1&t\\0&0&1\end{pmatrix}.
     $$
@@ -307,19 +350,24 @@ Computing the matrix exponential is a central problem in applications. This sect
 
 !!! definition "Definition 13.5 (Cayley-Hamilton method for computing matrix functions)"
     By the Cayley-Hamilton theorem, $A^n$ can be expressed as a linear combination of $I, A, \ldots, A^{n-1}$. Therefore any matrix function $f(A)$ can be written as
+
     $$
     f(A) = \alpha_0 I + \alpha_1 A + \cdots + \alpha_{n-1} A^{n-1},
     $$
+
     where the coefficients $\alpha_0, \ldots, \alpha_{n-1}$ are determined by the following conditions: for each eigenvalue $\lambda_i$ of $A$ (with algebraic multiplicity $m_i$),
+
     $$
     f^{(j)}(\lambda_i) = \alpha_0^{(j)} + \alpha_1 \cdot j! + \cdots \quad (j = 0, 1, \ldots, m_i - 1),
     $$
+
     i.e., the function values and derivatives of the $\alpha$-polynomial at $\lambda_i$ match those of $f$.
 
 !!! example "Example 13.6"
     Compute $e^{At}$ using the Cayley-Hamilton method, where $A = \begin{pmatrix}2&1\\0&2\end{pmatrix}$.
 
     **Solution:** Eigenvalue $\lambda = 2$ (algebraic multiplicity 2). $n = 2$, so let
+
     $$
     e^{At} = \alpha_0(t) I + \alpha_1(t) A.
     $$
@@ -334,6 +382,7 @@ Computing the matrix exponential is a central problem in applications. This sect
     $$
     e^{At} = (e^{2t} - 2te^{2t})I + te^{2t}A = e^{2t}\begin{pmatrix}1-2t&0\\0&1-2t\end{pmatrix} + te^{2t}\begin{pmatrix}2&1\\0&2\end{pmatrix}
     $$
+
     $$
     = e^{2t}\begin{pmatrix}1&t\\0&1\end{pmatrix}.
     $$
@@ -358,52 +407,67 @@ The most important application of the matrix exponential is solving linear const
 
 !!! theorem "Theorem 13.8 (Solution of homogeneous linear ODE systems)"
     The ODE system
+
     $$
     \mathbf{x}'(t) = A\mathbf{x}(t), \quad \mathbf{x}(0) = \mathbf{x}_0,
     $$
+
     has the unique solution
+
     $$
     \mathbf{x}(t) = e^{At}\mathbf{x}_0.
     $$
 
 ??? proof "Proof"
     **Existence:** Let $\mathbf{x}(t) = e^{At}\mathbf{x}_0$. Then
+
     $$
     \mathbf{x}'(t) = \frac{d}{dt}e^{At}\mathbf{x}_0 = Ae^{At}\mathbf{x}_0 = A\mathbf{x}(t),
     $$
+
     where $\frac{d}{dt}e^{At} = \sum_{k=1}^{\infty}\frac{kA^k t^{k-1}}{k!} = A\sum_{k=1}^{\infty}\frac{A^{k-1}t^{k-1}}{(k-1)!} = Ae^{At}$.
 
     Also $\mathbf{x}(0) = e^{0}\mathbf{x}_0 = \mathbf{x}_0$.
 
     **Uniqueness:** Let $\mathbf{y}(t)$ be another solution. Define $\mathbf{z}(t) = e^{-At}\mathbf{y}(t)$. Then
+
     $$
     \mathbf{z}'(t) = -Ae^{-At}\mathbf{y}(t) + e^{-At}\mathbf{y}'(t) = -Ae^{-At}\mathbf{y}(t) + e^{-At}A\mathbf{y}(t) = 0.
     $$
+
     Therefore $\mathbf{z}(t) = \mathbf{z}(0) = \mathbf{x}_0$, i.e., $\mathbf{y}(t) = e^{At}\mathbf{x}_0$. $\blacksquare$
 
 !!! theorem "Theorem 13.9 (Nonhomogeneous linear ODE systems)"
     The ODE system
+
     $$
     \mathbf{x}'(t) = A\mathbf{x}(t) + \mathbf{f}(t), \quad \mathbf{x}(0) = \mathbf{x}_0,
     $$
+
     has the solution (variation of parameters)
+
     $$
     \mathbf{x}(t) = e^{At}\mathbf{x}_0 + \int_0^t e^{A(t-s)}\mathbf{f}(s)\,ds.
     $$
 
 ??? proof "Proof"
     Let $\mathbf{x}(t) = e^{At}\mathbf{c}(t)$ (variation of parameters). Substituting into the equation gives
+
     $$
     Ae^{At}\mathbf{c}(t) + e^{At}\mathbf{c}'(t) = Ae^{At}\mathbf{c}(t) + \mathbf{f}(t).
     $$
+
     Simplifying: $e^{At}\mathbf{c}'(t) = \mathbf{f}(t)$, i.e., $\mathbf{c}'(t) = e^{-At}\mathbf{f}(t)$. Integrating:
+
     $$
     \mathbf{c}(t) = \mathbf{x}_0 + \int_0^t e^{-As}\mathbf{f}(s)\,ds.
     $$
+
     Therefore $\mathbf{x}(t) = e^{At}\mathbf{x}_0 + \int_0^t e^{A(t-s)}\mathbf{f}(s)\,ds$. $\blacksquare$
 
 !!! example "Example 13.7"
     Solve the ODE system
+
     $$
     \begin{cases} x_1' = 3x_1 + x_2, \\ x_2' = -x_1 + x_2, \end{cases} \quad \mathbf{x}(0) = \begin{pmatrix}1\\0\end{pmatrix}.
     $$
@@ -413,6 +477,7 @@ The most important application of the matrix exponential is solving linear const
     $A - 2I = \begin{pmatrix}1&1\\-1&-1\end{pmatrix}$, $\operatorname{rank} = 1$, geometric multiplicity = 1.
 
     Jordan form $J = J_2(2)$. Eigenvector $\mathbf{v}_1 = \begin{pmatrix}1\\-1\end{pmatrix}$, generalized eigenvector $(A-2I)\mathbf{v}_2 = \mathbf{v}_1$:
+
     $$
     \begin{pmatrix}1&1\\-1&-1\end{pmatrix}\mathbf{v}_2 = \begin{pmatrix}1\\-1\end{pmatrix}, \quad \Rightarrow \quad \mathbf{v}_2 = \begin{pmatrix}1\\0\end{pmatrix}.
     $$
@@ -422,6 +487,7 @@ The most important application of the matrix exponential is solving linear const
     $$
     e^{At} = Pe^{Jt}P^{-1} = \begin{pmatrix}1&1\\-1&0\end{pmatrix}e^{2t}\begin{pmatrix}1&t\\0&1\end{pmatrix}\begin{pmatrix}0&-1\\1&1\end{pmatrix}
     $$
+
     $$
     = e^{2t}\begin{pmatrix}1&1\\-1&0\end{pmatrix}\begin{pmatrix}t&-1+t\\1&1\end{pmatrix} = e^{2t}\begin{pmatrix}1+t&t\\-t&1-t\end{pmatrix}.
     $$
@@ -456,13 +522,17 @@ The matrix logarithm is the inverse operation of the matrix exponential.
     Let $A = PJP^{-1}$, $J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s))$. It suffices to define the logarithm for each Jordan block.
 
     For $J_k(\lambda)$ ($\lambda \neq 0$), write
+
     $$
     J_k(\lambda) = \lambda(I + \lambda^{-1}N_k) = \lambda(I + M),
     $$
+
     where $M = \lambda^{-1}N_k$ is nilpotent. Take
+
     $$
     \log J_k(\lambda) = (\log\lambda) I + \log(I + M) = (\log\lambda)I + \sum_{j=1}^{k-1}\frac{(-1)^{j+1}}{j}M^j.
     $$
+
     The series is finite (since $M$ is nilpotent), and $e^{\log J_k(\lambda)} = J_k(\lambda)$.
 
     Let $\log A = P \operatorname{diag}(\log J_{k_1}(\lambda_1), \ldots) P^{-1}$. $\blacksquare$
@@ -475,6 +545,7 @@ The matrix logarithm is the inverse operation of the matrix exponential.
     $$
     \log A = \log(I + N) = N - \frac{N^2}{2} + \frac{N^3}{3} - \cdots = N = \begin{pmatrix}0&1\\0&0\end{pmatrix}.
     $$
+
     (Since $N^2 = 0$, the series has only one term.)
 
     Verification: $e^N = I + N + \frac{N^2}{2!} + \cdots = I + N = A$. $\checkmark$
@@ -499,9 +570,11 @@ $X^2 = A$ → Positive definite matrices have a unique **positive definite squar
     **Existence:** $A$ is real symmetric positive definite, so by the spectral theorem, $A = Q\Lambda Q^T$, where $Q$ is orthogonal, $\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$, and $\lambda_i > 0$.
 
     Let $B = Q\Lambda^{1/2}Q^T$, where $\Lambda^{1/2} = \operatorname{diag}(\sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n})$. Then
+
     $$
     B^2 = Q\Lambda^{1/2}Q^T Q\Lambda^{1/2}Q^T = Q\Lambda Q^T = A.
     $$
+
     $B$ is symmetric: $B^T = (Q\Lambda^{1/2}Q^T)^T = Q\Lambda^{1/2}Q^T = B$. The eigenvalues of $B$ are $\sqrt{\lambda_i} > 0$, so $B$ is positive definite.
 
     **Uniqueness:** Suppose $C$ is also symmetric positive definite with $C^2 = A$. Since $C$ is symmetric positive definite, let $C = R\Gamma R^T$, $\Gamma = \operatorname{diag}(\gamma_1, \ldots, \gamma_n)$, $\gamma_i > 0$. Then $A = C^2 = R\Gamma^2 R^T$.
@@ -516,9 +589,11 @@ $X^2 = A$ → Positive definite matrices have a unique **positive definite squar
 
 ??? proof "Proof"
     Using the principal logarithm: let $A^{1/2} = e^{\frac{1}{2}\log A}$, where $\log A$ is the principal logarithm. Then
+
     $$
     (A^{1/2})^2 = e^{\frac{1}{2}\log A} e^{\frac{1}{2}\log A} = e^{\log A} = A.
     $$
+
     The eigenvalues of $A^{1/2}$ are $e^{\frac{1}{2}\log\lambda_i}$, where $\log\lambda_i$ has imaginary part in $(-\pi, \pi)$, so $\frac{1}{2}\log\lambda_i$ has imaginary part in $(-\frac{\pi}{2}, \frac{\pi}{2})$, and $e^{\frac{1}{2}\log\lambda_i}$ has positive real part. Uniqueness follows from this condition. $\blacksquare$
 
 !!! example "Example 13.9"
@@ -529,6 +604,7 @@ $X^2 = A$ → Positive definite matrices have a unique **positive definite squar
     $$
     A^{1/2} = Q\begin{pmatrix}\sqrt{3}&0\\0&1\end{pmatrix}Q^T = \frac{1}{2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}\begin{pmatrix}\sqrt{3}&0\\0&1\end{pmatrix}\begin{pmatrix}1&1\\1&-1\end{pmatrix}
     $$
+
     $$
     = \frac{1}{2}\begin{pmatrix}\sqrt{3}+1&\sqrt{3}-1\\\sqrt{3}-1&\sqrt{3}+1\end{pmatrix}.
     $$
@@ -563,10 +639,13 @@ The preceding sections discussed specific matrix functions (exponential, logarit
 
 !!! definition "Definition 13.9 (General matrix function — Jordan form definition)"
     Let $f$ be a function defined on the spectrum of $A$, with $A = PJP^{-1}$ and $J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s))$. Define
+
     $$
     f(A) = P f(J) P^{-1} = P \operatorname{diag}(f(J_{k_1}(\lambda_1)), \ldots, f(J_{k_s}(\lambda_s))) P^{-1},
     $$
+
     where for each Jordan block
+
     $$
     f(J_k(\lambda)) = \begin{pmatrix}
     f(\lambda) & f'(\lambda) & \frac{f''(\lambda)}{2!} & \cdots & \frac{f^{(k-1)}(\lambda)}{(k-1)!} \\
@@ -576,6 +655,7 @@ The preceding sections discussed specific matrix functions (exponential, logarit
     0 & \cdots & 0 & 0 & f(\lambda)
     \end{pmatrix}.
     $$
+
     This requires $f$ to be at least $k_i - 1$ times differentiable at each eigenvalue $\lambda_i$.
 
 !!! theorem "Theorem 13.13 (Well-definedness of the Jordan form definition)"
@@ -585,6 +665,7 @@ The preceding sections discussed specific matrix functions (exponential, logarit
     Suppose $A = P_1 J P_1^{-1} = P_2 J P_2^{-1}$ (same Jordan form $J$, but different transition matrices). Then $P_2^{-1}P_1$ commutes with $J$, i.e., $P_2^{-1}P_1 J = J P_2^{-1}P_1$.
 
     Since $f(J)$ is the limit of polynomials in $J$ (when $f$ is analytic), $P_2^{-1}P_1$ also commutes with $f(J)$. Therefore
+
     $$
     P_1 f(J) P_1^{-1} = P_2 (P_2^{-1}P_1) f(J) (P_2^{-1}P_1)^{-1} P_2^{-1} = P_2 f(J) P_2^{-1}. \qquad \blacksquare
     $$
@@ -606,6 +687,7 @@ The preceding sections discussed specific matrix functions (exponential, logarit
 
 !!! definition "Definition 13.10 (Matrix function — Cauchy integral definition)"
     Let $f$ be analytic on an open set $\Omega$ containing all eigenvalues of $A$, and let $\Gamma$ be a simple closed curve in $\Omega$ enclosing all eigenvalues. Define
+
     $$
     f(A) = \frac{1}{2\pi i} \oint_\Gamma f(z)(zI - A)^{-1}\,dz.
     $$
@@ -615,21 +697,26 @@ The preceding sections discussed specific matrix functions (exponential, logarit
 
 ??? proof "Proof"
     Let $A = PJP^{-1}$. Then $(zI - A)^{-1} = P(zI - J)^{-1}P^{-1}$, so
+
     $$
     \frac{1}{2\pi i}\oint_\Gamma f(z)(zI-A)^{-1}dz = P\left(\frac{1}{2\pi i}\oint_\Gamma f(z)(zI-J)^{-1}dz\right)P^{-1}.
     $$
 
     For a Jordan block $J_k(\lambda)$, the $(p,q)$ entry ($q \ge p$) of $(zI - J_k(\lambda))^{-1}$ is $\frac{1}{(z-\lambda)^{q-p+1}}$. By the Cauchy integral formula:
+
     $$
     \frac{1}{2\pi i}\oint \frac{f(z)}{(z-\lambda)^{q-p+1}}dz = \frac{f^{(q-p)}(\lambda)}{(q-p)!}.
     $$
+
     This is precisely the $(p,q)$ entry of $f(J_k(\lambda))$ from Definition 13.9. $\blacksquare$
 
 !!! theorem "Theorem 13.15 (Spectral Mapping Theorem for matrix functions)"
     Let $f$ be an analytic function on the spectrum of matrix $A$. Then
+
     $$
     \sigma(f(A)) = f(\sigma(A)) = \{f(\lambda) : \lambda \in \sigma(A)\},
     $$
+
     i.e., the eigenvalues of $f(A)$ are exactly the images of the eigenvalues of $A$ under $f$.
 
 ??? proof "Proof"
@@ -651,11 +738,13 @@ The preceding sections discussed specific matrix functions (exponential, logarit
     $$
     f(J_1(1)) = (1) = (\sqrt{1}) = (1).
     $$
+
     $$
     f(J_2(2)) = \begin{pmatrix} f(2) & f'(2) \\ 0 & f(2) \end{pmatrix} = \begin{pmatrix} \sqrt{2} & \frac{1}{2\sqrt{2}} \\ 0 & \sqrt{2} \end{pmatrix} = \begin{pmatrix} \sqrt{2} & \frac{\sqrt{2}}{4} \\ 0 & \sqrt{2} \end{pmatrix}.
     $$
 
     Therefore
+
     $$
     \sqrt{A} = \begin{pmatrix} 1 & 0 & 0 \\ 0 & \sqrt{2} & \frac{\sqrt{2}}{4} \\ 0 & 0 & \sqrt{2} \end{pmatrix}.
     $$

@@ -23,16 +23,20 @@ For any $m \times n$ real matrix $A$, the matrix $A^T A$ is an $n \times n$ symm
 
 !!! definition "Definition 11.1 (Singular Value)"
     Let $A$ be an $m \times n$ real matrix, and let $\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_n \ge 0$ be the eigenvalues of $A^T A$. The **singular values** of $A$ are defined as
+
     $$
     \sigma_i = \sqrt{\lambda_i}, \quad i = 1, 2, \ldots, n.
     $$
+
     They are arranged in descending order $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_n \ge 0$.
 
 !!! note "Note"
     Proof that $A^T A$ is positive semidefinite: for any $\mathbf{x} \in \mathbb{R}^n$,
+
     $$
     \mathbf{x}^T (A^T A) \mathbf{x} = (A\mathbf{x})^T (A\mathbf{x}) = \|A\mathbf{x}\|^2 \ge 0.
     $$
+
     Therefore all eigenvalues of $A^T A$ are nonnegative, and the definition of singular values is well-posed.
 
 !!! theorem "Theorem 11.1 (Relationship between singular values and matrix norms)"
@@ -44,13 +48,17 @@ For any $m \times n$ real matrix $A$, the matrix $A^T A$ is an $n \times n$ symm
 
 ??? proof "Proof"
     **(1)** The spectral norm is defined as
+
     $$
     \|A\|_2 = \max_{\|\mathbf{x}\|=1} \|A\mathbf{x}\|.
     $$
+
     Since $\|A\mathbf{x}\|^2 = \mathbf{x}^T A^T A \mathbf{x}$, and $A^T A$ is a symmetric positive semidefinite matrix with eigenvalues $\lambda_1 \ge \cdots \ge \lambda_n \ge 0$ and corresponding orthonormal eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_n$. For any unit vector $\mathbf{x} = \sum c_i \mathbf{v}_i$ ($\sum c_i^2 = 1$),
+
     $$
     \|A\mathbf{x}\|^2 = \sum_{i=1}^n \lambda_i c_i^2 \le \lambda_1 \sum c_i^2 = \lambda_1.
     $$
+
     Equality holds when $\mathbf{x} = \mathbf{v}_1$. Therefore $\|A\|_2 = \sqrt{\lambda_1} = \sigma_1$.
 
     **(2)** $\|A\|_F^2 = \operatorname{tr}(A^T A) = \sum_{i=1}^n \lambda_i = \sum_{i=1}^n \sigma_i^2$.
@@ -68,22 +76,28 @@ For any $m \times n$ real matrix $A$, the matrix $A^T A$ is an $n \times n$ symm
 
 ??? proof "Proof"
     Let $\lambda \neq 0$ be an eigenvalue of $A^T A$ with eigenvector $\mathbf{v}$, so $A^T A \mathbf{v} = \lambda \mathbf{v}$. Let $\mathbf{u} = A\mathbf{v}$. Then $\mathbf{u} \neq \mathbf{0}$ (since if $A\mathbf{v} = \mathbf{0}$, then $\lambda \mathbf{v} = A^T A \mathbf{v} = \mathbf{0}$, contradicting $\lambda \neq 0$ and $\mathbf{v} \neq \mathbf{0}$), and
+
     $$
     A A^T \mathbf{u} = A A^T (A \mathbf{v}) = A (A^T A \mathbf{v}) = A (\lambda \mathbf{v}) = \lambda (A\mathbf{v}) = \lambda \mathbf{u}.
     $$
+
     Therefore $\lambda$ is also an eigenvalue of $A A^T$. The reverse direction is proved analogously.
 
 !!! example "Example 11.1"
     Find the singular values of the matrix $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix}$.
 
     **Solution:** Compute
+
     $$
     A^T A = \begin{pmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}.
     $$
+
     The characteristic polynomial is
+
     $$
     \det(A^T A - \lambda I) = (2 - \lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda - 3)(\lambda - 1).
     $$
+
     The eigenvalues are $\lambda_1 = 3$ and $\lambda_2 = 1$.
 
     Therefore the singular values are $\sigma_1 = \sqrt{3}$ and $\sigma_2 = 1$.
@@ -108,29 +122,38 @@ The SVD theorem is the central result of this chapter, guaranteeing that any mat
 
 !!! theorem "Theorem 11.3 (SVD Theorem)"
     Let $A$ be an $m \times n$ real matrix with $\operatorname{rank}(A) = r$. Then there exist an $m \times m$ orthogonal matrix $U$, an $n \times n$ orthogonal matrix $V$, and an $m \times n$ matrix $\Sigma$ such that
+
     $$
     A = U \Sigma V^T,
     $$
+
     where $\Sigma$ has the form
+
     $$
     \Sigma = \begin{pmatrix} \sigma_1 & & & 0 & \cdots & 0 \\ & \sigma_2 & & 0 & \cdots & 0 \\ & & \ddots & \vdots & & \vdots \\ & & & \sigma_r & \cdots & 0 \\ 0 & \cdots & 0 & 0 & \cdots & 0 \\ \vdots & & \vdots & \vdots & & \vdots \\ 0 & \cdots & 0 & 0 & \cdots & 0 \end{pmatrix}_{m \times n},
     $$
+
     with $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r > 0$.
 
 ??? proof "Proof"
     **Constructive proof:**
 
     **Step 1:** Since $A^T A$ is an $n \times n$ symmetric positive semidefinite matrix, by the spectral theorem, there exists an orthogonal matrix $V = [\mathbf{v}_1, \ldots, \mathbf{v}_n]$ such that
+
     $$
     A^T A = V \operatorname{diag}(\lambda_1, \ldots, \lambda_n) V^T,
     $$
+
     where $\lambda_1 \ge \cdots \ge \lambda_r > 0 = \lambda_{r+1} = \cdots = \lambda_n$. Let $\sigma_i = \sqrt{\lambda_i}$ ($i = 1, \ldots, r$).
 
     **Step 2:** For $i = 1, \ldots, r$, define
+
     $$
     \mathbf{u}_i = \frac{1}{\sigma_i} A \mathbf{v}_i.
     $$
+
     Verify that $\{\mathbf{u}_1, \ldots, \mathbf{u}_r\}$ is an orthonormal set:
+
     $$
     \mathbf{u}_i^T \mathbf{u}_j = \frac{1}{\sigma_i \sigma_j} \mathbf{v}_i^T A^T A \mathbf{v}_j = \frac{1}{\sigma_i \sigma_j} \mathbf{v}_i^T (\lambda_j \mathbf{v}_j) = \frac{\lambda_j}{\sigma_i \sigma_j} \delta_{ij} = \delta_{ij}.
     $$
@@ -138,6 +161,7 @@ The SVD theorem is the central result of this chapter, guaranteeing that any mat
     **Step 3:** Extend $\{\mathbf{u}_1, \ldots, \mathbf{u}_r\}$ to an orthonormal basis $\{\mathbf{u}_1, \ldots, \mathbf{u}_m\}$ of $\mathbb{R}^m$, and let $U = [\mathbf{u}_1, \ldots, \mathbf{u}_m]$.
 
     **Step 4:** Verify $A = U \Sigma V^T$. By construction, $A\mathbf{v}_i = \sigma_i \mathbf{u}_i$ ($i \le r$), and for $i > r$, $A\mathbf{v}_i = \mathbf{0}$ (since $\|A\mathbf{v}_i\|^2 = \mathbf{v}_i^T A^T A \mathbf{v}_i = \lambda_i = 0$). Therefore
+
     $$
     AV = U\Sigma, \quad \text{i.e.,} \quad A = U\Sigma V^T. \qquad \blacksquare
     $$
@@ -151,25 +175,31 @@ The SVD theorem is the central result of this chapter, guaranteeing that any mat
 
 !!! theorem "Theorem 11.4 (Outer product expansion of SVD)"
     Let $A = U\Sigma V^T$ be the SVD of $A$ with $\operatorname{rank}(A) = r$. Then
+
     $$
     A = \sum_{i=1}^{r} \sigma_i \mathbf{u}_i \mathbf{v}_i^T.
     $$
+
     That is, $A$ can be expressed as a weighted sum of $r$ rank-one matrices.
 
 ??? proof "Proof"
     From $A = U\Sigma V^T$, expanding gives
+
     $$
     A = \sum_{i=1}^{\min(m,n)} \sigma_i \mathbf{u}_i \mathbf{v}_i^T.
     $$
+
     Since $\sigma_i = 0$ for $i > r$, the sum effectively runs only up to $r$. Each $\mathbf{u}_i \mathbf{v}_i^T$ is an $m \times n$ matrix with $\operatorname{rank}(\mathbf{u}_i \mathbf{v}_i^T) = 1$.
 
 !!! example "Example 11.2"
     Find the SVD of the matrix $A = \begin{pmatrix} 3 & 0 \\ 0 & 2 \end{pmatrix}$.
 
     **Solution:**
+
     $$
     A^T A = \begin{pmatrix} 9 & 0 \\ 0 & 4 \end{pmatrix},
     $$
+
     eigenvalues $\lambda_1 = 9$, $\lambda_2 = 4$; eigenvectors $\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}$, $\mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}$.
 
     Singular values $\sigma_1 = 3$, $\sigma_2 = 2$.
@@ -177,9 +207,11 @@ The SVD theorem is the central result of this chapter, guaranteeing that any mat
     Left singular vectors: $\mathbf{u}_1 = \frac{1}{3}A\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}$, $\mathbf{u}_2 = \frac{1}{2}A\mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}$.
 
     Therefore
+
     $$
     A = \begin{pmatrix}1&0\\0&1\end{pmatrix}\begin{pmatrix}3&0\\0&2\end{pmatrix}\begin{pmatrix}1&0\\0&1\end{pmatrix} = I \cdot \Sigma \cdot I.
     $$
+
     A diagonal matrix is its own SVD ($U = V = I$).
 
 ---
@@ -251,6 +283,7 @@ This section demonstrates the steps of computing the SVD through detailed exampl
     **Solution:**
 
     **Step 1:** Compute $A^T A$:
+
     $$
     A^T A = \begin{pmatrix} 1&1&0 \\ 1&-1&0 \end{pmatrix}\begin{pmatrix} 1&1 \\ 1&-1 \\ 0&0 \end{pmatrix} = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}.
     $$
@@ -260,6 +293,7 @@ This section demonstrates the steps of computing the SVD through detailed exampl
     **Step 3:** Singular values $\sigma_1 = \sigma_2 = \sqrt{2}$.
 
     **Step 4:** Compute left singular vectors:
+
     $$
     \mathbf{u}_1 = \frac{1}{\sqrt{2}} A \mathbf{v}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad
     \mathbf{u}_2 = \frac{1}{\sqrt{2}} A \mathbf{v}_2 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\\-1\\0\end{pmatrix}.
@@ -268,6 +302,7 @@ This section demonstrates the steps of computing the SVD through detailed exampl
     **Step 5:** Extend $\{\mathbf{u}_1, \mathbf{u}_2\}$; take $\mathbf{u}_3 = \begin{pmatrix}0\\0\\1\end{pmatrix}$.
 
     **Step 6:** Therefore
+
     $$
     A = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} \sqrt{2} & 0 \\ 0 & \sqrt{2} \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}^T.
     $$
@@ -278,14 +313,17 @@ This section demonstrates the steps of computing the SVD through detailed exampl
     **Solution:**
 
     **Step 1:**
+
     $$
     A^T A = \begin{pmatrix} 4&3 \\ 0&-5 \end{pmatrix}\begin{pmatrix} 4&0 \\ 3&-5 \end{pmatrix} = \begin{pmatrix} 25 & -15 \\ -15 & 25 \end{pmatrix}.
     $$
 
     **Step 2:** Characteristic polynomial:
+
     $$
     \det(A^T A - \lambda I) = (25-\lambda)^2 - 225 = \lambda^2 - 50\lambda + 400 = (\lambda - 40)(\lambda - 10).
     $$
+
     Eigenvalues $\lambda_1 = 40$, $\lambda_2 = 10$.
 
     For $\lambda_1 = 40$: $(A^T A - 40I)\mathbf{v} = \mathbf{0}$ gives $\begin{pmatrix}-15&-15\\-15&-15\end{pmatrix}\mathbf{v} = \mathbf{0}$, yielding $\mathbf{v}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}$.
@@ -295,14 +333,17 @@ This section demonstrates the steps of computing the SVD through detailed exampl
     **Step 3:** $\sigma_1 = \sqrt{40} = 2\sqrt{10}$, $\sigma_2 = \sqrt{10}$.
 
     **Step 4:**
+
     $$
     \mathbf{u}_1 = \frac{1}{2\sqrt{10}} A \mathbf{v}_1 = \frac{1}{2\sqrt{10}} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}4\\8\end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}1\\2\end{pmatrix},
     $$
+
     $$
     \mathbf{u}_2 = \frac{1}{\sqrt{10}} A \mathbf{v}_2 = \frac{1}{\sqrt{10}} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}4\\-2\end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}2\\-1\end{pmatrix}.
     $$
 
     **Step 5:** Assemble:
+
     $$
     A = \frac{1}{\sqrt{5}}\begin{pmatrix}1&2\\2&-1\end{pmatrix} \begin{pmatrix}2\sqrt{10}&0\\0&\sqrt{10}\end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\-1&1\end{pmatrix}^T.
     $$
@@ -321,30 +362,38 @@ When the rank of a matrix is much smaller than its dimensions, the full SVD cont
 
 !!! definition "Definition 11.6 (Compact SVD)"
     Let $A = U\Sigma V^T$ be the full SVD of an $m \times n$ matrix $A$ with $\operatorname{rank}(A) = r$. Let $U_r = [\mathbf{u}_1, \ldots, \mathbf{u}_r]$ ($m \times r$), $\Sigma_r = \operatorname{diag}(\sigma_1, \ldots, \sigma_r)$ ($r \times r$), $V_r = [\mathbf{v}_1, \ldots, \mathbf{v}_r]$ ($n \times r$). Then
+
     $$
     A = U_r \Sigma_r V_r^T
     $$
+
     is called the **compact SVD** (or **economy SVD**) of $A$.
 
 !!! definition "Definition 11.7 (Truncated SVD)"
     Let $\operatorname{rank}(A) = r$. For $k < r$, let
+
     $$
     A_k = \sum_{i=1}^{k} \sigma_i \mathbf{u}_i \mathbf{v}_i^T = U_k \Sigma_k V_k^T,
     $$
+
     where $U_k$, $\Sigma_k$, $V_k$ consist of the first $k$ columns/rows respectively. $A_k$ is called the **rank-$k$ truncated SVD** of $A$.
 
 !!! theorem "Theorem 11.6 (Approximation error of the truncated SVD)"
     Let the singular values of $A$ be $\sigma_1 \ge \cdots \ge \sigma_r > 0$, and let $A_k$ be the rank-$k$ truncated approximation. Then
+
     $$
     \|A - A_k\|_2 = \sigma_{k+1}, \qquad \|A - A_k\|_F = \sqrt{\sigma_{k+1}^2 + \cdots + \sigma_r^2}.
     $$
 
 ??? proof "Proof"
     From $A = \sum_{i=1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^T$ and $A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T$, we get
+
     $$
     A - A_k = \sum_{i=k+1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^T.
     $$
+
     This is itself the SVD of $A - A_k$ (with singular values $\sigma_{k+1}, \ldots, \sigma_r$), so
+
     $$
     \|A - A_k\|_2 = \sigma_{k+1}, \qquad \|A - A_k\|_F = \sqrt{\sum_{i=k+1}^r \sigma_i^2}. \qquad \blacksquare
     $$
@@ -353,12 +402,15 @@ When the rank of a matrix is much smaller than its dimensions, the full SVD cont
     Suppose the singular values of $A$ are $10, 5, 2, 0.1$. What are the spectral norm error and the Frobenius norm error when using the rank-2 truncated approximation? What is the relative Frobenius error?
 
     **Solution:**
+
     $$
     \|A - A_2\|_2 = \sigma_3 = 2, \qquad \|A - A_2\|_F = \sqrt{2^2 + 0.1^2} = \sqrt{4.01} \approx 2.0025.
     $$
+
     $$
     \|A\|_F = \sqrt{100 + 25 + 4 + 0.01} = \sqrt{129.01} \approx 11.359.
     $$
+
     The relative error is $\frac{\|A - A_2\|_F}{\|A\|_F} \approx \frac{2.0025}{11.359} \approx 17.6\%$.
 
 ---
@@ -381,9 +433,11 @@ SVD provides the optimal low-rank approximation, a result precisely stated by th
 
 !!! theorem "Theorem 11.7 (Eckart-Young-Mirsky theorem)"
     Let $A$ be an $m \times n$ real matrix with singular values $\sigma_1 \ge \cdots \ge \sigma_r > 0$. For any matrix $B$ of rank at most $k$ ($k < r$),
+
     $$
     \|A - A_k\|_2 \le \|A - B\|_2, \qquad \|A - A_k\|_F \le \|A - B\|_F,
     $$
+
     where $A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T$ is the rank-$k$ truncated SVD of $A$. That is, $A_k$ is the **best rank-$k$ approximation** of $A$ under both spectral and Frobenius norms.
 
 ??? proof "Proof"
@@ -392,33 +446,40 @@ SVD provides the optimal low-rank approximation, a result precisely stated by th
     Let $B$ be any matrix of rank at most $k$. The dimension of $\ker(B)$ is at least $n - k$. Consider the subspace $W = \operatorname{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_{k+1}\}$ with $\dim W = k + 1$.
 
     By the dimension formula, $W \cap \ker(B) \neq \{\mathbf{0}\}$ (since $(k+1) + (n-k) = n + 1 > n$). Take a unit vector $\mathbf{w} \in W \cap \ker(B)$, so $B\mathbf{w} = \mathbf{0}$, and therefore
+
     $$
     \|A - B\|_2^2 \ge \|(A-B)\mathbf{w}\|^2 = \|A\mathbf{w}\|^2.
     $$
 
     Writing $\mathbf{w} = \sum_{i=1}^{k+1} c_i \mathbf{v}_i$ ($\sum c_i^2 = 1$), we get
+
     $$
     \|A\mathbf{w}\|^2 = \left\|\sum_{i=1}^{k+1} c_i \sigma_i \mathbf{u}_i\right\|^2 = \sum_{i=1}^{k+1} c_i^2 \sigma_i^2 \ge \sigma_{k+1}^2 \sum c_i^2 = \sigma_{k+1}^2.
     $$
+
     Therefore $\|A - B\|_2 \ge \sigma_{k+1} = \|A - A_k\|_2$. $\blacksquare$
 
 !!! example "Example 11.7"
     Let $A = \begin{pmatrix} 3 & 2 & 2 \\ 2 & 3 & -2 \end{pmatrix}$. Find the best rank-one approximation of $A$.
 
     **Solution:** Compute
+
     $$
     A A^T = \begin{pmatrix} 17 & 8 \\ 8 & 17 \end{pmatrix}.
     $$
+
     Eigenvalues $\lambda_1 = 25$, $\lambda_2 = 9$, so $\sigma_1 = 5$, $\sigma_2 = 3$.
 
     For $\lambda_1 = 25$: $\mathbf{u}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}$.
 
     The corresponding right singular vector:
+
     $$
     \mathbf{v}_1 = \frac{1}{\sigma_1} A^T \mathbf{u}_1 = \frac{1}{5} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}5\\5\\0\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\\0\end{pmatrix}.
     $$
 
     The best rank-one approximation is
+
     $$
     A_1 = \sigma_1 \mathbf{u}_1 \mathbf{v}_1^T = 5 \cdot \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix}1&1&0\end{pmatrix} = \begin{pmatrix} \frac{5}{2} & \frac{5}{2} & 0 \\ \frac{5}{2} & \frac{5}{2} & 0 \end{pmatrix}.
     $$
@@ -450,9 +511,11 @@ For matrices that are noninvertible or nonsquare, the Moore-Penrose pseudoinvers
 
 ??? proof "Proof"
     **Existence:** Let $A = U\Sigma V^T$ be the SVD of $A$ with $\operatorname{rank}(A) = r$. Define
+
     $$
     \Sigma^+ = \begin{pmatrix} \sigma_1^{-1} & & \\ & \ddots & \\ & & \sigma_r^{-1} \\ & \mathbf{0} & \end{pmatrix}_{n \times m},
     $$
+
     and let $A^+ = V \Sigma^+ U^T$. We verify the four conditions.
 
     (1) $A A^+ A = (U\Sigma V^T)(V\Sigma^+ U^T)(U\Sigma V^T) = U\Sigma\Sigma^+\Sigma V^T = U\Sigma V^T = A$.
@@ -465,6 +528,7 @@ For matrices that are noninvertible or nonsquare, the Moore-Penrose pseudoinvers
 
 !!! definition "Definition 11.9 (SVD formula for the pseudoinverse)"
     Let $A = U\Sigma V^T$ be the SVD of $A$ with $\operatorname{rank}(A) = r$. Then
+
     $$
     A^+ = V \Sigma^+ U^T = \sum_{i=1}^{r} \frac{1}{\sigma_i} \mathbf{v}_i \mathbf{u}_i^T.
     $$
@@ -474,9 +538,11 @@ For matrices that are noninvertible or nonsquare, the Moore-Penrose pseudoinvers
 
 ??? proof "Proof"
     Let $A = U\Sigma V^T$ with $\operatorname{rank}(A) = r$. Let $\mathbf{c} = U^T \mathbf{b}$ and $\mathbf{y} = V^T \mathbf{x}$. Since $U, V$ are orthogonal,
+
     $$
     \|A\mathbf{x} - \mathbf{b}\|^2 = \|\Sigma\mathbf{y} - \mathbf{c}\|^2 = \sum_{i=1}^r (\sigma_i y_i - c_i)^2 + \sum_{i=r+1}^m c_i^2.
     $$
+
     The second term is independent of $\mathbf{x}$. Minimizing the first term gives $y_i = c_i / \sigma_i$ ($i = 1, \ldots, r$).
 
     Under this constraint, $\|\mathbf{x}\|^2 = \|\mathbf{y}\|^2 = \sum_{i=1}^r y_i^2 + \sum_{i=r+1}^n y_i^2$. Minimizing $\|\mathbf{x}\|$ requires $y_i = 0$ ($i = r+1, \ldots, n$).
@@ -493,6 +559,7 @@ For matrices that are noninvertible or nonsquare, the Moore-Penrose pseudoinvers
     $$
 
     Least-squares solution:
+
     $$
     x^* = A^+ \mathbf{b} = \frac{1}{5}(1 \cdot 3 + 2 \cdot 4) = \frac{11}{5} = 2.2.
     $$
@@ -515,6 +582,7 @@ SVD has important applications in numerous fields. This section introduces sever
 
 !!! definition "Definition 11.10 (SVD image compression)"
     Viewing an $m \times n$ grayscale image as a matrix $A$, its rank-$k$ truncated SVD approximation $A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T$ can be used for image compression. Storing $A_k$ requires $k(m + n + 1)$ numbers, while the original matrix requires $mn$ numbers. When $k \ll \min(m,n)$, the compression ratio is
+
     $$
     \rho = \frac{k(m + n + 1)}{mn}.
     $$
@@ -523,9 +591,11 @@ SVD has important applications in numerous fields. This section introduces sever
     For a $1000 \times 800$ grayscale image, what is the compression ratio when using a rank-$k = 50$ truncated SVD approximation?
 
     **Solution:**
+
     $$
     \rho = \frac{50 \times (1000 + 800 + 1)}{1000 \times 800} = \frac{50 \times 1801}{800000} = \frac{90050}{800000} \approx 11.3\%.
     $$
+
     That is, only about $11.3\%$ of the original data needs to be stored.
 
 ### 11.8.2 Introduction to Principal Component Analysis
@@ -540,9 +610,11 @@ SVD has important applications in numerous fields. This section introduces sever
 
 ??? proof "Proof"
     From $X = U\Sigma V^T$, we get $X^T X = V\Sigma^T U^T U \Sigma V^T = V\Sigma^T\Sigma V^T = V\Sigma^2 V^T$ (where $\Sigma^2$ denotes $\Sigma^T\Sigma$, a $p \times p$ diagonal matrix). Therefore
+
     $$
     S = \frac{1}{n-1}X^T X = V \left(\frac{\Sigma^2}{n-1}\right) V^T.
     $$
+
     This is precisely the spectral decomposition of the covariance matrix. The columns of $V$ are the eigenvectors of $S$ (principal component directions), with corresponding eigenvalues $\frac{\sigma_i^2}{n-1}$ (the variance of the $i$-th principal component).
 
     Principal component scores $Z = XV = U\Sigma V^T V = U\Sigma$. $\blacksquare$
@@ -551,16 +623,20 @@ SVD has important applications in numerous fields. This section introduces sever
 
 !!! definition "Definition 11.11 (Condition Number)"
     Let $A$ be an $m \times n$ matrix with $\operatorname{rank}(A) = r$. The **condition number** of $A$ is defined as
+
     $$
     \kappa(A) = \frac{\sigma_1}{\sigma_r} = \frac{\sigma_{\max}}{\sigma_{\min}},
     $$
+
     where $\sigma_1$ and $\sigma_r$ are the largest and smallest nonzero singular values of $A$, respectively.
 
 !!! theorem "Theorem 11.11 (Condition number and numerical stability)"
     For the linear system $A\mathbf{x} = \mathbf{b}$ ($A$ invertible), if $\mathbf{b}$ has a relative perturbation $\frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}$, then the relative perturbation of the solution satisfies
+
     $$
     \frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|} \le \kappa(A) \frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}.
     $$
+
     The larger the condition number, the more **ill-conditioned** the problem; when the condition number is close to 1, the problem is **well-conditioned**.
 
 ??? proof "Proof"
@@ -571,6 +647,7 @@ SVD has important applications in numerous fields. This section introduces sever
     $$
 
     Also $\|\mathbf{b}\| = \|A\mathbf{x}\| \le \|A\|_2 \|\mathbf{x}\|$, so $\frac{1}{\|\mathbf{x}\|} \le \frac{\|A\|_2}{\|\mathbf{b}\|}$. Therefore
+
     $$
     \frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|} \le \|A\|_2 \|A^{-1}\|_2 \frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|} = \frac{\sigma_1}{\sigma_n} \frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|} = \kappa(A) \frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}. \qquad \blacksquare
     $$
@@ -579,9 +656,11 @@ SVD has important applications in numerous fields. This section introduces sever
     Let $A = \begin{pmatrix}1&1\\1&1.0001\end{pmatrix}$. Find its condition number and analyze the numerical stability.
 
     **Solution:**
+
     $$
     A^T A = \begin{pmatrix}2&2.0001\\2.0001&2.00020001\end{pmatrix}.
     $$
+
     The eigenvalues are approximately $\lambda_1 \approx 4.00020001$ and $\lambda_2 \approx 0.000000005$ (exact values can be computed).
 
     Rough estimates: $\sigma_1 \approx 2.00005$, $\sigma_2 \approx 0.00005$.

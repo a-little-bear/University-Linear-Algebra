@@ -37,25 +37,31 @@ $A(W) \subseteq W$ → 不变子空间直和分解 ↔ **分块对角化** → �
 
 !!! definition "定义 12.2 (不变子空间直和分解)"
     设 $W_1, W_2, \ldots, W_k$ 都是 $A$ 的不变子空间，若
+
     $$
     \mathbb{R}^n = W_1 \oplus W_2 \oplus \cdots \oplus W_k
     $$
+
     （即每个 $\mathbf{x} \in \mathbb{R}^n$ 可以唯一表示为 $\mathbf{x} = \mathbf{w}_1 + \cdots + \mathbf{w}_k$，$\mathbf{w}_i \in W_i$），则称 $\mathbb{R}^n$ 为 $A$ 的不变子空间的**直和分解**。
 
 !!! theorem "定理 12.1 (不变子空间与分块对角化)"
     设 $\mathbb{R}^n = W_1 \oplus W_2 \oplus \cdots \oplus W_k$ 为 $A$ 的不变子空间直和分解，取 $W_i$ 的基 $\mathcal{B}_i$，合并为 $\mathcal{B} = \mathcal{B}_1 \cup \cdots \cup \mathcal{B}_k$。设 $P$ 为基 $\mathcal{B}$ 的矩阵（列为各基向量），则
+
     $$
     P^{-1}AP = \begin{pmatrix} A_1 & & \\ & A_2 & \\ & & \ddots & \\ & & & A_k \end{pmatrix},
     $$
+
     其中 $A_i$ 为 $A$ 限制在 $W_i$ 上的矩阵表示（$\dim W_i \times \dim W_i$）。
 
 ??? proof "证明"
     设 $\dim W_i = n_i$，$\mathcal{B}_i = \{\mathbf{w}_{i,1}, \ldots, \mathbf{w}_{i,n_i}\}$。由于 $W_i$ 是 $A$ 的不变子空间，$A\mathbf{w}_{i,j} \in W_i$，因此 $A\mathbf{w}_{i,j}$ 可以表示为 $\mathcal{B}_i$ 中向量的线性组合。
 
     设 $P = [\mathbf{w}_{1,1}, \ldots, \mathbf{w}_{1,n_1}, \ldots, \mathbf{w}_{k,1}, \ldots, \mathbf{w}_{k,n_k}]$，则
+
     $$
     AP = P \begin{pmatrix} A_1 & & \\ & \ddots & \\ & & A_k \end{pmatrix},
     $$
+
     其中 $A_i$ 的第 $j$ 列是 $A\mathbf{w}_{i,j}$ 在基 $\mathcal{B}_i$ 下的坐标。由 $P$ 可逆即得结论。$\blacksquare$
 
 !!! theorem "定理 12.2 (特征空间是不变子空间)"
@@ -80,23 +86,29 @@ $A(W) \subseteq W$ → 不变子空间直和分解 ↔ **分块对角化** → �
 
 !!! definition "定义 12.3 (广义特征向量 Generalized Eigenvector)"
     设 $\lambda$ 为矩阵 $A$ 的特征值。若非零向量 $\mathbf{v}$ 满足
+
     $$
     (A - \lambda I)^k \mathbf{v} = \mathbf{0}
     $$
+
     对某个正整数 $k$ 成立，则称 $\mathbf{v}$ 为 $A$ 对应于 $\lambda$ 的**广义特征向量**（秩为 $k$，如果 $(A-\lambda I)^{k-1}\mathbf{v} \neq \mathbf{0}$）。
 
 !!! definition "定义 12.4 (广义特征空间 Generalized Eigenspace)"
     矩阵 $A$ 对应于特征值 $\lambda$ 的**广义特征空间**为
+
     $$
     G_\lambda = \ker(A - \lambda I)^n = \{\mathbf{v} \in \mathbb{R}^n : (A - \lambda I)^n \mathbf{v} = \mathbf{0}\},
     $$
+
     其中 $n$ 为矩阵的阶数。等价地，$G_\lambda = \bigcup_{k=1}^{\infty} \ker(A - \lambda I)^k$。
 
 !!! theorem "定理 12.3 (广义特征空间的维数)"
     设 $\lambda$ 为 $A$ 的特征值，代数重数为 $m$，则
+
     $$
     \dim G_\lambda = m.
     $$
+
     即广义特征空间的维数等于特征值的代数重数。
 
 ??? proof "证明"
@@ -104,6 +116,7 @@ $A(W) \subseteq W$ → 不变子空间直和分解 ↔ **分块对角化** → �
 
 !!! theorem "定理 12.4 (广义特征空间的直和分解)"
     设 $A$ 为 $n \times n$ 矩阵（在复数域上），特征值为 $\lambda_1, \ldots, \lambda_s$（互不相同），则
+
     $$
     \mathbb{C}^n = G_{\lambda_1} \oplus G_{\lambda_2} \oplus \cdots \oplus G_{\lambda_s}.
     $$
@@ -165,16 +178,20 @@ $N^k = 0$ → 所有特征值为 $0$ → $(I-N)^{-1} = I + N + \cdots + N^{k-1}$
     设 $N = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{pmatrix}$。验证 $N$ 是幂零矩阵并求其幂零指数。
 
     **解：**
+
     $$
     N^2 = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \qquad N^3 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}.
     $$
+
     $N^2 \neq 0$ 而 $N^3 = 0$，故幂零指数为 $3$。
 
 !!! theorem "定理 12.6 (幂零矩阵的 Jordan 标准形)"
     设 $N$ 为 $n \times n$ 幂零矩阵，幂零指数为 $k$。则 $N$ 相似于分块对角矩阵
+
     $$
     J = \operatorname{diag}(J_{n_1}(0), J_{n_2}(0), \ldots, J_{n_t}(0)),
     $$
+
     其中 $J_{n_i}(0)$ 为 $n_i \times n_i$ 的幂零 Jordan 块（对角线为 0，超对角线为 1），$n_1 \ge n_2 \ge \cdots \ge n_t \ge 1$，$\sum n_i = n$，$n_1 = k$。
 
 ??? proof "证明"
@@ -194,6 +211,7 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
 !!! definition "定义 12.6 (Jordan 块 Jordan Block)"
     $k \times k$ 的 **Jordan 块** $J_k(\lambda)$ 定义为
+
     $$
     J_k(\lambda) = \begin{pmatrix}
     \lambda & 1 & 0 & \cdots & 0 \\
@@ -203,6 +221,7 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
     0 & \cdots & 0 & 0 & \lambda
     \end{pmatrix} = \lambda I_k + N_k,
     $$
+
     其中 $N_k$ 为 $k \times k$ 的**基本幂零矩阵**（超对角线元素全为 1，其余为 0）。
 
 !!! theorem "定理 12.7 (Jordan 块的性质)"
@@ -228,9 +247,11 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
     **解：** $J_3(2) = 2I + N_3$，其中 $N_3 = \begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}$。
 
     由公式：
+
     $$
     J_3(2)^4 = \sum_{j=0}^{2} \binom{4}{j} 2^{4-j} N_3^j = \binom{4}{0}2^4 I + \binom{4}{1}2^3 N_3 + \binom{4}{2}2^2 N_3^2
     $$
+
     $$
     = 16I + 32N_3 + 24N_3^2 = \begin{pmatrix}16&32&24\\0&16&32\\0&0&16\end{pmatrix}.
     $$
@@ -247,9 +268,11 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
 !!! definition "定义 12.7 (Jordan 矩阵 Jordan Matrix)"
     **Jordan 矩阵**是分块对角矩阵
+
     $$
     J = \operatorname{diag}(J_{k_1}(\lambda_1), J_{k_2}(\lambda_2), \ldots, J_{k_s}(\lambda_s)),
     $$
+
     其中每个 $J_{k_i}(\lambda_i)$ 是 Jordan 块。不同块可以有相同的 $\lambda$ 值。
 
 <div class="context-flow" markdown>
@@ -260,9 +283,11 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
 !!! theorem "定理 12.8 (Jordan 标准形定理)"
     设 $A$ 为 $n \times n$ 复数矩阵。则存在可逆矩阵 $P$ 使得
+
     $$
     P^{-1}AP = J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s)),
     $$
+
     其中 $J$ 为 Jordan 矩阵。
 
     而且，在**不计 Jordan 块的排列顺序**的意义下，$J$ 是唯一的。即 Jordan 块的大小和对应的特征值是由 $A$ 唯一确定的。
@@ -279,9 +304,11 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
     第三步（幂零矩阵的 Jordan 形）：设 $N$ 为 $d \times d$ 幂零矩阵。通过构造 Jordan 链（Jordan chains）可以找到基使得 $N$ 在此基下为 Jordan 形。
 
     具体地，选取 $\mathbf{v}$ 使得 $(A-\lambda I)^{k-1}\mathbf{v} \neq \mathbf{0}$ 但 $(A-\lambda I)^k\mathbf{v} = \mathbf{0}$。定义 Jordan 链：
+
     $$
     \mathbf{v}, (A-\lambda I)\mathbf{v}, (A-\lambda I)^2\mathbf{v}, \ldots, (A-\lambda I)^{k-1}\mathbf{v}.
     $$
+
     这 $k$ 个向量线性无关，且 $A$ 在它们张成的子空间上表示为 $J_k(\lambda)$。
 
     反复应用此过程，可将整个广义特征空间分解为 Jordan 链的直和。
@@ -289,13 +316,17 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
     **唯一性：**
 
     Jordan 块的结构由以下不变量确定：对每个特征值 $\lambda$ 和每个正整数 $j$，
+
     $$
     r_j = \operatorname{rank}(A - \lambda I)^j
     $$
+
     是相似不变量。大小为 $k$ 的 Jordan 块 $J_k(\lambda)$ 的个数为
+
     $$
     n_k = r_{k-2} - 2r_{k-1} + r_k
     $$
+
     （约定 $r_{-1} = n$, $r_0 = n - \dim\ker(A-\lambda I)$），这由 $A$ 唯一确定。$\blacksquare$
 
 !!! theorem "定理 12.9 (Jordan 标准形与矩阵性质)"
@@ -325,6 +356,7 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
     对 $\lambda_2 = -1$：代数重数 2，几何重数 1，因此有 1 个 Jordan 块，大小为 2。
 
     Jordan 标准形为
+
     $$
     J = \begin{pmatrix}
     2 & 1 & & & \\
@@ -368,6 +400,7 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
 
 !!! theorem "定理 12.11 (最小多项式与 Jordan 形的关系)"
     设 $A$ 的 Jordan 标准形中，特征值 $\lambda_i$ 对应的最大 Jordan 块大小为 $d_i$，则
+
     $$
     m_A(\lambda) = \prod_{i=1}^{s} (\lambda - \lambda_i)^{d_i}.
     $$
@@ -404,9 +437,11 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
 
 !!! definition "定义 12.9 (Jordan 链 Jordan Chain)"
     设 $\lambda$ 为 $A$ 的特征值。如果向量序列 $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k$ 满足
+
     $$
     (A - \lambda I)\mathbf{v}_1 = \mathbf{0}, \quad (A - \lambda I)\mathbf{v}_j = \mathbf{v}_{j-1}, \quad j = 2, \ldots, k,
     $$
+
     则称 $\{\mathbf{v}_k, \mathbf{v}_{k-1}, \ldots, \mathbf{v}_1\}$ 为一条**Jordan 链**，长度为 $k$。其中 $\mathbf{v}_1$ 是特征向量，$\mathbf{v}_2, \ldots, \mathbf{v}_k$ 是广义特征向量。
 
 !!! definition "定义 12.10 (Jordan 标准形的计算步骤)"
@@ -423,15 +458,19 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
     **解：**
 
     **第一步：** 特征多项式（可通过行列式展开或其他方法计算）：
+
     $$
     p_A(\lambda) = (\lambda - 1)^2(\lambda - 4)(\lambda - 3).
     $$
+
     特征值：$\lambda_1 = 1$（代数重数 2），$\lambda_2 = 4$（代数重数 1），$\lambda_3 = 3$（代数重数 1）。
 
     **第二步：** 对 $\lambda_1 = 1$：
+
     $$
     A - I = \begin{pmatrix} 4&4&2&1 \\ 0&0&-1&-1 \\ -1&-1&2&0 \\ 1&1&-1&1 \end{pmatrix}.
     $$
+
     计算 $\operatorname{rank}(A-I)$。通过行化简可得 $\operatorname{rank}(A-I) = 3$，故 $\dim\ker(A-I) = 1$。
 
     几何重数为 1 < 代数重数 2，因此有一个 $2 \times 2$ Jordan 块 $J_2(1)$。
@@ -439,6 +478,7 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
     对 $\lambda_2 = 4$ 和 $\lambda_3 = 3$：代数重数均为 1，因此各有一个 $1 \times 1$ 块。
 
     **第三步：** Jordan 标准形为
+
     $$
     J = \begin{pmatrix}
     1 & 1 & & \\
@@ -458,6 +498,7 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
     $(A - 2I) = \begin{pmatrix}0&1\\0&0\end{pmatrix}$，$\ker(A-2I) = \operatorname{span}\left\{\begin{pmatrix}1\\0\end{pmatrix}\right\}$。
 
     特征向量 $\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}$。广义特征向量 $\mathbf{v}_2$ 满足 $(A-2I)\mathbf{v}_2 = \mathbf{v}_1$：
+
     $$
     \begin{pmatrix}0&1\\0&0\end{pmatrix}\mathbf{v}_2 = \begin{pmatrix}1\\0\end{pmatrix}, \quad \Rightarrow \quad \mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}.
     $$
@@ -470,9 +511,11 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
     求矩阵 $A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 8 & -12 & 6 \end{pmatrix}$ 的 Jordan 标准形。
 
     **解：** 特征多项式为
+
     $$
     p_A(\lambda) = -\lambda^3 + 6\lambda^2 - 12\lambda + 8 = -(\lambda - 2)^3.
     $$
+
     唯一特征值 $\lambda = 2$，代数重数 3。
 
     $$
@@ -482,9 +525,11 @@ $m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大
     行化简得 $\operatorname{rank}(A - 2I) = 2$，$\dim\ker(A-2I) = 1$，几何重数为 1。
 
     $(A-2I)^2$ 的秩：计算
+
     $$
     (A-2I)^2 = \begin{pmatrix}4&-4&1\\-8&8&-2\\-16&16&-4\end{pmatrix} + \cdots
     $$
+
     实际计算得 $\operatorname{rank}(A-2I)^2 = 1$，$\dim\ker(A-2I)^2 = 2$。
 
     $(A-2I)^3 = 0$，$\dim\ker(A-2I)^3 = 3$。
@@ -511,10 +556,13 @@ $A^n = PJ^nP^{-1}$（矩阵幂）· $e^{At} = Pe^{Jt}P^{-1}$（微分方程）�
 
 !!! theorem "定理 12.12 (利用 Jordan 形计算矩阵幂)"
     设 $A = PJP^{-1}$，则 $A^n = PJ^nP^{-1}$。而
+
     $$
     J^n = \operatorname{diag}(J_{k_1}(\lambda_1)^n, \ldots, J_{k_s}(\lambda_s)^n),
     $$
+
     其中
+
     $$
     J_k(\lambda)^n = \begin{pmatrix}
     \lambda^n & \binom{n}{1}\lambda^{n-1} & \binom{n}{2}\lambda^{n-2} & \cdots & \binom{n}{k-1}\lambda^{n-k+1} \\
@@ -527,15 +575,18 @@ $A^n = PJ^nP^{-1}$（矩阵幂）· $e^{At} = Pe^{Jt}P^{-1}$（微分方程）�
 
 ??? proof "证明"
     $J_k(\lambda)^n = (\lambda I + N_k)^n = \sum_{j=0}^{k-1}\binom{n}{j}\lambda^{n-j}N_k^j$。而 $N_k^j$ 的 $(p,q)$ 元素为 $\delta_{p+j,q}$（第 $j$ 条超对角线为 1）。因此 $J_k(\lambda)^n$ 的 $(p,q)$ 元素为：
+
     $$
     [J_k(\lambda)^n]_{pq} = \begin{cases} \binom{n}{q-p}\lambda^{n-q+p} & \text{if } q \ge p, \\ 0 & \text{if } q < p. \end{cases}
     $$
+
     其中约定 $\binom{n}{j} = 0$ 当 $j > n$ 或 $j < 0$。$\blacksquare$
 
 !!! example "例 12.10"
     设 $A = \begin{pmatrix}3&1\\0&3\end{pmatrix}$，求 $A^{100}$。
 
     **解：** $A = J_2(3)$，因此
+
     $$
     A^{100} = J_2(3)^{100} = \begin{pmatrix} 3^{100} & 100 \cdot 3^{99} \\ 0 & 3^{100} \end{pmatrix}.
     $$
@@ -544,10 +595,13 @@ $A^n = PJ^nP^{-1}$（矩阵幂）· $e^{At} = Pe^{Jt}P^{-1}$（微分方程）�
 
 !!! theorem "定理 12.13 (Jordan 形与线性常微分方程组)"
     线性常系数微分方程组 $\mathbf{x}'(t) = A\mathbf{x}(t)$ 的解为 $\mathbf{x}(t) = e^{At}\mathbf{x}(0)$。利用 Jordan 分解 $A = PJP^{-1}$：
+
     $$
     e^{At} = Pe^{Jt}P^{-1} = P \operatorname{diag}(e^{J_{k_1}(\lambda_1)t}, \ldots, e^{J_{k_s}(\lambda_s)t}) P^{-1},
     $$
+
     其中
+
     $$
     e^{J_k(\lambda)t} = e^{\lambda t}\begin{pmatrix}
     1 & t & \frac{t^2}{2!} & \cdots & \frac{t^{k-1}}{(k-1)!} \\
@@ -569,6 +623,7 @@ $A^n = PJ^nP^{-1}$（矩阵幂）· $e^{At} = Pe^{Jt}P^{-1}$（微分方程）�
     求微分方程组 $\mathbf{x}' = \begin{pmatrix}2&1\\0&2\end{pmatrix}\mathbf{x}$，初始条件 $\mathbf{x}(0) = \begin{pmatrix}1\\3\end{pmatrix}$ 的解。
 
     **解：** $A = J_2(2)$，因此
+
     $$
     e^{At} = e^{2t}\begin{pmatrix}1&t\\0&1\end{pmatrix}.
     $$

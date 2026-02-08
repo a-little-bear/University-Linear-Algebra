@@ -22,6 +22,7 @@ Starting from the definition and basic properties of the Kronecker product, this
 
 !!! definition "Definition 19.1 (Kronecker product)"
     Let $A = (a_{ij})$ be an $m \times n$ matrix and $B$ be a $p \times q$ matrix. The **Kronecker product** (also called the **tensor product**) of $A$ and $B$, denoted $A \otimes B$, is defined as the $mp \times nq$ **block matrix**:
+
     $$
     A \otimes B = \begin{pmatrix}
     a_{11}B & a_{12}B & \cdots & a_{1n}B \\
@@ -36,6 +37,7 @@ Starting from the definition and basic properties of the Kronecker product, this
 
 !!! example "Example 19.1"
     Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$, $B = \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix}$. Then:
+
     $$
     A \otimes B = \begin{pmatrix}
     1 \cdot \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix} & 2 \cdot \begin{pmatrix} 0 & 5 \\ 6 & 7 \end{pmatrix} \\[6pt]
@@ -63,9 +65,11 @@ The Kronecker product possesses rich and elegant algebraic properties that make 
 
 !!! theorem "Theorem 19.1 (Mixed-product property)"
     Let $A, C$ be a compatible pair of matrices for multiplication, and $B, D$ be a compatible pair for multiplication. Then:
+
     $$
     (A \otimes B)(C \otimes D) = (AC) \otimes (BD).
     $$
+
     This property is called the **mixed-product property**.
 
 ??? proof "Proof"
@@ -74,6 +78,7 @@ The Kronecker product possesses rich and elegant algebraic properties that make 
     The $(i,j)$-block (of size $p \times q$) of $(A \otimes B)$ is $a_{ij}B$, and the $(j,k)$-block (of size $q \times s$) of $(C \otimes D)$ is $c_{jk}D$.
 
     The $(i,k)$-block of the product is:
+
     $$
     \sum_{j=1}^{n} (a_{ij}B)(c_{jk}D) = \sum_{j=1}^{n} a_{ij}c_{jk}(BD) = \left(\sum_{j=1}^n a_{ij}c_{jk}\right)(BD) = (AC)_{ik}(BD).
     $$
@@ -92,6 +97,7 @@ The Kronecker product possesses rich and elegant algebraic properties that make 
 
 ??? proof "Proof"
     We prove property 6. By the mixed-product property:
+
     $$
     (A \otimes B)(A^{-1} \otimes B^{-1}) = (AA^{-1}) \otimes (BB^{-1}) = I_m \otimes I_p = I_{mp}.
     $$
@@ -109,11 +115,13 @@ The Kronecker product possesses rich and elegant algebraic properties that make 
 
 ??? proof "Proof"
     **(1) Trace**: The diagonal blocks of $A \otimes B$ are $a_{ii}B$ ($i = 1,\ldots,m$), therefore:
+
     $$
     \operatorname{tr}(A \otimes B) = \sum_{i=1}^m \operatorname{tr}(a_{ii}B) = \sum_{i=1}^m a_{ii} \operatorname{tr}(B) = \operatorname{tr}(A) \cdot \operatorname{tr}(B).
     $$
 
     **(2) Determinant**: Using the mixed-product property and block diagonalization. Let the eigenvalues of $A$ be $\lambda_1, \ldots, \lambda_m$ and those of $B$ be $\mu_1, \ldots, \mu_n$ (counted with multiplicity). By Theorem 19.5 (to be proved later), the eigenvalues of $A \otimes B$ are $\{\lambda_i \mu_j\}$. Therefore:
+
     $$
     \det(A \otimes B) = \prod_{i=1}^m \prod_{j=1}^n \lambda_i \mu_j = \left(\prod_{i=1}^m \lambda_i\right)^n \left(\prod_{j=1}^n \mu_j\right)^m = (\det A)^n (\det B)^m.
     $$
@@ -137,9 +145,11 @@ The Kronecker product possesses rich and elegant algebraic properties that make 
 
 !!! definition "Definition 19.2 (Kronecker power)"
     For a square matrix $A$, the $k$-th **Kronecker power** is defined as:
+
     $$
     A^{\otimes k} = \underbrace{A \otimes A \otimes \cdots \otimes A}_{k \text{ copies}}.
     $$
+
     If $A$ is $n \times n$, then $A^{\otimes k}$ is $n^k \times n^k$.
 
 ---
@@ -156,30 +166,37 @@ The Vec operator stacks the columns of a matrix into a vector, serving as the br
 
 !!! definition "Definition 19.3 (Vec operator)"
     Let $A = (\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n)$ be an $m \times n$ matrix, where $\mathbf{a}_j$ is the $j$-th column. The **Vec operator** (vectorization) maps $A$ to an $mn \times 1$ column vector:
+
     $$
     \operatorname{vec}(A) = \begin{pmatrix} \mathbf{a}_1 \\ \mathbf{a}_2 \\ \vdots \\ \mathbf{a}_n \end{pmatrix}.
     $$
+
     That is, the columns of $A$ are stacked from left to right.
 
 !!! theorem "Theorem 19.4 (Core formula of the Vec operator)"
     Let $A$ be an $m \times n$ matrix, $X$ be an $n \times p$ matrix, and $B$ be a $p \times q$ matrix. Then:
+
     $$
     \operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X).
     $$
 
 ??? proof "Proof"
     **Method 1** (using column vectors): Let $B = (\mathbf{b}_1, \ldots, \mathbf{b}_q)$, $Y = AXB$. The $j$-th column of $Y$ is:
+
     $$
     \mathbf{y}_j = AX\mathbf{b}_j = A \sum_{k=1}^p b_{kj} \mathbf{x}_k = \sum_{k=1}^p b_{kj} A \mathbf{x}_k,
     $$
+
     where $\mathbf{x}_k$ is the $k$-th column of $X$.
 
     Therefore:
+
     $$
     \operatorname{vec}(Y) = \begin{pmatrix} \mathbf{y}_1 \\ \vdots \\ \mathbf{y}_q \end{pmatrix} = \begin{pmatrix} \sum_k b_{k1} A\mathbf{x}_k \\ \vdots \\ \sum_k b_{kq} A\mathbf{x}_k \end{pmatrix}.
     $$
 
     On the other hand:
+
     $$
     (B^T \otimes A)\operatorname{vec}(X) = \begin{pmatrix} b_{11}A & b_{21}A & \cdots & b_{p1}A \\ b_{12}A & b_{22}A & \cdots & b_{p2}A \\ \vdots & & \ddots & \vdots \\ b_{1q}A & b_{2q}A & \cdots & b_{pq}A \end{pmatrix} \begin{pmatrix} \mathbf{x}_1 \\ \mathbf{x}_2 \\ \vdots \\ \mathbf{x}_p \end{pmatrix}.
     $$
@@ -205,6 +222,7 @@ The Vec operator stacks the columns of a matrix into a vector, serving as the br
 
 !!! definition "Definition 19.4 (Half-vectorization operator)"
     For an $n \times n$ symmetric matrix $A$, the **half-vectorization operator** $\operatorname{vech}(A)$ stacks the lower triangular part (including the diagonal) of $A$ column by column into an $\frac{n(n+1)}{2} \times 1$ vector:
+
     $$
     \operatorname{vech}(A) = (a_{11}, a_{21}, \ldots, a_{n1}, a_{22}, a_{32}, \ldots, a_{nn})^T.
     $$
@@ -253,13 +271,17 @@ The Kronecker product is not commutative, but the two orderings of the Kronecker
 
 !!! definition "Definition 19.5 (Commutation matrix)"
     The **commutation matrix** $K_{m,n}$ is an $mn \times mn$ permutation matrix satisfying, for any $m \times n$ matrix $A$:
+
     $$
     K_{m,n} \operatorname{vec}(A) = \operatorname{vec}(A^T).
     $$
+
     Equivalently, $K_{m,n}$ can be expressed using basis matrices as:
+
     $$
     K_{m,n} = \sum_{i=1}^{m} \sum_{j=1}^{n} E_{ij} \otimes E_{ji},
     $$
+
     where $E_{ij}$ is the $m \times n$ basis matrix (with $1$ in position $(i,j)$ and $0$ elsewhere), and $E_{ji}$ is the $n \times m$ basis matrix.
 
 !!! theorem "Theorem 19.6 (Properties of the commutation matrix)"
@@ -282,10 +304,13 @@ The Kronecker product is not commutative, but the two orderings of the Kronecker
 
 !!! theorem "Theorem 19.7 (Relationship between Vec and transpose)"
     For any $m \times n$ matrix $A$:
+
     $$
     \operatorname{vec}(A^T) = K_{m,n}\operatorname{vec}(A).
     $$
+
     Furthermore, for the transpose of a matrix product:
+
     $$
     \operatorname{vec}((AXB)^T) = \operatorname{vec}(B^T X^T A^T) = (A \otimes B^T)\operatorname{vec}(X^T) = (A \otimes B^T)K_{n,p}\operatorname{vec}(X).
     $$
@@ -301,6 +326,7 @@ The Kronecker product is not commutative, but the two orderings of the Kronecker
     $\operatorname{vec}(A^T) = (a_{11}, a_{12}, a_{13}, a_{21}, a_{22}, a_{23})^T$.
 
     Therefore $K_{2,3}$ maps positions $(1,2,3,4,5,6)$ to $(1,3,5,2,4,6)$:
+
     $$
     K_{2,3} = \begin{pmatrix}
     1 & 0 & 0 & 0 & 0 & 0 \\
@@ -326,24 +352,29 @@ One of the most important applications of the Kronecker product and Vec operator
 
 !!! definition "Definition 19.6 (Linear matrix equation)"
     An equation of the form
+
     $$
     \sum_{k=1}^{K} A_k X B_k = C
     $$
+
     is called a **linear matrix equation**, where $A_k, B_k, C$ are known and $X$ is the unknown matrix.
 
 !!! theorem "Theorem 19.8 (Vectorization of matrix equations)"
     The linear matrix equation $\sum_{k=1}^K A_k X B_k = C$ is equivalent to the vector equation:
+
     $$
     \left(\sum_{k=1}^{K} B_k^T \otimes A_k\right) \operatorname{vec}(X) = \operatorname{vec}(C).
     $$
 
 ??? proof "Proof"
     Applying Theorem 19.4 to each term $A_k X B_k$:
+
     $$
     \operatorname{vec}(A_k X B_k) = (B_k^T \otimes A_k)\operatorname{vec}(X).
     $$
 
     Taking Vec of both sides of the equation:
+
     $$
     \operatorname{vec}\left(\sum_{k=1}^K A_k X B_k\right) = \sum_{k=1}^K \operatorname{vec}(A_k X B_k) = \sum_{k=1}^K (B_k^T \otimes A_k)\operatorname{vec}(X) = \left(\sum_{k=1}^K B_k^T \otimes A_k\right)\operatorname{vec}(X).
     $$
@@ -352,13 +383,16 @@ One of the most important applications of the Kronecker product and Vec operator
 
 !!! theorem "Theorem 19.9 (Kronecker product form of the Sylvester equation)"
     The Sylvester equation $AX + XB = C$ (where $A$ is $m \times m$, $B$ is $n \times n$, and $X, C$ are $m \times n$) is equivalent to:
+
     $$
     (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
+
     This equation has a unique solution if and only if $I_n \otimes A + B^T \otimes I_m$ is nonsingular, i.e., $A$ and $-B$ have no common eigenvalues.
 
 ??? proof "Proof"
     By Theorem 19.8, taking $K = 2$, $A_1 = A$, $B_1 = I$, $A_2 = I$, $B_2 = B$:
+
     $$
     (I^T \otimes A + B^T \otimes I)\operatorname{vec}(X) = (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
@@ -367,9 +401,11 @@ One of the most important applications of the Kronecker product and Vec operator
 
 !!! example "Example 19.6"
     Solve the Sylvester equation $AX + XB = C$, where:
+
     $$
     A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}, \quad B = (3), \quad C = \begin{pmatrix} 4 \\ 10 \end{pmatrix}.
     $$
+
     Here $A$ is $2 \times 2$, $B$ is $1 \times 1$ (the scalar 3), and $X$ is $2 \times 1$.
 
     Vectorization: $(I_1 \otimes A + B^T \otimes I_2)\operatorname{vec}(X) = \operatorname{vec}(C)$.
@@ -407,29 +443,35 @@ One of the most important applications of the Kronecker product and Vec operator
 
 !!! definition "Definition 19.7 (Spectrum of the Kronecker product)"
     Let $A$ be an $m \times m$ matrix with eigenvalues $\lambda_1, \ldots, \lambda_m$, and $B$ be an $n \times n$ matrix with eigenvalues $\mu_1, \ldots, \mu_n$. Then the $mn$ eigenvalues of $A \otimes B$ are:
+
     $$
     \sigma(A \otimes B) = \{\lambda_i \mu_j : i = 1,\ldots,m;\; j = 1,\ldots,n\}.
     $$
 
 !!! theorem "Theorem 19.10 (Eigenvalues and eigenvectors of the Kronecker product)"
     If $A\mathbf{u} = \lambda\mathbf{u}$ and $B\mathbf{v} = \mu\mathbf{v}$, then:
+
     $$
     (A \otimes B)(\mathbf{u} \otimes \mathbf{v}) = \lambda\mu(\mathbf{u} \otimes \mathbf{v}).
     $$
+
     That is, $\mathbf{u} \otimes \mathbf{v}$ is an eigenvector of $A \otimes B$ corresponding to eigenvalue $\lambda\mu$.
 
     If $A$ and $B$ are both diagonalizable, $A = P \operatorname{diag}(\lambda_1,\ldots,\lambda_m) P^{-1}$, $B = Q \operatorname{diag}(\mu_1,\ldots,\mu_n) Q^{-1}$, then:
+
     $$
     A \otimes B = (P \otimes Q) \operatorname{diag}(\lambda_1\mu_1, \lambda_1\mu_2, \ldots, \lambda_m\mu_n) (P \otimes Q)^{-1}.
     $$
 
 ??? proof "Proof"
     By the mixed-product property:
+
     $$
     (A \otimes B)(\mathbf{u} \otimes \mathbf{v}) = (A\mathbf{u}) \otimes (B\mathbf{v}) = (\lambda\mathbf{u}) \otimes (\mu\mathbf{v}) = \lambda\mu(\mathbf{u} \otimes \mathbf{v}).
     $$
 
     For the diagonalizable case:
+
     $$
     A \otimes B = (P \Lambda_A P^{-1}) \otimes (Q \Lambda_B Q^{-1}) = (P \otimes Q)(\Lambda_A \otimes \Lambda_B)(P^{-1} \otimes Q^{-1}).
     $$
@@ -438,13 +480,16 @@ One of the most important applications of the Kronecker product and Vec operator
 
 !!! theorem "Theorem 19.11 (Singular value decomposition of the Kronecker product)"
     Let $A = U_A \Sigma_A V_A^*$ and $B = U_B \Sigma_B V_B^*$ be the singular value decompositions of $A$ and $B$. Then:
+
     $$
     A \otimes B = (U_A \otimes U_B)(\Sigma_A \otimes \Sigma_B)(V_A \otimes V_B)^*.
     $$
+
     Therefore the singular values of $A \otimes B$ are $\{\sigma_i(A)\sigma_j(B)\}$.
 
 ??? proof "Proof"
     By the mixed-product property:
+
     $$
     A \otimes B = (U_A \Sigma_A V_A^*) \otimes (U_B \Sigma_B V_B^*) = (U_A \otimes U_B)(\Sigma_A \otimes \Sigma_B)(V_A^* \otimes V_B^*).
     $$
@@ -474,23 +519,29 @@ The Kronecker sum is another operation closely related to the Kronecker product,
 
 !!! definition "Definition 19.8 (Kronecker sum)"
     Let $A$ be an $m \times m$ matrix and $B$ be an $n \times n$ matrix. The **Kronecker sum** of $A$ and $B$ is defined as:
+
     $$
     A \oplus B = A \otimes I_n + I_m \otimes B.
     $$
+
     It is an $mn \times mn$ matrix.
 
 !!! theorem "Theorem 19.12 (Eigenvalues of the Kronecker sum)"
     Let the eigenvalues of $A$ be $\lambda_1, \ldots, \lambda_m$ and those of $B$ be $\mu_1, \ldots, \mu_n$. Then the $mn$ eigenvalues of $A \oplus B$ are:
+
     $$
     \sigma(A \oplus B) = \{\lambda_i + \mu_j : i = 1,\ldots,m;\; j = 1,\ldots,n\}.
     $$
+
     The corresponding eigenvectors are $\mathbf{u}_i \otimes \mathbf{v}_j$.
 
 ??? proof "Proof"
     Let $A\mathbf{u}_i = \lambda_i \mathbf{u}_i$ and $B\mathbf{v}_j = \mu_j \mathbf{v}_j$. Then:
+
     $$
     (A \oplus B)(\mathbf{u}_i \otimes \mathbf{v}_j) = (A \otimes I_n + I_m \otimes B)(\mathbf{u}_i \otimes \mathbf{v}_j)
     $$
+
     $$
     = (A\mathbf{u}_i) \otimes (I_n\mathbf{v}_j) + (I_m\mathbf{u}_i) \otimes (B\mathbf{v}_j) = \lambda_i(\mathbf{u}_i \otimes \mathbf{v}_j) + \mu_j(\mathbf{u}_i \otimes \mathbf{v}_j) = (\lambda_i + \mu_j)(\mathbf{u}_i \otimes \mathbf{v}_j).
     $$
@@ -499,17 +550,20 @@ The Kronecker sum is another operation closely related to the Kronecker product,
 
 !!! theorem "Theorem 19.13 (Kronecker sum and matrix exponential)"
     Let $A$ be an $m \times m$ matrix and $B$ be an $n \times n$ matrix. Then:
+
     $$
     e^{A \oplus B} = e^A \otimes e^B.
     $$
 
 ??? proof "Proof"
     The key observation is that $A \otimes I$ and $I \otimes B$ **commute**:
+
     $$
     (A \otimes I)(I \otimes B) = A \otimes B = (I \otimes B)(A \otimes I).
     $$
 
     Since $A \oplus B = A \otimes I + I \otimes B$ and these two matrices commute, the matrix exponential satisfies:
+
     $$
     e^{A \oplus B} = e^{A \otimes I + I \otimes B} = e^{A \otimes I} \cdot e^{I \otimes B}.
     $$
@@ -522,9 +576,11 @@ The Kronecker sum is another operation closely related to the Kronecker product,
 
 !!! theorem "Theorem 19.14 (Kronecker sum and Lyapunov equation)"
     The Lyapunov equation $AX + XA^T = C$ is equivalent to:
+
     $$
     (A \oplus A^T)\operatorname{vec}(X) = (I \otimes A + A^* \otimes I)\operatorname{vec}(X) = \operatorname{vec}(C),
     $$
+
     where we note that $(A^T)^T = A$, so $I \otimes A + (A^T)^T \otimes I = I \otimes A + A \otimes I$.
 
     More precisely: after vectorization the equation becomes $(I_n \otimes A + \bar{A} \otimes I_n)\operatorname{vec}(X) = \operatorname{vec}(C)$ (in the real case $\bar{A} = A$).
@@ -533,6 +589,7 @@ The Kronecker sum is another operation closely related to the Kronecker product,
 
 ??? proof "Proof"
     Taking Vec of both sides of $AX + XA^T = C$:
+
     $$
     \operatorname{vec}(AX) + \operatorname{vec}(XA^T) = \operatorname{vec}(C).
     $$

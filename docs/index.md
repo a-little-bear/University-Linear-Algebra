@@ -10,7 +10,7 @@
 
 本站是一个**全面、系统、自包含**的线性代数知识库，涵盖从本科大一基础课程到博士研究生阶段的所有核心线性代数内容。无论你是初学者还是研究者，都可以在这里找到所需的知识。
 
-本站内容按照难度递进、逻辑连贯的方式组织为四个部分，共 25 章。每章包含完整的定义、定理、证明和例题，力求做到内容严谨、叙述清晰。
+本站内容按照难度递进、逻辑连贯的方式组织为五个部分，共 30+ 章。每章包含完整的定义、定理、证明和例题，力求做到内容严谨、叙述清晰。
 
 ---
 
@@ -22,6 +22,7 @@
 
 | 章节 | 内容概要 |
 |------|---------|
+| [第 0 章 多项式代数](part1/ch00-polynomials.md) | 多项式环、整除理论、最大公因式、不可约分解 |
 | [第 1 章 线性方程组](part1/ch01-linear-equations.md) | 线性方程组的求解、高斯消元法、解的结构 |
 | [第 2 章 矩阵与矩阵运算](part1/ch02-matrices.md) | 矩阵运算、逆矩阵、分块矩阵、初等矩阵、矩阵的秩 |
 | [第 3 章 行列式](part1/ch03-determinants.md) | 行列式的定义与性质、展开定理、Cramer 法则 |
@@ -37,11 +38,13 @@
 | 章节 | 内容概要 |
 |------|---------|
 | [第 8 章 内积空间](part2/ch08-inner-product-spaces.md) | 一般内积空间、正交补、伴随算子、谱定理 |
-| [第 9 章 二次型](part2/ch09-quadratic-forms.md) | 二次型的标准形、惯性定理、正定性判别 |
+| [第 9 章 二次型与双线性型](part2/ch09-quadratic-forms.md) | 二次型、双线性型、辛空间、Hermite 型 |
 | [第 10 章 矩阵分解](part2/ch10-matrix-decompositions.md) | LU、Cholesky、QR、Schur 分解 |
 | [第 11 章 奇异值分解](part2/ch11-svd.md) | SVD 的理论与应用、低秩近似、伪逆 |
 | [第 12 章 Jordan 标准形](part2/ch12-jordan-form.md) | 广义特征向量、Jordan 块、最小多项式 |
 | [第 13 章 矩阵函数](part2/ch13-matrix-functions.md) | 矩阵指数、矩阵对数、矩阵幂级数 |
+| [第 13A 章 商空间与对偶空间](part2/ch13a-quotient-dual-spaces.md) | 商空间、对偶空间、零化子、转置映射、自然同构 |
+| [第 13B 章 λ-矩阵与有理标准形](part2/ch13b-lambda-rational-form.md) | λ-矩阵、Smith 标准形、不变因子、有理标准形 |
 
 ### 第三部分：高级线性代数 <span class="difficulty-tag advanced">研究生</span>
 
@@ -68,6 +71,18 @@
 | [第 23 章 随机矩阵初步](part4/ch23-random-matrices.md) | Wigner 半圆律、Marchenko-Pastur 律、特征值分布 |
 | [第 24 章 矩阵流形](part4/ch24-matrix-manifolds.md) | Stiefel 流形、Grassmann 流形、矩阵 Lie 群 |
 | [第 25 章 线性代数在优化中的应用](part4/ch25-optimization.md) | 半定规划、矩阵补全、压缩感知、PCA |
+
+### 第五部分：应用专题 <span class="difficulty-tag research">跨学科</span>
+
+线性代数在各学科中的核心应用。
+
+| 章节 | 内容概要 |
+|------|---------|
+| [第 26 章 线性代数在微分方程中的应用](part5/ch26-differential-equations.md) | 线性 ODE 系统、矩阵指数、稳定性分析 |
+| [第 27 章 线性代数在图论与网络中的应用](part5/ch27-graph-theory.md) | 谱图论、Laplacian、PageRank、扩展图 |
+| [第 28 章 线性代数在量子信息中的应用](part5/ch28-quantum-computing.md) | 量子态、酉变换、纠缠、量子信道 |
+| [第 29 章 线性代数在统计与机器学习中的应用](part5/ch29-statistics-ml.md) | PCA、回归、核方法、降维 |
+| [第 30 章 线性代数在信号处理与编码中的应用](part5/ch30-signal-processing.md) | DFT、压缩感知、纠错编码、小波变换 |
 
 ---
 

@@ -35,9 +35,11 @@ This section starts from the most basic matrix equations and establishes the fra
     When $A$ is invertible, the unique solution is $X = A^{-1}B$.
 
     In general, let $A^+$ be the Moore-Penrose pseudoinverse of $A$. The general solution is:
+
     $$
     X = A^+ B + (I - A^+ A)Z,
     $$
+
     where $Z$ is an arbitrary $n \times p$ matrix.
 
 ??? proof "Proof"
@@ -53,29 +55,35 @@ This section starts from the most basic matrix equations and establishes the fra
     When $A$ and $B$ are both invertible, the unique solution is $X = A^{-1}CB^{-1}$.
 
     In general, the general solution is:
+
     $$
     X = A^+ C B^+ + Z - A^+ A Z B B^+,
     $$
+
     where $Z$ is an arbitrary matrix of appropriate size.
 
 ??? proof "Proof"
     **Necessity**: If $AXB = C$, then $AA^+CB^+B = AA^+(AXB)B^+B = (AA^+A)X(BB^+B) = AXB = C$.
 
     **Sufficiency**: Assume $AA^+CB^+B = C$. Let $X_0 = A^+CB^+$. Then:
+
     $$
     AX_0B = A(A^+CB^+)B = (AA^+)C(B^+B) = AA^+CB^+B = C.
     $$
 
     **General solution**: Let $AXB = C$. Then $A(X - X_0)B = 0$. We need the general solution of $A\tilde{X}B = 0$. $\tilde{X} = Z - A^+AZBB^+$ satisfies:
+
     $$
     A(Z - A^+AZBB^+)B = AZB - (AA^+A)Z(BB^+B) = AZB - AZB = 0. \quad \blacksquare
     $$
 
 !!! definition "Definition 20.2 (Operator form of matrix equations)"
     A general linear matrix equation can be written in operator form $\mathcal{L}(X) = C$, where $\mathcal{L}: \mathbb{C}^{m \times n} \to \mathbb{C}^{m \times n}$ is a linear operator. Using the Vec operator and Kronecker product, this is equivalent to:
+
     $$
     L \operatorname{vec}(X) = \operatorname{vec}(C),
     $$
+
     where $L$ is an $mn \times mn$ matrix (see Chapter 19).
 
 !!! example "Example 20.1"
@@ -109,20 +117,24 @@ The Sylvester equation is one of the most important matrix equations, appearing 
 
 !!! definition "Definition 20.3 (Sylvester equation)"
     The **Sylvester equation** is a linear matrix equation of the form:
+
     $$
     AX + XB = C,
     $$
+
     where $A \in \mathbb{C}^{m \times m}$, $B \in \mathbb{C}^{n \times n}$, $C \in \mathbb{C}^{m \times n}$ are known matrices, and $X \in \mathbb{C}^{m \times n}$ is the unknown matrix.
     When $A = -B^*$, the Sylvester equation reduces to a Lyapunov equation.
 
 !!! theorem "Theorem 20.3 (Solvability of the Sylvester equation -- Sylvester-Rosenblum theorem)"
     The Sylvester equation $AX + XB = C$ has a unique solution $X$ for every $C$ if and only if $A$ and $-B$ have no common eigenvalues, i.e.:
+
     $$
     \sigma(A) \cap \sigma(-B) = \emptyset.
     $$
 
 ??? proof "Proof"
     **Kronecker product method**: By Chapter 19, the equation $AX + XB = C$ is equivalent to:
+
     $$
     (I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
     $$
@@ -135,6 +147,7 @@ The Sylvester equation is one of the most important matrix equations, appearing 
 
 !!! theorem "Theorem 20.4 (Integral representation of the Sylvester equation)"
     If all eigenvalues of $A$ have negative real parts ($A$ is stable) and all eigenvalues of $B$ have positive real parts, then the unique solution of the Sylvester equation $AX + XB = C$ is:
+
     $$
     X = \int_0^{\infty} e^{At} C e^{Bt} \, dt.
     $$
@@ -147,9 +160,11 @@ The Sylvester equation is one of the most important matrix equations, appearing 
     In fact, the standard condition is $\operatorname{Re}\lambda_i(A) + \operatorname{Re}\mu_j(B) < 0$. In this case:
 
     Let $X = \int_0^{\infty} e^{At} C e^{Bt} \, dt$. For $AX + XB$:
+
     $$
     AX + XB = \int_0^{\infty} (Ae^{At})Ce^{Bt} \, dt + \int_0^{\infty} e^{At}C(e^{Bt}B) \, dt
     $$
+
     $$
     = \int_0^{\infty} \frac{d}{dt}\left(e^{At}Ce^{Bt}\right) dt = \left[e^{At}Ce^{Bt}\right]_0^{\infty} = 0 - C = -C.
     $$
@@ -163,9 +178,11 @@ The Sylvester equation is one of the most important matrix equations, appearing 
 
 !!! theorem "Theorem 20.5 (Structure of commuting matrices)"
     Let $A$ be an $n \times n$ matrix with $k$ distinct eigenvalues $\lambda_1, \ldots, \lambda_k$, with corresponding Jordan block sizes $n_{i,1} \geq n_{i,2} \geq \cdots$ ($i = 1,\ldots,k$). Then the dimension of the space of matrices commuting with $A$ is:
+
     $$
     \dim\{X : AX = XA\} = \sum_{i=1}^{k} \sum_{j} (2j - 1) n_{i,j}',
     $$
+
     where $n_{i,j}'$ is the conjugate partition of the Jordan block sizes for eigenvalue $\lambda_i$.
 
     In particular, when $A$ has $n$ distinct eigenvalues (i.e., the minimal polynomial of $A$ equals the characteristic polynomial), the matrices commuting with $A$ are exactly the polynomials $p(A)$, and the dimension is $n$.
@@ -179,6 +196,7 @@ The Sylvester equation is one of the most important matrix equations, appearing 
 
 !!! example "Example 20.2"
     Solve the Sylvester equation $AX + XB = C$, where:
+
     $$
     A = \begin{pmatrix} 1 & 0 \\ 0 & 3 \end{pmatrix}, \quad B = \begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}, \quad C = \begin{pmatrix} 6 & 10 \\ 15 & 35 \end{pmatrix}.
     $$
@@ -224,32 +242,40 @@ The Lyapunov equation is an important special case of the Sylvester equation, pl
 
 !!! definition "Definition 20.5 (Continuous Lyapunov equation)"
     The **continuous Lyapunov equation** is:
+
     $$
     AX + XA^* = Q,
     $$
+
     where $A \in \mathbb{C}^{n \times n}$, $Q \in \mathbb{C}^{n \times n}$ ($Q = Q^*$), and $X \in \mathbb{C}^{n \times n}$ is the unknown Hermitian matrix.
 
 !!! definition "Definition 20.6 (Discrete Lyapunov equation)"
     The **discrete Lyapunov equation** (also called the **Stein equation**) is:
+
     $$
     AXA^* - X = Q,
     $$
+
     or equivalently $X - AXA^* = -Q$. Here $A, Q, X \in \mathbb{C}^{n \times n}$.
 
 !!! theorem "Theorem 20.6 (Continuous Lyapunov equation and stability)"
     Let $A \in \mathbb{C}^{n \times n}$.
 
     1. If $A$ is **stable** (i.e., all eigenvalues have negative real parts: $\operatorname{Re}\lambda_i(A) < 0$), then for any positive semidefinite $Q \succeq 0$, the continuous Lyapunov equation $AX + XA^* = -Q$ has a unique positive semidefinite solution:
+
     $$
     X = \int_0^{\infty} e^{At} Q e^{A^*t} \, dt \succeq 0.
     $$
+
     2. Conversely, if for some $Q \succ 0$ there exists $X \succ 0$ satisfying $AX + XA^* = -Q$, then $A$ is stable.
 
 ??? proof "Proof"
     **(1)**: Since $A$ is stable, $e^{At} \to 0$ ($t \to \infty$) at exponential rate, so the integral converges. Verification:
+
     $$
     AX + XA^* = \int_0^{\infty} (Ae^{At})Qe^{A^*t} \, dt + \int_0^{\infty} e^{At}Q(e^{A^*t}A^*) \, dt
     $$
+
     $$
     = \int_0^{\infty} \frac{d}{dt}(e^{At}Qe^{A^*t}) \, dt = [e^{At}Qe^{A^*t}]_0^{\infty} = 0 - Q = -Q.
     $$
@@ -259,6 +285,7 @@ The Lyapunov equation is an important special case of the Sylvester equation, pl
     Uniqueness is guaranteed by the Sylvester-Rosenblum theorem ($\sigma(A) \cap \sigma(-A^*) = \emptyset$, since the eigenvalues of $A$ have negative real parts while those of $-A^*$, namely $-\overline{\lambda_i(A)}$, have positive real parts).
 
     **(2)**: Let $A\mathbf{v} = \lambda\mathbf{v}$ ($\mathbf{v} \neq 0$). Then:
+
     $$
     \mathbf{v}^*(AX + XA^*)\mathbf{v} = \lambda(\mathbf{v}^*X\mathbf{v}) + \bar{\lambda}(\mathbf{v}^*X\mathbf{v}) = 2\operatorname{Re}(\lambda)(\mathbf{v}^*X\mathbf{v}) = -\mathbf{v}^*Q\mathbf{v}.
     $$
@@ -269,13 +296,16 @@ The Lyapunov equation is an important special case of the Sylvester equation, pl
     Let $A \in \mathbb{C}^{n \times n}$.
 
     1. If $A$ is **Schur stable** (i.e., all eigenvalues have modulus less than 1: $|\lambda_i(A)| < 1$), then for any $Q \succeq 0$, the discrete equation $X - AXA^* = Q$ has a unique positive semidefinite solution:
+
     $$
     X = \sum_{k=0}^{\infty} A^k Q (A^*)^k \succeq 0.
     $$
+
     2. Conversely, if for some $Q \succ 0$ there exists $X \succ 0$ satisfying $X - AXA^* = Q$, then $A$ is Schur stable.
 
 ??? proof "Proof"
     **(1)**: Since $|\lambda_i(A)| < 1$, the series $\sum_{k=0}^{\infty} A^k Q (A^*)^k$ converges absolutely. Verification:
+
     $$
     X - AXA^* = \sum_{k=0}^{\infty} A^k Q (A^*)^k - A\left(\sum_{k=0}^{\infty} A^k Q (A^*)^k\right)A^* = \sum_{k=0}^{\infty} A^k Q (A^*)^k - \sum_{k=1}^{\infty} A^k Q (A^*)^k = A^0 Q (A^*)^0 = Q.
     $$
@@ -284,14 +314,17 @@ The Lyapunov equation is an important special case of the Sylvester equation, pl
 
 !!! example "Example 20.4"
     Solve the continuous Lyapunov equation $AX + XA^T = -Q$, where:
+
     $$
     A = \begin{pmatrix} -1 & 0 \\ 0 & -2 \end{pmatrix}, \quad Q = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}.
     $$
 
     $A$ is stable (eigenvalues $-1, -2$). Using the integral formula:
+
     $$
     X = \int_0^{\infty} e^{At} Q e^{A^Tt} \, dt = \int_0^{\infty} \begin{pmatrix} e^{-t} & 0 \\ 0 & e^{-2t} \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \begin{pmatrix} e^{-t} & 0 \\ 0 & e^{-2t} \end{pmatrix} dt.
     $$
+
     $$
     = \int_0^{\infty} \begin{pmatrix} 2e^{-2t} & 0 \\ 0 & 2e^{-4t} \end{pmatrix} dt = \begin{pmatrix} 1 & 0 \\ 0 & 1/2 \end{pmatrix}.
     $$
@@ -300,6 +333,7 @@ The Lyapunov equation is an important special case of the Sylvester equation, pl
 
 !!! example "Example 20.5"
     Solve the discrete Lyapunov equation $X - AXA^T = Q$, where:
+
     $$
     A = \begin{pmatrix} 1/2 & 0 \\ 0 & 1/3 \end{pmatrix}, \quad Q = I_2.
     $$
@@ -330,30 +364,37 @@ The Riccati equation is a **nonlinear** matrix equation that plays a central rol
 
 !!! definition "Definition 20.7 (Algebraic Riccati equation)"
     The **continuous algebraic Riccati equation** (CARE) is:
+
     $$
     A^*X + XA - XBR^{-1}B^*X + Q = 0,
     $$
+
     where $A \in \mathbb{C}^{n \times n}$, $B \in \mathbb{C}^{n \times m}$, $Q = Q^* \in \mathbb{C}^{n \times n}$ ($Q \succeq 0$), $R = R^* \in \mathbb{C}^{m \times m}$ ($R \succ 0$), and $X = X^* \in \mathbb{C}^{n \times n}$ is the unknown Hermitian matrix.
 
     The **discrete algebraic Riccati equation** (DARE) is:
+
     $$
     X = A^*XA - A^*XB(R + B^*XB)^{-1}B^*XA + Q.
     $$
 
 !!! definition "Definition 20.8 (Hamiltonian matrix)"
     The **Hamiltonian matrix** associated with the continuous Riccati equation is:
+
     $$
     H = \begin{pmatrix} A & -BR^{-1}B^* \\ -Q & -A^* \end{pmatrix}.
     $$
+
     An important property of the Hamiltonian matrix is: if $\lambda$ is an eigenvalue of $H$, then $-\bar{\lambda}$ is also an eigenvalue.
 
 !!! theorem "Theorem 20.8 (CARE and Hamiltonian matrix)"
     Assume the Hamiltonian matrix $H$ has no purely imaginary eigenvalues. Partition the $2n$ eigenvalues of $H$ into the stable part (negative real parts) and the unstable part (positive real parts), $n$ each.
 
     Let $\begin{pmatrix} U_1 \\ U_2 \end{pmatrix}$ be a basis for the stable invariant subspace of $H$ ($U_1, U_2$ are both $n \times n$). If $U_1$ is invertible, then the **stabilizing solution** of CARE is:
+
     $$
     X = U_2 U_1^{-1}.
     $$
+
     This solution makes the closed-loop matrix $A - BR^{-1}B^*X$ stable.
 
 ??? proof "Proof"
@@ -431,6 +472,7 @@ This section introduces numerical methods for solving Sylvester and Lyapunov equ
     **Step 1**: Compute Schur decompositions $A = U_A T_A U_A^*$, $B = U_B T_B U_B^*$.
 
     **Step 2**: Substitute $Y = U_A^* X U_B$, $D = U_A^* C U_B$; the equation becomes:
+
     $$
     T_A Y + Y T_B = D.
     $$
@@ -447,6 +489,7 @@ This section introduces numerical methods for solving Sylvester and Lyapunov equ
     **Column-by-column solving**: Let the $j$-th column of $T_B$ be $\mathbf{t}_j$ (only the first $j$ entries may be nonzero), $\mathbf{y}_j$ be the $j$-th column of $Y$, and $\mathbf{d}_j$ be the $j$-th column of $D$.
 
     The $j$-th column of the equation $T_A Y + Y T_B = D$ is:
+
     $$
     T_A \mathbf{y}_j + \sum_{k=1}^{j} (T_B)_{kj} \mathbf{y}_k = \mathbf{d}_j.
     $$
@@ -469,6 +512,7 @@ This section introduces numerical methods for solving Sylvester and Lyapunov equ
 
 !!! example "Example 20.8"
     Solve $AX + XB = C$ using the Bartels-Stewart algorithm, where:
+
     $$
     A = \begin{pmatrix} 2 & 1 \\ 0 & 3 \end{pmatrix}, \quad B = \begin{pmatrix} 1 & 2 \\ 0 & 4 \end{pmatrix}, \quad C = \begin{pmatrix} 10 & 26 \\ 9 & 28 \end{pmatrix}.
     $$
@@ -478,15 +522,19 @@ This section introduces numerical methods for solving Sylvester and Lyapunov equ
     Directly solve column by column $T_A Y + Y T_B = D$ (i.e., $AX + XB = C$).
 
     **Column 1** ($j = 1$): $(A + b_{11}I)\mathbf{x}_1 = \mathbf{c}_1$.
+
     $$
     \begin{pmatrix} 3 & 1 \\ 0 & 4 \end{pmatrix}\begin{pmatrix} x_{11} \\ x_{21} \end{pmatrix} = \begin{pmatrix} 10 \\ 9 \end{pmatrix}.
     $$
+
     Back-substitution: $x_{21} = 9/4$, $x_{11} = (10 - 9/4)/3 = 31/12$.
 
     **Column 2** ($j = 2$): $(A + b_{22}I)\mathbf{x}_2 = \mathbf{c}_2 - b_{12}\mathbf{x}_1$.
+
     $$
     \begin{pmatrix} 6 & 1 \\ 0 & 7 \end{pmatrix}\begin{pmatrix} x_{12} \\ x_{22} \end{pmatrix} = \begin{pmatrix} 26 \\ 28 \end{pmatrix} - 2\begin{pmatrix} 31/12 \\ 9/4 \end{pmatrix} = \begin{pmatrix} 26 - 31/6 \\ 28 - 9/2 \end{pmatrix} = \begin{pmatrix} 125/6 \\ 47/2 \end{pmatrix}.
     $$
+
     Back-substitution: $x_{22} = 47/14$, $x_{12} = (125/6 - 47/14)/6 = (875/42 - 141/42)/6 = (734/42)/6 = 734/252 = 367/126$.
 
     Verification can be done by substituting back into the original equation. (The numerical values are somewhat involved but the process is correct.)
@@ -522,6 +570,7 @@ The Penrose equations give an axiomatic characterization of the Moore-Penrose ps
 
 !!! definition "Definition 20.10 (Penrose equations)"
     Let $A$ be an $m \times n$ matrix. The **Penrose equations** are the following four equations for an $n \times m$ matrix $X$:
+
     $$
     \begin{aligned}
     &(1)\quad AXA = A, \\
@@ -591,15 +640,19 @@ The Penrose equations give an axiomatic characterization of the Moore-Penrose ps
 
 !!! theorem "Theorem 20.14 (General solution of $\{1\}$-inverses)"
     For an $m \times n$ matrix $A$ ($\operatorname{rank}(A) = r$), the general solution of the equation $AXA = A$ is:
+
     $$
     X = A^+ + (I - A^+A)W_1 + W_2(I - AA^+),
     $$
+
     where $W_1, W_2$ are arbitrary matrices of appropriate sizes.
 
     Equivalently, let $A = P\begin{pmatrix} I_r & 0 \\ 0 & 0 \end{pmatrix}Q$ ($P, Q$ invertible). The general form of a $\{1\}$-inverse is:
+
     $$
     X = Q^{-1}\begin{pmatrix} I_r & L \\ M & N \end{pmatrix}P^{-1},
     $$
+
     where $L, M, N$ are arbitrary matrices.
 
 ??? proof "Proof"

@@ -408,3 +408,407 @@ $\mathbf{x}^TA\mathbf{x} = c$ 定义二次曲面 → 正交替换沿**特征向�
     - 若 $Q = 0$（齐次情形）则为**二次锥面**。
 
     二次曲面的类型由二次型的**签名** $(p, q)$ 决定。
+
+---
+
+## 9.8 双线性型
+
+<div class="context-flow" markdown>
+
+**前置**：二次型 $Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}$ 是"一元函数" → 双线性型 $f(\mathbf{x}, \mathbf{y}) = \mathbf{x}^TA\mathbf{y}$ 是"二元函数" → 通过**极化恒等式**二次型可恢复出双线性型 → 对称/反对称双线性型引出正交群与辛群
+
+</div>
+
+二次型是"对角线上"的值 $Q(\mathbf{x}) = f(\mathbf{x}, \mathbf{x})$。要全面理解二次型，必须先理解更一般的双线性型。双线性型是线性代数中最基本的"两个向量之间的标量函数"，内积、行列式、面积形式等都是它的特例。
+
+!!! definition "定义 9.9 (双线性型)"
+    设 $V$ 是域 $\mathbb{F}$ 上的 $n$ 维向量空间。映射 $f: V \times V \to \mathbb{F}$ 称为 $V$ 上的**双线性型**（bilinear form），如果 $f$ 对每个变量都是线性的：
+
+    - 对第一个变量：$f(\alpha \mathbf{x}_1 + \beta \mathbf{x}_2, \mathbf{y}) = \alpha f(\mathbf{x}_1, \mathbf{y}) + \beta f(\mathbf{x}_2, \mathbf{y})$
+    - 对第二个变量：$f(\mathbf{x}, \alpha \mathbf{y}_1 + \beta \mathbf{y}_2) = \alpha f(\mathbf{x}, \mathbf{y}_1) + \beta f(\mathbf{x}, \mathbf{y}_2)$
+
+    对所有 $\mathbf{x}, \mathbf{x}_1, \mathbf{x}_2, \mathbf{y}, \mathbf{y}_1, \mathbf{y}_2 \in V$ 和 $\alpha, \beta \in \mathbb{F}$ 成立。
+
+!!! definition "定义 9.10 (双线性型的矩阵)"
+    设 $\mathcal{B} = \{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ 是 $V$ 的一组基。双线性型 $f$ 在基 $\mathcal{B}$ 下的**矩阵**（又称 **Gram 矩阵**）定义为
+
+    $$
+    A = (a_{ij})_{n \times n}, \quad a_{ij} = f(\mathbf{e}_i, \mathbf{e}_j)
+    $$
+
+    若 $\mathbf{x} = \sum x_i \mathbf{e}_i$，$\mathbf{y} = \sum y_j \mathbf{e}_j$，则
+
+    $$
+    f(\mathbf{x}, \mathbf{y}) = \mathbf{x}^T A \mathbf{y} = \sum_{i=1}^n \sum_{j=1}^n a_{ij} x_i y_j
+    $$
+
+!!! theorem "定理 9.9 (基变换下的矩阵变换)"
+    设双线性型 $f$ 在基 $\mathcal{B}$ 下的矩阵为 $A$，在基 $\mathcal{B}'$ 下的矩阵为 $A'$。若从 $\mathcal{B}$ 到 $\mathcal{B}'$ 的过渡矩阵为 $C$，则
+
+    $$
+    A' = C^T A C
+    $$
+
+??? proof "证明"
+    设 $\mathcal{B}' = \{\mathbf{e}_1', \ldots, \mathbf{e}_n'\}$，$(\mathbf{e}_1', \ldots, \mathbf{e}_n') = (\mathbf{e}_1, \ldots, \mathbf{e}_n)C$。
+    则
+
+    $$
+    a_{ij}' = f(\mathbf{e}_i', \mathbf{e}_j') = f\!\left(\sum_k c_{ki}\mathbf{e}_k, \sum_l c_{lj}\mathbf{e}_l\right) = \sum_{k,l} c_{ki} a_{kl} c_{lj}
+    $$
+
+    写成矩阵形式即 $A' = C^TAC$。$\blacksquare$
+
+!!! definition "定义 9.11 (双线性型的秩与非退化性)"
+    双线性型 $f$ 的**秩**定义为其 Gram 矩阵的秩（由定理 9.9，这与基的选取无关）。
+
+    若 $\operatorname{rank}(f) = n$（即 Gram 矩阵可逆），则称 $f$ 是**非退化的**（nondegenerate）。等价地，$f$ 非退化当且仅当：若对所有 $\mathbf{y} \in V$ 有 $f(\mathbf{x}, \mathbf{y}) = 0$，则 $\mathbf{x} = \mathbf{0}$。
+
+!!! theorem "定理 9.10 (极化恒等式)"
+    设 $\operatorname{char}(\mathbb{F}) \neq 2$。对称双线性型 $f$ 与其关联的二次型 $Q(\mathbf{x}) = f(\mathbf{x}, \mathbf{x})$ 通过**极化恒等式**相互确定：
+
+    $$
+    f(\mathbf{x}, \mathbf{y}) = \frac{1}{2}\bigl[Q(\mathbf{x} + \mathbf{y}) - Q(\mathbf{x}) - Q(\mathbf{y})\bigr]
+    $$
+
+??? proof "证明"
+    展开 $Q(\mathbf{x}+\mathbf{y}) = f(\mathbf{x}+\mathbf{y}, \mathbf{x}+\mathbf{y})$：
+
+    $$
+    Q(\mathbf{x}+\mathbf{y}) = f(\mathbf{x}, \mathbf{x}) + f(\mathbf{x}, \mathbf{y}) + f(\mathbf{y}, \mathbf{x}) + f(\mathbf{y}, \mathbf{y})
+    $$
+
+    由对称性 $f(\mathbf{x}, \mathbf{y}) = f(\mathbf{y}, \mathbf{x})$，故 $Q(\mathbf{x}+\mathbf{y}) = Q(\mathbf{x}) + 2f(\mathbf{x}, \mathbf{y}) + Q(\mathbf{y})$。解出 $f(\mathbf{x}, \mathbf{y})$ 即得。$\blacksquare$
+
+!!! definition "定义 9.12 (对称与反对称双线性型)"
+    双线性型 $f$ 称为
+
+    - **对称的**（symmetric）：若 $f(\mathbf{x}, \mathbf{y}) = f(\mathbf{y}, \mathbf{x})$，对所有 $\mathbf{x}, \mathbf{y}$；
+    - **反对称的**（antisymmetric / skew-symmetric）：若 $f(\mathbf{x}, \mathbf{y}) = -f(\mathbf{y}, \mathbf{x})$，对所有 $\mathbf{x}, \mathbf{y}$。
+
+    对称双线性型的矩阵满足 $A = A^T$；反对称双线性型的矩阵满足 $A = -A^T$（且对角元为零）。
+
+!!! theorem "定理 9.11 (双线性型的分解)"
+    设 $\operatorname{char}(\mathbb{F}) \neq 2$。任意双线性型 $f$ 可唯一分解为对称部分与反对称部分之和：
+
+    $$
+    f = f_s + f_a, \quad f_s(\mathbf{x},\mathbf{y}) = \frac{f(\mathbf{x},\mathbf{y}) + f(\mathbf{y},\mathbf{x})}{2}, \quad f_a(\mathbf{x},\mathbf{y}) = \frac{f(\mathbf{x},\mathbf{y}) - f(\mathbf{y},\mathbf{x})}{2}
+    $$
+
+??? proof "证明"
+    直接验证 $f_s$ 对称、$f_a$ 反对称、$f = f_s + f_a$。唯一性：若 $f = g_s + g_a$（$g_s$ 对称，$g_a$ 反对称），则 $f(\mathbf{x},\mathbf{y}) + f(\mathbf{y},\mathbf{x}) = 2g_s(\mathbf{x},\mathbf{y})$，故 $g_s = f_s$，从而 $g_a = f_a$。$\blacksquare$
+
+!!! theorem "定理 9.12 (对称双线性型的标准形)"
+    设 $\operatorname{char}(\mathbb{F}) \neq 2$，$f$ 是 $V$ 上的对称双线性型。则存在 $V$ 的一组基 $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ 使得
+
+    $$
+    f(\mathbf{e}_i, \mathbf{e}_j) = 0 \quad (i \neq j)
+    $$
+
+    即 $f$ 在该基下的矩阵为对角矩阵。
+
+??? proof "证明"
+    对 $n$ 用归纳法。$n = 1$ 时显然。设对 $n-1$ 维空间成立。
+
+    若 $f \equiv 0$，取任意基即可。否则，存在 $\mathbf{v}$ 使 $f(\mathbf{v}, \mathbf{v}) \neq 0$（若所有 $f(\mathbf{v}, \mathbf{v}) = 0$，由极化恒等式 $f \equiv 0$，矛盾）。令 $\mathbf{e}_1 = \mathbf{v}$，$d = f(\mathbf{e}_1, \mathbf{e}_1) \neq 0$。
+
+    令 $W = \{\mathbf{w} \in V : f(\mathbf{e}_1, \mathbf{w}) = 0\}$。则 $V = \operatorname{span}\{\mathbf{e}_1\} \oplus W$（对任意 $\mathbf{x} \in V$，令 $\mathbf{w} = \mathbf{x} - \frac{f(\mathbf{e}_1, \mathbf{x})}{d}\mathbf{e}_1$，则 $f(\mathbf{e}_1, \mathbf{w}) = 0$）。
+
+    由归纳假设，$f|_W$ 可在某基下对角化。合并 $\mathbf{e}_1$ 和 $W$ 的基即得结论。$\blacksquare$
+
+!!! definition "定义 9.13 (正交补空间)"
+    设 $f$ 是 $V$ 上的双线性型，$S \subseteq V$。$S$ 关于 $f$ 的**左正交补**和**右正交补**分别为
+
+    $$
+    S^{\perp_L} = \{\mathbf{x} \in V : f(\mathbf{x}, \mathbf{s}) = 0, \forall \mathbf{s} \in S\}, \quad S^{\perp_R} = \{\mathbf{y} \in V : f(\mathbf{s}, \mathbf{y}) = 0, \forall \mathbf{s} \in S\}
+    $$
+
+    若 $f$ 对称，则 $S^{\perp_L} = S^{\perp_R}$，简记为 $S^\perp$。$V$ 的**根**（radical）定义为 $\operatorname{rad}(f) = V^\perp$。$f$ 非退化当且仅当 $\operatorname{rad}(f) = \{\mathbf{0}\}$。
+
+!!! example "例 9.11"
+    $\mathbb{R}^3$ 上双线性型 $f(\mathbf{x}, \mathbf{y}) = x_1y_1 + x_1y_2 + x_2y_1 + 3x_2y_2 - x_3y_3$ 的 Gram 矩阵为
+
+    $$
+    A = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 3 & 0 \\ 0 & 0 & -1 \end{pmatrix}
+    $$
+
+    $\det(A) = (3-1)(-1) = -2 \neq 0$，故 $f$ 非退化。$A$ 对称，故 $f$ 是对称双线性型。
+
+!!! example "例 9.12"
+    $\mathbb{R}^3$ 上的反对称双线性型 $f(\mathbf{x}, \mathbf{y}) = x_1y_2 - x_2y_1$，矩阵为
+
+    $$
+    A = \begin{pmatrix} 0 & 1 & 0 \\ -1 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix}
+    $$
+
+    $\operatorname{rank}(A) = 2$，$\operatorname{rad}(f) = \operatorname{span}\{\mathbf{e}_3\}$，$f$ 退化。
+
+!!! example "例 9.13"
+    验证极化恒等式。设 $Q(x_1,x_2) = 2x_1^2 + 3x_1x_2 + x_2^2$，对应对称矩阵 $A = \begin{pmatrix} 2 & 3/2 \\ 3/2 & 1 \end{pmatrix}$。
+
+    取 $\mathbf{x} = (1,0)^T$，$\mathbf{y} = (0,1)^T$：
+
+    $$
+    Q(\mathbf{x}+\mathbf{y}) = Q(1,1) = 2 + 3 + 1 = 6, \quad Q(\mathbf{x}) = 2, \quad Q(\mathbf{y}) = 1
+    $$
+
+    $$
+    f(\mathbf{x},\mathbf{y}) = \frac{6-2-1}{2} = \frac{3}{2} = a_{12} \checkmark
+    $$
+
+!!! theorem "定理 9.13 (反对称双线性型的标准形)"
+    设 $f$ 是有限维向量空间 $V$ 上的反对称双线性型。则存在基 $\{\mathbf{e}_1, \mathbf{f}_1, \ldots, \mathbf{e}_m, \mathbf{f}_m, \mathbf{g}_1, \ldots, \mathbf{g}_k\}$ 使得
+
+    $$
+    f(\mathbf{e}_i, \mathbf{f}_j) = \delta_{ij}, \quad f(\mathbf{e}_i, \mathbf{e}_j) = f(\mathbf{f}_i, \mathbf{f}_j) = 0
+    $$
+
+    且 $f(\mathbf{g}_s, \cdot) \equiv 0$。特别地，反对称双线性型的秩必为偶数 $2m$。
+
+??? proof "证明"
+    若 $f \equiv 0$，结论显然。否则存在 $\mathbf{x}, \mathbf{y}$ 使 $f(\mathbf{x}, \mathbf{y}) = c \neq 0$。令 $\mathbf{e}_1 = \mathbf{x}$，$\mathbf{f}_1 = \mathbf{y}/c$，则 $f(\mathbf{e}_1, \mathbf{f}_1) = 1$。
+
+    令 $W = \{\mathbf{w} : f(\mathbf{e}_1, \mathbf{w}) = 0 \text{ 且 } f(\mathbf{f}_1, \mathbf{w}) = 0\}$。可验证 $V = \operatorname{span}\{\mathbf{e}_1, \mathbf{f}_1\} \oplus W$（对任意 $\mathbf{v}$，令 $\mathbf{w} = \mathbf{v} - f(\mathbf{v}, \mathbf{f}_1)\mathbf{e}_1 + f(\mathbf{v}, \mathbf{e}_1)\mathbf{f}_1$，验证 $\mathbf{w} \in W$）。
+
+    对 $W$ 上的 $f|_W$ 递归应用即得。$\blacksquare$
+
+---
+
+## 9.9 辛空间
+
+<div class="context-flow" markdown>
+
+反对称非退化双线性型 = **辛形式** → 辛空间必偶维 → **Darboux 定理**：所有同维辛空间等价 → 辛几何是 Hamilton 力学的数学语言
+
+</div>
+
+辛空间（symplectic space）是装备了非退化反对称双线性型的向量空间，它在经典力学（Hamilton 系统）、量子力学和现代微分几何中有着基础性的地位。
+
+!!! definition "定义 9.14 (辛形式与辛空间)"
+    设 $V$ 是域 $\mathbb{F}$（$\operatorname{char}(\mathbb{F}) \neq 2$）上的有限维向量空间。$V$ 上的**辛形式**（symplectic form）是一个非退化的反对称双线性型 $\omega: V \times V \to \mathbb{F}$。配备辛形式的向量空间 $(V, \omega)$ 称为**辛空间**（symplectic space）。
+
+!!! theorem "定理 9.14 (辛空间的维数)"
+    辛空间的维数必为偶数。
+
+??? proof "证明"
+    设 $(V, \omega)$ 是辛空间，$\dim V = n$。$\omega$ 在任意基下的矩阵 $A$ 满足 $A^T = -A$（反对称），故
+
+    $$
+    \det(A) = \det(A^T) = \det(-A) = (-1)^n \det(A)
+    $$
+
+    由于 $\omega$ 非退化，$\det(A) \neq 0$，故 $(-1)^n = 1$，即 $n$ 为偶数。$\blacksquare$
+
+!!! definition "定义 9.15 (辛基)"
+    设 $(V, \omega)$ 是 $2n$ 维辛空间。$V$ 的一组基 $\{\mathbf{e}_1, \ldots, \mathbf{e}_n, \mathbf{f}_1, \ldots, \mathbf{f}_n\}$ 称为**辛基**（symplectic basis / Darboux basis），如果
+
+    $$
+    \omega(\mathbf{e}_i, \mathbf{e}_j) = 0, \quad \omega(\mathbf{f}_i, \mathbf{f}_j) = 0, \quad \omega(\mathbf{e}_i, \mathbf{f}_j) = \delta_{ij}
+    $$
+
+    在辛基下，$\omega$ 的矩阵为标准辛矩阵
+
+    $$
+    J_{2n} = \begin{pmatrix} O_n & I_n \\ -I_n & O_n \end{pmatrix}
+    $$
+
+!!! theorem "定理 9.15 (Darboux 定理——辛空间的标准形)"
+    每个辛空间 $(V, \omega)$ 都存在辛基。因此所有 $2n$ 维辛空间（在同一域上）彼此同构。
+
+??? proof "证明"
+    这是定理 9.13 在非退化情形（$k = 0$）的直接推论。由于 $\omega$ 非退化，秩为 $\dim V = 2m$，定理 9.13 给出基 $\{\mathbf{e}_1, \mathbf{f}_1, \ldots, \mathbf{e}_m, \mathbf{f}_m\}$ 满足 $\omega(\mathbf{e}_i, \mathbf{f}_j) = \delta_{ij}$，$\omega(\mathbf{e}_i, \mathbf{e}_j) = \omega(\mathbf{f}_i, \mathbf{f}_j) = 0$。这恰是辛基。$\blacksquare$
+
+!!! definition "定义 9.16 (辛矩阵与辛群)"
+    $2n$ 阶实方阵 $M$ 称为**辛矩阵**（symplectic matrix），如果
+
+    $$
+    M^T J_{2n} M = J_{2n}
+    $$
+
+    所有 $2n$ 阶辛矩阵在矩阵乘法下构成群，称为**辛群**（symplectic group），记作 $\operatorname{Sp}(2n, \mathbb{F})$。
+
+!!! theorem "定理 9.16 (辛矩阵的行列式)"
+    辛矩阵的行列式为 $1$。
+
+??? proof "证明"
+    由 $M^T J M = J$，取行列式得 $\det(M)^2 \det(J) = \det(J)$。由于 $\det(J) = 1$（可直接计算或利用 $J^2 = -I$ 得 $\det(J)^2 = 1$），故 $\det(M)^2 = 1$，$\det(M) = \pm 1$。
+
+    为证 $\det(M) = 1$，注意辛群 $\operatorname{Sp}(2n, \mathbb{R})$ 是连通的（可以连续地将 $M$ 变形为 $I_{2n}$），而行列式是连续函数，$\det(I_{2n}) = 1$，故 $\det(M) = 1$。
+
+    另一个代数证明：将 $M$ 写成分块 $M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}$，由 $M^TJM = J$ 得 $A^TD - C^TB = I$，因此 $\det(M)$ 的正负性可由 Pfaffian 论证确定为 $+1$。$\blacksquare$
+
+!!! definition "定义 9.17 (Lagrange 子空间)"
+    设 $(V, \omega)$ 是 $2n$ 维辛空间。子空间 $L \subseteq V$ 称为 **Lagrange 子空间**（Lagrangian subspace），如果 $L = L^\perp$（关于 $\omega$），即
+
+    $$
+    \omega(\mathbf{x}, \mathbf{y}) = 0, \quad \forall \mathbf{x}, \mathbf{y} \in L
+    $$
+
+    且 $\dim L = n$（达到最大各向同性子空间的维数）。
+
+!!! theorem "定理 9.17 (Lagrange 子空间的维数)"
+    设 $(V, \omega)$ 是 $2n$ 维辛空间，$L$ 是各向同性子空间（即 $\omega|_{L \times L} = 0$）。则 $\dim L \leq n$，且等号成立当且仅当 $L$ 是 Lagrange 子空间。
+
+??? proof "证明"
+    令 $L^\perp = \{\mathbf{v} \in V : \omega(\mathbf{v}, \mathbf{l}) = 0, \forall \mathbf{l} \in L\}$。由 $\omega$ 非退化，映射 $V \to V^*$，$\mathbf{v} \mapsto \omega(\mathbf{v}, \cdot)$ 是同构，故 $\dim L^\perp = 2n - \dim L$。
+
+    各向同性意味着 $L \subseteq L^\perp$，故 $\dim L \leq \dim L^\perp = 2n - \dim L$，即 $\dim L \leq n$。
+
+    等号成立当且仅当 $L = L^\perp$，即 $L$ 是 Lagrange 子空间。$\blacksquare$
+
+!!! example "例 9.14"
+    标准辛空间 $(\mathbb{R}^4, \omega)$，辛形式由矩阵 $J_4 = \begin{pmatrix} 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \\ -1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \end{pmatrix}$ 定义。
+
+    标准辛基为 $\mathbf{e}_1 = (1,0,0,0)^T$，$\mathbf{e}_2 = (0,1,0,0)^T$，$\mathbf{f}_1 = (0,0,1,0)^T$，$\mathbf{f}_2 = (0,0,0,1)^T$。
+
+    $L_1 = \operatorname{span}\{\mathbf{e}_1, \mathbf{e}_2\}$ 是 Lagrange 子空间：$\omega(\mathbf{e}_1, \mathbf{e}_2) = 0$，$\dim L_1 = 2 = n$。
+
+    $L_2 = \operatorname{span}\{\mathbf{f}_1, \mathbf{f}_2\}$ 也是 Lagrange 子空间。
+
+!!! example "例 9.15"
+    辛矩阵的例子。矩阵 $M = \begin{pmatrix} a & 0 & 0 & b \\ 0 & d & -c & 0 \\ 0 & c & d & 0 \\ -b & 0 & 0 & a \end{pmatrix}$（其中 $a^2 + b^2 = 1$，$c^2 + d^2 = 1$）是 $4 \times 4$ 辛矩阵。验证 $M^TJ_4M = J_4$ 可直接分块计算。$\det(M) = (a^2+b^2)(c^2+d^2) = 1$。
+
+!!! example "例 9.16"
+    Hamilton 力学中的应用。经典力学的相空间 $\mathbb{R}^{2n}$ 以广义坐标 $(q_1, \ldots, q_n)$ 和广义动量 $(p_1, \ldots, p_n)$ 为坐标。辛形式为
+
+    $$
+    \omega = \sum_{i=1}^n dp_i \wedge dq_i
+    $$
+
+    Hamilton 运动方程 $\dot{q}_i = \frac{\partial H}{\partial p_i}$，$\dot{p}_i = -\frac{\partial H}{\partial q_i}$ 可紧凑地写为
+
+    $$
+    \dot{\mathbf{z}} = J_{2n} \nabla H(\mathbf{z})
+    $$
+
+    其中 $\mathbf{z} = (q_1, \ldots, q_n, p_1, \ldots, p_n)^T$。正则变换（保持 Hamilton 方程形式的变量替换）恰对应辛矩阵。
+
+---
+
+## 9.10 Hermite 型
+
+<div class="context-flow" markdown>
+
+**实** $\to$ **复**：内积从双线性变为**半双线性** → Hermite 型 $H(\mathbf{x}) = \mathbf{x}^*A\mathbf{x}$（$A = A^*$ Hermite 矩阵）→ **惯性定理**在复数域上的推广 → 签名仍是完全不变量
+
+</div>
+
+当基础域从 $\mathbb{R}$ 扩展到 $\mathbb{C}$ 时，对称双线性型的自然推广是 Hermite 型。Hermite 型在量子力学（可观测量对应 Hermite 算子）和酉几何中有着根本性的作用。
+
+!!! definition "定义 9.18 (半双线性型)"
+    设 $V$ 是复向量空间。映射 $f: V \times V \to \mathbb{C}$ 称为**半双线性型**（sesquilinear form），如果
+
+    - 对第一个变量是共轭线性的：$f(\alpha\mathbf{x}_1 + \beta\mathbf{x}_2, \mathbf{y}) = \bar{\alpha}f(\mathbf{x}_1, \mathbf{y}) + \bar{\beta}f(\mathbf{x}_2, \mathbf{y})$
+    - 对第二个变量是线性的：$f(\mathbf{x}, \alpha\mathbf{y}_1 + \beta\mathbf{y}_2) = \alpha f(\mathbf{x}, \mathbf{y}_1) + \beta f(\mathbf{x}, \mathbf{y}_2)$
+
+    （此处采用物理学惯例，第一个变量取共轭。数学文献中有时反过来。）
+
+!!! definition "定义 9.19 (Hermite 型)"
+    半双线性型 $f$ 称为 **Hermite 型**（Hermitian form），如果满足共轭对称性：
+
+    $$
+    f(\mathbf{x}, \mathbf{y}) = \overline{f(\mathbf{y}, \mathbf{x})}, \quad \forall \mathbf{x}, \mathbf{y} \in V
+    $$
+
+    特别地，$f(\mathbf{x}, \mathbf{x}) = \overline{f(\mathbf{x}, \mathbf{x})}$，故 $f(\mathbf{x}, \mathbf{x}) \in \mathbb{R}$。
+
+!!! definition "定义 9.20 (Hermite 矩阵表示)"
+    设 $\mathcal{B} = \{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ 是 $V$ 的基，Hermite 型 $f$ 的矩阵 $A = (a_{ij})$，$a_{ij} = f(\mathbf{e}_i, \mathbf{e}_j)$。则
+
+    $$
+    f(\mathbf{x}, \mathbf{y}) = \mathbf{x}^* A \mathbf{y} = \sum_{i,j} \bar{x}_i a_{ij} y_j
+    $$
+
+    其中 $\mathbf{x}^* = \bar{\mathbf{x}}^T$ 是共轭转置。$A$ 满足 $A^* = A$（Hermite 矩阵）。
+
+!!! theorem "定理 9.18 (Hermite 型的基变换)"
+    设 Hermite 型 $f$ 在基 $\mathcal{B}$ 下矩阵为 $A$，在基 $\mathcal{B}'$ 下矩阵为 $A'$，过渡矩阵为 $C$，则
+
+    $$
+    A' = C^* A C
+    $$
+
+    即 $A'$ 与 $A$ **共轭合同**（$^*$-congruent）。
+
+??? proof "证明"
+    设 $\mathcal{B}' = \{\mathbf{e}_1', \ldots, \mathbf{e}_n'\}$，$(\mathbf{e}_1', \ldots, \mathbf{e}_n') = (\mathbf{e}_1, \ldots, \mathbf{e}_n)C$。则
+
+    $$
+    a_{ij}' = f(\mathbf{e}_i', \mathbf{e}_j') = f\!\left(\sum_k c_{ki}\mathbf{e}_k, \sum_l c_{lj}\mathbf{e}_l\right) = \sum_{k,l} \bar{c}_{ki} a_{kl} c_{lj}
+    $$
+
+    即 $A' = C^*AC$。$\blacksquare$
+
+!!! theorem "定理 9.19 (Hermite 型的标准形)"
+    设 $f$ 是复向量空间 $V$ 上的 Hermite 型。则存在 $V$ 的基使 $f$ 的矩阵为对角矩阵 $\operatorname{diag}(d_1, \ldots, d_n)$，其中 $d_i \in \mathbb{R}$。
+
+    进一步，经过适当缩放，可化为
+
+    $$
+    \operatorname{diag}(\underbrace{1, \ldots, 1}_{p}, \underbrace{-1, \ldots, -1}_{q}, \underbrace{0, \ldots, 0}_{n-r})
+    $$
+
+??? proof "证明"
+    类似实对称双线性型的配方法。若存在 $\mathbf{v}$ 使 $f(\mathbf{v}, \mathbf{v}) \neq 0$（此值为实数），令 $\mathbf{e}_1 = \mathbf{v}$，取正交补 $W = \{\mathbf{w} : f(\mathbf{e}_1, \mathbf{w}) = 0\}$，由归纳法对 $W$ 对角化。
+
+    若对所有 $\mathbf{v}$ 有 $f(\mathbf{v}, \mathbf{v}) = 0$，由极化恒等式的 Hermite 版本
+
+    $$
+    f(\mathbf{x}, \mathbf{y}) = \frac{1}{4}\bigl[f(\mathbf{x}+\mathbf{y}, \mathbf{x}+\mathbf{y}) - f(\mathbf{x}-\mathbf{y}, \mathbf{x}-\mathbf{y}) + if(\mathbf{x}+i\mathbf{y}, \mathbf{x}+i\mathbf{y}) - if(\mathbf{x}-i\mathbf{y}, \mathbf{x}-i\mathbf{y})\bigr]
+    $$
+
+    可知 $f \equiv 0$。故归纳法可以进行。
+
+    缩放：若 $d_k > 0$，令 $\mathbf{e}_k' = \mathbf{e}_k/\sqrt{d_k}$；若 $d_k < 0$，令 $\mathbf{e}_k' = \mathbf{e}_k/\sqrt{|d_k|}$。$\blacksquare$
+
+!!! theorem "定理 9.20 (Hermite 型的惯性定律)"
+    Hermite 型的标准形中正项个数 $p$ 和负项个数 $q$ 是不变量，不依赖于基的选取。$(p, q)$ 称为 Hermite 型的**签名**。
+
+??? proof "证明"
+    证明与实二次型的 Sylvester 惯性定律（定理 9.4）完全类似。假设两种标准形有不同的正项个数 $p > s$，构造子空间 $V_1$（维数 $p$，在其上 $f > 0$）和 $V_2$（维数 $n-s$，在其上 $f \leq 0$）。维数论证 $p + (n-s) > n$ 给出 $V_1 \cap V_2 \neq \{\mathbf{0}\}$，导出矛盾。$\blacksquare$
+
+!!! theorem "定理 9.21 (Hermite 矩阵的谱定理)"
+    Hermite 矩阵 $A$（$A^* = A$）的所有特征值都是实数，且 $A$ 可被酉矩阵对角化：存在酉矩阵 $U$ 使
+
+    $$
+    U^* A U = \operatorname{diag}(\lambda_1, \ldots, \lambda_n), \quad \lambda_i \in \mathbb{R}
+    $$
+
+??? proof "证明"
+    **特征值为实数**：设 $A\mathbf{v} = \lambda\mathbf{v}$，$\mathbf{v} \neq \mathbf{0}$。则 $\lambda \mathbf{v}^*\mathbf{v} = \mathbf{v}^*A\mathbf{v} = (A\mathbf{v})^*\mathbf{v} = \bar{\lambda}\mathbf{v}^*\mathbf{v}$（利用 $A^* = A$），故 $\lambda = \bar{\lambda}$，$\lambda \in \mathbb{R}$。
+
+    **酉对角化**：不同特征值的特征向量正交（证明同实情形）。对每个特征空间进行 Gram-Schmidt 正交化，合并得到酉矩阵 $U$。$\blacksquare$
+
+!!! definition "定义 9.21 (正定 Hermite 型)"
+    Hermite 型 $f$ 称为**正定的**，若 $f(\mathbf{x}, \mathbf{x}) > 0$ 对所有 $\mathbf{x} \neq \mathbf{0}$ 成立。等价条件与实情形类似：
+
+    - Hermite 矩阵 $A$ 的所有特征值大于零；
+    - 存在可逆矩阵 $C$ 使 $A = C^*C$；
+    - $A$ 的所有顺序主子式大于零。
+
+!!! example "例 9.17"
+    Hermite 型 $f(\mathbf{x}, \mathbf{y}) = 2\bar{x}_1y_1 + (1+i)\bar{x}_1y_2 + (1-i)\bar{x}_2y_1 + 3\bar{x}_2y_2$ 的 Hermite 矩阵为
+
+    $$
+    A = \begin{pmatrix} 2 & 1+i \\ 1-i & 3 \end{pmatrix}
+    $$
+
+    验证 $A^* = A$：$\overline{(1+i)} = 1-i = a_{21}$ $\checkmark$。$\Delta_1 = 2 > 0$，$\Delta_2 = 6 - |1+i|^2 = 6 - 2 = 4 > 0$，故 $A$ 正定。
+
+!!! example "例 9.18"
+    找 Hermite 矩阵 $A = \begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix}$ 的特征值和酉对角化。
+
+    特征多项式：$(1-\lambda)^2 - i(-i) = (1-\lambda)^2 - 1 = \lambda^2 - 2\lambda = \lambda(\lambda - 2)$。
+
+    $\lambda_1 = 0$：$\mathbf{v}_1 = \frac{1}{\sqrt{2}}(i, 1)^T$。
+
+    $\lambda_2 = 2$：$\mathbf{v}_2 = \frac{1}{\sqrt{2}}(-i, 1)^T$。
+
+    酉矩阵 $U = \frac{1}{\sqrt{2}}\begin{pmatrix} i & -i \\ 1 & 1 \end{pmatrix}$，$U^*AU = \begin{pmatrix} 0 & 0 \\ 0 & 2 \end{pmatrix}$。
+
+    签名 $(p, q) = (1, 0)$，秩 $r = 1$，$A$ 半正定但不正定。
+
+!!! example "例 9.19"
+    反 Hermite 型（anti-Hermitian / skew-Hermitian）。若半双线性型 $f$ 满足 $f(\mathbf{x}, \mathbf{y}) = -\overline{f(\mathbf{y}, \mathbf{x})}$，则 $f(\mathbf{x}, \mathbf{x})$ 纯虚。此时矩阵 $A$ 满足 $A^* = -A$（反 Hermite 矩阵），特征值全为纯虚数。
+
+    例如 $A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ 是反 Hermite 矩阵（也是实反对称矩阵），特征值为 $\pm i$。

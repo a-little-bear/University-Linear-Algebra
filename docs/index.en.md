@@ -10,7 +10,7 @@
 
 This site is a **comprehensive, systematic, and self-contained** linear algebra knowledge base, covering all core linear algebra content from undergraduate introductory courses through doctoral-level research. Whether you are a beginner or a researcher, you can find the knowledge you need here.
 
-The content is organized into four parts with 25 chapters, arranged by increasing difficulty and logical coherence. Each chapter contains complete definitions, theorems, proofs, and examples, striving for rigor and clarity.
+The content is organized into five parts with 30+ chapters, arranged by increasing difficulty and logical coherence. Each chapter contains complete definitions, theorems, proofs, and examples, striving for rigor and clarity.
 
 ---
 
@@ -22,6 +22,7 @@ Suitable for freshmen and sophomores, covering all core content of an introducto
 
 | Chapter | Overview |
 |---------|----------|
+| [Chapter 0  Polynomial Algebra](part1/ch00-polynomials.md) | Polynomial rings, divisibility, GCD, irreducible factorization |
 | [Chapter 1  Systems of Linear Equations](part1/ch01-linear-equations.md) | Solving linear systems, Gaussian elimination, solution structure |
 | [Chapter 2  Matrices and Matrix Operations](part1/ch02-matrices.md) | Matrix operations, inverse matrices, block matrices, elementary matrices, rank |
 | [Chapter 3  Determinants](part1/ch03-determinants.md) | Definition and properties of determinants, cofactor expansion, Cramer's rule |
@@ -37,11 +38,13 @@ Suitable for sophomores through seniors and early graduate students, delving dee
 | Chapter | Overview |
 |---------|----------|
 | [Chapter 8  Inner Product Spaces](part2/ch08-inner-product-spaces.md) | General inner product spaces, orthogonal complements, adjoint operators, spectral theorem |
-| [Chapter 9  Quadratic Forms](part2/ch09-quadratic-forms.md) | Canonical forms of quadratic forms, Sylvester's law of inertia, positive definiteness criteria |
+| [Chapter 9  Quadratic and Bilinear Forms](part2/ch09-quadratic-forms.md) | Quadratic forms, bilinear forms, symplectic spaces, Hermitian forms |
 | [Chapter 10  Matrix Decompositions](part2/ch10-matrix-decompositions.md) | LU, Cholesky, QR, Schur decompositions |
 | [Chapter 11  Singular Value Decomposition](part2/ch11-svd.md) | SVD theory and applications, low-rank approximation, pseudoinverse |
 | [Chapter 12  Jordan Normal Form](part2/ch12-jordan-form.md) | Generalized eigenvectors, Jordan blocks, minimal polynomial |
 | [Chapter 13  Matrix Functions](part2/ch13-matrix-functions.md) | Matrix exponential, matrix logarithm, matrix power series |
+| [Chapter 13A  Quotient Spaces and Dual Spaces](part2/ch13a-quotient-dual-spaces.md) | Quotient spaces, dual spaces, annihilators, transpose maps, canonical isomorphism |
+| [Chapter 13B  Lambda-Matrices and Rational Canonical Form](part2/ch13b-lambda-rational-form.md) | Lambda-matrices, Smith normal form, invariant factors, rational canonical form |
 
 ### Part III: Advanced Linear Algebra <span class="difficulty-tag advanced">Graduate</span>
 
@@ -68,6 +71,18 @@ For doctoral students and researchers, introducing frontier topics in linear alg
 | [Chapter 23  Introduction to Random Matrices](part4/ch23-random-matrices.md) | Wigner semicircle law, Marchenko–Pastur law, eigenvalue distributions |
 | [Chapter 24  Matrix Manifolds](part4/ch24-matrix-manifolds.md) | Stiefel manifold, Grassmann manifold, matrix Lie groups |
 | [Chapter 25  Linear Algebra in Optimization](part4/ch25-optimization.md) | Semidefinite programming, matrix completion, compressed sensing, PCA |
+
+### Part V: Applications <span class="difficulty-tag research">Interdisciplinary</span>
+
+Core applications of linear algebra across disciplines.
+
+| Chapter | Overview |
+|---------|----------|
+| [Chapter 26  Linear Algebra in Differential Equations](part5/ch26-differential-equations.md) | Linear ODE systems, matrix exponential, stability analysis |
+| [Chapter 27  Linear Algebra in Graph Theory and Networks](part5/ch27-graph-theory.md) | Spectral graph theory, Laplacian, PageRank, expander graphs |
+| [Chapter 28  Linear Algebra in Quantum Information](part5/ch28-quantum-computing.md) | Quantum states, unitary transformations, entanglement, quantum channels |
+| [Chapter 29  Linear Algebra in Statistics and Machine Learning](part5/ch29-statistics-ml.md) | PCA, regression, kernel methods, dimensionality reduction |
+| [Chapter 30  Linear Algebra in Signal Processing and Coding](part5/ch30-signal-processing.md) | DFT, compressed sensing, error-correcting codes, wavelet transform |
 
 ---
 
