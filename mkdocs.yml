@@ -36,6 +36,48 @@ theme:
     logo: material/book-open-variant
 
 plugins:
+  - i18n:
+      reconfigure_material: true
+      languages:
+        - locale: zh
+          default: true
+          name: 中文
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_name: "Linear Algebra Compendium"
+          nav_translations:
+            首页: Home
+            第一部分 基础线性代数: "Part I  Foundations"
+            第1章 线性方程组: "Ch 1  Systems of Linear Equations"
+            第2章 矩阵与矩阵运算: "Ch 2  Matrices and Matrix Operations"
+            第3章 行列式: "Ch 3  Determinants"
+            第4章 向量空间: "Ch 4  Vector Spaces"
+            第5章 线性变换: "Ch 5  Linear Transformations"
+            第6章 特征值与特征向量: "Ch 6  Eigenvalues and Eigenvectors"
+            第7章 正交性与最小二乘: "Ch 7  Orthogonality and Least Squares"
+            第二部分 中级线性代数: "Part II  Intermediate"
+            第8章 内积空间: "Ch 8  Inner Product Spaces"
+            第9章 二次型: "Ch 9  Quadratic Forms"
+            第10章 矩阵分解: "Ch 10  Matrix Decompositions"
+            第11章 奇异值分解: "Ch 11  Singular Value Decomposition"
+            第12章 Jordan标准形: "Ch 12  Jordan Normal Form"
+            第13章 矩阵函数: "Ch 13  Matrix Functions"
+            第三部分 高级线性代数: "Part III  Advanced"
+            第14章 矩阵分析: "Ch 14  Matrix Analysis"
+            第15章 范数与扰动理论: "Ch 15  Norms and Perturbation Theory"
+            第16章 正定矩阵: "Ch 16  Positive Definite Matrices"
+            第17章 非负矩阵与Perron-Frobenius理论: "Ch 17  Nonnegative Matrices & Perron-Frobenius"
+            第18章 矩阵不等式: "Ch 18  Matrix Inequalities"
+            第19章 Kronecker积与Vec算子: "Ch 19  Kronecker Product & Vec Operator"
+            第20章 矩阵方程: "Ch 20  Matrix Equations"
+            第四部分 专题研究: "Part IV  Special Topics"
+            第21章 多线性代数与张量: "Ch 21  Multilinear Algebra & Tensors"
+            第22章 数值线性代数: "Ch 22  Numerical Linear Algebra"
+            第23章 随机矩阵初步: "Ch 23  Introduction to Random Matrices"
+            第24章 矩阵流形: "Ch 24  Matrix Manifolds"
+            第25章 线性代数在优化中的应用: "Ch 25  Linear Algebra in Optimization"
   - search:
       separator: '[\s\-\.\u200b\u3000]+'
       lang:
@@ -68,6 +110,13 @@ extra_css:
   - stylesheets/extra.css
 
 extra:
+  alternate:
+    - name: 中文
+      link: /University-Linear-Algebra/
+      lang: zh
+    - name: English
+      link: /University-Linear-Algebra/en/
+      lang: en
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/a-little-bear/University-Linear-Algebra
