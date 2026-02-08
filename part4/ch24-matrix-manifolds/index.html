@@ -1,0 +1,2303 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part4/ch24-matrix-manifolds/">
+      
+      
+        <link rel="prev" href="../ch23-random-matrices/">
+      
+      
+        <link rel="next" href="../ch25-optimization/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第24章 矩阵流形 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#24" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第24章 矩阵流形
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.1 矩阵流形基本概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#242-gln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.2 一般线性群 \(GL(n)\)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.3 正交群与酉群
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#244-stiefel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.4 Stiefel 流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#245-grassmann" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.5 Grassmann 流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#246" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.6 正定矩阵流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#247-lie-lie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.7 矩阵 Lie 群与 Lie 代数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#248" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.8 矩阵流形上的优化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#241" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.1 矩阵流形基本概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#242-gln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.2 一般线性群 \(GL(n)\)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#243" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.3 正交群与酉群
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#244-stiefel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.4 Stiefel 流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#245-grassmann" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.5 Grassmann 流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#246" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.6 正定矩阵流形
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#247-lie-lie" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.7 矩阵 Lie 群与 Lie 代数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#248" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        24.8 矩阵流形上的优化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="24">第 24 章 矩阵流形<a class="headerlink" href="#24" title="Permanent link">&para;</a></h1>
+<p>矩阵流形（Matrix Manifold）是指由满足特定约束条件的矩阵所构成的光滑流形。这些流形在控制理论、信号处理、计算机视觉、机器学习等领域中无处不在。本章将系统介绍若干重要的矩阵流形，包括一般线性群、正交群、Stiefel 流形、Grassmann 流形和正定矩阵流形，以及它们上的微分几何结构与优化方法。</p>
+<hr />
+<h2 id="241">24.1 矩阵流形基本概念<a class="headerlink" href="#241" title="Permanent link">&para;</a></h2>
+<p>我们首先回顾流形论的基本语言，并说明矩阵集合如何自然地获得流形结构。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.1 (光滑流形)</p>
+<p>一个 <strong>光滑流形</strong>（smooth manifold）<span class="arithmatex">\(\mathcal{M}\)</span> 是一个 Hausdorff 的第二可数拓扑空间，配备一个极大光滑图册 <span class="arithmatex">\(\{(U_\alpha, \varphi_\alpha)\}\)</span>，其中每个 <span class="arithmatex">\(U_\alpha\)</span> 是 <span class="arithmatex">\(\mathcal{M}\)</span> 的开子集，<span class="arithmatex">\(\varphi_\alpha: U_\alpha \to \mathbb{R}^d\)</span> 为同胚，且转移映射 <span class="arithmatex">\(\varphi_\beta \circ \varphi_\alpha^{-1}\)</span> 为光滑映射。<span class="arithmatex">\(d\)</span> 称为 <span class="arithmatex">\(\mathcal{M}\)</span> 的维数。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.2 (嵌入子流形)</p>
+<p>设 <span class="arithmatex">\(\mathcal{M}\)</span> 为 <span class="arithmatex">\(\mathbb{R}^{n \times p}\)</span> 的子集。若 <span class="arithmatex">\(\mathcal{M}\)</span> 可以表示为
+$$
+\mathcal{M} = { X \in \mathbb{R}^{n \times p} : h(X) = 0 },
+$$
+其中 <span class="arithmatex">\(h: \mathbb{R}^{n \times p} \to \mathbb{R}^m\)</span> 为光滑映射，且对所有 <span class="arithmatex">\(X \in \mathcal{M}\)</span>，<span class="arithmatex">\(Dh(X)\)</span> 为满秩映射（即 <span class="arithmatex">\(\operatorname{rank}(Dh(X)) = m\)</span>），则 <span class="arithmatex">\(\mathcal{M}\)</span> 为 <span class="arithmatex">\(\mathbb{R}^{n \times p}\)</span> 的一个 <strong>嵌入子流形</strong>（embedded submanifold），维数为 <span class="arithmatex">\(np - m\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.3 (切空间)</p>
+<p>设 <span class="arithmatex">\(\mathcal{M}\)</span> 为光滑流形，<span class="arithmatex">\(X \in \mathcal{M}\)</span>。<span class="arithmatex">\(\mathcal{M}\)</span> 在 <span class="arithmatex">\(X\)</span> 处的 <strong>切空间</strong>（tangent space）<span class="arithmatex">\(T_X \mathcal{M}\)</span> 是所有经过 <span class="arithmatex">\(X\)</span> 的光滑曲线在 <span class="arithmatex">\(X\)</span> 处的速度向量的集合：
+$$
+T_X \mathcal{M} = \left{ \gamma'(0) : \gamma: (-\epsilon, \epsilon) \to \mathcal{M} \text{ 光滑}, \, \gamma(0) = X \right}.
+$$
+若 <span class="arithmatex">\(\mathcal{M} = h^{-1}(0)\)</span> 为嵌入子流形，则 <span class="arithmatex">\(T_X \mathcal{M} = \ker(Dh(X))\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.4 (Riemannian 度量)</p>
+<p>流形 <span class="arithmatex">\(\mathcal{M}\)</span> 上的一个 <strong>Riemannian 度量</strong>（Riemannian metric）是一个光滑地依赖于底点的内积族 <span class="arithmatex">\(\langle \cdot, \cdot \rangle_X: T_X\mathcal{M} \times T_X\mathcal{M} \to \mathbb{R}\)</span>，<span class="arithmatex">\(X \in \mathcal{M}\)</span>。配备 Riemannian 度量的流形称为 Riemannian 流形。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.5 (测地线)</p>
+<p>Riemannian 流形 <span class="arithmatex">\((\mathcal{M}, \langle \cdot, \cdot \rangle)\)</span> 上的 <strong>测地线</strong>（geodesic）是局部最短曲线。形式上，<span class="arithmatex">\(\gamma: [0, 1] \to \mathcal{M}\)</span> 为测地线当且仅当 <span class="arithmatex">\(\nabla_{\dot\gamma} \dot\gamma = 0\)</span>，其中 <span class="arithmatex">\(\nabla\)</span> 为 Levi-Civita 联络。<strong>指数映射</strong>（exponential map）<span class="arithmatex">\(\operatorname{Exp}_X: T_X\mathcal{M} \to \mathcal{M}\)</span> 将切向量 <span class="arithmatex">\(\xi\)</span> 映射到从 <span class="arithmatex">\(X\)</span> 出发、初始速度为 <span class="arithmatex">\(\xi\)</span> 的测地线在 <span class="arithmatex">\(t = 1\)</span> 时的端点。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.1 (隐函数定理与子流形)</p>
+<p>设 <span class="arithmatex">\(h: \mathbb{R}^{n \times p} \to \mathbb{R}^m\)</span> 为光滑映射，<span class="arithmatex">\(\mathbf{0}\)</span> 为 <span class="arithmatex">\(h\)</span> 的正则值（即对所有 <span class="arithmatex">\(X \in h^{-1}(\mathbf{0})\)</span>，<span class="arithmatex">\(Dh(X)\)</span> 满秩）。则 <span class="arithmatex">\(\mathcal{M} = h^{-1}(\mathbf{0})\)</span> 为 <span class="arithmatex">\(\mathbb{R}^{n \times p}\)</span> 的光滑嵌入子流形，维数为 <span class="arithmatex">\(np - m\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>这是隐函数定理的直接推论。对 <span class="arithmatex">\(X_0 \in \mathcal{M}\)</span>，<span class="arithmatex">\(Dh(X_0)\)</span> 满秩意味着存在 <span class="arithmatex">\(X_0\)</span> 的邻域 <span class="arithmatex">\(U\)</span> 和光滑映射 <span class="arithmatex">\(\psi\)</span>，使得 <span class="arithmatex">\(\mathcal{M} \cap U\)</span> 可以参数化为 <span class="arithmatex">\(np - m\)</span> 个自由变量的光滑函数的图像。这些局部参数化构成 <span class="arithmatex">\(\mathcal{M}\)</span> 的光滑图册。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.1</p>
+<p><strong>单位球面作为子流形。</strong></p>
+<p><span class="arithmatex">\(S^{n-1} = \{\mathbf{x} \in \mathbb{R}^n : \|\mathbf{x}\|^2 = 1\} = h^{-1}(0)\)</span>，其中 <span class="arithmatex">\(h(\mathbf{x}) = \mathbf{x}^T\mathbf{x} - 1\)</span>。<span class="arithmatex">\(Dh(\mathbf{x}) = 2\mathbf{x}^T\)</span>，对 <span class="arithmatex">\(\mathbf{x} \in S^{n-1}\)</span> 显然满秩。切空间 <span class="arithmatex">\(T_{\mathbf{x}} S^{n-1} = \{\mathbf{v} : \mathbf{x}^T \mathbf{v} = 0\}\)</span>，即与 <span class="arithmatex">\(\mathbf{x}\)</span> 正交的向量。</p>
+</div>
+<hr />
+<h2 id="242-gln">24.2 一般线性群 <span class="arithmatex">\(GL(n)\)</span><a class="headerlink" href="#242-gln" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.6 (一般线性群)</p>
+<p><strong>一般线性群</strong>（General Linear Group）<span class="arithmatex">\(GL(n, \mathbb{R})\)</span>（简记 <span class="arithmatex">\(GL(n)\)</span>）是所有 <span class="arithmatex">\(n \times n\)</span> 可逆实矩阵的集合：
+$$
+GL(n) = { A \in \mathbb{R}^{n \times n} : \det(A) \ne 0 }.
+$$
+<span class="arithmatex">\(GL(n)\)</span> 关于矩阵乘法构成群，且为 <span class="arithmatex">\(\mathbb{R}^{n \times n}\)</span> 的开子集，因此是 <span class="arithmatex">\(n^2\)</span> 维光滑流形。类似地，<span class="arithmatex">\(GL(n, \mathbb{C})\)</span> 为所有 <span class="arithmatex">\(n \times n\)</span> 可逆复矩阵之群。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.7 (Lie 代数 <span class="arithmatex">\(\mathfrak{gl}(n)\)</span>)</p>
+<p><span class="arithmatex">\(GL(n)\)</span> 的 <strong>Lie 代数</strong>（Lie algebra）<span class="arithmatex">\(\mathfrak{gl}(n)\)</span> 是 <span class="arithmatex">\(GL(n)\)</span> 在单位元 <span class="arithmatex">\(I\)</span> 处的切空间，即全体 <span class="arithmatex">\(n \times n\)</span> 实矩阵：
+$$
+\mathfrak{gl}(n) = T_I GL(n) = \mathbb{R}^{n \times n}.
+$$
+<span class="arithmatex">\(\mathfrak{gl}(n)\)</span> 上的 Lie 括号定义为矩阵交换子 <span class="arithmatex">\([A, B] = AB - BA\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.2 (矩阵指数映射)</p>
+<p>映射 <span class="arithmatex">\(\exp: \mathfrak{gl}(n) \to GL(n)\)</span>，<span class="arithmatex">\(A \mapsto e^A = \sum_{k=0}^{\infty} \frac{A^k}{k!}\)</span> 是光滑映射，且在 <span class="arithmatex">\(A = 0\)</span> 处的微分为恒等映射。因此 <span class="arithmatex">\(\exp\)</span> 在 <span class="arithmatex">\(0\)</span> 的邻域内是微分同胚。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>矩阵指数级数 <span class="arithmatex">\(e^A = \sum_{k=0}^\infty \frac{A^k}{k!}\)</span> 对所有 <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> 绝对收敛（因为 <span class="arithmatex">\(\|A^k/k!\| \le \|A\|^k/k!\)</span>，级数的和不超过 <span class="arithmatex">\(e^{\|A\|}\)</span>）。光滑性由幂级数的逐项微分得到。在 <span class="arithmatex">\(A = 0\)</span> 处，<span class="arithmatex">\(D\exp(0)(H) = \frac{d}{dt}\Big|_{t=0} e^{tH} = H\)</span>，故微分为恒等映射。由反函数定理，<span class="arithmatex">\(\exp\)</span> 在 <span class="arithmatex">\(0\)</span> 的邻域内为微分同胚。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.3 (<span class="arithmatex">\(GL(n)\)</span> 上的左不变向量场)</p>
+<p><span class="arithmatex">\(GL(n)\)</span> 上的每个左不变向量场由其在 <span class="arithmatex">\(I\)</span> 处的值唯一确定。具体地，对 <span class="arithmatex">\(A \in \mathfrak{gl}(n)\)</span>，左不变向量场 <span class="arithmatex">\(\tilde{A}\)</span> 定义为 <span class="arithmatex">\(\tilde{A}_g = gA\)</span>（<span class="arithmatex">\(g \in GL(n)\)</span>），且 <span class="arithmatex">\([\tilde{A}, \tilde{B}] = \widetilde{[A, B]}\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>左平移 <span class="arithmatex">\(L_g: GL(n) \to GL(n)\)</span>，<span class="arithmatex">\(h \mapsto gh\)</span> 的微分为 <span class="arithmatex">\((dL_g)_h(V) = gV\)</span>。向量场 <span class="arithmatex">\(\tilde{A}\)</span> 满足 <span class="arithmatex">\((dL_g)\tilde{A}_h = g(hA) = (gh)A = \tilde{A}_{gh}\)</span>，故左不变。Lie 括号 <span class="arithmatex">\([\tilde{A}, \tilde{B}]_I = \frac{d}{dt}\Big|_{t=0} \frac{d}{ds}\Big|_{s=0} (e^{tA} e^{sB} e^{-tA}) = AB - BA = [A, B]\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.2</p>
+<p><strong><span class="arithmatex">\(GL(2)\)</span> 上的指数映射。</strong></p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -\theta \\ \theta &amp; 0 \end{pmatrix}\)</span>，则
+$$
+e^A = \begin{pmatrix} \cos\theta &amp; -\sin\theta \ \sin\theta &amp; \cos\theta \end{pmatrix} \in SO(2).
+$$
+这表明反对称矩阵通过指数映射生成旋转矩阵。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.3</p>
+<p><strong>对角矩阵的指数。</strong></p>
+<p>设 <span class="arithmatex">\(D = \operatorname{diag}(d_1, \ldots, d_n)\)</span>，则 <span class="arithmatex">\(e^D = \operatorname{diag}(e^{d_1}, \ldots, e^{d_n})\)</span>。<span class="arithmatex">\(e^D\)</span> 的特征值都是正的，因此 <span class="arithmatex">\(e^D\)</span> 是正定对角矩阵。</p>
+</div>
+<hr />
+<h2 id="243">24.3 正交群与酉群<a class="headerlink" href="#243" title="Permanent link">&para;</a></h2>
+<p>正交群和酉群是最重要的矩阵 Lie 群，在几何、物理和工程中有广泛应用。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.8 (正交群)</p>
+<p><strong>正交群</strong>（Orthogonal Group）<span class="arithmatex">\(O(n)\)</span> 是所有 <span class="arithmatex">\(n \times n\)</span> 正交矩阵的集合：
+$$
+O(n) = { Q \in \mathbb{R}^{n \times n} : Q^T Q = I_n }.
+$$
+<span class="arithmatex">\(O(n)\)</span> 是紧 Lie 群，维数为 <span class="arithmatex">\(\frac{n(n-1)}{2}\)</span>。<strong>特殊正交群</strong>（Special Orthogonal Group）<span class="arithmatex">\(SO(n) = \{Q \in O(n) : \det(Q) = 1\}\)</span> 是 <span class="arithmatex">\(O(n)\)</span> 的单位连通分量。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.9 (酉群)</p>
+<p><strong>酉群</strong>（Unitary Group）<span class="arithmatex">\(U(n)\)</span> 是所有 <span class="arithmatex">\(n \times n\)</span> 酉矩阵的集合：
+$$
+U(n) = { U \in \mathbb{C}^{n \times n} : U^<em> U = I_n }.
+$$
+<span class="arithmatex">\(U(n)\)</span> 是紧 Lie 群，（实）维数为 <span class="arithmatex">\(n^2\)</span>。</em><em>特殊酉群</em>*（Special Unitary Group）<span class="arithmatex">\(SU(n) = \{U \in U(n) : \det(U) = 1\}\)</span>，维数为 <span class="arithmatex">\(n^2 - 1\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.4 (<span class="arithmatex">\(O(n)\)</span> 和 <span class="arithmatex">\(SO(n)\)</span> 的切空间和 Lie 代数)</p>
+<p><span class="arithmatex">\(O(n)\)</span> 在 <span class="arithmatex">\(I\)</span> 处的切空间（即 Lie 代数）为反对称矩阵空间：
+$$
+\mathfrak{o}(n) = T_I O(n) = \operatorname{Skew}(n) = { \Omega \in \mathbb{R}^{n \times n} : \Omega^T = -\Omega }.
+$$
+更一般地，在 <span class="arithmatex">\(Q \in O(n)\)</span> 处，<span class="arithmatex">\(T_Q O(n) = \{ Q\Omega : \Omega \in \operatorname{Skew}(n) \}\)</span>。<span class="arithmatex">\(SO(n)\)</span> 的 Lie 代数也是 <span class="arithmatex">\(\operatorname{Skew}(n)\)</span>（因为 <span class="arithmatex">\(\det\)</span> 条件不影响切空间）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><span class="arithmatex">\(O(n)\)</span> 由约束 <span class="arithmatex">\(h(Q) = Q^T Q - I = 0\)</span> 定义。<span class="arithmatex">\(Dh(Q)(V) = V^T Q + Q^T V\)</span>。在 <span class="arithmatex">\(Q = I\)</span> 处，<span class="arithmatex">\(Dh(I)(V) = V^T + V\)</span>。因此
+$$
+T_I O(n) = \ker(Dh(I)) = { V : V^T + V = 0 } = \operatorname{Skew}(n).
+$$
+<span class="arithmatex">\(\operatorname{Skew}(n)\)</span> 的维数为 <span class="arithmatex">\(\frac{n(n-1)}{2}\)</span>，与 <span class="arithmatex">\(O(n)\)</span> 的维数一致。</p>
+<p>在一般点 <span class="arithmatex">\(Q\)</span> 处，令 <span class="arithmatex">\(\gamma(t) = Qe^{t\Omega}\)</span>（<span class="arithmatex">\(\Omega \in \operatorname{Skew}(n)\)</span>），则 <span class="arithmatex">\(\gamma(0) = Q\)</span>，<span class="arithmatex">\(\gamma(t)^T\gamma(t) = e^{t\Omega^T}Q^TQe^{t\Omega} = e^{-t\Omega}e^{t\Omega} = I\)</span>，故 <span class="arithmatex">\(\gamma(t) \in O(n)\)</span>，<span class="arithmatex">\(\gamma'(0) = Q\Omega\)</span>。这说明 <span class="arithmatex">\(T_Q O(n) \supseteq \{Q\Omega : \Omega \in \operatorname{Skew}(n)\}\)</span>。维数计数表明这是等式。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.5 (<span class="arithmatex">\(U(n)\)</span> 的 Lie 代数)</p>
+<p><span class="arithmatex">\(U(n)\)</span> 的 Lie 代数为反 Hermite 矩阵空间：
+$$
+\mathfrak{u}(n) = T_I U(n) = { \Omega \in \mathbb{C}^{n \times n} : \Omega^* = -\Omega }.
+$$
+<span class="arithmatex">\(SU(n)\)</span> 的 Lie 代数为 <span class="arithmatex">\(\mathfrak{su}(n) = \{ \Omega \in \mathfrak{u}(n) : \operatorname{tr}(\Omega) = 0 \}\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>与 <span class="arithmatex">\(O(n)\)</span> 的证明完全类似。约束为 <span class="arithmatex">\(U^* U = I\)</span>，微分得 <span class="arithmatex">\(V^* U + U^* V = 0\)</span>，在 <span class="arithmatex">\(U = I\)</span> 时 <span class="arithmatex">\(V^* + V = 0\)</span>，即 <span class="arithmatex">\(V\)</span> 为反 Hermite 矩阵。对于 <span class="arithmatex">\(SU(n)\)</span>，额外条件 <span class="arithmatex">\(\det(U) = 1\)</span> 的微分为 <span class="arithmatex">\(\operatorname{tr}(U^{-1}V) = \operatorname{tr}(V) = 0\)</span>（在 <span class="arithmatex">\(U = I\)</span> 处）。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.6 (<span class="arithmatex">\(O(n)\)</span> 上的测地线)</p>
+<p>赋予 <span class="arithmatex">\(O(n)\)</span> 双不变度量 <span class="arithmatex">\(\langle \xi, \eta \rangle_Q = \operatorname{tr}(\xi^T \eta)\)</span>（<span class="arithmatex">\(\xi, \eta \in T_Q O(n)\)</span>），则从 <span class="arithmatex">\(Q\)</span> 出发、初始速度 <span class="arithmatex">\(Q\Omega\)</span>（<span class="arithmatex">\(\Omega \in \operatorname{Skew}(n)\)</span>）的测地线为
+$$
+\gamma(t) = Q e^{t\Omega}.
+$$
+<span class="arithmatex">\(O(n)\)</span> 上两点 <span class="arithmatex">\(Q_1, Q_2\)</span> 之间的测地距离为
+$$
+d(Q_1, Q_2) = |\log(Q_1^T Q_2)|<em k="1">F = \left(\sum</em>,
+$$
+其中 }^{\lfloor n/2 \rfloor} \theta_k^2\right)^{1/2<span class="arithmatex">\(\theta_k\)</span> 为 <span class="arithmatex">\(Q_1^T Q_2\)</span> 的旋转角。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在双不变度量下，<span class="arithmatex">\(O(n)\)</span> 上的 Levi-Civita 联络为 <span class="arithmatex">\(\nabla_{\tilde{A}}\tilde{B} = \frac{1}{2}[\tilde{A}, \tilde{B}]\)</span>（其中 <span class="arithmatex">\(\tilde{A}, \tilde{B}\)</span> 为左不变向量场）。曲线 <span class="arithmatex">\(\gamma(t) = Qe^{t\Omega}\)</span> 的速度为 <span class="arithmatex">\(\dot\gamma = Qe^{t\Omega}\Omega\)</span>，对应的左不变速度 <span class="arithmatex">\(\gamma^{-1}\dot\gamma = \Omega\)</span> 为常数，因此 <span class="arithmatex">\(\nabla_{\dot\gamma}\dot\gamma = 0\)</span>，即 <span class="arithmatex">\(\gamma\)</span> 为测地线。距离公式由测地线长度 <span class="arithmatex">\(L = \int_0^1 \|\dot\gamma\|dt = \|\Omega\|_F\)</span> 得到，其中 <span class="arithmatex">\(e^\Omega = Q_1^T Q_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.4</p>
+<p><strong><span class="arithmatex">\(SO(3)\)</span> 中的旋转。</strong></p>
+<p><span class="arithmatex">\(SO(3)\)</span> 的 Lie 代数 <span class="arithmatex">\(\mathfrak{so}(3)\)</span> 由 <span class="arithmatex">\(3 \times 3\)</span> 反对称矩阵组成，维数为 <span class="arithmatex">\(3\)</span>。标准基为
+$$
+L_1 = \begin{pmatrix} 0 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; -1 \ 0 &amp; 1 &amp; 0 \end{pmatrix}, \quad
+L_2 = \begin{pmatrix} 0 &amp; 0 &amp; 1 \ 0 &amp; 0 &amp; 0 \ -1 &amp; 0 &amp; 0 \end{pmatrix}, \quad
+L_3 = \begin{pmatrix} 0 &amp; -1 &amp; 0 \ 1 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 0 \end{pmatrix}.
+$$
+每个 <span class="arithmatex">\(\Omega \in \mathfrak{so}(3)\)</span> 可以写成 <span class="arithmatex">\(\Omega = \theta_1 L_1 + \theta_2 L_2 + \theta_3 L_3\)</span>，对应绕轴 <span class="arithmatex">\((\theta_1, \theta_2, \theta_3)\)</span> 旋转角度 <span class="arithmatex">\(\|\boldsymbol{\theta}\|\)</span>。Rodrigues 公式给出
+$$
+e^\Omega = I + \frac{\sin\theta}{\theta}\Omega + \frac{1 - \cos\theta}{\theta^2}\Omega^2, \quad \theta = |\boldsymbol{\theta}|.
+$$</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.5</p>
+<p><strong><span class="arithmatex">\(O(n)\)</span> 的维数计算。</strong></p>
+<p><span class="arithmatex">\(O(n)\)</span> 由约束 <span class="arithmatex">\(Q^T Q = I\)</span> 定义，共 <span class="arithmatex">\(n^2\)</span> 个矩阵元素，<span class="arithmatex">\(\frac{n(n+1)}{2}\)</span> 个独立约束（因为 <span class="arithmatex">\(Q^T Q\)</span> 是对称的）。因此
+$$
+\dim O(n) = n^2 - \frac{n(n+1)}{2} = \frac{n(n-1)}{2}.
+$$
+例如 <span class="arithmatex">\(\dim O(3) = 3\)</span>，<span class="arithmatex">\(\dim O(4) = 6\)</span>。</p>
+</div>
+<hr />
+<h2 id="244-stiefel">24.4 Stiefel 流形<a class="headerlink" href="#244-stiefel" title="Permanent link">&para;</a></h2>
+<p>Stiefel 流形推广了正交群，是约束优化中的重要对象。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.10 (Stiefel 流形)</p>
+<p><strong>Stiefel 流形</strong>（Stiefel manifold）<span class="arithmatex">\(V_k(\mathbb{R}^n)\)</span>（<span class="arithmatex">\(1 \le k \le n\)</span>）是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中所有 <span class="arithmatex">\(k\)</span>-标准正交组的集合：
+$$
+V_k(\mathbb{R}^n) = \operatorname{St}(k, n) = { X \in \mathbb{R}^{n \times k} : X^T X = I_k }.
+$$
+当 <span class="arithmatex">\(k = n\)</span> 时，<span class="arithmatex">\(V_n(\mathbb{R}^n) = O(n)\)</span>；当 <span class="arithmatex">\(k = 1\)</span> 时，<span class="arithmatex">\(V_1(\mathbb{R}^n) = S^{n-1}\)</span>。<span class="arithmatex">\(\operatorname{St}(k, n)\)</span> 是紧流形，维数为 <span class="arithmatex">\(nk - \frac{k(k+1)}{2}\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.7 (Stiefel 流形的切空间)</p>
+<p><span class="arithmatex">\(\operatorname{St}(k, n)\)</span> 在 <span class="arithmatex">\(X\)</span> 处的切空间为
+$$
+T_X \operatorname{St}(k, n) = { Z \in \mathbb{R}^{n \times k} : X^T Z + Z^T X = 0 }.
+$$
+等价地，<span class="arithmatex">\(Z \in T_X \operatorname{St}(k, n)\)</span> 当且仅当 <span class="arithmatex">\(X^T Z\)</span> 是反对称矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>约束为 <span class="arithmatex">\(h(X) = X^T X - I_k = 0\)</span>。微分：<span class="arithmatex">\(Dh(X)(Z) = X^T Z + Z^T X\)</span>。因此
+$$
+T_X \operatorname{St}(k, n) = \ker(Dh(X)) = { Z : X^T Z + Z^T X = 0 }.
+$$
+验证满秩条件：<span class="arithmatex">\(Dh(X)\)</span> 是从 <span class="arithmatex">\(\mathbb{R}^{n \times k}\)</span> 到 <span class="arithmatex">\(\operatorname{Sym}(k)\)</span>（<span class="arithmatex">\(k \times k\)</span> 对称矩阵空间）的线性映射。给定任意对称矩阵 <span class="arithmatex">\(S\)</span>，取 <span class="arithmatex">\(Z = \frac{1}{2}XS\)</span>，则 <span class="arithmatex">\(X^T Z + Z^T X = S\)</span>，故 <span class="arithmatex">\(Dh(X)\)</span> 满射。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.8 (Stiefel 流形上的典范度量与测地线)</p>
+<p>赋予 <span class="arithmatex">\(\operatorname{St}(k, n)\)</span> 从欧氏空间 <span class="arithmatex">\(\mathbb{R}^{n \times k}\)</span> 继承的度量（典范度量）<span class="arithmatex">\(\langle Z_1, Z_2 \rangle = \operatorname{tr}(Z_1^T Z_2)\)</span>。正交投影到切空间 <span class="arithmatex">\(T_X \operatorname{St}(k, n)\)</span> 的公式为
+$$
+\Pi_X(Z) = Z - X \operatorname{sym}(X^T Z),
+$$
+其中 <span class="arithmatex">\(\operatorname{sym}(A) = \frac{A + A^T}{2}\)</span>。</p>
+<p>在此度量下，从 <span class="arithmatex">\(X\)</span> 出发、初始速度 <span class="arithmatex">\(Z \in T_X \operatorname{St}(k, n)\)</span> 的测地线可以通过如下方法计算：设 <span class="arithmatex">\(A = X^T Z\)</span>（反对称），<span class="arithmatex">\(QR = (I - XX^T)Z\)</span> 为 QR 分解（<span class="arithmatex">\(Q \in \mathbb{R}^{n \times k}\)</span>，<span class="arithmatex">\(R \in \mathbb{R}^{k \times k}\)</span>），则
+$$
+\gamma(t) = \begin{pmatrix} X &amp; Q \end{pmatrix} \exp!\left(t \begin{pmatrix} A &amp; -R^T \ R &amp; 0 \end{pmatrix}\right) \begin{pmatrix} I_k \ 0 \end{pmatrix}.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>投影公式：对 <span class="arithmatex">\(Z \in \mathbb{R}^{n \times k}\)</span>，分解 <span class="arithmatex">\(Z = \Pi_X(Z) + X \cdot \operatorname{sym}(X^T Z)\)</span>。验证 <span class="arithmatex">\(\Pi_X(Z) \in T_X\operatorname{St}(k,n)\)</span>：<span class="arithmatex">\(X^T\Pi_X(Z) = X^TZ - \operatorname{sym}(X^TZ)\)</span> 是反对称的。残差 <span class="arithmatex">\(X \cdot \operatorname{sym}(X^T Z)\)</span> 与切空间正交（在典范内积下）。</p>
+<p>测地线公式的推导需要解联络方程 <span class="arithmatex">\(\nabla_{\dot\gamma}\dot\gamma = 0\)</span>。将速度分解为 <span class="arithmatex">\(X\)</span> 方向和 <span class="arithmatex">\(X\)</span> 的正交补方向，利用矩阵指数表示旋转，可以将测地线方程化为有限维矩阵 ODE，其解即为上述公式。详细推导见 Edelman-Arias-Smith (1998)。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.6</p>
+<p><strong><span class="arithmatex">\(\operatorname{St}(2, 3)\)</span> 的维数和切空间。</strong></p>
+<p><span class="arithmatex">\(\operatorname{St}(2, 3) = \{X \in \mathbb{R}^{3 \times 2} : X^TX = I_2\}\)</span>，维数 <span class="arithmatex">\(= 3 \times 2 - \frac{2 \times 3}{2} = 3\)</span>。</p>
+<p>取 <span class="arithmatex">\(X = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>，则切空间为满足 <span class="arithmatex">\(X^TZ\)</span> 反对称的 <span class="arithmatex">\(Z \in \mathbb{R}^{3 \times 2}\)</span>：
+$$
+T_X \operatorname{St}(2, 3) = \left{ \begin{pmatrix} 0 &amp; -a \ a &amp; 0 \ b &amp; c \end{pmatrix} : a, b, c \in \mathbb{R} \right},
+$$
+确实是 <span class="arithmatex">\(3\)</span> 维空间。</p>
+</div>
+<hr />
+<h2 id="245-grassmann">24.5 Grassmann 流形<a class="headerlink" href="#245-grassmann" title="Permanent link">&para;</a></h2>
+<p>Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等问题中自然出现。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.11 (Grassmann 流形)</p>
+<p><strong>Grassmann 流形</strong>（Grassmann manifold）<span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中所有 <span class="arithmatex">\(k\)</span> 维子空间的集合：
+$$
+\operatorname{Gr}(k, n) = { \mathcal{V} \subseteq \mathbb{R}^n : \dim \mathcal{V} = k }.
+$$
+<span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 可以视为 Stiefel 流形的商空间：
+$$
+\operatorname{Gr}(k, n) \cong \operatorname{St}(k, n) / O(k),
+$$
+其中等价关系为 <span class="arithmatex">\(X \sim XQ\)</span>（<span class="arithmatex">\(Q \in O(k)\)</span>），因为 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(XQ\)</span> 张成相同的子空间。<span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 的维数为 <span class="arithmatex">\(k(n - k)\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.12 (Grassmann 流形的投影表示)</p>
+<p>每个 <span class="arithmatex">\(k\)</span> 维子空间 <span class="arithmatex">\(\mathcal{V} \in \operatorname{Gr}(k, n)\)</span> 可以用其正交投影矩阵 <span class="arithmatex">\(P = XX^T\)</span>（<span class="arithmatex">\(X \in \operatorname{St}(k, n)\)</span> 为 <span class="arithmatex">\(\mathcal{V}\)</span> 的标准正交基）唯一表示。因此
+$$
+\operatorname{Gr}(k, n) \cong { P \in \mathbb{R}^{n \times n} : P^2 = P, \, P^T = P, \, \operatorname{tr}(P) = k }.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.9 (Grassmann 流形的切空间)</p>
+<p>在投影表示 <span class="arithmatex">\(P = XX^T\)</span> 下，<span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 在 <span class="arithmatex">\(P\)</span> 处的切空间为
+$$
+T_P \operatorname{Gr}(k, n) = { \Delta \in \mathbb{R}^{n \times n} : \Delta = \Delta^T, \, P\Delta + \Delta P = \Delta }.
+$$
+等价地，在标准正交基表示下，<span class="arithmatex">\(T_{[X]} \operatorname{Gr}(k, n)\)</span> 中的水平切向量为
+$$
+\mathcal{H}_X = { Z \in \mathbb{R}^{n \times k} : X^T Z = 0 },
+$$
+即列空间与 <span class="arithmatex">\(X\)</span> 的列空间正交的矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在商空间的框架下，Stiefel 流形上的切向量 <span class="arithmatex">\(Z \in T_X \operatorname{St}(k, n)\)</span> 分解为垂直分量（沿 <span class="arithmatex">\(O(k)\)</span> 轨道的方向，即 <span class="arithmatex">\(XA\)</span>，<span class="arithmatex">\(A\)</span> 反对称）和水平分量（与轨道正交的方向）。在典范度量下，水平空间为
+$$
+\mathcal{H}_X = { Z \in T_X \operatorname{St}(k, n) : X^T Z = 0 } = { Z \in \mathbb{R}^{n \times k} : X^T Z = 0 }.
+$$
+维数为 <span class="arithmatex">\(k(n - k) = \dim \operatorname{Gr}(k, n)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.10 (Grassmann 流形上的测地线与距离)</p>
+<p>赋予 <span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 从 Stiefel 流形商结构继承的 Riemannian 度量。两个子空间 <span class="arithmatex">\(\mathcal{V}_1, \mathcal{V}_2 \in \operatorname{Gr}(k, n)\)</span> 之间的测地距离为
+$$
+d(\mathcal{V}<em i="1">1, \mathcal{V}_2) = |\boldsymbol{\theta}|_2 = \left(\sum</em>,
+$$
+其中 }^{k} \theta_i^2\right)^{1/2<span class="arithmatex">\(\theta_1, \ldots, \theta_k \in [0, \pi/2]\)</span> 为 <span class="arithmatex">\(\mathcal{V}_1\)</span> 和 <span class="arithmatex">\(\mathcal{V}_2\)</span> 之间的 <strong>主角</strong>（principal angles），定义为 <span class="arithmatex">\(\cos\theta_i = \sigma_i(X_1^T X_2)\)</span>，<span class="arithmatex">\(\sigma_i\)</span> 为奇异值。</p>
+<p>从 <span class="arithmatex">\([X_1]\)</span> 沿水平方向 <span class="arithmatex">\(Z\)</span> 的测地线为：设 <span class="arithmatex">\(Z = U\Sigma V^T\)</span> 为紧 SVD，则
+$$
+\gamma(t) = [X_1 V \cos(\Sigma t) + U \sin(\Sigma t)].
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(X_1, X_2 \in \operatorname{St}(k, n)\)</span> 分别为 <span class="arithmatex">\(\mathcal{V}_1, \mathcal{V}_2\)</span> 的标准正交基。<span class="arithmatex">\(X_1^T X_2\)</span> 的 SVD 为 <span class="arithmatex">\(X_1^T X_2 = P \operatorname{diag}(\cos\theta_1, \ldots, \cos\theta_k) Q^T\)</span>。取 <span class="arithmatex">\(\tilde{X}_1 = X_1 P\)</span>，<span class="arithmatex">\(\tilde{X}_2 = X_2 Q\)</span>，则 <span class="arithmatex">\(\tilde{X}_1^T \tilde{X}_2 = \operatorname{diag}(\cos\theta_i)\)</span>。</p>
+<p>构造测地线 <span class="arithmatex">\(\gamma(t) = \tilde{X}_1 \operatorname{diag}(\cos(t\theta_i)) + U_\perp \operatorname{diag}(\sin(t\theta_i))\)</span>，其中 <span class="arithmatex">\(U_\perp = (\tilde{X}_2 - \tilde{X}_1 \operatorname{diag}(\cos\theta_i)) \operatorname{diag}(\sin\theta_i)^{-1}\)</span>。验证 <span class="arithmatex">\(\gamma(0) = [\tilde{X}_1] = [X_1]\)</span>，<span class="arithmatex">\(\gamma(1) = [X_2]\)</span>，且 <span class="arithmatex">\(\gamma\)</span> 满足测地线方程。长度为 <span class="arithmatex">\(\int_0^1 \|\dot\gamma\| dt = \|\boldsymbol{\theta}\|_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.7</p>
+<p><strong><span class="arithmatex">\(\operatorname{Gr}(1, n)\)</span>——实射影空间。</strong></p>
+<p><span class="arithmatex">\(\operatorname{Gr}(1, n)\)</span> 是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中所有一维子空间（过原点的直线）的集合，即实射影空间 <span class="arithmatex">\(\mathbb{RP}^{n-1}\)</span>。维数为 <span class="arithmatex">\(1 \times (n-1) = n - 1\)</span>。两条直线之间的测地距离就是它们的夹角 <span class="arithmatex">\(\theta \in [0, \pi/2]\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.8</p>
+<p><strong>计算两个子空间的主角。</strong></p>
+<p>设 <span class="arithmatex">\(X_1 = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(X_2 = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>（已正交化）。计算
+$$
+X_1^T X_2 = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 1 \end{pmatrix},
+$$
+奇异值为 <span class="arithmatex">\(\sigma_1 = \sigma_2 = 1/\sqrt{2}\)</span>，主角 <span class="arithmatex">\(\theta_1 = \theta_2 = \pi/4\)</span>。测地距离 <span class="arithmatex">\(d = \sqrt{(\pi/4)^2 + (\pi/4)^2} = \frac{\pi}{2\sqrt{2}}\)</span>。</p>
+</div>
+<hr />
+<h2 id="246">24.6 正定矩阵流形<a class="headerlink" href="#246" title="Permanent link">&para;</a></h2>
+<p>对称正定矩阵在统计学、扩散张量成像、协方差估计等领域中扮演重要角色。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.13 (正定矩阵流形)</p>
+<p><strong>对称正定矩阵流形</strong>（manifold of symmetric positive definite matrices）定义为
+$$
+\mathcal{P}(n) = \operatorname{Sym}^+(n) = { P \in \mathbb{R}^{n \times n} : P = P^T, \, P \succ 0 }.
+$$
+<span class="arithmatex">\(\mathcal{P}(n)\)</span> 是 <span class="arithmatex">\(\operatorname{Sym}(n)\)</span> 的一个开子集，因此是 <span class="arithmatex">\(\frac{n(n+1)}{2}\)</span> 维光滑流形，切空间为 <span class="arithmatex">\(T_P \mathcal{P}(n) = \operatorname{Sym}(n)\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.14 (仿射不变 Riemannian 度量)</p>
+<p><span class="arithmatex">\(\mathcal{P}(n)\)</span> 上的 <strong>仿射不变 Riemannian 度量</strong>（affine-invariant Riemannian metric）定义为
+$$
+\langle \xi, \eta \rangle_P = \operatorname{tr}(P^{-1} \xi P^{-1} \eta), \quad \xi, \eta \in T_P \mathcal{P}(n) = \operatorname{Sym}(n).
+$$
+该度量在群作用 <span class="arithmatex">\(P \mapsto APA^T\)</span>（<span class="arithmatex">\(A \in GL(n)\)</span>）下不变。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.11 (<span class="arithmatex">\(\mathcal{P}(n)\)</span> 上的测地线)</p>
+<p>在仿射不变度量下，<span class="arithmatex">\(\mathcal{P}(n)\)</span> 上从 <span class="arithmatex">\(P\)</span> 出发、初始速度 <span class="arithmatex">\(\xi \in \operatorname{Sym}(n)\)</span> 的测地线为
+$$
+\gamma(t) = P^{1/2} \exp(t P^{-1/2} \xi P^{-1/2}) P^{1/2}.
+$$
+两点 <span class="arithmatex">\(P, Q \in \mathcal{P}(n)\)</span> 之间的测地距离为
+$$
+d(P, Q) = \left| \log(P^{-1/2} Q P^{-1/2}) \right|<em i="1">F = \left( \sum</em>,
+$$
+其中 }^{n} \ln^2 \lambda_i \right)^{1/2<span class="arithmatex">\(\lambda_1, \ldots, \lambda_n\)</span> 为 <span class="arithmatex">\(P^{-1}Q\)</span>（或等价地 <span class="arithmatex">\(P^{-1/2}QP^{-1/2}\)</span>）的特征值。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在 <span class="arithmatex">\(P = I\)</span> 处，度量简化为 <span class="arithmatex">\(\langle \xi, \eta \rangle_I = \operatorname{tr}(\xi\eta)\)</span>，测地线为 <span class="arithmatex">\(\gamma(t) = e^{t\xi}\)</span>。验证：<span class="arithmatex">\(\gamma(0) = I\)</span>，<span class="arithmatex">\(\dot\gamma(0) = \xi\)</span>，且 <span class="arithmatex">\(\gamma(t)\)</span> 满足 <span class="arithmatex">\(\mathcal{P}(n)\)</span> 上的测地线方程 <span class="arithmatex">\(\ddot\gamma - \dot\gamma \gamma^{-1} \dot\gamma = 0\)</span>（这里的运动方程由 Levi-Civita 联络 <span class="arithmatex">\(\nabla_\xi \eta = D_\xi \eta - \frac{1}{2}(\xi P^{-1}\eta + \eta P^{-1}\xi)\)</span> 推导出）。</p>
+<p>对一般 <span class="arithmatex">\(P\)</span>，利用等距变换 <span class="arithmatex">\(\Phi_A(P) = APA^T\)</span> 将 <span class="arithmatex">\(P\)</span> 映射到 <span class="arithmatex">\(I\)</span>（取 <span class="arithmatex">\(A = P^{-1/2}\)</span>），得到一般测地线公式。距离为
+$$
+d(P, Q) = d(I, P^{-1/2}QP^{-1/2}) = |\log(P^{-1/2}QP^{-1/2})|_F.
+$$
+<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.12 (<span class="arithmatex">\(\mathcal{P}(n)\)</span> 上的 Frechet 均值)</p>
+<p>设 <span class="arithmatex">\(P_1, \ldots, P_m \in \mathcal{P}(n)\)</span>。其关于仿射不变度量的 <strong>Frechet 均值</strong>（Frechet mean）为
+$$
+\bar{P} = \arg\min_{P \in \mathcal{P}(n)} \sum_{i=1}^{m} d(P, P_i)^2.
+$$
+Frechet 均值存在且唯一（因为 <span class="arithmatex">\(\mathcal{P}(n)\)</span> 在仿射不变度量下是非正曲率完备 Riemannian 流形，即 Hadamard 流形）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><span class="arithmatex">\(\mathcal{P}(n)\)</span> 在仿射不变度量下是完备的（测地线存在于任意时间），且截面曲率 <span class="arithmatex">\(K \le 0\)</span>（这可以通过计算曲率张量验证）。Hadamard 流形上的 Frechet 均值存在且唯一，这是 Cartan-Hadamard 定理和 Karcher 定理的推论。具体地，严格负曲率保证目标函数 <span class="arithmatex">\(f(P) = \sum_i d(P, P_i)^2\)</span> 是严格凸的（在测地线意义下），因此有唯一极小值点。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.9</p>
+<p><strong><span class="arithmatex">\(\mathcal{P}(1)\)</span> 即正实数。</strong></p>
+<p><span class="arithmatex">\(\mathcal{P}(1) = (0, \infty)\)</span>，度量为 <span class="arithmatex">\(ds^2 = dp^2/p^2\)</span>（双曲度量）。测地线为 <span class="arithmatex">\(\gamma(t) = p_0 e^{vt}\)</span>，距离为 <span class="arithmatex">\(d(p, q) = |\ln(p/q)|\)</span>。两点 <span class="arithmatex">\(p, q &gt; 0\)</span> 的 Frechet 均值为几何均值 <span class="arithmatex">\(\bar{p} = (p \cdot q)^{1/2}\)</span>（对两点情形）。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.10</p>
+<p><strong>计算 <span class="arithmatex">\(2 \times 2\)</span> 正定矩阵间的距离。</strong></p>
+<p>设 <span class="arithmatex">\(P = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(Q = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span>。则
+$$
+P^{-1}Q = \begin{pmatrix} 1/2 &amp; 0 \ 0 &amp; 2 \end{pmatrix}, \quad \log(P^{-1}Q) = \begin{pmatrix} -\ln 2 &amp; 0 \ 0 &amp; \ln 2 \end{pmatrix}.
+$$
+距离 <span class="arithmatex">\(d(P, Q) = \sqrt{(\ln 2)^2 + (\ln 2)^2} = \ln 2 \cdot \sqrt{2} \approx 0.980\)</span>。</p>
+</div>
+<hr />
+<h2 id="247-lie-lie">24.7 矩阵 Lie 群与 Lie 代数<a class="headerlink" href="#247-lie-lie" title="Permanent link">&para;</a></h2>
+<p>本节系统讨论矩阵 Lie 群的一般理论。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.15 (矩阵 Lie 群)</p>
+<p><strong>矩阵 Lie 群</strong>（matrix Lie group）是 <span class="arithmatex">\(GL(n, \mathbb{C})\)</span> 的闭子群 <span class="arithmatex">\(G\)</span>。由 Cartan 闭子群定理，<span class="arithmatex">\(G\)</span> 自动是光滑流形，因此是 Lie 群。常见的矩阵 Lie 群包括 <span class="arithmatex">\(GL(n), SL(n), O(n), SO(n), U(n), SU(n), Sp(2n)\)</span> 等。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.13 (Baker-Campbell-Hausdorff 公式)</p>
+<p>设 <span class="arithmatex">\(X, Y \in \mathfrak{g}\)</span>（某 Lie 代数），且 <span class="arithmatex">\(\|X\|, \|Y\|\)</span> 足够小。则存在 <span class="arithmatex">\(Z \in \mathfrak{g}\)</span> 使得 <span class="arithmatex">\(e^X e^Y = e^Z\)</span>，且
+$$
+Z = X + Y + \frac{1}{2}[X, Y] + \frac{1}{12}\big([X, [X, Y]] - [Y, [X, Y]]\big) + \cdots
+$$
+该级数称为 <strong>Baker-Campbell-Hausdorff (BCH) 公式</strong>，其中每一项都是 <span class="arithmatex">\(X, Y\)</span> 的嵌套 Lie 括号。特别地，当 <span class="arithmatex">\([X, Y] = 0\)</span> 时，<span class="arithmatex">\(Z = X + Y\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>证明思路。</strong> 在 <span class="arithmatex">\(e^X e^Y = e^Z\)</span> 两边取对数（在形式幂级数意义下），利用矩阵指数和对数的级数展开
+$$
+e^X = \sum_k \frac{X^k}{k!}, \quad \log(I + W) = \sum_k \frac{(-1)^{k+1}}{k} W^k,
+$$
+将 <span class="arithmatex">\(Z = \log(e^X e^Y)\)</span> 展开为 <span class="arithmatex">\(X, Y\)</span> 的幂级数。通过 Dynkin 的显式公式，每一项可以表示为嵌套交换子。</p>
+<p>前几项的具体验证：
+$$
+e^X e^Y = (I + X + \tfrac{X^2}{2} + \cdots)(I + Y + \tfrac{Y^2}{2} + \cdots) = I + (X+Y) + (XY + \tfrac{X^2 + Y^2}{2}) + \cdots
+$$
+$$
+\log(e^X e^Y) = (X+Y) + \frac{XY - YX}{2} + \cdots = X + Y + \frac{1}{2}[X, Y] + \cdots
+$$
+收敛性在 <span class="arithmatex">\(\|X\| + \|Y\|\)</span> 足够小时由 Lie 代数的完备性保证。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.14 (Lie 群同态与 Lie 代数同态的对应)</p>
+<p>设 <span class="arithmatex">\(G, H\)</span> 为矩阵 Lie 群，<span class="arithmatex">\(\mathfrak{g}, \mathfrak{h}\)</span> 为其 Lie 代数。若 <span class="arithmatex">\(\Phi: G \to H\)</span> 为 Lie 群同态（光滑群同态），则 <span class="arithmatex">\(d\Phi_I: \mathfrak{g} \to \mathfrak{h}\)</span> 为 Lie 代数同态，即保持 Lie 括号：
+$$
+d\Phi_I([X, Y]) = [d\Phi_I(X), d\Phi_I(Y)], \quad \forall X, Y \in \mathfrak{g}.
+$$
+反之，若 <span class="arithmatex">\(G\)</span> 单连通，则每个 Lie 代数同态 <span class="arithmatex">\(\phi: \mathfrak{g} \to \mathfrak{h}\)</span> 都可提升为唯一的 Lie 群同态 <span class="arithmatex">\(\Phi: G \to H\)</span> 使得 <span class="arithmatex">\(d\Phi_I = \phi\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\Phi: G \to H\)</span> 为 Lie 群同态。对 <span class="arithmatex">\(X, Y \in \mathfrak{g}\)</span>，
+$$
+d\Phi_I([X, Y]) = d\Phi_I!\left(\frac{d}{dt}\Big|<em t="0">{t=0} e^{tX} Y e^{-tX}\right) = \frac{d}{dt}\Big|</em>).
+$$
+由 } \Phi(e^{tX}) d\Phi_I(Y) \Phi(e^{-tX<span class="arithmatex">\(\Phi(e^{tX}) = e^{t \, d\Phi_I(X)}\)</span>，上式等于 <span class="arithmatex">\([d\Phi_I(X), d\Phi_I(Y)]\)</span>。</p>
+<p>反方向需要用到 <span class="arithmatex">\(G\)</span> 的单连通性和指数映射的局部同胚性来逐步扩展 <span class="arithmatex">\(\phi\)</span> 到整个群。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.11</p>
+<p><strong><span class="arithmatex">\(\det: GL(n) \to \mathbb{R}^*\)</span> 的 Lie 代数映射。</strong></p>
+<p>行列式 <span class="arithmatex">\(\det: GL(n) \to GL(1) = \mathbb{R}^*\)</span> 是 Lie 群同态。其在 <span class="arithmatex">\(I\)</span> 处的微分为
+$$
+d(\det)_I(X) = \operatorname{tr}(X).
+$$
+这是因为 <span class="arithmatex">\(\det(I + tX) = 1 + t\operatorname{tr}(X) + O(t^2)\)</span>。对应的 Lie 代数同态为 <span class="arithmatex">\(\operatorname{tr}: \mathfrak{gl}(n) \to \mathfrak{gl}(1) = \mathbb{R}\)</span>，保持 Lie 括号：<span class="arithmatex">\(\operatorname{tr}([A, B]) = 0 = [\operatorname{tr}(A), \operatorname{tr}(B)]\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.12</p>
+<p><strong>BCH 公式的应用：近似乘积。</strong></p>
+<p>对于小角度旋转 <span class="arithmatex">\(R_1 = e^{\Omega_1}, R_2 = e^{\Omega_2} \in SO(3)\)</span>，BCH 公式给出
+$$
+R_1 R_2 \approx \exp!\left(\Omega_1 + \Omega_2 + \frac{1}{2}[\Omega_1, \Omega_2]\right).
+$$
+这在机器人学和计算机视觉中用于小旋转的合成。当 <span class="arithmatex">\(\Omega_1, \Omega_2\)</span> 足够小时，可以进一步近似为 <span class="arithmatex">\(R_1 R_2 \approx e^{\Omega_1 + \Omega_2}\)</span>。</p>
+</div>
+<hr />
+<h2 id="248">24.8 矩阵流形上的优化<a class="headerlink" href="#248" title="Permanent link">&para;</a></h2>
+<p>许多实际问题可以建模为矩阵流形上的优化问题。流形优化将约束优化转化为无约束的 Riemannian 优化。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.16 (Riemannian 梯度)</p>
+<p>设 <span class="arithmatex">\(f: \mathcal{M} \to \mathbb{R}\)</span> 为 Riemannian 流形 <span class="arithmatex">\((\mathcal{M}, \langle \cdot, \cdot \rangle)\)</span> 上的光滑函数。<span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(X \in \mathcal{M}\)</span> 处的 <strong>Riemannian 梯度</strong>（Riemannian gradient）<span class="arithmatex">\(\operatorname{grad} f(X) \in T_X \mathcal{M}\)</span> 定义为满足
+$$
+\langle \operatorname{grad} f(X), \xi \rangle_X = Df(X)[\xi], \quad \forall \xi \in T_X \mathcal{M}
+$$
+的唯一切向量。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 24.17 (收回映射)</p>
+<p><strong>收回映射</strong>（retraction）<span class="arithmatex">\(R_X: T_X \mathcal{M} \to \mathcal{M}\)</span> 是指数映射的一阶近似，满足：</p>
+<ol>
+<li><span class="arithmatex">\(R_X(0) = X\)</span>；</li>
+<li><span class="arithmatex">\(\frac{d}{dt}\Big|_{t=0} R_X(t\xi) = \xi\)</span>，<span class="arithmatex">\(\forall \xi \in T_X \mathcal{M}\)</span>。</li>
+</ol>
+<p>收回映射比指数映射计算代价低，在优化算法中常用于替代测地线步。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.15 (Riemannian 梯度下降收敛性)</p>
+<p>设 <span class="arithmatex">\(f: \mathcal{M} \to \mathbb{R}\)</span> 为紧 Riemannian 流形上的光滑函数，<span class="arithmatex">\(R\)</span> 为收回映射。Riemannian 梯度下降迭代
+$$
+X_{k+1} = R_{X_k}(-\alpha_k \operatorname{grad} f(X_k))
+$$
+满足：在适当的步长选择（如 Armijo 线搜索）下，<span class="arithmatex">\(\|\operatorname{grad} f(X_k)\| \to 0\)</span>，即迭代点趋向临界点。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>证明思路。</strong> 利用收回映射的性质和 Taylor 展开：
+$$
+f(R_X(-\alpha \operatorname{grad} f)) = f(X) - \alpha |\operatorname{grad} f(X)|^2 + O(\alpha^2).
+$$
+在 Armijo 条件 <span class="arithmatex">\(f(X_{k+1}) \le f(X_k) - c \alpha_k \|\operatorname{grad} f(X_k)\|^2\)</span>（<span class="arithmatex">\(0 &lt; c &lt; 1\)</span>）下，
+$$
+\sum_{k=0}^{\infty} \alpha_k |\operatorname{grad} f(X_k)|^2 \le f(X_0) - \inf f &lt; \infty.
+$$
+由步长的下界（回溯线搜索保证 <span class="arithmatex">\(\alpha_k \ge \alpha_{\min} &gt; 0\)</span>），可得 <span class="arithmatex">\(\|\operatorname{grad} f(X_k)\| \to 0\)</span>。紧性保证了下界和 Lipschitz 常数的存在。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 24.16 (Stiefel 流形上的 Riemannian 梯度)</p>
+<p>设 <span class="arithmatex">\(f: \mathbb{R}^{n \times k} \to \mathbb{R}\)</span> 为光滑函数，限制到 <span class="arithmatex">\(\operatorname{St}(k, n)\)</span> 上。在典范度量下，Riemannian 梯度为
+$$
+\operatorname{grad} f(X) = \nabla f(X) - X \operatorname{sym}(X^T \nabla f(X)),
+$$
+其中 <span class="arithmatex">\(\nabla f(X)\)</span> 为 <span class="arithmatex">\(f\)</span> 在欧氏空间中的梯度，<span class="arithmatex">\(\operatorname{sym}(A) = (A + A^T)/2\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>Riemannian 梯度是欧氏梯度到切空间的正交投影：<span class="arithmatex">\(\operatorname{grad} f(X) = \Pi_X(\nabla f(X))\)</span>。由定理 24.8 的投影公式，<span class="arithmatex">\(\Pi_X(Z) = Z - X\operatorname{sym}(X^TZ)\)</span>。代入 <span class="arithmatex">\(Z = \nabla f(X)\)</span> 即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 24.13</p>
+<p><strong>Stiefel 流形上的特征值问题。</strong></p>
+<p>求 <span class="arithmatex">\(A \in \operatorname{Sym}(n)\)</span> 的前 <span class="arithmatex">\(k\)</span> 个最大特征值对应的特征向量，等价于
+$$
+\max_{X \in \operatorname{St}(k, n)} \operatorname{tr}(X^T A X).
+$$
+欧氏梯度 <span class="arithmatex">\(\nabla f(X) = 2AX\)</span>，Riemannian 梯度为
+$$
+\operatorname{grad} f(X) = 2AX - X \operatorname{sym}(X^T \cdot 2AX) = 2AX - X(X^TAX + (X^TAX)^T)/1 = 2(I - XX^T)AX,
+$$
+其中利用了 <span class="arithmatex">\(X^TAX\)</span> 的对称性。Riemannian 梯度上升迭代配合收回映射（如 QR 分解收回 <span class="arithmatex">\(R_X(Z) = \operatorname{qf}(X + Z)\)</span>，其中 <span class="arithmatex">\(\operatorname{qf}\)</span> 表示 QR 分解的 Q 因子）可以求解此问题。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.14</p>
+<p><strong>Grassmann 流形上的子空间拟合。</strong></p>
+<p>给定数据矩阵 <span class="arithmatex">\(Y \in \mathbb{R}^{n \times m}\)</span>，寻找最佳 <span class="arithmatex">\(k\)</span> 维子空间以最大化投影方差：
+$$
+\max_{[X] \in \operatorname{Gr}(k, n)} |X^T Y|<em _X_="[X]" _in="\in" _operatorname_Gr="\operatorname{Gr">F^2 = \max</em>(X^T Y Y^T X).
+$$
+这是 PCA 问题的流形优化表述。Riemannian 梯度为 }(k, n)} \operatorname{tr<span class="arithmatex">\(\operatorname{grad} f([X]) = 2(I - XX^T)YY^TX\)</span>，收回映射可以取极分解收回 <span class="arithmatex">\(R_X(Z) = (X + Z)(I + Z^TZ)^{-1/2}\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 24.15</p>
+<p><strong>正定矩阵流形上的几何均值。</strong></p>
+<p>给定 <span class="arithmatex">\(P_1, \ldots, P_m \in \mathcal{P}(n)\)</span>，几何均值（Frechet 均值）可以通过 Riemannian 梯度下降求解：
+$$
+\operatorname{grad} f(P) = -\sum_{i=1}^{m} \log(P^{-1} P_i),
+$$
+其中 <span class="arithmatex">\(f(P) = \frac{1}{2}\sum_i d(P, P_i)^2\)</span>，<span class="arithmatex">\(\log\)</span> 为矩阵对数。迭代
+$$
+P_{k+1} = P_k^{1/2} \exp!\left(\frac{\alpha}{m} P_k^{-1/2} \sum_{i=1}^{m} \log(P_k^{-1/2} P_i P_k^{-1/2}) P_k^{-1/2}\right) P_k^{1/2}
+$$
+在适当步长 <span class="arithmatex">\(\alpha\)</span> 下收敛到几何均值。</p>
+</div>
+<hr />
+<h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章系统介绍了矩阵流形的理论框架和计算方法：</p>
+<ol>
+<li><strong>基本概念</strong>：嵌入子流形、切空间、Riemannian 度量为矩阵约束问题提供了几何语言。</li>
+<li><strong>一般线性群</strong> <span class="arithmatex">\(GL(n)\)</span> 是所有矩阵 Lie 群的母群，其 Lie 代数 <span class="arithmatex">\(\mathfrak{gl}(n)\)</span> 即全矩阵空间。</li>
+<li><strong>正交群与酉群</strong> <span class="arithmatex">\(O(n), U(n)\)</span> 及其特殊子群是最基本的紧 Lie 群，Lie 代数分别为反对称和反 Hermite 矩阵空间。</li>
+<li><strong>Stiefel 流形</strong> <span class="arithmatex">\(\operatorname{St}(k, n)\)</span> 参数化标准正交 <span class="arithmatex">\(k\)</span>-组，是正交约束优化的自然空间。</li>
+<li><strong>Grassmann 流形</strong> <span class="arithmatex">\(\operatorname{Gr}(k, n)\)</span> 参数化 <span class="arithmatex">\(k\)</span> 维子空间，主角提供了子空间间的自然距离。</li>
+<li><strong>正定矩阵流形</strong> <span class="arithmatex">\(\mathcal{P}(n)\)</span> 在仿射不变度量下是非正曲率空间，具有唯一的 Frechet 均值。</li>
+<li><strong>矩阵 Lie 群与 Lie 代数</strong>通过指数映射和 BCH 公式联系。</li>
+<li><strong>流形优化</strong>将约束优化转化为 Riemannian 无约束优化，Riemannian 梯度和收回映射是核心工具。</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

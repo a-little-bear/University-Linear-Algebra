@@ -1,0 +1,2469 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part2/ch13-matrix-functions/">
+      
+      
+        <link rel="prev" href="../ch12-jordan-form/">
+      
+      
+        <link rel="next" href="../../part3/ch14-matrix-analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第13章 矩阵函数 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第13章 矩阵函数
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 矩阵多项式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 矩阵幂级数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 矩阵指数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 矩阵指数的计算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 矩阵指数的计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 对角矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342-jordan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.2 Jordan 块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-cayley-hamilton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.3 Cayley-Hamilton 方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 矩阵指数与微分方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 矩阵对数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.7 矩阵平方根
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#138" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8 一般矩阵函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.8 一般矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1381-jordan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8.1 通过 Jordan 标准形定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1382-cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8.2 Cauchy 积分定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.1 矩阵多项式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.2 矩阵幂级数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.3 矩阵指数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#134" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4 矩阵指数的计算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.4 矩阵指数的计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1341" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.1 对角矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1342-jordan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.2 Jordan 块
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1343-cayley-hamilton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.4.3 Cayley-Hamilton 方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#135" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.5 矩阵指数与微分方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#136" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.6 矩阵对数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#137" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.7 矩阵平方根
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#138" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8 一般矩阵函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13.8 一般矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1381-jordan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8.1 通过 Jordan 标准形定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1382-cauchy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13.8.2 Cauchy 积分定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="13">第 13 章 矩阵函数<a class="headerlink" href="#13" title="Permanent link">&para;</a></h1>
+<p>在前面的章节中，我们已经熟悉了矩阵的加法、乘法和求逆等基本运算。本章将把函数的概念从标量推广到矩阵：给定一个函数 <span class="arithmatex">\(f\)</span>（如指数函数、对数函数、平方根等），我们希望定义 <span class="arithmatex">\(f(A)\)</span> 的含义。矩阵函数（matrix function）在微分方程、控制理论、量子力学等领域有着重要应用。本章从矩阵多项式出发，经由幂级数和 Jordan 标准形，逐步建立矩阵函数的完整理论。</p>
+<hr />
+<h2 id="131">13.1 矩阵多项式<a class="headerlink" href="#131" title="Permanent link">&para;</a></h2>
+<p>矩阵多项式是定义矩阵函数的最基础方式，也是理解更一般矩阵函数的起点。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.1 (矩阵多项式 Matrix Polynomial)</p>
+<p>设 <span class="arithmatex">\(p(\lambda) = a_k \lambda^k + a_{k-1}\lambda^{k-1} + \cdots + a_1\lambda + a_0\)</span> 为一个标量多项式，<span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵。定义<strong>矩阵多项式</strong>
+$$
+p(A) = a_k A^k + a_{k-1}A^{k-1} + \cdots + a_1 A + a_0 I,
+$$
+其中 <span class="arithmatex">\(A^0 = I\)</span>（单位矩阵）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.1 (矩阵多项式的基本性质)</p>
+<p>设 <span class="arithmatex">\(p, q\)</span> 为标量多项式，<span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，则：</p>
+<ol>
+<li><span class="arithmatex">\((p + q)(A) = p(A) + q(A)\)</span>；</li>
+<li><span class="arithmatex">\((pq)(A) = p(A)q(A)\)</span>；</li>
+<li><span class="arithmatex">\(p(A)\)</span> 与 <span class="arithmatex">\(q(A)\)</span> 可交换：<span class="arithmatex">\(p(A)q(A) = q(A)p(A)\)</span>；</li>
+<li>若 <span class="arithmatex">\(A = PBP^{-1}\)</span>，则 <span class="arithmatex">\(p(A) = Pp(B)P^{-1}\)</span>；</li>
+<li><span class="arithmatex">\(p(A)\)</span> 的特征值为 <span class="arithmatex">\(p(\lambda_1), \ldots, p(\lambda_n)\)</span>，其中 <span class="arithmatex">\(\lambda_i\)</span> 为 <span class="arithmatex">\(A\)</span> 的特征值。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> 和 <strong>(2)</strong> 由矩阵乘法的分配律和结合律直接得出。</p>
+<p><strong>(3)</strong> 由 (2)，<span class="arithmatex">\(p(A)q(A) = (pq)(A) = (qp)(A) = q(A)p(A)\)</span>（利用标量多项式乘法的交换性）。</p>
+<p><strong>(4)</strong> <span class="arithmatex">\(A^k = PB^kP^{-1}\)</span>（数学归纳法易证），因此
+$$
+p(A) = \sum a_i A^i = \sum a_i PB^iP^{-1} = P\left(\sum a_i B^i\right)P^{-1} = Pp(B)P^{-1}.
+$$</p>
+<p><strong>(5)</strong> 设 <span class="arithmatex">\(A\mathbf{v} = \lambda\mathbf{v}\)</span>，则 <span class="arithmatex">\(A^k\mathbf{v} = \lambda^k\mathbf{v}\)</span>，因此 <span class="arithmatex">\(p(A)\mathbf{v} = p(\lambda)\mathbf{v}\)</span>。即 <span class="arithmatex">\(p(\lambda)\)</span> 为 <span class="arithmatex">\(p(A)\)</span> 的特征值。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.2 (Cayley-Hamilton 定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，<span class="arithmatex">\(p_A(\lambda) = \det(\lambda I - A)\)</span> 为其特征多项式，则
+$$
+p_A(A) = 0.
+$$
+即每个矩阵都满足自己的特征方程。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(p_A(\lambda) = \lambda^n + c_{n-1}\lambda^{n-1} + \cdots + c_0\)</span>。</p>
+<p><strong>方法一（伴随矩阵法）：</strong> 设 <span class="arithmatex">\(B(\lambda) = \operatorname{adj}(\lambda I - A)\)</span> 为 <span class="arithmatex">\(\lambda I - A\)</span> 的伴随矩阵（adjugate），则
+$$
+(\lambda I - A)B(\lambda) = \det(\lambda I - A) \cdot I = p_A(\lambda) I.
+$$
+<span class="arithmatex">\(B(\lambda)\)</span> 的每个元素是 <span class="arithmatex">\(\lambda\)</span> 的至多 <span class="arithmatex">\((n-1)\)</span> 次多项式，因此可以写为
+$$
+B(\lambda) = B_{n-1}\lambda^{n-1} + B_{n-2}\lambda^{n-2} + \cdots + B_0,
+$$
+其中 <span class="arithmatex">\(B_i\)</span> 为常数矩阵。将 <span class="arithmatex">\((\lambda I - A)B(\lambda) = p_A(\lambda) I\)</span> 展开并比较 <span class="arithmatex">\(\lambda\)</span> 的各次幂系数，可得到一组矩阵等式。将第 <span class="arithmatex">\(k\)</span> 个等式左乘 <span class="arithmatex">\(A^k\)</span> 后全部相加，利用抵消可得 <span class="arithmatex">\(p_A(A) = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.1</p>
+<p>验证 Cayley-Hamilton 定理对 <span class="arithmatex">\(A = \begin{pmatrix}1&amp;2\\3&amp;4\end{pmatrix}\)</span> 成立。</p>
+<p><strong>解：</strong> 特征多项式：
+$$
+p_A(\lambda) = \lambda^2 - 5\lambda - 2.
+$$</p>
+<p>计算 <span class="arithmatex">\(p_A(A) = A^2 - 5A - 2I\)</span>：
+$$
+A^2 = \begin{pmatrix}7&amp;10\15&amp;22\end{pmatrix}, \quad 5A = \begin{pmatrix}5&amp;10\15&amp;20\end{pmatrix}, \quad 2I = \begin{pmatrix}2&amp;0\0&amp;2\end{pmatrix}.
+$$
+$$
+p_A(A) = \begin{pmatrix}7&amp;10\15&amp;22\end{pmatrix} - \begin{pmatrix}5&amp;10\15&amp;20\end{pmatrix} - \begin{pmatrix}2&amp;0\0&amp;2\end{pmatrix} = \begin{pmatrix}0&amp;0\0&amp;0\end{pmatrix}. \quad \checkmark
+$$</p>
+</div>
+<hr />
+<h2 id="132">13.2 矩阵幂级数<a class="headerlink" href="#132" title="Permanent link">&para;</a></h2>
+<p>将多项式推广到幂级数，需要引入矩阵级数的收敛性概念。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.2 (矩阵级数的收敛 Convergence of Matrix Series)</p>
+<p>设 <span class="arithmatex">\(\{A_k\}\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵序列。称 <span class="arithmatex">\(\sum_{k=0}^{\infty} A_k\)</span> <strong>收敛</strong>，若每个元素位置的标量级数都收敛，即对所有 <span class="arithmatex">\(1 \le i \le m\)</span>、<span class="arithmatex">\(1 \le j \le n\)</span>，<span class="arithmatex">\(\sum_{k=0}^{\infty} [A_k]_{ij}\)</span> 收敛。此时定义
+$$
+\sum_{k=0}^{\infty} A_k = \left[\sum_{k=0}^{\infty} [A_k]<em _times="\times" m="m" n="n">{ij}\right]</em>.
+$$</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.3 (谱半径 Spectral Radius)</p>
+<p>矩阵 <span class="arithmatex">\(A\)</span> 的<strong>谱半径</strong>（spectral radius）定义为
+$$
+\rho(A) = \max{|\lambda| : \lambda \text{ 为 } A \text{ 的特征值}}.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.3 (矩阵幂级数的收敛判定)</p>
+<p>设 <span class="arithmatex">\(f(z) = \sum_{k=0}^{\infty} c_k z^k\)</span> 为收敛半径为 <span class="arithmatex">\(R\)</span> 的幂级数，<span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵。则矩阵幂级数
+$$
+f(A) = \sum_{k=0}^{\infty} c_k A^k
+$$
+收敛的充分条件是 <span class="arithmatex">\(\rho(A) &lt; R\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = PJP^{-1}\)</span>，其中 <span class="arithmatex">\(J\)</span> 为 Jordan 标准形。则 <span class="arithmatex">\(A^k = PJ^kP^{-1}\)</span>，故
+$$
+f(A) = P\left(\sum_{k=0}^{\infty} c_k J^k\right)P^{-1} = Pf(J)P^{-1}.
+$$
+由于 <span class="arithmatex">\(J\)</span> 为分块对角矩阵，<span class="arithmatex">\(f(J) = \operatorname{diag}(f(J_{n_1}(\lambda_1)), \ldots)\)</span>。</p>
+<p>对 Jordan 块 <span class="arithmatex">\(J_m(\lambda)\)</span>，<span class="arithmatex">\(f(J_m(\lambda))\)</span> 的 <span class="arithmatex">\((p,q)\)</span> 元素（<span class="arithmatex">\(q \ge p\)</span>）为
+$$
+\frac{f^{(q-p)}(\lambda)}{(q-p)!} = \sum_{k=q-p}^{\infty} c_k \binom{k}{q-p} \lambda^{k-q+p}.
+$$
+当 <span class="arithmatex">\(|\lambda| &lt; R\)</span> 时，<span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\lambda\)</span> 处的各阶导数都收敛，因此上式收敛。<span class="arithmatex">\(\rho(A) &lt; R\)</span> 保证所有特征值 <span class="arithmatex">\(\lambda\)</span> 满足 <span class="arithmatex">\(|\lambda| &lt; R\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.4 (Neumann 级数)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵。若 <span class="arithmatex">\(\rho(A) &lt; 1\)</span>，则 <span class="arithmatex">\(I - A\)</span> 可逆且
+$$
+(I - A)^{-1} = \sum_{k=0}^{\infty} A^k = I + A + A^2 + \cdots.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>这是 <span class="arithmatex">\(f(z) = \frac{1}{1-z} = \sum_{k=0}^{\infty} z^k\)</span>（收敛半径 <span class="arithmatex">\(R = 1\)</span>）的矩阵版本。</p>
+<p>由定理 13.3，当 <span class="arithmatex">\(\rho(A) &lt; 1\)</span> 时，<span class="arithmatex">\(\sum A^k\)</span> 收敛。设 <span class="arithmatex">\(S_N = \sum_{k=0}^N A^k\)</span>，则
+$$
+(I - A)S_N = I - A^{N+1}.
+$$
+由 <span class="arithmatex">\(\rho(A) &lt; 1\)</span>，可证 <span class="arithmatex">\(A^{N+1} \to 0\)</span>（逐元素），因此 <span class="arithmatex">\((I - A) \lim S_N = I\)</span>，即 <span class="arithmatex">\((I-A)^{-1} = \sum_{k=0}^{\infty} A^k\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.2</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix}0.5&amp;0.1\\0&amp;0.3\end{pmatrix}\)</span>，计算 <span class="arithmatex">\((I-A)^{-1}\)</span>。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A\)</span> 的特征值为 <span class="arithmatex">\(0.5\)</span> 和 <span class="arithmatex">\(0.3\)</span>，<span class="arithmatex">\(\rho(A) = 0.5 &lt; 1\)</span>，因此 Neumann 级数收敛。</p>
+<p>直接计算：
+$$
+I - A = \begin{pmatrix}0.5&amp;-0.1\0&amp;0.7\end{pmatrix}, \quad (I-A)^{-1} = \begin{pmatrix}2&amp;\frac{2}{7}\0&amp;\frac{10}{7}\end{pmatrix}.
+$$</p>
+<p>验证（用 Neumann 级数前几项近似）：
+$$
+I + A + A^2 + A^3 + \cdots \approx \begin{pmatrix}2&amp;0.2857\0&amp;1.4286\end{pmatrix} \approx \begin{pmatrix}2&amp;\frac{2}{7}\0&amp;\frac{10}{7}\end{pmatrix}. \quad \checkmark
+$$</p>
+</div>
+<hr />
+<h2 id="133">13.3 矩阵指数<a class="headerlink" href="#133" title="Permanent link">&para;</a></h2>
+<p>矩阵指数（matrix exponential）是最重要的矩阵函数，在线性微分方程理论中起核心作用。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.4 (矩阵指数 Matrix Exponential)</p>
+<p>对 <span class="arithmatex">\(n \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，<strong>矩阵指数</strong>定义为
+$$
+e^A = \exp(A) = \sum_{k=0}^{\infty} \frac{A^k}{k!} = I + A + \frac{A^2}{2!} + \frac{A^3}{3!} + \cdots.
+$$
+该级数对任意矩阵 <span class="arithmatex">\(A\)</span> 都绝对收敛（因为 <span class="arithmatex">\(e^z\)</span> 的收敛半径为 <span class="arithmatex">\(\infty\)</span>）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.5 (矩阵指数的基本性质)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，则：</p>
+<ol>
+<li><span class="arithmatex">\(e^{0} = I\)</span>；</li>
+<li><span class="arithmatex">\((e^A)^{-1} = e^{-A}\)</span>，即 <span class="arithmatex">\(e^A\)</span> 总是可逆的；</li>
+<li><span class="arithmatex">\(e^{(s+t)A} = e^{sA} e^{tA}\)</span>，对任意标量 <span class="arithmatex">\(s, t\)</span>；</li>
+<li>若 <span class="arithmatex">\(AB = BA\)</span>，则 <span class="arithmatex">\(e^{A+B} = e^A e^B\)</span>；</li>
+<li><span class="arithmatex">\(\det(e^A) = e^{\operatorname{tr}(A)}\)</span>；</li>
+<li><span class="arithmatex">\(e^{PAP^{-1}} = P e^A P^{-1}\)</span>，对任意可逆矩阵 <span class="arithmatex">\(P\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> <span class="arithmatex">\(e^0 = I + 0 + 0 + \cdots = I\)</span>。</p>
+<p><strong>(2)</strong> 由 (4)（取 <span class="arithmatex">\(B = -A\)</span>，显然 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(-A\)</span> 可交换），<span class="arithmatex">\(e^A e^{-A} = e^{A+(-A)} = e^0 = I\)</span>。</p>
+<p><strong>(3)</strong> <span class="arithmatex">\(sA\)</span> 与 <span class="arithmatex">\(tA\)</span> 可交换，由 (4) 得 <span class="arithmatex">\(e^{sA}e^{tA} = e^{sA+tA} = e^{(s+t)A}\)</span>。</p>
+<p><strong>(4)</strong> 当 <span class="arithmatex">\(AB = BA\)</span> 时，可用二项式定理：
+$$
+(A+B)^k = \sum_{j=0}^k \binom{k}{j}A^j B^{k-j}.
+$$
+因此
+$$
+e^{A+B} = \sum_{k=0}^{\infty}\frac{(A+B)^k}{k!} = \sum_{k=0}^{\infty}\sum_{j=0}^k \frac{A^j B^{k-j}}{j!(k-j)!} = \left(\sum_{j=0}^{\infty}\frac{A^j}{j!}\right)\left(\sum_{l=0}^{\infty}\frac{B^l}{l!}\right) = e^A e^B.
+$$
+（Cauchy 乘积，绝对收敛保证重排合法。）</p>
+<p><strong>(5)</strong> 设 <span class="arithmatex">\(A\)</span> 的 Jordan 标准形为 <span class="arithmatex">\(J\)</span>，<span class="arithmatex">\(A = PJP^{-1}\)</span>。则 <span class="arithmatex">\(e^A = Pe^JP^{-1}\)</span>，<span class="arithmatex">\(\det(e^A) = \det(e^J)\)</span>。<span class="arithmatex">\(e^J = \operatorname{diag}(e^{J_{k_i}(\lambda_i)})\)</span>，而 <span class="arithmatex">\(\det(e^{J_k(\lambda)}) = (e^\lambda)^k = e^{k\lambda}\)</span>。因此 <span class="arithmatex">\(\det(e^A) = e^{\sum k_i\lambda_i} = e^{\operatorname{tr}(A)}\)</span>。</p>
+<p><strong>(6)</strong> <span class="arithmatex">\((PAP^{-1})^k = PA^kP^{-1}\)</span>，代入级数即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p><strong>注意：</strong> 当 <span class="arithmatex">\(AB \neq BA\)</span> 时，一般 <span class="arithmatex">\(e^{A+B} \neq e^A e^B\)</span>。这是矩阵指数与标量指数的一个重要区别。例如取 <span class="arithmatex">\(A = \begin{pmatrix}0&amp;1\\0&amp;0\end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix}0&amp;0\\1&amp;0\end{pmatrix}\)</span>，可以验证 <span class="arithmatex">\(e^{A+B} \neq e^A e^B\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 13.3</p>
+<p>计算 <span class="arithmatex">\(e^A\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}0&amp;-\theta\\\theta&amp;0\end{pmatrix}\)</span>。</p>
+<p><strong>解：</strong> 注意到
+$$
+A^2 = \begin{pmatrix}-\theta^2&amp;0\0&amp;-\theta^2\end{pmatrix} = -\theta^2 I, \quad A^3 = -\theta^2 A, \quad A^4 = \theta^4 I, \ldots
+$$
+一般地，<span class="arithmatex">\(A^{2k} = (-1)^k \theta^{2k} I\)</span>，<span class="arithmatex">\(A^{2k+1} = (-1)^k \theta^{2k} A\)</span>。</p>
+<div class="arithmatex">\[
+e^A = \sum_{k=0}^{\infty} \frac{A^k}{k!} = \left(\sum_{k=0}^{\infty} \frac{(-1)^k \theta^{2k}}{(2k)!}\right) I + \left(\sum_{k=0}^{\infty} \frac{(-1)^k \theta^{2k}}{(2k+1)!}\right) \frac{A}{\theta}
+$$
+$$
+= \cos\theta \cdot I + \frac{\sin\theta}{\theta} \cdot A = \begin{pmatrix}\cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta\end{pmatrix}.
+\]</div>
+<p>这正是旋转矩阵！<span class="arithmatex">\(A\)</span> 是反对称矩阵，<span class="arithmatex">\(e^A\)</span> 是正交矩阵。</p>
+</div>
+<hr />
+<h2 id="134">13.4 矩阵指数的计算<a class="headerlink" href="#134" title="Permanent link">&para;</a></h2>
+<p>矩阵指数的计算是应用中的核心问题。本节介绍几种主要方法。</p>
+<h3 id="1341">13.4.1 对角矩阵<a class="headerlink" href="#1341" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.6 (对角矩阵的指数)</p>
+<p>若 <span class="arithmatex">\(A = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)\)</span>，则
+$$
+e^A = \operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n}).
+$$
+更一般地，若 <span class="arithmatex">\(A = P\operatorname{diag}(\lambda_1, \ldots, \lambda_n)P^{-1}\)</span>（<span class="arithmatex">\(A\)</span> 可对角化），则
+$$
+e^A = P\operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n})P^{-1}.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><span class="arithmatex">\(A^k = \operatorname{diag}(\lambda_1^k, \ldots, \lambda_n^k)\)</span>，因此
+$$
+e^A = \sum_{k=0}^{\infty}\frac{A^k}{k!} = \operatorname{diag}\left(\sum_{k=0}^{\infty}\frac{\lambda_1^k}{k!}, \ldots, \sum_{k=0}^{\infty}\frac{\lambda_n^k}{k!}\right) = \operatorname{diag}(e^{\lambda_1}, \ldots, e^{\lambda_n}). \qquad \blacksquare
+$$</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.4</p>
+<p>计算 <span class="arithmatex">\(e^{At}\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}1&amp;0\\0&amp;-2\end{pmatrix}\)</span>。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A\)</span> 是对角矩阵，因此
+$$
+e^{At} = \begin{pmatrix}e^t&amp;0\0&amp;e^{-2t}\end{pmatrix}.
+$$</p>
+</div>
+<h3 id="1342-jordan">13.4.2 Jordan 块<a class="headerlink" href="#1342-jordan" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.7 (Jordan 块的指数)</p>
+<p>对 Jordan 块 <span class="arithmatex">\(J_k(\lambda)\)</span>，
+$$
+e^{J_k(\lambda)t} = e^{\lambda t}\begin{pmatrix}
+1 &amp; t &amp; \frac{t^2}{2!} &amp; \cdots &amp; \frac{t^{k-1}}{(k-1)!} \
+0 &amp; 1 &amp; t &amp; \cdots &amp; \frac{t^{k-2}}{(k-2)!} \
+\vdots &amp; &amp; \ddots &amp; \ddots &amp; \vdots \
+0 &amp; \cdots &amp; 0 &amp; 1 &amp; t \
+0 &amp; \cdots &amp; 0 &amp; 0 &amp; 1
+\end{pmatrix}.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><span class="arithmatex">\(J_k(\lambda)t = \lambda t I + N_k t\)</span>，其中 <span class="arithmatex">\(\lambda t I\)</span> 和 <span class="arithmatex">\(N_k t\)</span> 可交换。因此
+$$
+e^{J_k(\lambda)t} = e^{\lambda t I}e^{N_k t} = e^{\lambda t}\sum_{j=0}^{k-1}\frac{(N_k t)^j}{j!} = e^{\lambda t}\sum_{j=0}^{k-1}\frac{t^j}{j!}N_k^j.
+$$
+而 <span class="arithmatex">\(N_k^j\)</span> 是第 <span class="arithmatex">\(j\)</span> 条超对角线全为 1 的矩阵，代入即得结论。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.5</p>
+<p>计算 <span class="arithmatex">\(e^{At}\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}3&amp;1&amp;0\\0&amp;3&amp;1\\0&amp;0&amp;3\end{pmatrix} = J_3(3)\)</span>。</p>
+<p><strong>解：</strong> 由定理 13.7，
+$$
+e^{At} = e^{3t}\begin{pmatrix}1&amp;t&amp;\frac{t^2}{2}\0&amp;1&amp;t\0&amp;0&amp;1\end{pmatrix}.
+$$</p>
+</div>
+<h3 id="1343-cayley-hamilton">13.4.3 Cayley-Hamilton 方法<a class="headerlink" href="#1343-cayley-hamilton" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.5 (Cayley-Hamilton 方法计算矩阵函数)</p>
+<p>由 Cayley-Hamilton 定理，<span class="arithmatex">\(A^n\)</span> 可以表示为 <span class="arithmatex">\(I, A, \ldots, A^{n-1}\)</span> 的线性组合。因此任意矩阵函数 <span class="arithmatex">\(f(A)\)</span> 可以表示为
+$$
+f(A) = \alpha_0 I + \alpha_1 A + \cdots + \alpha_{n-1} A^{n-1},
+$$
+其中系数 <span class="arithmatex">\(\alpha_0, \ldots, \alpha_{n-1}\)</span> 由以下条件确定：对 <span class="arithmatex">\(A\)</span> 的每个特征值 <span class="arithmatex">\(\lambda_i\)</span>（代数重数 <span class="arithmatex">\(m_i\)</span>），
+$$
+f^{(j)}(\lambda_i) = \alpha_0^{(j)} + \alpha_1 \cdot j! + \cdots \quad (j = 0, 1, \ldots, m_i - 1),
+$$
+即 <span class="arithmatex">\(\alpha\)</span> 多项式在 <span class="arithmatex">\(\lambda_i\)</span> 处的函数值及导数值与 <span class="arithmatex">\(f\)</span> 的一致。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 13.6</p>
+<p>用 Cayley-Hamilton 方法计算 <span class="arithmatex">\(e^{At}\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}2&amp;1\\0&amp;2\end{pmatrix}\)</span>。</p>
+<p><strong>解：</strong> 特征值 <span class="arithmatex">\(\lambda = 2\)</span>（代数重数 2）。<span class="arithmatex">\(n = 2\)</span>，设
+$$
+e^{At} = \alpha_0(t) I + \alpha_1(t) A.
+$$</p>
+<p>由条件 <span class="arithmatex">\(f(\lambda) = e^{\lambda t}\)</span> 在 <span class="arithmatex">\(\lambda = 2\)</span> 处匹配到一阶导数：</p>
+<ul>
+<li><span class="arithmatex">\(f(2) = e^{2t}\)</span>：<span class="arithmatex">\(\alpha_0 + 2\alpha_1 = e^{2t}\)</span>；</li>
+<li><span class="arithmatex">\(f'(2) = te^{2t}\)</span>：<span class="arithmatex">\(\alpha_1 = te^{2t}\)</span>。</li>
+</ul>
+<p>解得 <span class="arithmatex">\(\alpha_1 = te^{2t}\)</span>，<span class="arithmatex">\(\alpha_0 = e^{2t} - 2te^{2t}\)</span>。</p>
+<div class="arithmatex">\[
+e^{At} = (e^{2t} - 2te^{2t})I + te^{2t}A = e^{2t}\begin{pmatrix}1-2t&amp;0\\0&amp;1-2t\end{pmatrix} + te^{2t}\begin{pmatrix}2&amp;1\\0&amp;2\end{pmatrix}
+$$
+$$
+= e^{2t}\begin{pmatrix}1&amp;t\\0&amp;1\end{pmatrix}.
+\]</div>
+</div>
+<hr />
+<h2 id="135">13.5 矩阵指数与微分方程<a class="headerlink" href="#135" title="Permanent link">&para;</a></h2>
+<p>矩阵指数的最重要应用是求解线性常系数微分方程组。</p>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.8 (齐次线性微分方程组的解)</p>
+<p>微分方程组
+$$
+\mathbf{x}'(t) = A\mathbf{x}(t), \quad \mathbf{x}(0) = \mathbf{x}_0,
+$$
+的唯一解为
+$$
+\mathbf{x}(t) = e^{At}\mathbf{x}_0.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> 令 <span class="arithmatex">\(\mathbf{x}(t) = e^{At}\mathbf{x}_0\)</span>。则
+$$
+\mathbf{x}'(t) = \frac{d}{dt}e^{At}\mathbf{x}_0 = Ae^{At}\mathbf{x}_0 = A\mathbf{x}(t),
+$$
+其中 <span class="arithmatex">\(\frac{d}{dt}e^{At} = \sum_{k=1}^{\infty}\frac{kA^k t^{k-1}}{k!} = A\sum_{k=1}^{\infty}\frac{A^{k-1}t^{k-1}}{(k-1)!} = Ae^{At}\)</span>。</p>
+<p>且 <span class="arithmatex">\(\mathbf{x}(0) = e^{0}\mathbf{x}_0 = \mathbf{x}_0\)</span>。</p>
+<p><strong>唯一性：</strong> 设 <span class="arithmatex">\(\mathbf{y}(t)\)</span> 也是解。令 <span class="arithmatex">\(\mathbf{z}(t) = e^{-At}\mathbf{y}(t)\)</span>，则
+$$
+\mathbf{z}'(t) = -Ae^{-At}\mathbf{y}(t) + e^{-At}\mathbf{y}'(t) = -Ae^{-At}\mathbf{y}(t) + e^{-At}A\mathbf{y}(t) = 0.
+$$
+因此 <span class="arithmatex">\(\mathbf{z}(t) = \mathbf{z}(0) = \mathbf{x}_0\)</span>，即 <span class="arithmatex">\(\mathbf{y}(t) = e^{At}\mathbf{x}_0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.9 (非齐次线性微分方程组)</p>
+<p>微分方程组
+$$
+\mathbf{x}'(t) = A\mathbf{x}(t) + \mathbf{f}(t), \quad \mathbf{x}(0) = \mathbf{x}_0,
+$$
+的解为（常数变易法 / variation of parameters）
+$$
+\mathbf{x}(t) = e^{At}\mathbf{x}_0 + \int_0^t e^{A(t-s)}\mathbf{f}(s)\,ds.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>令 <span class="arithmatex">\(\mathbf{x}(t) = e^{At}\mathbf{c}(t)\)</span>（常数变易法），代入方程得
+$$
+Ae^{At}\mathbf{c}(t) + e^{At}\mathbf{c}'(t) = Ae^{At}\mathbf{c}(t) + \mathbf{f}(t).
+$$
+化简得 <span class="arithmatex">\(e^{At}\mathbf{c}'(t) = \mathbf{f}(t)\)</span>，即 <span class="arithmatex">\(\mathbf{c}'(t) = e^{-At}\mathbf{f}(t)\)</span>。积分得
+$$
+\mathbf{c}(t) = \mathbf{x}_0 + \int_0^t e^{-As}\mathbf{f}(s)\,ds.
+$$
+因此 <span class="arithmatex">\(\mathbf{x}(t) = e^{At}\mathbf{x}_0 + \int_0^t e^{A(t-s)}\mathbf{f}(s)\,ds\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.7</p>
+<p>求微分方程组
+$$
+\begin{cases} x_1' = 3x_1 + x_2, \ x_2' = -x_1 + x_2, \end{cases} \quad \mathbf{x}(0) = \begin{pmatrix}1\0\end{pmatrix}
+$$
+的解。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A = \begin{pmatrix}3&amp;1\\-1&amp;1\end{pmatrix}\)</span>。特征值：<span class="arithmatex">\(\lambda^2 - 4\lambda + 4 = (\lambda-2)^2 = 0\)</span>，<span class="arithmatex">\(\lambda = 2\)</span>（重根）。</p>
+<p><span class="arithmatex">\(A - 2I = \begin{pmatrix}1&amp;1\\-1&amp;-1\end{pmatrix}\)</span>，<span class="arithmatex">\(\operatorname{rank} = 1\)</span>，几何重数 = 1。</p>
+<p>Jordan 形 <span class="arithmatex">\(J = J_2(2)\)</span>。特征向量 <span class="arithmatex">\(\mathbf{v}_1 = \begin{pmatrix}1\\-1\end{pmatrix}\)</span>，广义特征向量 <span class="arithmatex">\((A-2I)\mathbf{v}_2 = \mathbf{v}_1\)</span>：
+$$
+\begin{pmatrix}1&amp;1\-1&amp;-1\end{pmatrix}\mathbf{v}_2 = \begin{pmatrix}1\-1\end{pmatrix}, \quad \Rightarrow \quad \mathbf{v}_2 = \begin{pmatrix}1\0\end{pmatrix}.
+$$</p>
+<p><span class="arithmatex">\(P = \begin{pmatrix}1&amp;1\\-1&amp;0\end{pmatrix}\)</span>，<span class="arithmatex">\(P^{-1} = \begin{pmatrix}0&amp;-1\\1&amp;1\end{pmatrix}\)</span>。</p>
+<div class="arithmatex">\[
+e^{At} = Pe^{Jt}P^{-1} = \begin{pmatrix}1&amp;1\\-1&amp;0\end{pmatrix}e^{2t}\begin{pmatrix}1&amp;t\\0&amp;1\end{pmatrix}\begin{pmatrix}0&amp;-1\\1&amp;1\end{pmatrix}
+$$
+$$
+= e^{2t}\begin{pmatrix}1&amp;1\\-1&amp;0\end{pmatrix}\begin{pmatrix}t&amp;-1+t\\1&amp;1\end{pmatrix} = e^{2t}\begin{pmatrix}1+t&amp;t\\-t&amp;1-t\end{pmatrix}.
+\]</div>
+<div class="arithmatex">\[
+\mathbf{x}(t) = e^{At}\mathbf{x}(0) = e^{2t}\begin{pmatrix}1+t\\-t\end{pmatrix}.
+\]</div>
+</div>
+<hr />
+<h2 id="136">13.6 矩阵对数<a class="headerlink" href="#136" title="Permanent link">&para;</a></h2>
+<p>矩阵对数（matrix logarithm）是矩阵指数的逆运算。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.6 (矩阵对数 Matrix Logarithm)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 可逆矩阵。若存在矩阵 <span class="arithmatex">\(X\)</span> 使得 <span class="arithmatex">\(e^X = A\)</span>，则称 <span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(A\)</span> 的<strong>矩阵对数</strong>，记为 <span class="arithmatex">\(X = \log A\)</span> 或 <span class="arithmatex">\(X = \ln A\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.10 (矩阵对数的存在性)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 可逆复数矩阵，则 <span class="arithmatex">\(A\)</span> 的矩阵对数存在。即存在矩阵 <span class="arithmatex">\(X\)</span> 使得 <span class="arithmatex">\(e^X = A\)</span>。</p>
+<p>更精确地，若 <span class="arithmatex">\(A\)</span> 没有负实数特征值，则存在唯一的矩阵对数 <span class="arithmatex">\(X\)</span>，使得 <span class="arithmatex">\(X\)</span> 的所有特征值的虚部都在 <span class="arithmatex">\((-\pi, \pi)\)</span> 内。此 <span class="arithmatex">\(X\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>主对数</strong>（principal logarithm）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性（构造性证明）：</strong></p>
+<p>设 <span class="arithmatex">\(A = PJP^{-1}\)</span>，<span class="arithmatex">\(J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s))\)</span>。只需对每个 Jordan 块定义对数。</p>
+<p>对 <span class="arithmatex">\(J_k(\lambda)\)</span>（<span class="arithmatex">\(\lambda \neq 0\)</span>），写
+$$
+J_k(\lambda) = \lambda(I + \lambda^{-1}N_k) = \lambda(I + M),
+$$
+其中 <span class="arithmatex">\(M = \lambda^{-1}N_k\)</span> 是幂零矩阵。取
+$$
+\log J_k(\lambda) = (\log\lambda) I + \log(I + M) = (\log\lambda)I + \sum_{j=1}^{k-1}\frac{(-1)^{j+1}}{j}M^j.
+$$
+级数是有限的（因为 <span class="arithmatex">\(M\)</span> 幂零），且 <span class="arithmatex">\(e^{\log J_k(\lambda)} = J_k(\lambda)\)</span>。</p>
+<p>令 <span class="arithmatex">\(\log A = P \operatorname{diag}(\log J_{k_1}(\lambda_1), \ldots) P^{-1}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.8</p>
+<p>求 <span class="arithmatex">\(\log A\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}1&amp;1\\0&amp;1\end{pmatrix} = J_2(1)\)</span>。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A = I + N\)</span>，其中 <span class="arithmatex">\(N = \begin{pmatrix}0&amp;1\\0&amp;0\end{pmatrix}\)</span>。</p>
+<p>$$
+\log A = \log(I + N) = N - \frac{N^2}{2} + \frac{N^3}{3} - \cdots = N = \begin{pmatrix}0&amp;1\0&amp;0\end{pmatrix}.
+$$
+（因为 <span class="arithmatex">\(N^2 = 0\)</span>，级数只有一项。）</p>
+<p>验证：<span class="arithmatex">\(e^N = I + N + \frac{N^2}{2!} + \cdots = I + N = A\)</span>。 <span class="arithmatex">\(\checkmark\)</span></p>
+</div>
+<hr />
+<h2 id="137">13.7 矩阵平方根<a class="headerlink" href="#137" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.7 (矩阵平方根 Matrix Square Root)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵。若存在矩阵 <span class="arithmatex">\(X\)</span> 使得 <span class="arithmatex">\(X^2 = A\)</span>，则称 <span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(A\)</span> 的<strong>矩阵平方根</strong>，记为 <span class="arithmatex">\(X = A^{1/2}\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.11 (正定矩阵的唯一正定平方根)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 实对称正定矩阵。则存在唯一的实对称正定矩阵 <span class="arithmatex">\(B\)</span> 使得 <span class="arithmatex">\(B^2 = A\)</span>。<span class="arithmatex">\(B\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>正定平方根</strong>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> <span class="arithmatex">\(A\)</span> 是实对称正定矩阵，由谱定理，<span class="arithmatex">\(A = Q\Lambda Q^T\)</span>，其中 <span class="arithmatex">\(Q\)</span> 是正交矩阵，<span class="arithmatex">\(\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)\)</span>，<span class="arithmatex">\(\lambda_i &gt; 0\)</span>。</p>
+<p>令 <span class="arithmatex">\(B = Q\Lambda^{1/2}Q^T\)</span>，其中 <span class="arithmatex">\(\Lambda^{1/2} = \operatorname{diag}(\sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n})\)</span>。则
+$$
+B^2 = Q\Lambda^{1/2}Q^T Q\Lambda^{1/2}Q^T = Q\Lambda Q^T = A.
+$$
+<span class="arithmatex">\(B\)</span> 是对称的：<span class="arithmatex">\(B^T = (Q\Lambda^{1/2}Q^T)^T = Q\Lambda^{1/2}Q^T = B\)</span>。<span class="arithmatex">\(B\)</span> 的特征值为 <span class="arithmatex">\(\sqrt{\lambda_i} &gt; 0\)</span>，因此 <span class="arithmatex">\(B\)</span> 正定。</p>
+<p><strong>唯一性：</strong> 设 <span class="arithmatex">\(C\)</span> 也是对称正定矩阵且 <span class="arithmatex">\(C^2 = A\)</span>。由 <span class="arithmatex">\(C\)</span> 对称正定，设 <span class="arithmatex">\(C = R\Gamma R^T\)</span>，<span class="arithmatex">\(\Gamma = \operatorname{diag}(\gamma_1, \ldots, \gamma_n)\)</span>，<span class="arithmatex">\(\gamma_i &gt; 0\)</span>。则 <span class="arithmatex">\(A = C^2 = R\Gamma^2 R^T\)</span>。</p>
+<p>由 <span class="arithmatex">\(A\)</span> 的谱分解的唯一性（特征值确定后特征空间确定），<span class="arithmatex">\(\Gamma^2 = \Lambda\)</span>（特征值重新排列后）。因为 <span class="arithmatex">\(\gamma_i &gt; 0\)</span>，<span class="arithmatex">\(\gamma_i = \sqrt{\lambda_i}\)</span>，故 <span class="arithmatex">\(C = B\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.8 (半正定矩阵的平方根)</p>
+<p>对实对称半正定矩阵 <span class="arithmatex">\(A\)</span>（特征值 <span class="arithmatex">\(\lambda_i \ge 0\)</span>），正定平方根的构造推广为：<span class="arithmatex">\(A^{1/2} = Q\operatorname{diag}(\sqrt{\lambda_1}, \ldots, \sqrt{\lambda_n})Q^T\)</span>。此时 <span class="arithmatex">\(A^{1/2}\)</span> 是半正定的（唯一的半正定平方根）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.12 (可逆矩阵平方根的存在性)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 可逆复数矩阵，且 <span class="arithmatex">\(A\)</span> 没有负实数特征值。则 <span class="arithmatex">\(A\)</span> 存在唯一的平方根 <span class="arithmatex">\(A^{1/2}\)</span>，使得 <span class="arithmatex">\(A^{1/2}\)</span> 的所有特征值具有正实部。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>利用主对数：令 <span class="arithmatex">\(A^{1/2} = e^{\frac{1}{2}\log A}\)</span>，其中 <span class="arithmatex">\(\log A\)</span> 为主对数。则
+$$
+(A^{1/2})^2 = e^{\frac{1}{2}\log A} e^{\frac{1}{2}\log A} = e^{\log A} = A.
+$$
+<span class="arithmatex">\(A^{1/2}\)</span> 的特征值为 <span class="arithmatex">\(e^{\frac{1}{2}\log\lambda_i}\)</span>，其中 <span class="arithmatex">\(\log\lambda_i\)</span> 的虚部在 <span class="arithmatex">\((-\pi, \pi)\)</span> 内，因此 <span class="arithmatex">\(\frac{1}{2}\log\lambda_i\)</span> 的虚部在 <span class="arithmatex">\((-\frac{\pi}{2}, \frac{\pi}{2})\)</span> 内，<span class="arithmatex">\(e^{\frac{1}{2}\log\lambda_i}\)</span> 的实部为正。唯一性可由此条件推出。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.9</p>
+<p>求 <span class="arithmatex">\(A = \begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}\)</span> 的正定平方根。</p>
+<p><strong>解：</strong> 特征值 <span class="arithmatex">\(\lambda_1 = 3\)</span>，<span class="arithmatex">\(\lambda_2 = 1\)</span>。正交特征向量：<span class="arithmatex">\(\mathbf{q}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{q}_2 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}\)</span>。</p>
+<div class="arithmatex">\[
+A^{1/2} = Q\begin{pmatrix}\sqrt{3}&amp;0\\0&amp;1\end{pmatrix}Q^T = \frac{1}{2}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}\begin{pmatrix}\sqrt{3}&amp;0\\0&amp;1\end{pmatrix}\begin{pmatrix}1&amp;1\\1&amp;-1\end{pmatrix}
+$$
+$$
+= \frac{1}{2}\begin{pmatrix}\sqrt{3}+1&amp;\sqrt{3}-1\\\sqrt{3}-1&amp;\sqrt{3}+1\end{pmatrix}.
+\]</div>
+<p>验证：<span class="arithmatex">\((A^{1/2})^2 = \frac{1}{4}\begin{pmatrix}\sqrt{3}+1&amp;\sqrt{3}-1\\\sqrt{3}-1&amp;\sqrt{3}+1\end{pmatrix}^2\)</span>。</p>
+<p>计算对角元：<span class="arithmatex">\(\frac{1}{4}[(\sqrt{3}+1)^2 + (\sqrt{3}-1)^2] = \frac{1}{4}(4+2\sqrt{3}+4-2\sqrt{3}) = \frac{8}{4} = 2\)</span>。</p>
+<p>计算非对角元：<span class="arithmatex">\(\frac{1}{4}[(\sqrt{3}+1)(\sqrt{3}-1) + (\sqrt{3}-1)(\sqrt{3}+1)] = \frac{1}{4}(2 \times 2) = 1\)</span>。</p>
+<p>因此 <span class="arithmatex">\((A^{1/2})^2 = \begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix} = A\)</span>。<span class="arithmatex">\(\checkmark\)</span></p>
+</div>
+<hr />
+<h2 id="138">13.8 一般矩阵函数<a class="headerlink" href="#138" title="Permanent link">&para;</a></h2>
+<p>前面几节讨论了特定的矩阵函数（指数、对数、平方根）。本节给出矩阵函数的一般定义框架。</p>
+<h3 id="1381-jordan">13.8.1 通过 Jordan 标准形定义<a class="headerlink" href="#1381-jordan" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.9 (一般矩阵函数 — Jordan 形定义)</p>
+<p>设 <span class="arithmatex">\(f\)</span> 为定义在 <span class="arithmatex">\(A\)</span> 的谱上的函数，<span class="arithmatex">\(A = PJP^{-1}\)</span>，<span class="arithmatex">\(J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s))\)</span>。定义
+$$
+f(A) = P f(J) P^{-1} = P \operatorname{diag}(f(J_{k_1}(\lambda_1)), \ldots, f(J_{k_s}(\lambda_s))) P^{-1},
+$$
+其中对每个 Jordan 块
+$$
+f(J_k(\lambda)) = \begin{pmatrix}
+f(\lambda) &amp; f'(\lambda) &amp; \frac{f''(\lambda)}{2!} &amp; \cdots &amp; \frac{f^{(k-1)}(\lambda)}{(k-1)!} \
+0 &amp; f(\lambda) &amp; f'(\lambda) &amp; \cdots &amp; \frac{f^{(k-2)}(\lambda)}{(k-2)!} \
+\vdots &amp; &amp; \ddots &amp; \ddots &amp; \vdots \
+0 &amp; \cdots &amp; 0 &amp; f(\lambda) &amp; f'(\lambda) \
+0 &amp; \cdots &amp; 0 &amp; 0 &amp; f(\lambda)
+\end{pmatrix}.
+$$
+要求 <span class="arithmatex">\(f\)</span> 在每个特征值 <span class="arithmatex">\(\lambda_i\)</span> 处至少 <span class="arithmatex">\(k_i - 1\)</span> 次可微。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.13 (Jordan 形定义的合理性)</p>
+<p>定义 13.9 中的 <span class="arithmatex">\(f(A)\)</span> 不依赖于 Jordan 分解的选取（即不依赖 <span class="arithmatex">\(P\)</span> 的选取），因此 <span class="arithmatex">\(f(A)\)</span> 是良定义的。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = P_1 J P_1^{-1} = P_2 J P_2^{-1}\)</span>（同一个 Jordan 形 <span class="arithmatex">\(J\)</span>，但不同的过渡矩阵）。则 <span class="arithmatex">\(P_2^{-1}P_1\)</span> 与 <span class="arithmatex">\(J\)</span> 可交换，即 <span class="arithmatex">\(P_2^{-1}P_1 J = J P_2^{-1}P_1\)</span>。</p>
+<p>由于 <span class="arithmatex">\(f(J)\)</span> 是 <span class="arithmatex">\(J\)</span> 的多项式的极限（当 <span class="arithmatex">\(f\)</span> 是解析函数时），<span class="arithmatex">\(P_2^{-1}P_1\)</span> 也与 <span class="arithmatex">\(f(J)\)</span> 可交换。因此
+$$
+P_1 f(J) P_1^{-1} = P_2 (P_2^{-1}P_1) f(J) (P_2^{-1}P_1)^{-1} P_2^{-1} = P_2 f(J) P_2^{-1}. \qquad \blacksquare
+$$</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.10</p>
+<p>计算 <span class="arithmatex">\(\sin(A)\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix}0&amp;\pi\\0&amp;0\end{pmatrix}\)</span>。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A = J_2(0)\)</span>，<span class="arithmatex">\(\lambda = 0\)</span>，<span class="arithmatex">\(k = 2\)</span>。</p>
+<p><span class="arithmatex">\(f(\lambda) = \sin(\lambda)\)</span>。<span class="arithmatex">\(f(0) = 0\)</span>，<span class="arithmatex">\(f'(0) = \cos(0) = 1\)</span>。</p>
+<div class="arithmatex">\[
+\sin(A) = f(J_2(0)) = \begin{pmatrix}f(0)&amp;f'(0)\\0&amp;f(0)\end{pmatrix} = \begin{pmatrix}0&amp;1\\0&amp;0\end{pmatrix}.
+\]</div>
+<p>注意这不是逐元素的 <span class="arithmatex">\(\sin\)</span>！<span class="arithmatex">\(\sin\begin{pmatrix}0&amp;\pi\\0&amp;0\end{pmatrix} \neq \begin{pmatrix}\sin 0&amp;\sin\pi\\\sin 0&amp;\sin 0\end{pmatrix}\)</span>。</p>
+</div>
+<h3 id="1382-cauchy">13.8.2 Cauchy 积分定义<a class="headerlink" href="#1382-cauchy" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 13.10 (矩阵函数 — Cauchy 积分定义)</p>
+<p>设 <span class="arithmatex">\(f\)</span> 在包含 <span class="arithmatex">\(A\)</span> 的所有特征值的开集 <span class="arithmatex">\(\Omega\)</span> 上解析，<span class="arithmatex">\(\Gamma\)</span> 为 <span class="arithmatex">\(\Omega\)</span> 中包围所有特征值的简单闭曲线。定义
+$$
+f(A) = \frac{1}{2\pi i} \oint_\Gamma f(z)(zI - A)^{-1}\,dz.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.14 (Cauchy 积分定义与 Jordan 形定义的等价性)</p>
+<p>当 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(A\)</span> 的谱的某个开邻域上解析时，定义 13.9 和定义 13.10 给出的 <span class="arithmatex">\(f(A)\)</span> 相同。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = PJP^{-1}\)</span>，<span class="arithmatex">\((zI - A)^{-1} = P(zI - J)^{-1}P^{-1}\)</span>。因此
+$$
+\frac{1}{2\pi i}\oint_\Gamma f(z)(zI-A)^{-1}dz = P\left(\frac{1}{2\pi i}\oint_\Gamma f(z)(zI-J)^{-1}dz\right)P^{-1}.
+$$</p>
+<p>对 Jordan 块 <span class="arithmatex">\(J_k(\lambda)\)</span>，<span class="arithmatex">\((zI - J_k(\lambda))^{-1}\)</span> 的 <span class="arithmatex">\((p,q)\)</span> 元素（<span class="arithmatex">\(q \ge p\)</span>）为 <span class="arithmatex">\(\frac{1}{(z-\lambda)^{q-p+1}}\)</span>。由 Cauchy 积分公式：
+$$
+\frac{1}{2\pi i}\oint \frac{f(z)}{(z-\lambda)^{q-p+1}}dz = \frac{f^{(q-p)}(\lambda)}{(q-p)!}.
+$$
+这正是定义 13.9 中 <span class="arithmatex">\(f(J_k(\lambda))\)</span> 的 <span class="arithmatex">\((p,q)\)</span> 元素。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 13.15 (矩阵函数的谱映射定理)</p>
+<p>设 <span class="arithmatex">\(f\)</span> 为矩阵 <span class="arithmatex">\(A\)</span> 的谱上的解析函数，则
+$$
+\sigma(f(A)) = f(\sigma(A)) = {f(\lambda) : \lambda \in \sigma(A)},
+$$
+即 <span class="arithmatex">\(f(A)\)</span> 的特征值恰好是 <span class="arithmatex">\(A\)</span> 的特征值经 <span class="arithmatex">\(f\)</span> 映射后的值。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = PJP^{-1}\)</span>，<span class="arithmatex">\(f(A) = Pf(J)P^{-1}\)</span>。<span class="arithmatex">\(f(J)\)</span> 的对角元素为 <span class="arithmatex">\(f(\lambda_i)\)</span>（各 Jordan 块的对角元素），这些正是 <span class="arithmatex">\(f(A)\)</span> 的特征值（相似变换保谱）。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 13.11</p>
+<p>设 <span class="arithmatex">\(A\)</span> 的特征值为 <span class="arithmatex">\(1, 2, 3\)</span>。求 <span class="arithmatex">\(e^A\)</span> 的特征值和 <span class="arithmatex">\(\cos(A)\)</span> 的特征值。</p>
+<p><strong>解：</strong> 由谱映射定理：</p>
+<ul>
+<li><span class="arithmatex">\(e^A\)</span> 的特征值为 <span class="arithmatex">\(e^1, e^2, e^3\)</span>，即 <span class="arithmatex">\(e, e^2, e^3\)</span>。</li>
+<li><span class="arithmatex">\(\cos(A)\)</span> 的特征值为 <span class="arithmatex">\(\cos 1, \cos 2, \cos 3\)</span>。</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 13.12</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix}1&amp;0&amp;0\\0&amp;2&amp;1\\0&amp;0&amp;2\end{pmatrix}\)</span>，计算 <span class="arithmatex">\(\sqrt{A}\)</span>（取主平方根）。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A = J_1(1) \oplus J_2(2)\)</span>。<span class="arithmatex">\(f(\lambda) = \sqrt{\lambda}\)</span>，<span class="arithmatex">\(f'(\lambda) = \frac{1}{2\sqrt{\lambda}}\)</span>。</p>
+<div class="arithmatex">\[
+f(J_1(1)) = (1) = (\sqrt{1}) = (1).
+$$
+$$
+f(J_2(2)) = \begin{pmatrix} f(2) &amp; f'(2) \\ 0 &amp; f(2) \end{pmatrix} = \begin{pmatrix} \sqrt{2} &amp; \frac{1}{2\sqrt{2}} \\ 0 &amp; \sqrt{2} \end{pmatrix} = \begin{pmatrix} \sqrt{2} &amp; \frac{\sqrt{2}}{4} \\ 0 &amp; \sqrt{2} \end{pmatrix}.
+\]</div>
+<p>因此
+$$
+\sqrt{A} = \begin{pmatrix} 1 &amp; 0 &amp; 0 \ 0 &amp; \sqrt{2} &amp; \frac{\sqrt{2}}{4} \ 0 &amp; 0 &amp; \sqrt{2} \end{pmatrix}.
+$$</p>
+<p>验证：<span class="arithmatex">\((\sqrt{A})^2\)</span> 的 <span class="arithmatex">\((2,3)\)</span> 元素 = <span class="arithmatex">\(\sqrt{2} \cdot \frac{\sqrt{2}}{4} + \frac{\sqrt{2}}{4} \cdot \sqrt{2} = \frac{2}{4} + \frac{2}{4} = 1 = A_{23}\)</span>。<span class="arithmatex">\(\checkmark\)</span></p>
+</div>
+<hr />
+<h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章系统介绍了矩阵函数理论，包括：</p>
+<ol>
+<li><strong>矩阵多项式</strong> <span class="arithmatex">\(p(A)\)</span> 是最基础的矩阵函数，Cayley-Hamilton 定理是核心结果；</li>
+<li><strong>矩阵幂级数</strong>的收敛由谱半径 <span class="arithmatex">\(\rho(A)\)</span> 控制；</li>
+<li><strong>矩阵指数</strong> <span class="arithmatex">\(e^A\)</span> 对任意矩阵都有定义，满足 <span class="arithmatex">\(\det(e^A) = e^{\operatorname{tr}(A)}\)</span>，但注意 <span class="arithmatex">\(e^{A+B} = e^A e^B\)</span> 仅在 <span class="arithmatex">\(AB = BA\)</span> 时成立；</li>
+<li><strong>矩阵指数与微分方程</strong>：<span class="arithmatex">\(\mathbf{x}'(t) = A\mathbf{x}(t)\)</span> 的解为 <span class="arithmatex">\(\mathbf{x}(t) = e^{At}\mathbf{x}_0\)</span>；</li>
+<li><strong>矩阵对数</strong>在可逆矩阵上存在，正定矩阵有唯一的半正定对数；</li>
+<li><strong>矩阵平方根</strong>：正定矩阵有唯一的正定平方根 <span class="arithmatex">\(A^{1/2} = Q\Lambda^{1/2}Q^T\)</span>；</li>
+<li><strong>一般矩阵函数</strong>可通过 Jordan 标准形或 Cauchy 积分定义，谱映射定理 <span class="arithmatex">\(\sigma(f(A)) = f(\sigma(A))\)</span> 是重要性质。</li>
+</ol>
+<p>矩阵函数理论将微积分与线性代数深度融合，是现代应用数学的重要工具箱。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

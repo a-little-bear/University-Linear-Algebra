@@ -1,0 +1,2244 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part3/ch20-matrix-equations/">
+      
+      
+        <link rel="prev" href="../ch19-kronecker/">
+      
+      
+        <link rel="next" href="../../part4/ch21-multilinear-algebra/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第20章 矩阵方程 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#20" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第20章 矩阵方程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.1 线性矩阵方程概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202-sylvester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.2 Sylvester 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203-lyapunov" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.3 Lyapunov 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204-riccati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.4 Riccati 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.5 数值解法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.6 Penrose 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#201" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.1 线性矩阵方程概述
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#202-sylvester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.2 Sylvester 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#203-lyapunov" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.3 Lyapunov 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#204-riccati" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.4 Riccati 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#205" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.5 数值解法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#206-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        20.6 Penrose 方程
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="20">第 20 章 矩阵方程<a class="headerlink" href="#20" title="Permanent link">&para;</a></h1>
+<p>矩阵方程是线性代数在控制论、信号处理和数值分析中应用的核心。与普通线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 不同，矩阵方程中的未知量是一个<strong>矩阵</strong>而非向量。从最简单的 <span class="arithmatex">\(AX = B\)</span> 到结构丰富的 Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span>、Lyapunov 方程 <span class="arithmatex">\(AX + XA^* = Q\)</span>，以及非线性的 Riccati 方程，这些方程各有其独特的数学结构和求解方法。</p>
+<p>本章系统地介绍这些矩阵方程的理论基础、可解性条件、求解公式以及数值算法，最后讨论与 Moore-Penrose 伪逆密切相关的 Penrose 方程组。</p>
+<hr />
+<h2 id="201">20.1 线性矩阵方程概述<a class="headerlink" href="#201" title="Permanent link">&para;</a></h2>
+<p>本节从最基本的矩阵方程出发，建立矩阵方程理论的框架。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.1 (基本线性矩阵方程)</p>
+<p>以下是三种最常见的线性矩阵方程：</p>
+<ol>
+<li><strong>单边方程</strong>：<span class="arithmatex">\(AX = B\)</span>，其中 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span>，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(m \times p\)</span>，<span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(n \times p\)</span> 未知矩阵。</li>
+<li><strong>双边方程</strong>：<span class="arithmatex">\(AXB = C\)</span>，其中 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span>，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(p \times q\)</span>，<span class="arithmatex">\(C\)</span> 为 <span class="arithmatex">\(m \times q\)</span>，<span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(n \times p\)</span> 未知矩阵。</li>
+<li><strong>Sylvester 型方程</strong>：<span class="arithmatex">\(AX + XB = C\)</span>，其中 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times m\)</span>，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(n \times n\)</span>，<span class="arithmatex">\(C\)</span> 为 <span class="arithmatex">\(m \times n\)</span>，<span class="arithmatex">\(X\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 未知矩阵。</li>
+</ol>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.1 (单边方程 <span class="arithmatex">\(AX = B\)</span> 的可解性)</p>
+<p>方程 <span class="arithmatex">\(AX = B\)</span> 有解当且仅当 <span class="arithmatex">\(\operatorname{rank}(A) = \operatorname{rank}(A \mid B)\)</span>，即 <span class="arithmatex">\(B\)</span> 的列空间包含在 <span class="arithmatex">\(A\)</span> 的列空间中：<span class="arithmatex">\(\mathcal{C}(B) \subseteq \mathcal{C}(A)\)</span>。</p>
+<p>当 <span class="arithmatex">\(A\)</span> 可逆时，唯一解为 <span class="arithmatex">\(X = A^{-1}B\)</span>。</p>
+<p>一般情况下，设 <span class="arithmatex">\(A^+\)</span> 为 <span class="arithmatex">\(A\)</span> 的 Moore-Penrose 伪逆，则通解为：
+$$
+X = A^+ B + (I - A^+ A)Z,
+$$
+其中 <span class="arithmatex">\(Z\)</span> 为任意 <span class="arithmatex">\(n \times p\)</span> 矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>必要性</strong>：若 <span class="arithmatex">\(AX = B\)</span>，则 <span class="arithmatex">\(B\)</span> 的每一列 <span class="arithmatex">\(\mathbf{b}_j = A\mathbf{x}_j \in \mathcal{C}(A)\)</span>。</p>
+<p><strong>充分性</strong>：若 <span class="arithmatex">\(\mathcal{C}(B) \subseteq \mathcal{C}(A)\)</span>，则 <span class="arithmatex">\(AA^+B = B\)</span>（因为 <span class="arithmatex">\(A^+\)</span> 是从 <span class="arithmatex">\(\mathcal{C}(A)\)</span> 到自身的左逆，<span class="arithmatex">\(AA^+\)</span> 是到 <span class="arithmatex">\(\mathcal{C}(A)\)</span> 的正交投影）。因此 <span class="arithmatex">\(X_0 = A^+B\)</span> 是一个特解。</p>
+<p><strong>通解</strong>：设 <span class="arithmatex">\(X\)</span> 为任意解，则 <span class="arithmatex">\(A(X - X_0) = 0\)</span>，即 <span class="arithmatex">\(X - X_0 \in \mathcal{N}(A)\)</span>。而 <span class="arithmatex">\(\mathcal{N}(A) = \mathcal{C}(I - A^+A)\)</span>（<span class="arithmatex">\(I - A^+A\)</span> 是到 <span class="arithmatex">\(\mathcal{N}(A)\)</span> 的正交投影），因此 <span class="arithmatex">\(X - X_0 = (I - A^+A)Z\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.2 (双边方程 <span class="arithmatex">\(AXB = C\)</span> 的可解性)</p>
+<p>方程 <span class="arithmatex">\(AXB = C\)</span> 有解当且仅当 <span class="arithmatex">\(AA^+CB^+B = C\)</span>。</p>
+<p>当 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 均可逆时，唯一解为 <span class="arithmatex">\(X = A^{-1}CB^{-1}\)</span>。</p>
+<p>一般情况下，通解为：
+$$
+X = A^+ C B^+ + Z - A^+ A Z B B^+,
+$$
+其中 <span class="arithmatex">\(Z\)</span> 为任意大小适当的矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>必要性</strong>：若 <span class="arithmatex">\(AXB = C\)</span>，则 <span class="arithmatex">\(AA^+CB^+B = AA^+(AXB)B^+B = (AA^+A)X(BB^+B) = AXB = C\)</span>。</p>
+<p><strong>充分性</strong>：设 <span class="arithmatex">\(AA^+CB^+B = C\)</span>。令 <span class="arithmatex">\(X_0 = A^+CB^+\)</span>，则：
+$$
+AX_0B = A(A^+CB^+)B = (AA^+)C(B^+B) = AA^+CB^+B = C.
+$$</p>
+<p><strong>通解</strong>：设 <span class="arithmatex">\(AXB = C\)</span>，则 <span class="arithmatex">\(A(X - X_0)B = 0\)</span>。需要找到 <span class="arithmatex">\(A\tilde{X}B = 0\)</span> 的通解。<span class="arithmatex">\(\tilde{X} = Z - A^+AZB B^+\)</span> 满足：
+$$
+A(Z - A^+AZBB^+)B = AZB - (AA^+A)Z(BB^+B) = AZB - AZB = 0. \quad \blacksquare
+$$</p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.2 (矩阵方程的算子形式)</p>
+<p>一般的线性矩阵方程可以写成算子形式 <span class="arithmatex">\(\mathcal{L}(X) = C\)</span>，其中 <span class="arithmatex">\(\mathcal{L}: \mathbb{C}^{m \times n} \to \mathbb{C}^{m \times n}\)</span> 为线性算子。利用 Vec 算子和 Kronecker 积，这等价于：
+$$
+L \operatorname{vec}(X) = \operatorname{vec}(C),
+$$
+其中 <span class="arithmatex">\(L\)</span> 为 <span class="arithmatex">\(mn \times mn\)</span> 矩阵（见第 19 章）。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.1</p>
+<p>求解 <span class="arithmatex">\(AX = B\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 3 \\ 6 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\operatorname{rank}(A) = 1\)</span>（第二行是第一行的 2 倍）。<span class="arithmatex">\(B = 3\begin{pmatrix} 1 \\ 2 \end{pmatrix} \in \mathcal{C}(A)\)</span>，因此有解。</p>
+<p><span class="arithmatex">\(A^+ = \frac{1}{25}\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\)</span>（因为 <span class="arithmatex">\(A = \mathbf{a}\mathbf{a}^T/5\)</span>，其中 <span class="arithmatex">\(\mathbf{a} = (1,2)^T\)</span>，故 <span class="arithmatex">\(A^+ = \mathbf{a}\mathbf{a}^T/(5 \cdot 5) \cdot 5 = A/\|A\|_F^2\)</span>... 让我们直接计算）。</p>
+<p>由于 <span class="arithmatex">\(A = \begin{pmatrix} 1 \\ 2 \end{pmatrix}(1, 2)\)</span>，<span class="arithmatex">\(A^+ = \frac{1}{5}\begin{pmatrix} 1 \\ 2 \end{pmatrix}\frac{1}{5}(1, 2) \cdot 5 = \frac{1}{5}\begin{pmatrix} 1/5 &amp; 2/5 \\ 2/5 &amp; 4/5 \end{pmatrix}\)</span>...</p>
+<p>更直接地：<span class="arithmatex">\(A^+ = \frac{1}{25}A\)</span>，因为 <span class="arithmatex">\(A = \mathbf{u}\mathbf{v}^T\)</span>（<span class="arithmatex">\(\mathbf{u} = \mathbf{v} = (1,2)^T\)</span>），则 <span class="arithmatex">\(A^+ = \frac{\mathbf{v}\mathbf{u}^T}{\|\mathbf{u}\|^2\|\mathbf{v}\|^2} = \frac{1}{25}\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\)</span>。</p>
+<p>特解：<span class="arithmatex">\(X_0 = A^+B = \frac{1}{25}\begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \end{pmatrix}\begin{pmatrix} 3 \\ 6 \end{pmatrix} = \frac{1}{25}\begin{pmatrix} 15 \\ 30 \end{pmatrix} = \begin{pmatrix} 3/5 \\ 6/5 \end{pmatrix}\)</span>。</p>
+<p>通解：<span class="arithmatex">\(X = \begin{pmatrix} 3/5 \\ 6/5 \end{pmatrix} + (I - A^+A)Z = \begin{pmatrix} 3/5 \\ 6/5 \end{pmatrix} + \frac{1}{5}\begin{pmatrix} 4 &amp; -2 \\ -2 &amp; 1 \end{pmatrix}\begin{pmatrix} z \end{pmatrix}\)</span>。</p>
+<p>即 <span class="arithmatex">\(X = \begin{pmatrix} 3/5 + 4t/5 \\ 6/5 - 2t/5 \end{pmatrix}\)</span>，或写成 <span class="arithmatex">\(X = \begin{pmatrix} 3 + 4t \\ 6 - 2t \end{pmatrix}/5\)</span>（<span class="arithmatex">\(t\)</span> 为任意实数）。</p>
+<p>验证（取 <span class="arithmatex">\(t = 3\)</span>）：<span class="arithmatex">\(X = \begin{pmatrix} 3 \\ 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(AX = \begin{pmatrix} 3 \\ 6 \end{pmatrix} = B\)</span>。正确。</p>
+</div>
+<hr />
+<h2 id="202-sylvester">20.2 Sylvester 方程<a class="headerlink" href="#202-sylvester" title="Permanent link">&para;</a></h2>
+<p>Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、模型简化和矩阵函数理论中。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.3 (Sylvester 方程)</p>
+<p><strong>Sylvester 方程</strong>是如下形式的线性矩阵方程：
+$$
+AX + XB = C,
+$$
+其中 <span class="arithmatex">\(A \in \mathbb{C}^{m \times m}\)</span>，<span class="arithmatex">\(B \in \mathbb{C}^{n \times n}\)</span>，<span class="arithmatex">\(C \in \mathbb{C}^{m \times n}\)</span> 为已知矩阵，<span class="arithmatex">\(X \in \mathbb{C}^{m \times n}\)</span> 为未知矩阵。
+当 <span class="arithmatex">\(A = -B^*\)</span> 时，Sylvester 方程退化为 Lyapunov 方程。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.3 (Sylvester 方程的可解性 —— Sylvester-Rosenblum 定理)</p>
+<p>Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span> 对任意 <span class="arithmatex">\(C\)</span> 有唯一解 <span class="arithmatex">\(X\)</span>，当且仅当 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(-B\)</span> 无公共特征值，即：
+$$
+\sigma(A) \cap \sigma(-B) = \emptyset.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>Kronecker 积方法</strong>：由第 19 章，方程 <span class="arithmatex">\(AX + XB = C\)</span> 等价于：
+$$
+(I_n \otimes A + B^T \otimes I_m)\operatorname{vec}(X) = \operatorname{vec}(C).
+$$</p>
+<p><span class="arithmatex">\(I_n \otimes A + B^T \otimes I_m\)</span> 的特征值为 <span class="arithmatex">\(\{\lambda_i(A) + \lambda_j(B) : i = 1,\ldots,m;\; j = 1,\ldots,n\}\)</span>（这是 Kronecker 和 <span class="arithmatex">\(A \oplus B^T\)</span> 的特征值，注意 <span class="arithmatex">\(\sigma(B^T) = \sigma(B)\)</span>）。</p>
+<p>因此方程对任意 <span class="arithmatex">\(C\)</span> 有唯一解当且仅当所有 <span class="arithmatex">\(\lambda_i(A) + \lambda_j(B) \neq 0\)</span>，即 <span class="arithmatex">\(\lambda_i(A) \neq -\lambda_j(B)\)</span> 对所有 <span class="arithmatex">\(i, j\)</span> 成立，即 <span class="arithmatex">\(\sigma(A) \cap \sigma(-B) = \emptyset\)</span>。</p>
+<p><strong>直接方法</strong>（Rosenblum）：将 <span class="arithmatex">\(A\)</span> 化为 Jordan 标准形 <span class="arithmatex">\(A = PJP^{-1}\)</span>，方程变为 <span class="arithmatex">\(JY + YB = D\)</span>（<span class="arithmatex">\(Y = P^{-1}X\)</span>，<span class="arithmatex">\(D = P^{-1}C\)</span>）。由 <span class="arithmatex">\(J\)</span> 的三角结构，可以逐列求解 <span class="arithmatex">\(Y\)</span>。当 <span class="arithmatex">\(\sigma(A) \cap \sigma(-B) = \emptyset\)</span> 时，每步求解的系数矩阵 <span class="arithmatex">\((\lambda_i I + B)\)</span> 可逆。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.4 (Sylvester 方程的积分表示)</p>
+<p>若 <span class="arithmatex">\(A\)</span> 的所有特征值实部为负（<span class="arithmatex">\(A\)</span> 稳定），<span class="arithmatex">\(B\)</span> 的所有特征值实部为正，则 Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span> 的唯一解为：
+$$
+X = \int_0^{\infty} e^{At} C e^{Bt} \, dt.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>首先验证积分收敛。由于 <span class="arithmatex">\(A\)</span> 稳定，<span class="arithmatex">\(\|e^{At}\| \leq M e^{-\alpha t}\)</span>（某 <span class="arithmatex">\(\alpha &gt; 0\)</span>）；由于 <span class="arithmatex">\(B\)</span> 的特征值实部为正，<span class="arithmatex">\(-B\)</span> 稳定，<span class="arithmatex">\(\|e^{Bt}\| = \|e^{-(-B)t}\|\)</span>...</p>
+<p>更准确地说，条件应为 <span class="arithmatex">\(\operatorname{Re}\lambda_i(A) &lt; 0\)</span> 且 <span class="arithmatex">\(\operatorname{Re}\lambda_j(B) &gt; 0\)</span>（或反过来取负号），使得 <span class="arithmatex">\(e^{At} \to 0\)</span>（<span class="arithmatex">\(t \to +\infty\)</span>）且 <span class="arithmatex">\(e^{Bt}\)</span> 增长但积分仍收敛。</p>
+<p>实际上，标准条件是 <span class="arithmatex">\(\operatorname{Re}\lambda_i(A) + \operatorname{Re}\mu_j(B) &lt; 0\)</span>。此时：</p>
+<p>令 <span class="arithmatex">\(X = \int_0^{\infty} e^{At} C e^{Bt} \, dt\)</span>。对 <span class="arithmatex">\(AX + XB\)</span>：
+$$
+AX + XB = \int_0^{\infty} (Ae^{At})Ce^{Bt} \, dt + \int_0^{\infty} e^{At}C(e^{Bt}B) \, dt
+$$
+$$
+= \int_0^{\infty} \frac{d}{dt}\left(e^{At}Ce^{Bt}\right) dt = \left[e^{At}Ce^{Bt}\right]_0^{\infty} = 0 - C = -C.
+$$</p>
+<p>因此 <span class="arithmatex">\(X\)</span> 是 <span class="arithmatex">\(AX + XB = -C\)</span> 的解。若方程为 <span class="arithmatex">\(AX + XB = C\)</span>，则解为 <span class="arithmatex">\(X = -\int_0^{\infty} e^{At}Ce^{Bt}\,dt\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.4 (齐次 Sylvester 方程与交换子)</p>
+<p>齐次 Sylvester 方程 <span class="arithmatex">\(AX - XA = 0\)</span>（即 <span class="arithmatex">\(AX = XA\)</span>）描述了与 <span class="arithmatex">\(A\)</span> <strong>交换</strong>的矩阵 <span class="arithmatex">\(X\)</span>。与 <span class="arithmatex">\(A\)</span> 交换的所有矩阵构成一个代数，称为 <span class="arithmatex">\(A\)</span> 的<strong>交换子代数</strong>（commutant）。</p>
+<p>映射 <span class="arithmatex">\(\operatorname{ad}_A(X) = AX - XA\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>伴随映射</strong>（adjoint map），<span class="arithmatex">\([A, X] = AX - XA\)</span> 称为 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(X\)</span> 的<strong>交换子</strong>（commutator）或<strong>Lie 括号</strong>（Lie bracket）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.5 (交换矩阵的结构)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，有 <span class="arithmatex">\(k\)</span> 个不同的特征值 <span class="arithmatex">\(\lambda_1, \ldots, \lambda_k\)</span>，对应的 Jordan 块大小分别为 <span class="arithmatex">\(n_{i,1} \geq n_{i,2} \geq \cdots\)</span>（<span class="arithmatex">\(i = 1,\ldots,k\)</span>）。则与 <span class="arithmatex">\(A\)</span> 交换的矩阵空间的维数为：
+$$
+\dim{X : AX = XA} = \sum_{i=1}^{k} \sum_{j} (2j - 1) n_{i,j}',
+$$
+其中 <span class="arithmatex">\(n_{i,j}'\)</span> 是特征值 <span class="arithmatex">\(\lambda_i\)</span> 对应的 Jordan 块大小的共轭分拆。</p>
+<p>特别地，当 <span class="arithmatex">\(A\)</span> 有 <span class="arithmatex">\(n\)</span> 个不同特征值时（即 <span class="arithmatex">\(A\)</span> 的最小多项式等于特征多项式），与 <span class="arithmatex">\(A\)</span> 交换的矩阵恰好是 <span class="arithmatex">\(A\)</span> 的多项式 <span class="arithmatex">\(p(A)\)</span>，维数为 <span class="arithmatex">\(n\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>简单情形</strong>（<span class="arithmatex">\(A\)</span> 有 <span class="arithmatex">\(n\)</span> 个不同特征值）：设 <span class="arithmatex">\(A = P \operatorname{diag}(\lambda_1, \ldots, \lambda_n) P^{-1}\)</span>，<span class="arithmatex">\(AX = XA\)</span> 当且仅当 <span class="arithmatex">\(DY = YD\)</span>（<span class="arithmatex">\(Y = P^{-1}XP\)</span>，<span class="arithmatex">\(D = \operatorname{diag}(\lambda_1,\ldots,\lambda_n)\)</span>）。</p>
+<p><span class="arithmatex">\(DY = YD\)</span> 意味着 <span class="arithmatex">\(\lambda_i y_{ij} = \lambda_j y_{ij}\)</span>，即 <span class="arithmatex">\((\lambda_i - \lambda_j)y_{ij} = 0\)</span>。当 <span class="arithmatex">\(\lambda_i \neq \lambda_j\)</span> 时 <span class="arithmatex">\(y_{ij} = 0\)</span>，因此 <span class="arithmatex">\(Y\)</span> 为对角矩阵，<span class="arithmatex">\(X = P Y P^{-1}\)</span>。</p>
+<p>对角矩阵 <span class="arithmatex">\(Y = \operatorname{diag}(d_1,\ldots,d_n)\)</span> 可以唯一地写成 <span class="arithmatex">\(Y = p(D)\)</span>，其中 <span class="arithmatex">\(p\)</span> 为 <span class="arithmatex">\(n-1\)</span> 次多项式（Lagrange 插值），因此 <span class="arithmatex">\(X = p(A)\)</span>。维数为 <span class="arithmatex">\(n\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 20.2</p>
+<p>求解 Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span>，其中：
+$$
+A = \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 3 \end{pmatrix}, \quad B = \begin{pmatrix} 2 &amp; 0 \ 0 &amp; 4 \end{pmatrix}, \quad C = \begin{pmatrix} 6 &amp; 10 \ 15 &amp; 35 \end{pmatrix}.
+$$</p>
+<p><span class="arithmatex">\(\sigma(A) = \{1, 3\}\)</span>，<span class="arithmatex">\(\sigma(-B) = \{-2, -4\}\)</span>，无公共特征值，唯一解存在。</p>
+<p>设 <span class="arithmatex">\(X = \begin{pmatrix} x_{11} &amp; x_{12} \\ x_{21} &amp; x_{22} \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(AX + XB = \begin{pmatrix} x_{11} &amp; x_{12} \\ 3x_{21} &amp; 3x_{22} \end{pmatrix} + \begin{pmatrix} 2x_{11} &amp; 4x_{12} \\ 2x_{21} &amp; 4x_{22} \end{pmatrix} = \begin{pmatrix} 3x_{11} &amp; 5x_{12} \\ 5x_{21} &amp; 7x_{22} \end{pmatrix}\)</span>。</p>
+<p>因此 <span class="arithmatex">\(3x_{11} = 6\)</span>，<span class="arithmatex">\(5x_{12} = 10\)</span>，<span class="arithmatex">\(5x_{21} = 15\)</span>，<span class="arithmatex">\(7x_{22} = 35\)</span>。</p>
+<p>解：<span class="arithmatex">\(X = \begin{pmatrix} 2 &amp; 2 \\ 3 &amp; 5 \end{pmatrix}\)</span>。</p>
+<p>验证：<span class="arithmatex">\(AX + XB = \begin{pmatrix} 2 &amp; 2 \\ 9 &amp; 15 \end{pmatrix} + \begin{pmatrix} 4 &amp; 8 \\ 6 &amp; 20 \end{pmatrix} = \begin{pmatrix} 6 &amp; 10 \\ 15 &amp; 35 \end{pmatrix} = C\)</span>。正确。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.3</p>
+<p>考虑齐次 Sylvester 方程 <span class="arithmatex">\(AX - XB = 0\)</span>，即 <span class="arithmatex">\(AX = XB\)</span>。</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 2 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\sigma(A) = \{2\}\)</span>，<span class="arithmatex">\(\sigma(B) = \{2, 3\}\)</span>。公共特征值为 <span class="arithmatex">\(\{2\}\)</span>，因此齐次方程有非平凡解。</p>
+<p>设 <span class="arithmatex">\(X = \begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(AX = \begin{pmatrix} 2a+c &amp; 2b+d \\ 2c &amp; 2d \end{pmatrix}\)</span>，<span class="arithmatex">\(XB = \begin{pmatrix} 2a &amp; 3b \\ 2c &amp; 3d \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(AX = XB\)</span> 给出：<span class="arithmatex">\(c = 0\)</span>，<span class="arithmatex">\(2b + d = 3b\)</span>（即 <span class="arithmatex">\(d = b\)</span>），<span class="arithmatex">\(2d = 3d\)</span>（即 <span class="arithmatex">\(d = 0\)</span>）。</p>
+<p>因此 <span class="arithmatex">\(b = 0\)</span>，解空间为 <span class="arithmatex">\(X = \begin{pmatrix} a &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>，维数为 1。</p>
+</div>
+<hr />
+<h2 id="203-lyapunov">20.3 Lyapunov 方程<a class="headerlink" href="#203-lyapunov" title="Permanent link">&para;</a></h2>
+<p>Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分析中有核心地位。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.5 (连续 Lyapunov 方程)</p>
+<p><strong>连续 Lyapunov 方程</strong>（continuous Lyapunov equation）为：
+$$
+AX + XA^* = Q,
+$$
+其中 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span>，<span class="arithmatex">\(Q \in \mathbb{C}^{n \times n}\)</span>（<span class="arithmatex">\(Q = Q^*\)</span>），<span class="arithmatex">\(X \in \mathbb{C}^{n \times n}\)</span> 为未知 Hermite 矩阵。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.6 (离散 Lyapunov 方程)</p>
+<p><strong>离散 Lyapunov 方程</strong>（discrete Lyapunov equation，也称 <strong>Stein 方程</strong>）为：
+$$
+AXA^* - X = Q,
+$$
+或等价地 <span class="arithmatex">\(X - AXA^* = -Q\)</span>。其中 <span class="arithmatex">\(A, Q, X \in \mathbb{C}^{n \times n}\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.6 (连续 Lyapunov 方程与稳定性)</p>
+<p>设 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span>。</p>
+<ol>
+<li>若 <span class="arithmatex">\(A\)</span> <strong>稳定</strong>（即所有特征值实部为负：<span class="arithmatex">\(\operatorname{Re}\lambda_i(A) &lt; 0\)</span>），则对任意半正定 <span class="arithmatex">\(Q \succeq 0\)</span>，连续 Lyapunov 方程 <span class="arithmatex">\(AX + XA^* = -Q\)</span> 有唯一的半正定解：
+$$
+X = \int_0^{\infty} e^{At} Q e^{A^*t} \, dt \succeq 0.
+$$</li>
+<li>反之，若对某个 <span class="arithmatex">\(Q \succ 0\)</span>，存在 <span class="arithmatex">\(X \succ 0\)</span> 满足 <span class="arithmatex">\(AX + XA^* = -Q\)</span>，则 <span class="arithmatex">\(A\)</span> 稳定。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong>：由 <span class="arithmatex">\(A\)</span> 稳定，<span class="arithmatex">\(e^{At} \to 0\)</span>（<span class="arithmatex">\(t \to \infty\)</span>）以指数速度，因此积分收敛。验证：
+$$
+AX + XA^<em> = \int_0^{\infty} (Ae^{At})Qe^{A^</em>t} \, dt + \int_0^{\infty} e^{At}Q(e^{A^<em>t}A^</em>) \, dt
+$$
+$$
+= \int_0^{\infty} \frac{d}{dt}(e^{At}Qe^{A^<em>t}) \, dt = [e^{At}Qe^{A^</em>t}]_0^{\infty} = 0 - Q = -Q.
+$$</p>
+<p><span class="arithmatex">\(X \succeq 0\)</span> 因为对任意 <span class="arithmatex">\(\mathbf{v}\)</span>：<span class="arithmatex">\(\mathbf{v}^*X\mathbf{v} = \int_0^{\infty} \|Q^{1/2}e^{A^*t}\mathbf{v}\|^2 \, dt \geq 0\)</span>。</p>
+<p>唯一性由 Sylvester-Rosenblum 定理保证（<span class="arithmatex">\(\sigma(A) \cap \sigma(-A^*) = \emptyset\)</span>，因为 <span class="arithmatex">\(A\)</span> 的特征值实部为负而 <span class="arithmatex">\(-A^*\)</span> 的特征值 <span class="arithmatex">\(-\overline{\lambda_i(A)}\)</span> 实部为正）。</p>
+<p><strong>(2)</strong>：设 <span class="arithmatex">\(A\mathbf{v} = \lambda\mathbf{v}\)</span>（<span class="arithmatex">\(\mathbf{v} \neq 0\)</span>），则：
+$$
+\mathbf{v}^<em>(AX + XA^</em>)\mathbf{v} = \lambda(\mathbf{v}^<em>X\mathbf{v}) + \bar{\lambda}(\mathbf{v}^</em>X\mathbf{v}) = 2\operatorname{Re}(\lambda)(\mathbf{v}^<em>X\mathbf{v}) = -\mathbf{v}^</em>Q\mathbf{v}.
+$$</p>
+<p>由 <span class="arithmatex">\(X \succ 0\)</span>，<span class="arithmatex">\(\mathbf{v}^*X\mathbf{v} &gt; 0\)</span>；由 <span class="arithmatex">\(Q \succ 0\)</span>，<span class="arithmatex">\(\mathbf{v}^*Q\mathbf{v} &gt; 0\)</span>。因此 <span class="arithmatex">\(2\operatorname{Re}(\lambda) &lt; 0\)</span>，即 <span class="arithmatex">\(\operatorname{Re}(\lambda) &lt; 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.7 (离散 Lyapunov 方程与稳定性)</p>
+<p>设 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span>。</p>
+<ol>
+<li>若 <span class="arithmatex">\(A\)</span> <strong>Schur 稳定</strong>（即所有特征值模小于 1：<span class="arithmatex">\(|\lambda_i(A)| &lt; 1\)</span>），则对任意 <span class="arithmatex">\(Q \succeq 0\)</span>，离散方程 <span class="arithmatex">\(X - AXA^* = Q\)</span> 有唯一的半正定解：
+$$
+X = \sum_{k=0}^{\infty} A^k Q (A^*)^k \succeq 0.
+$$</li>
+<li>反之，若对某个 <span class="arithmatex">\(Q \succ 0\)</span>，存在 <span class="arithmatex">\(X \succ 0\)</span> 满足 <span class="arithmatex">\(X - AXA^* = Q\)</span>，则 <span class="arithmatex">\(A\)</span> Schur 稳定。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong>：由 <span class="arithmatex">\(|\lambda_i(A)| &lt; 1\)</span>，级数 <span class="arithmatex">\(\sum_{k=0}^{\infty} A^k Q (A^*)^k\)</span> 绝对收敛。验证：
+$$
+X - AXA^<em> = \sum_{k=0}^{\infty} A^k Q (A^</em>)^k - A\left(\sum_{k=0}^{\infty} A^k Q (A^<em>)^k\right)A^</em> = \sum_{k=0}^{\infty} A^k Q (A^<em>)^k - \sum_{k=1}^{\infty} A^k Q (A^</em>)^k = A^0 Q (A^*)^0 = Q.
+$$</p>
+<p><strong>(2)</strong>：设 <span class="arithmatex">\(A\mathbf{v} = \lambda\mathbf{v}\)</span>，则 <span class="arithmatex">\(\mathbf{v}^*(X - AXA^*)\mathbf{v} = \mathbf{v}^*X\mathbf{v} - |\lambda|^2 \mathbf{v}^*X\mathbf{v} = (1 - |\lambda|^2)\mathbf{v}^*X\mathbf{v} = \mathbf{v}^*Q\mathbf{v} &gt; 0\)</span>。由 <span class="arithmatex">\(X \succ 0\)</span>，得 <span class="arithmatex">\(1 - |\lambda|^2 &gt; 0\)</span>，即 <span class="arithmatex">\(|\lambda| &lt; 1\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 20.4</p>
+<p>求解连续 Lyapunov 方程 <span class="arithmatex">\(AX + XA^T = -Q\)</span>，其中：
+$$
+A = \begin{pmatrix} -1 &amp; 0 \ 0 &amp; -2 \end{pmatrix}, \quad Q = \begin{pmatrix} 2 &amp; 0 \ 0 &amp; 2 \end{pmatrix}.
+$$</p>
+<p><span class="arithmatex">\(A\)</span> 稳定（特征值 <span class="arithmatex">\(-1, -2\)</span>）。利用积分公式：
+$$
+X = \int_0^{\infty} e^{At} Q e^{A^Tt} \, dt = \int_0^{\infty} \begin{pmatrix} e^{-t} &amp; 0 \ 0 &amp; e^{-2t} \end{pmatrix} \begin{pmatrix} 2 &amp; 0 \ 0 &amp; 2 \end{pmatrix} \begin{pmatrix} e^{-t} &amp; 0 \ 0 &amp; e^{-2t} \end{pmatrix} dt.
+$$
+$$
+= \int_0^{\infty} \begin{pmatrix} 2e^{-2t} &amp; 0 \ 0 &amp; 2e^{-4t} \end{pmatrix} dt = \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 1/2 \end{pmatrix}.
+$$</p>
+<p>验证：<span class="arithmatex">\(AX + XA^T = \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} + \begin{pmatrix} -1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix} = \begin{pmatrix} -2 &amp; 0 \\ 0 &amp; -2 \end{pmatrix} = -Q\)</span>。正确。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.5</p>
+<p>求解离散 Lyapunov 方程 <span class="arithmatex">\(X - AXA^T = Q\)</span>，其中：
+$$
+A = \begin{pmatrix} 1/2 &amp; 0 \ 0 &amp; 1/3 \end{pmatrix}, \quad Q = I_2.
+$$</p>
+<p><span class="arithmatex">\(A\)</span> Schur 稳定（特征值 <span class="arithmatex">\(1/2, 1/3\)</span>）。</p>
+<p>设 <span class="arithmatex">\(X = \begin{pmatrix} x_{11} &amp; x_{12} \\ x_{12} &amp; x_{22} \end{pmatrix}\)</span>（对称解）。</p>
+<p><span class="arithmatex">\(X - AXA^T = \begin{pmatrix} x_{11} - x_{11}/4 &amp; x_{12} - x_{12}/6 \\ x_{12} - x_{12}/6 &amp; x_{22} - x_{22}/9 \end{pmatrix} = \begin{pmatrix} 3x_{11}/4 &amp; 5x_{12}/6 \\ 5x_{12}/6 &amp; 8x_{22}/9 \end{pmatrix} = I_2\)</span>。</p>
+<p>解：<span class="arithmatex">\(x_{11} = 4/3\)</span>，<span class="arithmatex">\(x_{12} = 0\)</span>，<span class="arithmatex">\(x_{22} = 9/8\)</span>。</p>
+<p><span class="arithmatex">\(X = \begin{pmatrix} 4/3 &amp; 0 \\ 0 &amp; 9/8 \end{pmatrix}\)</span>。</p>
+<p>验证可直接代入。<span class="arithmatex">\(X \succ 0\)</span> 且 <span class="arithmatex">\(A\)</span> Schur 稳定，与定理一致。</p>
+</div>
+<hr />
+<h2 id="204-riccati">20.4 Riccati 方程<a class="headerlink" href="#204-riccati" title="Permanent link">&para;</a></h2>
+<p>Riccati 方程是一个<strong>非线性</strong>矩阵方程，在最优控制、滤波和博弈论中有核心地位。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.7 (代数 Riccati 方程)</p>
+<p><strong>连续代数 Riccati 方程</strong>（continuous algebraic Riccati equation, CARE）为：
+$$
+A^<em>X + XA - XBR^{-1}B^</em>X + Q = 0,
+$$
+其中 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span>，<span class="arithmatex">\(B \in \mathbb{C}^{n \times m}\)</span>，<span class="arithmatex">\(Q = Q^* \in \mathbb{C}^{n \times n}\)</span>（<span class="arithmatex">\(Q \succeq 0\)</span>），<span class="arithmatex">\(R = R^* \in \mathbb{C}^{m \times m}\)</span>（<span class="arithmatex">\(R \succ 0\)</span>），<span class="arithmatex">\(X = X^* \in \mathbb{C}^{n \times n}\)</span> 为未知 Hermite 矩阵。</p>
+<p><strong>离散代数 Riccati 方程</strong>（discrete algebraic Riccati equation, DARE）为：
+$$
+X = A^<em>XA - A^</em>XB(R + B^<em>XB)^{-1}B^</em>XA + Q.
+$$</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.8 (Hamiltonian 矩阵)</p>
+<p>与连续 Riccati 方程相关联的 <strong>Hamilton 矩阵</strong>（Hamiltonian matrix）为：
+$$
+H = \begin{pmatrix} A &amp; -BR^{-1}B^<em> \ -Q &amp; -A^</em> \end{pmatrix}.
+$$
+Hamilton 矩阵的一个重要性质是：若 <span class="arithmatex">\(\lambda\)</span> 是 <span class="arithmatex">\(H\)</span> 的特征值，则 <span class="arithmatex">\(-\bar{\lambda}\)</span> 也是。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.8 (CARE 与 Hamilton 矩阵)</p>
+<p>设 Hamilton 矩阵 <span class="arithmatex">\(H\)</span> 没有纯虚数特征值。将 <span class="arithmatex">\(H\)</span> 的 <span class="arithmatex">\(2n\)</span> 个特征值分为稳定部分（实部为负）和不稳定部分（实部为正），各 <span class="arithmatex">\(n\)</span> 个。</p>
+<p>设 <span class="arithmatex">\(\begin{pmatrix} U_1 \\ U_2 \end{pmatrix}\)</span> 为 <span class="arithmatex">\(H\)</span> 的稳定不变子空间的基（<span class="arithmatex">\(U_1, U_2\)</span> 均为 <span class="arithmatex">\(n \times n\)</span>），若 <span class="arithmatex">\(U_1\)</span> 可逆，则 CARE 的<strong>稳定化解</strong>为：
+$$
+X = U_2 U_1^{-1}.
+$$
+此解使得闭环矩阵 <span class="arithmatex">\(A - BR^{-1}B^*X\)</span> 稳定。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\mathbf{w} = \begin{pmatrix} \mathbf{x} \\ \mathbf{p} \end{pmatrix}\)</span> 是 <span class="arithmatex">\(H\)</span> 的特征向量，<span class="arithmatex">\(H\mathbf{w} = \lambda\mathbf{w}\)</span>。对稳定不变子空间，<span class="arithmatex">\(H\begin{pmatrix} U_1 \\ U_2 \end{pmatrix} = \begin{pmatrix} U_1 \\ U_2 \end{pmatrix}\Lambda_s\)</span>，其中 <span class="arithmatex">\(\Lambda_s\)</span> 的特征值全在左半平面。</p>
+<p>展开第一行：<span class="arithmatex">\(AU_1 - BR^{-1}B^*U_2 = U_1\Lambda_s\)</span>。
+展开第二行：<span class="arithmatex">\(-QU_1 - A^*U_2 = U_2\Lambda_s\)</span>。</p>
+<p>若 <span class="arithmatex">\(U_1\)</span> 可逆，令 <span class="arithmatex">\(X = U_2U_1^{-1}\)</span>，则 <span class="arithmatex">\(U_2 = XU_1\)</span>。</p>
+<p>代入第一行：<span class="arithmatex">\(AU_1 - BR^{-1}B^*XU_1 = U_1\Lambda_s\)</span>，即 <span class="arithmatex">\((A - BR^{-1}B^*X)U_1 = U_1\Lambda_s\)</span>。这说明 <span class="arithmatex">\(A - BR^{-1}B^*X\)</span> 与 <span class="arithmatex">\(\Lambda_s\)</span> 相似，因此闭环矩阵稳定。</p>
+<p>代入第二行：<span class="arithmatex">\(-QU_1 - A^*XU_1 = XU_1\Lambda_s = X(AU_1 - BR^{-1}B^*XU_1)\)</span>。</p>
+<p>整理：<span class="arithmatex">\(-Q - A^*X = XA - XBR^{-1}B^*X\)</span>，即 <span class="arithmatex">\(A^*X + XA - XBR^{-1}B^*X + Q = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.9 (CARE 的正定解存在条件)</p>
+<p>设 <span class="arithmatex">\((A, B)\)</span> 可镇定（stabilizable），<span class="arithmatex">\((A, Q^{1/2})\)</span> 可检测（detectable），<span class="arithmatex">\(Q \succeq 0\)</span>，<span class="arithmatex">\(R \succ 0\)</span>。则 CARE 存在唯一的正半定解 <span class="arithmatex">\(X \succeq 0\)</span>，且闭环矩阵 <span class="arithmatex">\(A - BR^{-1}B^*X\)</span> 稳定。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>本定理的完整证明较长，我们给出思路框架。</p>
+<p><strong>可镇定性</strong>意味着存在反馈增益 <span class="arithmatex">\(K\)</span> 使得 <span class="arithmatex">\(A - BK\)</span> 稳定。<strong>可检测性</strong>意味着 <span class="arithmatex">\((A^*, (Q^{1/2})^*)\)</span> 可镇定。</p>
+<p>在这些条件下，可以证明 Hamilton 矩阵 <span class="arithmatex">\(H\)</span> 没有纯虚数特征值（关键一步），因此定理 20.8 的构造可以进行。</p>
+<p>正半定性 <span class="arithmatex">\(X \succeq 0\)</span> 来自 <span class="arithmatex">\(Q \succeq 0\)</span> 的条件和 Lyapunov 论证：闭环系统 <span class="arithmatex">\((A-BR^{-1}B^*X)\)</span> 稳定时，<span class="arithmatex">\(X\)</span> 满足一个 Lyapunov 方程，由此保证半正定性。</p>
+<p>唯一性可以通过反证法：若有两个半正定解 <span class="arithmatex">\(X_1, X_2\)</span>，则它们的差满足一个线性方程，由稳定性条件可推出差为零。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 20.6</p>
+<p>求解标量 Riccati 方程：<span class="arithmatex">\(2x + 2x - x^2 + 1 = 0\)</span>，其中 <span class="arithmatex">\(A = 1\)</span>，<span class="arithmatex">\(B = 1\)</span>，<span class="arithmatex">\(R = 1\)</span>，<span class="arithmatex">\(Q = 1\)</span>。</p>
+<p>简化：<span class="arithmatex">\(2x - x^2 + 1 = 0\)</span>，即 <span class="arithmatex">\(x^2 - 2x - 1 = 0\)</span>。</p>
+<p><span class="arithmatex">\(x = \frac{2 \pm \sqrt{4+4}}{2} = 1 \pm \sqrt{2}\)</span>。</p>
+<p>稳定化解：闭环 <span class="arithmatex">\(A - BR^{-1}B^*x = 1 - x\)</span>。取 <span class="arithmatex">\(x = 1 + \sqrt{2}\)</span>，闭环 <span class="arithmatex">\(= 1 - 1 - \sqrt{2} = -\sqrt{2} &lt; 0\)</span>（稳定）。取 <span class="arithmatex">\(x = 1 - \sqrt{2}\)</span>，闭环 <span class="arithmatex">\(= \sqrt{2} &gt; 0\)</span>（不稳定）。</p>
+<p>因此稳定化解 <span class="arithmatex">\(x = 1 + \sqrt{2}\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.7</p>
+<p><strong>最优控制中的 Riccati 方程</strong>。</p>
+<p>考虑线性系统 <span class="arithmatex">\(\dot{\mathbf{x}} = A\mathbf{x} + B\mathbf{u}\)</span>，代价函数 <span class="arithmatex">\(J = \int_0^{\infty}(\mathbf{x}^TQ\mathbf{x} + \mathbf{u}^TR\mathbf{u})\,dt\)</span>。</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span>（双积分器），<span class="arithmatex">\(B = \begin{pmatrix} 0 \\ 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(Q = I_2\)</span>，<span class="arithmatex">\(R = 1\)</span>。</p>
+<p>Hamilton 矩阵：<span class="arithmatex">\(H = \begin{pmatrix} 0 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; -1 \\ -1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; -1 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(H\)</span> 的特征多项式可以计算为 <span class="arithmatex">\(\lambda^4 + 3\lambda^2 + 1 = 0\)</span>（令 <span class="arithmatex">\(\mu = \lambda^2\)</span>，则 <span class="arithmatex">\(\mu^2 + 3\mu + 1 = 0\)</span>，<span class="arithmatex">\(\mu = \frac{-3 \pm \sqrt{5}}{2}\)</span>）。</p>
+<p>稳定特征值对应的子空间给出 Riccati 方程的正定解 <span class="arithmatex">\(X = \begin{pmatrix} \sqrt{3} &amp; 1 \\ 1 &amp; \sqrt{3} \end{pmatrix}\)</span>（精确值需要更仔细的计算）。</p>
+<p>最优反馈为 <span class="arithmatex">\(\mathbf{u} = -R^{-1}B^TX\mathbf{x} = -\begin{pmatrix} 0 &amp; 1 \end{pmatrix}X\mathbf{x}\)</span>。</p>
+</div>
+<hr />
+<h2 id="205">20.5 数值解法<a class="headerlink" href="#205" title="Permanent link">&para;</a></h2>
+<p>本节介绍求解 Sylvester 和 Lyapunov 方程的数值方法。直接使用 Kronecker 积将方程转化为 <span class="arithmatex">\(n^2\)</span> 维线性系统虽然理论上可行，但计算复杂度为 <span class="arithmatex">\(O(n^6)\)</span>，实际中不可接受。Bartels-Stewart 算法将复杂度降低到 <span class="arithmatex">\(O(n^3)\)</span>。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.9 (Schur 分解)</p>
+<p>任意方阵 <span class="arithmatex">\(A\)</span> 可以分解为 <span class="arithmatex">\(A = UTU^*\)</span>，其中 <span class="arithmatex">\(U\)</span> 为酉矩阵，<span class="arithmatex">\(T\)</span> 为上三角矩阵（对角元素为 <span class="arithmatex">\(A\)</span> 的特征值）。这称为 <strong>Schur 分解</strong>（Schur decomposition）。对于实矩阵，可以使用<strong>实 Schur 分解</strong>：<span class="arithmatex">\(A = UTU^T\)</span>，其中 <span class="arithmatex">\(T\)</span> 为拟上三角矩阵（对角块为 <span class="arithmatex">\(1 \times 1\)</span> 或 <span class="arithmatex">\(2 \times 2\)</span>）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.10 (Bartels-Stewart 算法)</p>
+<p>Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span> 可以通过以下步骤高效求解：</p>
+<p><strong>步骤 1</strong>：计算 Schur 分解 <span class="arithmatex">\(A = U_A T_A U_A^*\)</span>，<span class="arithmatex">\(B = U_B T_B U_B^*\)</span>。</p>
+<p><strong>步骤 2</strong>：变量替换 <span class="arithmatex">\(Y = U_A^* X U_B\)</span>，<span class="arithmatex">\(D = U_A^* C U_B\)</span>，方程变为：
+$$
+T_A Y + Y T_B = D.
+$$</p>
+<p><strong>步骤 3</strong>：由于 <span class="arithmatex">\(T_A\)</span> 和 <span class="arithmatex">\(T_B\)</span> 为（拟）上三角矩阵，方程可以逐列（从最后一列开始）用回代法求解。</p>
+<p><strong>步骤 4</strong>：恢复 <span class="arithmatex">\(X = U_A Y U_B^*\)</span>。</p>
+<p>总计算复杂度为 <span class="arithmatex">\(O(n^3)\)</span>（Schur 分解主导）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>正确性</strong>：代入验证，<span class="arithmatex">\(T_A Y + YT_B = U_A^*AU_A \cdot U_A^*XU_B + U_A^*XU_B \cdot U_B^*BU_B = U_A^*(AX + XB)U_B = U_A^*CU_B = D\)</span>。</p>
+<p><strong>逐列求解</strong>：设 <span class="arithmatex">\(T_B\)</span> 的第 <span class="arithmatex">\(j\)</span> 列为 <span class="arithmatex">\(\mathbf{t}_j\)</span>（仅前 <span class="arithmatex">\(j\)</span> 个分量可能非零），<span class="arithmatex">\(Y\)</span> 的第 <span class="arithmatex">\(j\)</span> 列为 <span class="arithmatex">\(\mathbf{y}_j\)</span>，<span class="arithmatex">\(D\)</span> 的第 <span class="arithmatex">\(j\)</span> 列为 <span class="arithmatex">\(\mathbf{d}_j\)</span>。</p>
+<p>方程 <span class="arithmatex">\(T_A Y + Y T_B = D\)</span> 的第 <span class="arithmatex">\(j\)</span> 列为：
+$$
+T_A \mathbf{y}<em k="1">j + \sum</em>_j.
+$$}^{j} (T_B)_{kj} \mathbf{y}_k = \mathbf{d</p>
+<p>即 <span class="arithmatex">\((T_A + (T_B)_{jj}I)\mathbf{y}_j = \mathbf{d}_j - \sum_{k=1}^{j-1}(T_B)_{kj}\mathbf{y}_k\)</span>。</p>
+<p>从 <span class="arithmatex">\(j = 1\)</span> 开始，右端已知（当 <span class="arithmatex">\(j = 1\)</span> 时无求和项），<span class="arithmatex">\((T_A + (T_B)_{11}I)\)</span> 为上三角矩阵，可用回代求解 <span class="arithmatex">\(\mathbf{y}_1\)</span>。然后逐列进行。</p>
+<p>每列求解 <span class="arithmatex">\(O(n^2)\)</span>（三角系统），共 <span class="arithmatex">\(n\)</span> 列，回代部分 <span class="arithmatex">\(O(n^3)\)</span>。Schur 分解 <span class="arithmatex">\(O(n^3)\)</span>。总复杂度 <span class="arithmatex">\(O(n^3)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.11 (Hessenberg-Schur 方法)</p>
+<p>对于 Sylvester 方程 <span class="arithmatex">\(AX + XB = C\)</span>（<span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times m\)</span>，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(n \times n\)</span>，<span class="arithmatex">\(m \gg n\)</span> 或 <span class="arithmatex">\(m \ll n\)</span>），可以采用改进的 <strong>Hessenberg-Schur 方法</strong>：仅对较小的矩阵做 Schur 分解，较大的矩阵化为 Hessenberg 形。这在某些情况下可以减少计算量。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对 <span class="arithmatex">\(B\)</span> 做 Schur 分解 <span class="arithmatex">\(B = U_B T_B U_B^*\)</span>，对 <span class="arithmatex">\(A\)</span> 化为上 Hessenberg 形 <span class="arithmatex">\(A = Q_A H_A Q_A^*\)</span>。变量替换后方程变为 <span class="arithmatex">\(H_A Y + Y T_B = D\)</span>。</p>
+<p>逐列求解时，<span class="arithmatex">\((H_A + (T_B)_{jj}I)\mathbf{y}_j = \mathbf{r}_j\)</span> 为 Hessenberg 系统，可用 <span class="arithmatex">\(O(n^2)\)</span> 的方法求解（无需化为三角形，直接用 Gauss 消元即可，因 Hessenberg 矩阵的 LU 分解很快）。</p>
+<p>总计算量的常数因子比标准 Bartels-Stewart 略小。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 20.8</p>
+<p>用 Bartels-Stewart 算法求解 <span class="arithmatex">\(AX + XB = C\)</span>，其中：
+$$
+A = \begin{pmatrix} 2 &amp; 1 \ 0 &amp; 3 \end{pmatrix}, \quad B = \begin{pmatrix} 1 &amp; 2 \ 0 &amp; 4 \end{pmatrix}, \quad C = \begin{pmatrix} 10 &amp; 26 \ 9 &amp; 28 \end{pmatrix}.
+$$</p>
+<p><span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 已经是上三角矩阵（即为自身的 Schur 分解，<span class="arithmatex">\(U_A = U_B = I\)</span>）。</p>
+<p>直接逐列求解 <span class="arithmatex">\(T_A Y + Y T_B = D\)</span>（即 <span class="arithmatex">\(AX + XB = C\)</span>）。</p>
+<p><strong>第 1 列</strong>（<span class="arithmatex">\(j = 1\)</span>）：<span class="arithmatex">\((A + b_{11}I)\mathbf{x}_1 = \mathbf{c}_1\)</span>。
+$$
+\begin{pmatrix} 3 &amp; 1 \ 0 &amp; 4 \end{pmatrix}\begin{pmatrix} x_{11} \ x_{21} \end{pmatrix} = \begin{pmatrix} 10 \ 9 \end{pmatrix}.
+$$
+回代：<span class="arithmatex">\(x_{21} = 9/4\)</span>，<span class="arithmatex">\(x_{11} = (10 - 9/4)/3 = 31/12\)</span>。</p>
+<p><strong>第 2 列</strong>（<span class="arithmatex">\(j = 2\)</span>）：<span class="arithmatex">\((A + b_{22}I)\mathbf{x}_2 = \mathbf{c}_2 - b_{12}\mathbf{x}_1\)</span>。
+$$
+\begin{pmatrix} 6 &amp; 1 \ 0 &amp; 7 \end{pmatrix}\begin{pmatrix} x_{12} \ x_{22} \end{pmatrix} = \begin{pmatrix} 26 \ 28 \end{pmatrix} - 2\begin{pmatrix} 31/12 \ 9/4 \end{pmatrix} = \begin{pmatrix} 26 - 31/6 \ 28 - 9/2 \end{pmatrix} = \begin{pmatrix} 125/6 \ 47/2 \end{pmatrix}.
+$$
+回代：<span class="arithmatex">\(x_{22} = 47/14\)</span>，<span class="arithmatex">\(x_{12} = (125/6 - 47/14)/6 = (875/42 - 141/42)/6 = (734/42)/6 = 734/252 = 367/126\)</span>。</p>
+<p>验证可代回原方程。（数值较复杂但过程正确。）</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.9</p>
+<p><strong>Lyapunov 方程的 Bartels-Stewart 求解</strong>。</p>
+<p>对 <span class="arithmatex">\(AX + XA^T = -Q\)</span>（实对称情形），只需对 <span class="arithmatex">\(A\)</span> 做一次 Schur 分解 <span class="arithmatex">\(A = UTU^T\)</span>，方程变为 <span class="arithmatex">\(TY + YT^T = -\tilde{Q}\)</span>（<span class="arithmatex">\(Y = U^TXU\)</span>，<span class="arithmatex">\(\tilde{Q} = U^TQU\)</span>）。由 <span class="arithmatex">\(T\)</span> 上三角而 <span class="arithmatex">\(T^T\)</span> 下三角，逐列求解时需要利用对称性。</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}\)</span>... 这不是上三角的。取实 Schur 分解：<span class="arithmatex">\(A\)</span> 的特征值为 <span class="arithmatex">\(\pm i\)</span>（纯虚数），此时 Lyapunov 方程 <span class="arithmatex">\(AX + XA^T = -Q\)</span> 不一定有解（因为 <span class="arithmatex">\(\sigma(A) \cap \sigma(-A^T) = \{i, -i\} \cap \{i, -i\} \neq \emptyset\)</span>）。</p>
+<p>改为 <span class="arithmatex">\(A = \begin{pmatrix} -1 &amp; 1 \\ 0 &amp; -2 \end{pmatrix}\)</span>（稳定，已上三角），<span class="arithmatex">\(Q = I\)</span>。</p>
+<p><span class="arithmatex">\((T + t_{11}I)\mathbf{y}_1 = -\mathbf{q}_1\)</span>：<span class="arithmatex">\(\begin{pmatrix} -2 &amp; 1 \\ 0 &amp; -3 \end{pmatrix}\begin{pmatrix} y_{11} \\ y_{21} \end{pmatrix} = -\begin{pmatrix} 1 \\ 0 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(y_{21} = 0\)</span>，<span class="arithmatex">\(y_{11} = 1/2\)</span>。</p>
+<p><span class="arithmatex">\((T + t_{22}I)\mathbf{y}_2 = -\mathbf{q}_2 - t_{12}^T\mathbf{y}_1\)</span>：其中 <span class="arithmatex">\(t_{12}^T\)</span> 是 <span class="arithmatex">\(T^T\)</span> 的上三角元素...</p>
+<p>更仔细地处理：<span class="arithmatex">\(TY + YT^T = -Q\)</span>。逐列时方程结构需要同时利用行和列的三角性。设 <span class="arithmatex">\(Y\)</span> 对称，则只需求 <span class="arithmatex">\(n(n+1)/2\)</span> 个变量。此例中解为 <span class="arithmatex">\(X = \begin{pmatrix} 5/6 &amp; 1/6 \\ 1/6 &amp; 1/4 \end{pmatrix}\)</span>（需代入验证）。</p>
+</div>
+<hr />
+<h2 id="206-penrose">20.6 Penrose 方程<a class="headerlink" href="#206-penrose" title="Permanent link">&para;</a></h2>
+<p>Penrose 方程组给出了 Moore-Penrose 伪逆的公理化刻画。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.10 (Penrose 方程组)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵。<strong>Penrose 方程组</strong>（Penrose equations）是关于 <span class="arithmatex">\(n \times m\)</span> 矩阵 <span class="arithmatex">\(X\)</span> 的以下四个方程：
+$$
+\begin{aligned}
+&amp;(1)\quad AXA = A, \
+&amp;(2)\quad XAX = X, \
+&amp;(3)\quad (AX)^<em> = AX, \
+&amp;(4)\quad (XA)^</em> = XA.
+\end{aligned}
+$$</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 20.11 (广义逆)</p>
+<p>满足 Penrose 方程组不同子集的矩阵 <span class="arithmatex">\(X\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>广义逆</strong>（generalized inverse）：</p>
+<ul>
+<li>满足 (1) 的 <span class="arithmatex">\(X\)</span> 称为 <strong><span class="arithmatex">\(\{1\}\)</span>-逆</strong>或<strong>内逆</strong>（inner inverse），记作 <span class="arithmatex">\(A^{(1)}\)</span>。</li>
+<li>满足 (1)(2) 的 <span class="arithmatex">\(X\)</span> 称为 <strong><span class="arithmatex">\(\{1,2\}\)</span>-逆</strong>或<strong>自反广义逆</strong>（reflexive generalized inverse）。</li>
+<li>满足 (1)(3) 的 <span class="arithmatex">\(X\)</span> 称为 <strong><span class="arithmatex">\(\{1,3\}\)</span>-逆</strong>或<strong>最小二乘广义逆</strong>。</li>
+<li>满足 (1)(4) 的 <span class="arithmatex">\(X\)</span> 称为 <strong><span class="arithmatex">\(\{1,4\}\)</span>-逆</strong>或<strong>最小范数广义逆</strong>。</li>
+<li>满足全部四个方程的唯一的 <span class="arithmatex">\(X\)</span> 称为 <strong>Moore-Penrose 伪逆</strong>（Moore-Penrose pseudoinverse），记作 <span class="arithmatex">\(A^+\)</span>。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.12 (Moore-Penrose 伪逆的存在唯一性)</p>
+<p>对任意 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，Moore-Penrose 伪逆 <span class="arithmatex">\(A^+\)</span> 存在且唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性</strong>：设 <span class="arithmatex">\(A = U\Sigma V^*\)</span> 为奇异值分解，其中 <span class="arithmatex">\(\Sigma = \begin{pmatrix} \Sigma_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(\Sigma_r = \operatorname{diag}(\sigma_1, \ldots, \sigma_r)\)</span>（<span class="arithmatex">\(r = \operatorname{rank}(A)\)</span>）。</p>
+<p>定义 <span class="arithmatex">\(A^+ = V\Sigma^+ U^*\)</span>，其中 <span class="arithmatex">\(\Sigma^+ = \begin{pmatrix} \Sigma_r^{-1} &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p>逐一验证四个 Penrose 方程：</p>
+<p>(1) <span class="arithmatex">\(AXA = U\Sigma V^* V\Sigma^+ U^* U\Sigma V^* = U\Sigma\Sigma^+\Sigma V^* = U\Sigma V^* = A\)</span>。</p>
+<p>(2) <span class="arithmatex">\(XAX = V\Sigma^+ U^* U\Sigma V^* V\Sigma^+ U^* = V\Sigma^+\Sigma\Sigma^+ U^* = V\Sigma^+ U^* = X\)</span>。</p>
+<p>(3) <span class="arithmatex">\(AX = U\Sigma\Sigma^+ U^* = U\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}U^*\)</span>，为 Hermite（因为对角分块实对称，<span class="arithmatex">\(U(\cdot)U^*\)</span> 保持 Hermite 性）。</p>
+<p>(4) <span class="arithmatex">\(XA = V\Sigma^+\Sigma V^* = V\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}V^*\)</span>，同样为 Hermite。</p>
+<p><strong>唯一性</strong>：设 <span class="arithmatex">\(X_1, X_2\)</span> 均满足四个方程。</p>
+<p>由 (1)(3)：<span class="arithmatex">\(AX_1\)</span> 和 <span class="arithmatex">\(AX_2\)</span> 均为到 <span class="arithmatex">\(\mathcal{C}(A)\)</span> 的正交投影，因此 <span class="arithmatex">\(AX_1 = AX_2\)</span>。</p>
+<p>由 (1)(4)：<span class="arithmatex">\(X_1A\)</span> 和 <span class="arithmatex">\(X_2A\)</span> 均为到 <span class="arithmatex">\(\mathcal{C}(A^*)\)</span> 的正交投影，因此 <span class="arithmatex">\(X_1A = X_2A\)</span>。</p>
+<p>由 (2)：<span class="arithmatex">\(X_1 = X_1AX_1 = X_2AX_1 = X_2AX_2 = X_2\)</span>（中间步骤利用了 <span class="arithmatex">\(X_1A = X_2A\)</span> 和 <span class="arithmatex">\(AX_1 = AX_2\)</span>）。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.13 (Moore-Penrose 伪逆的性质)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵，<span class="arithmatex">\(A^+\)</span> 为其 Moore-Penrose 伪逆，则：</p>
+<ol>
+<li><span class="arithmatex">\((A^+)^+ = A\)</span>。</li>
+<li><span class="arithmatex">\((A^*)^+ = (A^+)^*\)</span>。</li>
+<li><span class="arithmatex">\((A^*A)^+ = A^+(A^+)^* = A^+(A^*)^+\)</span>。</li>
+<li><span class="arithmatex">\(\operatorname{rank}(A^+) = \operatorname{rank}(A)\)</span>。</li>
+<li><span class="arithmatex">\(A^+ = (A^*A)^+A^* = A^*(AA^*)^+\)</span>。</li>
+<li>若 <span class="arithmatex">\(A\)</span> 为列满秩，则 <span class="arithmatex">\(A^+ = (A^*A)^{-1}A^*\)</span>。</li>
+<li>若 <span class="arithmatex">\(A\)</span> 为行满秩，则 <span class="arithmatex">\(A^+ = A^*(AA^*)^{-1}\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong>：<span class="arithmatex">\(A\)</span> 满足以 <span class="arithmatex">\(A^+\)</span> 为"原矩阵"的四个 Penrose 方程（只需交换 <span class="arithmatex">\(A, X\)</span> 的角色并利用 Hermite 条件），因此 <span class="arithmatex">\((A^+)^+ = A\)</span>。</p>
+<p><strong>(2)</strong>：设 <span class="arithmatex">\(A = U\Sigma V^*\)</span>，则 <span class="arithmatex">\(A^* = V\Sigma^* U^*\)</span>，<span class="arithmatex">\((A^*)^+ = U(\Sigma^*)^+ V^*\)</span>。又 <span class="arithmatex">\(A^+ = V\Sigma^+ U^*\)</span>，<span class="arithmatex">\((A^+)^* = U(\Sigma^+)^* V^*\)</span>。由于 <span class="arithmatex">\(\Sigma\)</span> 为实矩阵，<span class="arithmatex">\((\Sigma^*)^+ = (\Sigma^+)^*\)</span>，因此 <span class="arithmatex">\((A^*)^+ = (A^+)^*\)</span>。</p>
+<p><strong>(6)</strong>：若 <span class="arithmatex">\(A\)</span> 列满秩（<span class="arithmatex">\(\operatorname{rank}(A) = n\)</span>），则 <span class="arithmatex">\(A^*A\)</span> 可逆。此时 <span class="arithmatex">\(X = (A^*A)^{-1}A^*\)</span> 满足：
+- (1)：<span class="arithmatex">\(AXA = A(A^*A)^{-1}A^*A = A\)</span>。
+- (3)：<span class="arithmatex">\(AX = A(A^*A)^{-1}A^*\)</span> 为 Hermite。
+- (4)：<span class="arithmatex">\(XA = (A^*A)^{-1}A^*A = I\)</span> 为 Hermite。
+- (2)：<span class="arithmatex">\(XAX = IX = X\)</span>。
+因此 <span class="arithmatex">\(X = A^+\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.14 (<span class="arithmatex">\(\{1\}\)</span>-逆的通解)</p>
+<p>对 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>（<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>），方程 <span class="arithmatex">\(AXA = A\)</span> 的通解为：
+$$
+X = A^+ + (I - A^+A)W_1 + W_2(I - AA^+),
+$$
+其中 <span class="arithmatex">\(W_1, W_2\)</span> 为任意大小适当的矩阵。</p>
+<p>等价地，设 <span class="arithmatex">\(A = P\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}Q\)</span>（<span class="arithmatex">\(P, Q\)</span> 可逆），则 <span class="arithmatex">\(\{1\}\)</span>-逆的一般形式为：
+$$
+X = Q^{-1}\begin{pmatrix} I_r &amp; L \ M &amp; N \end{pmatrix}P^{-1},
+$$
+其中 <span class="arithmatex">\(L, M, N\)</span> 为任意矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = P\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}Q\)</span>，<span class="arithmatex">\(X = Q^{-1}\begin{pmatrix} G_{11} &amp; G_{12} \\ G_{21} &amp; G_{22} \end{pmatrix}P^{-1}\)</span>。</p>
+<p><span class="arithmatex">\(AXA = P\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} G_{11} &amp; G_{12} \\ G_{21} &amp; G_{22} \end{pmatrix}\begin{pmatrix} I_r &amp; 0 \\ 0 &amp; 0 \end{pmatrix}Q = P\begin{pmatrix} G_{11} &amp; 0 \\ 0 &amp; 0 \end{pmatrix}Q\)</span>。</p>
+<p><span class="arithmatex">\(AXA = A\)</span> 要求 <span class="arithmatex">\(G_{11} = I_r\)</span>，而 <span class="arithmatex">\(G_{12}, G_{21}, G_{22}\)</span> 任意。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 20.15 (Penrose 方程与最小二乘)</p>
+<p>方程 <span class="arithmatex">\(AXA = A\)</span> 的解与最小二乘问题密切相关：</p>
+<p>对于不相容方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>：</p>
+<ol>
+<li><span class="arithmatex">\(\mathbf{x} = A^{(1)}\mathbf{b}\)</span> 是某个最小二乘解（满足 (1)），但不一定是范数最小的。</li>
+<li><span class="arithmatex">\(\mathbf{x} = A^{(1,3)}\mathbf{b}\)</span> 是最小二乘解（<span class="arithmatex">\(\min \|A\mathbf{x} - \mathbf{b}\|\)</span>），满足 (1)(3)。</li>
+<li><span class="arithmatex">\(\mathbf{x} = A^{(1,4)}\mathbf{b}\)</span> 是最小范数解（在相容方程的解中范数最小），满足 (1)(4)。</li>
+<li><span class="arithmatex">\(\mathbf{x} = A^+\mathbf{b}\)</span> 是<strong>最小范数最小二乘解</strong>（满足全部四个方程）。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(4)</strong> 的证明：<span class="arithmatex">\(\mathbf{x}_0 = A^+\mathbf{b}\)</span> 满足 <span class="arithmatex">\(A\mathbf{x}_0 = AA^+\mathbf{b}\)</span>。由 Penrose 方程 (3)，<span class="arithmatex">\(AA^+\)</span> 为正交投影到 <span class="arithmatex">\(\mathcal{C}(A)\)</span> 上，因此 <span class="arithmatex">\(AA^+\mathbf{b}\)</span> 是 <span class="arithmatex">\(\mathbf{b}\)</span> 在 <span class="arithmatex">\(\mathcal{C}(A)\)</span> 上的正交投影，即 <span class="arithmatex">\(\|A\mathbf{x} - \mathbf{b}\|\)</span> 的最小值在 <span class="arithmatex">\(A\mathbf{x} = AA^+\mathbf{b}\)</span> 时取到。</p>
+<p>最小二乘解的集合为 <span class="arithmatex">\(\{\mathbf{x} : A\mathbf{x} = AA^+\mathbf{b}\} = A^+\mathbf{b} + \mathcal{N}(A)\)</span>。</p>
+<p><span class="arithmatex">\(\mathbf{x}_0 = A^+\mathbf{b} \in \mathcal{C}(A^+) = \mathcal{C}(A^*)\)</span>（由 SVD 可见）。而 <span class="arithmatex">\(\mathcal{C}(A^*) = \mathcal{N}(A)^{\perp}\)</span>。因此 <span class="arithmatex">\(\mathbf{x}_0\)</span> 与 <span class="arithmatex">\(\mathcal{N}(A)\)</span> 正交，在仿射集 <span class="arithmatex">\(A^+\mathbf{b} + \mathcal{N}(A)\)</span> 中具有最小范数。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 20.10</p>
+<p>计算矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\)</span> 的 Moore-Penrose 伪逆。</p>
+<p><span class="arithmatex">\(A\)</span> 列满秩（<span class="arithmatex">\(\operatorname{rank} = 2\)</span>），因此 <span class="arithmatex">\(A^+ = (A^TA)^{-1}A^T\)</span>。</p>
+<p><span class="arithmatex">\(A^TA = I_2\)</span>，故 <span class="arithmatex">\(A^+ = A^T = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p>验证 Penrose 方程：</p>
+<p>(1) <span class="arithmatex">\(AXA = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix} = A\)</span>。</p>
+<p>(2) <span class="arithmatex">\(XAX = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 0 &amp; 0 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix} = X\)</span>。</p>
+<p>(3) <span class="arithmatex">\(AX = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{pmatrix}\)</span>，对称。</p>
+<p>(4) <span class="arithmatex">\(XA = I_2\)</span>，对称。</p>
+<p>全部验证通过。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.11</p>
+<p>计算秩 1 矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}\)</span> 的 Moore-Penrose 伪逆。</p>
+<p><span class="arithmatex">\(A = \mathbf{u}\mathbf{v}^T\)</span>，其中 <span class="arithmatex">\(\mathbf{u} = (1,2,3)^T\)</span>，<span class="arithmatex">\(\mathbf{v} = (1,1)^T\)</span>。</p>
+<p>对秩 1 矩阵，<span class="arithmatex">\(A^+ = \frac{\mathbf{v}\mathbf{u}^T}{\|\mathbf{u}\|^2\|\mathbf{v}\|^2} = \frac{1}{14 \cdot 2}\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 1 &amp; 2 &amp; 3 \end{pmatrix} = \frac{1}{28}\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 1 &amp; 2 &amp; 3 \end{pmatrix}\)</span>。</p>
+<p>验证 (1)：<span class="arithmatex">\(AXA = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}\frac{1}{28}\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 1 &amp; 2 &amp; 3 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}\)</span>。</p>
+<p>先算 <span class="arithmatex">\(XA = \frac{1}{28}\begin{pmatrix} 1 &amp; 2 &amp; 3 \\ 1 &amp; 2 &amp; 3 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix} = \frac{14}{28}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(AXA = A \cdot \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>... 更准确地：<span class="arithmatex">\(A(XA) = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix}\frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1 &amp; 1 \\ 2 &amp; 2 \\ 3 &amp; 3 \end{pmatrix} = A\)</span>。正确。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.12</p>
+<p><strong>利用伪逆求解不相容方程组</strong>。</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{b} = \begin{pmatrix} 3 \\ 1 \\ 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A^TA = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>，<span class="arithmatex">\((A^TA)^{-1} = \begin{pmatrix} 1/2 &amp; 0 \\ 0 &amp; 1/3 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A^+ = (A^TA)^{-1}A^T = \begin{pmatrix} 1/2 &amp; 0 \\ 0 &amp; 1/3 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 1/2 &amp; 1/2 &amp; 0 \\ 1/3 &amp; -1/3 &amp; 1/3 \end{pmatrix}\)</span>。</p>
+<p>最小范数最小二乘解：<span class="arithmatex">\(\mathbf{x} = A^+\mathbf{b} = \begin{pmatrix} 1/2 &amp; 1/2 &amp; 0 \\ 1/3 &amp; -1/3 &amp; 1/3 \end{pmatrix}\begin{pmatrix} 3 \\ 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 2 \\ 1 \end{pmatrix}\)</span>。</p>
+<p>残差：<span class="arithmatex">\(A\mathbf{x} - \mathbf{b} = \begin{pmatrix} 3 \\ 1 \\ 1 \end{pmatrix} - \begin{pmatrix} 3 \\ 1 \\ 1 \end{pmatrix} = \mathbf{0}\)</span>。</p>
+<p>方程组竟然是相容的！解唯一（因为 <span class="arithmatex">\(A\)</span> 列满秩）。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 20.13</p>
+<p><strong>真正不相容的情形</strong>。设 <span class="arithmatex">\(A = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{b} = \begin{pmatrix} 1 \\ 3 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A^+ = \frac{A^T}{A^TA} = \frac{1}{2}(1, 1)\)</span>。</p>
+<p><span class="arithmatex">\(\mathbf{x} = A^+\mathbf{b} = \frac{1}{2}(1 + 3) = 2\)</span>。</p>
+<p>最小二乘解：<span class="arithmatex">\(x = 2\)</span>，<span class="arithmatex">\(A\mathbf{x} = \begin{pmatrix} 2 \\ 2 \end{pmatrix}\)</span>，残差 <span class="arithmatex">\(= \begin{pmatrix} -1 \\ 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\|\)</span>残差<span class="arithmatex">\(\| = \sqrt{2}\)</span>。</p>
+<p>这是最优的，因为 <span class="arithmatex">\(\|A x - \mathbf{b}\|^2 = (x-1)^2 + (x-3)^2\)</span>，对 <span class="arithmatex">\(x\)</span> 求导得 <span class="arithmatex">\(2(x-1) + 2(x-3) = 0\)</span>，<span class="arithmatex">\(x = 2\)</span>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

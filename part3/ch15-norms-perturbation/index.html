@@ -1,0 +1,2133 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part3/ch15-norms-perturbation/">
+      
+      
+        <link rel="prev" href="../ch14-matrix-analysis/">
+      
+      
+        <link rel="next" href="../ch16-positive-definite/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第15章 范数与扰动理论 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#15" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第15章 范数与扰动理论
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 向量范数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 矩阵范数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 算子范数（诱导范数）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 范数之间的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 条件数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 特征值的扰动
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#157" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.7 奇异值的扰动
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#158" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.8 线性方程组的扰动分析
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.1 向量范数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.2 矩阵范数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#153" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.3 算子范数（诱导范数）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#154" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.4 范数之间的关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#155" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.5 条件数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#156" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.6 特征值的扰动
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#157" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.7 奇异值的扰动
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#158" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15.8 线性方程组的扰动分析
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="15">第 15 章 范数与扰动理论<a class="headerlink" href="#15" title="Permanent link">&para;</a></h1>
+<p>范数为向量空间和矩阵空间提供了"大小"的度量，是矩阵分析和数值线性代数的基石。扰动理论则研究当矩阵发生微小变化时，其特征值、奇异值和线性方程组的解如何变化。这些理论对于理解数值计算的稳定性和精度至关重要。本章系统地建立向量范数和矩阵范数的理论，引入条件数的概念，并深入讨论特征值和奇异值的扰动界。</p>
+<hr />
+<h2 id="151">15.1 向量范数<a class="headerlink" href="#151" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.1 (向量范数)</p>
+<p><span class="arithmatex">\(\mathbb{C}^n\)</span> 上的<strong>向量范数（vector norm）</strong> 是函数 <span class="arithmatex">\(\|\cdot\| : \mathbb{C}^n \to \mathbb{R}\)</span>，满足对所有 <span class="arithmatex">\(\mathbf{x}, \mathbf{y} \in \mathbb{C}^n\)</span> 和 <span class="arithmatex">\(\alpha \in \mathbb{C}\)</span>：</p>
+<p>(1) <strong>非负性</strong>：<span class="arithmatex">\(\|\mathbf{x}\| \geq 0\)</span>，等号成立当且仅当 <span class="arithmatex">\(\mathbf{x} = \mathbf{0}\)</span>；</p>
+<p>(2) <strong>齐次性</strong>：<span class="arithmatex">\(\|\alpha\mathbf{x}\| = |\alpha|\|\mathbf{x}\|\)</span>；</p>
+<p>(3) <strong>三角不等式</strong>：<span class="arithmatex">\(\|\mathbf{x} + \mathbf{y}\| \leq \|\mathbf{x}\| + \|\mathbf{y}\|\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.2 (<span class="arithmatex">\(\ell_p\)</span> 范数)</p>
+<p>对 <span class="arithmatex">\(1 \leq p \leq \infty\)</span>，<span class="arithmatex">\(\mathbb{C}^n\)</span> 上的 <strong><span class="arithmatex">\(\ell_p\)</span> 范数（<span class="arithmatex">\(\ell_p\)</span> norm）</strong> 定义为</p>
+<div class="arithmatex">\[\|\mathbf{x}\|_p = \left(\sum_{i=1}^{n} |x_i|^p\right)^{1/p}, \quad 1 \leq p &lt; \infty,\]</div>
+<div class="arithmatex">\[\|\mathbf{x}\|_\infty = \max_{1 \leq i \leq n} |x_i|.\]</div>
+<p>特别重要的是：</p>
+<ul>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_1 = \sum_{i=1}^{n}|x_i|\)</span>（曼哈顿范数）；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n}|x_i|^2} = \sqrt{\mathbf{x}^*\mathbf{x}}\)</span>（欧氏范数）；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_\infty = \max_i |x_i|\)</span>（切比雪夫范数）。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.1 (Hölder 不等式)</p>
+<p>设 <span class="arithmatex">\(p, q \geq 1\)</span> 满足 <span class="arithmatex">\(\frac{1}{p} + \frac{1}{q} = 1\)</span>（共轭指数），则对任意 <span class="arithmatex">\(\mathbf{x}, \mathbf{y} \in \mathbb{C}^n\)</span>，</p>
+<div class="arithmatex">\[|\mathbf{x}^*\mathbf{y}| \leq \|\mathbf{x}\|_p\|\mathbf{y}\|_q.\]</div>
+<p>特别地，<span class="arithmatex">\(p = q = 2\)</span> 时即为 Cauchy-Schwarz 不等式。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>当 <span class="arithmatex">\(\|\mathbf{x}\|_p = 0\)</span> 或 <span class="arithmatex">\(\|\mathbf{y}\|_q = 0\)</span> 时显然成立。否则不妨设 <span class="arithmatex">\(\|\mathbf{x}\|_p = \|\mathbf{y}\|_q = 1\)</span>。由 Young 不等式 <span class="arithmatex">\(ab \leq \frac{a^p}{p} + \frac{b^q}{q}\)</span>（<span class="arithmatex">\(a, b \geq 0\)</span>），取 <span class="arithmatex">\(a = |x_i|\)</span>，<span class="arithmatex">\(b = |y_i|\)</span>，求和得</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}|x_i||y_i| \leq \frac{1}{p}\sum|x_i|^p + \frac{1}{q}\sum|y_i|^q = \frac{1}{p} + \frac{1}{q} = 1.\]</div>
+<p>因此 <span class="arithmatex">\(|\mathbf{x}^*\mathbf{y}| \leq \sum|x_i||y_i| \leq 1 = \|\mathbf{x}\|_p\|\mathbf{y}\|_q\)</span>。一般情形除以 <span class="arithmatex">\(\|\mathbf{x}\|_p\|\mathbf{y}\|_q\)</span> 归约到上述情况。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.2 (范数等价性定理)</p>
+<p><span class="arithmatex">\(\mathbb{C}^n\)</span> 上的任意两个范数 <span class="arithmatex">\(\|\cdot\|_\alpha\)</span> 和 <span class="arithmatex">\(\|\cdot\|_\beta\)</span> 是<strong>等价的（equivalent）</strong>，即存在正常数 <span class="arithmatex">\(c_1, c_2 &gt; 0\)</span> 使得对所有 <span class="arithmatex">\(\mathbf{x} \in \mathbb{C}^n\)</span>，</p>
+<div class="arithmatex">\[c_1\|\mathbf{x}\|_\alpha \leq \|\mathbf{x}\|_\beta \leq c_2\|\mathbf{x}\|_\alpha.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>只需证明任意范数 <span class="arithmatex">\(\|\cdot\|\)</span> 与 <span class="arithmatex">\(\|\cdot\|_2\)</span> 等价。设 <span class="arithmatex">\(\mathbf{e}_1, \ldots, \mathbf{e}_n\)</span> 为标准基。对 <span class="arithmatex">\(\mathbf{x} = \sum x_i\mathbf{e}_i\)</span>，</p>
+<div class="arithmatex">\[\|\mathbf{x}\| \leq \sum |x_i|\|\mathbf{e}_i\| \leq \left(\max_i\|\mathbf{e}_i\|\right)\sum|x_i| \leq \left(\max_i\|\mathbf{e}_i\|\right)\sqrt{n}\|\mathbf{x}\|_2.\]</div>
+<p>令 <span class="arithmatex">\(c_2 = \sqrt{n}\max_i\|\mathbf{e}_i\|\)</span>，则 <span class="arithmatex">\(\|\mathbf{x}\| \leq c_2\|\mathbf{x}\|_2\)</span>。这说明 <span class="arithmatex">\(\|\cdot\|\)</span> 关于 <span class="arithmatex">\(\|\cdot\|_2\)</span> 是 Lipschitz 连续的。</p>
+<p>考虑紧集 <span class="arithmatex">\(S = \{\mathbf{x} : \|\mathbf{x}\|_2 = 1\}\)</span>。连续函数 <span class="arithmatex">\(\|\cdot\|\)</span> 在 <span class="arithmatex">\(S\)</span> 上达到最小值 <span class="arithmatex">\(c_1 &gt; 0\)</span>（因为 <span class="arithmatex">\(\|\mathbf{x}\| &gt; 0\)</span> 对 <span class="arithmatex">\(\mathbf{x} \in S\)</span>）。因此对 <span class="arithmatex">\(\mathbf{x} \neq \mathbf{0}\)</span>，<span class="arithmatex">\(\|\mathbf{x}/\|\mathbf{x}\|_2\| \geq c_1\)</span>，即 <span class="arithmatex">\(\|\mathbf{x}\| \geq c_1\|\mathbf{x}\|_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 15.1 (<span class="arithmatex">\(\ell_p\)</span> 范数之间的关系)</p>
+<p>对任意 <span class="arithmatex">\(\mathbf{x} \in \mathbb{C}^n\)</span> 和 <span class="arithmatex">\(1 \leq p \leq q \leq \infty\)</span>，</p>
+<div class="arithmatex">\[\|\mathbf{x}\|_q \leq \|\mathbf{x}\|_p \leq n^{1/p - 1/q}\|\mathbf{x}\|_q.\]</div>
+<p>特别地：</p>
+<ul>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_2 \leq \|\mathbf{x}\|_1 \leq \sqrt{n}\|\mathbf{x}\|_2\)</span>；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_\infty \leq \|\mathbf{x}\|_2 \leq \sqrt{n}\|\mathbf{x}\|_\infty\)</span>；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_\infty \leq \|\mathbf{x}\|_1 \leq n\|\mathbf{x}\|_\infty\)</span>。</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.1</p>
+<p>设 <span class="arithmatex">\(\mathbf{x} = (3, -4, 0, 1)^T\)</span>，计算各 <span class="arithmatex">\(\ell_p\)</span> 范数。</p>
+<ul>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_1 = |3| + |-4| + |0| + |1| = 8\)</span>；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_2 = \sqrt{9 + 16 + 0 + 1} = \sqrt{26} \approx 5.10\)</span>；</li>
+<li><span class="arithmatex">\(\|\mathbf{x}\|_\infty = \max\{3, 4, 0, 1\} = 4\)</span>。</li>
+</ul>
+<p>验证：<span class="arithmatex">\(\|\mathbf{x}\|_\infty = 4 \leq 5.10 = \|\mathbf{x}\|_2 \leq 8 = \|\mathbf{x}\|_1\)</span>。</p>
+<p><span class="arithmatex">\(\|\mathbf{x}\|_1 = 8 \leq \sqrt{4}\cdot 5.10 = 10.2\)</span>？实际上 <span class="arithmatex">\(\sqrt{n}\|\mathbf{x}\|_2 = 2 \times 5.10 = 10.2\)</span>，而 <span class="arithmatex">\(\|\mathbf{x}\|_1 = 8 \leq 10.2\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.2</p>
+<p><strong><span class="arithmatex">\(\ell_p\)</span> 范数的单位球</strong>。<span class="arithmatex">\(\ell_p\)</span> 范数的单位球 <span class="arithmatex">\(B_p = \{\mathbf{x} \in \mathbb{R}^2 : \|\mathbf{x}\|_p \leq 1\}\)</span> 的形状随 <span class="arithmatex">\(p\)</span> 变化：</p>
+<ul>
+<li><span class="arithmatex">\(p = 1\)</span>：菱形（正方形旋转 <span class="arithmatex">\(45°\)</span>），顶点为 <span class="arithmatex">\((\pm 1, 0)\)</span> 和 <span class="arithmatex">\((0, \pm 1)\)</span>；</li>
+<li><span class="arithmatex">\(p = 2\)</span>：圆盘；</li>
+<li><span class="arithmatex">\(p = \infty\)</span>：正方形 <span class="arithmatex">\([-1, 1]^2\)</span>；</li>
+<li><span class="arithmatex">\(p \to 0^+\)</span>：单位球退化为坐标轴上的线段。</li>
+</ul>
+<p>随 <span class="arithmatex">\(p\)</span> 增大，单位球从菱形膨胀为圆再膨胀为正方形，体现了范数之间 <span class="arithmatex">\(\|\mathbf{x}\|_q \leq \|\mathbf{x}\|_p\)</span>（<span class="arithmatex">\(p \leq q\)</span>）的关系。</p>
+</div>
+<hr />
+<h2 id="152">15.2 矩阵范数<a class="headerlink" href="#152" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.3 (矩阵范数)</p>
+<p><span class="arithmatex">\(\mathbb{C}^{m \times n}\)</span> 上的<strong>矩阵范数（matrix norm）</strong> 是函数 <span class="arithmatex">\(\|\cdot\| : \mathbb{C}^{m \times n} \to \mathbb{R}\)</span>，满足对所有 <span class="arithmatex">\(A, B\)</span> 和 <span class="arithmatex">\(\alpha \in \mathbb{C}\)</span>：</p>
+<p>(1) <strong>非负性</strong>：<span class="arithmatex">\(\|A\| \geq 0\)</span>，等号成立当且仅当 <span class="arithmatex">\(A = O\)</span>；</p>
+<p>(2) <strong>齐次性</strong>：<span class="arithmatex">\(\|\alpha A\| = |\alpha|\|A\|\)</span>；</p>
+<p>(3) <strong>三角不等式</strong>：<span class="arithmatex">\(\|A + B\| \leq \|A\| + \|B\|\)</span>。</p>
+<p>若还满足 (4) <strong>次可乘性（submultiplicativity）</strong>：<span class="arithmatex">\(\|AB\| \leq \|A\|\|B\|\)</span>（当乘法有定义时），则称为<strong>次可乘范数</strong>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.4 (Frobenius 范数)</p>
+<p>设 <span class="arithmatex">\(A = (a_{ij}) \in \mathbb{C}^{m \times n}\)</span>，<strong>Frobenius 范数（Frobenius norm）</strong> 定义为</p>
+<div class="arithmatex">\[\|A\|_F = \sqrt{\sum_{i=1}^{m}\sum_{j=1}^{n}|a_{ij}|^2} = \sqrt{\operatorname{tr}(A^*A)} = \sqrt{\sum_{i=1}^{\min(m,n)}\sigma_i^2}.\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.3 (Frobenius 范数的性质)</p>
+<p>Frobenius 范数满足：</p>
+<p>(1) 它是矩阵范数且次可乘；</p>
+<p>(2) <span class="arithmatex">\(\|A\|_F = \|A^*\|_F\)</span>；</p>
+<p>(3) 对酉矩阵（正交矩阵）<span class="arithmatex">\(U, V\)</span>，<span class="arithmatex">\(\|UAV\|_F = \|A\|_F\)</span>（酉不变性）；</p>
+<p>(4) <span class="arithmatex">\(\|A\|_F^2 = \sum_{i=1}^{r}\sigma_i^2\)</span>，其中 <span class="arithmatex">\(\sigma_i\)</span> 为 <span class="arithmatex">\(A\)</span> 的奇异值；</p>
+<p>(5) <span class="arithmatex">\(\|A\|_2 \leq \|A\|_F \leq \sqrt{r}\|A\|_2\)</span>，其中 <span class="arithmatex">\(r = \operatorname{rank}(A)\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> 次可乘性：<span class="arithmatex">\(\|AB\|_F^2 = \sum_{i,k}\left|\sum_j a_{ij}b_{jk}\right|^2 \leq \sum_{i,k}\left(\sum_j|a_{ij}|^2\right)\left(\sum_j|b_{jk}|^2\right)\)</span>（由 Cauchy-Schwarz）<span class="arithmatex">\(= \sum_i\left(\sum_j|a_{ij}|^2\right)\sum_k\left(\sum_j|b_{jk}|^2\right) = \|A\|_F^2\|B\|_F^2\)</span>。</p>
+<p><strong>(3)</strong> <span class="arithmatex">\(\|UAV\|_F^2 = \operatorname{tr}(V^*A^*U^*UAV) = \operatorname{tr}(V^*A^*AV) = \operatorname{tr}(A^*AVV^*) = \operatorname{tr}(A^*A) = \|A\|_F^2\)</span>。</p>
+<p><strong>(4)</strong> 由 SVD，<span class="arithmatex">\(A = U\Sigma V^*\)</span>，<span class="arithmatex">\(\|A\|_F^2 = \|\Sigma\|_F^2 = \sum\sigma_i^2\)</span>。</p>
+<p><strong>(5)</strong> <span class="arithmatex">\(\|A\|_F^2 = \sum\sigma_i^2 \geq \sigma_1^2 = \|A\|_2^2\)</span>，又 <span class="arithmatex">\(\sum\sigma_i^2 \leq r\sigma_1^2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 15.3</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\|A\|_F = \sqrt{1 + 4 + 9 + 16} = \sqrt{30} \approx 5.48\)</span>。</p>
+<p><span class="arithmatex">\(A^*A = \begin{pmatrix} 10 &amp; 14 \\ 14 &amp; 20 \end{pmatrix}\)</span>，特征值 <span class="arithmatex">\(15 \pm \sqrt{221}/\sqrt{1}\)</span>... 让我重新计算。<span class="arithmatex">\(\operatorname{tr} = 30\)</span>，<span class="arithmatex">\(\det = 200 - 196 = 4\)</span>。特征值 <span class="arithmatex">\(\mu = 15 \pm \sqrt{225 - 4} = 15 \pm \sqrt{221}\)</span>。<span class="arithmatex">\(\sigma_1 = \sqrt{15 + \sqrt{221}} \approx \sqrt{29.87} \approx 5.47\)</span>，<span class="arithmatex">\(\sigma_2 = \sqrt{15 - \sqrt{221}} \approx \sqrt{0.13} \approx 0.37\)</span>。</p>
+<p>验证 <span class="arithmatex">\(\|A\|_F = \sqrt{\sigma_1^2 + \sigma_2^2} = \sqrt{30} \approx 5.48\)</span>。</p>
+</div>
+<hr />
+<h2 id="153">15.3 算子范数（诱导范数）<a class="headerlink" href="#153" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.5 (算子范数)</p>
+<p>设 <span class="arithmatex">\(\|\cdot\|_\alpha\)</span> 和 <span class="arithmatex">\(\|\cdot\|_\beta\)</span> 分别是 <span class="arithmatex">\(\mathbb{C}^n\)</span> 和 <span class="arithmatex">\(\mathbb{C}^m\)</span> 上的向量范数。由它们<strong>诱导（induced）</strong> 的<strong>算子范数（operator norm）</strong> 定义为</p>
+<div class="arithmatex">\[\|A\|_{\alpha \to \beta} = \max_{\mathbf{x} \neq \mathbf{0}} \frac{\|A\mathbf{x}\|_\beta}{\|\mathbf{x}\|_\alpha} = \max_{\|\mathbf{x}\|_\alpha = 1} \|A\mathbf{x}\|_\beta.\]</div>
+<p>当 <span class="arithmatex">\(\alpha = \beta = p\)</span> 时，简记为 <span class="arithmatex">\(\|A\|_p\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.4 (算子范数的计算公式)</p>
+<p>设 <span class="arithmatex">\(A = (a_{ij}) \in \mathbb{C}^{m \times n}\)</span>，则：</p>
+<p>(1) <span class="arithmatex">\(\|A\|_1 = \max_{1 \leq j \leq n} \sum_{i=1}^{m} |a_{ij}|\)</span>（最大列和）；</p>
+<p>(2) <span class="arithmatex">\(\|A\|_\infty = \max_{1 \leq i \leq m} \sum_{j=1}^{n} |a_{ij}|\)</span>（最大行和）；</p>
+<p>(3) <span class="arithmatex">\(\|A\|_2 = \sigma_1(A)\)</span>（最大奇异值）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> 设 <span class="arithmatex">\(\mathbf{x}\)</span> 满足 <span class="arithmatex">\(\|\mathbf{x}\|_1 = 1\)</span>。则</p>
+<div class="arithmatex">\[\|A\mathbf{x}\|_1 = \sum_i\left|\sum_j a_{ij}x_j\right| \leq \sum_i\sum_j|a_{ij}||x_j| = \sum_j|x_j|\sum_i|a_{ij}| \leq \max_j\sum_i|a_{ij}|.\]</div>
+<p>等号在 <span class="arithmatex">\(\mathbf{x} = \mathbf{e}_{j^*}\)</span>（取最大列和对应的标准基向量）时达到。</p>
+<p><strong>(2)</strong> 类似地，<span class="arithmatex">\(\|A\mathbf{x}\|_\infty = \max_i\left|\sum_j a_{ij}x_j\right| \leq \max_i\sum_j|a_{ij}|\|\mathbf{x}\|_\infty\)</span>。等号在选取适当 <span class="arithmatex">\(\mathbf{x}\)</span> 时达到。</p>
+<p><strong>(3)</strong> <span class="arithmatex">\(\|A\mathbf{x}\|_2^2 = \mathbf{x}^*A^*A\mathbf{x}\)</span>。<span class="arithmatex">\(\max_{\|\mathbf{x}\|_2=1}\mathbf{x}^*A^*A\mathbf{x} = \lambda_{\max}(A^*A) = \sigma_1^2(A)\)</span>（由 Rayleigh 商）。故 <span class="arithmatex">\(\|A\|_2 = \sigma_1(A)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.5 (算子范数的性质)</p>
+<p>算子范数满足：</p>
+<p>(1) <span class="arithmatex">\(\|I\| = 1\)</span>；</p>
+<p>(2) 次可乘性：<span class="arithmatex">\(\|AB\| \leq \|A\|\|B\|\)</span>；</p>
+<p>(3) 相容性：<span class="arithmatex">\(\|A\mathbf{x}\| \leq \|A\|\|\mathbf{x}\|\)</span>（对相应的向量范数）；</p>
+<p>(4) <span class="arithmatex">\(\rho(A) \leq \|A\|\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(2)</strong> <span class="arithmatex">\(\|AB\mathbf{x}\| \leq \|A\|\|B\mathbf{x}\| \leq \|A\|\|B\|\|\mathbf{x}\|\)</span>，对所有 <span class="arithmatex">\(\|\mathbf{x}\| = 1\)</span> 取上确界得 <span class="arithmatex">\(\|AB\| \leq \|A\|\|B\|\)</span>。</p>
+<p><strong>(3)</strong> 由定义直接得出。</p>
+<p><strong>(4)</strong> 已在定理 14.6 中证明。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 15.4</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; -2 &amp; 3 \\ 4 &amp; 0 &amp; -1 \end{pmatrix}\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(\|A\|_1 = \max\{|1|+|4|,\; |-2|+|0|,\; |3|+|-1|\} = \max\{5, 2, 4\} = 5\)</span>；</li>
+<li><span class="arithmatex">\(\|A\|_\infty = \max\{|1|+|-2|+|3|,\; |4|+|0|+|-1|\} = \max\{6, 5\} = 6\)</span>；</li>
+<li><span class="arithmatex">\(\|A\|_2 = \sigma_1(A)\)</span>，需计算 <span class="arithmatex">\(A^TA\)</span> 的最大特征值。</li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.5</p>
+<p>对正规矩阵，<span class="arithmatex">\(\|A\|_2 = \rho(A)\)</span>。</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}\)</span>（旋转 <span class="arithmatex">\(90°\)</span>）。<span class="arithmatex">\(A\)</span> 是正规矩阵（实际是正交矩阵），特征值为 <span class="arithmatex">\(\pm i\)</span>，<span class="arithmatex">\(\rho(A) = 1\)</span>。</p>
+<p><span class="arithmatex">\(A^TA = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = I\)</span>，<span class="arithmatex">\(\sigma_1 = 1\)</span>。因此 <span class="arithmatex">\(\|A\|_2 = 1 = \rho(A)\)</span>。</p>
+</div>
+<hr />
+<h2 id="154">15.4 范数之间的关系<a class="headerlink" href="#154" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.6 (矩阵范数之间的不等式)</p>
+<p>设 <span class="arithmatex">\(A \in \mathbb{C}^{m \times n}\)</span>，则：</p>
+<p>(1) <span class="arithmatex">\(\|A\|_2 \leq \|A\|_F \leq \sqrt{n}\|A\|_2\)</span>；</p>
+<p>(2) <span class="arithmatex">\(\frac{1}{\sqrt{n}}\|A\|_\infty \leq \|A\|_2 \leq \sqrt{m}\|A\|_\infty\)</span>；</p>
+<p>(3) <span class="arithmatex">\(\frac{1}{\sqrt{m}}\|A\|_1 \leq \|A\|_2 \leq \sqrt{n}\|A\|_1\)</span>；</p>
+<p>(4) <span class="arithmatex">\(\|A\|_2 \leq \sqrt{\|A\|_1\|A\|_\infty}\)</span>；</p>
+<p>(5) <span class="arithmatex">\(\frac{1}{\sqrt{mn}}\|A\|_F \leq \|A\|_\infty\)</span>，<span class="arithmatex">\(\frac{1}{\sqrt{mn}}\|A\|_F \leq \|A\|_1\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> 已在定理 15.3 (5) 中证明。</p>
+<p><strong>(4)</strong> 设 <span class="arithmatex">\(A\mathbf{x} = \sigma_1\mathbf{u}\)</span>（<span class="arithmatex">\(\|\mathbf{x}\|_2 = \|\mathbf{u}\|_2 = 1\)</span>）。则</p>
+<div class="arithmatex">\[\sigma_1 = \|A\mathbf{x}\|_2 \leq \sqrt{m}\|A\mathbf{x}\|_\infty \leq \sqrt{m}\|A\|_\infty\|\mathbf{x}\|_\infty \leq \sqrt{m}\|A\|_\infty.\]</div>
+<p>同理利用 <span class="arithmatex">\(A^*\)</span>：<span class="arithmatex">\(\sigma_1 = \|A^*\mathbf{u}\|_2 \leq \sqrt{n}\|A^*\|_\infty = \sqrt{n}\|A\|_1\)</span>。因此 <span class="arithmatex">\(\sigma_1^2 \leq \sqrt{mn}\|A\|_\infty\sqrt{mn}\|A\|_1/(mn)\)</span>...</p>
+<p>更直接的证明：<span class="arithmatex">\(\|A\|_2^2 = \rho(A^*A) \leq \|A^*A\|_\infty \leq \|A^*\|_\infty\|A\|_\infty = \|A\|_1\|A\|_\infty\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 15.6</p>
+<p>对矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>：</p>
+<ul>
+<li><span class="arithmatex">\(\|A\|_1 = \max\{4, 6\} = 6\)</span>；</li>
+<li><span class="arithmatex">\(\|A\|_\infty = \max\{3, 7\} = 7\)</span>；</li>
+<li><span class="arithmatex">\(\|A\|_F = \sqrt{30} \approx 5.48\)</span>；</li>
+<li><span class="arithmatex">\(\|A\|_2 \approx 5.46\)</span>（最大奇异值）。</li>
+</ul>
+<p>验证不等式 (4)：<span class="arithmatex">\(\|A\|_2^2 \approx 29.87 \leq 42 = 6 \times 7 = \|A\|_1\|A\|_\infty\)</span>。</p>
+</div>
+<hr />
+<h2 id="155">15.5 条件数<a class="headerlink" href="#155" title="Permanent link">&para;</a></h2>
+<p>条件数衡量了求解线性方程组时问题本身对输入扰动的敏感程度，是数值线性代数中最重要的概念之一。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.6 (条件数)</p>
+<p>设 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span> 可逆，<span class="arithmatex">\(\|\cdot\|\)</span> 为矩阵范数。<span class="arithmatex">\(A\)</span> 关于范数 <span class="arithmatex">\(\|\cdot\|\)</span> 的<strong>条件数（condition number）</strong> 定义为</p>
+<div class="arithmatex">\[\kappa(A) = \|A\|\cdot\|A^{-1}\|.\]</div>
+<p>对于 <span class="arithmatex">\(\ell_2\)</span> 范数，<span class="arithmatex">\(\kappa_2(A) = \|A\|_2\|A^{-1}\|_2 = \frac{\sigma_1}{\sigma_n}\)</span>（最大奇异值与最小奇异值之比）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.7 (条件数的基本性质)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 可逆，则：</p>
+<p>(1) <span class="arithmatex">\(\kappa(A) \geq 1\)</span>；</p>
+<p>(2) <span class="arithmatex">\(\kappa(\alpha A) = \kappa(A)\)</span>，对任意 <span class="arithmatex">\(\alpha \neq 0\)</span>；</p>
+<p>(3) 对算子范数，<span class="arithmatex">\(\kappa(A) \geq \frac{\|A\|}{\|B\|}\)</span> 当 <span class="arithmatex">\(B\)</span> 是与 <span class="arithmatex">\(A\)</span> 同阶的任意可逆矩阵时（此条不成立，应为其他性质）；</p>
+<p>(4) 若 <span class="arithmatex">\(U\)</span> 是酉矩阵，则 <span class="arithmatex">\(\kappa_2(U) = 1\)</span>；</p>
+<p>(5) <span class="arithmatex">\(\kappa_2(A) = \kappa_2(A^*)\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> <span class="arithmatex">\(\kappa(A) = \|A\|\|A^{-1}\| \geq \|AA^{-1}\| = \|I\| = 1\)</span>。</p>
+<p><strong>(2)</strong> <span class="arithmatex">\(\kappa(\alpha A) = \|\alpha A\|\|(\alpha A)^{-1}\| = |\alpha|\|A\|\frac{1}{|\alpha|}\|A^{-1}\| = \kappa(A)\)</span>。</p>
+<p><strong>(4)</strong> <span class="arithmatex">\(\|U\|_2 = 1\)</span>（酉矩阵的奇异值都是 <span class="arithmatex">\(1\)</span>），<span class="arithmatex">\(\|U^{-1}\|_2 = \|U^*\|_2 = 1\)</span>。</p>
+<p><strong>(5)</strong> <span class="arithmatex">\(\kappa_2(A^*) = \sigma_1(A^*)/\sigma_n(A^*) = \sigma_1(A)/\sigma_n(A) = \kappa_2(A)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.8 (线性方程组的扰动定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 可逆，<span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>（<span class="arithmatex">\(\mathbf{b} \neq \mathbf{0}\)</span>）。若 <span class="arithmatex">\(\mathbf{b}\)</span> 被扰动为 <span class="arithmatex">\(\mathbf{b} + \delta\mathbf{b}\)</span>，相应的解变为 <span class="arithmatex">\(\mathbf{x} + \delta\mathbf{x}\)</span>，则</p>
+<div class="arithmatex">\[\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|} \leq \kappa(A)\frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}.\]</div>
+<p>若 <span class="arithmatex">\(A\)</span> 被扰动为 <span class="arithmatex">\(A + \delta A\)</span>（<span class="arithmatex">\(\|\delta A\| &lt; \|A^{-1}\|^{-1}\)</span>），解变为 <span class="arithmatex">\(\mathbf{x} + \delta\mathbf{x}\)</span>，则</p>
+<div class="arithmatex">\[\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x} + \delta\mathbf{x}\|} \leq \kappa(A)\frac{\|\delta A\|}{\|A\|}.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>右端扰动</strong>：<span class="arithmatex">\(A(\mathbf{x} + \delta\mathbf{x}) = \mathbf{b} + \delta\mathbf{b}\)</span>，因此 <span class="arithmatex">\(A\delta\mathbf{x} = \delta\mathbf{b}\)</span>，<span class="arithmatex">\(\delta\mathbf{x} = A^{-1}\delta\mathbf{b}\)</span>。</p>
+<div class="arithmatex">\[\|\delta\mathbf{x}\| = \|A^{-1}\delta\mathbf{b}\| \leq \|A^{-1}\|\|\delta\mathbf{b}\|.\]</div>
+<p>由 <span class="arithmatex">\(\|\mathbf{b}\| = \|A\mathbf{x}\| \leq \|A\|\|\mathbf{x}\|\)</span>，即 <span class="arithmatex">\(\frac{1}{\|\mathbf{x}\|} \leq \frac{\|A\|}{\|\mathbf{b}\|}\)</span>。因此</p>
+<div class="arithmatex">\[\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|} \leq \|A^{-1}\|\|\delta\mathbf{b}\|\frac{\|A\|}{\|\mathbf{b}\|} = \kappa(A)\frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}.\]</div>
+<p><strong>系数矩阵扰动</strong>：<span class="arithmatex">\((A + \delta A)(\mathbf{x} + \delta\mathbf{x}) = \mathbf{b} = A\mathbf{x}\)</span>，展开得 <span class="arithmatex">\(A\delta\mathbf{x} + \delta A(\mathbf{x} + \delta\mathbf{x}) = \mathbf{0}\)</span>，即 <span class="arithmatex">\(\delta\mathbf{x} = -A^{-1}\delta A(\mathbf{x} + \delta\mathbf{x})\)</span>。因此</p>
+<div class="arithmatex">\[\|\delta\mathbf{x}\| \leq \|A^{-1}\|\|\delta A\|\|\mathbf{x}+\delta\mathbf{x}\|,\]</div>
+<div class="arithmatex">\[\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}+\delta\mathbf{x}\|} \leq \|A^{-1}\|\|\delta A\| = \kappa(A)\frac{\|\delta A\|}{\|A\|}. \quad \blacksquare\]</div>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 15.7</p>
+<p>著名的 Hilbert 矩阵 <span class="arithmatex">\(H_n = \left(\frac{1}{i+j-1}\right)_{i,j=1}^{n}\)</span> 是病态矩阵的典型例子。</p>
+<ul>
+<li><span class="arithmatex">\(H_3 = \begin{pmatrix} 1 &amp; 1/2 &amp; 1/3 \\ 1/2 &amp; 1/3 &amp; 1/4 \\ 1/3 &amp; 1/4 &amp; 1/5 \end{pmatrix}\)</span>，<span class="arithmatex">\(\kappa_2(H_3) \approx 524\)</span>；</li>
+<li><span class="arithmatex">\(\kappa_2(H_5) \approx 4.77 \times 10^5\)</span>；</li>
+<li><span class="arithmatex">\(\kappa_2(H_{10}) \approx 1.60 \times 10^{13}\)</span>。</li>
+</ul>
+<p>条件数随 <span class="arithmatex">\(n\)</span> 指数增长，意味着用 Hilbert 矩阵求解线性方程组时，输入数据的微小扰动会导致解的巨大变化。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.8</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1.001 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{b} = \begin{pmatrix} 2 \\ 2.001 \end{pmatrix}\)</span>，解为 <span class="arithmatex">\(\mathbf{x} = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\)</span>。</p>
+<p>扰动 <span class="arithmatex">\(\mathbf{b}' = \begin{pmatrix} 2 \\ 2.002 \end{pmatrix}\)</span>（相对扰动约 <span class="arithmatex">\(0.05\%\)</span>），新解为 <span class="arithmatex">\(\mathbf{x}' = \begin{pmatrix} 0 \\ 2 \end{pmatrix}\)</span>。</p>
+<p>相对解变化 <span class="arithmatex">\(\frac{\|\mathbf{x}'-\mathbf{x}\|_2}{\|\mathbf{x}\|_2} = \frac{\sqrt{2}}{\sqrt{2}} = 1 = 100\%\)</span>。</p>
+<p><span class="arithmatex">\(\kappa_2(A) \approx 4002\)</span>，远大于 <span class="arithmatex">\(1\)</span>，表明此问题极其病态。</p>
+</div>
+<hr />
+<h2 id="156">15.6 特征值的扰动<a class="headerlink" href="#156" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.9 (Bauer-Fike 定理)</p>
+<p>设 <span class="arithmatex">\(A \in \mathbb{C}^{n \times n}\)</span> 可对角化，<span class="arithmatex">\(A = X\Lambda X^{-1}\)</span>（<span class="arithmatex">\(\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)\)</span>）。设 <span class="arithmatex">\(\mu\)</span> 是 <span class="arithmatex">\(A + E\)</span> 的任意特征值，则存在 <span class="arithmatex">\(A\)</span> 的某个特征值 <span class="arithmatex">\(\lambda_j\)</span> 使得</p>
+<div class="arithmatex">\[|\mu - \lambda_j| \leq \kappa_p(X)\|E\|_p,\]</div>
+<p>其中 <span class="arithmatex">\(\kappa_p(X) = \|X\|_p\|X^{-1}\|_p\)</span> 是特征向量矩阵的条件数。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>若 <span class="arithmatex">\(\mu = \lambda_j\)</span> 对某个 <span class="arithmatex">\(j\)</span> 成立则不等式显然。否则 <span class="arithmatex">\(\mu\)</span> 不是 <span class="arithmatex">\(A\)</span> 的特征值，即 <span class="arithmatex">\(\mu I - A\)</span> 可逆。由 <span class="arithmatex">\((A+E)\mathbf{v} = \mu\mathbf{v}\)</span>（<span class="arithmatex">\(\mathbf{v} \neq \mathbf{0}\)</span>），得 <span class="arithmatex">\((\mu I - A)\mathbf{v} = E\mathbf{v}\)</span>，即</p>
+<div class="arithmatex">\[\mathbf{v} = (\mu I - A)^{-1}E\mathbf{v}.\]</div>
+<p>因此 <span class="arithmatex">\(1 \leq \|(\mu I - A)^{-1}E\|_p \leq \|(\mu I - A)^{-1}\|_p\|E\|_p\)</span>。</p>
+<p>由 <span class="arithmatex">\(A = X\Lambda X^{-1}\)</span>，<span class="arithmatex">\((\mu I - A)^{-1} = X(\mu I - \Lambda)^{-1}X^{-1}\)</span>。故</p>
+<div class="arithmatex">\[\|(\mu I - A)^{-1}\|_p \leq \|X\|_p\|(\mu I - \Lambda)^{-1}\|_p\|X^{-1}\|_p.\]</div>
+<p><span class="arithmatex">\((\mu I - \Lambda)^{-1} = \operatorname{diag}\left(\frac{1}{\mu-\lambda_1}, \ldots, \frac{1}{\mu-\lambda_n}\right)\)</span>，其范数为 <span class="arithmatex">\(\max_j\frac{1}{|\mu-\lambda_j|} = \frac{1}{\min_j|\mu-\lambda_j|}\)</span>。</p>
+<p>因此 <span class="arithmatex">\(1 \leq \frac{\kappa_p(X)}{\min_j|\mu-\lambda_j|}\|E\|_p\)</span>，即 <span class="arithmatex">\(\min_j|\mu-\lambda_j| \leq \kappa_p(X)\|E\|_p\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Bauer-Fike 定理表明，特征值对扰动的敏感性由特征向量矩阵的条件数 <span class="arithmatex">\(\kappa(X)\)</span> 控制。对于正规矩阵，<span class="arithmatex">\(X\)</span> 可取为酉矩阵，<span class="arithmatex">\(\kappa_2(X) = 1\)</span>，此时特征值对扰动最不敏感。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.10 (Weyl 不等式——Hermitian 矩阵)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 是 <span class="arithmatex">\(n \times n\)</span> Hermitian 矩阵，特征值分别降序排列为 <span class="arithmatex">\(\lambda_1(A) \geq \cdots \geq \lambda_n(A)\)</span> 和 <span class="arithmatex">\(\lambda_1(B) \geq \cdots \geq \lambda_n(B)\)</span>。设 <span class="arithmatex">\(A + B\)</span> 的特征值为 <span class="arithmatex">\(\lambda_1(A+B) \geq \cdots \geq \lambda_n(A+B)\)</span>。则对所有 <span class="arithmatex">\(i + j - 1 \leq n\)</span>，</p>
+<div class="arithmatex">\[\lambda_{i+j-1}(A + B) \leq \lambda_i(A) + \lambda_j(B).\]</div>
+<p>特别地，取 <span class="arithmatex">\(j = 1\)</span>：<span class="arithmatex">\(\lambda_i(A+B) \leq \lambda_i(A) + \lambda_1(B)\)</span>。</p>
+<p>取 <span class="arithmatex">\(i = 1\)</span>：<span class="arithmatex">\(\lambda_j(A+B) \leq \lambda_1(A) + \lambda_j(B)\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>利用特征值的极大极小原理（Courant-Fischer 定理）：</p>
+<div class="arithmatex">\[\lambda_k(M) = \min_{\dim V = n-k+1}\max_{\substack{\mathbf{x} \in V \\ \|\mathbf{x}\| = 1}}\mathbf{x}^*M\mathbf{x}.\]</div>
+<p>设 <span class="arithmatex">\(U\)</span> 是使 <span class="arithmatex">\(\lambda_i(A)\)</span> 达到的 <span class="arithmatex">\((n-i+1)\)</span> 维子空间，<span class="arithmatex">\(W\)</span> 是使 <span class="arithmatex">\(\lambda_j(B)\)</span> 达到的 <span class="arithmatex">\((n-j+1)\)</span> 维子空间。令 <span class="arithmatex">\(V = U \cap W\)</span>，其维数 <span class="arithmatex">\(\geq (n-i+1) + (n-j+1) - n = n-i-j+2\)</span>，因此 <span class="arithmatex">\(\dim V \geq n-(i+j-1)+1\)</span>。</p>
+<p>对 <span class="arithmatex">\(\mathbf{x} \in V\)</span>，<span class="arithmatex">\(\|\mathbf{x}\| = 1\)</span>：</p>
+<div class="arithmatex">\[\mathbf{x}^*(A+B)\mathbf{x} = \mathbf{x}^*A\mathbf{x} + \mathbf{x}^*B\mathbf{x} \leq \lambda_i(A) + \lambda_j(B).\]</div>
+<p>由极大极小原理，<span class="arithmatex">\(\lambda_{i+j-1}(A+B) \leq \max_{\mathbf{x} \in V, \|\mathbf{x}\|=1}\mathbf{x}^*(A+B)\mathbf{x} \leq \lambda_i(A) + \lambda_j(B)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.11 (Wielandt-Hoffman 定理)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 是 <span class="arithmatex">\(n \times n\)</span> Hermitian 矩阵，特征值分别为 <span class="arithmatex">\(\lambda_1(A) \geq \cdots \geq \lambda_n(A)\)</span> 和 <span class="arithmatex">\(\lambda_1(B) \geq \cdots \geq \lambda_n(B)\)</span>。则</p>
+<div class="arithmatex">\[\sum_{i=1}^{n}(\lambda_i(A) - \lambda_i(B))^2 \leq \|A - B\|_F^2.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = U\Lambda_A U^*\)</span>，<span class="arithmatex">\(B = V\Lambda_B V^*\)</span>（谱分解）。令 <span class="arithmatex">\(W = U^*V\)</span>，则 <span class="arithmatex">\(W\)</span> 是酉矩阵。</p>
+<div class="arithmatex">\[\|A - B\|_F^2 = \|\Lambda_A - W\Lambda_B W^*\|_F^2 = \operatorname{tr}(\Lambda_A^2) + \operatorname{tr}(\Lambda_B^2) - 2\operatorname{Re}\operatorname{tr}(\Lambda_A W\Lambda_B W^*).\]</div>
+<p>由 von Neumann 迹不等式，<span class="arithmatex">\(\operatorname{Re}\operatorname{tr}(\Lambda_A W\Lambda_B W^*) \leq \sum_i\lambda_i(A)\lambda_i(B)\)</span>（当 <span class="arithmatex">\(W\)</span> 是置换矩阵时取等）。因此</p>
+<div class="arithmatex">\[\|A-B\|_F^2 \geq \sum\lambda_i(A)^2 + \sum\lambda_i(B)^2 - 2\sum\lambda_i(A)\lambda_i(B) = \sum(\lambda_i(A)-\lambda_i(B))^2. \quad \blacksquare\]</div>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 15.9</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 5 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}\)</span>，<span class="arithmatex">\(E = \begin{pmatrix} 0.1 &amp; 0 \\ 0 &amp; -0.1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A\)</span> 的特征值：<span class="arithmatex">\(\lambda = 4 \pm \sqrt{2}\)</span>，即 <span class="arithmatex">\(\lambda_1 \approx 5.41\)</span>，<span class="arithmatex">\(\lambda_2 \approx 2.59\)</span>。</p>
+<p><span class="arithmatex">\(A + E = \begin{pmatrix} 5.1 &amp; 1 \\ 1 &amp; 2.9 \end{pmatrix}\)</span>，特征值 <span class="arithmatex">\(\lambda = 4 \pm \sqrt{2.21}\)</span>，即 <span class="arithmatex">\(\lambda_1' \approx 5.49\)</span>，<span class="arithmatex">\(\lambda_2' \approx 2.51\)</span>。</p>
+<p><span class="arithmatex">\(\max_i|\lambda_i' - \lambda_i| \approx 0.08 \leq \|E\|_2 = 0.1\)</span>（Weyl 不等式对 Hermitian 矩阵给出 <span class="arithmatex">\(\kappa_2 = 1\)</span> 的估计）。</p>
+</div>
+<hr />
+<h2 id="157">15.7 奇异值的扰动<a class="headerlink" href="#157" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.12 (奇异值的 Weyl 不等式)</p>
+<p>设 <span class="arithmatex">\(A, B \in \mathbb{C}^{m \times n}\)</span>，奇异值分别降序排列为 <span class="arithmatex">\(\sigma_1(A) \geq \cdots \geq \sigma_p(A)\)</span> 和 <span class="arithmatex">\(\sigma_1(B) \geq \cdots \geq \sigma_p(B)\)</span>（<span class="arithmatex">\(p = \min(m,n)\)</span>）。则对每个 <span class="arithmatex">\(i\)</span>，</p>
+<div class="arithmatex">\[|\sigma_i(A) - \sigma_i(B)| \leq \|A - B\|_2.\]</div>
+<p>更强地，</p>
+<div class="arithmatex">\[\sqrt{\sum_{i=1}^{p}(\sigma_i(A) - \sigma_i(B))^2} \leq \|A - B\|_F.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>构造 <span class="arithmatex">\((m+n) \times (m+n)\)</span> Hermitian 矩阵</p>
+<div class="arithmatex">\[\hat{A} = \begin{pmatrix} O &amp; A \\ A^* &amp; O \end{pmatrix}, \quad \hat{B} = \begin{pmatrix} O &amp; B \\ B^* &amp; O \end{pmatrix}.\]</div>
+<p><span class="arithmatex">\(\hat{A}\)</span> 的特征值为 <span class="arithmatex">\(\pm\sigma_1(A), \ldots, \pm\sigma_p(A)\)</span> 和 <span class="arithmatex">\(|m-n|\)</span> 个零（若 <span class="arithmatex">\(m \neq n\)</span>）。<span class="arithmatex">\(\hat{B}\)</span> 类似。</p>
+<p>将 Hermitian 矩阵的 Weyl 不等式应用于 <span class="arithmatex">\(\hat{A}\)</span> 和 <span class="arithmatex">\(\hat{B}\)</span>：</p>
+<div class="arithmatex">\[|\sigma_i(A) - \sigma_i(B)| = |\lambda_i(\hat{A}) - \lambda_i(\hat{B})| \leq \|\hat{A} - \hat{B}\|_2 = \|A - B\|_2.\]</div>
+<p>Frobenius 范数版本类似地由 Wielandt-Hoffman 定理推出。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 15.2 (奇异值的次可加性)</p>
+<p>设 <span class="arithmatex">\(A, B \in \mathbb{C}^{m \times n}\)</span>，则对每个 <span class="arithmatex">\(i + j - 1 \leq \min(m,n)\)</span>，</p>
+<div class="arithmatex">\[\sigma_{i+j-1}(A + B) \leq \sigma_i(A) + \sigma_j(B).\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.10</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(E = \begin{pmatrix} 0 &amp; 0.2 \\ 0.2 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\sigma_1(A) = 3\)</span>，<span class="arithmatex">\(\sigma_2(A) = 1\)</span>。<span class="arithmatex">\(B = A + E = \begin{pmatrix} 3 &amp; 0.2 \\ 0.2 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(B^TB = \begin{pmatrix} 9.04 &amp; 0.8 \\ 0.8 &amp; 1.04 \end{pmatrix}\)</span>，特征值 <span class="arithmatex">\(\mu = 5.04 \pm \sqrt{16.64}\)</span>。<span class="arithmatex">\(\mu_1 \approx 9.12\)</span>，<span class="arithmatex">\(\mu_2 \approx 0.96\)</span>。<span class="arithmatex">\(\sigma_1(B) \approx 3.02\)</span>，<span class="arithmatex">\(\sigma_2(B) \approx 0.98\)</span>。</p>
+<p><span class="arithmatex">\(|\sigma_1(B) - \sigma_1(A)| \approx 0.02 \leq 0.2 = \|E\|_2\)</span>。<span class="arithmatex">\(|\sigma_2(B) - \sigma_2(A)| \approx 0.02 \leq 0.2\)</span>。</p>
+</div>
+<hr />
+<h2 id="158">15.8 线性方程组的扰动分析<a class="headerlink" href="#158" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 15.7 (前向误差与后向误差)</p>
+<p>设 <span class="arithmatex">\(\hat{\mathbf{x}}\)</span> 是线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 的近似解。</p>
+<ul>
+<li><strong>前向误差（forward error）</strong>：<span class="arithmatex">\(\|\hat{\mathbf{x}} - \mathbf{x}\|\)</span>（解的误差）；</li>
+<li><strong>后向误差（backward error）</strong>：<span class="arithmatex">\(\|\mathbf{r}\| = \|\mathbf{b} - A\hat{\mathbf{x}}\|\)</span>（残量的范数）；</li>
+<li><strong>相对前向误差</strong>：<span class="arithmatex">\(\frac{\|\hat{\mathbf{x}} - \mathbf{x}\|}{\|\mathbf{x}\|}\)</span>；</li>
+<li><strong>相对后向误差</strong>：<span class="arithmatex">\(\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|}\)</span>。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.13 (前向误差与后向误差的关系)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 可逆，<span class="arithmatex">\(\mathbf{r} = \mathbf{b} - A\hat{\mathbf{x}}\)</span> 为残量。则</p>
+<div class="arithmatex">\[\frac{1}{\kappa(A)}\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|} \leq \frac{\|\hat{\mathbf{x}} - \mathbf{x}\|}{\|\mathbf{x}\|} \leq \kappa(A)\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|}.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 <span class="arithmatex">\(A(\hat{\mathbf{x}} - \mathbf{x}) = A\hat{\mathbf{x}} - \mathbf{b} = -\mathbf{r}\)</span>，即 <span class="arithmatex">\(\hat{\mathbf{x}} - \mathbf{x} = -A^{-1}\mathbf{r}\)</span>。</p>
+<p><strong>上界</strong>：<span class="arithmatex">\(\|\hat{\mathbf{x}}-\mathbf{x}\| \leq \|A^{-1}\|\|\mathbf{r}\|\)</span>，<span class="arithmatex">\(\|\mathbf{b}\| \leq \|A\|\|\mathbf{x}\|\)</span>，因此</p>
+<div class="arithmatex">\[\frac{\|\hat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|} \leq \|A^{-1}\|\frac{\|\mathbf{r}\|}{\|\mathbf{x}\|} \leq \|A^{-1}\|\|A\|\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|} = \kappa(A)\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|}.\]</div>
+<p><strong>下界</strong>：<span class="arithmatex">\(\|\mathbf{r}\| = \|A(\hat{\mathbf{x}}-\mathbf{x})\| \leq \|A\|\|\hat{\mathbf{x}}-\mathbf{x}\|\)</span>，<span class="arithmatex">\(\|\mathbf{x}\| \leq \|A^{-1}\|\|\mathbf{b}\|\)</span>，因此</p>
+<div class="arithmatex">\[\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|} \leq \|A\|\frac{\|\hat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{b}\|} \leq \|A\|\|A^{-1}\|\frac{\|\hat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|} = \kappa(A)\frac{\|\hat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|}.\]</div>
+<p>即 <span class="arithmatex">\(\frac{1}{\kappa(A)}\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|} \leq \frac{\|\hat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 15.14 (同时扰动 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(\mathbf{b}\)</span>)</p>
+<p>设 <span class="arithmatex">\((A + \delta A)(\mathbf{x} + \delta\mathbf{x}) = \mathbf{b} + \delta\mathbf{b}\)</span>，且 <span class="arithmatex">\(\kappa(A)\frac{\|\delta A\|}{\|A\|} &lt; 1\)</span>，则</p>
+<div class="arithmatex">\[\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|} \leq \frac{\kappa(A)}{1 - \kappa(A)\frac{\|\delta A\|}{\|A\|}}\left(\frac{\|\delta A\|}{\|A\|} + \frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}\right).\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.11</p>
+<p>用浮点运算求解 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1.0001 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{b} = \begin{pmatrix} 2 \\ 2.0001 \end{pmatrix}\)</span>。</p>
+<p>精确解 <span class="arithmatex">\(\mathbf{x} = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\)</span>。</p>
+<p>假设计算得到 <span class="arithmatex">\(\hat{\mathbf{x}} = \begin{pmatrix} 1.5 \\ 0.5 \end{pmatrix}\)</span>。残量 <span class="arithmatex">\(\mathbf{r} = \mathbf{b} - A\hat{\mathbf{x}} = \begin{pmatrix} 0 \\ 0.00005 \end{pmatrix}\)</span>。</p>
+<p>相对残量 <span class="arithmatex">\(\frac{\|\mathbf{r}\|_\infty}{\|\mathbf{b}\|_\infty} = \frac{0.00005}{2.0001} \approx 2.5 \times 10^{-5}\)</span>（很小）。</p>
+<p>但相对前向误差 <span class="arithmatex">\(\frac{\|\hat{\mathbf{x}}-\mathbf{x}\|_\infty}{\|\mathbf{x}\|_\infty} = \frac{0.5}{1} = 0.5 = 50\%\)</span>（很大）。</p>
+<p>这体现了条件数的放大效应。<span class="arithmatex">\(\kappa_\infty(A) \approx 4 \times 10^4\)</span>，使得小残量对应大误差。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 15.12</p>
+<p>比较良态和病态系统。</p>
+<p><strong>良态系统</strong>：<span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\kappa_2(A) = 2\)</span>。扰动 <span class="arithmatex">\(\|\delta\mathbf{b}\|/\|\mathbf{b}\| = 10^{-6}\)</span> 导致 <span class="arithmatex">\(\|\delta\mathbf{x}\|/\|\mathbf{x}\| \leq 2 \times 10^{-6}\)</span>。</p>
+<p><strong>病态系统</strong>：<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1+10^{-10} \end{pmatrix}\)</span>，<span class="arithmatex">\(\kappa_2(B) \approx 4 \times 10^{10}\)</span>。同样的扰动可能导致 <span class="arithmatex">\(\|\delta\mathbf{x}\|/\|\mathbf{x}\| \leq 4 \times 10^4\)</span>，即解完全不可靠。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

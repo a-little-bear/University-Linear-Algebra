@@ -1,0 +1,2524 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part2/ch08-inner-product-spaces/">
+      
+      
+        <link rel="prev" href="../../part1/ch07-orthogonality/">
+      
+      
+        <link rel="next" href="../ch09-quadratic-forms/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第8章 内积空间 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#8" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第8章 内积空间
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 内积的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 内积的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实内积空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复内积空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 范数与距离
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 范数与距离">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cauchy-schwarz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cauchy-Schwarz 不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 正交与正交补
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 正交投影定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85-bessel-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Bessel 不等式与 Parseval 等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 伴随算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 正规算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 自伴算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.9 谱定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.9 谱定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实谱定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复谱定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.10 酉算子与正交算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 内积的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.1 内积的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实内积空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复内积空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 范数与距离
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.2 范数与距离">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cauchy-schwarz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cauchy-Schwarz 不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 正交与正交补
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 正交投影定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#85-bessel-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 Bessel 不等式与 Parseval 等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#86" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.6 伴随算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#87" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.7 正规算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#88" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.8 自伴算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#89" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.9 谱定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8.9 谱定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        实谱定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复谱定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#810" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.10 酉算子与正交算子
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="8">第 8 章 内积空间<a class="headerlink" href="#8" title="Permanent link">&para;</a></h1>
+<p>内积空间（inner product space）是线性代数中最富有几何直觉的结构之一。通过在向量空间上引入内积运算，我们可以严格地定义长度、角度、正交性等几何概念，从而将代数结构与几何直觉深度融合。本章从内积的公理化定义出发，系统地建立范数与距离理论，研究正交性与正交分解，深入探讨伴随算子、正规算子和自伴算子的性质，最终推导出线性代数中最深刻的结果之一——谱定理。</p>
+<hr />
+<h2 id="81">8.1 内积的定义<a class="headerlink" href="#81" title="Permanent link">&para;</a></h2>
+<p>在欧几里得空间 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中，点积 <span class="arithmatex">\(\mathbf{x} \cdot \mathbf{y} = \sum_{i=1}^n x_i y_i\)</span> 赋予了向量以长度和角度的概念。内积是点积的推广，它将这种几何结构引入到一般的向量空间中。</p>
+<h3 id="_1">实内积空间<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.1 (实内积)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\mathbb{R}\)</span> 上的向量空间。<span class="arithmatex">\(V\)</span> 上的一个<strong>实内积</strong>（real inner product）是一个映射 <span class="arithmatex">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span>，满足以下四条公理：对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v}, \mathbf{w} \in V\)</span> 和 <span class="arithmatex">\(\alpha \in \mathbb{R}\)</span>，</p>
+<ol>
+<li><strong>正定性</strong>（positive definiteness）：<span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v} \rangle \geq 0\)</span>，且 <span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v} \rangle = 0\)</span> 当且仅当 <span class="arithmatex">\(\mathbf{v} = \mathbf{0}\)</span>；</li>
+<li><strong>对称性</strong>（symmetry）：<span class="arithmatex">\(\langle \mathbf{u}, \mathbf{v} \rangle = \langle \mathbf{v}, \mathbf{u} \rangle\)</span>；</li>
+<li><strong>第一变元的齐次性</strong>（homogeneity）：<span class="arithmatex">\(\langle \alpha\mathbf{u}, \mathbf{v} \rangle = \alpha \langle \mathbf{u}, \mathbf{v} \rangle\)</span>；</li>
+<li><strong>第一变元的可加性</strong>（additivity）：<span class="arithmatex">\(\langle \mathbf{u} + \mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{u}, \mathbf{w} \rangle + \langle \mathbf{v}, \mathbf{w} \rangle\)</span>。</li>
+</ol>
+<p>配备了实内积的实向量空间 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 称为<strong>实内积空间</strong>。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>公理 3 和 4 合在一起等价于内积关于第一变元是线性的：<span class="arithmatex">\(\langle \alpha\mathbf{u} + \beta\mathbf{v}, \mathbf{w} \rangle = \alpha\langle \mathbf{u}, \mathbf{w} \rangle + \beta\langle \mathbf{v}, \mathbf{w} \rangle\)</span>。由对称性可知，实内积关于第二变元也是线性的，即实内积是<strong>双线性</strong>的（bilinear）。</p>
+</div>
+<h3 id="_2">复内积空间<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.2 (复内积)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\mathbb{C}\)</span> 上的向量空间。<span class="arithmatex">\(V\)</span> 上的一个<strong>复内积</strong>（complex inner product，或 Hermitian 内积）是一个映射 <span class="arithmatex">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{C}\)</span>，满足以下四条公理：对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v}, \mathbf{w} \in V\)</span> 和 <span class="arithmatex">\(\alpha \in \mathbb{C}\)</span>，</p>
+<ol>
+<li><strong>正定性</strong>：<span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v} \rangle \geq 0\)</span>（即 <span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v} \rangle \in \mathbb{R}\)</span> 且非负），且 <span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v} \rangle = 0\)</span> 当且仅当 <span class="arithmatex">\(\mathbf{v} = \mathbf{0}\)</span>；</li>
+<li><strong>共轭对称性</strong>（conjugate symmetry）：<span class="arithmatex">\(\langle \mathbf{u}, \mathbf{v} \rangle = \overline{\langle \mathbf{v}, \mathbf{u} \rangle}\)</span>；</li>
+<li><strong>第一变元的齐次性</strong>：<span class="arithmatex">\(\langle \alpha\mathbf{u}, \mathbf{v} \rangle = \alpha \langle \mathbf{u}, \mathbf{v} \rangle\)</span>；</li>
+<li><strong>第一变元的可加性</strong>：<span class="arithmatex">\(\langle \mathbf{u} + \mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{u}, \mathbf{w} \rangle + \langle \mathbf{v}, \mathbf{w} \rangle\)</span>。</li>
+</ol>
+<p>配备了复内积的复向量空间 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 称为<strong>复内积空间</strong>。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>在复内积空间中，内积关于第一变元是线性的，但关于第二变元是<strong>共轭线性</strong>的（conjugate linear）：<span class="arithmatex">\(\langle \mathbf{u}, \alpha\mathbf{v} \rangle = \bar{\alpha}\langle \mathbf{u}, \mathbf{v} \rangle\)</span>。这种性质称为<strong>半双线性</strong>（sesquilinear）。注意在某些教材（如物理文献）中采用第二变元线性的约定，这里我们遵循数学中更常见的第一变元线性约定。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.3 (内积空间)</p>
+<p><strong>内积空间</strong>（inner product space）是配备了内积的向量空间 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span>。当基域为 <span class="arithmatex">\(\mathbb{R}\)</span> 时称为实内积空间，当基域为 <span class="arithmatex">\(\mathbb{C}\)</span> 时称为复内积空间。有限维的实内积空间称为<strong>欧几里得空间</strong>（Euclidean space），有限维的复内积空间称为<strong>酉空间</strong>（unitary space）。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.1</p>
+<p><strong><span class="arithmatex">\(\mathbb{R}^n\)</span> 上的标准内积。</strong> 对 <span class="arithmatex">\(\mathbf{x} = (x_1, \ldots, x_n)^T, \mathbf{y} = (y_1, \ldots, y_n)^T \in \mathbb{R}^n\)</span>，定义</p>
+<div class="arithmatex">\[\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^T\mathbf{y} = \sum_{i=1}^n x_i y_i\]</div>
+<p>这是最常见的内积，即标准点积。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.2</p>
+<p><strong><span class="arithmatex">\(\mathbb{C}^n\)</span> 上的标准内积。</strong> 对 <span class="arithmatex">\(\mathbf{x} = (x_1, \ldots, x_n)^T, \mathbf{y} = (y_1, \ldots, y_n)^T \in \mathbb{C}^n\)</span>，定义</p>
+<div class="arithmatex">\[\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x}^H\mathbf{y} = \sum_{i=1}^n x_i \overline{y_i}\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{x}^H = \overline{\mathbf{x}}^T\)</span> 是共轭转置。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.3</p>
+<p><strong>连续函数空间上的内积。</strong> 在实向量空间 <span class="arithmatex">\(C[a, b]\)</span>（区间 <span class="arithmatex">\([a, b]\)</span> 上的连续实值函数）上，定义</p>
+<div class="arithmatex">\[\langle f, g \rangle = \int_a^b f(t)g(t) \, dt\]</div>
+<p>可以验证这满足实内积的四条公理。特别地，正定性由以下事实保证：若 <span class="arithmatex">\(f\)</span> 连续且 <span class="arithmatex">\(\int_a^b f(t)^2 \, dt = 0\)</span>，则 <span class="arithmatex">\(f \equiv 0\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.4</p>
+<p><strong>加权内积。</strong> 设 <span class="arithmatex">\(w_1, w_2, \ldots, w_n &gt; 0\)</span> 为正实数（称为权重），对 <span class="arithmatex">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^n\)</span> 定义</p>
+<div class="arithmatex">\[\langle \mathbf{x}, \mathbf{y} \rangle_w = \sum_{i=1}^n w_i x_i y_i\]</div>
+<p>这是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 上的一个内积，称为加权内积（weighted inner product）。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 8.1</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，有</p>
+<div class="arithmatex">\[\langle \mathbf{u}, \mathbf{0} \rangle = \langle \mathbf{0}, \mathbf{v} \rangle = 0\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由线性性，<span class="arithmatex">\(\langle \mathbf{u}, \mathbf{0} \rangle = \langle \mathbf{u}, 0 \cdot \mathbf{v} \rangle = \bar{0} \langle \mathbf{u}, \mathbf{v} \rangle = 0\)</span>。类似地，<span class="arithmatex">\(\langle \mathbf{0}, \mathbf{v} \rangle = \langle 0 \cdot \mathbf{u}, \mathbf{v} \rangle = 0 \cdot \langle \mathbf{u}, \mathbf{v} \rangle = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<hr />
+<h2 id="82">8.2 范数与距离<a class="headerlink" href="#82" title="Permanent link">&para;</a></h2>
+<p>内积自然地诱导出向量的"长度"概念（范数）和向量之间的"距离"概念。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.4 (诱导范数)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。由内积<strong>诱导的范数</strong>（induced norm）定义为</p>
+<div class="arithmatex">\[\|\mathbf{v}\| = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle}, \quad \forall \mathbf{v} \in V\]</div>
+<p>向量 <span class="arithmatex">\(\mathbf{v}\)</span> 与 <span class="arithmatex">\(\mathbf{w}\)</span> 之间的<strong>距离</strong>（distance）定义为 <span class="arithmatex">\(d(\mathbf{v}, \mathbf{w}) = \|\mathbf{v} - \mathbf{w}\|\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.5 (单位向量)</p>
+<p>若 <span class="arithmatex">\(\|\mathbf{v}\| = 1\)</span>，则称 <span class="arithmatex">\(\mathbf{v}\)</span> 为<strong>单位向量</strong>（unit vector）。对任意非零向量 <span class="arithmatex">\(\mathbf{v}\)</span>，向量 <span class="arithmatex">\(\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}\)</span> 是单位向量，将 <span class="arithmatex">\(\mathbf{v}\)</span> 变换为 <span class="arithmatex">\(\hat{\mathbf{v}}\)</span> 的过程称为<strong>单位化</strong>（normalization）。</p>
+</div>
+<h3 id="cauchy-schwarz">Cauchy-Schwarz 不等式<a class="headerlink" href="#cauchy-schwarz" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.1 (Cauchy-Schwarz 不等式)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，有</p>
+<div class="arithmatex">\[|\langle \mathbf{u}, \mathbf{v} \rangle| \leq \|\mathbf{u}\| \cdot \|\mathbf{v}\|\]</div>
+<p>等号成立当且仅当 <span class="arithmatex">\(\mathbf{u}\)</span> 与 <span class="arithmatex">\(\mathbf{v}\)</span> 线性相关。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>若 <span class="arithmatex">\(\mathbf{v} = \mathbf{0}\)</span>，则两边均为 <span class="arithmatex">\(0\)</span>，不等式显然成立。</p>
+<p>设 <span class="arithmatex">\(\mathbf{v} \neq \mathbf{0}\)</span>。对任意标量 <span class="arithmatex">\(t\)</span>，由正定性有</p>
+<div class="arithmatex">\[0 \leq \|\mathbf{u} - t\mathbf{v}\|^2 = \langle \mathbf{u} - t\mathbf{v}, \mathbf{u} - t\mathbf{v} \rangle = \|\mathbf{u}\|^2 - t\langle \mathbf{v}, \mathbf{u}\rangle - \bar{t}\langle \mathbf{u}, \mathbf{v}\rangle + |t|^2\|\mathbf{v}\|^2\]</div>
+<p>取 <span class="arithmatex">\(t = \dfrac{\langle \mathbf{u}, \mathbf{v}\rangle}{\|\mathbf{v}\|^2}\)</span>，代入得</p>
+<div class="arithmatex">\[0 \leq \|\mathbf{u}\|^2 - \frac{|\langle \mathbf{u}, \mathbf{v}\rangle|^2}{\|\mathbf{v}\|^2}\]</div>
+<p>整理即得 <span class="arithmatex">\(|\langle \mathbf{u}, \mathbf{v}\rangle|^2 \leq \|\mathbf{u}\|^2 \|\mathbf{v}\|^2\)</span>，两边开方即得所求不等式。</p>
+<p>等号成立当且仅当 <span class="arithmatex">\(\|\mathbf{u} - t\mathbf{v}\|^2 = 0\)</span>，即 <span class="arithmatex">\(\mathbf{u} = t\mathbf{v}\)</span>，此时 <span class="arithmatex">\(\mathbf{u}, \mathbf{v}\)</span> 线性相关。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.2 (三角不等式)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，有</p>
+<div class="arithmatex">\[\|\mathbf{u} + \mathbf{v}\| \leq \|\mathbf{u}\| + \|\mathbf{v}\|\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<div class="arithmatex">\[\|\mathbf{u} + \mathbf{v}\|^2 = \langle \mathbf{u}+\mathbf{v}, \mathbf{u}+\mathbf{v}\rangle = \|\mathbf{u}\|^2 + \langle \mathbf{u}, \mathbf{v}\rangle + \langle \mathbf{v}, \mathbf{u}\rangle + \|\mathbf{v}\|^2\]</div>
+<div class="arithmatex">\[= \|\mathbf{u}\|^2 + 2\operatorname{Re}\langle \mathbf{u}, \mathbf{v}\rangle + \|\mathbf{v}\|^2 \leq \|\mathbf{u}\|^2 + 2|\langle \mathbf{u}, \mathbf{v}\rangle| + \|\mathbf{v}\|^2\]</div>
+<p>由 Cauchy-Schwarz 不等式，<span class="arithmatex">\(|\langle \mathbf{u}, \mathbf{v}\rangle| \leq \|\mathbf{u}\|\|\mathbf{v}\|\)</span>，因此</p>
+<div class="arithmatex">\[\|\mathbf{u}+\mathbf{v}\|^2 \leq \|\mathbf{u}\|^2 + 2\|\mathbf{u}\|\|\mathbf{v}\| + \|\mathbf{v}\|^2 = (\|\mathbf{u}\| + \|\mathbf{v}\|)^2\]</div>
+<p>两边开方即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.3 (平行四边形恒等式)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，有</p>
+<div class="arithmatex">\[\|\mathbf{u} + \mathbf{v}\|^2 + \|\mathbf{u} - \mathbf{v}\|^2 = 2(\|\mathbf{u}\|^2 + \|\mathbf{v}\|^2)\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>直接计算：</p>
+<div class="arithmatex">\[\|\mathbf{u}+\mathbf{v}\|^2 = \|\mathbf{u}\|^2 + 2\operatorname{Re}\langle \mathbf{u}, \mathbf{v}\rangle + \|\mathbf{v}\|^2\]</div>
+<div class="arithmatex">\[\|\mathbf{u}-\mathbf{v}\|^2 = \|\mathbf{u}\|^2 - 2\operatorname{Re}\langle \mathbf{u}, \mathbf{v}\rangle + \|\mathbf{v}\|^2\]</div>
+<p>两式相加，中间项消去，即得 <span class="arithmatex">\(\|\mathbf{u}+\mathbf{v}\|^2 + \|\mathbf{u}-\mathbf{v}\|^2 = 2\|\mathbf{u}\|^2 + 2\|\mathbf{v}\|^2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>平行四边形恒等式的几何意义是：平行四边形两条对角线的平方和等于四条边的平方和。反过来，一个范数满足平行四边形恒等式是它能够由某个内积诱导的必要充分条件（Jordan-von Neumann 定理）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.4 (极化恒等式)</p>
+<p>在实内积空间中，内积可由范数恢复：</p>
+<div class="arithmatex">\[\langle \mathbf{u}, \mathbf{v} \rangle = \frac{1}{4}\left(\|\mathbf{u}+\mathbf{v}\|^2 - \|\mathbf{u}-\mathbf{v}\|^2\right)\]</div>
+<p>在复内积空间中：</p>
+<div class="arithmatex">\[\langle \mathbf{u}, \mathbf{v} \rangle = \frac{1}{4}\sum_{k=0}^{3} i^k \|\mathbf{u} + i^k\mathbf{v}\|^2 = \frac{1}{4}\left(\|\mathbf{u}+\mathbf{v}\|^2 - \|\mathbf{u}-\mathbf{v}\|^2 + i\|\mathbf{u}+i\mathbf{v}\|^2 - i\|\mathbf{u}-i\mathbf{v}\|^2\right)\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对实情形：展开 <span class="arithmatex">\(\|\mathbf{u}+\mathbf{v}\|^2 - \|\mathbf{u}-\mathbf{v}\|^2\)</span>：</p>
+<div class="arithmatex">\[\|\mathbf{u}+\mathbf{v}\|^2 - \|\mathbf{u}-\mathbf{v}\|^2 = (\|\mathbf{u}\|^2 + 2\langle \mathbf{u},\mathbf{v}\rangle + \|\mathbf{v}\|^2) - (\|\mathbf{u}\|^2 - 2\langle \mathbf{u},\mathbf{v}\rangle + \|\mathbf{v}\|^2) = 4\langle \mathbf{u},\mathbf{v}\rangle\]</div>
+<p>复情形类似，将四个展开式加权求和后，实部与虚部恰好组合成 <span class="arithmatex">\(4\langle \mathbf{u},\mathbf{v}\rangle\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 8.5</p>
+<p>在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中取标准内积，设 <span class="arithmatex">\(\mathbf{u} = (1, 2, 3)^T\)</span>，<span class="arithmatex">\(\mathbf{v} = (4, -1, 2)^T\)</span>。则</p>
+<div class="arithmatex">\[\langle \mathbf{u}, \mathbf{v} \rangle = 1 \cdot 4 + 2 \cdot (-1) + 3 \cdot 2 = 8\]</div>
+<div class="arithmatex">\[\|\mathbf{u}\| = \sqrt{1+4+9} = \sqrt{14}, \quad \|\mathbf{v}\| = \sqrt{16+1+4} = \sqrt{21}\]</div>
+<p>验证 Cauchy-Schwarz 不等式：<span class="arithmatex">\(|8| = 8 \leq \sqrt{14} \cdot \sqrt{21} = \sqrt{294} \approx 17.15\)</span>，成立。</p>
+<p><span class="arithmatex">\(\mathbf{u}\)</span> 与 <span class="arithmatex">\(\mathbf{v}\)</span> 的夹角 <span class="arithmatex">\(\theta\)</span> 满足 <span class="arithmatex">\(\cos\theta = \dfrac{\langle \mathbf{u}, \mathbf{v}\rangle}{\|\mathbf{u}\|\|\mathbf{v}\|} = \dfrac{8}{\sqrt{294}}\)</span>。</p>
+</div>
+<hr />
+<h2 id="83">8.3 正交与正交补<a class="headerlink" href="#83" title="Permanent link">&para;</a></h2>
+<p>正交性是内积空间中最重要的概念之一，它推广了"垂直"的几何概念。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.6 (正交)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间。</p>
+<ul>
+<li>两个向量 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span> 称为<strong>正交的</strong>（orthogonal），若 <span class="arithmatex">\(\langle \mathbf{u}, \mathbf{v} \rangle = 0\)</span>，记作 <span class="arithmatex">\(\mathbf{u} \perp \mathbf{v}\)</span>。</li>
+<li>向量 <span class="arithmatex">\(\mathbf{v}\)</span> 与集合 <span class="arithmatex">\(S \subseteq V\)</span> 正交，若 <span class="arithmatex">\(\mathbf{v}\)</span> 与 <span class="arithmatex">\(S\)</span> 中每个向量正交。</li>
+<li>集合 <span class="arithmatex">\(S\)</span> 称为<strong>正交集</strong>（orthogonal set），若 <span class="arithmatex">\(S\)</span> 中任意两个不同向量都正交。</li>
+<li>集合 <span class="arithmatex">\(S\)</span> 称为<strong>标准正交集</strong>（orthonormal set），若 <span class="arithmatex">\(S\)</span> 是正交集且每个向量都是单位向量。</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.7 (正交补)</p>
+<p>设 <span class="arithmatex">\(W\)</span> 是内积空间 <span class="arithmatex">\(V\)</span> 的子空间。<span class="arithmatex">\(W\)</span> 的<strong>正交补</strong>（orthogonal complement）定义为</p>
+<div class="arithmatex">\[W^\perp = \{\mathbf{v} \in V : \langle \mathbf{v}, \mathbf{w} \rangle = 0, \, \forall \mathbf{w} \in W\}\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.5 (正交补的性质)</p>
+<p>设 <span class="arithmatex">\(W\)</span> 是有限维内积空间 <span class="arithmatex">\(V\)</span> 的子空间。则</p>
+<ol>
+<li><span class="arithmatex">\(W^\perp\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间；</li>
+<li><span class="arithmatex">\(W \cap W^\perp = \{\mathbf{0}\}\)</span>；</li>
+<li><span class="arithmatex">\((W^\perp)^\perp = W\)</span>；</li>
+<li><span class="arithmatex">\(\dim W + \dim W^\perp = \dim V\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>(1) 若 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in W^\perp\)</span>，<span class="arithmatex">\(\alpha, \beta\)</span> 为标量，则对任意 <span class="arithmatex">\(\mathbf{w} \in W\)</span>：</p>
+<div class="arithmatex">\[\langle \alpha\mathbf{u} + \beta\mathbf{v}, \mathbf{w}\rangle = \alpha\langle \mathbf{u}, \mathbf{w}\rangle + \beta\langle \mathbf{v}, \mathbf{w}\rangle = 0\]</div>
+<p>故 <span class="arithmatex">\(\alpha\mathbf{u}+\beta\mathbf{v} \in W^\perp\)</span>，因此 <span class="arithmatex">\(W^\perp\)</span> 是子空间。</p>
+<p>(2) 若 <span class="arithmatex">\(\mathbf{v} \in W \cap W^\perp\)</span>，则 <span class="arithmatex">\(\mathbf{v} \in W\)</span> 且 <span class="arithmatex">\(\langle \mathbf{v}, \mathbf{w}\rangle = 0\)</span> 对所有 <span class="arithmatex">\(\mathbf{w} \in W\)</span> 成立。特别地取 <span class="arithmatex">\(\mathbf{w} = \mathbf{v}\)</span>，得 <span class="arithmatex">\(\langle \mathbf{v}, \mathbf{v}\rangle = 0\)</span>，由正定性知 <span class="arithmatex">\(\mathbf{v} = \mathbf{0}\)</span>。</p>
+<p>(3) 和 (4) 将在正交投影定理之后证明。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.6 (正交直和分解)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。则</p>
+<div class="arithmatex">\[V = W \oplus W^\perp\]</div>
+<p>即任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span> 可以唯一地写成 <span class="arithmatex">\(\mathbf{v} = \mathbf{w} + \mathbf{w}'\)</span>，其中 <span class="arithmatex">\(\mathbf{w} \in W\)</span>，<span class="arithmatex">\(\mathbf{w}' \in W^\perp\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}\)</span> 是 <span class="arithmatex">\(W\)</span> 的一个标准正交基。对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，令</p>
+<div class="arithmatex">\[\mathbf{w} = \sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i \rangle \mathbf{e}_i, \quad \mathbf{w}' = \mathbf{v} - \mathbf{w}\]</div>
+<p>显然 <span class="arithmatex">\(\mathbf{w} \in W\)</span>。验证 <span class="arithmatex">\(\mathbf{w}' \in W^\perp\)</span>：对任意 <span class="arithmatex">\(j = 1, \ldots, k\)</span>，</p>
+<div class="arithmatex">\[\langle \mathbf{w}', \mathbf{e}_j \rangle = \langle \mathbf{v} - \mathbf{w}, \mathbf{e}_j\rangle = \langle \mathbf{v}, \mathbf{e}_j\rangle - \sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i\rangle\langle \mathbf{e}_i, \mathbf{e}_j\rangle = \langle \mathbf{v}, \mathbf{e}_j\rangle - \langle \mathbf{v}, \mathbf{e}_j\rangle = 0\]</div>
+<p>因此 <span class="arithmatex">\(\mathbf{w}' \perp \mathbf{e}_j\)</span> 对所有 <span class="arithmatex">\(j\)</span> 成立，从而 <span class="arithmatex">\(\mathbf{w}' \in W^\perp\)</span>。故 <span class="arithmatex">\(\mathbf{v} = \mathbf{w} + \mathbf{w}'\)</span> 是所求的分解。</p>
+<p>唯一性由 <span class="arithmatex">\(W \cap W^\perp = \{\mathbf{0}\}\)</span> 保证：若 <span class="arithmatex">\(\mathbf{v} = \mathbf{w}_1 + \mathbf{w}_1' = \mathbf{w}_2 + \mathbf{w}_2'\)</span>，则 <span class="arithmatex">\(\mathbf{w}_1 - \mathbf{w}_2 = \mathbf{w}_2' - \mathbf{w}_1' \in W \cap W^\perp = \{\mathbf{0}\}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 8.2 (正交集的线性无关性)</p>
+<p>设 <span class="arithmatex">\(S = \{\mathbf{v}_1, \ldots, \mathbf{v}_k\}\)</span> 是内积空间 <span class="arithmatex">\(V\)</span> 中由非零向量组成的正交集。则 <span class="arithmatex">\(S\)</span> 是线性无关的。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\alpha_1\mathbf{v}_1 + \cdots + \alpha_k\mathbf{v}_k = \mathbf{0}\)</span>。对任意 <span class="arithmatex">\(j\)</span>，用 <span class="arithmatex">\(\mathbf{v}_j\)</span> 取内积：</p>
+<div class="arithmatex">\[0 = \left\langle \sum_{i=1}^k \alpha_i\mathbf{v}_i, \mathbf{v}_j \right\rangle = \sum_{i=1}^k \alpha_i \langle \mathbf{v}_i, \mathbf{v}_j\rangle = \alpha_j \|\mathbf{v}_j\|^2\]</div>
+<p>因 <span class="arithmatex">\(\mathbf{v}_j \neq \mathbf{0}\)</span>，故 <span class="arithmatex">\(\|\mathbf{v}_j\|^2 &gt; 0\)</span>，从而 <span class="arithmatex">\(\alpha_j = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 8.6</p>
+<p>在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，设 <span class="arithmatex">\(W = \operatorname{span}\{(1, 1, 0)^T, (0, 1, 1)^T\}\)</span>。求 <span class="arithmatex">\(W^\perp\)</span>。</p>
+<p>设 <span class="arithmatex">\(\mathbf{v} = (x, y, z)^T \in W^\perp\)</span>，则</p>
+<div class="arithmatex">\[\langle \mathbf{v}, (1,1,0)^T\rangle = x + y = 0, \quad \langle \mathbf{v}, (0,1,1)^T\rangle = y + z = 0\]</div>
+<p>解得 <span class="arithmatex">\(y = -x\)</span>，<span class="arithmatex">\(z = -y = x\)</span>。故 <span class="arithmatex">\(W^\perp = \operatorname{span}\{(1, -1, 1)^T\}\)</span>。</p>
+<p>验证：<span class="arithmatex">\(\dim W + \dim W^\perp = 2 + 1 = 3 = \dim \mathbb{R}^3\)</span>。</p>
+</div>
+<hr />
+<h2 id="84">8.4 正交投影定理<a class="headerlink" href="#84" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.8 (正交投影)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的子空间。根据正交直和分解 <span class="arithmatex">\(V = W \oplus W^\perp\)</span>，对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，定义<strong>正交投影</strong>（orthogonal projection）<span class="arithmatex">\(\operatorname{proj}_W: V \to V\)</span> 为</p>
+<div class="arithmatex">\[\operatorname{proj}_W(\mathbf{v}) = \mathbf{w}\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{v} = \mathbf{w} + \mathbf{w}'\)</span>，<span class="arithmatex">\(\mathbf{w} \in W\)</span>，<span class="arithmatex">\(\mathbf{w}' \in W^\perp\)</span>。</p>
+<p>若 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}\)</span> 是 <span class="arithmatex">\(W\)</span> 的标准正交基，则</p>
+<div class="arithmatex">\[\operatorname{proj}_W(\mathbf{v}) = \sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i \rangle \mathbf{e}_i\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.7 (最佳逼近定理)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是内积空间，<span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(V\)</span> 的有限维子空间。对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，<span class="arithmatex">\(\operatorname{proj}_W(\mathbf{v})\)</span> 是 <span class="arithmatex">\(W\)</span> 中距 <span class="arithmatex">\(\mathbf{v}\)</span> 最近的向量。即对任意 <span class="arithmatex">\(\mathbf{w} \in W\)</span>，</p>
+<div class="arithmatex">\[\|\mathbf{v} - \operatorname{proj}_W(\mathbf{v})\| \leq \|\mathbf{v} - \mathbf{w}\|\]</div>
+<p>等号成立当且仅当 <span class="arithmatex">\(\mathbf{w} = \operatorname{proj}_W(\mathbf{v})\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>记 <span class="arithmatex">\(\hat{\mathbf{v}} = \operatorname{proj}_W(\mathbf{v})\)</span>。对任意 <span class="arithmatex">\(\mathbf{w} \in W\)</span>，</p>
+<div class="arithmatex">\[\|\mathbf{v} - \mathbf{w}\|^2 = \|(\mathbf{v} - \hat{\mathbf{v}}) + (\hat{\mathbf{v}} - \mathbf{w})\|^2\]</div>
+<p>注意 <span class="arithmatex">\(\mathbf{v} - \hat{\mathbf{v}} \in W^\perp\)</span> 且 <span class="arithmatex">\(\hat{\mathbf{v}} - \mathbf{w} \in W\)</span>，因此两者正交。由勾股定理：</p>
+<div class="arithmatex">\[\|\mathbf{v} - \mathbf{w}\|^2 = \|\mathbf{v} - \hat{\mathbf{v}}\|^2 + \|\hat{\mathbf{v}} - \mathbf{w}\|^2 \geq \|\mathbf{v} - \hat{\mathbf{v}}\|^2\]</div>
+<p>等号成立当且仅当 <span class="arithmatex">\(\|\hat{\mathbf{v}} - \mathbf{w}\|^2 = 0\)</span>，即 <span class="arithmatex">\(\mathbf{w} = \hat{\mathbf{v}}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 8.3 (正交投影算子的性质)</p>
+<p>设 <span class="arithmatex">\(P = \operatorname{proj}_W\)</span> 是正交投影算子。则</p>
+<ol>
+<li><span class="arithmatex">\(P\)</span> 是线性算子；</li>
+<li><span class="arithmatex">\(P^2 = P\)</span>（幂等性）；</li>
+<li><span class="arithmatex">\(\operatorname{Im}(P) = W\)</span>，<span class="arithmatex">\(\operatorname{Ker}(P) = W^\perp\)</span>；</li>
+<li><span class="arithmatex">\(P^* = P\)</span>（自伴性）；</li>
+<li>对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，<span class="arithmatex">\(\|\mathbf{v}\|^2 = \|P\mathbf{v}\|^2 + \|\mathbf{v} - P\mathbf{v}\|^2\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>(1) 设 <span class="arithmatex">\(\mathbf{v}_1 = \mathbf{w}_1 + \mathbf{w}_1'\)</span>，<span class="arithmatex">\(\mathbf{v}_2 = \mathbf{w}_2 + \mathbf{w}_2'\)</span>，则 <span class="arithmatex">\(\alpha\mathbf{v}_1 + \beta\mathbf{v}_2 = (\alpha\mathbf{w}_1 + \beta\mathbf{w}_2) + (\alpha\mathbf{w}_1' + \beta\mathbf{w}_2')\)</span>，故 <span class="arithmatex">\(P(\alpha\mathbf{v}_1 + \beta\mathbf{v}_2) = \alpha\mathbf{w}_1 + \beta\mathbf{w}_2 = \alpha P\mathbf{v}_1 + \beta P\mathbf{v}_2\)</span>。</p>
+<p>(2) 对 <span class="arithmatex">\(\mathbf{v} = \mathbf{w} + \mathbf{w}'\)</span>，<span class="arithmatex">\(P\mathbf{v} = \mathbf{w} \in W\)</span>，故 <span class="arithmatex">\(P(P\mathbf{v}) = P\mathbf{w} = \mathbf{w} = P\mathbf{v}\)</span>。</p>
+<p>(3) 显然。</p>
+<p>(4) 设 <span class="arithmatex">\(\mathbf{u} = \mathbf{w}_1 + \mathbf{w}_1'\)</span>，<span class="arithmatex">\(\mathbf{v} = \mathbf{w}_2 + \mathbf{w}_2'\)</span>。则 <span class="arithmatex">\(\langle P\mathbf{u}, \mathbf{v}\rangle = \langle \mathbf{w}_1, \mathbf{w}_2 + \mathbf{w}_2'\rangle = \langle \mathbf{w}_1, \mathbf{w}_2\rangle\)</span> 且 <span class="arithmatex">\(\langle \mathbf{u}, P\mathbf{v}\rangle = \langle \mathbf{w}_1 + \mathbf{w}_1', \mathbf{w}_2\rangle = \langle \mathbf{w}_1, \mathbf{w}_2\rangle\)</span>。</p>
+<p>(5) 由 <span class="arithmatex">\(\mathbf{v} = P\mathbf{v} + (\mathbf{v} - P\mathbf{v})\)</span> 且两者正交，由勾股定理即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 8.7</p>
+<p>设 <span class="arithmatex">\(W = \operatorname{span}\left\{\mathbf{e}_1 = \frac{1}{\sqrt{2}}(1, 1, 0)^T, \, \mathbf{e}_2 = \frac{1}{\sqrt{6}}(1, -1, 2)^T\right\}\)</span> 是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中的子空间（<span class="arithmatex">\(\mathbf{e}_1, \mathbf{e}_2\)</span> 已是标准正交基）。求 <span class="arithmatex">\(\mathbf{v} = (1, 2, 3)^T\)</span> 在 <span class="arithmatex">\(W\)</span> 上的正交投影。</p>
+<div class="arithmatex">\[\operatorname{proj}_W(\mathbf{v}) = \langle \mathbf{v}, \mathbf{e}_1\rangle \mathbf{e}_1 + \langle \mathbf{v}, \mathbf{e}_2\rangle \mathbf{e}_2\]</div>
+<div class="arithmatex">\[\langle \mathbf{v}, \mathbf{e}_1\rangle = \frac{1}{\sqrt{2}}(1+2) = \frac{3}{\sqrt{2}}\]</div>
+<div class="arithmatex">\[\langle \mathbf{v}, \mathbf{e}_2\rangle = \frac{1}{\sqrt{6}}(1-2+6) = \frac{5}{\sqrt{6}}\]</div>
+<div class="arithmatex">\[\operatorname{proj}_W(\mathbf{v}) = \frac{3}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\\0\end{pmatrix} + \frac{5}{\sqrt{6}} \cdot \frac{1}{\sqrt{6}}\begin{pmatrix}1\\-1\\2\end{pmatrix} = \frac{3}{2}\begin{pmatrix}1\\1\\0\end{pmatrix} + \frac{5}{6}\begin{pmatrix}1\\-1\\2\end{pmatrix} = \begin{pmatrix}7/3\\2/3\\5/3\end{pmatrix}\]</div>
+</div>
+<hr />
+<h2 id="85-bessel-parseval">8.5 Bessel 不等式与 Parseval 等式<a class="headerlink" href="#85-bessel-parseval" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.8 (Bessel 不等式)</p>
+<p>设 <span class="arithmatex">\((V, \langle \cdot, \cdot \rangle)\)</span> 是内积空间，<span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}\)</span> 是 <span class="arithmatex">\(V\)</span> 中的标准正交集。则对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，</p>
+<div class="arithmatex">\[\sum_{i=1}^k |\langle \mathbf{v}, \mathbf{e}_i \rangle|^2 \leq \|\mathbf{v}\|^2\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>令 <span class="arithmatex">\(W = \operatorname{span}\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}\)</span>，<span class="arithmatex">\(\hat{\mathbf{v}} = \operatorname{proj}_W(\mathbf{v}) = \sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i\rangle\mathbf{e}_i\)</span>。</p>
+<p>由勾股定理：</p>
+<div class="arithmatex">\[\|\mathbf{v}\|^2 = \|\hat{\mathbf{v}}\|^2 + \|\mathbf{v} - \hat{\mathbf{v}}\|^2 \geq \|\hat{\mathbf{v}}\|^2\]</div>
+<p>而 <span class="arithmatex">\(\|\hat{\mathbf{v}}\|^2 = \left\|\sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i\rangle \mathbf{e}_i\right\|^2 = \sum_{i=1}^k |\langle \mathbf{v}, \mathbf{e}_i\rangle|^2\)</span>（利用标准正交性）。</p>
+<p>故 <span class="arithmatex">\(\sum_{i=1}^k |\langle \mathbf{v}, \mathbf{e}_i\rangle|^2 \leq \|\mathbf{v}\|^2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.9 (Parseval 等式)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的一个标准正交基。则对任意 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，</p>
+<div class="arithmatex">\[\sum_{i=1}^n |\langle \mathbf{v}, \mathbf{e}_i \rangle|^2 = \|\mathbf{v}\|^2\]</div>
+<p>更一般地，对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，</p>
+<div class="arithmatex">\[\langle \mathbf{u}, \mathbf{v} \rangle = \sum_{i=1}^n \langle \mathbf{u}, \mathbf{e}_i \rangle \overline{\langle \mathbf{v}, \mathbf{e}_i \rangle}\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>因 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的标准正交基，<span class="arithmatex">\(\mathbf{v} = \sum_{i=1}^n \langle \mathbf{v}, \mathbf{e}_i\rangle \mathbf{e}_i\)</span>，从而</p>
+<div class="arithmatex">\[\|\mathbf{v}\|^2 = \left\langle \sum_{i=1}^n \langle \mathbf{v}, \mathbf{e}_i\rangle \mathbf{e}_i, \sum_{j=1}^n \langle \mathbf{v}, \mathbf{e}_j\rangle \mathbf{e}_j \right\rangle = \sum_{i=1}^n \sum_{j=1}^n \langle \mathbf{v}, \mathbf{e}_i\rangle \overline{\langle \mathbf{v}, \mathbf{e}_j\rangle}\langle \mathbf{e}_i, \mathbf{e}_j\rangle = \sum_{i=1}^n |\langle \mathbf{v}, \mathbf{e}_i\rangle|^2\]</div>
+<p>一般的恒等式（Parseval 恒等式的一般形式）类似证明。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Parseval 等式可以理解为：向量在标准正交基下的坐标分量的模的平方和等于向量的范数的平方。Bessel 不等式则说明，如果标准正交集不是基（即不张成整个空间），则"能量"（模的平方）不能被完全捕获。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.8</p>
+<p>在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中取标准正交基 <span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}\)</span>，设 <span class="arithmatex">\(\mathbf{v} = (3, 4, 0)^T\)</span>。</p>
+<p>Parseval 等式：<span class="arithmatex">\(|\langle \mathbf{v}, \mathbf{e}_1\rangle|^2 + |\langle \mathbf{v}, \mathbf{e}_2\rangle|^2 + |\langle \mathbf{v}, \mathbf{e}_3\rangle|^2 = 9 + 16 + 0 = 25 = \|\mathbf{v}\|^2\)</span>。</p>
+<p>仅用前两个基向量（Bessel 不等式）：<span class="arithmatex">\(|\langle \mathbf{v}, \mathbf{e}_1\rangle|^2 + |\langle \mathbf{v}, \mathbf{e}_2\rangle|^2 = 25 \leq 25 = \|\mathbf{v}\|^2\)</span>。此例中恰好取等，因为 <span class="arithmatex">\(\mathbf{v}\)</span> 本身在前两个分量张成的子空间中。</p>
+</div>
+<hr />
+<h2 id="86">8.6 伴随算子<a class="headerlink" href="#86" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.9 (伴随算子)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。<span class="arithmatex">\(T\)</span> 的<strong>伴随算子</strong>（adjoint operator）<span class="arithmatex">\(T^*: V \to V\)</span> 是满足以下条件的唯一线性算子：</p>
+<div class="arithmatex">\[\langle T\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, T^*\mathbf{w} \rangle, \quad \forall \mathbf{v}, \mathbf{w} \in V\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.10 (伴随算子的存在唯一性)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。则 <span class="arithmatex">\(T^*\)</span> 存在且唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> 设 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的标准正交基。<span class="arithmatex">\(T\)</span> 在此基下的矩阵为 <span class="arithmatex">\(A = (a_{ij})\)</span>，其中 <span class="arithmatex">\(a_{ij} = \langle T\mathbf{e}_j, \mathbf{e}_i\rangle\)</span>。</p>
+<p>定义 <span class="arithmatex">\(T^*\)</span> 为以矩阵 <span class="arithmatex">\(B = (b_{ij})\)</span> 表示的算子，其中 <span class="arithmatex">\(b_{ij} = \overline{a_{ji}}\)</span>，即 <span class="arithmatex">\(B = A^H\)</span>（共轭转置）。则</p>
+<div class="arithmatex">\[\langle T\mathbf{v}, \mathbf{w}\rangle = (A\mathbf{v})^H \mathbf{w} = \mathbf{v}^H A^H \mathbf{w} = \mathbf{v}^H (B\mathbf{w}) = \langle \mathbf{v}, T^*\mathbf{w}\rangle\]</div>
+<p><strong>唯一性：</strong> 若 <span class="arithmatex">\(S\)</span> 也满足 <span class="arithmatex">\(\langle T\mathbf{v}, \mathbf{w}\rangle = \langle \mathbf{v}, S\mathbf{w}\rangle\)</span>，则 <span class="arithmatex">\(\langle \mathbf{v}, T^*\mathbf{w} - S\mathbf{w}\rangle = 0\)</span> 对所有 <span class="arithmatex">\(\mathbf{v}\)</span> 成立。取 <span class="arithmatex">\(\mathbf{v} = T^*\mathbf{w} - S\mathbf{w}\)</span>，得 <span class="arithmatex">\(T^*\mathbf{w} = S\mathbf{w}\)</span> 对所有 <span class="arithmatex">\(\mathbf{w}\)</span> 成立。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.11 (伴随算子的性质)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(S, T: V \to V\)</span> 是线性算子，<span class="arithmatex">\(\alpha\)</span> 是标量。则</p>
+<ol>
+<li><span class="arithmatex">\((S + T)^* = S^* + T^*\)</span></li>
+<li><span class="arithmatex">\((\alpha T)^* = \bar{\alpha} T^*\)</span></li>
+<li><span class="arithmatex">\((ST)^* = T^* S^*\)</span></li>
+<li><span class="arithmatex">\((T^*)^* = T\)</span></li>
+<li><span class="arithmatex">\(\operatorname{Ker}(T^*) = (\operatorname{Im}(T))^\perp\)</span></li>
+<li><span class="arithmatex">\(\operatorname{Im}(T^*) = (\operatorname{Ker}(T))^\perp\)</span></li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>我们证明性质 5，其他性质类似。</p>
+<p><span class="arithmatex">\(\mathbf{w} \in \operatorname{Ker}(T^*)\)</span> <span class="arithmatex">\(\Leftrightarrow\)</span> <span class="arithmatex">\(T^*\mathbf{w} = \mathbf{0}\)</span> <span class="arithmatex">\(\Leftrightarrow\)</span> <span class="arithmatex">\(\langle \mathbf{v}, T^*\mathbf{w}\rangle = 0, \, \forall \mathbf{v} \in V\)</span> <span class="arithmatex">\(\Leftrightarrow\)</span> <span class="arithmatex">\(\langle T\mathbf{v}, \mathbf{w}\rangle = 0, \, \forall \mathbf{v} \in V\)</span> <span class="arithmatex">\(\Leftrightarrow\)</span> <span class="arithmatex">\(\mathbf{w} \in (\operatorname{Im}(T))^\perp\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>在标准正交基下，<span class="arithmatex">\(T\)</span> 的矩阵为 <span class="arithmatex">\(A\)</span> 时，<span class="arithmatex">\(T^*\)</span> 的矩阵为 <span class="arithmatex">\(A^H = \overline{A}^T\)</span>（共轭转置）。对实内积空间，<span class="arithmatex">\(T^*\)</span> 的矩阵就是 <span class="arithmatex">\(A^T\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.9</p>
+<p>设 <span class="arithmatex">\(T: \mathbb{C}^2 \to \mathbb{C}^2\)</span> 在标准基下的矩阵为</p>
+<div class="arithmatex">\[A = \begin{pmatrix} 1+i &amp; 2 \\ 3i &amp; 4-i \end{pmatrix}\]</div>
+<p>则 <span class="arithmatex">\(T^*\)</span> 的矩阵为</p>
+<div class="arithmatex">\[A^H = \overline{A}^T = \begin{pmatrix} 1-i &amp; -3i \\ 2 &amp; 4+i \end{pmatrix}\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.10</p>
+<p>设 <span class="arithmatex">\(V = C[0,1]\)</span> 带内积 <span class="arithmatex">\(\langle f, g\rangle = \int_0^1 f(t)\overline{g(t)} \, dt\)</span>。定义线性算子 <span class="arithmatex">\(T: V \to V\)</span>，<span class="arithmatex">\((Tf)(t) = tf(t)\)</span>（乘以自变量）。则 <span class="arithmatex">\(T^* = T\)</span>，因为</p>
+<div class="arithmatex">\[\langle Tf, g\rangle = \int_0^1 tf(t)\overline{g(t)} \, dt = \int_0^1 f(t)\overline{tg(t)} \, dt = \langle f, Tg\rangle\]</div>
+<p>其中最后一步利用了 <span class="arithmatex">\(t\)</span> 是实数。</p>
+</div>
+<hr />
+<h2 id="87">8.7 正规算子<a class="headerlink" href="#87" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.10 (正规算子)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。若</p>
+<div class="arithmatex">\[TT^* = T^*T\]</div>
+<p>则称 <span class="arithmatex">\(T\)</span> 是<strong>正规算子</strong>（normal operator）。相应地，若 <span class="arithmatex">\(n \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span> 满足 <span class="arithmatex">\(AA^H = A^HA\)</span>，则称 <span class="arithmatex">\(A\)</span> 为<strong>正规矩阵</strong>（normal matrix）。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>自伴算子（<span class="arithmatex">\(T^* = T\)</span>）、酉算子（<span class="arithmatex">\(T^*T = I\)</span>）、反自伴算子（<span class="arithmatex">\(T^* = -T\)</span>）都是正规算子的特例。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.12 (正规算子的等价条件)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。则以下条件等价：</p>
+<ol>
+<li><span class="arithmatex">\(T\)</span> 是正规的；</li>
+<li><span class="arithmatex">\(\|T\mathbf{v}\| = \|T^*\mathbf{v}\|\)</span> 对所有 <span class="arithmatex">\(\mathbf{v} \in V\)</span> 成立；</li>
+<li><span class="arithmatex">\(T - \lambda I\)</span> 对任意标量 <span class="arithmatex">\(\lambda\)</span> 都是正规的；</li>
+<li>若 <span class="arithmatex">\(T\mathbf{v} = \lambda\mathbf{v}\)</span>，则 <span class="arithmatex">\(T^*\mathbf{v} = \bar{\lambda}\mathbf{v}\)</span>；</li>
+<li><span class="arithmatex">\(T\)</span> 的属于不同特征值的特征向量正交。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)<span class="arithmatex">\(\Rightarrow\)</span>(2)：</strong> <span class="arithmatex">\(\|T\mathbf{v}\|^2 = \langle T\mathbf{v}, T\mathbf{v}\rangle = \langle T^*T\mathbf{v}, \mathbf{v}\rangle = \langle TT^*\mathbf{v}, \mathbf{v}\rangle = \langle T^*\mathbf{v}, T^*\mathbf{v}\rangle = \|T^*\mathbf{v}\|^2\)</span>。</p>
+<p><strong>(2)<span class="arithmatex">\(\Rightarrow\)</span>(1)：</strong> 条件 (2) 意味着 <span class="arithmatex">\(\langle (T^*T - TT^*)\mathbf{v}, \mathbf{v}\rangle = 0\)</span> 对所有 <span class="arithmatex">\(\mathbf{v}\)</span> 成立。由于 <span class="arithmatex">\(T^*T - TT^*\)</span> 是自伴的，这推出 <span class="arithmatex">\(T^*T - TT^* = 0\)</span>。</p>
+<p><strong>(1)<span class="arithmatex">\(\Rightarrow\)</span>(3)：</strong> <span class="arithmatex">\((T-\lambda I)^* = T^* - \bar{\lambda}I\)</span>。直接验证：</p>
+<div class="arithmatex">\[(T-\lambda I)(T-\lambda I)^* = TT^* - \lambda T^* - \bar{\lambda}T + |\lambda|^2 I\]</div>
+<div class="arithmatex">\[(T-\lambda I)^*(T-\lambda I) = T^*T - \bar{\lambda}T - \lambda T^* + |\lambda|^2 I\]</div>
+<p>由 <span class="arithmatex">\(TT^* = T^*T\)</span> 知两者相等。</p>
+<p><strong>(3)<span class="arithmatex">\(\Rightarrow\)</span>(4)：</strong> 若 <span class="arithmatex">\(T\mathbf{v} = \lambda\mathbf{v}\)</span>，即 <span class="arithmatex">\((T-\lambda I)\mathbf{v} = \mathbf{0}\)</span>。由 (3) 知 <span class="arithmatex">\(T-\lambda I\)</span> 正规，由 (2) 得 <span class="arithmatex">\(\|(T-\lambda I)^*\mathbf{v}\| = \|(T-\lambda I)\mathbf{v}\| = 0\)</span>，即 <span class="arithmatex">\((T^*-\bar{\lambda}I)\mathbf{v} = \mathbf{0}\)</span>，故 <span class="arithmatex">\(T^*\mathbf{v} = \bar{\lambda}\mathbf{v}\)</span>。</p>
+<p><strong>(4)<span class="arithmatex">\(\Rightarrow\)</span>(5)：</strong> 设 <span class="arithmatex">\(T\mathbf{v}_1 = \lambda_1\mathbf{v}_1\)</span>，<span class="arithmatex">\(T\mathbf{v}_2 = \lambda_2\mathbf{v}_2\)</span>，<span class="arithmatex">\(\lambda_1 \neq \lambda_2\)</span>。由 (4) 知 <span class="arithmatex">\(T^*\mathbf{v}_1 = \bar{\lambda}_1\mathbf{v}_1\)</span>。则</p>
+<div class="arithmatex">\[\lambda_1\langle \mathbf{v}_1, \mathbf{v}_2\rangle = \langle T\mathbf{v}_1, \mathbf{v}_2\rangle = \langle \mathbf{v}_1, T^*\mathbf{v}_2\rangle = \langle \mathbf{v}_1, \bar{\lambda}_2\mathbf{v}_2\rangle = \lambda_2\langle \mathbf{v}_1, \mathbf{v}_2\rangle\]</div>
+<p>故 <span class="arithmatex">\((\lambda_1 - \lambda_2)\langle \mathbf{v}_1, \mathbf{v}_2\rangle = 0\)</span>。因 <span class="arithmatex">\(\lambda_1 \neq \lambda_2\)</span>，得 <span class="arithmatex">\(\langle \mathbf{v}_1, \mathbf{v}_2\rangle = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 8.11</p>
+<p>矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\)</span> 是正规矩阵，因为</p>
+<div class="arithmatex">\[AA^T = \begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\]</div>
+<div class="arithmatex">\[A^TA = \begin{pmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\]</div>
+<p>但 <span class="arithmatex">\(A\)</span> 不是对称矩阵（<span class="arithmatex">\(A \neq A^T\)</span>），也不是正交矩阵（<span class="arithmatex">\(A^TA \neq I\)</span>）。</p>
+</div>
+<hr />
+<h2 id="88">8.8 自伴算子<a class="headerlink" href="#88" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.11 (自伴算子)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。若 <span class="arithmatex">\(T^* = T\)</span>，即</p>
+<div class="arithmatex">\[\langle T\mathbf{v}, \mathbf{w} \rangle = \langle \mathbf{v}, T\mathbf{w} \rangle, \quad \forall \mathbf{v}, \mathbf{w} \in V\]</div>
+<p>则称 <span class="arithmatex">\(T\)</span> 是<strong>自伴算子</strong>（self-adjoint operator）。在实内积空间中也称为<strong>对称算子</strong>。相应地，满足 <span class="arithmatex">\(A^H = A\)</span> 的矩阵称为 <strong>Hermitian 矩阵</strong>（实情形即对称矩阵 <span class="arithmatex">\(A^T = A\)</span>）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.13 (自伴算子的特征值都是实数)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间（实或复），<span class="arithmatex">\(T: V \to V\)</span> 是自伴算子。则 <span class="arithmatex">\(T\)</span> 的所有特征值都是实数。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(T\mathbf{v} = \lambda\mathbf{v}\)</span>，<span class="arithmatex">\(\mathbf{v} \neq \mathbf{0}\)</span>。则</p>
+<div class="arithmatex">\[\lambda\|\mathbf{v}\|^2 = \lambda\langle \mathbf{v}, \mathbf{v}\rangle = \langle \lambda\mathbf{v}, \mathbf{v}\rangle = \langle T\mathbf{v}, \mathbf{v}\rangle = \langle \mathbf{v}, T\mathbf{v}\rangle = \langle \mathbf{v}, \lambda\mathbf{v}\rangle = \bar{\lambda}\langle \mathbf{v}, \mathbf{v}\rangle = \bar{\lambda}\|\mathbf{v}\|^2\]</div>
+<p>因 <span class="arithmatex">\(\|\mathbf{v}\|^2 &gt; 0\)</span>，故 <span class="arithmatex">\(\lambda = \bar{\lambda}\)</span>，即 <span class="arithmatex">\(\lambda \in \mathbb{R}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.14 (自伴算子属于不同特征值的特征向量正交)</p>
+<p>设 <span class="arithmatex">\(T\)</span> 是自伴算子，<span class="arithmatex">\(\lambda_1 \neq \lambda_2\)</span> 是 <span class="arithmatex">\(T\)</span> 的两个不同特征值，<span class="arithmatex">\(\mathbf{v}_1, \mathbf{v}_2\)</span> 分别是对应的特征向量。则 <span class="arithmatex">\(\langle \mathbf{v}_1, \mathbf{v}_2\rangle = 0\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由定理 8.12 性质 (5)（自伴算子是正规算子的特例），或直接证明：</p>
+<div class="arithmatex">\[\lambda_1\langle \mathbf{v}_1, \mathbf{v}_2\rangle = \langle T\mathbf{v}_1, \mathbf{v}_2\rangle = \langle \mathbf{v}_1, T\mathbf{v}_2\rangle = \lambda_2\langle \mathbf{v}_1, \mathbf{v}_2\rangle\]</div>
+<p>其中最后一步用了 <span class="arithmatex">\(\lambda_2 \in \mathbb{R}\)</span>（故 <span class="arithmatex">\(\bar{\lambda}_2 = \lambda_2\)</span>）。因此 <span class="arithmatex">\((\lambda_1 - \lambda_2)\langle \mathbf{v}_1, \mathbf{v}_2\rangle = 0\)</span>，由 <span class="arithmatex">\(\lambda_1 \neq \lambda_2\)</span> 得 <span class="arithmatex">\(\langle \mathbf{v}_1, \mathbf{v}_2\rangle = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 8.4</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维<strong>复</strong>内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。若 <span class="arithmatex">\(\langle T\mathbf{v}, \mathbf{v}\rangle = 0\)</span> 对所有 <span class="arithmatex">\(\mathbf{v} \in V\)</span> 成立，则 <span class="arithmatex">\(T = 0\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对任意 <span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，利用极化恒等式：</p>
+<div class="arithmatex">\[\langle T\mathbf{u}, \mathbf{v}\rangle = \frac{1}{4}\sum_{k=0}^3 i^k \langle T(\mathbf{u}+i^k\mathbf{v}), \mathbf{u}+i^k\mathbf{v}\rangle = 0\]</div>
+<p>取 <span class="arithmatex">\(\mathbf{v} = T\mathbf{u}\)</span> 得 <span class="arithmatex">\(\|T\mathbf{u}\|^2 = 0\)</span>，故 <span class="arithmatex">\(T\mathbf{u} = \mathbf{0}\)</span> 对所有 <span class="arithmatex">\(\mathbf{u}\)</span> 成立。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>命题 8.4 在实内积空间中不成立。例如 <span class="arithmatex">\(T: \mathbb{R}^2 \to \mathbb{R}^2\)</span>，<span class="arithmatex">\(T(x,y)^T = (-y, x)^T\)</span>（旋转 90 度），满足 <span class="arithmatex">\(\langle T\mathbf{v}, \mathbf{v}\rangle = 0\)</span> 对所有 <span class="arithmatex">\(\mathbf{v}\)</span> 成立，但 <span class="arithmatex">\(T \neq 0\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.12</p>
+<p>矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1+i \\ 1-i &amp; 3 \end{pmatrix}\)</span> 是 Hermitian 矩阵，因为 <span class="arithmatex">\(A^H = A\)</span>。其特征多项式为</p>
+<div class="arithmatex">\[\det(A - \lambda I) = (2-\lambda)(3-\lambda) - |1+i|^2 = \lambda^2 - 5\lambda + 4 = (\lambda - 1)(\lambda - 4)\]</div>
+<p>特征值为 <span class="arithmatex">\(\lambda_1 = 1, \lambda_2 = 4\)</span>，均为实数。</p>
+</div>
+<hr />
+<h2 id="89">8.9 谱定理<a class="headerlink" href="#89" title="Permanent link">&para;</a></h2>
+<p>谱定理是线性代数中最重要、最深刻的定理之一。它指出正规算子（包括自伴算子）可以通过标准正交基对角化。</p>
+<h3 id="_3">实谱定理<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.15 (实对称矩阵的谱定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实对称矩阵（即 <span class="arithmatex">\(A^T = A\)</span>）。则</p>
+<ol>
+<li><span class="arithmatex">\(A\)</span> 的所有特征值都是实数；</li>
+<li><span class="arithmatex">\(A\)</span> 的属于不同特征值的特征向量正交；</li>
+<li>存在正交矩阵 <span class="arithmatex">\(Q\)</span>（即 <span class="arithmatex">\(Q^TQ = I\)</span>）使得 <span class="arithmatex">\(A = Q\Lambda Q^T\)</span>，其中 <span class="arithmatex">\(\Lambda\)</span> 是对角矩阵。</li>
+</ol>
+<p>等价地，<span class="arithmatex">\(\mathbb{R}^n\)</span> 存在由 <span class="arithmatex">\(A\)</span> 的特征向量组成的标准正交基。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>性质 1 和 2 已在定理 8.13 和 8.14 中证明。下面证明性质 3。</p>
+<p>对 <span class="arithmatex">\(n\)</span> 用数学归纳法。<span class="arithmatex">\(n=1\)</span> 时显然。设结论对 <span class="arithmatex">\(n-1\)</span> 阶矩阵成立。</p>
+<p><strong>关键步骤：</strong> 首先需要证明实对称矩阵 <span class="arithmatex">\(A\)</span> 有实特征值。<span class="arithmatex">\(A\)</span> 的特征多项式 <span class="arithmatex">\(\det(A - \lambda I)\)</span> 是 <span class="arithmatex">\(n\)</span> 次实系数多项式。在 <span class="arithmatex">\(\mathbb{C}\)</span> 上它有 <span class="arithmatex">\(n\)</span> 个根（计重数），而由定理 8.13，所有根都是实数。</p>
+<p>设 <span class="arithmatex">\(\lambda_1\)</span> 是 <span class="arithmatex">\(A\)</span> 的一个（实）特征值，<span class="arithmatex">\(\mathbf{q}_1\)</span> 是对应的单位特征向量。将 <span class="arithmatex">\(\mathbf{q}_1\)</span> 扩充为 <span class="arithmatex">\(\mathbb{R}^n\)</span> 的标准正交基 <span class="arithmatex">\(\{\mathbf{q}_1, \mathbf{q}_2, \ldots, \mathbf{q}_n\}\)</span>，令 <span class="arithmatex">\(Q_1 = [\mathbf{q}_1 | \mathbf{q}_2 | \cdots | \mathbf{q}_n]\)</span>。则</p>
+<div class="arithmatex">\[Q_1^T A Q_1 = \begin{pmatrix} \lambda_1 &amp; \mathbf{b}^T \\ \mathbf{0} &amp; A_1 \end{pmatrix}\]</div>
+<p>由 <span class="arithmatex">\(A\)</span> 的对称性，<span class="arithmatex">\(Q_1^TAQ_1\)</span> 也是对称的，故 <span class="arithmatex">\(\mathbf{b} = \mathbf{0}\)</span> 且 <span class="arithmatex">\(A_1\)</span> 是 <span class="arithmatex">\((n-1)\times(n-1)\)</span> 实对称矩阵。</p>
+<p>由归纳假设，存在 <span class="arithmatex">\((n-1)\)</span> 阶正交矩阵 <span class="arithmatex">\(P_1\)</span> 使 <span class="arithmatex">\(P_1^TA_1P_1 = \operatorname{diag}(\lambda_2, \ldots, \lambda_n)\)</span>。令</p>
+<div class="arithmatex">\[P = \begin{pmatrix} 1 &amp; \mathbf{0}^T \\ \mathbf{0} &amp; P_1 \end{pmatrix}\]</div>
+<p>则 <span class="arithmatex">\(Q = Q_1P\)</span> 是正交矩阵且 <span class="arithmatex">\(Q^TAQ = \operatorname{diag}(\lambda_1, \lambda_2, \ldots, \lambda_n)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<h3 id="_4">复谱定理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.16 (Hermitian 矩阵的谱定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> Hermitian 矩阵（即 <span class="arithmatex">\(A^H = A\)</span>）。则存在酉矩阵 <span class="arithmatex">\(U\)</span>（即 <span class="arithmatex">\(U^HU = I\)</span>）使得</p>
+<div class="arithmatex">\[A = U\Lambda U^H\]</div>
+<p>其中 <span class="arithmatex">\(\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)\)</span>，<span class="arithmatex">\(\lambda_i\)</span> 均为实数。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>证明与实对称矩阵的情形完全类似，只需将"正交"替换为"酉"，"转置"替换为"共轭转置"。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.17 (正规算子的谱定理——复情形)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维<strong>复</strong>内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。则 <span class="arithmatex">\(T\)</span> 是正规的当且仅当存在 <span class="arithmatex">\(V\)</span> 的标准正交基使得 <span class="arithmatex">\(T\)</span> 在此基下的矩阵是对角矩阵。</p>
+<p>等价地，<span class="arithmatex">\(n \times n\)</span> 复矩阵 <span class="arithmatex">\(A\)</span> 是正规的当且仅当存在酉矩阵 <span class="arithmatex">\(U\)</span> 使得</p>
+<div class="arithmatex">\[A = U\Lambda U^H\]</div>
+<p>其中 <span class="arithmatex">\(\Lambda\)</span> 是对角矩阵（对角元素可以是复数）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>充分性：</strong> 若 <span class="arithmatex">\(A = UDU^H\)</span>（<span class="arithmatex">\(D\)</span> 为对角矩阵），则 <span class="arithmatex">\(A^H = UD^HU^H\)</span>，从而</p>
+<div class="arithmatex">\[AA^H = UDD^HU^H = UD^HDU^H = A^HA\]</div>
+<p>（因为对角矩阵之间一定可交换。）</p>
+<p><strong>必要性：</strong> 对 <span class="arithmatex">\(n\)</span> 用归纳法。<span class="arithmatex">\(n = 1\)</span> 显然。设对 <span class="arithmatex">\(n-1\)</span> 成立。</p>
+<p>由代数基本定理，<span class="arithmatex">\(T\)</span> 在 <span class="arithmatex">\(\mathbb{C}\)</span> 上有特征值 <span class="arithmatex">\(\lambda_1\)</span>。设 <span class="arithmatex">\(\mathbf{e}_1\)</span> 是对应的单位特征向量。</p>
+<p>令 <span class="arithmatex">\(W = \operatorname{span}\{\mathbf{e}_1\}\)</span>。由定理 8.12 性质 (4)，<span class="arithmatex">\(T^*\mathbf{e}_1 = \bar{\lambda}_1\mathbf{e}_1\)</span>，因此 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(T^*\)</span>-不变的。</p>
+<p>我们证明 <span class="arithmatex">\(W^\perp\)</span> 是 <span class="arithmatex">\(T\)</span>-不变的：若 <span class="arithmatex">\(\mathbf{v} \in W^\perp\)</span>，则对任意 <span class="arithmatex">\(\mathbf{w} \in W\)</span>，</p>
+<div class="arithmatex">\[\langle T\mathbf{v}, \mathbf{w}\rangle = \langle \mathbf{v}, T^*\mathbf{w}\rangle\]</div>
+<p>因 <span class="arithmatex">\(W\)</span> 是 <span class="arithmatex">\(T^*\)</span>-不变的，<span class="arithmatex">\(T^*\mathbf{w} \in W\)</span>，故 <span class="arithmatex">\(\langle \mathbf{v}, T^*\mathbf{w}\rangle = 0\)</span>。从而 <span class="arithmatex">\(T\mathbf{v} \in W^\perp\)</span>。</p>
+<p><span class="arithmatex">\(T|_{W^\perp}\)</span> 是 <span class="arithmatex">\(W^\perp\)</span> 上的正规算子（继承正规性）。由归纳假设，存在 <span class="arithmatex">\(W^\perp\)</span> 的标准正交基 <span class="arithmatex">\(\{\mathbf{e}_2, \ldots, \mathbf{e}_n\}\)</span> 使 <span class="arithmatex">\(T|_{W^\perp}\)</span> 在此基下为对角矩阵。则 <span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的标准正交基，<span class="arithmatex">\(T\)</span> 在此基下为对角矩阵。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p><strong>实情形的谱定理</strong>需要额外条件。一般的实正规矩阵不一定可以实正交对角化（例如旋转矩阵有复特征值）。实正规矩阵可以正交相似于如下分块对角形：对角块是 <span class="arithmatex">\(1\times 1\)</span> 实数或 <span class="arithmatex">\(2\times 2\)</span> 旋转-缩放块 <span class="arithmatex">\(\begin{pmatrix} a &amp; -b \\ b &amp; a \end{pmatrix}\)</span>（<span class="arithmatex">\(b \neq 0\)</span>），对应于共轭复特征值对 <span class="arithmatex">\(a \pm bi\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.13</p>
+<p>对实对称矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span> 进行正交对角化。</p>
+<p>特征多项式：<span class="arithmatex">\(\det(A - \lambda I) = (2-\lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda-1)(\lambda-3)\)</span>。</p>
+<p><span class="arithmatex">\(\lambda_1 = 1\)</span>：<span class="arithmatex">\((A-I)\mathbf{x} = \mathbf{0}\)</span> 给出 <span class="arithmatex">\(\mathbf{v}_1 = \frac{1}{\sqrt{2}}(1, -1)^T\)</span>。</p>
+<p><span class="arithmatex">\(\lambda_2 = 3\)</span>：<span class="arithmatex">\((A-3I)\mathbf{x} = \mathbf{0}\)</span> 给出 <span class="arithmatex">\(\mathbf{v}_2 = \frac{1}{\sqrt{2}}(1, 1)^T\)</span>。</p>
+<p>验证正交性：<span class="arithmatex">\(\langle \mathbf{v}_1, \mathbf{v}_2\rangle = \frac{1}{2}(1-1) = 0\)</span>。</p>
+<p>令 <span class="arithmatex">\(Q = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ -1 &amp; 1 \end{pmatrix}\)</span>，则 <span class="arithmatex">\(A = Q\begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}Q^T\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 8.14</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(A\)</span> 是实正规矩阵（<span class="arithmatex">\(AA^T = A^TA = I\)</span>），但其特征值为 <span class="arithmatex">\(\pm i\)</span>，不是实数。因此 <span class="arithmatex">\(A\)</span> 不能实正交对角化，但可以酉对角化：</p>
+<div class="arithmatex">\[A = U\begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix}U^H, \quad U = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ i &amp; -i \end{pmatrix}\]</div>
+</div>
+<hr />
+<h2 id="810">8.10 酉算子与正交算子<a class="headerlink" href="#810" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.12 (酉算子与正交算子)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。</p>
+<ul>
+<li>若 <span class="arithmatex">\(V\)</span> 是复内积空间且 <span class="arithmatex">\(T^*T = TT^* = I\)</span>（即 <span class="arithmatex">\(T^* = T^{-1}\)</span>），则称 <span class="arithmatex">\(T\)</span> 为<strong>酉算子</strong>（unitary operator）。</li>
+<li>若 <span class="arithmatex">\(V\)</span> 是实内积空间且 <span class="arithmatex">\(T^*T = TT^* = I\)</span>，则称 <span class="arithmatex">\(T\)</span> 为<strong>正交算子</strong>（orthogonal operator）。</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 8.13 (酉矩阵与正交矩阵)</p>
+<ul>
+<li><span class="arithmatex">\(n \times n\)</span> 复矩阵 <span class="arithmatex">\(U\)</span> 满足 <span class="arithmatex">\(U^HU = I\)</span>（等价于 <span class="arithmatex">\(UU^H = I\)</span>）称为<strong>酉矩阵</strong>（unitary matrix）。</li>
+<li><span class="arithmatex">\(n \times n\)</span> 实矩阵 <span class="arithmatex">\(Q\)</span> 满足 <span class="arithmatex">\(Q^TQ = I\)</span>（等价于 <span class="arithmatex">\(QQ^T = I\)</span>）称为<strong>正交矩阵</strong>（orthogonal matrix）。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.18 (酉/正交算子的等价条件)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维内积空间，<span class="arithmatex">\(T: V \to V\)</span> 是线性算子。以下条件等价：</p>
+<ol>
+<li><span class="arithmatex">\(T\)</span> 是酉（正交）算子；</li>
+<li><span class="arithmatex">\(T\)</span> 保持内积：<span class="arithmatex">\(\langle T\mathbf{u}, T\mathbf{v}\rangle = \langle \mathbf{u}, \mathbf{v}\rangle\)</span>，<span class="arithmatex">\(\forall \mathbf{u}, \mathbf{v} \in V\)</span>；</li>
+<li><span class="arithmatex">\(T\)</span> 保持范数（等距映射）：<span class="arithmatex">\(\|T\mathbf{v}\| = \|\mathbf{v}\|\)</span>，<span class="arithmatex">\(\forall \mathbf{v} \in V\)</span>；</li>
+<li><span class="arithmatex">\(T\)</span> 将标准正交基映射为标准正交基；</li>
+<li><span class="arithmatex">\(T\)</span> 的列向量构成标准正交集。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)<span class="arithmatex">\(\Rightarrow\)</span>(2)：</strong> <span class="arithmatex">\(\langle T\mathbf{u}, T\mathbf{v}\rangle = \langle \mathbf{u}, T^*T\mathbf{v}\rangle = \langle \mathbf{u}, I\mathbf{v}\rangle = \langle \mathbf{u}, \mathbf{v}\rangle\)</span>。</p>
+<p><strong>(2)<span class="arithmatex">\(\Rightarrow\)</span>(3)：</strong> 取 <span class="arithmatex">\(\mathbf{u} = \mathbf{v}\)</span>。</p>
+<p><strong>(3)<span class="arithmatex">\(\Rightarrow\)</span>(1)：</strong> 由极化恒等式，保持范数蕴含保持内积。即 <span class="arithmatex">\(\langle T^*T\mathbf{v}, \mathbf{v}\rangle = \langle \mathbf{v}, \mathbf{v}\rangle\)</span> 对所有 <span class="arithmatex">\(\mathbf{v}\)</span> 成立，故 <span class="arithmatex">\(\langle (T^*T - I)\mathbf{v}, \mathbf{v}\rangle = 0\)</span>。因 <span class="arithmatex">\(T^*T - I\)</span> 自伴，由命题 8.4 的实情形类似推理（对自伴算子成立）得 <span class="arithmatex">\(T^*T = I\)</span>。</p>
+<p><strong>(2)<span class="arithmatex">\(\Leftrightarrow\)</span>(4)：</strong> 设 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是标准正交基，则 <span class="arithmatex">\(\langle T\mathbf{e}_i, T\mathbf{e}_j\rangle = \langle \mathbf{e}_i, \mathbf{e}_j\rangle = \delta_{ij}\)</span>，即 <span class="arithmatex">\(\{T\mathbf{e}_1, \ldots, T\mathbf{e}_n\}\)</span> 是标准正交基。反之亦然。</p>
+<p><strong>(4)<span class="arithmatex">\(\Leftrightarrow\)</span>(5)：</strong> 直接由矩阵列向量与基的像的关系。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 8.19 (酉/正交算子的特征值)</p>
+<p>设 <span class="arithmatex">\(T\)</span> 是酉（正交）算子。则 <span class="arithmatex">\(T\)</span> 的所有特征值的模等于 <span class="arithmatex">\(1\)</span>，即 <span class="arithmatex">\(|\lambda| = 1\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(T\mathbf{v} = \lambda\mathbf{v}\)</span>，<span class="arithmatex">\(\mathbf{v} \neq \mathbf{0}\)</span>。由保范性：</p>
+<div class="arithmatex">\[\|\mathbf{v}\| = \|T\mathbf{v}\| = \|\lambda\mathbf{v}\| = |\lambda|\|\mathbf{v}\|\]</div>
+<p>因 <span class="arithmatex">\(\|\mathbf{v}\| &gt; 0\)</span>，故 <span class="arithmatex">\(|\lambda| = 1\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition proposition">
+<p class="admonition-title">命题 8.5 (正交矩阵的行列式)</p>
+<p>若 <span class="arithmatex">\(Q\)</span> 是正交矩阵，则 <span class="arithmatex">\(\det(Q) = \pm 1\)</span>。若 <span class="arithmatex">\(U\)</span> 是酉矩阵，则 <span class="arithmatex">\(|\det(U)| = 1\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><span class="arithmatex">\(Q^TQ = I\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\det(Q^T)\det(Q) = 1\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\((\det Q)^2 = 1\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\det Q = \pm 1\)</span>。</p>
+<p>对酉矩阵：<span class="arithmatex">\(U^HU = I\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(\overline{\det U} \cdot \det U = 1\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(|\det U|^2 = 1\)</span> <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(|\det U| = 1\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 8.15</p>
+<p><strong><span class="arithmatex">\(2 \times 2\)</span> 正交矩阵的一般形式。</strong> 每个 <span class="arithmatex">\(2 \times 2\)</span> 正交矩阵要么是旋转矩阵</p>
+<div class="arithmatex">\[R_\theta = \begin{pmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{pmatrix}, \quad \det R_\theta = 1\]</div>
+<p>要么是反射矩阵</p>
+<div class="arithmatex">\[S_\theta = \begin{pmatrix} \cos\theta &amp; \sin\theta \\ \sin\theta &amp; -\cos\theta \end{pmatrix}, \quad \det S_\theta = -1\]</div>
+<p><span class="arithmatex">\(\det Q = 1\)</span> 的正交矩阵称为<strong>特殊正交矩阵</strong>，它们构成特殊正交群 <span class="arithmatex">\(SO(n)\)</span>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

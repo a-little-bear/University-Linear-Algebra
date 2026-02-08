@@ -1,0 +1,2344 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part2/ch11-svd/">
+      
+      
+        <link rel="prev" href="../ch10-matrix-decompositions/">
+      
+      
+        <link rel="next" href="../ch12-jordan-form/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第11章 奇异值分解 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第11章 奇异值分解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 奇异值的定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 奇异值分解定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 SVD 的几何意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 SVD 的计算方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115-svd-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5 紧凑 SVD 与截断 SVD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.6 低秩近似
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117-moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.7 Moore-Penrose 伪逆
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8 SVD 的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.8 SVD 的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.1 数据压缩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1182" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.2 主成分分析简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.3 条件数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 奇异值的定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 奇异值分解定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 SVD 的几何意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.4 SVD 的计算方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115-svd-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.5 紧凑 SVD 与截断 SVD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.6 低秩近似
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117-moore-penrose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.7 Moore-Penrose 伪逆
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8 SVD 的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.8 SVD 的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.1 数据压缩
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1182" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.2 主成分分析简介
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.8.3 条件数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        本章小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="11">第 11 章 奇异值分解<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
+<p>奇异值分解（Singular Value Decomposition, SVD）是线性代数中最重要的矩阵分解之一。与特征值分解不同，SVD 适用于<strong>任意</strong>矩阵——不要求方阵，也不要求可对角化。SVD 将一个 <span class="arithmatex">\(m \times n\)</span> 矩阵分解为两个正交矩阵与一个对角矩阵的乘积，清晰地揭示了线性变换的几何本质：旋转、缩放、再旋转。SVD 在数据科学、信号处理、数值计算等领域有着极其广泛的应用，是现代应用数学的核心工具。</p>
+<hr />
+<h2 id="111">11.1 奇异值的定义<a class="headerlink" href="#111" title="Permanent link">&para;</a></h2>
+<p>对于任意 <span class="arithmatex">\(m \times n\)</span> 实矩阵 <span class="arithmatex">\(A\)</span>，矩阵 <span class="arithmatex">\(A^T A\)</span> 是一个 <span class="arithmatex">\(n \times n\)</span> 的半正定对称矩阵，因此其所有特征值都是非负实数。奇异值正是从这些特征值中提取出来的。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.1 (奇异值 Singular Value)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵，<span class="arithmatex">\(A^T A\)</span> 的特征值为 <span class="arithmatex">\(\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_n \ge 0\)</span>。则 <span class="arithmatex">\(A\)</span> 的<strong>奇异值</strong>（singular values）定义为
+$$
+\sigma_i = \sqrt{\lambda_i}, \quad i = 1, 2, \ldots, n.
+$$
+按降序排列 <span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_n \ge 0\)</span>。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>矩阵 <span class="arithmatex">\(A^T A\)</span> 半正定的证明：对任意 <span class="arithmatex">\(\mathbf{x} \in \mathbb{R}^n\)</span>，
+$$
+\mathbf{x}^T (A^T A) \mathbf{x} = (A\mathbf{x})^T (A\mathbf{x}) = |A\mathbf{x}|^2 \ge 0.
+$$
+因此 <span class="arithmatex">\(A^T A\)</span> 的特征值均非负，奇异值定义合理。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.1 (奇异值与矩阵范数的关系)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵，<span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_n \ge 0\)</span> 为其奇异值，则：</p>
+<ol>
+<li><span class="arithmatex">\(\|A\|_2 = \sigma_1\)</span>（谱范数等于最大奇异值）；</li>
+<li><span class="arithmatex">\(\|A\|_F = \sqrt{\sigma_1^2 + \sigma_2^2 + \cdots + \sigma_n^2}\)</span>（Frobenius 范数等于奇异值的平方和的平方根）；</li>
+<li>$\operatorname{rank}(A) = $ 非零奇异值的个数。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(1)</strong> 谱范数定义为
+$$
+|A|<em _124_mathbf_x="|\mathbf{x">2 = \max</em>|.
+$$
+由于 }|=1} |A\mathbf{x<span class="arithmatex">\(\|A\mathbf{x}\|^2 = \mathbf{x}^T A^T A \mathbf{x}\)</span>，而 <span class="arithmatex">\(A^T A\)</span> 是对称半正定矩阵，设其特征值为 <span class="arithmatex">\(\lambda_1 \ge \cdots \ge \lambda_n \ge 0\)</span>，对应的单位正交特征向量为 <span class="arithmatex">\(\mathbf{v}_1, \ldots, \mathbf{v}_n\)</span>。任意单位向量 <span class="arithmatex">\(\mathbf{x} = \sum c_i \mathbf{v}_i\)</span>（<span class="arithmatex">\(\sum c_i^2 = 1\)</span>），则
+$$
+|A\mathbf{x}|^2 = \sum_{i=1}^n \lambda_i c_i^2 \le \lambda_1 \sum c_i^2 = \lambda_1.
+$$
+取 <span class="arithmatex">\(\mathbf{x} = \mathbf{v}_1\)</span> 时等号成立。因此 <span class="arithmatex">\(\|A\|_2 = \sqrt{\lambda_1} = \sigma_1\)</span>。</p>
+<p><strong>(2)</strong> <span class="arithmatex">\(\|A\|_F^2 = \operatorname{tr}(A^T A) = \sum_{i=1}^n \lambda_i = \sum_{i=1}^n \sigma_i^2\)</span>。</p>
+<p><strong>(3)</strong> <span class="arithmatex">\(\operatorname{rank}(A) = \operatorname{rank}(A^T A)\)</span>（因为 <span class="arithmatex">\(A\mathbf{x} = \mathbf{0}\)</span> 当且仅当 <span class="arithmatex">\(A^T A \mathbf{x} = \mathbf{0}\)</span>），而对称矩阵的秩等于非零特征值的个数。</p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.2 (左奇异向量与右奇异向量)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵。</p>
+<ul>
+<li><span class="arithmatex">\(A^T A\)</span> 的单位正交特征向量 <span class="arithmatex">\(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n \in \mathbb{R}^n\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>右奇异向量</strong>（right singular vectors）；</li>
+<li><span class="arithmatex">\(A A^T\)</span> 的单位正交特征向量 <span class="arithmatex">\(\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_m \in \mathbb{R}^m\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>左奇异向量</strong>（left singular vectors）。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.2 (<span class="arithmatex">\(A^TA\)</span> 与 <span class="arithmatex">\(AA^T\)</span> 的非零特征值相同)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵，则 <span class="arithmatex">\(A^T A\)</span> 与 <span class="arithmatex">\(A A^T\)</span> 具有相同的非零特征值（计重数）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\lambda \neq 0\)</span> 是 <span class="arithmatex">\(A^T A\)</span> 的特征值，<span class="arithmatex">\(\mathbf{v}\)</span> 为对应的特征向量，则 <span class="arithmatex">\(A^T A \mathbf{v} = \lambda \mathbf{v}\)</span>。令 <span class="arithmatex">\(\mathbf{u} = A\mathbf{v}\)</span>，则 <span class="arithmatex">\(\mathbf{u} \neq \mathbf{0}\)</span>（因为若 <span class="arithmatex">\(A\mathbf{v} = \mathbf{0}\)</span>，则 <span class="arithmatex">\(\lambda \mathbf{v} = A^T A \mathbf{v} = \mathbf{0}\)</span>，与 <span class="arithmatex">\(\lambda \neq 0\)</span>、<span class="arithmatex">\(\mathbf{v} \neq \mathbf{0}\)</span> 矛盾），且
+$$
+A A^T \mathbf{u} = A A^T (A \mathbf{v}) = A (A^T A \mathbf{v}) = A (\lambda \mathbf{v}) = \lambda (A\mathbf{v}) = \lambda \mathbf{u}.
+$$
+因此 <span class="arithmatex">\(\lambda\)</span> 也是 <span class="arithmatex">\(A A^T\)</span> 的特征值。反向同理可证。</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.1</p>
+<p>求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span> 的奇异值。</p>
+<p><strong>解：</strong> 计算
+$$
+A^T A = \begin{pmatrix} 1 &amp; 0 &amp; 1 \ 1 &amp; 1 &amp; 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 1 \ 0 &amp; 1 \ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 2 &amp; 1 \ 1 &amp; 2 \end{pmatrix}.
+$$
+特征多项式为
+$$
+\det(A^T A - \lambda I) = (2 - \lambda)^2 - 1 = \lambda^2 - 4\lambda + 3 = (\lambda - 3)(\lambda - 1).
+$$
+特征值为 <span class="arithmatex">\(\lambda_1 = 3\)</span>，<span class="arithmatex">\(\lambda_2 = 1\)</span>。</p>
+<p>因此奇异值为 <span class="arithmatex">\(\sigma_1 = \sqrt{3}\)</span>，<span class="arithmatex">\(\sigma_2 = 1\)</span>。</p>
+</div>
+<hr />
+<h2 id="112">11.2 奇异值分解定理<a class="headerlink" href="#112" title="Permanent link">&para;</a></h2>
+<p>奇异值分解定理是本章的核心结果，它保证任意矩阵都可以被分解为标准形式。</p>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.3 (奇异值分解定理 SVD Theorem)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>。则存在 <span class="arithmatex">\(m \times m\)</span> 正交矩阵 <span class="arithmatex">\(U\)</span>、<span class="arithmatex">\(n \times n\)</span> 正交矩阵 <span class="arithmatex">\(V\)</span> 以及 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(\Sigma\)</span>，使得
+$$
+A = U \Sigma V^T,
+$$
+其中 <span class="arithmatex">\(\Sigma\)</span> 的形式为
+$$
+\Sigma = \begin{pmatrix} \sigma_1 &amp; &amp; &amp; 0 &amp; \cdots &amp; 0 \ &amp; \sigma_2 &amp; &amp; 0 &amp; \cdots &amp; 0 \ &amp; &amp; \ddots &amp; \vdots &amp; &amp; \vdots \ &amp; &amp; &amp; \sigma_r &amp; \cdots &amp; 0 \ 0 &amp; \cdots &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \ \vdots &amp; &amp; \vdots &amp; \vdots &amp; &amp; \vdots \ 0 &amp; \cdots &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \end{pmatrix}_{m \times n},
+$$
+且 <span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r &gt; 0\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>构造性证明：</strong></p>
+<p><strong>第一步：</strong> 由于 <span class="arithmatex">\(A^T A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 对称半正定矩阵，由谱定理，存在正交矩阵 <span class="arithmatex">\(V = [\mathbf{v}_1, \ldots, \mathbf{v}_n]\)</span> 使得
+$$
+A^T A = V \operatorname{diag}(\lambda_1, \ldots, \lambda_n) V^T,
+$$
+其中 <span class="arithmatex">\(\lambda_1 \ge \cdots \ge \lambda_r &gt; 0 = \lambda_{r+1} = \cdots = \lambda_n\)</span>。令 <span class="arithmatex">\(\sigma_i = \sqrt{\lambda_i}\)</span>（<span class="arithmatex">\(i = 1, \ldots, r\)</span>）。</p>
+<p><strong>第二步：</strong> 对 <span class="arithmatex">\(i = 1, \ldots, r\)</span>，定义
+$$
+\mathbf{u}<em ij="ij">i = \frac{1}{\sigma_i} A \mathbf{v}_i.
+$$
+验证 <span class="arithmatex">\(\{\mathbf{u}_1, \ldots, \mathbf{u}_r\}\)</span> 是正交单位组：
+$$
+\mathbf{u}_i^T \mathbf{u}_j = \frac{1}{\sigma_i \sigma_j} \mathbf{v}_i^T A^T A \mathbf{v}_j = \frac{1}{\sigma_i \sigma_j} \mathbf{v}_i^T (\lambda_j \mathbf{v}_j) = \frac{\lambda_j}{\sigma_i \sigma_j} \delta</em>.
+$$} = \delta_{ij</p>
+<p><strong>第三步：</strong> 将 <span class="arithmatex">\(\{\mathbf{u}_1, \ldots, \mathbf{u}_r\}\)</span> 扩充为 <span class="arithmatex">\(\mathbb{R}^m\)</span> 的标准正交基 <span class="arithmatex">\(\{\mathbf{u}_1, \ldots, \mathbf{u}_m\}\)</span>，令 <span class="arithmatex">\(U = [\mathbf{u}_1, \ldots, \mathbf{u}_m]\)</span>。</p>
+<p><strong>第四步：</strong> 验证 <span class="arithmatex">\(A = U \Sigma V^T\)</span>。由构造，<span class="arithmatex">\(A\mathbf{v}_i = \sigma_i \mathbf{u}_i\)</span>（<span class="arithmatex">\(i \le r\)</span>），且对 <span class="arithmatex">\(i &gt; r\)</span>，<span class="arithmatex">\(A\mathbf{v}_i = \mathbf{0}\)</span>（因为 <span class="arithmatex">\(\|A\mathbf{v}_i\|^2 = \mathbf{v}_i^T A^T A \mathbf{v}_i = \lambda_i = 0\)</span>）。因此
+$$
+AV = U\Sigma, \quad \text{即} \quad A = U\Sigma V^T. \qquad \blacksquare
+$$</p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.3 (SVD 的各分量)</p>
+<p>在 SVD 分解 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 中：</p>
+<ul>
+<li><span class="arithmatex">\(U = [\mathbf{u}_1, \ldots, \mathbf{u}_m]\)</span> 为 <span class="arithmatex">\(m \times m\)</span> 正交矩阵，其列为<strong>左奇异向量</strong>；</li>
+<li><span class="arithmatex">\(V = [\mathbf{v}_1, \ldots, \mathbf{v}_n]\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 正交矩阵，其列为<strong>右奇异向量</strong>；</li>
+<li><span class="arithmatex">\(\Sigma\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 对角矩阵，对角元素为奇异值 <span class="arithmatex">\(\sigma_1 \ge \cdots \ge \sigma_r &gt; 0\)</span>。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.4 (SVD 的外积展开形式)</p>
+<p>设 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 为 <span class="arithmatex">\(A\)</span> 的 SVD，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>，则
+$$
+A = \sum_{i=1}^{r} \sigma_i \mathbf{u}_i \mathbf{v}_i^T.
+$$
+即 <span class="arithmatex">\(A\)</span> 可以表示为 <span class="arithmatex">\(r\)</span> 个秩一矩阵的加权和。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 <span class="arithmatex">\(A = U\Sigma V^T\)</span>，展开得
+$$
+A = \sum_{i=1}^{\min(m,n)} \sigma_i \mathbf{u}_i \mathbf{v}_i^T.
+$$
+当 <span class="arithmatex">\(i &gt; r\)</span> 时 <span class="arithmatex">\(\sigma_i = 0\)</span>，因此求和实际只到 <span class="arithmatex">\(r\)</span>。每个 <span class="arithmatex">\(\mathbf{u}_i \mathbf{v}_i^T\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵，且 <span class="arithmatex">\(\operatorname{rank}(\mathbf{u}_i \mathbf{v}_i^T) = 1\)</span>。</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.2</p>
+<p>对矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span> 求 SVD。</p>
+<p><strong>解：</strong>
+$$
+A^T A = \begin{pmatrix} 9 &amp; 0 \ 0 &amp; 4 \end{pmatrix},
+$$
+特征值 <span class="arithmatex">\(\lambda_1 = 9\)</span>，<span class="arithmatex">\(\lambda_2 = 4\)</span>；特征向量 <span class="arithmatex">\(\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}\)</span>。</p>
+<p>奇异值 <span class="arithmatex">\(\sigma_1 = 3\)</span>，<span class="arithmatex">\(\sigma_2 = 2\)</span>。</p>
+<p>左奇异向量：<span class="arithmatex">\(\mathbf{u}_1 = \frac{1}{3}A\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{u}_2 = \frac{1}{2}A\mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}\)</span>。</p>
+<p>因此
+$$
+A = \begin{pmatrix}1&amp;0\0&amp;1\end{pmatrix}\begin{pmatrix}3&amp;0\0&amp;2\end{pmatrix}\begin{pmatrix}1&amp;0\0&amp;1\end{pmatrix} = I \cdot \Sigma \cdot I.
+$$
+对角矩阵本身就是其 SVD（<span class="arithmatex">\(U = V = I\)</span>）。</p>
+</div>
+<hr />
+<h2 id="113-svd">11.3 SVD 的几何意义<a class="headerlink" href="#113-svd" title="Permanent link">&para;</a></h2>
+<p>SVD 的几何解释极其直观：任何线性变换都可以分解为<strong>旋转（或反射）</strong>、<strong>缩放</strong>、<strong>再旋转（或反射）</strong>三步。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.4 (正交变换的几何意义)</p>
+<p>正交矩阵 <span class="arithmatex">\(Q\)</span>（<span class="arithmatex">\(Q^TQ = I\)</span>）所表示的线性变换是保距的（isometric），即 <span class="arithmatex">\(\|Q\mathbf{x}\| = \|\mathbf{x}\|\)</span>。当 <span class="arithmatex">\(\det Q = 1\)</span> 时为旋转，当 <span class="arithmatex">\(\det Q = -1\)</span> 时为旋转加反射。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.5 (线性变换的几何分解)</p>
+<p>设 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span> 的 SVD。则线性变换 <span class="arithmatex">\(\mathbf{x} \mapsto A\mathbf{x}\)</span> 可以分解为三步：</p>
+<ol>
+<li><span class="arithmatex">\(V^T\)</span>：在 <span class="arithmatex">\(\mathbb{R}^n\)</span> 中旋转（将标准基变为右奇异向量方向）；</li>
+<li><span class="arithmatex">\(\Sigma\)</span>：沿坐标轴方向按 <span class="arithmatex">\(\sigma_i\)</span> 缩放（从 <span class="arithmatex">\(\mathbb{R}^n\)</span> 到 <span class="arithmatex">\(\mathbb{R}^m\)</span>）；</li>
+<li><span class="arithmatex">\(U\)</span>：在 <span class="arithmatex">\(\mathbb{R}^m\)</span> 中旋转（将坐标轴方向变为左奇异向量方向）。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对任意 <span class="arithmatex">\(\mathbf{x} \in \mathbb{R}^n\)</span>，令 <span class="arithmatex">\(\mathbf{y} = V^T \mathbf{x}\)</span>。由于 <span class="arithmatex">\(V\)</span> 是正交矩阵，<span class="arithmatex">\(\|\mathbf{y}\| = \|\mathbf{x}\|\)</span>，因此第一步是等距变换（旋转或反射）。</p>
+<p>第二步，<span class="arithmatex">\(\mathbf{z} = \Sigma \mathbf{y}\)</span> 将 <span class="arithmatex">\(\mathbf{y}\)</span> 的第 <span class="arithmatex">\(i\)</span> 个分量乘以 <span class="arithmatex">\(\sigma_i\)</span>，这是沿坐标轴的缩放。</p>
+<p>第三步，<span class="arithmatex">\(A\mathbf{x} = U\mathbf{z}\)</span>，<span class="arithmatex">\(U\)</span> 是正交矩阵，因此也是等距变换。</p>
+<p>综合三步，单位球 <span class="arithmatex">\(\{\mathbf{x} : \|\mathbf{x}\| = 1\}\)</span> 在 <span class="arithmatex">\(V^T\)</span> 下仍为单位球，在 <span class="arithmatex">\(\Sigma\)</span> 下变为以 <span class="arithmatex">\(\sigma_i\)</span> 为半轴长的超椭球，在 <span class="arithmatex">\(U\)</span> 下旋转到最终位置。</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>在二维情形中，单位圆 <span class="arithmatex">\(\|\mathbf{x}\| = 1\)</span> 经过线性变换 <span class="arithmatex">\(A\)</span> 后变为一个椭圆，椭圆的半长轴和半短轴长度恰好是 <span class="arithmatex">\(\sigma_1\)</span> 和 <span class="arithmatex">\(\sigma_2\)</span>，方向分别为 <span class="arithmatex">\(\mathbf{u}_1\)</span> 和 <span class="arithmatex">\(\mathbf{u}_2\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 11.3</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>。描述 <span class="arithmatex">\(A\)</span> 对单位圆的作用。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A\)</span> 已经是对角矩阵，其 SVD 为 <span class="arithmatex">\(A = I \cdot \begin{pmatrix}2&amp;0\\0&amp;1\end{pmatrix} \cdot I\)</span>。</p>
+<p>单位圆 <span class="arithmatex">\(x^2 + y^2 = 1\)</span> 在 <span class="arithmatex">\(A\)</span> 作用下变为椭圆 <span class="arithmatex">\(\frac{x^2}{4} + y^2 = 1\)</span>，长半轴为 <span class="arithmatex">\(\sigma_1 = 2\)</span>（沿 <span class="arithmatex">\(x\)</span> 轴方向），短半轴为 <span class="arithmatex">\(\sigma_2 = 1\)</span>（沿 <span class="arithmatex">\(y\)</span> 轴方向）。</p>
+</div>
+<hr />
+<h2 id="114-svd">11.4 SVD 的计算方法<a class="headerlink" href="#114-svd" title="Permanent link">&para;</a></h2>
+<p>本节通过详细例题展示 SVD 的计算步骤。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.5 (SVD 计算的标准流程)</p>
+<p>给定 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，SVD 的计算分为以下步骤：</p>
+<ol>
+<li>计算 <span class="arithmatex">\(A^T A\)</span>；</li>
+<li>求 <span class="arithmatex">\(A^T A\)</span> 的特征值 <span class="arithmatex">\(\lambda_1 \ge \cdots \ge \lambda_n \ge 0\)</span> 和对应的单位正交特征向量 <span class="arithmatex">\(\mathbf{v}_1, \ldots, \mathbf{v}_n\)</span>；</li>
+<li>奇异值 <span class="arithmatex">\(\sigma_i = \sqrt{\lambda_i}\)</span>；</li>
+<li>对每个 <span class="arithmatex">\(\sigma_i &gt; 0\)</span>，计算 <span class="arithmatex">\(\mathbf{u}_i = \frac{1}{\sigma_i} A \mathbf{v}_i\)</span>；</li>
+<li>将 <span class="arithmatex">\(\{\mathbf{u}_1, \ldots, \mathbf{u}_r\}\)</span> 扩充为 <span class="arithmatex">\(\mathbb{R}^m\)</span> 的标准正交基；</li>
+<li>组装 <span class="arithmatex">\(U\)</span>、<span class="arithmatex">\(\Sigma\)</span>、<span class="arithmatex">\(V\)</span>。</li>
+</ol>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 11.4</p>
+<p>求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \\ 0 &amp; 0 \end{pmatrix}\)</span> 的 SVD。</p>
+<p><strong>解：</strong></p>
+<p><strong>第一步：</strong> 计算 <span class="arithmatex">\(A^T A\)</span>：
+$$
+A^T A = \begin{pmatrix} 1&amp;1&amp;0 \ 1&amp;-1&amp;0 \end{pmatrix}\begin{pmatrix} 1&amp;1 \ 1&amp;-1 \ 0&amp;0 \end{pmatrix} = \begin{pmatrix} 2 &amp; 0 \ 0 &amp; 2 \end{pmatrix}.
+$$</p>
+<p><strong>第二步：</strong> 特征值 <span class="arithmatex">\(\lambda_1 = \lambda_2 = 2\)</span>，取正交特征向量 <span class="arithmatex">\(\mathbf{v}_1 = \begin{pmatrix}1\\0\end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{v}_2 = \begin{pmatrix}0\\1\end{pmatrix}\)</span>。</p>
+<p><strong>第三步：</strong> 奇异值 <span class="arithmatex">\(\sigma_1 = \sigma_2 = \sqrt{2}\)</span>。</p>
+<p><strong>第四步：</strong> 计算左奇异向量：
+$$
+\mathbf{u}_1 = \frac{1}{\sqrt{2}} A \mathbf{v}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\1\0\end{pmatrix}, \quad
+\mathbf{u}_2 = \frac{1}{\sqrt{2}} A \mathbf{v}_2 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\-1\0\end{pmatrix}.
+$$</p>
+<p><strong>第五步：</strong> 扩充 <span class="arithmatex">\(\{\mathbf{u}_1, \mathbf{u}_2\}\)</span>，取 <span class="arithmatex">\(\mathbf{u}_3 = \begin{pmatrix}0\\0\\1\end{pmatrix}\)</span>。</p>
+<p><strong>第六步：</strong> 因此
+$$
+A = \begin{pmatrix} \frac{1}{\sqrt{2}} &amp; \frac{1}{\sqrt{2}} &amp; 0 \ \frac{1}{\sqrt{2}} &amp; -\frac{1}{\sqrt{2}} &amp; 0 \ 0 &amp; 0 &amp; 1 \end{pmatrix} \begin{pmatrix} \sqrt{2} &amp; 0 \ 0 &amp; \sqrt{2} \ 0 &amp; 0 \end{pmatrix} \begin{pmatrix} 1 &amp; 0 \ 0 &amp; 1 \end{pmatrix}^T.
+$$</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 11.5</p>
+<p>求矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 0 \\ 3 &amp; -5 \end{pmatrix}\)</span> 的 SVD。</p>
+<p><strong>解：</strong></p>
+<p><strong>第一步：</strong>
+$$
+A^T A = \begin{pmatrix} 4&amp;3 \ 0&amp;-5 \end{pmatrix}\begin{pmatrix} 4&amp;0 \ 3&amp;-5 \end{pmatrix} = \begin{pmatrix} 25 &amp; -15 \ -15 &amp; 25 \end{pmatrix}.
+$$</p>
+<p><strong>第二步：</strong> 特征多项式：
+$$
+\det(A^T A - \lambda I) = (25-\lambda)^2 - 225 = \lambda^2 - 50\lambda + 400 = (\lambda - 40)(\lambda - 10).
+$$
+特征值 <span class="arithmatex">\(\lambda_1 = 40\)</span>，<span class="arithmatex">\(\lambda_2 = 10\)</span>。</p>
+<p>对 <span class="arithmatex">\(\lambda_1 = 40\)</span>：<span class="arithmatex">\((A^T A - 40I)\mathbf{v} = \mathbf{0}\)</span> 给出 <span class="arithmatex">\(\begin{pmatrix}-15&amp;-15\\-15&amp;-15\end{pmatrix}\mathbf{v} = \mathbf{0}\)</span>，得 <span class="arithmatex">\(\mathbf{v}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\end{pmatrix}\)</span>。</p>
+<p>对 <span class="arithmatex">\(\lambda_2 = 10\)</span>：<span class="arithmatex">\((A^T A - 10I)\mathbf{v} = \mathbf{0}\)</span> 给出 <span class="arithmatex">\(\begin{pmatrix}15&amp;-15\\-15&amp;15\end{pmatrix}\mathbf{v} = \mathbf{0}\)</span>，得 <span class="arithmatex">\(\mathbf{v}_2 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\)</span>。</p>
+<p><strong>第三步：</strong> <span class="arithmatex">\(\sigma_1 = \sqrt{40} = 2\sqrt{10}\)</span>，<span class="arithmatex">\(\sigma_2 = \sqrt{10}\)</span>。</p>
+<p><strong>第四步：</strong>
+$$
+\mathbf{u}_1 = \frac{1}{2\sqrt{10}} A \mathbf{v}_1 = \frac{1}{2\sqrt{10}} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}4\8\end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}1\2\end{pmatrix},
+$$
+$$
+\mathbf{u}_2 = \frac{1}{\sqrt{10}} A \mathbf{v}_2 = \frac{1}{\sqrt{10}} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}4\-2\end{pmatrix} = \frac{1}{\sqrt{5}}\begin{pmatrix}2\-1\end{pmatrix}.
+$$</p>
+<p><strong>第五步：</strong> 组装：
+$$
+A = \frac{1}{\sqrt{5}}\begin{pmatrix}1&amp;2\2&amp;-1\end{pmatrix} \begin{pmatrix}2\sqrt{10}&amp;0\0&amp;\sqrt{10}\end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix}1&amp;1\-1&amp;1\end{pmatrix}^T.
+$$</p>
+</div>
+<hr />
+<h2 id="115-svd-svd">11.5 紧凑 SVD 与截断 SVD<a class="headerlink" href="#115-svd-svd" title="Permanent link">&para;</a></h2>
+<p>当矩阵的秩远小于其维度时，完整的 SVD 包含了大量冗余信息。紧凑 SVD 和截断 SVD 提供了更经济的表示。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.6 (紧凑 SVD / Compact SVD)</p>
+<p>设 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span> 的完整 SVD，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>。令 <span class="arithmatex">\(U_r = [\mathbf{u}_1, \ldots, \mathbf{u}_r]\)</span>（<span class="arithmatex">\(m \times r\)</span>），<span class="arithmatex">\(\Sigma_r = \operatorname{diag}(\sigma_1, \ldots, \sigma_r)\)</span>（<span class="arithmatex">\(r \times r\)</span>），<span class="arithmatex">\(V_r = [\mathbf{v}_1, \ldots, \mathbf{v}_r]\)</span>（<span class="arithmatex">\(n \times r\)</span>），则
+$$
+A = U_r \Sigma_r V_r^T
+$$
+称为 <span class="arithmatex">\(A\)</span> 的<strong>紧凑 SVD</strong>（compact SVD）或<strong>经济 SVD</strong>（economy SVD）。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.7 (截断 SVD / Truncated SVD)</p>
+<p>设 <span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>，对 <span class="arithmatex">\(k &lt; r\)</span>，令
+$$
+A_k = \sum_{i=1}^{k} \sigma_i \mathbf{u}_i \mathbf{v}_i^T = U_k \Sigma_k V_k^T,
+$$
+其中 <span class="arithmatex">\(U_k\)</span>、<span class="arithmatex">\(\Sigma_k\)</span>、<span class="arithmatex">\(V_k\)</span> 分别取前 <span class="arithmatex">\(k\)</span> 列/行。<span class="arithmatex">\(A_k\)</span> 称为 <span class="arithmatex">\(A\)</span> 的<strong>秩 <span class="arithmatex">\(k\)</span> 截断 SVD</strong>（rank-<span class="arithmatex">\(k\)</span> truncated SVD）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.6 (截断 SVD 的近似误差)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 的奇异值为 <span class="arithmatex">\(\sigma_1 \ge \cdots \ge \sigma_r &gt; 0\)</span>，<span class="arithmatex">\(A_k\)</span> 为秩 <span class="arithmatex">\(k\)</span> 截断近似，则
+$$
+|A - A_k|<em k_1="k+1">2 = \sigma</em>, \qquad |A - A_k|<em k_1="k+1">F = \sqrt{\sigma</em>.
+$$}^2 + \cdots + \sigma_r^2</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 <span class="arithmatex">\(A = \sum_{i=1}^r \sigma_i \mathbf{u}_i \mathbf{v}_i^T\)</span> 以及 <span class="arithmatex">\(A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T\)</span>，得
+$$
+A - A_k = \sum_{i=k+1}^r \sigma_i \mathbf{u}<em k_1="k+1">i \mathbf{v}_i^T.
+$$
+这本身就是 <span class="arithmatex">\(A - A_k\)</span> 的 SVD（奇异值为 <span class="arithmatex">\(\sigma_{k+1}, \ldots, \sigma_r\)</span>），因此
+$$
+|A - A_k|_2 = \sigma</em>, \qquad |A - A_k|<em i="k+1">F = \sqrt{\sum</em>. \qquad \blacksquare
+$$}^r \sigma_i^2</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.6</p>
+<p>设 <span class="arithmatex">\(A\)</span> 的奇异值为 <span class="arithmatex">\(10, 5, 2, 0.1\)</span>。用秩 2 截断近似时，谱范数误差和 Frobenius 范数误差分别是多少？相对 Frobenius 误差是多少？</p>
+<p><strong>解：</strong>
+$$
+|A - A_2|_2 = \sigma_3 = 2, \qquad |A - A_2|_F = \sqrt{2^2 + 0.1^2} = \sqrt{4.01} \approx 2.0025.
+$$
+$$
+|A|_F = \sqrt{100 + 25 + 4 + 0.01} = \sqrt{129.01} \approx 11.359.
+$$
+相对误差为 <span class="arithmatex">\(\frac{\|A - A_2\|_F}{\|A\|_F} \approx \frac{2.0025}{11.359} \approx 17.6\%\)</span>。</p>
+</div>
+<hr />
+<h2 id="116">11.6 低秩近似<a class="headerlink" href="#116" title="Permanent link">&para;</a></h2>
+<p>SVD 提供了最优低秩近似，这一结论由 Eckart-Young-Mirsky 定理精确表述。</p>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.7 (Eckart-Young-Mirsky 定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵，奇异值为 <span class="arithmatex">\(\sigma_1 \ge \cdots \ge \sigma_r &gt; 0\)</span>。对任意秩不超过 <span class="arithmatex">\(k\)</span>（<span class="arithmatex">\(k &lt; r\)</span>）的矩阵 <span class="arithmatex">\(B\)</span>，有
+$$
+|A - A_k|_2 \le |A - B|_2, \qquad |A - A_k|_F \le |A - B|_F,
+$$
+其中 <span class="arithmatex">\(A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T\)</span> 为 <span class="arithmatex">\(A\)</span> 的秩 <span class="arithmatex">\(k\)</span> 截断 SVD。即 <span class="arithmatex">\(A_k\)</span> 是 <span class="arithmatex">\(A\)</span> 在谱范数和 Frobenius 范数下的<strong>最佳秩 <span class="arithmatex">\(k\)</span> 近似</strong>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>谱范数情形的证明：</strong></p>
+<p>设 <span class="arithmatex">\(B\)</span> 为任意秩不超过 <span class="arithmatex">\(k\)</span> 的矩阵。<span class="arithmatex">\(\ker(B)\)</span> 的维数至少为 <span class="arithmatex">\(n - k\)</span>。考虑子空间 <span class="arithmatex">\(W = \operatorname{span}\{\mathbf{v}_1, \ldots, \mathbf{v}_{k+1}\}\)</span>，<span class="arithmatex">\(\dim W = k + 1\)</span>。</p>
+<p>由维数公式，<span class="arithmatex">\(W \cap \ker(B) \neq \{\mathbf{0}\}\)</span>（因为 <span class="arithmatex">\((k+1) + (n-k) = n + 1 &gt; n\)</span>）。取单位向量 <span class="arithmatex">\(\mathbf{w} \in W \cap \ker(B)\)</span>，则 <span class="arithmatex">\(B\mathbf{w} = \mathbf{0}\)</span>，因此
+$$
+|A - B|_2^2 \ge |(A-B)\mathbf{w}|^2 = |A\mathbf{w}|^2.
+$$</p>
+<p>写 <span class="arithmatex">\(\mathbf{w} = \sum_{i=1}^{k+1} c_i \mathbf{v}_i\)</span>（<span class="arithmatex">\(\sum c_i^2 = 1\)</span>），则
+$$
+|A\mathbf{w}|^2 = \left|\sum_{i=1}^{k+1} c_i \sigma_i \mathbf{u}<em i="1">i\right|^2 = \sum</em>^2.
+$$
+因此 }^{k+1} c_i^2 \sigma_i^2 \ge \sigma_{k+1}^2 \sum c_i^2 = \sigma_{k+1<span class="arithmatex">\(\|A - B\|_2 \ge \sigma_{k+1} = \|A - A_k\|_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.7</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 2 &amp; 2 \\ 2 &amp; 3 &amp; -2 \end{pmatrix}\)</span>，求 <span class="arithmatex">\(A\)</span> 的最佳秩一近似。</p>
+<p><strong>解：</strong> 计算
+$$
+A A^T = \begin{pmatrix} 17 &amp; 8 \ 8 &amp; 17 \end{pmatrix}.
+$$
+特征值 <span class="arithmatex">\(\lambda_1 = 25\)</span>，<span class="arithmatex">\(\lambda_2 = 9\)</span>，故 <span class="arithmatex">\(\sigma_1 = 5\)</span>，<span class="arithmatex">\(\sigma_2 = 3\)</span>。</p>
+<p>对 <span class="arithmatex">\(\lambda_1 = 25\)</span>：<span class="arithmatex">\(\mathbf{u}_1 = \frac{1}{\sqrt{2}}\begin{pmatrix}1\\1\end{pmatrix}\)</span>。</p>
+<p>对应右奇异向量：
+$$
+\mathbf{v}_1 = \frac{1}{\sigma_1} A^T \mathbf{u}_1 = \frac{1}{5} \cdot \frac{1}{\sqrt{2}} \begin{pmatrix}5\5\0\end{pmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}1\1\0\end{pmatrix}.
+$$</p>
+<p>最佳秩一近似为
+$$
+A_1 = \sigma_1 \mathbf{u}_1 \mathbf{v}_1^T = 5 \cdot \frac{1}{\sqrt{2}}\begin{pmatrix}1\1\end{pmatrix} \cdot \frac{1}{\sqrt{2}}\begin{pmatrix}1&amp;1&amp;0\end{pmatrix} = \begin{pmatrix} \frac{5}{2} &amp; \frac{5}{2} &amp; 0 \ \frac{5}{2} &amp; \frac{5}{2} &amp; 0 \end{pmatrix}.
+$$</p>
+<p>近似误差 <span class="arithmatex">\(\|A - A_1\|_2 = \sigma_2 = 3\)</span>。</p>
+</div>
+<hr />
+<h2 id="117-moore-penrose">11.7 Moore-Penrose 伪逆<a class="headerlink" href="#117-moore-penrose" title="Permanent link">&para;</a></h2>
+<p>对于不可逆或非方阵的矩阵，Moore-Penrose 伪逆（pseudoinverse）提供了"最佳逆"的概念，可通过 SVD 简洁地构造。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.8 (Moore-Penrose 伪逆)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 实矩阵。<span class="arithmatex">\(A\)</span> 的 <strong>Moore-Penrose 伪逆</strong>（pseudoinverse）<span class="arithmatex">\(A^+\)</span> 是满足以下四个条件的唯一 <span class="arithmatex">\(n \times m\)</span> 矩阵：</p>
+<ol>
+<li><span class="arithmatex">\(A A^+ A = A\)</span>；</li>
+<li><span class="arithmatex">\(A^+ A A^+ = A^+\)</span>；</li>
+<li><span class="arithmatex">\((A A^+)^T = A A^+\)</span>（即 <span class="arithmatex">\(A A^+\)</span> 是对称矩阵）；</li>
+<li><span class="arithmatex">\((A^+ A)^T = A^+ A\)</span>（即 <span class="arithmatex">\(A^+ A\)</span> 是对称矩阵）。</li>
+</ol>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.8 (Moore-Penrose 伪逆的存在唯一性)</p>
+<p>对任意 <span class="arithmatex">\(m \times n\)</span> 实矩阵 <span class="arithmatex">\(A\)</span>，满足定义 11.8 中四个条件的矩阵 <span class="arithmatex">\(A^+\)</span> 存在且唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> 设 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 为 <span class="arithmatex">\(A\)</span> 的 SVD，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>。定义
+$$
+\Sigma^+ = \begin{pmatrix} \sigma_1^{-1} &amp; &amp; \ &amp; \ddots &amp; \ &amp; &amp; \sigma_r^{-1} \ &amp; \mathbf{0} &amp; \end{pmatrix}_{n \times m},
+$$
+令 <span class="arithmatex">\(A^+ = V \Sigma^+ U^T\)</span>。下面验证四个条件。</p>
+<p>(1) <span class="arithmatex">\(A A^+ A = (U\Sigma V^T)(V\Sigma^+ U^T)(U\Sigma V^T) = U\Sigma\Sigma^+\Sigma V^T = U\Sigma V^T = A\)</span>。</p>
+<p>这里 <span class="arithmatex">\(\Sigma\Sigma^+\Sigma = \Sigma\)</span> 成立，因为对角元素满足 <span class="arithmatex">\(\sigma_i \cdot \sigma_i^{-1} \cdot \sigma_i = \sigma_i\)</span>（<span class="arithmatex">\(i \le r\)</span>），其余为零。</p>
+<p>(2)-(4) 类似验证。</p>
+<p><strong>唯一性：</strong> 设 <span class="arithmatex">\(B_1, B_2\)</span> 都满足四个条件。利用条件 (1)(3) 可证 <span class="arithmatex">\(AB_1 = AB_2\)</span>，再由 (1)(4) 可证 <span class="arithmatex">\(B_1A = B_2A\)</span>，最终由 (2) 得 <span class="arithmatex">\(B_1 = B_1AB_1 = B_2AB_2 = B_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.9 (伪逆的 SVD 公式)</p>
+<p>设 <span class="arithmatex">\(A = U\Sigma V^T\)</span> 为 <span class="arithmatex">\(A\)</span> 的 SVD，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>，则
+$$
+A^+ = V \Sigma^+ U^T = \sum_{i=1}^{r} \frac{1}{\sigma_i} \mathbf{v}_i \mathbf{u}_i^T.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.9 (伪逆与最小二乘)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵，<span class="arithmatex">\(\mathbf{b} \in \mathbb{R}^m\)</span>。则 <span class="arithmatex">\(\mathbf{x}^* = A^+ \mathbf{b}\)</span> 是线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 的<strong>最小范数最小二乘解</strong>，即在所有使 <span class="arithmatex">\(\|A\mathbf{x} - \mathbf{b}\|\)</span> 最小的 <span class="arithmatex">\(\mathbf{x}\)</span> 中，<span class="arithmatex">\(\mathbf{x}^*\)</span> 的范数 <span class="arithmatex">\(\|\mathbf{x}^*\|\)</span> 最小。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = U\Sigma V^T\)</span>，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>。令 <span class="arithmatex">\(\mathbf{c} = U^T \mathbf{b}\)</span>，<span class="arithmatex">\(\mathbf{y} = V^T \mathbf{x}\)</span>。由于 <span class="arithmatex">\(U, V\)</span> 是正交矩阵，
+$$
+|A\mathbf{x} - \mathbf{b}|^2 = |\Sigma\mathbf{y} - \mathbf{c}|^2 = \sum_{i=1}^r (\sigma_i y_i - c_i)^2 + \sum_{i=r+1}^m c_i^2.
+$$
+第二项与 <span class="arithmatex">\(\mathbf{x}\)</span> 无关。最小化第一项得 <span class="arithmatex">\(y_i = c_i / \sigma_i\)</span>（<span class="arithmatex">\(i = 1, \ldots, r\)</span>）。</p>
+<p>在此约束下，<span class="arithmatex">\(\|\mathbf{x}\|^2 = \|\mathbf{y}\|^2 = \sum_{i=1}^r y_i^2 + \sum_{i=r+1}^n y_i^2\)</span>。最小化 <span class="arithmatex">\(\|\mathbf{x}\|\)</span> 需取 <span class="arithmatex">\(y_i = 0\)</span>（<span class="arithmatex">\(i = r+1, \ldots, n\)</span>）。</p>
+<p>因此最小范数最小二乘解为 <span class="arithmatex">\(\mathbf{y}^* = (\frac{c_1}{\sigma_1}, \ldots, \frac{c_r}{\sigma_r}, 0, \ldots, 0)^T\)</span>，即 <span class="arithmatex">\(\mathbf{x}^* = V\mathbf{y}^* = V\Sigma^+ U^T \mathbf{b} = A^+ \mathbf{b}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.8</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix}1\\2\end{pmatrix}\)</span>，求 <span class="arithmatex">\(A^+\)</span> 并求 <span class="arithmatex">\(A\mathbf{x} = \begin{pmatrix}3\\4\end{pmatrix}\)</span> 的最小二乘解。</p>
+<p><strong>解：</strong> <span class="arithmatex">\(A^T A = (5)\)</span>，<span class="arithmatex">\(\sigma_1 = \sqrt{5}\)</span>。<span class="arithmatex">\(\mathbf{v}_1 = (1)\)</span>，<span class="arithmatex">\(\mathbf{u}_1 = \frac{1}{\sqrt{5}}\begin{pmatrix}1\\2\end{pmatrix}\)</span>。</p>
+<div class="arithmatex">\[
+A^+ = \frac{1}{\sigma_1} \mathbf{v}_1 \mathbf{u}_1^T = \frac{1}{\sqrt{5}} \cdot (1) \cdot \frac{1}{\sqrt{5}}\begin{pmatrix}1&amp;2\end{pmatrix} = \frac{1}{5}\begin{pmatrix}1&amp;2\end{pmatrix} = \begin{pmatrix}\frac{1}{5}&amp;\frac{2}{5}\end{pmatrix}.
+\]</div>
+<p>最小二乘解：
+$$
+x^* = A^+ \mathbf{b} = \frac{1}{5}(1 \cdot 3 + 2 \cdot 4) = \frac{11}{5} = 2.2.
+$$</p>
+<p>验证：<span class="arithmatex">\(A x^* = \begin{pmatrix}2.2\\4.4\end{pmatrix}\)</span>，残差 <span class="arithmatex">\(\mathbf{b} - Ax^* = \begin{pmatrix}0.8\\-0.4\end{pmatrix}\)</span>，与 <span class="arithmatex">\(A\)</span> 的列空间正交：<span class="arithmatex">\(A^T(\mathbf{b} - Ax^*) = (1)(0.8) + (2)(-0.4) = 0\)</span>。</p>
+</div>
+<hr />
+<h2 id="118-svd">11.8 SVD 的应用<a class="headerlink" href="#118-svd" title="Permanent link">&para;</a></h2>
+<p>SVD 在众多领域有着重要应用，本节介绍几个典型场景。</p>
+<h3 id="1181">11.8.1 数据压缩<a class="headerlink" href="#1181" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.10 (SVD 图像压缩)</p>
+<p>将 <span class="arithmatex">\(m \times n\)</span> 灰度图像视为矩阵 <span class="arithmatex">\(A\)</span>，其秩 <span class="arithmatex">\(k\)</span> 截断 SVD 近似 <span class="arithmatex">\(A_k = \sum_{i=1}^k \sigma_i \mathbf{u}_i \mathbf{v}_i^T\)</span> 可用于图像压缩。存储 <span class="arithmatex">\(A_k\)</span> 需要 <span class="arithmatex">\(k(m + n + 1)\)</span> 个数，而原始矩阵需要 <span class="arithmatex">\(mn\)</span> 个数。当 <span class="arithmatex">\(k \ll \min(m,n)\)</span> 时，压缩比为
+$$
+\rho = \frac{k(m + n + 1)}{mn}.
+$$</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 11.9</p>
+<p>一幅 <span class="arithmatex">\(1000 \times 800\)</span> 的灰度图像，若取秩 <span class="arithmatex">\(k = 50\)</span> 的截断 SVD 近似，压缩比是多少？</p>
+<p><strong>解：</strong>
+$$
+\rho = \frac{50 \times (1000 + 800 + 1)}{1000 \times 800} = \frac{50 \times 1801}{800000} = \frac{90050}{800000} \approx 11.3\%.
+$$
+即只需存储原数据量的约 <span class="arithmatex">\(11.3\%\)</span>。</p>
+</div>
+<h3 id="1182">11.8.2 主成分分析简介<a class="headerlink" href="#1182" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.10 (SVD 与 PCA 的关系)</p>
+<p>设数据矩阵 <span class="arithmatex">\(X\)</span>（<span class="arithmatex">\(n \times p\)</span>，已中心化）的 SVD 为 <span class="arithmatex">\(X = U\Sigma V^T\)</span>。则：</p>
+<ol>
+<li><span class="arithmatex">\(X\)</span> 的协方差矩阵为 <span class="arithmatex">\(S = \frac{1}{n-1}X^TX = \frac{1}{n-1}V\Sigma^2 V^T\)</span>；</li>
+<li><span class="arithmatex">\(V\)</span> 的列即为主成分方向（主轴）；</li>
+<li>第 <span class="arithmatex">\(i\)</span> 个主成分的方差为 <span class="arithmatex">\(\frac{\sigma_i^2}{n-1}\)</span>；</li>
+<li>主成分得分矩阵为 <span class="arithmatex">\(XV = U\Sigma\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 <span class="arithmatex">\(X = U\Sigma V^T\)</span>，得 <span class="arithmatex">\(X^T X = V\Sigma^T U^T U \Sigma V^T = V\Sigma^T\Sigma V^T = V\Sigma^2 V^T\)</span>（其中 <span class="arithmatex">\(\Sigma^2\)</span> 指 <span class="arithmatex">\(\Sigma^T\Sigma\)</span>，是 <span class="arithmatex">\(p \times p\)</span> 对角矩阵）。因此
+$$
+S = \frac{1}{n-1}X^T X = V \left(\frac{\Sigma^2}{n-1}\right) V^T.
+$$
+这正是协方差矩阵的谱分解。<span class="arithmatex">\(V\)</span> 的列是 <span class="arithmatex">\(S\)</span> 的特征向量（主成分方向），对应特征值 <span class="arithmatex">\(\frac{\sigma_i^2}{n-1}\)</span>（第 <span class="arithmatex">\(i\)</span> 个主成分的方差）。</p>
+<p>主成分得分 <span class="arithmatex">\(Z = XV = U\Sigma V^T V = U\Sigma\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<h3 id="1183">11.8.3 条件数<a class="headerlink" href="#1183" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 11.11 (矩阵条件数 Condition Number)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵，<span class="arithmatex">\(\operatorname{rank}(A) = r\)</span>。<span class="arithmatex">\(A\)</span> 的<strong>条件数</strong>（condition number）定义为
+$$
+\kappa(A) = \frac{\sigma_1}{\sigma_r} = \frac{\sigma_{\max}}{\sigma_{\min}},
+$$
+其中 <span class="arithmatex">\(\sigma_1\)</span> 和 <span class="arithmatex">\(\sigma_r\)</span> 分别为 <span class="arithmatex">\(A\)</span> 的最大和最小非零奇异值。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 11.11 (条件数与数值稳定性)</p>
+<p>对于线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>（<span class="arithmatex">\(A\)</span> 可逆），若 <span class="arithmatex">\(\mathbf{b}\)</span> 有相对扰动 <span class="arithmatex">\(\frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}\)</span>，则解的相对扰动满足
+$$
+\frac{|\delta\mathbf{x}|}{|\mathbf{x}|} \le \kappa(A) \frac{|\delta\mathbf{b}|}{|\mathbf{b}|}.
+$$
+条件数越大，问题越<strong>病态</strong>（ill-conditioned）；条件数接近 1 时，问题<strong>良态</strong>（well-conditioned）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A(\mathbf{x} + \delta\mathbf{x}) = \mathbf{b} + \delta\mathbf{b}\)</span>，则 <span class="arithmatex">\(A\delta\mathbf{x} = \delta\mathbf{b}\)</span>，故 <span class="arithmatex">\(\delta\mathbf{x} = A^{-1}\delta\mathbf{b}\)</span>。</p>
+<div class="arithmatex">\[
+\|\delta\mathbf{x}\| = \|A^{-1}\delta\mathbf{b}\| \le \|A^{-1}\|_2 \|\delta\mathbf{b}\|.
+\]</div>
+<p>又 <span class="arithmatex">\(\|\mathbf{b}\| = \|A\mathbf{x}\| \le \|A\|_2 \|\mathbf{x}\|\)</span>，故 <span class="arithmatex">\(\frac{1}{\|\mathbf{x}\|} \le \frac{\|A\|_2}{\|\mathbf{b}\|}\)</span>。因此
+$$
+\frac{|\delta\mathbf{x}|}{|\mathbf{x}|} \le |A|_2 |A^{-1}|_2 \frac{|\delta\mathbf{b}|}{|\mathbf{b}|} = \frac{\sigma_1}{\sigma_n} \frac{|\delta\mathbf{b}|}{|\mathbf{b}|} = \kappa(A) \frac{|\delta\mathbf{b}|}{|\mathbf{b}|}. \qquad \blacksquare
+$$</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 11.10</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix}1&amp;1\\1&amp;1.0001\end{pmatrix}\)</span>，求条件数并分析数值稳定性。</p>
+<p><strong>解：</strong>
+$$
+A^T A = \begin{pmatrix}2&amp;2.0001\2.0001&amp;2.00020001\end{pmatrix}.
+$$
+特征值约为 <span class="arithmatex">\(\lambda_1 \approx 4.00020001\)</span> 和 <span class="arithmatex">\(\lambda_2 \approx 0.000000005\)</span>（精确计算可得）。</p>
+<p>粗略估计：<span class="arithmatex">\(\sigma_1 \approx 2.00005\)</span>，<span class="arithmatex">\(\sigma_2 \approx 0.00005\)</span>。</p>
+<div class="arithmatex">\[
+\kappa(A) = \frac{\sigma_1}{\sigma_2} \approx \frac{2.00005}{0.00005} \approx 40000.
+\]</div>
+<p>条件数约为 <span class="arithmatex">\(40000\)</span>，说明该矩阵是病态的。右端 <span class="arithmatex">\(\mathbf{b}\)</span> 的微小扰动可能导致解的巨大变化。</p>
+</div>
+<hr />
+<h2 id="_1">本章小结<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本章系统介绍了奇异值分解（SVD），包括：</p>
+<ol>
+<li><strong>奇异值</strong>来源于 <span class="arithmatex">\(A^T A\)</span> 的特征值的平方根；</li>
+<li><strong>SVD 定理</strong>保证任意矩阵 <span class="arithmatex">\(A = U\Sigma V^T\)</span>；</li>
+<li><strong>几何意义</strong>：线性变换 = 旋转 + 缩放 + 旋转；</li>
+<li><strong>Eckart-Young-Mirsky 定理</strong>：截断 SVD 给出最优低秩近似；</li>
+<li><strong>Moore-Penrose 伪逆</strong> <span class="arithmatex">\(A^+ = V\Sigma^+ U^T\)</span> 给出最小范数最小二乘解；</li>
+<li><strong>应用</strong>涵盖数据压缩、PCA、条件数分析等领域。</li>
+</ol>
+<p>SVD 将线性代数的理论优美性与实际计算的有效性完美统一，是后续学习数值线性代数、机器学习等课程的基石。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

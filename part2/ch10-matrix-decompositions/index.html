@@ -1,0 +1,2101 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part2/ch10-matrix-decompositions/">
+      
+      
+        <link rel="prev" href="../ch09-quadratic-forms/">
+      
+      
+        <link rel="next" href="../ch11-svd/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第10章 矩阵分解 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第10章 矩阵分解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-lu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 LU 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-plu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 PLU 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-cholesky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Cholesky 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 QR 分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 QR 分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gram-schmidt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gram-Schmidt 正交化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#householder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Householder 变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#givens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Givens 旋转
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105-schur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Schur 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 谱分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 极分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#101-lu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 LU 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102-plu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 PLU 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103-cholesky" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.3 Cholesky 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104-qr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.4 QR 分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 QR 分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gram-schmidt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gram-Schmidt 正交化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#householder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Householder 变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#givens" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Givens 旋转
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105-schur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.5 Schur 分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#106" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.6 谱分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.7 极分解
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="10">第 10 章 矩阵分解<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
+<p>矩阵分解（matrix decomposition / matrix factorization）是将一个矩阵表示为若干特殊矩阵之积的技术，是数值线性代数和应用数学的核心工具。不同的矩阵分解适用于不同的应用场景：LU 分解用于高效求解线性方程组，QR 分解用于最小二乘问题，Schur 分解揭示矩阵的深层结构，谱分解刻画了对称矩阵和正规矩阵的本质。本章系统地介绍各种重要的矩阵分解方法。</p>
+<hr />
+<h2 id="101-lu">10.1 LU 分解<a class="headerlink" href="#101-lu" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.1 (LU 分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 矩阵。若存在 <span class="arithmatex">\(n \times n\)</span> 下三角矩阵 <span class="arithmatex">\(L\)</span>（对角元素全为 1）和上三角矩阵 <span class="arithmatex">\(U\)</span> 使得</p>
+<div class="arithmatex">\[A = LU\]</div>
+<p>则称 <span class="arithmatex">\(A = LU\)</span> 为 <span class="arithmatex">\(A\)</span> 的 <strong>LU 分解</strong>（LU decomposition / LU factorization）。<span class="arithmatex">\(L\)</span> 称为<strong>单位下三角矩阵</strong>（unit lower triangular matrix），<span class="arithmatex">\(U\)</span> 称为<strong>上三角矩阵</strong>（upper triangular matrix）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.1 (LU 分解的存在唯一性)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 矩阵。<span class="arithmatex">\(A\)</span> 具有 LU 分解当且仅当 <span class="arithmatex">\(A\)</span> 的所有前 <span class="arithmatex">\(k\)</span> 阶顺序主子矩阵 <span class="arithmatex">\(A_k\)</span>（<span class="arithmatex">\(k = 1, \ldots, n-1\)</span>）都是非奇异的，即 <span class="arithmatex">\(\det(A_k) \neq 0\)</span>。若 <span class="arithmatex">\(A\)</span> 可逆，则 LU 分解唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>必要性：</strong> 设 <span class="arithmatex">\(A = LU\)</span>，<span class="arithmatex">\(L, U\)</span> 分别为下三角和上三角。<span class="arithmatex">\(A_k = L_k U_k\)</span>，其中 <span class="arithmatex">\(L_k, U_k\)</span> 分别是 <span class="arithmatex">\(L, U\)</span> 的前 <span class="arithmatex">\(k\)</span> 阶主子矩阵。<span class="arithmatex">\(L_k\)</span> 是单位下三角，<span class="arithmatex">\(\det(L_k) = 1 \neq 0\)</span>。若 <span class="arithmatex">\(\det(A_k) = 0\)</span>，则 <span class="arithmatex">\(\det(U_k) = 0\)</span>，这意味着 <span class="arithmatex">\(U\)</span> 的前 <span class="arithmatex">\(k\)</span> 个对角元中有零。但高斯消元过程要求主元非零，矛盾。</p>
+<p><strong>充分性：</strong> 用高斯消元法的语言。由 <span class="arithmatex">\(\det(A_k) \neq 0\)</span> 保证消元过程中所有主元非零，不需要行交换。将消元过程记录为 <span class="arithmatex">\(A = L_1^{-1}L_2^{-1}\cdots L_{n-1}^{-1}U\)</span>，其中 <span class="arithmatex">\(L_i\)</span> 是初等下三角矩阵。<span class="arithmatex">\(L = L_1^{-1}L_2^{-1}\cdots L_{n-1}^{-1}\)</span> 仍是单位下三角矩阵。</p>
+<p><strong>唯一性（<span class="arithmatex">\(A\)</span> 可逆时）：</strong> 设 <span class="arithmatex">\(A = L_1U_1 = L_2U_2\)</span>，则 <span class="arithmatex">\(L_2^{-1}L_1 = U_2U_1^{-1}\)</span>。左边是单位下三角，右边是上三角，因此两边都等于单位矩阵 <span class="arithmatex">\(I\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 10.1</p>
+<p>对矩阵 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 4 &amp; 3 &amp; 3 \\ 8 &amp; 7 &amp; 9 \end{pmatrix}\)</span> 进行 LU 分解。</p>
+<p>高斯消元：<span class="arithmatex">\(R_2 \leftarrow R_2 - 2R_1\)</span>，<span class="arithmatex">\(R_3 \leftarrow R_3 - 4R_1\)</span>：</p>
+<div class="arithmatex">\[\begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 3 &amp; 5 \end{pmatrix}\]</div>
+<p><span class="arithmatex">\(R_3 \leftarrow R_3 - 3R_2\)</span>：</p>
+<div class="arithmatex">\[U = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 2 \end{pmatrix}\]</div>
+<p>乘数矩阵 <span class="arithmatex">\(L = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 0 \\ 4 &amp; 3 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p>验证：<span class="arithmatex">\(LU = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 2 &amp; 1 &amp; 0 \\ 4 &amp; 3 &amp; 1 \end{pmatrix}\begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 2 \end{pmatrix} = \begin{pmatrix} 2 &amp; 1 &amp; 1 \\ 4 &amp; 3 &amp; 3 \\ 8 &amp; 7 &amp; 9 \end{pmatrix} = A\)</span>。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>LU 分解的主要应用是高效求解线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span>：先解 <span class="arithmatex">\(L\mathbf{y} = \mathbf{b}\)</span>（前代法），再解 <span class="arithmatex">\(U\mathbf{x} = \mathbf{y}\)</span>（回代法）。计算量为 <span class="arithmatex">\(O(n^2)\)</span>（假设 <span class="arithmatex">\(L, U\)</span> 已知），而分解本身的计算量为 <span class="arithmatex">\(O(\frac{2}{3}n^3)\)</span>。</p>
+</div>
+<hr />
+<h2 id="102-plu">10.2 PLU 分解<a class="headerlink" href="#102-plu" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.2 (置换矩阵)</p>
+<p><strong>置换矩阵</strong>（permutation matrix）是恰好在每行每列有且仅有一个 <span class="arithmatex">\(1\)</span>、其余元素为 <span class="arithmatex">\(0\)</span> 的方阵。它对应于单位矩阵的行（列）的一个排列。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 10.1 (置换矩阵的性质)</p>
+<p>设 <span class="arithmatex">\(P\)</span> 是置换矩阵。则</p>
+<ol>
+<li><span class="arithmatex">\(P\)</span> 是正交矩阵：<span class="arithmatex">\(P^TP = PP^T = I\)</span>，即 <span class="arithmatex">\(P^{-1} = P^T\)</span>；</li>
+<li><span class="arithmatex">\(\det(P) = \pm 1\)</span>；</li>
+<li>置换矩阵的乘积仍是置换矩阵。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>(1) <span class="arithmatex">\(P\)</span> 的行（列）向量是标准基向量的排列，因此是标准正交集。</p>
+<p>(2) 由 <span class="arithmatex">\(\det(P^TP) = (\det P)^2 = 1\)</span> 得 <span class="arithmatex">\(\det P = \pm 1\)</span>。</p>
+<p>(3) 两个排列的复合仍是排列。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.2 (PLU 分解)</p>
+<p>任意 <span class="arithmatex">\(n \times n\)</span> 可逆矩阵 <span class="arithmatex">\(A\)</span> 都可以分解为</p>
+<div class="arithmatex">\[PA = LU\]</div>
+<p>其中 <span class="arithmatex">\(P\)</span> 是置换矩阵，<span class="arithmatex">\(L\)</span> 是单位下三角矩阵，<span class="arithmatex">\(U\)</span> 是上三角矩阵。等价地，</p>
+<div class="arithmatex">\[A = P^{-1}LU = P^TLU\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在高斯消元过程中，若某步的主元为零，可以通过行交换（部分选主元）使主元非零。所有行交换操作对应一个置换矩阵 <span class="arithmatex">\(P\)</span>。对 <span class="arithmatex">\(PA\)</span> 进行不需要行交换的高斯消元，得到 <span class="arithmatex">\(PA = LU\)</span>。</p>
+<p>更精确地说：对可逆矩阵 <span class="arithmatex">\(A\)</span>，每步消元时选择当前列中绝对值最大的元素作为主元（部分选主元策略），通过行交换将其移至对角位置。全部行交换的效果由 <span class="arithmatex">\(P\)</span> 记录。由于 <span class="arithmatex">\(A\)</span> 可逆，消元过程一定能完成。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 10.2</p>
+<p>对 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; 2 &amp; 1 \\ 1 &amp; 1 &amp; 0 \\ 2 &amp; 0 &amp; 3 \end{pmatrix}\)</span> 进行 PLU 分解。</p>
+<p>第一列主元为 <span class="arithmatex">\(0\)</span>，需要行交换。交换第 1 行和第 3 行：</p>
+<div class="arithmatex">\[P_1A = \begin{pmatrix} 2 &amp; 0 &amp; 3 \\ 1 &amp; 1 &amp; 0 \\ 0 &amp; 2 &amp; 1 \end{pmatrix}\]</div>
+<p><span class="arithmatex">\(R_2 \leftarrow R_2 - \frac{1}{2}R_1\)</span>：</p>
+<div class="arithmatex">\[\begin{pmatrix} 2 &amp; 0 &amp; 3 \\ 0 &amp; 1 &amp; -3/2 \\ 0 &amp; 2 &amp; 1 \end{pmatrix}\]</div>
+<p><span class="arithmatex">\(R_3 \leftarrow R_3 - 2R_2\)</span>：</p>
+<div class="arithmatex">\[U = \begin{pmatrix} 2 &amp; 0 &amp; 3 \\ 0 &amp; 1 &amp; -3/2 \\ 0 &amp; 0 &amp; 4 \end{pmatrix}\]</div>
+<p>因此 <span class="arithmatex">\(P = \begin{pmatrix} 0 &amp; 0 &amp; 1 \\ 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(L = \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 1/2 &amp; 1 &amp; 0 \\ 0 &amp; 2 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(PA = LU\)</span>。</p>
+</div>
+<hr />
+<h2 id="103-cholesky">10.3 Cholesky 分解<a class="headerlink" href="#103-cholesky" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.3 (Cholesky 分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实对称正定矩阵。<span class="arithmatex">\(A\)</span> 的 <strong>Cholesky 分解</strong>（Cholesky decomposition）是</p>
+<div class="arithmatex">\[A = LL^T\]</div>
+<p>其中 <span class="arithmatex">\(L\)</span> 是对角元素全为正的下三角矩阵。对复 Hermitian 正定矩阵，<span class="arithmatex">\(A = LL^H\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.3 (Cholesky 分解的存在唯一性)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实对称正定矩阵。则存在唯一的对角元素全为正的下三角矩阵 <span class="arithmatex">\(L\)</span> 使得 <span class="arithmatex">\(A = LL^T\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> 由 LU 分解（正定矩阵的顺序主子式全为正，保证 LU 分解存在）：<span class="arithmatex">\(A = L_0 U_0\)</span>。令 <span class="arithmatex">\(D = \operatorname{diag}(u_{11}, \ldots, u_{nn})\)</span>（<span class="arithmatex">\(U_0\)</span> 的对角线），则 <span class="arithmatex">\(U_0 = DU_1\)</span>，其中 <span class="arithmatex">\(U_1\)</span> 是单位上三角。</p>
+<p>由 <span class="arithmatex">\(A = A^T\)</span>，有 <span class="arithmatex">\(L_0DU_1 = U_1^TDL_0^T\)</span>。由唯一性可推出 <span class="arithmatex">\(U_1 = L_0^T\)</span>，故 <span class="arithmatex">\(A = L_0DL_0^T\)</span>。</p>
+<p>正定性保证 <span class="arithmatex">\(u_{ii} = d_i &gt; 0\)</span>。令 <span class="arithmatex">\(L = L_0 D^{1/2}\)</span>（其中 <span class="arithmatex">\(D^{1/2} = \operatorname{diag}(\sqrt{d_1}, \ldots, \sqrt{d_n})\)</span>），则 <span class="arithmatex">\(A = L_0 D^{1/2}(D^{1/2})^TL_0^T = LL^T\)</span>。</p>
+<p><strong>唯一性：</strong> 设 <span class="arithmatex">\(A = L_1L_1^T = L_2L_2^T\)</span>。则 <span class="arithmatex">\(L_2^{-1}L_1 = L_2^T L_1^{-T}\)</span>。左边是下三角，右边是上三角，故两边都是对角矩阵 <span class="arithmatex">\(D\)</span>。由 <span class="arithmatex">\(L_2^{-1}L_1 = D\)</span> 和 <span class="arithmatex">\(L_2^TL_1^{-T} = D\)</span>，得 <span class="arithmatex">\(D = D^T = D\)</span>，且 <span class="arithmatex">\(DD^T = I\)</span>。由对角元素为正，<span class="arithmatex">\(D = I\)</span>，故 <span class="arithmatex">\(L_1 = L_2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 10.3</p>
+<p>对 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 2 &amp; -2 \\ 2 &amp; 10 &amp; 2 \\ -2 &amp; 2 &amp; 5 \end{pmatrix}\)</span> 进行 Cholesky 分解。</p>
+<p>设 <span class="arithmatex">\(L = \begin{pmatrix} l_{11} &amp; 0 &amp; 0 \\ l_{21} &amp; l_{22} &amp; 0 \\ l_{31} &amp; l_{32} &amp; l_{33} \end{pmatrix}\)</span>，由 <span class="arithmatex">\(A = LL^T\)</span>：</p>
+<ul>
+<li><span class="arithmatex">\(l_{11}^2 = 4 \Rightarrow l_{11} = 2\)</span></li>
+<li><span class="arithmatex">\(l_{21}l_{11} = 2 \Rightarrow l_{21} = 1\)</span></li>
+<li><span class="arithmatex">\(l_{31}l_{11} = -2 \Rightarrow l_{31} = -1\)</span></li>
+<li><span class="arithmatex">\(l_{21}^2 + l_{22}^2 = 10 \Rightarrow l_{22}^2 = 9 \Rightarrow l_{22} = 3\)</span></li>
+<li><span class="arithmatex">\(l_{31}l_{21} + l_{32}l_{22} = 2 \Rightarrow l_{32} = 1\)</span></li>
+<li><span class="arithmatex">\(l_{31}^2 + l_{32}^2 + l_{33}^2 = 5 \Rightarrow l_{33}^2 = 3 \Rightarrow l_{33} = \sqrt{3}\)</span></li>
+</ul>
+<div class="arithmatex">\[L = \begin{pmatrix} 2 &amp; 0 &amp; 0 \\ 1 &amp; 3 &amp; 0 \\ -1 &amp; 1 &amp; \sqrt{3} \end{pmatrix}\]</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Cholesky 分解的计算量约为 <span class="arithmatex">\(\frac{1}{3}n^3\)</span>，是 LU 分解的一半。它在数值计算中非常稳定，不需要选主元。Cholesky 分解也常用于判定矩阵是否正定：若算法顺利完成（所有对角元素为正），则矩阵正定。</p>
+</div>
+<hr />
+<h2 id="104-qr">10.4 QR 分解<a class="headerlink" href="#104-qr" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.4 (QR 分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 矩阵（<span class="arithmatex">\(m \geq n\)</span>）。<span class="arithmatex">\(A\)</span> 的 <strong>QR 分解</strong>（QR decomposition）是</p>
+<div class="arithmatex">\[A = QR\]</div>
+<p>其中 <span class="arithmatex">\(Q\)</span> 是 <span class="arithmatex">\(m \times m\)</span> 正交（或酉）矩阵，<span class="arithmatex">\(R\)</span> 是 <span class="arithmatex">\(m \times n\)</span> 上三角矩阵。</p>
+<p><strong>缩减形式</strong>（thin QR）：<span class="arithmatex">\(A = Q_1R_1\)</span>，其中 <span class="arithmatex">\(Q_1\)</span> 是 <span class="arithmatex">\(m \times n\)</span>（列正交，<span class="arithmatex">\(Q_1^TQ_1 = I_n\)</span>），<span class="arithmatex">\(R_1\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 上三角。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.4 (QR 分解的存在性)</p>
+<p>任意 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>（<span class="arithmatex">\(m \geq n\)</span>）都具有 QR 分解。若 <span class="arithmatex">\(A\)</span> 列满秩且要求 <span class="arithmatex">\(R\)</span> 的对角元素为正，则缩减 QR 分解唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性（Gram-Schmidt 方法）：</strong> 设 <span class="arithmatex">\(A = [\mathbf{a}_1 | \cdots | \mathbf{a}_n]\)</span>。对列向量 <span class="arithmatex">\(\mathbf{a}_1, \ldots, \mathbf{a}_n\)</span> 施以 Gram-Schmidt 正交化：</p>
+<div class="arithmatex">\[\mathbf{u}_1 = \mathbf{a}_1, \quad \mathbf{e}_1 = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|}\]</div>
+<div class="arithmatex">\[\mathbf{u}_k = \mathbf{a}_k - \sum_{j=1}^{k-1}\langle \mathbf{a}_k, \mathbf{e}_j\rangle \mathbf{e}_j, \quad \mathbf{e}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|}\]</div>
+<p>则 <span class="arithmatex">\(\mathbf{a}_k = \sum_{j=1}^{k}\langle \mathbf{a}_k, \mathbf{e}_j\rangle \mathbf{e}_j\)</span>，写成矩阵形式即 <span class="arithmatex">\(A = Q_1R_1\)</span>。</p>
+<p><strong>唯一性：</strong> 若 <span class="arithmatex">\(A = Q_1R_1 = Q_2R_2\)</span>（<span class="arithmatex">\(R_i\)</span> 对角元素为正），则 <span class="arithmatex">\(Q_2^TQ_1 = R_2R_1^{-1}\)</span>。左边列正交，右边上三角。<span class="arithmatex">\(Q_2^TQ_1\)</span> 同时是正交矩阵和上三角矩阵，因此是对角矩阵，且对角元素为 <span class="arithmatex">\(\pm 1\)</span>。由 <span class="arithmatex">\(R_1, R_2\)</span> 对角元素为正，该对角矩阵为 <span class="arithmatex">\(I\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<h3 id="gram-schmidt">Gram-Schmidt 正交化<a class="headerlink" href="#gram-schmidt" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.5 (Gram-Schmidt 正交化)</p>
+<p>设 <span class="arithmatex">\(\{\mathbf{a}_1, \ldots, \mathbf{a}_n\}\)</span> 是线性无关向量组。<strong>Gram-Schmidt 正交化</strong>（Gram-Schmidt orthogonalization）过程为：</p>
+<div class="arithmatex">\[\mathbf{u}_1 = \mathbf{a}_1, \quad \mathbf{e}_1 = \frac{\mathbf{u}_1}{\|\mathbf{u}_1\|}\]</div>
+<p>对 <span class="arithmatex">\(k = 2, \ldots, n\)</span>：</p>
+<div class="arithmatex">\[\mathbf{u}_k = \mathbf{a}_k - \sum_{j=1}^{k-1} \frac{\langle \mathbf{a}_k, \mathbf{u}_j \rangle}{\langle \mathbf{u}_j, \mathbf{u}_j \rangle} \mathbf{u}_j, \quad \mathbf{e}_k = \frac{\mathbf{u}_k}{\|\mathbf{u}_k\|}\]</div>
+<p>则 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是标准正交组，且对每个 <span class="arithmatex">\(k\)</span>，<span class="arithmatex">\(\operatorname{span}\{\mathbf{e}_1, \ldots, \mathbf{e}_k\} = \operatorname{span}\{\mathbf{a}_1, \ldots, \mathbf{a}_k\}\)</span>。</p>
+</div>
+<h3 id="householder">Householder 变换<a class="headerlink" href="#householder" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.6 (Householder 反射)</p>
+<p>设 <span class="arithmatex">\(\mathbf{v} \in \mathbb{R}^n\)</span> 是非零向量。<strong>Householder 反射</strong>（Householder reflection）定义为</p>
+<div class="arithmatex">\[H = I - 2\frac{\mathbf{v}\mathbf{v}^T}{\mathbf{v}^T\mathbf{v}}\]</div>
+<p><span class="arithmatex">\(H\)</span> 是对称正交矩阵（<span class="arithmatex">\(H^T = H\)</span>，<span class="arithmatex">\(H^2 = I\)</span>），几何上表示关于 <span class="arithmatex">\(\mathbf{v}\)</span> 的正交补超平面的反射。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 10.2</p>
+<p>Householder 反射矩阵 <span class="arithmatex">\(H\)</span> 满足：</p>
+<ol>
+<li><span class="arithmatex">\(H = H^T\)</span>（对称）；</li>
+<li><span class="arithmatex">\(H^2 = I\)</span>（对合）；</li>
+<li><span class="arithmatex">\(H\)</span> 是正交矩阵，<span class="arithmatex">\(\det(H) = -1\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>(1) <span class="arithmatex">\((I - 2\frac{\mathbf{v}\mathbf{v}^T}{\mathbf{v}^T\mathbf{v}})^T = I - 2\frac{\mathbf{v}\mathbf{v}^T}{\mathbf{v}^T\mathbf{v}} = H\)</span>。</p>
+<p>(2) <span class="arithmatex">\(H^2 = (I - 2\frac{\mathbf{v}\mathbf{v}^T}{\|\mathbf{v}\|^2})^2 = I - 4\frac{\mathbf{v}\mathbf{v}^T}{\|\mathbf{v}\|^2} + 4\frac{\mathbf{v}(\mathbf{v}^T\mathbf{v})\mathbf{v}^T}{\|\mathbf{v}\|^4} = I\)</span>。</p>
+<p>(3) 由 (1) 和 (2) 得 <span class="arithmatex">\(HH^T = H^2 = I\)</span>。<span class="arithmatex">\(\det(H) = -1\)</span> 因为 <span class="arithmatex">\(H\)</span> 有一个特征值为 <span class="arithmatex">\(-1\)</span>，其余 <span class="arithmatex">\(n-1\)</span> 个特征值为 <span class="arithmatex">\(1\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.5 (Householder QR)</p>
+<p>对任意 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>（<span class="arithmatex">\(m \geq n\)</span>），存在 Householder 反射 <span class="arithmatex">\(H_1, H_2, \ldots, H_n\)</span> 使得</p>
+<div class="arithmatex">\[H_n \cdots H_2 H_1 A = R\]</div>
+<p>为上三角矩阵。因此 <span class="arithmatex">\(A = QR\)</span>，其中 <span class="arithmatex">\(Q = H_1 H_2 \cdots H_n\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>构造 <span class="arithmatex">\(H_1\)</span>：</strong> 设 <span class="arithmatex">\(\mathbf{a}_1\)</span> 是 <span class="arithmatex">\(A\)</span> 的第一列。选择 <span class="arithmatex">\(\mathbf{v}_1 = \mathbf{a}_1 + \operatorname{sign}(a_{11})\|\mathbf{a}_1\|\mathbf{e}_1\)</span>，令 <span class="arithmatex">\(H_1 = I - 2\frac{\mathbf{v}_1\mathbf{v}_1^T}{\mathbf{v}_1^T\mathbf{v}_1}\)</span>，则 <span class="arithmatex">\(H_1\mathbf{a}_1 = -\operatorname{sign}(a_{11})\|\mathbf{a}_1\|\mathbf{e}_1\)</span>，即第一列被消为只有第一个分量非零。</p>
+<p>对 <span class="arithmatex">\(H_1A\)</span> 的右下角 <span class="arithmatex">\((m-1)\times(n-1)\)</span> 子矩阵重复此过程。将 <span class="arithmatex">\((m-1)\)</span> 维的 Householder 矩阵嵌入 <span class="arithmatex">\(m\)</span> 维（左上角补 <span class="arithmatex">\(1\)</span>）得到 <span class="arithmatex">\(H_2\)</span>。如此迭代 <span class="arithmatex">\(n\)</span> 步。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<h3 id="givens">Givens 旋转<a class="headerlink" href="#givens" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.7 (Givens 旋转)</p>
+<p><strong>Givens 旋转</strong>（Givens rotation）<span class="arithmatex">\(G(i, j, \theta)\)</span> 是单位矩阵在第 <span class="arithmatex">\((i,i), (i,j), (j,i), (j,j)\)</span> 位置修改为</p>
+<div class="arithmatex">\[g_{ii} = g_{jj} = \cos\theta, \quad g_{ij} = -\sin\theta, \quad g_{ji} = \sin\theta\]</div>
+<p>其余位置不变。<span class="arithmatex">\(G(i,j,\theta)\)</span> 是正交矩阵，表示在 <span class="arithmatex">\((i,j)\)</span> 平面内旋转 <span class="arithmatex">\(\theta\)</span> 角。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 10.4</p>
+<p>用 Gram-Schmidt 方法对 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\)</span> 进行 QR 分解。</p>
+<p><span class="arithmatex">\(\mathbf{a}_1 = (1,1,0)^T\)</span>，<span class="arithmatex">\(\|\mathbf{a}_1\| = \sqrt{2}\)</span>，<span class="arithmatex">\(\mathbf{e}_1 = \frac{1}{\sqrt{2}}(1,1,0)^T\)</span>。</p>
+<p><span class="arithmatex">\(\mathbf{u}_2 = \mathbf{a}_2 - \langle \mathbf{a}_2, \mathbf{e}_1\rangle \mathbf{e}_1 = (1,0,1)^T - \frac{1}{\sqrt{2}} \cdot \frac{1}{\sqrt{2}}(1,1,0)^T = (1,0,1)^T - \frac{1}{2}(1,1,0)^T = \frac{1}{2}(1,-1,2)^T\)</span>。</p>
+<p><span class="arithmatex">\(\|\mathbf{u}_2\| = \frac{1}{2}\sqrt{6}\)</span>，<span class="arithmatex">\(\mathbf{e}_2 = \frac{1}{\sqrt{6}}(1,-1,2)^T\)</span>。</p>
+<p><span class="arithmatex">\(\mathbf{u}_3 = \mathbf{a}_3 - \langle \mathbf{a}_3, \mathbf{e}_1\rangle \mathbf{e}_1 - \langle \mathbf{a}_3, \mathbf{e}_2\rangle \mathbf{e}_2\)</span>。</p>
+<p><span class="arithmatex">\(\langle \mathbf{a}_3, \mathbf{e}_1\rangle = \frac{1}{\sqrt{2}}\)</span>，<span class="arithmatex">\(\langle \mathbf{a}_3, \mathbf{e}_2\rangle = \frac{1}{\sqrt{6}}(0-1+2) = \frac{1}{\sqrt{6}}\)</span>。</p>
+<p><span class="arithmatex">\(\mathbf{u}_3 = (0,1,1)^T - \frac{1}{2}(1,1,0)^T - \frac{1}{6}(1,-1,2)^T = \frac{1}{3}(-1,1,1)^T \cdot \frac{3}{2}\)</span>。</p>
+<p>经计算，<span class="arithmatex">\(\mathbf{u}_3 = (-\frac{2}{3}, \frac{2}{3}, \frac{2}{3})^T\)</span>，<span class="arithmatex">\(\|\mathbf{u}_3\| = \frac{2}{\sqrt{3}}\)</span>，<span class="arithmatex">\(\mathbf{e}_3 = \frac{1}{\sqrt{3}}(-1, 1, 1)^T\)</span>。</p>
+<div class="arithmatex">\[Q = \begin{pmatrix} 1/\sqrt{2} &amp; 1/\sqrt{6} &amp; -1/\sqrt{3} \\ 1/\sqrt{2} &amp; -1/\sqrt{6} &amp; 1/\sqrt{3} \\ 0 &amp; 2/\sqrt{6} &amp; 1/\sqrt{3} \end{pmatrix}\]</div>
+<div class="arithmatex">\[R = Q^TA = \begin{pmatrix} \sqrt{2} &amp; 1/\sqrt{2} &amp; 1/\sqrt{2} \\ 0 &amp; \sqrt{6}/2 &amp; 1/\sqrt{6} \\ 0 &amp; 0 &amp; 2/\sqrt{3} \end{pmatrix}\]</div>
+</div>
+<hr />
+<h2 id="105-schur">10.5 Schur 分解<a class="headerlink" href="#105-schur" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.6 (Schur 分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 复矩阵。则存在酉矩阵 <span class="arithmatex">\(U\)</span> 使得</p>
+<div class="arithmatex">\[U^H A U = T\]</div>
+<p>其中 <span class="arithmatex">\(T\)</span> 是上三角矩阵，其对角元素是 <span class="arithmatex">\(A\)</span> 的特征值（按任意指定顺序排列）。等价地，<span class="arithmatex">\(A = UTU^H\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对 <span class="arithmatex">\(n\)</span> 用数学归纳法。<span class="arithmatex">\(n = 1\)</span> 时显然。设结论对 <span class="arithmatex">\(n-1\)</span> 阶矩阵成立。</p>
+<p>由代数基本定理，<span class="arithmatex">\(A\)</span> 有特征值 <span class="arithmatex">\(\lambda_1\)</span>。设 <span class="arithmatex">\(\mathbf{u}_1\)</span> 是对应的单位特征向量。将 <span class="arithmatex">\(\mathbf{u}_1\)</span> 扩充为 <span class="arithmatex">\(\mathbb{C}^n\)</span> 的标准正交基 <span class="arithmatex">\(\{\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\}\)</span>，令 <span class="arithmatex">\(U_1 = [\mathbf{u}_1 | \cdots | \mathbf{u}_n]\)</span>。则</p>
+<div class="arithmatex">\[U_1^H A U_1 = \begin{pmatrix} \lambda_1 &amp; \mathbf{b}^H \\ \mathbf{0} &amp; A_1 \end{pmatrix}\]</div>
+<p>其中 <span class="arithmatex">\(A_1\)</span> 是 <span class="arithmatex">\((n-1) \times (n-1)\)</span> 矩阵（第一列为零向量是因为 <span class="arithmatex">\(\mathbf{u}_j^HA\mathbf{u}_1 = \lambda_1 \mathbf{u}_j^H\mathbf{u}_1 = 0\)</span>，<span class="arithmatex">\(j \geq 2\)</span>）。</p>
+<p>由归纳假设，存在 <span class="arithmatex">\((n-1)\)</span> 阶酉矩阵 <span class="arithmatex">\(V_1\)</span> 使 <span class="arithmatex">\(V_1^HA_1V_1 = T_1\)</span> 为上三角。令</p>
+<div class="arithmatex">\[V = \begin{pmatrix} 1 &amp; \mathbf{0}^H \\ \mathbf{0} &amp; V_1 \end{pmatrix}\]</div>
+<p>则 <span class="arithmatex">\(U = U_1V\)</span> 是酉矩阵，且 <span class="arithmatex">\(U^HAU\)</span> 是上三角矩阵，对角元素为 <span class="arithmatex">\(A\)</span> 的特征值。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.7 (实 Schur 分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实矩阵。则存在正交矩阵 <span class="arithmatex">\(Q\)</span> 使得</p>
+<div class="arithmatex">\[Q^TAQ = T\]</div>
+<p>其中 <span class="arithmatex">\(T\)</span> 是准上三角矩阵（quasi-upper triangular），即对角块是 <span class="arithmatex">\(1\times 1\)</span> 块（对应实特征值）或 <span class="arithmatex">\(2\times 2\)</span> 块 <span class="arithmatex">\(\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\)</span>（对应共轭复特征值对）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>思路类似复 Schur 分解。对实特征值，可像复情形一样处理。对共轭复特征值对 <span class="arithmatex">\(\lambda = a \pm bi\)</span>，对应两个共轭复特征向量 <span class="arithmatex">\(\mathbf{v} \pm i\mathbf{w}\)</span>，其实部和虚部 <span class="arithmatex">\(\mathbf{v}, \mathbf{w}\)</span> 张成一个 <span class="arithmatex">\(2\)</span> 维实不变子空间，在此子空间上 <span class="arithmatex">\(A\)</span> 的限制给出 <span class="arithmatex">\(2\times 2\)</span> 块。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 10.5</p>
+<p>对 <span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{pmatrix}\)</span>（旋转 90 度矩阵），其特征值为 <span class="arithmatex">\(\pm i\)</span>。</p>
+<p>复 Schur 分解：<span class="arithmatex">\(U = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 &amp; 1 \\ i &amp; -i \end{pmatrix}\)</span>，<span class="arithmatex">\(U^HAU = \begin{pmatrix} i &amp; 0 \\ 0 &amp; -i \end{pmatrix}\)</span>。</p>
+<p>实 Schur 分解：<span class="arithmatex">\(A\)</span> 本身已经是准上三角形式（一个 <span class="arithmatex">\(2\times 2\)</span> 块）：<span class="arithmatex">\(Q = I\)</span>，<span class="arithmatex">\(T = A\)</span>。</p>
+</div>
+<hr />
+<h2 id="106">10.6 谱分解<a class="headerlink" href="#106" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.8 (谱分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是可对角化的矩阵。若 <span class="arithmatex">\(A\)</span> 有特征值 <span class="arithmatex">\(\lambda_1, \ldots, \lambda_k\)</span>（互不相同），对应的特征空间投影为 <span class="arithmatex">\(P_1, \ldots, P_k\)</span>，则</p>
+<div class="arithmatex">\[A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_k P_k\]</div>
+<p>称为 <span class="arithmatex">\(A\)</span> 的<strong>谱分解</strong>（spectral decomposition）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.8 (对称矩阵的谱分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 实对称矩阵，特征值为 <span class="arithmatex">\(\lambda_1, \ldots, \lambda_n\)</span>（允许重复），对应的标准正交特征向量为 <span class="arithmatex">\(\mathbf{q}_1, \ldots, \mathbf{q}_n\)</span>。则</p>
+<div class="arithmatex">\[A = Q\Lambda Q^T = \sum_{i=1}^n \lambda_i \mathbf{q}_i \mathbf{q}_i^T\]</div>
+<p>若将相同特征值的项合并，设不同特征值为 <span class="arithmatex">\(\mu_1, \ldots, \mu_k\)</span>，对应的特征空间正交投影为 <span class="arithmatex">\(P_j = \sum_{\lambda_i = \mu_j} \mathbf{q}_i\mathbf{q}_i^T\)</span>，则</p>
+<div class="arithmatex">\[A = \sum_{j=1}^k \mu_j P_j, \quad \text{其中} \quad \sum_{j=1}^k P_j = I, \quad P_j P_l = \delta_{jl} P_j\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由谱定理，<span class="arithmatex">\(A = Q\Lambda Q^T\)</span>。展开矩阵乘法：</p>
+<div class="arithmatex">\[A = \sum_{i=1}^n \lambda_i \mathbf{q}_i \mathbf{q}_i^T\]</div>
+<p>验证 <span class="arithmatex">\(P_j\)</span> 的性质：<span class="arithmatex">\(P_j\)</span> 是到特征空间 <span class="arithmatex">\(E_{\mu_j}\)</span> 上的正交投影，因此 <span class="arithmatex">\(P_j^2 = P_j\)</span>，<span class="arithmatex">\(P_j^T = P_j\)</span>，<span class="arithmatex">\(P_jP_l = 0\)</span>（<span class="arithmatex">\(j \neq l\)</span>，因不同特征空间正交），<span class="arithmatex">\(\sum P_j = I\)</span>（因特征向量组成完整的标准正交基）。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.9 (正规矩阵的谱分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 正规矩阵，特征值为 <span class="arithmatex">\(\lambda_1, \ldots, \lambda_n\)</span>，对应的标准正交特征向量为 <span class="arithmatex">\(\mathbf{u}_1, \ldots, \mathbf{u}_n\)</span>。则</p>
+<div class="arithmatex">\[A = U\Lambda U^H = \sum_{i=1}^n \lambda_i \mathbf{u}_i \mathbf{u}_i^H\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由正规矩阵的谱定理（定理 8.17），<span class="arithmatex">\(A\)</span> 可酉对角化为 <span class="arithmatex">\(A = U\Lambda U^H\)</span>。展开即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 10.6</p>
+<p>对 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span> 进行谱分解。</p>
+<p>特征值 <span class="arithmatex">\(\lambda_1 = 1\)</span>，<span class="arithmatex">\(\mathbf{q}_1 = \frac{1}{\sqrt{2}}(1,-1)^T\)</span>；<span class="arithmatex">\(\lambda_2 = 3\)</span>，<span class="arithmatex">\(\mathbf{q}_2 = \frac{1}{\sqrt{2}}(1,1)^T\)</span>。</p>
+<div class="arithmatex">\[P_1 = \mathbf{q}_1\mathbf{q}_1^T = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix}, \quad P_2 = \mathbf{q}_2\mathbf{q}_2^T = \frac{1}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\]</div>
+<div class="arithmatex">\[A = 1 \cdot P_1 + 3 \cdot P_2 = \frac{1}{2}\begin{pmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{pmatrix} + \frac{3}{2}\begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\]</div>
+<p>验证：<span class="arithmatex">\(P_1 + P_2 = I\)</span>，<span class="arithmatex">\(P_1P_2 = 0\)</span>。</p>
+</div>
+<hr />
+<h2 id="107">10.7 极分解<a class="headerlink" href="#107" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 10.9 (极分解)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times n\)</span> 可逆复矩阵。<span class="arithmatex">\(A\)</span> 的<strong>极分解</strong>（polar decomposition）是</p>
+<div class="arithmatex">\[A = UP\]</div>
+<p>其中 <span class="arithmatex">\(U\)</span> 是酉矩阵（<span class="arithmatex">\(U^HU = I\)</span>），<span class="arithmatex">\(P\)</span> 是正定 Hermitian 矩阵（<span class="arithmatex">\(P^H = P\)</span>，<span class="arithmatex">\(P &gt; 0\)</span>）。这称为<strong>右极分解</strong>。类似地，<span class="arithmatex">\(A = P'U\)</span>（<span class="arithmatex">\(P'\)</span> 正定）称为<strong>左极分解</strong>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 10.10 (极分解的存在唯一性)</p>
+<p>(1) 任意 <span class="arithmatex">\(n \times n\)</span> 可逆矩阵 <span class="arithmatex">\(A\)</span> 都有唯一的右极分解 <span class="arithmatex">\(A = UP\)</span>（<span class="arithmatex">\(U\)</span> 酉，<span class="arithmatex">\(P\)</span> 正定 Hermitian）和唯一的左极分解 <span class="arithmatex">\(A = P'U\)</span>。</p>
+<p>(2) 更一般地，任意 <span class="arithmatex">\(m \times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span> 都可以分解为 <span class="arithmatex">\(A = UP\)</span>，其中 <span class="arithmatex">\(U\)</span> 的列是正交的（<span class="arithmatex">\(U^HU = I_n\)</span>），<span class="arithmatex">\(P\)</span> 是半正定 Hermitian 矩阵。<span class="arithmatex">\(P\)</span> 唯一确定（<span class="arithmatex">\(P = \sqrt{A^HA}\)</span>），但 <span class="arithmatex">\(U\)</span> 在 <span class="arithmatex">\(A\)</span> 不满秩时不唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性：</strong> <span class="arithmatex">\(A^HA\)</span> 是半正定 Hermitian 矩阵。令 <span class="arithmatex">\(P = (A^HA)^{1/2}\)</span>（正半定 Hermitian 平方根，由谱定理可构造）。</p>
+<p>若 <span class="arithmatex">\(A\)</span> 可逆，则 <span class="arithmatex">\(A^HA\)</span> 正定，<span class="arithmatex">\(P\)</span> 正定可逆。令 <span class="arithmatex">\(U = AP^{-1}\)</span>。验证 <span class="arithmatex">\(U\)</span> 是酉矩阵：</p>
+<div class="arithmatex">\[U^HU = (AP^{-1})^H(AP^{-1}) = P^{-H}A^HAP^{-1} = P^{-1}P^2P^{-1} = I\]</div>
+<p><strong>唯一性（可逆情形）：</strong> 设 <span class="arithmatex">\(A = U_1P_1 = U_2P_2\)</span>，则 <span class="arithmatex">\(A^HA = P_1^2 = P_2^2\)</span>。由正定矩阵正平方根的唯一性（见定理 13.7），<span class="arithmatex">\(P_1 = P_2\)</span>。从而 <span class="arithmatex">\(U_1 = U_2\)</span>。</p>
+<p><strong>左极分解：</strong> <span class="arithmatex">\(P' = (AA^H)^{1/2}\)</span>，<span class="arithmatex">\(U = (P')^{-1}A\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>极分解的名称来自与复数极坐标表示 <span class="arithmatex">\(z = e^{i\theta}|z|\)</span> 的类比：<span class="arithmatex">\(U\)</span> 对应"旋转"（<span class="arithmatex">\(e^{i\theta}\)</span>），<span class="arithmatex">\(P\)</span> 对应"伸缩"（<span class="arithmatex">\(|z|\)</span>）。极分解可以通过 SVD 方便地计算：若 <span class="arithmatex">\(A = V\Sigma W^H\)</span>（SVD），则 <span class="arithmatex">\(U = VW^H\)</span>，<span class="arithmatex">\(P = W\Sigma W^H\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 10.7</p>
+<p>对 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\)</span> 进行极分解。</p>
+<p><span class="arithmatex">\(A^TA = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>，特征值为 <span class="arithmatex">\(\frac{3 \pm \sqrt{5}}{2}\)</span>。</p>
+<p>设 <span class="arithmatex">\(\lambda_1 = \frac{3+\sqrt{5}}{2}\)</span>，<span class="arithmatex">\(\lambda_2 = \frac{3-\sqrt{5}}{2}\)</span>。<span class="arithmatex">\(P = (A^TA)^{1/2}\)</span>，即 <span class="arithmatex">\(P\)</span> 的特征值为 <span class="arithmatex">\(\sqrt{\lambda_1}, \sqrt{\lambda_2}\)</span>。</p>
+<p><span class="arithmatex">\(P = Q\operatorname{diag}(\sqrt{\lambda_1}, \sqrt{\lambda_2})Q^T\)</span>（<span class="arithmatex">\(Q\)</span> 由 <span class="arithmatex">\(A^TA\)</span> 的标准正交特征向量组成）。</p>
+<p><span class="arithmatex">\(U = AP^{-1}\)</span> 是正交矩阵。</p>
+<p>具体数值：<span class="arithmatex">\(P \approx \begin{pmatrix} 1.0515 &amp; 0.4851 \\ 0.4851 &amp; 1.2965 \end{pmatrix}\)</span>，<span class="arithmatex">\(U \approx \begin{pmatrix} 0.8507 &amp; 0.5257 \\ -0.5257 &amp; 0.8507 \end{pmatrix}\)</span>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

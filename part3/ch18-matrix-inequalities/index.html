@@ -1,0 +1,2356 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part3/ch18-matrix-inequalities/">
+      
+      
+        <link rel="prev" href="../ch17-nonnegative-matrices/">
+      
+      
+        <link rel="next" href="../ch19-kronecker/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第18章 矩阵不等式 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#18" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第18章 矩阵不等式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 特征值不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 奇异值不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 迹不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 行列式不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185-majorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Majorization（优超）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186-schur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 Schur 凸函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#187" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.7 矩阵凸性与矩阵单调性
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.1 特征值不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#182" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.2 奇异值不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.3 迹不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.4 行列式不等式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#185-majorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.5 Majorization（优超）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#186-schur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.6 Schur 凸函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#187" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        18.7 矩阵凸性与矩阵单调性
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="18">第 18 章 矩阵不等式<a class="headerlink" href="#18" title="Permanent link">&para;</a></h1>
+<p>矩阵不等式是矩阵分析中最为精深的主题之一。在标量情形中，不等式的理论已经非常成熟——从算术-几何均值不等式到 Cauchy-Schwarz 不等式，这些结果构成了分析学的基石。然而，当我们将这些想法推广到矩阵的世界时，情况变得远为丰富和微妙。矩阵的特征值（eigenvalue）、奇异值（singular value）、迹（trace）和行列式（determinant）之间存在着深刻而优美的不等式关系，它们不仅在纯数学中有重要意义，而且在量子信息论、统计学和最优化理论中都有广泛应用。</p>
+<p>本章系统地介绍矩阵不等式的主要结果，从特征值不等式出发，经由奇异值不等式和迹不等式，直至行列式不等式，最后以优超理论（majorization）和矩阵凸性作为统一框架。</p>
+<hr />
+<h2 id="181">18.1 特征值不等式<a class="headerlink" href="#181" title="Permanent link">&para;</a></h2>
+<p>特征值是矩阵最基本的不变量。对于 Hermite 矩阵（Hermitian matrix），其特征值全为实数，因此可以排序比较。本节讨论 Hermite 矩阵之和的特征值与各自特征值之间的关系。</p>
+<p><strong>约定</strong>：对于 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵 <span class="arithmatex">\(A\)</span>，其特征值按降序排列为 <span class="arithmatex">\(\lambda_1(A) \geq \lambda_2(A) \geq \cdots \geq \lambda_n(A)\)</span>。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.1 (Hermite 矩阵的特征值排序)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，即 <span class="arithmatex">\(A = A^*\)</span>。其 <span class="arithmatex">\(n\)</span> 个实特征值按降序排列：
+$$
+\lambda_1(A) \geq \lambda_2(A) \geq \cdots \geq \lambda_n(A).
+$$
+我们用 <span class="arithmatex">\(\lambda_{\max}(A) = \lambda_1(A)\)</span> 和 <span class="arithmatex">\(\lambda_{\min}(A) = \lambda_n(A)\)</span> 分别表示最大和最小特征值。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.2 (Rayleigh 商)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，对非零向量 <span class="arithmatex">\(\mathbf{x} \in \mathbb{C}^n\)</span>，<strong>Rayleigh 商</strong>（Rayleigh quotient）定义为：
+$$
+R_A(\mathbf{x}) = \frac{\mathbf{x}^<em> A \mathbf{x}}{\mathbf{x}^</em> \mathbf{x}}.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.1 (Courant-Fischer 极小极大定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，特征值 <span class="arithmatex">\(\lambda_1(A) \geq \cdots \geq \lambda_n(A)\)</span>，则对 <span class="arithmatex">\(k = 1, 2, \ldots, n\)</span>：
+$$
+\lambda_k(A) = \max_{\dim S = k} \min_{\mathbf{x} \in S, \mathbf{x} \neq \mathbf{0}} \frac{\mathbf{x}^<em> A \mathbf{x}}{\mathbf{x}^</em> \mathbf{x}} = \min_{\dim T = n-k+1} \max_{\mathbf{x} \in T, \mathbf{x} \neq \mathbf{0}} \frac{\mathbf{x}^<em> A \mathbf{x}}{\mathbf{x}^</em> \mathbf{x}}.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = U \Lambda U^*\)</span> 为谱分解，其中 <span class="arithmatex">\(U = [\mathbf{u}_1, \ldots, \mathbf{u}_n]\)</span> 为酉矩阵，<span class="arithmatex">\(\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)\)</span>。</p>
+<p><strong>第一步</strong>：证明 <span class="arithmatex">\(\lambda_k \geq \max_{\dim S=k} \min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x})\)</span> 的一个方向。</p>
+<p>取 <span class="arithmatex">\(S_0 = \operatorname{span}\{\mathbf{u}_1, \ldots, \mathbf{u}_k\}\)</span>，则 <span class="arithmatex">\(\dim S_0 = k\)</span>。对任意 <span class="arithmatex">\(\mathbf{x} = \sum_{i=1}^k c_i \mathbf{u}_i \in S_0\)</span>，有：
+$$
+R_A(\mathbf{x}) = \frac{\sum_{i=1}^k \lambda_i |c_i|^2}{\sum_{i=1}^k |c_i|^2} \geq \lambda_k.
+$$
+因此 <span class="arithmatex">\(\min_{\mathbf{x} \in S_0 \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \geq \lambda_k\)</span>，从而 <span class="arithmatex">\(\max_{\dim S=k} \min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \geq \lambda_k\)</span>。</p>
+<p><strong>第二步</strong>：证明对任意 <span class="arithmatex">\(k\)</span> 维子空间 <span class="arithmatex">\(S\)</span>，<span class="arithmatex">\(\min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \leq \lambda_k\)</span>。</p>
+<p>取 <span class="arithmatex">\(T_0 = \operatorname{span}\{\mathbf{u}_k, \ldots, \mathbf{u}_n\}\)</span>，则 <span class="arithmatex">\(\dim T_0 = n - k + 1\)</span>。由维数公式，<span class="arithmatex">\(\dim(S \cap T_0) \geq k + (n-k+1) - n = 1\)</span>，因此存在非零 <span class="arithmatex">\(\mathbf{x} \in S \cap T_0\)</span>。对这样的 <span class="arithmatex">\(\mathbf{x} = \sum_{i=k}^n c_i \mathbf{u}_i\)</span>：
+$$
+R_A(\mathbf{x}) = \frac{\sum_{i=k}^n \lambda_i |c_i|^2}{\sum_{i=k}^n |c_i|^2} \leq \lambda_k.
+$$
+因此 <span class="arithmatex">\(\min_{\mathbf{x} \in S \setminus \{\mathbf{0}\}} R_A(\mathbf{x}) \leq \lambda_k\)</span>。</p>
+<p>综合两步即得第一个等式。第二个等式的证明完全类似。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.2 (Weyl 不等式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，则对所有满足 <span class="arithmatex">\(i + j - 1 \leq n\)</span> 的 <span class="arithmatex">\(i, j\)</span>：
+$$
+\lambda_{i+j-1}(A + B) \leq \lambda_i(A) + \lambda_j(B).
+$$
+对所有满足 <span class="arithmatex">\(i + j - n \geq 1\)</span> 的 <span class="arithmatex">\(i, j\)</span>：
+$$
+\lambda_{i+j-n}(A + B) \geq \lambda_i(A) + \lambda_j(B).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>我们证明第一个不等式。由 Courant-Fischer 定理的 min-max 形式：
+$$
+\lambda_{i+j-1}(A+B) = \min_{\dim T = n-i-j+2} \max_{\mathbf{x} \in T \setminus {\mathbf{0}}} R_{A+B}(\mathbf{x}).
+$$</p>
+<p>设 <span class="arithmatex">\(A\)</span> 的前 <span class="arithmatex">\(i\)</span> 个特征向量张成子空间 <span class="arithmatex">\(S_A\)</span>（<span class="arithmatex">\(\dim S_A = i\)</span>），<span class="arithmatex">\(B\)</span> 的前 <span class="arithmatex">\(j\)</span> 个特征向量张成子空间 <span class="arithmatex">\(S_B\)</span>（<span class="arithmatex">\(\dim S_B = j\)</span>）。</p>
+<p>对任意 <span class="arithmatex">\((n-i-j+2)\)</span> 维子空间 <span class="arithmatex">\(T\)</span>，由维数公式：
+$$
+\dim(S_A \cap T) \geq i + (n-i-j+2) - n = n - j + 2 - n + i + i - i = 2 - j + i \geq 1,
+$$
+即 <span class="arithmatex">\(\dim(T \cap S_A) \geq 1\)</span>（当 <span class="arithmatex">\(i + j - 1 \leq n\)</span> 时）。类似地 <span class="arithmatex">\(\dim(T \cap S_B) \geq 1\)</span>。</p>
+<p>更直接地，取 <span class="arithmatex">\(T_0 = \operatorname{span}\{\mathbf{u}_i, \ldots, \mathbf{u}_n\} \cap \operatorname{span}\{\mathbf{v}_j, \ldots, \mathbf{v}_n\}\)</span>，其中 <span class="arithmatex">\(\mathbf{u}_k, \mathbf{v}_k\)</span> 分别为 <span class="arithmatex">\(A, B\)</span> 的特征向量。由 Courant-Fischer 定理：</p>
+<p>对任意非零 <span class="arithmatex">\(\mathbf{x}\)</span>：
+$$
+R_{A+B}(\mathbf{x}) = R_A(\mathbf{x}) + R_B(\mathbf{x}).
+$$</p>
+<p>取使得 <span class="arithmatex">\(R_A(\mathbf{x}) \leq \lambda_i(A)\)</span> 和 <span class="arithmatex">\(R_B(\mathbf{x}) \leq \lambda_j(B)\)</span> 同时成立的子空间（维数关系保证其非空），即得：
+$$
+\lambda_{i+j-1}(A+B) \leq \lambda_i(A) + \lambda_j(B). \quad \blacksquare
+$$</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Weyl 不等式的一个常用特殊情况是取 <span class="arithmatex">\(j = 1\)</span>：<span class="arithmatex">\(\lambda_i(A+B) \leq \lambda_i(A) + \lambda_1(B)\)</span>，即加上半正定矩阵后特征值不减小超过 <span class="arithmatex">\(\lambda_1(B)\)</span>。类似地取 <span class="arithmatex">\(j = n\)</span>：<span class="arithmatex">\(\lambda_i(A+B) \geq \lambda_i(A) + \lambda_n(B)\)</span>。这给出了特征值的扰动界。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.3 (Cauchy 交错定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，<span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(A\)</span> 的 <span class="arithmatex">\(m \times m\)</span> 主子矩阵（即 <span class="arithmatex">\(B = P^* A P\)</span>，其中 <span class="arithmatex">\(P\)</span> 是 <span class="arithmatex">\(n \times m\)</span> 矩阵且 <span class="arithmatex">\(P^* P = I_m\)</span>），<span class="arithmatex">\(m &lt; n\)</span>。则 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 的特征值满足<strong>交错关系</strong>（interlacing）：
+$$
+\lambda_i(A) \geq \lambda_i(B) \geq \lambda_{i+n-m}(A), \quad i = 1, 2, \ldots, m.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 Courant-Fischer 定理，对 <span class="arithmatex">\(B = P^* A P\)</span>：
+$$
+\lambda_i(B) = \max_{\substack{S \subset \mathbb{C}^m \ \dim S = i}} \min_{\mathbf{y} \in S \setminus {\mathbf{0}}} \frac{\mathbf{y}^<em> B \mathbf{y}}{\mathbf{y}^</em> \mathbf{y}} = \max_{\substack{S \subset \mathbb{C}^m \ \dim S = i}} \min_{\mathbf{y} \in S \setminus {\mathbf{0}}} \frac{(P\mathbf{y})^<em> A (P\mathbf{y})}{(P\mathbf{y})^</em> (P\mathbf{y})}.
+$$</p>
+<p>令 <span class="arithmatex">\(\mathbf{x} = P \mathbf{y}\)</span>，由于 <span class="arithmatex">\(P\)</span> 是等距嵌入，当 <span class="arithmatex">\(S\)</span> 遍历 <span class="arithmatex">\(\mathbb{C}^m\)</span> 的所有 <span class="arithmatex">\(i\)</span> 维子空间时，<span class="arithmatex">\(PS\)</span> 遍历 <span class="arithmatex">\(P(\mathbb{C}^m)\)</span> 的所有 <span class="arithmatex">\(i\)</span> 维子空间。由于 <span class="arithmatex">\(P(\mathbb{C}^m)\)</span> 是 <span class="arithmatex">\(\mathbb{C}^n\)</span> 的一个 <span class="arithmatex">\(m\)</span> 维子空间，而 <span class="arithmatex">\(\mathbb{C}^n\)</span> 的所有 <span class="arithmatex">\(i\)</span> 维子空间的集合包含 <span class="arithmatex">\(P(\mathbb{C}^m)\)</span> 的所有 <span class="arithmatex">\(i\)</span> 维子空间，因此：
+$$
+\lambda_i(B) \leq \max_{\substack{S \subset \mathbb{C}^n \ \dim S = i}} \min_{\mathbf{x} \in S \setminus {\mathbf{0}}} \frac{\mathbf{x}^<em> A \mathbf{x}}{\mathbf{x}^</em> \mathbf{x}} = \lambda_i(A).
+$$</p>
+<p>类似地，使用 min-max 形式可证 <span class="arithmatex">\(\lambda_i(B) \geq \lambda_{i+n-m}(A)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.4 (Poincare 分离定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，<span class="arithmatex">\(U\)</span> 为 <span class="arithmatex">\(n \times k\)</span> 矩阵满足 <span class="arithmatex">\(U^* U = I_k\)</span>（<span class="arithmatex">\(k \leq n\)</span>），令 <span class="arithmatex">\(B = U^* A U\)</span>，则：
+$$
+\lambda_i(A) \geq \lambda_i(B) \geq \lambda_{i+n-k}(A), \quad i = 1, \ldots, k.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>这实际上就是 Cauchy 交错定理在一般酉压缩下的推广形式。证明方法与定理 18.3 完全相同，只是将 <span class="arithmatex">\(P\)</span> 替换为一般的等距映射 <span class="arithmatex">\(U\)</span>。关键在于 <span class="arithmatex">\(U^* U = I_k\)</span> 保证了 <span class="arithmatex">\(U\)</span> 是从 <span class="arithmatex">\(\mathbb{C}^k\)</span> 到 <span class="arithmatex">\(\mathbb{C}^n\)</span> 的等距嵌入。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.1</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 5 &amp; 1 &amp; 0 \\ 1 &amp; 3 &amp; 1 \\ 0 &amp; 1 &amp; 1 \end{pmatrix}\)</span>，其特征值为 <span class="arithmatex">\(\lambda_1(A) \approx 5.414\)</span>，<span class="arithmatex">\(\lambda_2(A) \approx 2.828\)</span>，<span class="arithmatex">\(\lambda_3(A) \approx 0.758\)</span>。</p>
+<p>取左上 <span class="arithmatex">\(2 \times 2\)</span> 主子矩阵 <span class="arithmatex">\(B = \begin{pmatrix} 5 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}\)</span>，其特征值为 <span class="arithmatex">\(\lambda_1(B) = 3 + \sqrt{2} \approx 4.414\)</span>，<span class="arithmatex">\(\lambda_2(B) = 3 - \sqrt{2} \approx 1.586\)</span>。</p>
+<p>验证交错性：
+$$
+\lambda_1(A) \approx 5.414 \geq \lambda_1(B) \approx 4.414 \geq \lambda_2(A) \approx 2.828,
+$$
+$$
+\lambda_2(A) \approx 2.828 \geq \lambda_2(B) \approx 1.586 \geq \lambda_3(A) \approx 0.758.
+$$
+交错关系成立。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.2</p>
+<p><strong>Weyl 不等式的应用</strong>：设 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A\)</span> 的特征值：<span class="arithmatex">\(\lambda_1(A) = 4\)</span>，<span class="arithmatex">\(\lambda_2(A) = 2\)</span>。</p>
+<p><span class="arithmatex">\(B\)</span> 的特征值：<span class="arithmatex">\(\lambda_1(B) = 2\)</span>，<span class="arithmatex">\(\lambda_2(B) = 0\)</span>。</p>
+<p><span class="arithmatex">\(A + B = \begin{pmatrix} 5 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}\)</span>，特征值为 <span class="arithmatex">\(\lambda_1(A+B) = 4 + \sqrt{2} \approx 5.414\)</span>，<span class="arithmatex">\(\lambda_2(A+B) = 4 - \sqrt{2} \approx 2.586\)</span>。</p>
+<p>Weyl 不等式 <span class="arithmatex">\(\lambda_2(A+B) \leq \lambda_1(A) + \lambda_2(B) = 4 + 0 = 4\)</span> 成立（<span class="arithmatex">\(2.586 \leq 4\)</span>）。</p>
+<p>Weyl 不等式 <span class="arithmatex">\(\lambda_2(A+B) \geq \lambda_2(A) + \lambda_2(B) = 2 + 0 = 2\)</span> 成立（<span class="arithmatex">\(2.586 \geq 2\)</span>）。</p>
+</div>
+<hr />
+<h2 id="182">18.2 奇异值不等式<a class="headerlink" href="#182" title="Permanent link">&para;</a></h2>
+<p>奇异值（singular value）是矩阵理论中与特征值同等重要的概念。对于一般矩阵（不要求 Hermite 或方阵），奇异值提供了最自然的"大小"度量。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.3 (奇异值排序)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵，其奇异值按降序排列为：
+$$
+\sigma_1(A) \geq \sigma_2(A) \geq \cdots \geq \sigma_{\min(m,n)}(A) \geq 0.
+$$
+其中 <span class="arithmatex">\(\sigma_i(A) = \sqrt{\lambda_i(A^* A)}\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.5 (奇异值的次可乘性)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，则对 <span class="arithmatex">\(i + j - 1 \leq n\)</span>：
+$$
+\sigma_{i+j-1}(AB) \leq \sigma_i(A) \sigma_j(B).
+$$
+特别地，取 <span class="arithmatex">\(i = j = 1\)</span>：<span class="arithmatex">\(\sigma_1(AB) \leq \sigma_1(A) \sigma_1(B)\)</span>，即 <span class="arithmatex">\(\|AB\|_2 \leq \|A\|_2 \|B\|_2\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>关键工具是奇异值与特征值的关系以及 Weyl 不等式。</p>
+<p>设 <span class="arithmatex">\(A = U_1 \Sigma_1 V_1^*\)</span>，<span class="arithmatex">\(B = U_2 \Sigma_2 V_2^*\)</span> 为奇异值分解。考虑 <span class="arithmatex">\(AB\)</span> 的奇异值平方，即 <span class="arithmatex">\(B^* A^* A B\)</span> 的特征值。</p>
+<p>利用 Fan 的极值原理：
+$$
+\sigma_k(AB) = \min_{\substack{S \subset \mathbb{C}^n \ \operatorname{codim} S = k-1}} \max_{\mathbf{x} \in S, |\mathbf{x}|=1} |AB\mathbf{x}|.
+$$</p>
+<p>对任意单位向量 <span class="arithmatex">\(\mathbf{x}\)</span>，<span class="arithmatex">\(\|AB\mathbf{x}\| \leq \|A\| \cdot \|B\mathbf{x}\|\)</span>（这里 <span class="arithmatex">\(\|A\|\)</span> 表示算子范数）。更精细的分析使用子空间的维数论证：</p>
+<p>取使得 <span class="arithmatex">\(\|A\mathbf{y}\| \leq \sigma_i(A)\|\mathbf{y}\|\)</span> 的 <span class="arithmatex">\((n-i+1)\)</span> 维子空间 <span class="arithmatex">\(S_A\)</span>，以及使得 <span class="arithmatex">\(\|B\mathbf{x}\| \leq \sigma_j(B)\|\mathbf{x}\|\)</span> 的 <span class="arithmatex">\((n-j+1)\)</span> 维子空间 <span class="arithmatex">\(S_B\)</span>。则 <span class="arithmatex">\(B^{-1}(S_A) \cap S_B\)</span> 的维数至少为 <span class="arithmatex">\((n-i+1) + (n-j+1) - n = n - i - j + 2\)</span>，其余维 <span class="arithmatex">\(= i + j - 2\)</span>。</p>
+<p>因此在相应子空间上 <span class="arithmatex">\(\|AB\mathbf{x}\| \leq \sigma_i(A)\sigma_j(B)\|\mathbf{x}\|\)</span>，由奇异值的极小极大表征即得 <span class="arithmatex">\(\sigma_{i+j-1}(AB) \leq \sigma_i(A)\sigma_j(B)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.4 (Ky Fan 范数)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m \times n\)</span> 矩阵，对 <span class="arithmatex">\(k = 1, 2, \ldots, \min(m,n)\)</span>，<strong>Ky Fan <span class="arithmatex">\(k\)</span>-范数</strong>定义为前 <span class="arithmatex">\(k\)</span> 个奇异值之和：
+$$
+|A|<em i="1">{(k)} = \sum</em> \sigma_i(A).
+$$
+特别地，}^{k<span class="arithmatex">\(\|A\|_{(1)} = \sigma_1(A) = \|A\|_2\)</span>（谱范数），<span class="arithmatex">\(\|A\|_{(\min(m,n))} = \|A\|_*\)</span>（核范数）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.6 (Fan 不等式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，则对 <span class="arithmatex">\(k = 1, 2, \ldots, n\)</span>：
+$$
+\sum_{i=1}^{k} \sigma_i(A + B) \leq \sum_{i=1}^{k} \sigma_i(A) + \sum_{i=1}^{k} \sigma_i(B).
+$$
+即 Ky Fan <span class="arithmatex">\(k\)</span>-范数满足三角不等式：<span class="arithmatex">\(\|A + B\|_{(k)} \leq \|A\|_{(k)} + \|B\|_{(k)}\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对任意 <span class="arithmatex">\(n \times n\)</span> 矩阵 <span class="arithmatex">\(M\)</span>，由奇异值的极值表征：
+$$
+\sum_{i=1}^{k} \sigma_i(M) = \max { |\operatorname{tr}(U^* M)| : U \text{ 为 } n \times k \text{ 的等距映射} }.
+$$</p>
+<p>更精确地，存在 Fan 的定理：
+$$
+\sum_{i=1}^{k} \sigma_i(M) = \max { \operatorname{Re}\operatorname{tr}(U^<em> M) : U^</em> U = I_k, U \in \mathbb{C}^{n \times k} }.
+$$</p>
+<p>设 <span class="arithmatex">\(U_0\)</span> 是使得 <span class="arithmatex">\(\sum_{i=1}^k \sigma_i(A+B) = \operatorname{Re}\operatorname{tr}(U_0^*(A+B))\)</span> 的最优等距映射，则：
+$$
+\sum_{i=1}^{k} \sigma_i(A+B) = \operatorname{Re}\operatorname{tr}(U_0^<em> A) + \operatorname{Re}\operatorname{tr}(U_0^</em> B) \leq \sum_{i=1}^{k} \sigma_i(A) + \sum_{i=1}^{k} \sigma_i(B). \quad \blacksquare
+$$</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.3</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 0 &amp; 2 \\ 0 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A\)</span> 的奇异值：<span class="arithmatex">\(\sigma_1(A) = 3\)</span>，<span class="arithmatex">\(\sigma_2(A) = 1\)</span>。</p>
+<p><span class="arithmatex">\(B\)</span> 的奇异值：<span class="arithmatex">\(\sigma_1(B) = 2\)</span>，<span class="arithmatex">\(\sigma_2(B) = 0\)</span>。</p>
+<p><span class="arithmatex">\(AB = \begin{pmatrix} 0 &amp; 6 \\ 0 &amp; 0 \end{pmatrix}\)</span>，奇异值：<span class="arithmatex">\(\sigma_1(AB) = 6\)</span>，<span class="arithmatex">\(\sigma_2(AB) = 0\)</span>。</p>
+<p>次可乘性：<span class="arithmatex">\(\sigma_1(AB) = 6 \leq \sigma_1(A) \cdot \sigma_1(B) = 3 \times 2 = 6\)</span>，等号成立。</p>
+<p><span class="arithmatex">\(\sigma_2(AB) = 0 \leq \sigma_1(A) \cdot \sigma_2(B) = 3 \times 0 = 0\)</span>，等号成立。</p>
+</div>
+<hr />
+<h2 id="183">18.3 迹不等式<a class="headerlink" href="#183" title="Permanent link">&para;</a></h2>
+<p>矩阵的迹是最简单的矩阵函数之一，但它满足若干深刻的不等式。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.5 (迹与 Frobenius 范数)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 矩阵，则：</p>
+<ul>
+<li><strong>迹</strong>：<span class="arithmatex">\(\operatorname{tr}(A) = \sum_{i=1}^n a_{ii}\)</span>。</li>
+<li><strong>Frobenius 范数</strong>：<span class="arithmatex">\(\|A\|_F = \sqrt{\operatorname{tr}(A^* A)} = \sqrt{\sum_{i=1}^n \sigma_i^2(A)}\)</span>。</li>
+</ul>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.7 (von Neumann 迹不等式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 复矩阵，则：
+$$
+|\operatorname{tr}(AB)| \leq \sum_{i=1}^{n} \sigma_i(A) \sigma_i(B).
+$$
+更一般地：
+$$
+|\operatorname{tr}(A^* B)| \leq \sum_{i=1}^{n} \sigma_i(A) \sigma_i(B).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(A = U_A \Sigma_A V_A^*\)</span> 和 <span class="arithmatex">\(B = U_B \Sigma_B V_B^*\)</span> 为奇异值分解。则：
+$$
+\operatorname{tr}(A^<em> B) = \operatorname{tr}(V_A \Sigma_A U_A^</em> U_B \Sigma_B V_B^*) = \operatorname{tr}(\Sigma_A W \Sigma_B Z),
+$$
+其中 <span class="arithmatex">\(W = U_A^* U_B\)</span> 和 <span class="arithmatex">\(Z = V_B^* V_A\)</span> 为酉矩阵。令 <span class="arithmatex">\(P = WZ\)</span>，则 <span class="arithmatex">\(P\)</span> 也是酉矩阵。</p>
+<p>由于 <span class="arithmatex">\(\operatorname{tr}(\Sigma_A W \Sigma_B Z) = \sum_{i,j} (\sigma_i(A))(\sigma_j(B)) w_{ij} z_{ji}\)</span>，我们需要证明：
+$$
+\left|\sum_{i,j} \sigma_i(A) \sigma_j(B) w_{ij} z_{ji}\right| \leq \sum_i \sigma_i(A)\sigma_i(B).
+$$</p>
+<p>注意 <span class="arithmatex">\(|w_{ij} z_{ji}| \leq |w_{ij}| |z_{ji}|\)</span>，而矩阵 <span class="arithmatex">\(C\)</span> 定义为 <span class="arithmatex">\(c_{ij} = |w_{ij}||z_{ji}|\)</span> 是一个双随机矩阵（doubly stochastic matrix）。</p>
+<p>由 Birkhoff 定理，<span class="arithmatex">\(C\)</span> 是置换矩阵的凸组合，因此：
+$$
+|\operatorname{tr}(A^* B)| \leq \sum_{i,j} \sigma_i(A) \sigma_j(B) c_{ij} \leq \max_{\pi} \sum_i \sigma_i(A) \sigma_{\pi(i)}(B) = \sum_i \sigma_i(A) \sigma_i(B),
+$$
+最后一个等式由排序不等式（rearrangement inequality）得到。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.8 (Golden-Thompson 不等式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，则：
+$$
+\operatorname{tr}(e^{A+B}) \leq \operatorname{tr}(e^A e^B).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>证明的关键步骤如下：</p>
+<p><strong>第一步</strong>：利用 Lie-Trotter 乘积公式：<span class="arithmatex">\(e^{A+B} = \lim_{m \to \infty} (e^{A/m} e^{B/m})^m\)</span>。</p>
+<p><strong>第二步</strong>：由 von Neumann 迹不等式，对 Hermite 矩阵 <span class="arithmatex">\(A, B\)</span>：
+$$
+\operatorname{tr}(e^{A+B}) = \operatorname{tr}\left(\lim_{m\to\infty}(e^{A/m}e^{B/m})^m\right).
+$$</p>
+<p><strong>第三步</strong>：关键的不等式来自于以下事实：对于半正定矩阵 <span class="arithmatex">\(P, Q\)</span>，<span class="arithmatex">\(\operatorname{tr}(PQ) \leq \operatorname{tr}(P) \cdot \|Q\|_2\)</span> 不够精确。需要更精细的论证。</p>
+<p>利用特征值的对数凸性：设 <span class="arithmatex">\(\lambda_i = \lambda_i(e^{A+B})\)</span>，<span class="arithmatex">\(\alpha_i = \lambda_i(e^A)\)</span>，<span class="arithmatex">\(\beta_i = \lambda_i(e^B)\)</span>，由 Weyl 不等式和特征值-奇异值关系：
+$$
+\sum_i \lambda_i(e^{A+B}) \leq \sum_i \sigma_i(e^{A/2} \cdot e^B \cdot e^{A/2}) \leq \sum_i \sigma_i(e^A) \sigma_i(e^B) = \sum_i \lambda_i(e^A) \lambda_i(e^B),
+$$
+其中最后一步利用了 <span class="arithmatex">\(e^A, e^B\)</span> 为正定矩阵，其奇异值等于特征值。</p>
+<p>而 <span class="arithmatex">\(\operatorname{tr}(e^A e^B) = \operatorname{tr}(e^{A/2} e^B e^{A/2}) \geq \sum_i \lambda_i(e^{A/2} e^B e^{A/2}) = \sum_i \lambda_i(e^{A+B})\)</span>（在适当的不等式方向上），由此得到结论。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Golden-Thompson 不等式不能推广到三个矩阵：一般来说 <span class="arithmatex">\(\operatorname{tr}(e^{A+B+C}) \leq \operatorname{tr}(e^A e^B e^C)\)</span> <strong>不成立</strong>。但 Lieb 和 Seiringer 证明了：<span class="arithmatex">\(\operatorname{tr}(e^{A+B+C}) \leq \operatorname{tr}\left(e^A \# e^B \# e^C\right)\)</span> 的某些推广形式。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.4</p>
+<p>验证 von Neumann 迹不等式。设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 0 \\ 1 &amp; 2 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\operatorname{tr}(A^* B) = \operatorname{tr}\begin{pmatrix} 2 &amp; 0 \\ 1 &amp; 1 \end{pmatrix}\begin{pmatrix} 1 &amp; 0 \\ 1 &amp; 2 \end{pmatrix} = \operatorname{tr}\begin{pmatrix} 2 &amp; 0 \\ 2 &amp; 2 \end{pmatrix} = 4\)</span>。</p>
+<p><span class="arithmatex">\(A\)</span> 的奇异值：<span class="arithmatex">\(\sigma_1(A) = \frac{\sqrt{6}+\sqrt{2}}{2} \approx 1.932\)</span>，<span class="arithmatex">\(\sigma_2(A) = \frac{\sqrt{6}-\sqrt{2}}{2} \approx 0.518\)</span>。</p>
+<p><span class="arithmatex">\(B\)</span> 的奇异值（与 <span class="arithmatex">\(A\)</span> 相同，因为 <span class="arithmatex">\(B = A^T\)</span>）：<span class="arithmatex">\(\sigma_1(B) \approx 1.932\)</span>，<span class="arithmatex">\(\sigma_2(B) \approx 0.518\)</span>。</p>
+<p><span class="arithmatex">\(\sum \sigma_i(A)\sigma_i(B) \approx 1.932^2 + 0.518^2 \approx 3.732 + 0.268 = 4.0\)</span>。</p>
+<p>因此 <span class="arithmatex">\(|\operatorname{tr}(A^*B)| = 4 \leq 4.0 = \sum \sigma_i(A)\sigma_i(B)\)</span>，等号成立！</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.5</p>
+<p><strong>Golden-Thompson 不等式的数值验证</strong>。设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A + B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; -1 \end{pmatrix}\)</span>，特征值为 <span class="arithmatex">\(\pm\sqrt{2}\)</span>。</p>
+<p><span class="arithmatex">\(\operatorname{tr}(e^{A+B}) = e^{\sqrt{2}} + e^{-\sqrt{2}} = 2\cosh(\sqrt{2}) \approx 4.121\)</span>。</p>
+<p><span class="arithmatex">\(e^A = \begin{pmatrix} e &amp; 0 \\ 0 &amp; e^{-1} \end{pmatrix}\)</span>，<span class="arithmatex">\(e^B = \begin{pmatrix} \cosh 1 &amp; \sinh 1 \\ \sinh 1 &amp; \cosh 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\operatorname{tr}(e^A e^B) = e \cosh 1 + e^{-1}\cosh 1 + e\cdot 0 \cdot \sinh 1 + \cdots\)</span></p>
+<p>直接计算：<span class="arithmatex">\(\operatorname{tr}(e^A e^B) = e \cosh 1 + e^{-1} \cosh 1 = (e + e^{-1})\cosh 1 = 2\cosh(1)\cosh(1) \approx 2 \times 1.543 \times 1.543 \approx 4.762\)</span>。</p>
+<p>确实 <span class="arithmatex">\(4.121 \leq 4.762\)</span>，Golden-Thompson 不等式成立。</p>
+</div>
+<hr />
+<h2 id="184">18.4 行列式不等式<a class="headerlink" href="#184" title="Permanent link">&para;</a></h2>
+<p>行列式作为矩阵的另一个基本不变量，也满足若干重要的不等式。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.6 (正定矩阵上的偏序)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵。定义 <strong>Löwner 偏序</strong>（Loewner partial order）为：
+$$
+A \succeq B \iff A - B \text{ 半正定}.
+$$
+记作 <span class="arithmatex">\(A \succ B\)</span> 若 <span class="arithmatex">\(A - B\)</span> 正定。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.9 (Hadamard 不等式)</p>
+<p>设 <span class="arithmatex">\(A = (a_{ij})\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 正半定 Hermite 矩阵，则：
+$$
+\det(A) \leq \prod_{i=1}^{n} a_{ii}.
+$$
+等号成立当且仅当 <span class="arithmatex">\(A\)</span> 为对角矩阵或 <span class="arithmatex">\(A\)</span> 有零行。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>方法一</strong>（利用 Schur 补）：对 <span class="arithmatex">\(A\)</span> 作分块：
+$$
+A = \begin{pmatrix} A_{n-1} &amp; \mathbf{a} \ \mathbf{a}^* &amp; a_{nn} \end{pmatrix},
+$$
+其中 <span class="arithmatex">\(A_{n-1}\)</span> 为前 <span class="arithmatex">\(n-1\)</span> 阶主子矩阵。</p>
+<p>若 <span class="arithmatex">\(A_{n-1}\)</span> 奇异，则 <span class="arithmatex">\(\det(A) = 0 \leq \prod a_{ii}\)</span> 显然成立。</p>
+<p>若 <span class="arithmatex">\(A_{n-1}\)</span> 非奇异，由 Schur 补公式：
+$$
+\det(A) = \det(A_{n-1})(a_{nn} - \mathbf{a}^* A_{n-1}^{-1} \mathbf{a}).
+$$</p>
+<p>由于 <span class="arithmatex">\(A \succeq 0\)</span>，Schur 补 <span class="arithmatex">\(a_{nn} - \mathbf{a}^* A_{n-1}^{-1} \mathbf{a} \geq 0\)</span>，即 <span class="arithmatex">\(a_{nn} - \mathbf{a}^* A_{n-1}^{-1} \mathbf{a} \leq a_{nn}\)</span>。</p>
+<p>因此 <span class="arithmatex">\(\det(A) \leq \det(A_{n-1}) \cdot a_{nn}\)</span>。</p>
+<p>由数学归纳法，<span class="arithmatex">\(\det(A_{n-1}) \leq \prod_{i=1}^{n-1} a_{ii}\)</span>，故 <span class="arithmatex">\(\det(A) \leq \prod_{i=1}^n a_{ii}\)</span>。</p>
+<p>等号成立要求每步 Schur 补 <span class="arithmatex">\(\mathbf{a}^* A_{n-1}^{-1}\mathbf{a} = 0\)</span>（当 <span class="arithmatex">\(A_{n-1}\)</span> 非奇异时意味着 <span class="arithmatex">\(\mathbf{a} = 0\)</span>），即 <span class="arithmatex">\(A\)</span> 为对角矩阵。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.10 (Fischer 不等式)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 正半定 Hermite 矩阵，分块为：
+$$
+A = \begin{pmatrix} B &amp; C \ C^* &amp; D \end{pmatrix},
+$$
+其中 <span class="arithmatex">\(B\)</span> 为 <span class="arithmatex">\(k \times k\)</span>，<span class="arithmatex">\(D\)</span> 为 <span class="arithmatex">\((n-k) \times (n-k)\)</span>。则：
+$$
+\det(A) \leq \det(B) \cdot \det(D).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>若 <span class="arithmatex">\(B\)</span> 奇异，则由 <span class="arithmatex">\(A \succeq 0\)</span> 可以证明 <span class="arithmatex">\(\det(A) = 0\)</span>，不等式显然成立。</p>
+<p>设 <span class="arithmatex">\(B\)</span> 非奇异。由 Schur 补公式：
+$$
+\det(A) = \det(B) \cdot \det(D - C^* B^{-1} C).
+$$</p>
+<p>由于 <span class="arithmatex">\(A \succeq 0\)</span>，其 Schur 补 <span class="arithmatex">\(D - C^* B^{-1} C \succeq 0\)</span>，因此 <span class="arithmatex">\(D - C^* B^{-1} C \preceq D\)</span>（因为 <span class="arithmatex">\(C^* B^{-1} C \succeq 0\)</span>）。</p>
+<p>由正半定矩阵行列式的单调性（<span class="arithmatex">\(0 \preceq X \preceq Y\)</span> 蕴含 <span class="arithmatex">\(\det X \leq \det Y\)</span>）：
+$$
+\det(D - C^* B^{-1} C) \leq \det(D).
+$$</p>
+<p>因此 <span class="arithmatex">\(\det(A) = \det(B) \cdot \det(D - C^*B^{-1}C) \leq \det(B) \cdot \det(D)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.11 (Minkowski 行列式不等式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n \times n\)</span> 正半定 Hermite 矩阵，则：
+$$
+[\det(A + B)]^{1/n} \geq [\det(A)]^{1/n} + [\det(B)]^{1/n}.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>若 <span class="arithmatex">\(A\)</span> 或 <span class="arithmatex">\(B\)</span> 奇异，不等式变为 <span class="arithmatex">\([\det(A+B)]^{1/n} \geq [\det(A)]^{1/n}\)</span>（或类似地关于 <span class="arithmatex">\(B\)</span>），由 <span class="arithmatex">\(A + B \succeq A\)</span> 和行列式单调性即得。</p>
+<p>设 <span class="arithmatex">\(A\)</span> 正定（<span class="arithmatex">\(A \succ 0\)</span>）。则：
+$$
+\det(A + B) = \det(A) \cdot \det(I + A^{-1/2} B A^{-1/2}).
+$$</p>
+<p>令 <span class="arithmatex">\(C = A^{-1/2} B A^{-1/2} \succeq 0\)</span>，设其特征值为 <span class="arithmatex">\(\mu_1, \ldots, \mu_n \geq 0\)</span>。则：
+$$
+[\det(I + C)]^{1/n} = \left[\prod_{i=1}^n (1 + \mu_i)\right]^{1/n} \geq 1 + \left[\prod_{i=1}^n \mu_i\right]^{1/n},
+$$
+最后一步由 AM-GM 不等式的推广形式得到（具体地，这是对 <span class="arithmatex">\((1+\mu_i)\)</span> 应用几何-算术均值不等式的结果）。</p>
+<p>因此：
+$$
+[\det(A+B)]^{1/n} = [\det A]^{1/n} \cdot [\det(I+C)]^{1/n} \geq [\det A]^{1/n}(1 + [\det C]^{1/n}).
+$$</p>
+<p>又 <span class="arithmatex">\(\det C = \det(A^{-1/2} B A^{-1/2}) = \det(A^{-1}) \det(B) = \frac{\det B}{\det A}\)</span>，故 <span class="arithmatex">\([\det C]^{1/n} = \frac{[\det B]^{1/n}}{[\det A]^{1/n}}\)</span>。</p>
+<p>代入得 <span class="arithmatex">\([\det(A+B)]^{1/n} \geq [\det A]^{1/n} + [\det B]^{1/n}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.6</p>
+<p>验证 Hadamard 不等式。设 <span class="arithmatex">\(A = \begin{pmatrix} 4 &amp; 2 &amp; 1 \\ 2 &amp; 5 &amp; 3 \\ 1 &amp; 3 &amp; 6 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(A\)</span> 正定（可通过检查所有顺序主子式为正来验证：<span class="arithmatex">\(4 &gt; 0\)</span>，<span class="arithmatex">\(20 - 4 = 16 &gt; 0\)</span>，<span class="arithmatex">\(\det A = 4 \cdot 21 - 2 \cdot 9 + 1 \cdot 1 = 84 - 18 + 1 = 67 &gt; 0\)</span>）。</p>
+<p>Hadamard 不等式：<span class="arithmatex">\(\det(A) = 67 \leq 4 \times 5 \times 6 = 120\)</span>。</p>
+<p>确实 <span class="arithmatex">\(67 \leq 120\)</span>，不等式成立。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.7</p>
+<p>验证 Minkowski 行列式不等式。设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 4 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\([\det(A+B)]^{1/2} = [\det\begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 7 \end{pmatrix}]^{1/2} = \sqrt{21} \approx 4.583\)</span>。</p>
+<p><span class="arithmatex">\([\det A]^{1/2} + [\det B]^{1/2} = \sqrt{6} + \sqrt{4} = \sqrt{6} + 2 \approx 2.449 + 2 = 4.449\)</span>。</p>
+<p>确实 <span class="arithmatex">\(4.583 \geq 4.449\)</span>，Minkowski 不等式成立。</p>
+</div>
+<hr />
+<h2 id="185-majorization">18.5 Majorization（优超）<a class="headerlink" href="#185-majorization" title="Permanent link">&para;</a></h2>
+<p>Majorization（优超）是一个统一多种不等式的核心概念，它精确描述了向量分量之间"扩散程度"的比较。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.7 (优超关系)</p>
+<p>设 <span class="arithmatex">\(\mathbf{x} = (x_1, \ldots, x_n)\)</span> 和 <span class="arithmatex">\(\mathbf{y} = (y_1, \ldots, y_n)\)</span> 为实向量，将其分量按降序排列得 <span class="arithmatex">\(x_{[1]} \geq \cdots \geq x_{[n]}\)</span> 和 <span class="arithmatex">\(y_{[1]} \geq \cdots \geq y_{[n]}\)</span>。称 <span class="arithmatex">\(\mathbf{x}\)</span> <strong>被 <span class="arithmatex">\(\mathbf{y}\)</span> 优超</strong>（<span class="arithmatex">\(\mathbf{x}\)</span> is majorized by <span class="arithmatex">\(\mathbf{y}\)</span>），记作 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>，若：
+$$
+\sum_{i=1}^{k} x_{[i]} \leq \sum_{i=1}^{k} y_{[i]}, \quad k = 1, 2, \ldots, n-1,
+$$
+且 <span class="arithmatex">\(\sum_{i=1}^{n} x_i = \sum_{i=1}^{n} y_i\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.8 (双随机矩阵)</p>
+<p>一个 <span class="arithmatex">\(n \times n\)</span> 非负实矩阵 <span class="arithmatex">\(D = (d_{ij})\)</span> 称为<strong>双随机矩阵</strong>（doubly stochastic matrix），若其每行和每列之和均为 <span class="arithmatex">\(1\)</span>：
+$$
+\sum_{j=1}^{n} d_{ij} = 1 \quad \forall i, \qquad \sum_{i=1}^{n} d_{ij} = 1 \quad \forall j.
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.12 (Hardy-Littlewood-Polya 定理)</p>
+<p>对实向量 <span class="arithmatex">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^n\)</span>，以下条件等价：</p>
+<ol>
+<li><span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>；</li>
+<li>存在双随机矩阵 <span class="arithmatex">\(D\)</span> 使得 <span class="arithmatex">\(\mathbf{x} = D\mathbf{y}\)</span>；</li>
+<li><span class="arithmatex">\(\mathbf{x}\)</span> 在 <span class="arithmatex">\(\mathbf{y}\)</span> 的所有分量置换所构成的凸包内。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(2) <span class="arithmatex">\(\Rightarrow\)</span> (1)</strong>：设 <span class="arithmatex">\(\mathbf{x} = D\mathbf{y}\)</span>，<span class="arithmatex">\(D\)</span> 为双随机矩阵。由 Birkhoff 定理，<span class="arithmatex">\(D = \sum_k \alpha_k P_{\pi_k}\)</span>（置换矩阵的凸组合）。因此 <span class="arithmatex">\(\mathbf{x} = \sum_k \alpha_k P_{\pi_k} \mathbf{y}\)</span>，即 <span class="arithmatex">\(\mathbf{x}\)</span> 是 <span class="arithmatex">\(\mathbf{y}\)</span> 各分量置换的凸组合。</p>
+<p>对凸组合应用排序后部分和的凸性，可以验证优超条件。</p>
+<p><strong>(1) <span class="arithmatex">\(\Rightarrow\)</span> (2)</strong>：构造性证明。给定 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>，可以通过有限次 T-变换（<span class="arithmatex">\(\mathbf{z} = t\mathbf{a} + (1-t)P_{ij}\mathbf{a}\)</span>，其中 <span class="arithmatex">\(P_{ij}\)</span> 交换第 <span class="arithmatex">\(i, j\)</span> 分量）将 <span class="arithmatex">\(\mathbf{y}\)</span> 变换为 <span class="arithmatex">\(\mathbf{x}\)</span>，每次 T-变换对应一个特殊的双随机矩阵，其乘积仍为双随机矩阵。</p>
+<p><strong>(2) <span class="arithmatex">\(\Leftrightarrow\)</span> (3)</strong>：由 Birkhoff 定理（定理 18.14）直接得出。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.13 (Schur-Horn 定理)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，特征值 <span class="arithmatex">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>，对角元素 <span class="arithmatex">\(a_{11}, \ldots, a_{nn}\)</span>，则：
+$$
+(a_{11}, \ldots, a_{nn}) \prec (\lambda_1, \ldots, \lambda_n).
+$$
+即对角元素向量被特征值向量优超。</p>
+<p>反之，给定实向量 <span class="arithmatex">\(\mathbf{d} \prec \boldsymbol{\lambda}\)</span>，存在 Hermite 矩阵以 <span class="arithmatex">\(\boldsymbol{\lambda}\)</span> 为特征值、以 <span class="arithmatex">\(\mathbf{d}\)</span> 为对角。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>必要性</strong>：设 <span class="arithmatex">\(A = U \Lambda U^*\)</span>，其中 <span class="arithmatex">\(U = (u_{ij})\)</span> 为酉矩阵。则：
+$$
+a_{ii} = (U \Lambda U^*)<em j="1">{ii} = \sum</em>|^2.
+$$}^n \lambda_j |u_{ij</p>
+<p>令 <span class="arithmatex">\(d_{ij} = |u_{ij}|^2\)</span>，由 <span class="arithmatex">\(U\)</span> 的酉性，<span class="arithmatex">\(D = (d_{ij})\)</span> 为双随机矩阵。因此 <span class="arithmatex">\(\mathbf{d} = D\boldsymbol{\lambda}\)</span>，由 Hardy-Littlewood-Polya 定理，<span class="arithmatex">\(\mathbf{d} \prec \boldsymbol{\lambda}\)</span>。</p>
+<p><strong>充分性</strong>（Horn 的结果）：由构造性方法，可以通过一系列 Givens 旋转构造所需的酉矩阵 <span class="arithmatex">\(U\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.14 (Birkhoff 定理)</p>
+<p>双随机矩阵的集合 <span class="arithmatex">\(\mathcal{D}_n\)</span> 是一个凸紧集，其极点恰好是所有 <span class="arithmatex">\(n \times n\)</span> <strong>置换矩阵</strong>（permutation matrix）。即每个双随机矩阵可以写成置换矩阵的凸组合：
+$$
+D = \sum_{k=1}^{N} \alpha_k P_{\pi_k}, \quad \alpha_k \geq 0, \quad \sum_k \alpha_k = 1.
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>极点是置换矩阵</strong>：设 <span class="arithmatex">\(D\)</span> 是 <span class="arithmatex">\(\mathcal{D}_n\)</span> 的极点。若 <span class="arithmatex">\(D\)</span> 不是置换矩阵，则存在某行含至少两个正元素 <span class="arithmatex">\(d_{ij}, d_{ik} &gt; 0\)</span>。利用双随机条件可构造两个不同的双随机矩阵 <span class="arithmatex">\(D_1, D_2\)</span> 使得 <span class="arithmatex">\(D = \frac{1}{2}(D_1 + D_2)\)</span>，与 <span class="arithmatex">\(D\)</span> 为极点矛盾。</p>
+<p><strong>置换矩阵是极点</strong>：设 <span class="arithmatex">\(P\)</span> 为置换矩阵，若 <span class="arithmatex">\(P = \alpha D_1 + (1-\alpha) D_2\)</span>（<span class="arithmatex">\(0 &lt; \alpha &lt; 1\)</span>），由于 <span class="arithmatex">\(P\)</span> 的元素仅为 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>，而 <span class="arithmatex">\(D_1, D_2\)</span> 的元素在 <span class="arithmatex">\([0,1]\)</span> 中且 <span class="arithmatex">\(\alpha D_1 + (1-\alpha)D_2\)</span> 要达到 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span>，必须 <span class="arithmatex">\(D_1 = D_2 = P\)</span>。</p>
+<p><strong>每个双随机矩阵是置换矩阵的凸组合</strong>：这可由 Birkhoff 算法证明。对双随机矩阵 <span class="arithmatex">\(D\)</span>，由 König 定理，存在置换 <span class="arithmatex">\(\pi\)</span> 使得 <span class="arithmatex">\(d_{i,\pi(i)} &gt; 0\)</span> 对所有 <span class="arithmatex">\(i\)</span> 成立。令 <span class="arithmatex">\(\theta = \min_i d_{i,\pi(i)} &gt; 0\)</span>，则 <span class="arithmatex">\(D' = \frac{1}{1-\theta}(D - \theta P_\pi)\)</span> 仍为双随机矩阵（或已完成），且零元素更多。有限步后终止。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.8</p>
+<p>验证 Schur-Horn 定理。设 <span class="arithmatex">\(A = \begin{pmatrix} 3 &amp; 1 \\ 1 &amp; 3 \end{pmatrix}\)</span>。</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 4\)</span>，<span class="arithmatex">\(\lambda_2 = 2\)</span>。对角元素：<span class="arithmatex">\(d_1 = 3\)</span>，<span class="arithmatex">\(d_2 = 3\)</span>。</p>
+<p>检验优超：<span class="arithmatex">\(d_{[1]} = 3 \leq \lambda_1 = 4\)</span>，<span class="arithmatex">\(d_1 + d_2 = 6 = \lambda_1 + \lambda_2 = 6\)</span>。</p>
+<p>因此 <span class="arithmatex">\((3, 3) \prec (4, 2)\)</span>，定理成立。</p>
+<p>对应的双随机矩阵为 <span class="arithmatex">\(D = \begin{pmatrix} 1/2 &amp; 1/2 \\ 1/2 &amp; 1/2 \end{pmatrix}\)</span>，确实 <span class="arithmatex">\((3, 3) = D(4, 2)\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.9</p>
+<p>设 <span class="arithmatex">\(\mathbf{x} = (3, 3, 3)\)</span>，<span class="arithmatex">\(\mathbf{y} = (5, 3, 1)\)</span>。验证 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>。</p>
+<p><span class="arithmatex">\(x_{[1]} = 3 \leq y_{[1]} = 5\)</span>。</p>
+<p><span class="arithmatex">\(x_{[1]} + x_{[2]} = 6 \leq y_{[1]} + y_{[2]} = 8\)</span>。</p>
+<p><span class="arithmatex">\(x_{[1]} + x_{[2]} + x_{[3]} = 9 = y_{[1]} + y_{[2]} + y_{[3]} = 9\)</span>。</p>
+<p>所有条件满足，<span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>。双随机矩阵：<span class="arithmatex">\(D = \frac{1}{3}\begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(D\mathbf{y} = (3,3,3) = \mathbf{x}\)</span>。</p>
+</div>
+<hr />
+<h2 id="186-schur">18.6 Schur 凸函数<a class="headerlink" href="#186-schur" title="Permanent link">&para;</a></h2>
+<p>Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩阵不等式提供了强大工具。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.9 (Schur 凸函数与 Schur 凹函数)</p>
+<p>函数 <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> 称为 <strong>Schur 凸函数</strong>（Schur-convex function），若对所有满足 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span> 的 <span class="arithmatex">\(\mathbf{x}, \mathbf{y} \in \mathbb{R}^n\)</span>，有：
+$$
+f(\mathbf{x}) \leq f(\mathbf{y}).
+$$
+称为 <strong>Schur 凹函数</strong>（Schur-concave function），若 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span> 蕴含 <span class="arithmatex">\(f(\mathbf{x}) \geq f(\mathbf{y})\)</span>。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.10 (对称函数)</p>
+<p>函数 <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> 称为<strong>对称函数</strong>（symmetric function），若对任意置换 <span class="arithmatex">\(\pi\)</span>，<span class="arithmatex">\(f(x_{\pi(1)}, \ldots, x_{\pi(n)}) = f(x_1, \ldots, x_n)\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.15 (Schur 凸性的判别条件)</p>
+<p>设 <span class="arithmatex">\(f: \mathbb{R}^n \to \mathbb{R}\)</span> 连续可微且对称，则 <span class="arithmatex">\(f\)</span> 为 Schur 凸函数当且仅当对所有 <span class="arithmatex">\(i \neq j\)</span>：
+$$
+(x_i - x_j)\left(\frac{\partial f}{\partial x_i} - \frac{\partial f}{\partial x_j}\right) \geq 0.
+$$
+此条件称为 <strong>Schur 条件</strong>（Schur's condition）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>充分性</strong>：设 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>。由 Hardy-Littlewood-Polya 定理，<span class="arithmatex">\(\mathbf{x} = D\mathbf{y}\)</span>，<span class="arithmatex">\(D\)</span> 为双随机矩阵。由 Birkhoff 定理，<span class="arithmatex">\(\mathbf{x}\)</span> 在 <span class="arithmatex">\(\mathbf{y}\)</span> 的置换点集的凸包中。</p>
+<p>可以证明，<span class="arithmatex">\(\mathbf{x}\)</span> 可以通过有限次 Robin Hood 变换（T-变换）从 <span class="arithmatex">\(\mathbf{y}\)</span> 得到。每次 T-变换将 <span class="arithmatex">\(\mathbf{y}\)</span> 中较大分量减小、较小分量增大。因此只需证明每次 T-变换不增加 <span class="arithmatex">\(f\)</span> 的值。</p>
+<p>设 <span class="arithmatex">\(\mathbf{z} = t\mathbf{y} + (1-t)P_{ij}\mathbf{y}\)</span>（<span class="arithmatex">\(0 \leq t \leq 1\)</span>），考虑 <span class="arithmatex">\(g(t) = f(\mathbf{z}(t))\)</span>。由链式法则和 Schur 条件，可以证明 <span class="arithmatex">\(g\)</span> 在适当方向单调，从而 <span class="arithmatex">\(f(\mathbf{x}) \leq f(\mathbf{y})\)</span>。</p>
+<p><strong>必要性</strong>：取 <span class="arithmatex">\(\mathbf{y}\)</span> 使得 <span class="arithmatex">\(y_i &gt; y_j\)</span>，令 <span class="arithmatex">\(\mathbf{x}\)</span> 由 T-变换得到（将 <span class="arithmatex">\(y_i\)</span> 减小 <span class="arithmatex">\(\epsilon\)</span>，<span class="arithmatex">\(y_j\)</span> 增大 <span class="arithmatex">\(\epsilon\)</span>），则 <span class="arithmatex">\(\mathbf{x} \prec \mathbf{y}\)</span>，由 <span class="arithmatex">\(f(\mathbf{x}) \leq f(\mathbf{y})\)</span> 和 <span class="arithmatex">\(\epsilon \to 0\)</span> 取极限即得 Schur 条件。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.16 (特征值的 Schur 凸性)</p>
+<p>设 <span class="arithmatex">\(\phi: \mathbb{R} \to \mathbb{R}\)</span> 为凸函数，<span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵，特征值 <span class="arithmatex">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>，对角元素 <span class="arithmatex">\(a_{11}, \ldots, a_{nn}\)</span>。则：
+$$
+\sum_{i=1}^{n} \phi(a_{ii}) \leq \sum_{i=1}^{n} \phi(\lambda_i).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 Schur-Horn 定理（定理 18.13），<span class="arithmatex">\((a_{11}, \ldots, a_{nn}) \prec (\lambda_1, \ldots, \lambda_n)\)</span>。</p>
+<p>函数 <span class="arithmatex">\(F(\mathbf{x}) = \sum_{i=1}^n \phi(x_i)\)</span> 是 Schur 凸函数（当 <span class="arithmatex">\(\phi\)</span> 为凸函数时）。验证：
+$$
+(x_i - x_j)\left(\frac{\partial F}{\partial x_i} - \frac{\partial F}{\partial x_j}\right) = (x_i - x_j)(\phi'(x_i) - \phi'(x_j)) \geq 0,
+$$
+最后一步由 <span class="arithmatex">\(\phi\)</span> 的凸性（即 <span class="arithmatex">\(\phi'\)</span> 单调递增）得到。</p>
+<p>因此 <span class="arithmatex">\(F(\mathbf{a}) \leq F(\boldsymbol{\lambda})\)</span>，即 <span class="arithmatex">\(\sum \phi(a_{ii}) \leq \sum \phi(\lambda_i)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.10</p>
+<p>取 <span class="arithmatex">\(\phi(x) = x^2\)</span>（凸函数），<span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>。</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 3\)</span>，<span class="arithmatex">\(\lambda_2 = 1\)</span>。对角元素：<span class="arithmatex">\(a_{11} = 2\)</span>，<span class="arithmatex">\(a_{22} = 2\)</span>。</p>
+<p><span class="arithmatex">\(\sum \phi(a_{ii}) = 4 + 4 = 8 \leq \sum \phi(\lambda_i) = 9 + 1 = 10\)</span>。</p>
+<p>确实 <span class="arithmatex">\(8 \leq 10\)</span>，定理成立。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.11</p>
+<p>取 <span class="arithmatex">\(\phi(x) = e^x\)</span>（凸函数），<span class="arithmatex">\(A = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>。</p>
+<p>特征值：<span class="arithmatex">\(\lambda_1 = 1\)</span>，<span class="arithmatex">\(\lambda_2 = -1\)</span>。对角元素：<span class="arithmatex">\(a_{11} = 0\)</span>，<span class="arithmatex">\(a_{22} = 0\)</span>。</p>
+<p><span class="arithmatex">\(\sum \phi(a_{ii}) = e^0 + e^0 = 2 \leq \sum \phi(\lambda_i) = e^1 + e^{-1} = e + 1/e \approx 3.086\)</span>。</p>
+<p>不等式成立。</p>
+</div>
+<hr />
+<h2 id="187">18.7 矩阵凸性与矩阵单调性<a class="headerlink" href="#187" title="Permanent link">&para;</a></h2>
+<p>本节将凸性和单调性从标量函数推广到矩阵函数的领域。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.11 (矩阵凸函数)</p>
+<p>设 <span class="arithmatex">\(f: (a, b) \to \mathbb{R}\)</span> 为连续函数。称 <span class="arithmatex">\(f\)</span> 为<strong>矩阵凸函数</strong>（matrix convex function），若对所有特征值在 <span class="arithmatex">\((a,b)\)</span> 中的 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵 <span class="arithmatex">\(A, B\)</span> 和 <span class="arithmatex">\(t \in [0,1]\)</span>：
+$$
+f(tA + (1-t)B) \preceq t f(A) + (1-t) f(B).
+$$
+这里 <span class="arithmatex">\(f(A)\)</span> 表示矩阵函数（通过谱映射定义）。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 18.12 (矩阵单调函数)</p>
+<p>设 <span class="arithmatex">\(f: (a,b) \to \mathbb{R}\)</span> 为连续函数。称 <span class="arithmatex">\(f\)</span> 为<strong>矩阵单调函数</strong>（matrix monotone function），或<strong>算子单调函数</strong>（operator monotone function），若对所有特征值在 <span class="arithmatex">\((a,b)\)</span> 中的 <span class="arithmatex">\(n \times n\)</span> Hermite 矩阵 <span class="arithmatex">\(A, B\)</span>：
+$$
+A \preceq B \implies f(A) \preceq f(B).
+$$</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.17 (矩阵单调函数的基本例子)</p>
+<p>以下函数在 <span class="arithmatex">\((0, \infty)\)</span> 上是矩阵单调的：</p>
+<ol>
+<li><span class="arithmatex">\(f(t) = t^r\)</span>，<span class="arithmatex">\(0 \leq r \leq 1\)</span>；</li>
+<li><span class="arithmatex">\(f(t) = \log t\)</span>；</li>
+<li><span class="arithmatex">\(f(t) = \frac{t}{t+1}\)</span>。</li>
+</ol>
+<p>以下函数<strong>不是</strong>矩阵单调的：</p>
+<ol>
+<li><span class="arithmatex">\(f(t) = t^2\)</span>（<span class="arithmatex">\(t &gt; 0\)</span>）。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>(4)</strong> 的反例：取 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(B - A = \begin{pmatrix} -1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>，特征值为 <span class="arithmatex">\(\sqrt{2}, -\sqrt{2}\)</span>，<span class="arithmatex">\(B \not\succeq A\)</span>。</p>
+<p>换一个例子：取 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}\)</span>。则 <span class="arithmatex">\(B - A = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 2 \end{pmatrix} \succeq 0\)</span>（特征值 <span class="arithmatex">\(1 \pm \sqrt{2}\)</span>，不全非负）。</p>
+<p>更清晰的例子：<span class="arithmatex">\(A = I\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>。<span class="arithmatex">\(B - A = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>（特征值 <span class="arithmatex">\(\frac{1\pm\sqrt{5}}{2}\)</span>），<span class="arithmatex">\(B \not\succeq A\)</span>。</p>
+<p>取 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} \preceq \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = B\)</span>，<span class="arithmatex">\(A^2 = A\)</span>，<span class="arithmatex">\(B^2 = B\)</span>，<span class="arithmatex">\(B^2 - A^2 = B - A \succeq 0\)</span>，此特殊情况下碰巧成立。</p>
+<p>正确反例：<span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} \preceq \begin{pmatrix} 3 &amp; 1 \\ 1 &amp; 1 \end{pmatrix} = B\)</span>。则 <span class="arithmatex">\(B - A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{pmatrix} \succeq 0\)</span>。但 <span class="arithmatex">\(B^2 - A^2 = \begin{pmatrix} 10 &amp; 4 \\ 4 &amp; 2 \end{pmatrix} - \begin{pmatrix} 5 &amp; 3 \\ 3 &amp; 2 \end{pmatrix} = \begin{pmatrix} 5 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>，其特征值为 <span class="arithmatex">\(\frac{5 \pm \sqrt{29}}{2}\)</span>，由于 <span class="arithmatex">\(\sqrt{29} &gt; 5\)</span>，有一个负特征值，因此 <span class="arithmatex">\(B^2 \not\succeq A^2\)</span>。</p>
+<p><strong>(2)</strong> <span class="arithmatex">\(\log t\)</span> 的矩阵单调性：设 <span class="arithmatex">\(0 \prec A \preceq B\)</span>，需证 <span class="arithmatex">\(\log A \preceq \log B\)</span>。</p>
+<p>利用积分表示 <span class="arithmatex">\(\log t = \int_0^{\infty} \left(\frac{1}{1+s} - \frac{1}{t+s}\right) ds\)</span>，而 <span class="arithmatex">\(g_s(t) = \frac{1}{t+s}\)</span> 是矩阵单调递减函数（因为 <span class="arithmatex">\(A \preceq B\)</span> 蕴含 <span class="arithmatex">\((A+sI)^{-1} \succeq (B+sI)^{-1}\)</span>，这由 <span class="arithmatex">\(A + sI \preceq B + sI\)</span> 和逆的反单调性得到）。因此 <span class="arithmatex">\(-g_s\)</span> 矩阵单调递增，对 <span class="arithmatex">\(s\)</span> 积分保持单调性。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.18 (Löwner 定理)</p>
+<p>函数 <span class="arithmatex">\(f: (a,b) \to \mathbb{R}\)</span> 对所有 <span class="arithmatex">\(n\)</span>（任意维数）都是矩阵单调的，当且仅当 <span class="arithmatex">\(f\)</span> 可以解析延拓到上半平面 <span class="arithmatex">\(\mathbb{C}^+\)</span>，且 <span class="arithmatex">\(f(\mathbb{C}^+) \subset \overline{\mathbb{C}^+}\)</span>（即 <span class="arithmatex">\(f\)</span> 将上半平面映入上半平面的闭包）。</p>
+<p>等价地，<span class="arithmatex">\(f\)</span> 具有积分表示：
+$$
+f(t) = \alpha + \beta t + \int_{-\infty}^{\infty} \frac{t\mu + 1}{\mu - t} \, d\nu(\mu),
+$$
+其中 <span class="arithmatex">\(\alpha \in \mathbb{R}\)</span>，<span class="arithmatex">\(\beta \geq 0\)</span>，<span class="arithmatex">\(\nu\)</span> 为正 Borel 测度。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>这是 Löwner 在 1934 年的经典结果，完整证明需要相当多的函数论工具。</p>
+<p><strong>必要性的思路</strong>：若 <span class="arithmatex">\(f\)</span> 为矩阵单调，取 <span class="arithmatex">\(n = 2\)</span>，考虑矩阵 <span class="arithmatex">\(A = \begin{pmatrix} x &amp; 0 \\ 0 &amp; y \end{pmatrix}\)</span> 和扰动 <span class="arithmatex">\(B = A + \epsilon \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>。由矩阵单调性导出的条件可以推出 <span class="arithmatex">\(f\)</span> 的<strong>分差矩阵</strong>（Loewner matrix）<span class="arithmatex">\(L_f = \left(\frac{f(x_i) - f(x_j)}{x_i - x_j}\right)\)</span> 为正半定矩阵。这进一步蕴含 <span class="arithmatex">\(f\)</span> 可以延拓为上半平面上的 Pick 函数。</p>
+<p><strong>充分性的思路</strong>：若 <span class="arithmatex">\(f\)</span> 为 Pick 函数，则利用 Nevanlinna-Pick 插值理论和正半定核的性质，可以证明分差矩阵的正半定性，从而得到矩阵单调性。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 18.19 (Jensen 矩阵不等式)</p>
+<p>设 <span class="arithmatex">\(f\)</span> 为 <span class="arithmatex">\((a,b)\)</span> 上的矩阵凸函数，<span class="arithmatex">\(A_1, \ldots, A_k\)</span> 为 Hermite 矩阵（特征值在 <span class="arithmatex">\((a,b)\)</span> 中），<span class="arithmatex">\(\omega_1, \ldots, \omega_k &gt; 0\)</span> 且 <span class="arithmatex">\(\sum \omega_i = 1\)</span>，则：
+$$
+f\left(\sum_{i=1}^{k} \omega_i A_i\right) \preceq \sum_{i=1}^{k} \omega_i f(A_i).
+$$</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对 <span class="arithmatex">\(k\)</span> 使用数学归纳法。<span class="arithmatex">\(k = 2\)</span> 时即为矩阵凸函数的定义。</p>
+<p>设 <span class="arithmatex">\(k \geq 3\)</span>，令 <span class="arithmatex">\(\omega = \omega_1 + \cdots + \omega_{k-1}\)</span>，<span class="arithmatex">\(B = \frac{1}{\omega}\sum_{i=1}^{k-1}\omega_i A_i\)</span>。则：
+$$
+\sum_{i=1}^k \omega_i A_i = \omega B + \omega_k A_k.
+$$</p>
+<p>由矩阵凸性：
+$$
+f(\omega B + \omega_k A_k) \preceq \omega f(B) + \omega_k f(A_k).
+$$</p>
+<p>由归纳假设：
+$$
+f(B) = f\left(\sum_{i=1}^{k-1}\frac{\omega_i}{\omega} A_i\right) \preceq \sum_{i=1}^{k-1}\frac{\omega_i}{\omega} f(A_i).
+$$</p>
+<p>因此 <span class="arithmatex">\(f\left(\sum_{i=1}^k \omega_i A_i\right) \preceq \omega \sum_{i=1}^{k-1}\frac{\omega_i}{\omega} f(A_i) + \omega_k f(A_k) = \sum_{i=1}^k \omega_i f(A_i)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 18.12</p>
+<p>验证 <span class="arithmatex">\(f(t) = t^2\)</span> 是矩阵凸函数（在所有 Hermite 矩阵上）。</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 Hermite 矩阵，<span class="arithmatex">\(t \in [0,1]\)</span>。需证 <span class="arithmatex">\((tA + (1-t)B)^2 \preceq t A^2 + (1-t) B^2\)</span>。</p>
+<p>展开左边：<span class="arithmatex">\(t^2 A^2 + t(1-t)(AB + BA) + (1-t)^2 B^2\)</span>。</p>
+<p>右边减左边：
+$$
+t(1-t)A^2 + t(1-t)B^2 - t(1-t)(AB+BA) = t(1-t)(A-B)^2 \succeq 0,
+$$
+因为 <span class="arithmatex">\((A-B)^2\)</span> 半正定。因此 <span class="arithmatex">\(f(t) = t^2\)</span> 确实是矩阵凸的。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 18.13</p>
+<p><span class="arithmatex">\(f(t) = -\log t\)</span> 是 <span class="arithmatex">\((0,\infty)\)</span> 上的矩阵凸函数。</p>
+<p>这等价于 <span class="arithmatex">\(\log t\)</span> 是矩阵凹函数，即 <span class="arithmatex">\(\log(tA + (1-t)B) \succeq t\log A + (1-t)\log B\)</span>。</p>
+<p>数值验证：<span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(B = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>，<span class="arithmatex">\(t = 1/2\)</span>。</p>
+<p><span class="arithmatex">\(\frac{1}{2}(A + B) = \begin{pmatrix} 3/2 &amp; 0 \\ 0 &amp; 2 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\log\frac{1}{2}(A+B) = \begin{pmatrix} \log(3/2) &amp; 0 \\ 0 &amp; \log 2 \end{pmatrix} \approx \begin{pmatrix} 0.405 &amp; 0 \\ 0 &amp; 0.693 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\frac{1}{2}(\log A + \log B) = \frac{1}{2}\begin{pmatrix} \log 2 &amp; 0 \\ 0 &amp; \log 3 \end{pmatrix} \approx \begin{pmatrix} 0.347 &amp; 0 \\ 0 &amp; 0.549 \end{pmatrix}\)</span>。</p>
+<p>差为 <span class="arithmatex">\(\begin{pmatrix} 0.058 &amp; 0 \\ 0 &amp; 0.144 \end{pmatrix} \succeq 0\)</span>，验证了矩阵凹性。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2546 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part4/ch21-multilinear-algebra/">
+      
+      
+        <link rel="prev" href="../../part3/ch20-matrix-equations/">
+      
+      
+        <link rel="next" href="../ch22-numerical-linear-algebra/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第21章 多线性代数与张量 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#21" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第21章 多线性代数与张量
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part1/ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch03-determinants/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part1/ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1 对偶空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.1 对偶空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线性泛函与对偶空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对偶基
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双对偶空间与自然同构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.2 多线性映射
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.2 多线性映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3 张量积
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3 张量积">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        泛性质定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        张量积的基与维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.4 张量的分量表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.4 张量的分量表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指标记法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#einstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Einstein 求和约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5 对称张量与反对称张量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.6 外代数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.6 外代数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        楔积与外幂
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        行列式作为外积
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.7 张量分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.7 张量分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tucker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tucker 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8 张量的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8 张量的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多维数据分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        量子信息中的张量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.1 对偶空间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.1 对偶空间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线性泛函与对偶空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对偶基
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双对偶空间与自然同构
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#212" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.2 多线性映射
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.2 多线性映射">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        双线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#213" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.3 张量积
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.3 张量积">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        泛性质定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        张量积的基与维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#214" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.4 张量的分量表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.4 张量的分量表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        指标记法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#einstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Einstein 求和约定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#215" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.5 对称张量与反对称张量
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#216" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.6 外代数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.6 外代数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        楔积与外幂
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        行列式作为外积
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#217" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.7 张量分解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.7 张量分解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CP 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tucker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tucker 分解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#218" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        21.8 张量的应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="21.8 张量的应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多维数据分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        量子信息中的张量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="21">第 21 章 多线性代数与张量<a class="headerlink" href="#21" title="Permanent link">&para;</a></h1>
+<p>多线性代数是线性代数的自然推广，它研究多个向量空间之间的多线性关系。张量（tensor）作为多线性代数的核心对象，不仅为微分几何、广义相对论提供了基本语言，也在近年来的机器学习、量子计算和数据科学中扮演着越来越重要的角色。本章从对偶空间出发，系统建立多线性映射、张量积、外代数等基本理论，并介绍张量分解等现代应用方向。</p>
+<h2 id="211">21.1 对偶空间<a class="headerlink" href="#211" title="Permanent link">&para;</a></h2>
+<h3 id="_1">线性泛函与对偶空间<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.1 (线性泛函)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是数域 <span class="arithmatex">\(\mathbb{F}\)</span>（<span class="arithmatex">\(\mathbb{F} = \mathbb{R}\)</span> 或 <span class="arithmatex">\(\mathbb{C}\)</span>）上的向量空间。一个<strong>线性泛函</strong>（linear functional）是从 <span class="arithmatex">\(V\)</span> 到 <span class="arithmatex">\(\mathbb{F}\)</span> 的线性映射 <span class="arithmatex">\(f: V \to \mathbb{F}\)</span>，即满足：</p>
+<div class="arithmatex">\[f(\alpha \mathbf{u} + \beta \mathbf{v}) = \alpha f(\mathbf{u}) + \beta f(\mathbf{v}), \quad \forall \mathbf{u}, \mathbf{v} \in V, \ \alpha, \beta \in \mathbb{F}.\]</div>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.2 (对偶空间)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\mathbb{F}\)</span> 上的向量空间。<span class="arithmatex">\(V\)</span> 的<strong>对偶空间</strong>（dual space）定义为 <span class="arithmatex">\(V\)</span> 上所有线性泛函构成的集合，记作 <span class="arithmatex">\(V^*\)</span>：</p>
+<div class="arithmatex">\[V^* = \text{Hom}(V, \mathbb{F}) = \{ f: V \to \mathbb{F} \mid f \text{ 是线性映射} \}.\]</div>
+<p><span class="arithmatex">\(V^*\)</span> 在逐点加法和标量乘法下构成 <span class="arithmatex">\(\mathbb{F}\)</span> 上的向量空间。</p>
+</div>
+<h3 id="_2">对偶基<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.3 (对偶基)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(n\)</span> 维向量空间，<span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基。<strong>对偶基</strong>（dual basis）<span class="arithmatex">\(\{\mathbf{e}^1, \mathbf{e}^2, \ldots, \mathbf{e}^n\}\)</span> 是 <span class="arithmatex">\(V^*\)</span> 中满足以下条件的一组线性泛函：</p>
+<div class="arithmatex">\[\mathbf{e}^i(\mathbf{e}_j) = \delta^i_j = \begin{cases} 1, &amp; i = j, \\ 0, &amp; i \neq j. \end{cases}\]</div>
+<p>其中 <span class="arithmatex">\(\delta^i_j\)</span> 是 Kronecker delta。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.1 (对偶基的存在性与唯一性)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维向量空间，<span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的一组基，则对偶基 <span class="arithmatex">\(\{\mathbf{e}^1, \ldots, \mathbf{e}^n\}\)</span> 存在且唯一，并且构成 <span class="arithmatex">\(V^*\)</span> 的一组基。特别地，<span class="arithmatex">\(\dim V^* = \dim V\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性</strong>：对每个 <span class="arithmatex">\(i = 1, \ldots, n\)</span>，定义 <span class="arithmatex">\(\mathbf{e}^i: V \to \mathbb{F}\)</span> 如下。对任意 <span class="arithmatex">\(\mathbf{v} = \sum_{j=1}^n v_j \mathbf{e}_j \in V\)</span>，令</p>
+<div class="arithmatex">\[\mathbf{e}^i(\mathbf{v}) = v_i.\]</div>
+<p>显然 <span class="arithmatex">\(\mathbf{e}^i\)</span> 是线性的，且 <span class="arithmatex">\(\mathbf{e}^i(\mathbf{e}_j) = \delta^i_j\)</span>。</p>
+<p><strong>唯一性</strong>：若 <span class="arithmatex">\(f \in V^*\)</span> 满足 <span class="arithmatex">\(f(\mathbf{e}_j) = \delta^i_j\)</span>，则对任意 <span class="arithmatex">\(\mathbf{v} = \sum_j v_j \mathbf{e}_j\)</span>，</p>
+<div class="arithmatex">\[f(\mathbf{v}) = \sum_j v_j f(\mathbf{e}_j) = \sum_j v_j \delta^i_j = v_i = \mathbf{e}^i(\mathbf{v}).\]</div>
+<p>故 <span class="arithmatex">\(f = \mathbf{e}^i\)</span>。</p>
+<p><strong><span class="arithmatex">\(\{\mathbf{e}^1, \ldots, \mathbf{e}^n\}\)</span> 是 <span class="arithmatex">\(V^*\)</span> 的基</strong>：</p>
+<ul>
+<li><em>线性无关</em>：设 <span class="arithmatex">\(\sum_i c_i \mathbf{e}^i = 0\)</span>。将此等式作用于 <span class="arithmatex">\(\mathbf{e}_j\)</span>，得 <span class="arithmatex">\(c_j = 0\)</span>，<span class="arithmatex">\(\forall j\)</span>。</li>
+<li><em>生成 <span class="arithmatex">\(V^*\)</span></em>：设 <span class="arithmatex">\(f \in V^*\)</span>，令 <span class="arithmatex">\(c_i = f(\mathbf{e}_i)\)</span>。则 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(\sum_i c_i \mathbf{e}^i\)</span> 在基向量上的值相同，由线性性知它们相等，即 <span class="arithmatex">\(f = \sum_i c_i \mathbf{e}^i\)</span>。</li>
+</ul>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 21.1</p>
+<p>设 <span class="arithmatex">\(V = \mathbb{R}^3\)</span>，取标准基 <span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}\)</span>。对偶基为 <span class="arithmatex">\(\{\mathbf{e}^1, \mathbf{e}^2, \mathbf{e}^3\}\)</span>，其中</p>
+<div class="arithmatex">\[\mathbf{e}^i(x_1, x_2, x_3) = x_i.\]</div>
+<p>即 <span class="arithmatex">\(\mathbf{e}^i\)</span> 是"提取第 <span class="arithmatex">\(i\)</span> 个坐标"的投影函数。</p>
+<p>例如 <span class="arithmatex">\(\mathbf{e}^2(3, -1, 5) = -1\)</span>。</p>
+</div>
+<h3 id="_3">双对偶空间与自然同构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.4 (双对偶空间)</p>
+<p><span class="arithmatex">\(V\)</span> 的<strong>双对偶空间</strong>（double dual space）定义为 <span class="arithmatex">\((V^*)^*\)</span>，记作 <span class="arithmatex">\(V^{**}\)</span>。<span class="arithmatex">\(V^{**}\)</span> 的元素是 <span class="arithmatex">\(V^*\)</span> 上的线性泛函。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.2 (自然同构)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是有限维向量空间。定义映射 <span class="arithmatex">\(\Phi: V \to V^{**}\)</span>，</p>
+<div class="arithmatex">\[\Phi(\mathbf{v})(f) = f(\mathbf{v}), \quad \forall \mathbf{v} \in V, \ f \in V^*.\]</div>
+<p>则 <span class="arithmatex">\(\Phi\)</span> 是一个<strong>自然同构</strong>（canonical isomorphism），即 <span class="arithmatex">\(\Phi\)</span> 是不依赖于基的选取的向量空间同构。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong><span class="arithmatex">\(\Phi\)</span> 是线性映射</strong>：对任意 <span class="arithmatex">\(\alpha, \beta \in \mathbb{F}\)</span>，<span class="arithmatex">\(\mathbf{u}, \mathbf{v} \in V\)</span>，<span class="arithmatex">\(f \in V^*\)</span>，</p>
+<div class="arithmatex">\[\Phi(\alpha \mathbf{u} + \beta \mathbf{v})(f) = f(\alpha \mathbf{u} + \beta \mathbf{v}) = \alpha f(\mathbf{u}) + \beta f(\mathbf{v}) = (\alpha \Phi(\mathbf{u}) + \beta \Phi(\mathbf{v}))(f).\]</div>
+<p><strong><span class="arithmatex">\(\Phi\)</span> 是单射</strong>：设 <span class="arithmatex">\(\Phi(\mathbf{v}) = 0\)</span>，即对所有 <span class="arithmatex">\(f \in V^*\)</span>，<span class="arithmatex">\(f(\mathbf{v}) = 0\)</span>。取对偶基 <span class="arithmatex">\(\mathbf{e}^i\)</span>，有 <span class="arithmatex">\(\mathbf{e}^i(\mathbf{v}) = v_i = 0\)</span>，故 <span class="arithmatex">\(\mathbf{v} = \mathbf{0}\)</span>。</p>
+<p><strong><span class="arithmatex">\(\Phi\)</span> 是同构</strong>：因为 <span class="arithmatex">\(\dim V = \dim V^{**}\)</span>（<span class="arithmatex">\(V\)</span> 有限维），而 <span class="arithmatex">\(\Phi\)</span> 是单射，故 <span class="arithmatex">\(\Phi\)</span> 是同构。</p>
+<p><strong>自然性</strong>：<span class="arithmatex">\(\Phi\)</span> 的定义不涉及任何基的选取，因此是"自然的"。在范畴论的意义下，<span class="arithmatex">\(\Phi\)</span> 构成从恒等函子到双对偶函子的自然变换。</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>当 <span class="arithmatex">\(V\)</span> 是无限维空间时，<span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(V^*\)</span> 不再同构（<span class="arithmatex">\(V^*\)</span> 可能"更大"），自然映射 <span class="arithmatex">\(\Phi: V \to V^{**}\)</span> 仍是单射但不再是满射。这一区别在泛函分析中尤为重要，引出了自反空间（reflexive space）的概念。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 21.2</p>
+<p>设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，基为 <span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2\}\)</span>。对偶基为 <span class="arithmatex">\(\{\mathbf{e}^1, \mathbf{e}^2\}\)</span>。对 <span class="arithmatex">\(\mathbf{v} = 3\mathbf{e}_1 + 2\mathbf{e}_2\)</span>，</p>
+<div class="arithmatex">\[\Phi(\mathbf{v})(\mathbf{e}^1) = \mathbf{e}^1(\mathbf{v}) = 3, \quad \Phi(\mathbf{v})(\mathbf{e}^2) = \mathbf{e}^2(\mathbf{v}) = 2.\]</div>
+<p>因此 <span class="arithmatex">\(\Phi(\mathbf{v}) = 3(\mathbf{e}^1)^* + 2(\mathbf{e}^2)^*\)</span>，其中 <span class="arithmatex">\(\{(\mathbf{e}^1)^*, (\mathbf{e}^2)^*\}\)</span> 是 <span class="arithmatex">\(V^{**}\)</span> 中 <span class="arithmatex">\(\{\mathbf{e}^1, \mathbf{e}^2\}\)</span> 的对偶基。</p>
+</div>
+<h2 id="212">21.2 多线性映射<a class="headerlink" href="#212" title="Permanent link">&para;</a></h2>
+<h3 id="_4">双线性映射<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.5 (双线性映射)</p>
+<p>设 <span class="arithmatex">\(V, W, U\)</span> 是 <span class="arithmatex">\(\mathbb{F}\)</span> 上的向量空间。映射 <span class="arithmatex">\(B: V \times W \to U\)</span> 称为<strong>双线性映射</strong>（bilinear map），如果它关于每个变量都是线性的：</p>
+<ul>
+<li>固定 <span class="arithmatex">\(\mathbf{w} \in W\)</span>，映射 <span class="arithmatex">\(\mathbf{v} \mapsto B(\mathbf{v}, \mathbf{w})\)</span> 是线性的；</li>
+<li>固定 <span class="arithmatex">\(\mathbf{v} \in V\)</span>，映射 <span class="arithmatex">\(\mathbf{w} \mapsto B(\mathbf{v}, \mathbf{w})\)</span> 是线性的。</li>
+</ul>
+<p>即对任意 <span class="arithmatex">\(\alpha, \beta \in \mathbb{F}\)</span>：</p>
+<div class="arithmatex">\[B(\alpha \mathbf{v}_1 + \beta \mathbf{v}_2, \mathbf{w}) = \alpha B(\mathbf{v}_1, \mathbf{w}) + \beta B(\mathbf{v}_2, \mathbf{w}),\]</div>
+<div class="arithmatex">\[B(\mathbf{v}, \alpha \mathbf{w}_1 + \beta \mathbf{w}_2) = \alpha B(\mathbf{v}, \mathbf{w}_1) + \beta B(\mathbf{v}, \mathbf{w}_2).\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 21.3</p>
+<p><strong>内积是双线性映射</strong>。设 <span class="arithmatex">\(V\)</span> 是实内积空间，则内积 <span class="arithmatex">\(\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}\)</span> 是双线性映射。</p>
+<p><strong>矩阵乘法是双线性映射</strong>。映射 <span class="arithmatex">\(B: \mathbb{R}^{m \times n} \times \mathbb{R}^{n \times p} \to \mathbb{R}^{m \times p}\)</span>，<span class="arithmatex">\(B(A, B) = AB\)</span> 是双线性的。</p>
+<p><strong>行列式作为行向量的函数</strong>。将 <span class="arithmatex">\(n \times n\)</span> 矩阵看作 <span class="arithmatex">\(n\)</span> 个行向量 <span class="arithmatex">\((\mathbf{r}_1, \ldots, \mathbf{r}_n)\)</span>，则 <span class="arithmatex">\(\det(\mathbf{r}_1, \ldots, \mathbf{r}_n)\)</span> 关于每个 <span class="arithmatex">\(\mathbf{r}_i\)</span> 是线性的（即行列式是多线性映射）。</p>
+</div>
+<h3 id="_5">多线性映射<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.6 (多线性映射)</p>
+<p>设 <span class="arithmatex">\(V_1, V_2, \ldots, V_k, U\)</span> 是 <span class="arithmatex">\(\mathbb{F}\)</span> 上的向量空间。映射 <span class="arithmatex">\(f: V_1 \times V_2 \times \cdots \times V_k \to U\)</span> 称为 <strong><span class="arithmatex">\(k\)</span>-线性映射</strong>（<span class="arithmatex">\(k\)</span>-linear map 或 multilinear map），如果固定其余 <span class="arithmatex">\(k-1\)</span> 个变量后，<span class="arithmatex">\(f\)</span> 关于每个变量都是线性的。</p>
+<p>所有从 <span class="arithmatex">\(V_1 \times \cdots \times V_k\)</span> 到 <span class="arithmatex">\(U\)</span> 的 <span class="arithmatex">\(k\)</span>-线性映射构成的集合记为 <span class="arithmatex">\(\mathcal{L}^k(V_1, \ldots, V_k; U)\)</span>。当 <span class="arithmatex">\(U = \mathbb{F}\)</span> 时，称为 <strong><span class="arithmatex">\(k\)</span>-线性型</strong>（<span class="arithmatex">\(k\)</span>-linear form）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.3 (多线性映射由基上的值决定)</p>
+<p>设 <span class="arithmatex">\(V_i\)</span> 是有限维向量空间，<span class="arithmatex">\(\dim V_i = n_i\)</span>，<span class="arithmatex">\(\{\mathbf{e}^{(i)}_1, \ldots, \mathbf{e}^{(i)}_{n_i}\}\)</span> 是 <span class="arithmatex">\(V_i\)</span> 的基（<span class="arithmatex">\(i = 1, \ldots, k\)</span>）。则 <span class="arithmatex">\(k\)</span>-线性映射 <span class="arithmatex">\(f: V_1 \times \cdots \times V_k \to U\)</span> 完全由它在各基向量组上的值</p>
+<div class="arithmatex">\[f(\mathbf{e}^{(1)}_{j_1}, \mathbf{e}^{(2)}_{j_2}, \ldots, \mathbf{e}^{(k)}_{j_k}), \quad 1 \leq j_i \leq n_i\]</div>
+<p>唯一确定。这些值共有 <span class="arithmatex">\(n_1 n_2 \cdots n_k\)</span> 个，可以自由指定。从而</p>
+<div class="arithmatex">\[\dim \mathcal{L}^k(V_1, \ldots, V_k; U) = n_1 n_2 \cdots n_k \cdot \dim U.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\mathbf{v}_i = \sum_{j_i=1}^{n_i} v^{j_i}_i \mathbf{e}^{(i)}_{j_i} \in V_i\)</span>。由多线性性，</p>
+<div class="arithmatex">\[f(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \sum_{j_1=1}^{n_1} \cdots \sum_{j_k=1}^{n_k} v^{j_1}_1 \cdots v^{j_k}_k \, f(\mathbf{e}^{(1)}_{j_1}, \ldots, \mathbf{e}^{(k)}_{j_k}).\]</div>
+<p>这表明 <span class="arithmatex">\(f\)</span> 完全由 <span class="arithmatex">\(f(\mathbf{e}^{(1)}_{j_1}, \ldots, \mathbf{e}^{(k)}_{j_k})\)</span> 的取值决定。</p>
+<p>反之，对任意给定的值 <span class="arithmatex">\(\mathbf{u}_{j_1 \cdots j_k} \in U\)</span>，可以用上述公式定义 <span class="arithmatex">\(f\)</span>，直接验证可知 <span class="arithmatex">\(f\)</span> 是 <span class="arithmatex">\(k\)</span>-线性的。</p>
+<p>当 <span class="arithmatex">\(U = \mathbb{F}\)</span> 时，<span class="arithmatex">\(\dim \mathcal{L}^k(V_1, \ldots, V_k; \mathbb{F}) = n_1 n_2 \cdots n_k\)</span>。</p>
+</details>
+<h2 id="213">21.3 张量积<a class="headerlink" href="#213" title="Permanent link">&para;</a></h2>
+<h3 id="_6">泛性质定义<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.7 (张量积的泛性质)</p>
+<p>设 <span class="arithmatex">\(V, W\)</span> 是 <span class="arithmatex">\(\mathbb{F}\)</span> 上的向量空间。<span class="arithmatex">\(V\)</span> 和 <span class="arithmatex">\(W\)</span> 的<strong>张量积</strong>（tensor product）是一个向量空间 <span class="arithmatex">\(V \otimes W\)</span> 连同一个双线性映射 <span class="arithmatex">\(\otimes: V \times W \to V \otimes W\)</span>，使得以下泛性质成立：</p>
+<p>对于任意向量空间 <span class="arithmatex">\(U\)</span> 和任意双线性映射 <span class="arithmatex">\(B: V \times W \to U\)</span>，存在唯一的线性映射 <span class="arithmatex">\(\tilde{B}: V \otimes W \to U\)</span>，使得 <span class="arithmatex">\(B = \tilde{B} \circ \otimes\)</span>，即以下图表交换：</p>
+<div class="arithmatex">\[V \times W \xrightarrow{\otimes} V \otimes W\]</div>
+<div class="arithmatex">\[\searrow^{B} \quad \downarrow^{\tilde{B}}\]</div>
+<div class="arithmatex">\[\qquad \quad U\]</div>
+<p>元素 <span class="arithmatex">\(\mathbf{v} \otimes \mathbf{w}\)</span>（<span class="arithmatex">\(\mathbf{v} \in V, \mathbf{w} \in W\)</span>）称为<strong>简单张量</strong>（simple tensor 或 decomposable tensor）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.4 (张量积的存在性与唯一性)</p>
+<p>对任意向量空间 <span class="arithmatex">\(V, W\)</span>，张量积 <span class="arithmatex">\(V \otimes W\)</span> 存在且在同构意义下唯一。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>存在性（构造法）</strong>：设 <span class="arithmatex">\(F(V \times W)\)</span> 是以 <span class="arithmatex">\(V \times W\)</span> 中所有元素 <span class="arithmatex">\((\mathbf{v}, \mathbf{w})\)</span> 为基的自由向量空间。设 <span class="arithmatex">\(R\)</span> 是由以下形式的元素生成的子空间：</p>
+<ul>
+<li><span class="arithmatex">\((\alpha \mathbf{v}_1 + \beta \mathbf{v}_2, \mathbf{w}) - \alpha(\mathbf{v}_1, \mathbf{w}) - \beta(\mathbf{v}_2, \mathbf{w})\)</span></li>
+<li><span class="arithmatex">\((\mathbf{v}, \alpha \mathbf{w}_1 + \beta \mathbf{w}_2) - \alpha(\mathbf{v}, \mathbf{w}_1) - \beta(\mathbf{v}, \mathbf{w}_2)\)</span></li>
+</ul>
+<p>定义 <span class="arithmatex">\(V \otimes W = F(V \times W) / R\)</span>，并令 <span class="arithmatex">\(\mathbf{v} \otimes \mathbf{w}\)</span> 为 <span class="arithmatex">\((\mathbf{v}, \mathbf{w})\)</span> 在商空间中的像。则映射 <span class="arithmatex">\(\otimes: V \times W \to V \otimes W\)</span> 是双线性的，且满足泛性质。</p>
+<p><strong>唯一性</strong>：设 <span class="arithmatex">\((T_1, \otimes_1)\)</span> 和 <span class="arithmatex">\((T_2, \otimes_2)\)</span> 均满足泛性质。由 <span class="arithmatex">\(T_1\)</span> 的泛性质，对双线性映射 <span class="arithmatex">\(\otimes_2\)</span>，存在唯一的线性映射 <span class="arithmatex">\(\varphi: T_1 \to T_2\)</span>，使得 <span class="arithmatex">\(\otimes_2 = \varphi \circ \otimes_1\)</span>。同理存在 <span class="arithmatex">\(\psi: T_2 \to T_1\)</span>，使得 <span class="arithmatex">\(\otimes_1 = \psi \circ \otimes_2\)</span>。则 <span class="arithmatex">\(\psi \circ \varphi \circ \otimes_1 = \otimes_1\)</span>，由泛性质的唯一性，<span class="arithmatex">\(\psi \circ \varphi = \text{id}_{T_1}\)</span>。同理 <span class="arithmatex">\(\varphi \circ \psi = \text{id}_{T_2}\)</span>。故 <span class="arithmatex">\(T_1 \cong T_2\)</span>。</p>
+</details>
+<h3 id="_7">张量积的基与维数<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.5 (张量积的基)</p>
+<p>设 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_m\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的基，<span class="arithmatex">\(\{\mathbf{f}_1, \ldots, \mathbf{f}_n\}\)</span> 是 <span class="arithmatex">\(W\)</span> 的基，则</p>
+<div class="arithmatex">\[\{\mathbf{e}_i \otimes \mathbf{f}_j : 1 \leq i \leq m, \ 1 \leq j \leq n\}\]</div>
+<p>是 <span class="arithmatex">\(V \otimes W\)</span> 的基。特别地，</p>
+<div class="arithmatex">\[\dim(V \otimes W) = \dim V \cdot \dim W.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>生成</strong>：<span class="arithmatex">\(V \otimes W\)</span> 由简单张量 <span class="arithmatex">\(\mathbf{v} \otimes \mathbf{w}\)</span> 的线性组合生成。设 <span class="arithmatex">\(\mathbf{v} = \sum_i a_i \mathbf{e}_i\)</span>，<span class="arithmatex">\(\mathbf{w} = \sum_j b_j \mathbf{f}_j\)</span>，则</p>
+<div class="arithmatex">\[\mathbf{v} \otimes \mathbf{w} = \left(\sum_i a_i \mathbf{e}_i\right) \otimes \left(\sum_j b_j \mathbf{f}_j\right) = \sum_{i,j} a_i b_j \, \mathbf{e}_i \otimes \mathbf{f}_j.\]</div>
+<p><strong>线性无关</strong>：设 <span class="arithmatex">\(\sum_{i,j} c_{ij} \, \mathbf{e}_i \otimes \mathbf{f}_j = 0\)</span>。对每对 <span class="arithmatex">\((p, q)\)</span>，取线性泛函 <span class="arithmatex">\(\mathbf{e}^p \in V^*\)</span>，<span class="arithmatex">\(\mathbf{f}^q \in W^*\)</span>，定义双线性映射 <span class="arithmatex">\(B_{pq}(\mathbf{v}, \mathbf{w}) = \mathbf{e}^p(\mathbf{v}) \mathbf{f}^q(\mathbf{w})\)</span>。由泛性质，存在线性映射 <span class="arithmatex">\(\tilde{B}_{pq}: V \otimes W \to \mathbb{F}\)</span>，使得 <span class="arithmatex">\(\tilde{B}_{pq}(\mathbf{e}_i \otimes \mathbf{f}_j) = \delta^p_i \delta^q_j\)</span>。将 <span class="arithmatex">\(\tilde{B}_{pq}\)</span> 应用于等式两端，得 <span class="arithmatex">\(c_{pq} = 0\)</span>。</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 21.4</p>
+<p>设 <span class="arithmatex">\(V = \mathbb{R}^2\)</span>，<span class="arithmatex">\(W = \mathbb{R}^3\)</span>。则 <span class="arithmatex">\(V \otimes W\)</span> 是 <span class="arithmatex">\(6\)</span> 维空间。取 <span class="arithmatex">\(V\)</span> 的标准基 <span class="arithmatex">\(\{\mathbf{e}_1, \mathbf{e}_2\}\)</span>，<span class="arithmatex">\(W\)</span> 的标准基 <span class="arithmatex">\(\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3\}\)</span>，则 <span class="arithmatex">\(V \otimes W\)</span> 的基为：</p>
+<div class="arithmatex">\[\{\mathbf{e}_1 \otimes \mathbf{f}_1, \mathbf{e}_1 \otimes \mathbf{f}_2, \mathbf{e}_1 \otimes \mathbf{f}_3, \mathbf{e}_2 \otimes \mathbf{f}_1, \mathbf{e}_2 \otimes \mathbf{f}_2, \mathbf{e}_2 \otimes \mathbf{f}_3\}.\]</div>
+<p><span class="arithmatex">\(V \otimes W\)</span> 与 <span class="arithmatex">\(\mathbb{R}^{2 \times 3}\)</span>（<span class="arithmatex">\(2 \times 3\)</span> 矩阵空间）同构：<span class="arithmatex">\(\mathbf{v} \otimes \mathbf{w} \mapsto \mathbf{v}\mathbf{w}^T\)</span>。</p>
+<p>例如 <span class="arithmatex">\(\begin{pmatrix} 1 \\ 2 \end{pmatrix} \otimes \begin{pmatrix} 3 \\ 0 \\ -1 \end{pmatrix} \mapsto \begin{pmatrix} 3 &amp; 0 &amp; -1 \\ 6 &amp; 0 &amp; -2 \end{pmatrix}\)</span>。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 21.1 (张量积的基本性质)</p>
+<p>张量积满足以下性质：</p>
+<ol>
+<li><strong>结合律</strong>：<span class="arithmatex">\((V \otimes W) \otimes U \cong V \otimes (W \otimes U)\)</span>；</li>
+<li><strong>交换律</strong>：<span class="arithmatex">\(V \otimes W \cong W \otimes V\)</span>；</li>
+<li><strong>分配律</strong>：<span class="arithmatex">\(V \otimes (W \oplus U) \cong (V \otimes W) \oplus (V \otimes U)\)</span>；</li>
+<li><strong>与标量域的张量积</strong>：<span class="arithmatex">\(V \otimes \mathbb{F} \cong V\)</span>；</li>
+<li><strong>与对偶空间的关系</strong>：<span class="arithmatex">\(V^* \otimes W \cong \text{Hom}(V, W)\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>我们证明第 5 条。定义映射 <span class="arithmatex">\(\Phi: V^* \otimes W \to \text{Hom}(V, W)\)</span>，在简单张量上定义为</p>
+<div class="arithmatex">\[\Phi(f \otimes \mathbf{w})(\mathbf{v}) = f(\mathbf{v}) \mathbf{w}, \quad f \in V^*, \ \mathbf{w} \in W, \ \mathbf{v} \in V.\]</div>
+<p>由张量积的泛性质，映射 <span class="arithmatex">\((f, \mathbf{w}) \mapsto [\ \mathbf{v} \mapsto f(\mathbf{v})\mathbf{w}\ ]\)</span> 是双线性的，故 <span class="arithmatex">\(\Phi\)</span> 存在且是线性的。</p>
+<p>取 <span class="arithmatex">\(V\)</span> 的基 <span class="arithmatex">\(\{\mathbf{e}_i\}\)</span> 和 <span class="arithmatex">\(W\)</span> 的基 <span class="arithmatex">\(\{\mathbf{f}_j\}\)</span>，对偶基 <span class="arithmatex">\(\{\mathbf{e}^i\}\)</span>。则 <span class="arithmatex">\(\Phi(\mathbf{e}^i \otimes \mathbf{f}_j)\)</span> 是将 <span class="arithmatex">\(\mathbf{e}_i\)</span> 映为 <span class="arithmatex">\(\mathbf{f}_j\)</span>，其余基向量映为 <span class="arithmatex">\(\mathbf{0}\)</span> 的线性映射，这恰好是 <span class="arithmatex">\(\text{Hom}(V, W)\)</span> 的标准基。因此 <span class="arithmatex">\(\Phi\)</span> 将基映为基，是同构。</p>
+</details>
+<h2 id="214">21.4 张量的分量表示<a class="headerlink" href="#214" title="Permanent link">&para;</a></h2>
+<h3 id="_8">指标记法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>在物理学和工程学中，张量通常用<strong>指标记法</strong>（index notation）来表示。设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(n\)</span> 维向量空间，基为 <span class="arithmatex">\(\{\mathbf{e}_i\}\)</span>，对偶基为 <span class="arithmatex">\(\{\mathbf{e}^i\}\)</span>。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.8 (<span class="arithmatex">\((r, s)\)</span> 型张量)</p>
+<p>一个 <strong><span class="arithmatex">\((r, s)\)</span> 型张量</strong>（type <span class="arithmatex">\((r, s)\)</span> tensor）是一个多线性映射</p>
+<div class="arithmatex">\[T: \underbrace{V^* \times \cdots \times V^*}_{r} \times \underbrace{V \times \cdots \times V}_{s} \to \mathbb{F}.\]</div>
+<p>在给定基下，<span class="arithmatex">\(T\)</span> 的<strong>分量</strong>（components）为</p>
+<div class="arithmatex">\[T^{i_1 \cdots i_r}_{j_1 \cdots j_s} = T(\mathbf{e}^{i_1}, \ldots, \mathbf{e}^{i_r}, \mathbf{e}_{j_1}, \ldots, \mathbf{e}_{j_s}).\]</div>
+<p>上标称为<strong>逆变指标</strong>（contravariant indices），下标称为<strong>协变指标</strong>（covariant indices）。</p>
+</div>
+<h3 id="einstein">Einstein 求和约定<a class="headerlink" href="#einstein" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.9 (Einstein 求和约定)</p>
+<p><strong>Einstein 求和约定</strong>（Einstein summation convention）规定：当一个指标在表达式中同时作为上标和下标出现时（称为<strong>哑指标</strong>），自动对该指标求和。例如：</p>
+<div class="arithmatex">\[a^i b_i \equiv \sum_{i=1}^n a^i b_i, \quad T^i_{\ j} v^j \equiv \sum_{j=1}^n T^i_{\ j} v^j.\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 21.5</p>
+<p>使用 Einstein 约定，以下是一些常见的张量运算：</p>
+<ol>
+<li><strong>向量的分量</strong>：<span class="arithmatex">\(\mathbf{v} = v^i \mathbf{e}_i\)</span>（对 <span class="arithmatex">\(i\)</span> 求和）。</li>
+<li><strong>线性泛函的作用</strong>：<span class="arithmatex">\(f(\mathbf{v}) = f_i v^i\)</span>。</li>
+<li><strong>矩阵乘向量</strong>：<span class="arithmatex">\((A\mathbf{v})^i = A^i_{\ j} v^j\)</span>。</li>
+<li><strong>矩阵乘法</strong>：<span class="arithmatex">\((AB)^i_{\ k} = A^i_{\ j} B^j_{\ k}\)</span>。</li>
+<li><strong>迹</strong>：<span class="arithmatex">\(\text{tr}(A) = A^i_{\ i}\)</span>。</li>
+</ol>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.6 (张量分量的变换律)</p>
+<p>设 <span class="arithmatex">\(\{\mathbf{e}_i\}\)</span> 和 <span class="arithmatex">\(\{\tilde{\mathbf{e}}_i\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的两组基，基变换矩阵为 <span class="arithmatex">\(P\)</span>：<span class="arithmatex">\(\tilde{\mathbf{e}}_j = P^i_{\ j} \mathbf{e}_i\)</span>。则 <span class="arithmatex">\((r, s)\)</span> 型张量 <span class="arithmatex">\(T\)</span> 的分量变换律为：</p>
+<div class="arithmatex">\[\tilde{T}^{i_1 \cdots i_r}_{j_1 \cdots j_s} = (P^{-1})^{i_1}_{\ k_1} \cdots (P^{-1})^{i_r}_{\ k_r} \, P^{l_1}_{\ j_1} \cdots P^{l_s}_{\ j_s} \, T^{k_1 \cdots k_r}_{l_1 \cdots l_s}.\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对偶基的变换为 <span class="arithmatex">\(\tilde{\mathbf{e}}^i = (P^{-1})^i_{\ j} \mathbf{e}^j\)</span>（利用 <span class="arithmatex">\(\tilde{\mathbf{e}}^i(\tilde{\mathbf{e}}_k) = \delta^i_k\)</span> 可导出）。因此</p>
+<div class="arithmatex">\[\tilde{T}^{i_1 \cdots i_r}_{j_1 \cdots j_s} = T(\tilde{\mathbf{e}}^{i_1}, \ldots, \tilde{\mathbf{e}}^{i_r}, \tilde{\mathbf{e}}_{j_1}, \ldots, \tilde{\mathbf{e}}_{j_s}).\]</div>
+<p>将 <span class="arithmatex">\(\tilde{\mathbf{e}}^{i_\alpha} = (P^{-1})^{i_\alpha}_{\ k_\alpha} \mathbf{e}^{k_\alpha}\)</span> 和 <span class="arithmatex">\(\tilde{\mathbf{e}}_{j_\beta} = P^{l_\beta}_{\ j_\beta} \mathbf{e}_{l_\beta}\)</span> 代入，由 <span class="arithmatex">\(T\)</span> 的多线性性即得结果。</p>
+</details>
+<h2 id="215">21.5 对称张量与反对称张量<a class="headerlink" href="#215" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.10 (对称张量与反对称张量)</p>
+<p>设 <span class="arithmatex">\(T \in V^{\otimes k} = \underbrace{V \otimes \cdots \otimes V}_{k}\)</span> 是一个 <span class="arithmatex">\(k\)</span> 阶张量。</p>
+<ul>
+<li><span class="arithmatex">\(T\)</span> 是<strong>对称的</strong>（symmetric），如果对任意置换 <span class="arithmatex">\(\sigma \in S_k\)</span>，<span class="arithmatex">\(T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}) = T(\mathbf{v}_1, \ldots, \mathbf{v}_k)\)</span>；分量上即 <span class="arithmatex">\(T_{i_{\sigma(1)} \cdots i_{\sigma(k)}} = T_{i_1 \cdots i_k}\)</span>。</li>
+<li><span class="arithmatex">\(T\)</span> 是<strong>反对称的</strong>（antisymmetric / alternating），如果 <span class="arithmatex">\(T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}) = \text{sgn}(\sigma) \, T(\mathbf{v}_1, \ldots, \mathbf{v}_k)\)</span>；分量上即 <span class="arithmatex">\(T_{i_{\sigma(1)} \cdots i_{\sigma(k)}} = \text{sgn}(\sigma) \, T_{i_1 \cdots i_k}\)</span>。</li>
+</ul>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.11 (对称化与反对称化算子)</p>
+<p><strong>对称化算子</strong>（symmetrization operator）<span class="arithmatex">\(\text{Sym}\)</span> 和<strong>反对称化算子</strong>（antisymmetrization operator）<span class="arithmatex">\(\text{Alt}\)</span> 定义为：</p>
+<div class="arithmatex">\[\text{Sym}(T)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\sigma \in S_k} T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}),\]</div>
+<div class="arithmatex">\[\text{Alt}(T)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\sigma \in S_k} \text{sgn}(\sigma) \, T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}).\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.7 (对称化与反对称化的性质)</p>
+<ol>
+<li><span class="arithmatex">\(\text{Sym}\)</span> 和 <span class="arithmatex">\(\text{Alt}\)</span> 是从 <span class="arithmatex">\(V^{\otimes k}\)</span> 到自身的投影算子（即 <span class="arithmatex">\(\text{Sym}^2 = \text{Sym}\)</span>，<span class="arithmatex">\(\text{Alt}^2 = \text{Alt}\)</span>）。</li>
+<li><span class="arithmatex">\(\text{Sym}(T)\)</span> 是对称张量，<span class="arithmatex">\(\text{Alt}(T)\)</span> 是反对称张量。</li>
+<li><span class="arithmatex">\(T\)</span> 是对称的当且仅当 <span class="arithmatex">\(\text{Sym}(T) = T\)</span>；<span class="arithmatex">\(T\)</span> 是反对称的当且仅当 <span class="arithmatex">\(\text{Alt}(T) = T\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>证明 <span class="arithmatex">\(\text{Alt}\)</span> 是投影算子。设 <span class="arithmatex">\(S = \text{Alt}(T)\)</span>，则</p>
+<div class="arithmatex">\[\text{Alt}(S)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\tau \in S_k} \text{sgn}(\tau) S(\mathbf{v}_{\tau(1)}, \ldots, \mathbf{v}_{\tau(k)}).\]</div>
+<p>由于 <span class="arithmatex">\(S = \text{Alt}(T)\)</span> 是反对称的，<span class="arithmatex">\(S(\mathbf{v}_{\tau(1)}, \ldots, \mathbf{v}_{\tau(k)}) = \text{sgn}(\tau) S(\mathbf{v}_1, \ldots, \mathbf{v}_k)\)</span>。故</p>
+<div class="arithmatex">\[\text{Alt}(S)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\tau \in S_k} \text{sgn}(\tau)^2 S(\mathbf{v}_1, \ldots, \mathbf{v}_k) = S(\mathbf{v}_1, \ldots, \mathbf{v}_k).\]</div>
+<p>即 <span class="arithmatex">\(\text{Alt}^2 = \text{Alt}\)</span>。其余性质类似可证。</p>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 21.6</p>
+<p>设 <span class="arithmatex">\(T: \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R}\)</span> 定义为 <span class="arithmatex">\(T(\mathbf{u}, \mathbf{v}) = u_1 v_2\)</span>。则：</p>
+<div class="arithmatex">\[\text{Sym}(T)(\mathbf{u}, \mathbf{v}) = \frac{1}{2}(u_1 v_2 + u_2 v_1),\]</div>
+<div class="arithmatex">\[\text{Alt}(T)(\mathbf{u}, \mathbf{v}) = \frac{1}{2}(u_1 v_2 - u_2 v_1).\]</div>
+<p>注意 <span class="arithmatex">\(\text{Alt}(T)(\mathbf{u}, \mathbf{v})\)</span> 恰好是 <span class="arithmatex">\(\frac{1}{2} \det \begin{pmatrix} u_1 &amp; u_2 \\ v_1 &amp; v_2 \end{pmatrix}\)</span>。</p>
+</div>
+<h2 id="216">21.6 外代数<a class="headerlink" href="#216" title="Permanent link">&para;</a></h2>
+<h3 id="_9">楔积与外幂<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.12 (外积/楔积)</p>
+<p>设 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(n\)</span> 维向量空间。对 <span class="arithmatex">\(\omega \in \Lambda^p(V^*)\)</span>，<span class="arithmatex">\(\eta \in \Lambda^q(V^*)\)</span>（其中 <span class="arithmatex">\(\Lambda^k(V^*)\)</span> 是 <span class="arithmatex">\(V^*\)</span> 上的 <span class="arithmatex">\(k\)</span> 阶反对称张量空间），定义<strong>楔积</strong>（wedge product）<span class="arithmatex">\(\omega \wedge \eta \in \Lambda^{p+q}(V^*)\)</span> 为：</p>
+<div class="arithmatex">\[\omega \wedge \eta = \frac{(p+q)!}{p! \, q!} \, \text{Alt}(\omega \otimes \eta).\]</div>
+<p>对于向量空间 <span class="arithmatex">\(V\)</span> 本身，<strong>外幂</strong>（exterior power）<span class="arithmatex">\(\Lambda^k(V)\)</span> 定义为 <span class="arithmatex">\(V^{\otimes k}\)</span> 中所有反对称张量构成的子空间。对 <span class="arithmatex">\(\mathbf{v}_1, \ldots, \mathbf{v}_k \in V\)</span>，定义</p>
+<div class="arithmatex">\[\mathbf{v}_1 \wedge \mathbf{v}_2 \wedge \cdots \wedge \mathbf{v}_k = \sum_{\sigma \in S_k} \text{sgn}(\sigma) \, \mathbf{v}_{\sigma(1)} \otimes \cdots \otimes \mathbf{v}_{\sigma(k)}.\]</div>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.8 (楔积的性质)</p>
+<p>楔积满足以下性质：</p>
+<ol>
+<li><strong>双线性性</strong>：<span class="arithmatex">\((\alpha \omega_1 + \beta \omega_2) \wedge \eta = \alpha (\omega_1 \wedge \eta) + \beta (\omega_2 \wedge \eta)\)</span>；</li>
+<li><strong>结合律</strong>：<span class="arithmatex">\((\omega \wedge \eta) \wedge \zeta = \omega \wedge (\eta \wedge \zeta)\)</span>；</li>
+<li><strong>分次交换律</strong>：<span class="arithmatex">\(\omega \wedge \eta = (-1)^{pq} \eta \wedge \omega\)</span>，其中 <span class="arithmatex">\(\omega \in \Lambda^p\)</span>，<span class="arithmatex">\(\eta \in \Lambda^q\)</span>；</li>
+<li><strong>反对称性</strong>：<span class="arithmatex">\(\mathbf{v} \wedge \mathbf{v} = 0\)</span>，<span class="arithmatex">\(\forall \mathbf{v} \in V\)</span>。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>证明第 3 条。设 <span class="arithmatex">\(\sigma_0\)</span> 是将 <span class="arithmatex">\((1, \ldots, p, p+1, \ldots, p+q)\)</span> 变为 <span class="arithmatex">\((p+1, \ldots, p+q, 1, \ldots, p)\)</span> 的置换。这个置换需要 <span class="arithmatex">\(pq\)</span> 次对换（将 <span class="arithmatex">\(q\)</span> 个元素依次移过 <span class="arithmatex">\(p\)</span> 个元素），因此 <span class="arithmatex">\(\text{sgn}(\sigma_0) = (-1)^{pq}\)</span>。</p>
+<p>由反对称张量的性质：</p>
+<div class="arithmatex">\[(\omega \wedge \eta)(\mathbf{v}_{\sigma_0(1)}, \ldots, \mathbf{v}_{\sigma_0(p+q)}) = (-1)^{pq} (\omega \wedge \eta)(\mathbf{v}_1, \ldots, \mathbf{v}_{p+q}).\]</div>
+<p>而 <span class="arithmatex">\((\mathbf{v}_{\sigma_0(1)}, \ldots, \mathbf{v}_{\sigma_0(p+q)}) = (\mathbf{v}_{p+1}, \ldots, \mathbf{v}_{p+q}, \mathbf{v}_1, \ldots, \mathbf{v}_p)\)</span>，由楔积定义，这恰好给出 <span class="arithmatex">\((\eta \wedge \omega)(\mathbf{v}_1, \ldots, \mathbf{v}_{p+q})\)</span>。</p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.9 (外幂的维数)</p>
+<p>设 <span class="arithmatex">\(\dim V = n\)</span>，则</p>
+<div class="arithmatex">\[\dim \Lambda^k(V) = \binom{n}{k}.\]</div>
+<p>特别地，<span class="arithmatex">\(\Lambda^0(V) = \mathbb{F}\)</span>，<span class="arithmatex">\(\Lambda^1(V) = V\)</span>，<span class="arithmatex">\(\Lambda^n(V)\)</span> 是 <span class="arithmatex">\(1\)</span> 维的，<span class="arithmatex">\(\Lambda^k(V) = \{0\}\)</span>（<span class="arithmatex">\(k &gt; n\)</span>）。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设 <span class="arithmatex">\(\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的基。则</p>
+<div class="arithmatex">\[\{\mathbf{e}_{i_1} \wedge \mathbf{e}_{i_2} \wedge \cdots \wedge \mathbf{e}_{i_k} : 1 \leq i_1 &lt; i_2 &lt; \cdots &lt; i_k \leq n\}\]</div>
+<p>构成 <span class="arithmatex">\(\Lambda^k(V)\)</span> 的基（可直接验证线性无关和生成）。这些基向量的个数为 <span class="arithmatex">\(\binom{n}{k}\)</span>。</p>
+<p>当 <span class="arithmatex">\(k &gt; n\)</span> 时，在 <span class="arithmatex">\(\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_k}\)</span> 中必有重复的基向量，由反对称性得 <span class="arithmatex">\(\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_k} = 0\)</span>。</p>
+</details>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.13 (外代数)</p>
+<p><span class="arithmatex">\(V\)</span> 上的<strong>外代数</strong>（exterior algebra）定义为</p>
+<div class="arithmatex">\[\Lambda(V) = \bigoplus_{k=0}^{n} \Lambda^k(V),\]</div>
+<p>配以楔积运算。<span class="arithmatex">\(\Lambda(V)\)</span> 是一个分次反交换代数（graded anti-commutative algebra），总维数为 <span class="arithmatex">\(\sum_{k=0}^n \binom{n}{k} = 2^n\)</span>。</p>
+</div>
+<h3 id="_10">行列式作为外积<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.10 (行列式的外积解释)</p>
+<p>设 <span class="arithmatex">\(\mathbf{v}_1, \ldots, \mathbf{v}_n \in V\)</span>（<span class="arithmatex">\(\dim V = n\)</span>），且 <span class="arithmatex">\(\mathbf{v}_i = \sum_j a_{ji} \mathbf{e}_j\)</span>（即 <span class="arithmatex">\(a_{ji}\)</span> 是 <span class="arithmatex">\(\mathbf{v}_i\)</span> 的第 <span class="arithmatex">\(j\)</span> 个分量）。则</p>
+<div class="arithmatex">\[\mathbf{v}_1 \wedge \mathbf{v}_2 \wedge \cdots \wedge \mathbf{v}_n = \det(A) \, \mathbf{e}_1 \wedge \mathbf{e}_2 \wedge \cdots \wedge \mathbf{e}_n,\]</div>
+<p>其中 <span class="arithmatex">\(A = (a_{ij})\)</span> 是以 <span class="arithmatex">\(\mathbf{v}_j\)</span> 为列的矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由楔积的多线性性和反对称性：</p>
+<div class="arithmatex">\[\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \left(\sum_{i_1} a_{i_1 1} \mathbf{e}_{i_1}\right) \wedge \cdots \wedge \left(\sum_{i_n} a_{i_n n} \mathbf{e}_{i_n}\right)\]</div>
+<div class="arithmatex">\[= \sum_{i_1, \ldots, i_n} a_{i_1 1} \cdots a_{i_n n} \, \mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_n}.\]</div>
+<p>由于 <span class="arithmatex">\(\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_n} = 0\)</span> 若 <span class="arithmatex">\((i_1, \ldots, i_n)\)</span> 中有重复指标，非零项仅当 <span class="arithmatex">\((i_1, \ldots, i_n)\)</span> 是 <span class="arithmatex">\((1, \ldots, n)\)</span> 的置换 <span class="arithmatex">\(\sigma\)</span> 时出现。此时 <span class="arithmatex">\(\mathbf{e}_{\sigma(1)} \wedge \cdots \wedge \mathbf{e}_{\sigma(n)} = \text{sgn}(\sigma) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n\)</span>。故</p>
+<div class="arithmatex">\[\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \left(\sum_{\sigma \in S_n} \text{sgn}(\sigma) \, a_{\sigma(1),1} \cdots a_{\sigma(n),n}\right) \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n = \det(A) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n.\]</div>
+</details>
+<div class="admonition example">
+<p class="admonition-title">例 21.7</p>
+<p>设 <span class="arithmatex">\(V = \mathbb{R}^3\)</span>，<span class="arithmatex">\(\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}\)</span>，<span class="arithmatex">\(\mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 3 \end{pmatrix}\)</span>。则</p>
+<div class="arithmatex">\[\mathbf{v}_1 \wedge \mathbf{v}_2 = (1 \cdot 1 - 2 \cdot 0)(\mathbf{e}_1 \wedge \mathbf{e}_2) + (1 \cdot 3 - 0 \cdot 0)(\mathbf{e}_1 \wedge \mathbf{e}_3) + (2 \cdot 3 - 0 \cdot 1)(\mathbf{e}_2 \wedge \mathbf{e}_3)\]</div>
+<div class="arithmatex">\[= \mathbf{e}_1 \wedge \mathbf{e}_2 + 3 \, \mathbf{e}_1 \wedge \mathbf{e}_3 + 6 \, \mathbf{e}_2 \wedge \mathbf{e}_3.\]</div>
+<p>这对应于 <span class="arithmatex">\(\mathbf{v}_1 \times \mathbf{v}_2 = (6, -3, 1)^T\)</span>（外积与叉积的联系）。</p>
+</div>
+<h2 id="217">21.7 张量分解<a class="headerlink" href="#217" title="Permanent link">&para;</a></h2>
+<p>张量分解（tensor decomposition）是将高阶张量表示为简单张量之和的技术，在信号处理、机器学习和化学计量学中有广泛应用。</p>
+<h3 id="cp">CP 分解<a class="headerlink" href="#cp" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.14 (CP 分解)</p>
+<p><strong>CP 分解</strong>（Canonical Polyadic decomposition，也称 CANDECOMP/PARAFAC 分解）将一个 <span class="arithmatex">\(k\)</span> 阶张量 <span class="arithmatex">\(\mathcal{T} \in \mathbb{R}^{n_1 \times n_2 \times \cdots \times n_k}\)</span> 表示为秩一张量之和：</p>
+<div class="arithmatex">\[\mathcal{T} = \sum_{r=1}^{R} \lambda_r \, \mathbf{a}^{(1)}_r \otimes \mathbf{a}^{(2)}_r \otimes \cdots \otimes \mathbf{a}^{(k)}_r,\]</div>
+<p>其中 <span class="arithmatex">\(\lambda_r \in \mathbb{R}\)</span>，<span class="arithmatex">\(\mathbf{a}^{(i)}_r \in \mathbb{R}^{n_i}\)</span>。使上式成立的最小正整数 <span class="arithmatex">\(R\)</span> 称为 <span class="arithmatex">\(\mathcal{T}\)</span> 的<strong>张量秩</strong>（tensor rank）。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 21.11 (张量秩与矩阵秩的区别)</p>
+<p>与矩阵秩不同，张量秩具有以下性质：</p>
+<ol>
+<li>张量秩可能超过其任意模展开（mode unfolding）的矩阵秩；</li>
+<li>在实数域和复数域上，同一张量的秩可能不同；</li>
+<li>计算张量秩是 NP-hard 问题。</li>
+</ol>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>第 1 条的经典反例：考虑 <span class="arithmatex">\(2 \times 2 \times 2\)</span> 张量 <span class="arithmatex">\(\mathcal{T}\)</span>，其分量为 <span class="arithmatex">\(\mathcal{T}_{111} = \mathcal{T}_{222} = 1\)</span>，其余分量为 <span class="arithmatex">\(0\)</span>。可验证其三个模展开的矩阵秩均为 <span class="arithmatex">\(2\)</span>，但 <span class="arithmatex">\(\mathcal{T}\)</span> 的张量秩为 <span class="arithmatex">\(2\)</span>（在实数域上）。</p>
+<p>第 2 条的例子：存在张量使得实秩为 <span class="arithmatex">\(3\)</span> 但复秩为 <span class="arithmatex">\(2\)</span>。例如某些 <span class="arithmatex">\(2 \times 2 \times 2\)</span> 张量的实秩为 <span class="arithmatex">\(3\)</span>，而在 <span class="arithmatex">\(\mathbb{C}\)</span> 上可分解为 <span class="arithmatex">\(2\)</span> 个秩一张量之和。</p>
+<p>第 3 条已由 Hillar 和 Lim (2013) 严格证明。</p>
+</details>
+<h3 id="tucker">Tucker 分解<a class="headerlink" href="#tucker" title="Permanent link">&para;</a></h3>
+<div class="admonition definition">
+<p class="admonition-title">定义 21.15 (Tucker 分解)</p>
+<p><strong>Tucker 分解</strong>（Tucker decomposition）将 <span class="arithmatex">\(k\)</span> 阶张量表示为一个核心张量（core tensor）与各模因子矩阵的乘积：</p>
+<div class="arithmatex">\[\mathcal{T} = \mathcal{G} \times_1 U^{(1)} \times_2 U^{(2)} \times_3 \cdots \times_k U^{(k)},\]</div>
+<p>其中 <span class="arithmatex">\(\mathcal{G} \in \mathbb{R}^{r_1 \times r_2 \times \cdots \times r_k}\)</span> 是核心张量，<span class="arithmatex">\(U^{(i)} \in \mathbb{R}^{n_i \times r_i}\)</span> 是因子矩阵，<span class="arithmatex">\(\times_i\)</span> 表示第 <span class="arithmatex">\(i\)</span> 模的矩阵乘积。</p>
+<p>在分量形式下：</p>
+<div class="arithmatex">\[\mathcal{T}_{i_1 i_2 \cdots i_k} = \sum_{j_1=1}^{r_1} \cdots \sum_{j_k=1}^{r_k} \mathcal{G}_{j_1 j_2 \cdots j_k} \, U^{(1)}_{i_1 j_1} U^{(2)}_{i_2 j_2} \cdots U^{(k)}_{i_k j_k}.\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 21.8</p>
+<p>考虑一个 <span class="arithmatex">\(3 \times 4 \times 2\)</span> 的三阶张量 <span class="arithmatex">\(\mathcal{T}\)</span>，它的 CP 分解为</p>
+<div class="arithmatex">\[\mathcal{T} = \mathbf{a}_1 \otimes \mathbf{b}_1 \otimes \mathbf{c}_1 + \mathbf{a}_2 \otimes \mathbf{b}_2 \otimes \mathbf{c}_2,\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{a}_r \in \mathbb{R}^3\)</span>，<span class="arithmatex">\(\mathbf{b}_r \in \mathbb{R}^4\)</span>，<span class="arithmatex">\(\mathbf{c}_r \in \mathbb{R}^2\)</span>。分量形式为</p>
+<div class="arithmatex">\[\mathcal{T}_{ijk} = a_{1i} b_{1j} c_{1k} + a_{2i} b_{2j} c_{2k}, \quad 1 \leq i \leq 3, \ 1 \leq j \leq 4, \ 1 \leq k \leq 2.\]</div>
+<p>这是一个秩为 <span class="arithmatex">\(2\)</span> 的张量。Tucker 分解则可以取 <span class="arithmatex">\(U^{(1)} \in \mathbb{R}^{3 \times 2}\)</span>，<span class="arithmatex">\(U^{(2)} \in \mathbb{R}^{4 \times 2}\)</span>，<span class="arithmatex">\(U^{(3)} \in \mathbb{R}^{2 \times 2}\)</span>，核心张量 <span class="arithmatex">\(\mathcal{G} \in \mathbb{R}^{2 \times 2 \times 2}\)</span>。</p>
+</div>
+<h2 id="218">21.8 张量的应用<a class="headerlink" href="#218" title="Permanent link">&para;</a></h2>
+<h3 id="_11">多维数据分析<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>张量方法在数据科学中的应用越来越广泛。多维数据（如用户-物品-时间推荐数据、彩色图像序列、脑电信号等）自然地用张量来表示。</p>
+<div class="admonition example">
+<p class="admonition-title">例 21.9</p>
+<p><strong>推荐系统中的张量分解</strong>：设有 <span class="arithmatex">\(m\)</span> 个用户、<span class="arithmatex">\(n\)</span> 个物品和 <span class="arithmatex">\(p\)</span> 个时间点。用户 <span class="arithmatex">\(i\)</span> 在时间 <span class="arithmatex">\(k\)</span> 对物品 <span class="arithmatex">\(j\)</span> 的评分构成一个三阶张量 <span class="arithmatex">\(\mathcal{T} \in \mathbb{R}^{m \times n \times p}\)</span>。CP 分解将其表示为</p>
+<div class="arithmatex">\[\mathcal{T} \approx \sum_{r=1}^{R} \mathbf{u}_r \otimes \mathbf{v}_r \otimes \mathbf{w}_r,\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{u}_r \in \mathbb{R}^m\)</span> 编码用户特征，<span class="arithmatex">\(\mathbf{v}_r \in \mathbb{R}^n\)</span> 编码物品特征，<span class="arithmatex">\(\mathbf{w}_r \in \mathbb{R}^p\)</span> 编码时间模式。低秩近似自然地进行数据补全和降维。</p>
+</div>
+<h3 id="_12">量子信息中的张量<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<div class="admonition example">
+<p class="admonition-title">例 21.10</p>
+<p><strong>量子纠缠态</strong>。在量子计算中，<span class="arithmatex">\(n\)</span> 个量子比特（qubit）的状态空间是 <span class="arithmatex">\((\mathbb{C}^2)^{\otimes n}\)</span>，即 <span class="arithmatex">\(n\)</span> 个 <span class="arithmatex">\(\mathbb{C}^2\)</span> 的张量积，维数为 <span class="arithmatex">\(2^n\)</span>。一般的量子态 <span class="arithmatex">\(|\psi\rangle \in (\mathbb{C}^2)^{\otimes n}\)</span> 可以写为</p>
+<div class="arithmatex">\[|\psi\rangle = \sum_{i_1, \ldots, i_n \in \{0,1\}} c_{i_1 \cdots i_n} |i_1\rangle \otimes \cdots \otimes |i_n\rangle.\]</div>
+<p>当 <span class="arithmatex">\(|\psi\rangle\)</span> 不能写成 <span class="arithmatex">\(|\phi_1\rangle \otimes \cdots \otimes |\phi_n\rangle\)</span> 的形式时，称该态是<strong>纠缠的</strong>（entangled）。例如，Bell 态</p>
+<div class="arithmatex">\[|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)\]</div>
+<p>是纠缠态。判定纠缠与张量秩密切相关。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 21.2 (纠缠与张量秩)</p>
+<p>纯态 <span class="arithmatex">\(|\psi\rangle \in \mathcal{H}_A \otimes \mathcal{H}_B\)</span> 是可分的（separable）当且仅当它作为张量的秩为 <span class="arithmatex">\(1\)</span>，即可以写成 <span class="arithmatex">\(|\psi\rangle = |\phi_A\rangle \otimes |\phi_B\rangle\)</span>。纠缠态对应张量秩大于 <span class="arithmatex">\(1\)</span> 的情形。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>这是张量积定义的直接推论。<span class="arithmatex">\(|\psi\rangle\)</span> 可分意味着 <span class="arithmatex">\(|\psi\rangle = |\phi_A\rangle \otimes |\phi_B\rangle\)</span>，这恰好是一个简单（秩一）张量。反之，若 <span class="arithmatex">\(|\psi\rangle\)</span> 的张量秩为 <span class="arithmatex">\(1\)</span>，则由定义它可以写成一个简单张量，即可分态。</p>
+</details>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

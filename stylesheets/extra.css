@@ -1,0 +1,270 @@
+/* ============================
+   线性代数全览 - 自定义样式
+   ============================ */
+
+/* 全局排版 */
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+
+.md-typeset h1 {
+  font-weight: 700;
+  margin-bottom: 0.8em;
+  border-bottom: 2px solid var(--md-primary-fg-color);
+  padding-bottom: 0.3em;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  margin-top: 2em;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  padding-bottom: 0.2em;
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  margin-top: 1.5em;
+}
+
+/* 数学公式溢出处理 */
+.md-typeset .arithmatex {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2em 0;
+}
+
+.md-typeset .MathJax {
+  font-size: 1.05em !important;
+}
+
+/* 行间公式间距 */
+.md-typeset .arithmatex > .MathJax {
+  margin: 0.8em 0;
+}
+
+/* ============================
+   自定义 Admonition 类型
+   ============================ */
+
+/* 定义 - 蓝色 */
+:root {
+  --md-admonition-icon--definition: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>');
+}
+
+.md-typeset .admonition.definition,
+.md-typeset details.definition {
+  border-color: #2979ff;
+}
+
+.md-typeset .definition > .admonition-title,
+.md-typeset .definition > summary {
+  background-color: rgba(41, 121, 255, 0.1);
+}
+
+.md-typeset .definition > .admonition-title::before,
+.md-typeset .definition > summary::before {
+  background-color: #2979ff;
+  -webkit-mask-image: var(--md-admonition-icon--definition);
+  mask-image: var(--md-admonition-icon--definition);
+}
+
+/* 定理 - 绿色 */
+:root {
+  --md-admonition-icon--theorem: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg>');
+}
+
+.md-typeset .admonition.theorem,
+.md-typeset details.theorem {
+  border-color: #00c853;
+}
+
+.md-typeset .theorem > .admonition-title,
+.md-typeset .theorem > summary {
+  background-color: rgba(0, 200, 83, 0.1);
+}
+
+.md-typeset .theorem > .admonition-title::before,
+.md-typeset .theorem > summary::before {
+  background-color: #00c853;
+  -webkit-mask-image: var(--md-admonition-icon--theorem);
+  mask-image: var(--md-admonition-icon--theorem);
+}
+
+/* 引理 - 青色 */
+:root {
+  --md-admonition-icon--lemma: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>');
+}
+
+.md-typeset .admonition.lemma,
+.md-typeset details.lemma {
+  border-color: #00bcd4;
+}
+
+.md-typeset .lemma > .admonition-title,
+.md-typeset .lemma > summary {
+  background-color: rgba(0, 188, 212, 0.1);
+}
+
+.md-typeset .lemma > .admonition-title::before,
+.md-typeset .lemma > summary::before {
+  background-color: #00bcd4;
+  -webkit-mask-image: var(--md-admonition-icon--lemma);
+  mask-image: var(--md-admonition-icon--lemma);
+}
+
+/* 推论 - 浅绿色 */
+:root {
+  --md-admonition-icon--corollary: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>');
+}
+
+.md-typeset .admonition.corollary,
+.md-typeset details.corollary {
+  border-color: #69f0ae;
+}
+
+.md-typeset .corollary > .admonition-title,
+.md-typeset .corollary > summary {
+  background-color: rgba(105, 240, 174, 0.1);
+}
+
+.md-typeset .corollary > .admonition-title::before,
+.md-typeset .corollary > summary::before {
+  background-color: #69f0ae;
+  -webkit-mask-image: var(--md-admonition-icon--corollary);
+  mask-image: var(--md-admonition-icon--corollary);
+}
+
+/* 命题 - 橙色 */
+:root {
+  --md-admonition-icon--proposition: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>');
+}
+
+.md-typeset .admonition.proposition,
+.md-typeset details.proposition {
+  border-color: #ff9100;
+}
+
+.md-typeset .proposition > .admonition-title,
+.md-typeset .proposition > summary {
+  background-color: rgba(255, 145, 0, 0.1);
+}
+
+.md-typeset .proposition > .admonition-title::before,
+.md-typeset .proposition > summary::before {
+  background-color: #ff9100;
+  -webkit-mask-image: var(--md-admonition-icon--proposition);
+  mask-image: var(--md-admonition-icon--proposition);
+}
+
+/* 证明 - 灰色 */
+:root {
+  --md-admonition-icon--proof: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
+}
+
+.md-typeset .admonition.proof,
+.md-typeset details.proof {
+  border-color: #9e9e9e;
+}
+
+.md-typeset .proof > .admonition-title,
+.md-typeset .proof > summary {
+  background-color: rgba(158, 158, 158, 0.1);
+}
+
+.md-typeset .proof > .admonition-title::before,
+.md-typeset .proof > summary::before {
+  background-color: #9e9e9e;
+  -webkit-mask-image: var(--md-admonition-icon--proof);
+  mask-image: var(--md-admonition-icon--proof);
+}
+
+/* 证明末尾 QED 符号 */
+.md-typeset .proof .admonition-content p:last-child::after,
+.md-typeset details.proof > p:last-child::after {
+  content: " ∎";
+  float: right;
+  font-size: 1.2em;
+}
+
+/* ============================
+   难度标签
+   ============================ */
+
+.difficulty-tag {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  border-radius: 1em;
+  font-size: 0.75em;
+  font-weight: 600;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.difficulty-tag.beginner {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.difficulty-tag.intermediate {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.difficulty-tag.advanced {
+  background-color: #fce4ec;
+  color: #c62828;
+}
+
+.difficulty-tag.research {
+  background-color: #ede7f6;
+  color: #4a148c;
+}
+
+/* ============================
+   表格样式
+   ============================ */
+
+.md-typeset table:not([class]) {
+  font-size: 0.78rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  font-weight: 600;
+}
+
+/* ============================
+   搜索增强
+   ============================ */
+
+.md-search__output {
+  max-height: 80vh;
+}
+
+/* ============================
+   响应式调整
+   ============================ */
+
+@media screen and (max-width: 76.1875em) {
+  .md-typeset .arithmatex {
+    font-size: 0.9em;
+  }
+}
+
+/* ============================
+   打印样式
+   ============================ */
+
+@media print {
+  .md-typeset .admonition,
+  .md-typeset details {
+    break-inside: avoid;
+  }
+
+  .md-typeset .arithmatex {
+    overflow: visible;
+  }
+}

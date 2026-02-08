@@ -1,0 +1,2227 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="从大一到博士——全面系统的线性代数知识库">
+      
+      
+      
+        <link rel="canonical" href="https://a-little-bear.github.io/University-Linear-Algebra/part1/ch03-determinants/">
+      
+      
+        <link rel="prev" href="../ch02-matrices/">
+      
+      
+        <link rel="next" href="../ch04-vector-spaces/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>第3章 行列式 - 线性代数全览</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans SC";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="线性代数全览" class="md-header__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            线性代数全览
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第3章 行列式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至深色模式"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换至深色模式" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换至浅色模式"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换至浅色模式" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../ch01-linear-equations/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第一部分 基础线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part2/ch08-inner-product-spaces/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第二部分 中级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part3/ch14-matrix-analysis/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第三部分 高级线性代数
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../part4/ch21-multilinear-algebra/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  第四部分 专题研究
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="线性代数全览" class="md-nav__button md-logo" aria-label="线性代数全览" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.5c-1.35-.85-3.8-1.5-5.5-1.5-1.65 0-3.35.3-4.75 1.05-.1.05-.15.05-.25.05-.25 0-.5-.25-.5-.5V6c.6-.45 1.25-.75 2-1 1.11-.35 2.33-.5 3.5-.5 1.95 0 4.05.4 5.5 1.5 1.45-1.1 3.55-1.5 5.5-1.5 1.17 0 2.39.15 3.5.5.75.25 1.4.55 2 1v14.6c0 .25-.25.5-.5.5-.1 0-.15 0-.25-.05-1.4-.75-3.1-1.05-4.75-1.05-1.7 0-4.15.65-5.5 1.5M12 8v11.5c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5V7c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5m1 3.5c1.11-.68 2.6-1 4.5-1 .91 0 1.76.09 2.5.28V9.23c-.87-.15-1.71-.23-2.5-.23q-2.655 0-4.5.84zm4.5.17c-1.71 0-3.21.26-4.5.79v1.69c1.11-.65 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24v-1.5c-.87-.16-1.71-.23-2.5-.23m2.5 2.9c-.87-.16-1.71-.24-2.5-.24-1.83 0-3.33.27-4.5.8v1.69c1.11-.66 2.6-.99 4.5-.99 1.04 0 1.88.08 2.5.24z"/></svg>
+
+    </a>
+    线性代数全览
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第一部分 基础线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第一部分 基础线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch01-linear-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第1章 线性方程组
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch02-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第2章 矩阵与矩阵运算
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第3章 行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 排列与逆序数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 行列式的定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 行列式的性质
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 余子式与代数余子式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 行列式按行（列）展开
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 行列式的计算方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 行列式的计算方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角化法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        递推法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vandermonde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vandermonde 行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分块行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-cramer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Cramer 法则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 行列式的几何意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch04-vector-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第4章 向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch05-linear-transformations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第5章 线性变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch06-eigenvalues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第6章 特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ch07-orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第7章 正交性与最小二乘
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第二部分 中级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第二部分 中级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch08-inner-product-spaces/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第8章 内积空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch09-quadratic-forms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第9章 二次型
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch10-matrix-decompositions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第10章 矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch11-svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第11章 奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch12-jordan-form/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第12章 Jordan标准形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part2/ch13-matrix-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第13章 矩阵函数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第三部分 高级线性代数
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第三部分 高级线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch14-matrix-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第14章 矩阵分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch15-norms-perturbation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第15章 范数与扰动理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch16-positive-definite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第16章 正定矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch17-nonnegative-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第17章 非负矩阵与Perron-Frobenius理论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch18-matrix-inequalities/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第18章 矩阵不等式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch19-kronecker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第19章 Kronecker积与Vec算子
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part3/ch20-matrix-equations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第20章 矩阵方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第四部分 专题研究
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    第四部分 专题研究
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch21-multilinear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第21章 多线性代数与张量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch22-numerical-linear-algebra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第22章 数值线性代数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch23-random-matrices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第23章 随机矩阵初步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch24-matrix-manifolds/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第24章 矩阵流形
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../part4/ch25-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    第25章 线性代数在优化中的应用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 排列与逆序数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 行列式的定义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 行列式的性质
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 余子式与代数余子式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.5 行列式按行（列）展开
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.6 行列式的计算方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 行列式的计算方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角化法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        递推法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vandermonde" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vandermonde 行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        分块行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-cramer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.7 Cramer 法则
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.8 行列式的几何意义
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="3">第 3 章 行列式<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
+<p>行列式（determinant）是方阵特有的一个标量值，蕴含着矩阵的大量信息——可逆性、线性变换对体积的缩放效应、特征值之积等。本章从排列与逆序数出发建立行列式的严格定义，系统推导行列式的基本性质，介绍按行（列）展开定理与各种计算方法，最后证明 Cramer 法则并阐述行列式的几何意义。</p>
+<hr />
+<h2 id="31">3.1 排列与逆序数<a class="headerlink" href="#31" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 3.1 (排列)</p>
+<p>由 <span class="arithmatex">\(1, 2, \ldots, n\)</span> 组成的一个有序排列 <span class="arithmatex">\(\sigma = (j_1, j_2, \ldots, j_n)\)</span> 称为 <span class="arithmatex">\(\{1, 2, \ldots, n\}\)</span> 的一个<strong>排列</strong>（permutation）。<span class="arithmatex">\(n\)</span> 个元素的全部排列共有 <span class="arithmatex">\(n!\)</span> 个。</p>
+</div>
+<div class="admonition definition">
+<p class="admonition-title">定义 3.2 (逆序与逆序数)</p>
+<p>在排列 <span class="arithmatex">\(\sigma = (j_1, j_2, \ldots, j_n)\)</span> 中，若 <span class="arithmatex">\(s &lt; t\)</span> 但 <span class="arithmatex">\(j_s &gt; j_t\)</span>，则称 <span class="arithmatex">\((j_s, j_t)\)</span> 为一个<strong>逆序</strong>（inversion）。排列 <span class="arithmatex">\(\sigma\)</span> 中所有逆序的总数称为 <span class="arithmatex">\(\sigma\)</span> 的<strong>逆序数</strong>（inversion number），记为 <span class="arithmatex">\(\tau(\sigma)\)</span> 或 <span class="arithmatex">\(\operatorname{inv}(\sigma)\)</span>。</p>
+<ul>
+<li>若 <span class="arithmatex">\(\tau(\sigma)\)</span> 为偶数，则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>偶排列</strong>（even permutation）。</li>
+<li>若 <span class="arithmatex">\(\tau(\sigma)\)</span> 为奇数，则称 <span class="arithmatex">\(\sigma\)</span> 为<strong>奇排列</strong>（odd permutation）。</li>
+</ul>
+<p>排列 <span class="arithmatex">\(\sigma\)</span> 的<strong>符号</strong>（sign / signature）定义为 <span class="arithmatex">\(\operatorname{sgn}(\sigma) = (-1)^{\tau(\sigma)}\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.1</p>
+<p>排列 <span class="arithmatex">\((3, 1, 2)\)</span> 的逆序为 <span class="arithmatex">\((3,1)\)</span> 和 <span class="arithmatex">\((3,2)\)</span>，逆序数为 <span class="arithmatex">\(2\)</span>，是偶排列，符号为 <span class="arithmatex">\(+1\)</span>。</p>
+<p>排列 <span class="arithmatex">\((3, 2, 1)\)</span> 的逆序为 <span class="arithmatex">\((3,2)\)</span>、<span class="arithmatex">\((3,1)\)</span>、<span class="arithmatex">\((2,1)\)</span>，逆序数为 <span class="arithmatex">\(3\)</span>，是奇排列，符号为 <span class="arithmatex">\(-1\)</span>。</p>
+</div>
+<div class="admonition proposition">
+<p class="admonition-title">命题 3.1</p>
+<p>在排列中交换（对换）两个元素的位置，逆序数的奇偶性改变。因此排列的奇偶性在一次对换后翻转。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>相邻对换</strong>：交换相邻的 <span class="arithmatex">\(j_k\)</span> 和 <span class="arithmatex">\(j_{k+1}\)</span>，仅影响这一对的逆序关系，逆序数变化 <span class="arithmatex">\(\pm 1\)</span>，奇偶性改变。</p>
+<p><strong>一般对换</strong>：交换位置 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span>（<span class="arithmatex">\(s &lt; t\)</span>）可以分解为 <span class="arithmatex">\(2(t-s)-1\)</span> 次相邻对换（先把 <span class="arithmatex">\(j_t\)</span> 移到位置 <span class="arithmatex">\(s\)</span> 需要 <span class="arithmatex">\(t-s\)</span> 次，再把原来的 <span class="arithmatex">\(j_s\)</span> 从位置 <span class="arithmatex">\(s+1\)</span> 移到位置 <span class="arithmatex">\(t\)</span> 需要 <span class="arithmatex">\(t-s-1\)</span> 次），共 <span class="arithmatex">\(2(t-s)-1\)</span> 为奇数次相邻对换，因此奇偶性改变。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<hr />
+<h2 id="32">3.2 行列式的定义<a class="headerlink" href="#32" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 3.3 (<span class="arithmatex">\(n\)</span> 阶行列式)</p>
+<p>设 <span class="arithmatex">\(A = (a_{ij})\)</span> 为 <span class="arithmatex">\(n\)</span> 阶方阵，<span class="arithmatex">\(A\)</span> 的<strong>行列式</strong>（determinant）定义为</p>
+<div class="arithmatex">\[
+\det(A) = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) \cdot a_{1\sigma(1)} a_{2\sigma(2)} \cdots a_{n\sigma(n)},
+\]</div>
+<p>其中求和遍历 <span class="arithmatex">\(\{1, 2, \ldots, n\}\)</span> 的全部 <span class="arithmatex">\(n!\)</span> 个排列 <span class="arithmatex">\(\sigma\)</span>，<span class="arithmatex">\(\operatorname{sgn}(\sigma) = (-1)^{\tau(\sigma)}\)</span>。</p>
+<p>行列式也记为 <span class="arithmatex">\(|A|\)</span> 或</p>
+<div class="arithmatex">\[
+\begin{vmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \end{vmatrix}.
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.2</p>
+<p><span class="arithmatex">\(2\)</span> 阶行列式：</p>
+<div class="arithmatex">\[
+\begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} = ad - bc.
+\]</div>
+<p><span class="arithmatex">\(3\)</span> 阶行列式（Sarrus 法则）：</p>
+<div class="arithmatex">\[
+\begin{vmatrix} a_{11} &amp; a_{12} &amp; a_{13} \\ a_{21} &amp; a_{22} &amp; a_{23} \\ a_{31} &amp; a_{32} &amp; a_{33} \end{vmatrix} = a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32} - a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}.
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.3</p>
+<p>计算</p>
+<div class="arithmatex">\[
+\begin{vmatrix} 2 &amp; 1 &amp; 3 \\ 0 &amp; -1 &amp; 2 \\ 1 &amp; 0 &amp; 1 \end{vmatrix} = 2 \cdot(-1)\cdot 1 + 1\cdot 2\cdot 1 + 3\cdot 0\cdot 0 - 3\cdot(-1)\cdot 1 - 1\cdot 0\cdot 1 - 2\cdot 2\cdot 0 = -2 + 2 + 0 + 3 - 0 - 0 = 3.
+\]</div>
+</div>
+<hr />
+<h2 id="33">3.3 行列式的性质<a class="headerlink" href="#33" title="Permanent link">&para;</a></h2>
+<p>以下性质构成行列式计算的理论基础。</p>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.1 (转置不变性)</p>
+<p><span class="arithmatex">\(\det(A^T) = \det(A)\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<div class="arithmatex">\[
+\det(A^T) = \sum_{\sigma} \operatorname{sgn}(\sigma) a_{\sigma(1)1}a_{\sigma(2)2}\cdots a_{\sigma(n)n}.
+\]</div>
+<p>令 <span class="arithmatex">\(\tau = \sigma^{-1}\)</span>，则 <span class="arithmatex">\(\sigma(i) = j\)</span> 等价于 <span class="arithmatex">\(\tau(j) = i\)</span>，且 <span class="arithmatex">\(\operatorname{sgn}(\tau) = \operatorname{sgn}(\sigma)\)</span>。</p>
+<div class="arithmatex">\[
+\det(A^T) = \sum_{\tau} \operatorname{sgn}(\tau) a_{1\tau(1)}a_{2\tau(2)}\cdots a_{n\tau(n)} = \det(A). \quad \blacksquare
+\]</div>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>由转置不变性，行列式关于行成立的性质对列也成立，反之亦然。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.2 (行交换变号)</p>
+<p>交换矩阵的两行（或两列），行列式变号。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>交换第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 行等价于在行列式定义中将排列 <span class="arithmatex">\(\sigma\)</span> 复合一个对换，由命题 3.1，排列符号取反，故行列式变号。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.3 (行的齐次性)</p>
+<p>若矩阵的某一行（或某一列）的所有元素都乘以常数 <span class="arithmatex">\(c\)</span>，则行列式乘以 <span class="arithmatex">\(c\)</span>。即</p>
+<div class="arithmatex">\[
+\det(\ldots, c\mathbf{r}_i, \ldots) = c \cdot \det(\ldots, \mathbf{r}_i, \ldots),
+\]</div>
+<p>其中 <span class="arithmatex">\(\mathbf{r}_i\)</span> 表示第 <span class="arithmatex">\(i\)</span> 行。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在定义式中，每项恰包含第 <span class="arithmatex">\(i\)</span> 行的一个元素 <span class="arithmatex">\(a_{i\sigma(i)}\)</span>。该元素被乘以 <span class="arithmatex">\(c\)</span> 后，每项都被乘以 <span class="arithmatex">\(c\)</span>，故行列式乘以 <span class="arithmatex">\(c\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition corollary">
+<p class="admonition-title">推论 3.1</p>
+<p><span class="arithmatex">\(\det(cA) = c^n \det(A)\)</span>，其中 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 阶方阵。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.4 (行的加法性)</p>
+<p>若矩阵的第 <span class="arithmatex">\(i\)</span> 行可以写成两个行向量之和 <span class="arithmatex">\(\mathbf{r}_i = \mathbf{r}_i' + \mathbf{r}_i''\)</span>，则</p>
+<div class="arithmatex">\[
+\det(\ldots, \mathbf{r}_i' + \mathbf{r}_i'', \ldots) = \det(\ldots, \mathbf{r}_i', \ldots) + \det(\ldots, \mathbf{r}_i'', \ldots).
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>在定义式中，第 <span class="arithmatex">\(i\)</span> 行元素为 <span class="arithmatex">\(a_{i\sigma(i)}' + a_{i\sigma(i)}''\)</span>，展开后得到两部分之和，恰好对应右边两个行列式。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.5 (两行相同则行列式为零)</p>
+<p>若矩阵有两行（或两列）相同，则行列式为 <span class="arithmatex">\(0\)</span>。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>设第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 行相同。交换这两行，矩阵不变但行列式变号（定理 3.2），故 <span class="arithmatex">\(\det(A) = -\det(A)\)</span>，得 <span class="arithmatex">\(2\det(A) = 0\)</span>，即 <span class="arithmatex">\(\det(A) = 0\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.6 (行倍加不改变行列式)</p>
+<p>将矩阵的第 <span class="arithmatex">\(j\)</span> 行的 <span class="arithmatex">\(c\)</span> 倍加到第 <span class="arithmatex">\(i\)</span> 行上，行列式不变。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<div class="arithmatex">\[
+\det(\ldots, \mathbf{r}_i + c\mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots) = \det(\ldots, \mathbf{r}_i, \ldots, \mathbf{r}_j, \ldots) + c \cdot \det(\ldots, \mathbf{r}_j, \ldots, \mathbf{r}_j, \ldots).
+\]</div>
+<p>第二项中第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 行都是 <span class="arithmatex">\(\mathbf{r}_j\)</span>，由定理 3.5 为零。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.7 (三角矩阵的行列式)</p>
+<p>上三角矩阵（或下三角矩阵）的行列式等于其主对角线元素的乘积：</p>
+<div class="arithmatex">\[
+\det(A) = a_{11}a_{22}\cdots a_{nn}.
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>以上三角矩阵为例。在行列式定义式 <span class="arithmatex">\(\sum_\sigma \operatorname{sgn}(\sigma) a_{1\sigma(1)} \cdots a_{n\sigma(n)}\)</span> 中，由于 <span class="arithmatex">\(a_{ij} = 0\)</span>（<span class="arithmatex">\(i &gt; j\)</span>），要使乘积 <span class="arithmatex">\(a_{1\sigma(1)}\cdots a_{n\sigma(n)} \neq 0\)</span>，需要对每个 <span class="arithmatex">\(i\)</span> 都有 <span class="arithmatex">\(\sigma(i) \ge i\)</span>。又因为 <span class="arithmatex">\(\sigma\)</span> 是排列（双射），唯一可能是 <span class="arithmatex">\(\sigma(i) = i\)</span>（恒等排列），其符号为 <span class="arithmatex">\(+1\)</span>。因此 <span class="arithmatex">\(\det(A) = a_{11}a_{22}\cdots a_{nn}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.8 (行列式的乘法公式)</p>
+<p>设 <span class="arithmatex">\(A, B\)</span> 为 <span class="arithmatex">\(n\)</span> 阶方阵，则</p>
+<div class="arithmatex">\[
+\det(AB) = \det(A)\det(B).
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p><strong>情形一</strong>：<span class="arithmatex">\(A\)</span> 不可逆。则 <span class="arithmatex">\(\operatorname{rank}(A) &lt; n\)</span>，<span class="arithmatex">\(AB\)</span> 的列都是 <span class="arithmatex">\(A\)</span> 的列向量的线性组合，<span class="arithmatex">\(\operatorname{rank}(AB) \le \operatorname{rank}(A) &lt; n\)</span>，所以 <span class="arithmatex">\(AB\)</span> 不可逆，<span class="arithmatex">\(\det(AB) = 0\)</span>。又 <span class="arithmatex">\(\det(A) = 0\)</span>，故 <span class="arithmatex">\(\det(AB) = 0 = \det(A)\det(B)\)</span>。</p>
+<p><strong>情形二</strong>：<span class="arithmatex">\(A\)</span> 可逆。<span class="arithmatex">\(A\)</span> 可表示为初等矩阵的乘积 <span class="arithmatex">\(A = E_1 E_2 \cdots E_k\)</span>。对初等矩阵，可以直接验证 <span class="arithmatex">\(\det(EA) = \det(E)\det(A)\)</span>（分三种初等矩阵讨论，利用定理 3.2、3.3、3.6）。反复应用得</p>
+<div class="arithmatex">\[
+\det(AB) = \det(E_1 E_2 \cdots E_k B) = \det(E_1)\det(E_2)\cdots\det(E_k)\det(B) = \det(A)\det(B). \quad \blacksquare
+\]</div>
+</details>
+<hr />
+<h2 id="34">3.4 余子式与代数余子式<a class="headerlink" href="#34" title="Permanent link">&para;</a></h2>
+<div class="admonition definition">
+<p class="admonition-title">定义 3.4 (余子式与代数余子式)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 阶方阵。去掉 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 列后所得的 <span class="arithmatex">\((n-1)\)</span> 阶子方阵的行列式称为元素 <span class="arithmatex">\(a_{ij}\)</span> 的<strong>余子式</strong>（minor），记为 <span class="arithmatex">\(M_{ij}\)</span>。</p>
+<p><span class="arithmatex">\(a_{ij}\)</span> 的<strong>代数余子式</strong>（cofactor）定义为</p>
+<div class="arithmatex">\[
+A_{ij} = (-1)^{i+j} M_{ij}.
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.4</p>
+<p>设 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 1 &amp; 3 \\ 0 &amp; -1 &amp; 2 \\ 1 &amp; 0 &amp; 1 \end{pmatrix}\)</span>。</p>
+<p>元素 <span class="arithmatex">\(a_{11} = 2\)</span> 的余子式为 <span class="arithmatex">\(M_{11} = \begin{vmatrix} -1 &amp; 2 \\ 0 &amp; 1 \end{vmatrix} = -1\)</span>，代数余子式为 <span class="arithmatex">\(A_{11} = (-1)^{1+1}(-1) = -1\)</span>。</p>
+<p>元素 <span class="arithmatex">\(a_{12} = 1\)</span> 的余子式为 <span class="arithmatex">\(M_{12} = \begin{vmatrix} 0 &amp; 2 \\ 1 &amp; 1 \end{vmatrix} = -2\)</span>，代数余子式为 <span class="arithmatex">\(A_{12} = (-1)^{1+2}(-2) = 2\)</span>。</p>
+</div>
+<hr />
+<h2 id="35">3.5 行列式按行（列）展开<a class="headerlink" href="#35" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.9 (Laplace 展开定理)</p>
+<p><span class="arithmatex">\(n\)</span> 阶行列式 <span class="arithmatex">\(\det(A)\)</span> 可以按第 <span class="arithmatex">\(i\)</span> 行展开为</p>
+<div class="arithmatex">\[
+\det(A) = \sum_{j=1}^n a_{ij} A_{ij} = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in},
+\]</div>
+<p>也可以按第 <span class="arithmatex">\(j\)</span> 列展开为</p>
+<div class="arithmatex">\[
+\det(A) = \sum_{i=1}^n a_{ij} A_{ij} = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}.
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>按第 <span class="arithmatex">\(i\)</span> 行展开。在行列式定义式中，将所有项按 <span class="arithmatex">\(a_{i\sigma(i)}\)</span> 的值分组。对于 <span class="arithmatex">\(\sigma(i) = j\)</span>，将第 <span class="arithmatex">\(i\)</span> 行移到第一行（需 <span class="arithmatex">\(i-1\)</span> 次行交换），第 <span class="arithmatex">\(j\)</span> 列移到第一列（需 <span class="arithmatex">\(j-1\)</span> 次列交换），行列式变为 <span class="arithmatex">\((-1)^{(i-1)+(j-1)} = (-1)^{i+j}\)</span> 倍。移除第一行第一列后，剩余部分恰好是 <span class="arithmatex">\(M_{ij}\)</span> 对应的 <span class="arithmatex">\((n-1)\)</span> 阶行列式。因此</p>
+<div class="arithmatex">\[
+\det(A) = \sum_{j=1}^n a_{ij} (-1)^{i+j} M_{ij} = \sum_{j=1}^n a_{ij} A_{ij}. \quad \blacksquare
+\]</div>
+</details>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.10 (异行/列展开为零)</p>
+<p>一行的元素与另一行对应的代数余子式的乘积之和为零：</p>
+<div class="arithmatex">\[
+\sum_{k=1}^n a_{ik} A_{jk} = 0 \quad (i \neq j).
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>构造矩阵 <span class="arithmatex">\(B\)</span>：将 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 行替换为第 <span class="arithmatex">\(i\)</span> 行（其他行不变）。则 <span class="arithmatex">\(B\)</span> 有两行相同（第 <span class="arithmatex">\(i\)</span> 行和第 <span class="arithmatex">\(j\)</span> 行），故 <span class="arithmatex">\(\det(B) = 0\)</span>。将 <span class="arithmatex">\(\det(B)\)</span> 按第 <span class="arithmatex">\(j\)</span> 行展开，注意 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(j\)</span> 行元素为 <span class="arithmatex">\(a_{ik}\)</span>（<span class="arithmatex">\(k = 1, \ldots, n\)</span>），而 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(j\)</span> 行代数余子式与 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 行代数余子式相同（因为删去第 <span class="arithmatex">\(j\)</span> 行后，<span class="arithmatex">\(B\)</span> 与 <span class="arithmatex">\(A\)</span> 在其他行上一致），得</p>
+<div class="arithmatex">\[
+0 = \det(B) = \sum_{k=1}^n a_{ik} A_{jk}. \quad \blacksquare
+\]</div>
+</details>
+<p>综合定理 3.9 和 3.10，可以写成</p>
+<div class="arithmatex">\[
+\sum_{k=1}^n a_{ik}A_{jk} = \delta_{ij} \det(A),
+\]</div>
+<p>其中 <span class="arithmatex">\(\delta_{ij}\)</span> 为 Kronecker 符号。这等价于矩阵等式 <span class="arithmatex">\(A \cdot \operatorname{adj}(A) = \det(A) \cdot I\)</span>。</p>
+<div class="admonition definition">
+<p class="admonition-title">定义 3.5 (伴随矩阵)</p>
+<p><span class="arithmatex">\(n\)</span> 阶方阵 <span class="arithmatex">\(A\)</span> 的<strong>伴随矩阵</strong>（adjugate matrix / classical adjoint）定义为代数余子式矩阵的转置：</p>
+<div class="arithmatex">\[
+\operatorname{adj}(A) = (A_{ji})_{n \times n},
+\]</div>
+<p>即 <span class="arithmatex">\(\operatorname{adj}(A)\)</span> 的第 <span class="arithmatex">\((i, j)\)</span> 元素为 <span class="arithmatex">\(A_{ji}\)</span>。</p>
+</div>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.11 (伴随矩阵与逆矩阵)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 阶方阵，则</p>
+<div class="arithmatex">\[
+A \cdot \operatorname{adj}(A) = \operatorname{adj}(A) \cdot A = \det(A) \cdot I.
+\]</div>
+<p>因此，若 <span class="arithmatex">\(\det(A) \neq 0\)</span>，则 <span class="arithmatex">\(A\)</span> 可逆且</p>
+<div class="arithmatex">\[
+A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A).
+\]</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.5</p>
+<p>用伴随矩阵法求逆矩阵。设 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 5 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\det(A) = 5 - 6 = -1\)</span>。代数余子式：<span class="arithmatex">\(A_{11} = 5\)</span>，<span class="arithmatex">\(A_{12} = -3\)</span>，<span class="arithmatex">\(A_{21} = -2\)</span>，<span class="arithmatex">\(A_{22} = 1\)</span>。</p>
+<div class="arithmatex">\[
+\operatorname{adj}(A) = \begin{pmatrix} 5 &amp; -2 \\ -3 &amp; 1 \end{pmatrix}, \quad A^{-1} = \frac{1}{-1}\begin{pmatrix} 5 &amp; -2 \\ -3 &amp; 1 \end{pmatrix} = \begin{pmatrix} -5 &amp; 2 \\ 3 &amp; -1 \end{pmatrix}.
+\]</div>
+</div>
+<hr />
+<h2 id="36">3.6 行列式的计算方法<a class="headerlink" href="#36" title="Permanent link">&para;</a></h2>
+<h3 id="_1">三角化法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>利用行变换将矩阵化为上三角形（注意行交换变号、行倍乘乘以倍数），再利用定理 3.7 直接求行列式。</p>
+<div class="admonition example">
+<p class="admonition-title">例 3.6</p>
+<p>计算</p>
+<div class="arithmatex">\[
+D = \begin{vmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 0 \end{vmatrix}
+\]</div>
+<div class="arithmatex">\[
+\xrightarrow{R_2 - 4R_1, \; R_3 - 7R_1}
+\begin{vmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; -3 &amp; -6 \\ 0 &amp; -6 &amp; -21 \end{vmatrix}
+\xrightarrow{R_3 - 2R_2}
+\begin{vmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; -3 &amp; -6 \\ 0 &amp; 0 &amp; -9 \end{vmatrix} = 1 \cdot (-3) \cdot (-9) = 27.
+\]</div>
+</div>
+<h3 id="_2">递推法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>对于具有特殊规律的行列式，可以建立递推关系来求解。</p>
+<div class="admonition example">
+<p class="admonition-title">例 3.7</p>
+<p>设 <span class="arithmatex">\(D_n\)</span> 为 <span class="arithmatex">\(n\)</span> 阶行列式</p>
+<div class="arithmatex">\[
+D_n = \begin{vmatrix} 2 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 1 &amp; 2 &amp; 1 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 2 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; &amp; &amp; \ddots &amp; &amp; \vdots \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 0 &amp; \cdots &amp; 1 &amp; 2 \end{vmatrix}
+\]</div>
+<p>按第一行展开：<span class="arithmatex">\(D_n = 2D_{n-1} - D_{n-2}\)</span>。初始值 <span class="arithmatex">\(D_1 = 2\)</span>，<span class="arithmatex">\(D_2 = 3\)</span>。</p>
+<p>特征方程 <span class="arithmatex">\(x^2 - 2x + 1 = 0\)</span> 有重根 <span class="arithmatex">\(x = 1\)</span>，通解 <span class="arithmatex">\(D_n = (c_1 + c_2 n) \cdot 1^n = c_1 + c_2 n\)</span>。</p>
+<p>由 <span class="arithmatex">\(D_1 = 2, D_2 = 3\)</span> 解得 <span class="arithmatex">\(c_1 = 1, c_2 = 1\)</span>，故 <span class="arithmatex">\(D_n = n + 1\)</span>。</p>
+</div>
+<h3 id="vandermonde">Vandermonde 行列式<a class="headerlink" href="#vandermonde" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.12 (Vandermonde 行列式)</p>
+<p><strong>Vandermonde 行列式</strong>（Vandermonde determinant）为</p>
+<div class="arithmatex">\[
+V_n = \begin{vmatrix} 1 &amp; x_1 &amp; x_1^2 &amp; \cdots &amp; x_1^{n-1} \\ 1 &amp; x_2 &amp; x_2^2 &amp; \cdots &amp; x_2^{n-1} \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 1 &amp; x_n &amp; x_n^2 &amp; \cdots &amp; x_n^{n-1} \end{vmatrix} = \prod_{1 \le i &lt; j \le n} (x_j - x_i).
+\]</div>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>对 <span class="arithmatex">\(n\)</span> 进行归纳。<span class="arithmatex">\(n = 2\)</span> 时，<span class="arithmatex">\(V_2 = x_2 - x_1\)</span>，成立。</p>
+<p>设 <span class="arithmatex">\(n-1\)</span> 阶时公式成立。对 <span class="arithmatex">\(n\)</span> 阶 Vandermonde 行列式，从最后一行开始，每行减去上一行的 <span class="arithmatex">\(x_1\)</span> 倍（即 <span class="arithmatex">\(R_n - x_1 R_{n-1}\)</span>，<span class="arithmatex">\(R_{n-1} - x_1 R_{n-2}\)</span>，...，<span class="arithmatex">\(R_2 - x_1 R_1\)</span>）：</p>
+<div class="arithmatex">\[
+V_n = \begin{vmatrix} 1 &amp; x_1 &amp; x_1^2 &amp; \cdots &amp; x_1^{n-1} \\ 0 &amp; x_2 - x_1 &amp; x_2(x_2 - x_1) &amp; \cdots &amp; x_2^{n-2}(x_2 - x_1) \\ 0 &amp; x_3 - x_1 &amp; x_3(x_3 - x_1) &amp; \cdots &amp; x_3^{n-2}(x_3 - x_1) \\ \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; x_n - x_1 &amp; x_n(x_n - x_1) &amp; \cdots &amp; x_n^{n-2}(x_n - x_1) \end{vmatrix}
+\]</div>
+<p>按第一列展开，并从第 <span class="arithmatex">\(i\)</span> 行（<span class="arithmatex">\(i = 2, \ldots, n\)</span>）提出公因子 <span class="arithmatex">\((x_i - x_1)\)</span>：</p>
+<div class="arithmatex">\[
+V_n = \prod_{i=2}^n (x_i - x_1) \cdot V_{n-1}(x_2, x_3, \ldots, x_n)
+\]</div>
+<p>由归纳假设，<span class="arithmatex">\(V_{n-1}(x_2, \ldots, x_n) = \prod_{2 \le i &lt; j \le n}(x_j - x_i)\)</span>，因此</p>
+<div class="arithmatex">\[
+V_n = \prod_{i=2}^n(x_i - x_1) \cdot \prod_{2 \le i &lt; j \le n}(x_j - x_i) = \prod_{1 \le i &lt; j \le n}(x_j - x_i). \quad \blacksquare
+\]</div>
+</details>
+<h3 id="_3">分块行列式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.13 (分块三角矩阵的行列式)</p>
+<p>设</p>
+<div class="arithmatex">\[
+M = \begin{pmatrix} A &amp; B \\ O &amp; D \end{pmatrix} \quad \text{或} \quad M = \begin{pmatrix} A &amp; O \\ C &amp; D \end{pmatrix},
+\]</div>
+<p>其中 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(D\)</span> 为方阵，则 <span class="arithmatex">\(\det(M) = \det(A)\det(D)\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.8</p>
+<p>计算分块矩阵的行列式：</p>
+<div class="arithmatex">\[
+M = \begin{pmatrix} 1 &amp; 2 &amp; 0 &amp; 0 \\ 3 &amp; 4 &amp; 0 &amp; 0 \\ 5 &amp; 6 &amp; 1 &amp; 1 \\ 7 &amp; 8 &amp; 0 &amp; 2 \end{pmatrix}
+\]</div>
+<p>这是分块下三角矩阵 <span class="arithmatex">\(\begin{pmatrix} A &amp; O \\ C &amp; D \end{pmatrix}\)</span>，其中 <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{pmatrix}\)</span>，<span class="arithmatex">\(D = \begin{pmatrix} 1 &amp; 1 \\ 0 &amp; 2 \end{pmatrix}\)</span>。</p>
+<p><span class="arithmatex">\(\det(M) = \det(A)\det(D) = (4 - 6)(2 - 0) = (-2)(2) = -4\)</span>。</p>
+</div>
+<hr />
+<h2 id="37-cramer">3.7 Cramer 法则<a class="headerlink" href="#37-cramer" title="Permanent link">&para;</a></h2>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.14 (Cramer 法则)</p>
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(n\)</span> 阶可逆矩阵（即 <span class="arithmatex">\(\det(A) \neq 0\)</span>），则线性方程组 <span class="arithmatex">\(A\mathbf{x} = \mathbf{b}\)</span> 有唯一解，且</p>
+<div class="arithmatex">\[
+x_j = \frac{\det(A_j)}{\det(A)}, \quad j = 1, 2, \ldots, n,
+\]</div>
+<p>其中 <span class="arithmatex">\(A_j\)</span> 是将 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 列替换为 <span class="arithmatex">\(\mathbf{b}\)</span> 所得的矩阵。</p>
+</div>
+<details class="proof">
+<summary>证明</summary>
+<p>由 <span class="arithmatex">\(A\)</span> 可逆，方程有唯一解 <span class="arithmatex">\(\mathbf{x} = A^{-1}\mathbf{b}\)</span>。利用伴随矩阵公式：</p>
+<div class="arithmatex">\[
+x_j = (A^{-1}\mathbf{b})_j = \frac{1}{\det(A)}\sum_{i=1}^n A_{ji} b_i.
+\]</div>
+<p>而 <span class="arithmatex">\(\sum_{i=1}^n A_{ji} b_i\)</span> 恰好是将 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(j\)</span> 列替换为 <span class="arithmatex">\(\mathbf{b}\)</span> 后的矩阵 <span class="arithmatex">\(A_j\)</span> 按第 <span class="arithmatex">\(j\)</span> 列展开的结果，即 <span class="arithmatex">\(\det(A_j)\)</span>。因此 <span class="arithmatex">\(x_j = \frac{\det(A_j)}{\det(A)}\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p>Cramer 法则的理论意义大于计算意义。对于大型方程组，高斯消元法的效率远高于 Cramer 法则（后者需要计算 <span class="arithmatex">\(n+1\)</span> 个 <span class="arithmatex">\(n\)</span> 阶行列式）。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.9</p>
+<p>用 Cramer 法则解方程组</p>
+<div class="arithmatex">\[
+\begin{cases} 2x_1 + x_2 = 5 \\ 3x_1 + 2x_2 = 8 \end{cases}
+\]</div>
+<div class="arithmatex">\[
+\det(A) = \begin{vmatrix} 2 &amp; 1 \\ 3 &amp; 2 \end{vmatrix} = 1, \quad \det(A_1) = \begin{vmatrix} 5 &amp; 1 \\ 8 &amp; 2 \end{vmatrix} = 2, \quad \det(A_2) = \begin{vmatrix} 2 &amp; 5 \\ 3 &amp; 8 \end{vmatrix} = 1.
+\]</div>
+<div class="arithmatex">\[
+x_1 = \frac{2}{1} = 2, \quad x_2 = \frac{1}{1} = 1.
+\]</div>
+</div>
+<hr />
+<h2 id="38">3.8 行列式的几何意义<a class="headerlink" href="#38" title="Permanent link">&para;</a></h2>
+<p>行列式与几何中的面积和体积有着深刻的联系。</p>
+<div class="admonition theorem">
+<p class="admonition-title">定理 3.15 (行列式与面积/体积)</p>
+<p>设 <span class="arithmatex">\(\mathbf{a}_1, \mathbf{a}_2, \ldots, \mathbf{a}_n \in \mathbb{R}^n\)</span> 为 <span class="arithmatex">\(n\)</span> 个列向量，构成矩阵 <span class="arithmatex">\(A = (\mathbf{a}_1 \; \mathbf{a}_2 \; \cdots \; \mathbf{a}_n)\)</span>。</p>
+<ol>
+<li>
+<p><strong>二维</strong>：以 <span class="arithmatex">\(\mathbf{a}_1, \mathbf{a}_2 \in \mathbb{R}^2\)</span> 为邻边的平行四边形的<strong>有向面积</strong>等于 <span class="arithmatex">\(\det(A) = \begin{vmatrix} a_{11} &amp; a_{12} \\ a_{21} &amp; a_{22} \end{vmatrix}\)</span>。</p>
+</li>
+<li>
+<p><strong>三维</strong>：以 <span class="arithmatex">\(\mathbf{a}_1, \mathbf{a}_2, \mathbf{a}_3 \in \mathbb{R}^3\)</span> 为邻边的平行六面体的<strong>有向体积</strong>等于 <span class="arithmatex">\(\det(A)\)</span>。</p>
+</li>
+<li>
+<p><strong>一般情形</strong>：以 <span class="arithmatex">\(\mathbf{a}_1, \ldots, \mathbf{a}_n\)</span> 为邻边的 <span class="arithmatex">\(n\)</span> 维平行体的 <span class="arithmatex">\(n\)</span> 维体积的绝对值为 <span class="arithmatex">\(|\det(A)|\)</span>。</p>
+</li>
+</ol>
+</div>
+<div class="admonition note">
+<p class="admonition-title">注</p>
+<p><span class="arithmatex">\(\det(A) &gt; 0\)</span> 表示向量组 <span class="arithmatex">\(\{\mathbf{a}_1, \ldots, \mathbf{a}_n\}\)</span> 保持标准基的定向（右手系），<span class="arithmatex">\(\det(A) &lt; 0\)</span> 表示反转定向。<span class="arithmatex">\(\det(A) = 0\)</span> 表示向量组线性相关，"平行体"退化为低维对象，体积为零。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.10</p>
+<p>向量 <span class="arithmatex">\(\mathbf{a}_1 = (3, 0)^T\)</span> 和 <span class="arithmatex">\(\mathbf{a}_2 = (1, 2)^T\)</span> 张成的平行四边形的面积为</p>
+<div class="arithmatex">\[
+|\det(A)| = \left|\begin{vmatrix} 3 &amp; 1 \\ 0 &amp; 2 \end{vmatrix}\right| = |6 - 0| = 6.
+\]</div>
+<p>几何上，这个平行四边形底边长 <span class="arithmatex">\(3\)</span>、高 <span class="arithmatex">\(2\)</span>，面积确实为 <span class="arithmatex">\(6\)</span>。</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">例 3.11</p>
+<p>线性变换 <span class="arithmatex">\(T: \mathbb{R}^2 \to \mathbb{R}^2\)</span>，<span class="arithmatex">\(T(\mathbf{x}) = A\mathbf{x}\)</span>，将平面上的区域面积缩放为原来的 <span class="arithmatex">\(|\det(A)|\)</span> 倍。例如，若 <span class="arithmatex">\(A = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 3 \end{pmatrix}\)</span>，则 <span class="arithmatex">\(\det(A) = 6\)</span>，意味着 <span class="arithmatex">\(T\)</span> 将任何区域的面积放大到原来的 <span class="arithmatex">\(6\)</span> 倍。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/a-little-bear/University-Linear-Algebra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.indexes", "search.suggest", "search.highlight", "search.share", "content.tabs.link", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
