@@ -1,10 +1,23 @@
 # 第 11 章 奇异值分解
 
+<div class="context-flow" markdown>
+
+**前置**：Ch8 正交/谱定理 · Ch10 Schur/谱分解 · **本章脉络**：$\sigma_i = \sqrt{\lambda_i(A^TA)}$ → $A = U\Sigma V^T$ → 几何（旋转×缩放×旋转） → **Eckart-Young**（最优低秩逼近） → 伪逆/PCA/条件数
+本质：SVD 是谱定理对**任意矩阵**的推广——用两组正交基同时对角化 $A$
+
+</div>
+
 奇异值分解（Singular Value Decomposition, SVD）是线性代数中最重要的矩阵分解之一。与特征值分解不同，SVD 适用于**任意**矩阵——不要求方阵，也不要求可对角化。SVD 将一个 $m \times n$ 矩阵分解为两个正交矩阵与一个对角矩阵的乘积，清晰地揭示了线性变换的几何本质：旋转、缩放、再旋转。SVD 在数据科学、信号处理、数值计算等领域有着极其广泛的应用，是现代应用数学的核心工具。
 
 ---
 
 ## 11.1 奇异值的定义
+
+<div class="context-flow" markdown>
+
+$A^TA$ 半正定 → 特征值 $\lambda_i \ge 0$ → $\sigma_i = \sqrt{\lambda_i}$ → 奇异值统一了秩、谱范数 $\|A\|_2 = \sigma_1$、Frobenius 范数
+
+</div>
 
 对于任意 $m \times n$ 实矩阵 $A$，矩阵 $A^T A$ 是一个 $n \times n$ 的半正定对称矩阵，因此其所有特征值都是非负实数。奇异值正是从这些特征值中提取出来的。
 
@@ -79,7 +92,19 @@
 
 ## 11.2 奇异值分解定理
 
+<div class="context-flow" markdown>
+
+构造路径：对 $A^TA$ 做谱定理得 $V$ → $\mathbf{u}_i = \frac{1}{\sigma_i}A\mathbf{v}_i$ 得 $U$ → 验证 $AV = U\Sigma$ → 外积展开 $A = \sum \sigma_i \mathbf{u}_i\mathbf{v}_i^T$（秩一分解）
+
+</div>
+
 奇异值分解定理是本章的核心结果，它保证任意矩阵都可以被分解为标准形式。
+
+<div class="context-flow" markdown>
+
+**洞察**：SVD 存在性的本质——对 $A^TA$（方阵、半正定）用谱定理，再通过 $A$ 将右奇异向量"映射"为左奇异向量
+
+</div>
 
 !!! theorem "定理 11.3 (奇异值分解定理 SVD Theorem)"
     设 $A$ 为 $m \times n$ 实矩阵，$\operatorname{rank}(A) = r$。则存在 $m \times m$ 正交矩阵 $U$、$n \times n$ 正交矩阵 $V$ 以及 $m \times n$ 矩阵 $\Sigma$，使得
@@ -161,6 +186,12 @@
 
 ## 11.3 SVD 的几何意义
 
+<div class="context-flow" markdown>
+
+$V^T$（旋转）→ $\Sigma$（沿轴缩放）→ $U$（旋转）：单位球 → 超椭球 → 半轴长 = $\sigma_i$，方向 = $\mathbf{u}_i$
+
+</div>
+
 SVD 的几何解释极其直观：任何线性变换都可以分解为**旋转（或反射）**、**缩放**、**再旋转（或反射）**三步。
 
 !!! definition "定义 11.4 (正交变换的几何意义)"
@@ -195,6 +226,12 @@ SVD 的几何解释极其直观：任何线性变换都可以分解为**旋转�
 ---
 
 ## 11.4 SVD 的计算方法
+
+<div class="context-flow" markdown>
+
+标准流程：$A^TA$ → 特征值/特征向量 → 奇异值 → 由 $\mathbf{u}_i = \frac{1}{\sigma_i}A\mathbf{v}_i$ 构造左奇异向量 → 组装
+
+</div>
 
 本节通过详细例题展示 SVD 的计算步骤。
 
@@ -274,6 +311,12 @@ SVD 的几何解释极其直观：任何线性变换都可以分解为**旋转�
 
 ## 11.5 紧凑 SVD 与截断 SVD
 
+<div class="context-flow" markdown>
+
+紧凑 SVD：去掉零奇异值 → $A = U_r\Sigma_r V_r^T$ · 截断 SVD：只保留前 $k$ 个 → $A_k$ 是秩 $k$ 近似，误差 $\|A - A_k\|_2 = \sigma_{k+1}$
+
+</div>
+
 当矩阵的秩远小于其维度时，完整的 SVD 包含了大量冗余信息。紧凑 SVD 和截断 SVD 提供了更经济的表示。
 
 !!! definition "定义 11.6 (紧凑 SVD / Compact SVD)"
@@ -322,7 +365,19 @@ SVD 的几何解释极其直观：任何线性变换都可以分解为**旋转�
 
 ## 11.6 低秩近似
 
+<div class="context-flow" markdown>
+
+**Eckart-Young-Mirsky**：截断 SVD 是所有秩 $\le k$ 矩阵中的**最佳近似**（谱范数和 Frobenius 范数下均最优）
+
+</div>
+
 SVD 提供了最优低秩近似，这一结论由 Eckart-Young-Mirsky 定理精确表述。
+
+<div class="context-flow" markdown>
+
+**洞察**：证明的维数论证 $\dim W + \dim\ker(B) > n$ 与 Ch9 惯性定理异曲同工——"两个大子空间必相交"
+
+</div>
 
 !!! theorem "定理 11.7 (Eckart-Young-Mirsky 定理)"
     设 $A$ 为 $m \times n$ 实矩阵，奇异值为 $\sigma_1 \ge \cdots \ge \sigma_r > 0$。对任意秩不超过 $k$（$k < r$）的矩阵 $B$，有
@@ -373,6 +428,12 @@ SVD 提供了最优低秩近似，这一结论由 Eckart-Young-Mirsky 定理精�
 ---
 
 ## 11.7 Moore-Penrose 伪逆
+
+<div class="context-flow" markdown>
+
+$A^+ = V\Sigma^+ U^T$：将 SVD 中非零奇异值取倒数 → 给出**最小范数最小二乘解** → 统一了 Ch8 正交投影与最小二乘理论
+
+</div>
 
 对于不可逆或非方阵的矩阵，Moore-Penrose 伪逆（pseudoinverse）提供了"最佳逆"的概念，可通过 SVD 简洁地构造。
 
@@ -441,6 +502,12 @@ SVD 提供了最优低秩近似，这一结论由 Eckart-Young-Mirsky 定理精�
 ---
 
 ## 11.8 SVD 的应用
+
+<div class="context-flow" markdown>
+
+数据压缩（低秩近似）· PCA（$V$ 的列 = 主成分方向）· 条件数 $\kappa = \sigma_1/\sigma_r$（衡量病态程度） → SVD 是应用数学的瑞士军刀
+
+</div>
 
 SVD 在众多领域有着重要应用，本节介绍几个典型场景。
 

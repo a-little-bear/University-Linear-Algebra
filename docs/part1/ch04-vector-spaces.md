@@ -1,10 +1,23 @@
 # 第 4 章 向量空间
 
+<div class="context-flow" markdown>
+
+**前置**：第 1 章解集结构 · 第 2 章 $\mathbb{R}^{m \times n}$ 的运算律 · **本章脉络**：8 条公理 → 子空间 → 线性组合/张成 → 线性无关 → 基与维数 → 坐标/过渡矩阵 → 四个基本子空间 → 秩-零化度定理
+**一句话本质**：从 $\mathbb{R}^n$ 抽象到公理化框架——"维数"成为向量空间的唯一本质不变量（→ 第 5 章同构定理）
+
+</div>
+
 向量空间（vector space）是线性代数的核心抽象概念。在前几章中，我们主要在 $\mathbb{R}^n$ 的具体框架下讨论问题。本章将引入向量空间的公理化定义，使得线性代数的理论适用于远比 $\mathbb{R}^n$ 更广泛的对象——矩阵、多项式、函数等。我们将系统讨论子空间、线性无关、基与维数等基本概念，建立秩-零化度定理，并介绍四个基本子空间。
 
 ---
 
 ## 4.1 向量空间的定义与公理
+
+<div class="context-flow" markdown>
+
+**公理化跃迁**：第 2 章 $\mathbb{R}^{m \times n}$ 满足的 8 条运算律 → 抽象为任意集合上的公理 → "向量"不再局限于箭头或列向量
+
+</div>
 
 !!! definition "定义 4.1 (向量空间)"
     设 $\mathbb{F}$ 为一个数域（通常取 $\mathbb{R}$ 或 $\mathbb{C}$），$V$ 为一个非空集合，在 $V$ 上定义了**加法**运算 $+: V \times V \to V$ 和**标量乘法**运算 $\cdot: \mathbb{F} \times V \to V$。若以下 8 条公理对所有 $\mathbf{u}, \mathbf{v}, \mathbf{w} \in V$ 和所有 $c, d \in \mathbb{F}$ 成立，则称 $V$ 为 $\mathbb{F}$ 上的一个**向量空间**（vector space），$V$ 的元素称为**向量**（vector），$\mathbb{F}$ 的元素称为**标量**（scalar）：
@@ -41,6 +54,12 @@
 
 ## 4.2 常见向量空间举例
 
+<div class="context-flow" markdown>
+
+**公理的力量**：$\mathbb{R}^n$、矩阵空间 $\mathbb{R}^{m \times n}$、多项式空间 $\mathbb{P}_n$、函数空间 $C(\mathbb{R})$ → 形态各异但共享同一代数结构
+
+</div>
+
 !!! example "例 4.1"
     **$\mathbb{R}^n$ 空间**：$n$ 维实列向量的集合 $\mathbb{R}^n$，按分量进行加法和标量乘法，是最基本的向量空间。
 
@@ -61,6 +80,12 @@
 ---
 
 ## 4.3 子空间
+
+<div class="context-flow" markdown>
+
+**"空间中的空间"**：对加法和数乘封闭即为子空间 → 第 1 章齐次解集是子空间的原型 → 必须过原点（包含 $\mathbf{0}$）
+
+</div>
 
 !!! definition "定义 4.2 (子空间)"
     设 $V$ 为向量空间，$W \subseteq V$ 为非空子集。若 $W$ 在 $V$ 的加法和标量乘法下本身也构成向量空间，则称 $W$ 为 $V$ 的一个**子空间**（subspace）。
@@ -91,6 +116,12 @@
 ---
 
 ## 4.4 线性组合与张成空间
+
+<div class="context-flow" markdown>
+
+**生成子空间**：给定向量组 → 所有线性组合构成的集合 = 包含这些向量的**最小子空间** → $A\mathbf{x}=\mathbf{b}$ 有解 $\Leftrightarrow$ $\mathbf{b} \in \operatorname{Span}\{\text{列向量}\}$
+
+</div>
 
 !!! definition "定义 4.3 (线性组合)"
     设 $V$ 为向量空间，$\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k \in V$。形如
@@ -127,6 +158,12 @@
 ---
 
 ## 4.5 线性无关与线性相关
+
+<div class="context-flow" markdown>
+
+**无冗余 = 线性无关**：$\sum c_i \mathbf{v}_i = \mathbf{0}$ 只有平凡解 → 没有向量是其余的线性组合 → 在 $\mathbb{R}^n$ 中等价于矩阵列满秩（第 2 章）
+
+</div>
 
 !!! definition "定义 4.5 (线性无关与线性相关)"
     向量组 $\{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_k\}$ 称为**线性无关的**（linearly independent），若方程
@@ -171,6 +208,12 @@
 ---
 
 ## 4.6 基与维数
+
+<div class="context-flow" markdown>
+
+**基 = 线性无关 + 张成**：每个向量唯一表示为基向量的线性组合 → 所有基大小相同（维数的良定义性） → $\dim(V)$ 是向量空间的终极不变量
+
+</div>
 
 !!! definition "定义 4.6 (基)"
     设 $V$ 为向量空间，向量组 $\mathcal{B} = \{\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\}$ 称为 $V$ 的一组**基**（basis），若满足：
@@ -220,6 +263,12 @@
 
 ## 4.7 坐标与坐标变换
 
+<div class="context-flow" markdown>
+
+**抽象到具体的桥梁**：选定基 → 每个向量对应唯一坐标向量 $[\mathbf{x}]_\mathcal{B} \in \mathbb{R}^n$ → 换基 = 过渡矩阵 $P$ → 第 5 章基变换 $\to$ 相似矩阵
+
+</div>
+
 !!! definition "定义 4.8 (坐标向量)"
     设 $\mathcal{B} = \{\mathbf{v}_1, \ldots, \mathbf{v}_n\}$ 为向量空间 $V$ 的一组有序基，$\mathbf{x} \in V$ 可唯一表示为
 
@@ -262,6 +311,12 @@
 
 ## 4.8 行空间、列空间与零空间
 
+<div class="context-flow" markdown>
+
+**矩阵的四个基本子空间**：$\operatorname{Col}(A)$, $\operatorname{Row}(A)$, $\operatorname{Null}(A)$, $\operatorname{Null}(A^T)$ → 维数由 $\operatorname{rank}(A) = r$ 统一控制 → 正交补关系见第 7 章
+
+</div>
+
 !!! definition "定义 4.10 (四个基本子空间)"
     设 $A$ 为 $m \times n$ 矩阵，定义以下四个子空间：
 
@@ -302,6 +357,12 @@
 
 ## 4.9 秩-零化度定理（维数公式）
 
+<div class="context-flow" markdown>
+
+**维数守恒**：$\operatorname{rank}(A) + \operatorname{nullity}(A) = n$ → 线性映射"保留的维度"与"丢失的维度"之和 = 定义域维度 → 第 5 章秩-零化度定理的矩阵版本
+
+</div>
+
 !!! theorem "定理 4.10 (秩-零化度定理)"
     设 $A$ 为 $m \times n$ 矩阵，则
 
@@ -340,6 +401,12 @@
 ---
 
 ## 4.10 子空间的和与直和
+
+<div class="context-flow" markdown>
+
+**子空间的代数运算**：$W_1 + W_2$ 是包含两者的最小子空间 → $W_1 \cap W_2 = \{\mathbf{0}\}$ 时为**直和** → 维数公式：$\dim(W_1+W_2) = \dim W_1 + \dim W_2 - \dim(W_1 \cap W_2)$
+
+</div>
 
 !!! definition "定义 4.11 (子空间的和)"
     设 $W_1, W_2$ 为向量空间 $V$ 的子空间，定义它们的**和**（sum）为

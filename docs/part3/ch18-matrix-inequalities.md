@@ -1,5 +1,11 @@
 # 第 18 章 矩阵不等式
 
+<div class="context-flow" markdown>
+
+**前置**：Ch15 Weyl/Wielandt-Hoffman · Ch16 正定矩阵 · **脉络**：Courant-Fischer → Weyl/Cauchy交错 → 奇异值不等式 → 迹(von Neumann) → 行列式(Hadamard/Minkowski) → **Majorization**统一框架
+
+</div>
+
 矩阵不等式是矩阵分析中最为精深的主题之一。在标量情形中，不等式的理论已经非常成熟——从算术-几何均值不等式到 Cauchy-Schwarz 不等式，这些结果构成了分析学的基石。然而，当我们将这些想法推广到矩阵的世界时，情况变得远为丰富和微妙。矩阵的特征值（eigenvalue）、奇异值（singular value）、迹（trace）和行列式（determinant）之间存在着深刻而优美的不等式关系，它们不仅在纯数学中有重要意义，而且在量子信息论、统计学和最优化理论中都有广泛应用。
 
 本章系统地介绍矩阵不等式的主要结果，从特征值不等式出发，经由奇异值不等式和迹不等式，直至行列式不等式，最后以优超理论（majorization）和矩阵凸性作为统一框架。
@@ -7,6 +13,12 @@
 ---
 
 ## 18.1 特征值不等式
+
+<div class="context-flow" markdown>
+
+**核心工具**：**Courant-Fischer** 极小极大定理(Rayleigh商 + 子空间维数论证) → Weyl不等式 · Cauchy交错 = 主子矩阵特征值的夹逼
+
+</div>
 
 特征值是矩阵最基本的不变量。对于 Hermite 矩阵（Hermitian matrix），其特征值全为实数，因此可以排序比较。本节讨论 Hermite 矩阵之和的特征值与各自特征值之间的关系。
 
@@ -150,6 +162,12 @@
 
 ## 18.2 奇异值不等式
 
+<div class="context-flow" markdown>
+
+**脉络**：奇异值次可乘 $\sigma_{i+j-1}(AB)\leq\sigma_i(A)\sigma_j(B)$ · **Ky Fan $k$-范数** $=\sum_{i=1}^k\sigma_i$ 满足三角不等式 → 酉不变范数的统一视角
+
+</div>
+
 奇异值（singular value）是矩阵理论中与特征值同等重要的概念。对于一般矩阵（不要求 Hermite 或方阵），奇异值提供了最自然的"大小"度量。
 
 !!! definition "定义 18.3 (奇异值排序)"
@@ -228,6 +246,12 @@
 ---
 
 ## 18.3 迹不等式
+
+<div class="context-flow" markdown>
+
+**脉络**：**von Neumann** $|\operatorname{tr}(A^*B)|\leq\sum\sigma_i(A)\sigma_i(B)$(排序不等式+Birkhoff) → **Golden-Thompson** $\operatorname{tr}(e^{A+B})\leq\operatorname{tr}(e^Ae^B)$
+
+</div>
 
 矩阵的迹是最简单的矩阵函数之一，但它满足若干深刻的不等式。
 
@@ -327,6 +351,12 @@
 ---
 
 ## 18.4 行列式不等式
+
+<div class="context-flow" markdown>
+
+**脉络**：**Hadamard** $\det A\leq\prod a_{ii}$ (Ch16 Schur补证法) → **Fischer** (分块推广) → **Minkowski** $(\det(A+B))^{1/n}\geq(\det A)^{1/n}+(\det B)^{1/n}$
+
+</div>
 
 行列式作为矩阵的另一个基本不变量，也满足若干重要的不等式。
 
@@ -444,6 +474,12 @@
 
 ## 18.5 Majorization（优超）
 
+<div class="context-flow" markdown>
+
+**核心框架**：$\mathbf{x}\prec\mathbf{y}$ $\Leftrightarrow$ $\mathbf{x}=D\mathbf{y}$($D$双随机) $\Leftrightarrow$ $\mathbf{x}$在$\mathbf{y}$置换凸包内 · **Schur-Horn**：对角元 $\prec$ 特征值 · Birkhoff定理是桥梁
+
+</div>
+
 Majorization（优超）是一个统一多种不等式的核心概念，它精确描述了向量分量之间"扩散程度"的比较。
 
 !!! definition "定义 18.7 (优超关系)"
@@ -533,6 +569,12 @@ Majorization（优超）是一个统一多种不等式的核心概念，它精�
 
 ## 18.6 Schur 凸函数
 
+<div class="context-flow" markdown>
+
+**脉络**：$f$ Schur凸 + $\mathbf{x}\prec\mathbf{y}$ $\Rightarrow$ $f(\mathbf{x})\leq f(\mathbf{y})$ · 判别条件：Schur条件 $(x_i-x_j)(\partial_i f-\partial_j f)\geq 0$ · $\phi$凸 $\Rightarrow$ $\sum\phi(a_{ii})\leq\sum\phi(\lambda_i)$
+
+</div>
+
 Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩阵不等式提供了强大工具。
 
 !!! definition "定义 18.9 (Schur 凸函数与 Schur 凹函数)"
@@ -599,6 +641,12 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 ---
 
 ## 18.7 矩阵凸性与矩阵单调性
+
+<div class="context-flow" markdown>
+
+**脉络**：$t^r$($0\leq r\leq 1$)和 $\log t$ 矩阵单调，$t^2$ 不是 · **Löwner定理**：矩阵单调 $\Leftrightarrow$ Pick函数(上半平面自映) · Jensen矩阵不等式 → 量子信息
+
+</div>
 
 本节将凸性和单调性从标量函数推广到矩阵函数的领域。
 

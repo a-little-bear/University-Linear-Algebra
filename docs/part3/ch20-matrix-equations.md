@@ -1,5 +1,11 @@
 # 第 20 章 矩阵方程
 
+<div class="context-flow" markdown>
+
+**前置**：Ch19 Kronecker积/Vec算子 · **脉络**：$AX=B$(伪逆) → **Sylvester** $AX+XB=C$(特征值分离条件) → **Lyapunov**(稳定性) → **Riccati**(最优控制，非线性) → Penrose方程(伪逆公理化)
+
+</div>
+
 矩阵方程是线性代数在控制论、信号处理和数值分析中应用的核心。与普通线性方程组 $A\mathbf{x} = \mathbf{b}$ 不同，矩阵方程中的未知量是一个**矩阵**而非向量。从最简单的 $AX = B$ 到结构丰富的 Sylvester 方程 $AX + XB = C$、Lyapunov 方程 $AX + XA^* = Q$，以及非线性的 Riccati 方程，这些方程各有其独特的数学结构和求解方法。
 
 本章系统地介绍这些矩阵方程的理论基础、可解性条件、求解公式以及数值算法，最后讨论与 Moore-Penrose 伪逆密切相关的 Penrose 方程组。
@@ -7,6 +13,12 @@
 ---
 
 ## 20.1 线性矩阵方程概述
+
+<div class="context-flow" markdown>
+
+**脉络**：$AX=B$ 可解 $\Leftrightarrow$ $\mathcal{C}(B)\subseteq\mathcal{C}(A)$ · 通解结构 = 特解 + 零空间 · $AXB=C$：双边消元，条件 $AA^+CB^+B=C$
+
+</div>
 
 本节从最基本的矩阵方程出发，建立矩阵方程理论的框架。
 
@@ -88,6 +100,12 @@
 ---
 
 ## 20.2 Sylvester 方程
+
+<div class="context-flow" markdown>
+
+**核心**：$AX+XB=C$ 唯一可解 $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ · Ch19 Kronecker和视角：系数矩阵 $=A\oplus B^T$，特征值 $\lambda_i(A)+\lambda_j(B)$ · 积分表示需稳定性条件
+
+</div>
 
 Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、模型简化和矩阵函数理论中。
 
@@ -198,6 +216,12 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 ## 20.3 Lyapunov 方程
 
+<div class="context-flow" markdown>
+
+**脉络**：$AX+XA^*=-Q$：Sylvester方程取 $B=A^*$ · **稳定性等价**：$A$稳定($\operatorname{Re}\lambda_i<0$) $\Leftrightarrow$ $\exists X\succ 0$ 满足方程($Q\succ 0$) · 积分解 $X=\int_0^\infty e^{At}Qe^{A^*t}dt$
+
+</div>
+
 Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分析中有核心地位。
 
 !!! definition "定义 20.5 (连续 Lyapunov 方程)"
@@ -298,6 +322,12 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
 
 ## 20.4 Riccati 方程
 
+<div class="context-flow" markdown>
+
+**脉络**：$A^*X+XA-XBR^{-1}B^*X+Q=0$（非线性！） · **Hamilton矩阵**的稳定不变子空间 → 稳定化解 $X=U_2U_1^{-1}$ · 可镇定+可检测 $\Rightarrow$ 唯一半正定解
+
+</div>
+
 Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和博弈论中有核心地位。
 
 !!! definition "定义 20.7 (代数 Riccati 方程)"
@@ -385,6 +415,12 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
 ---
 
 ## 20.5 数值解法
+
+<div class="context-flow" markdown>
+
+**洞察**：Kronecker积直接法 $O(n^6)$ 不可行 → **Bartels-Stewart**：Schur分解 + 逐列回代 = $O(n^3)$ · 关键：三角Sylvester方程可逐列求解
+
+</div>
 
 本节介绍求解 Sylvester 和 Lyapunov 方程的数值方法。直接使用 Kronecker 积将方程转化为 $n^2$ 维线性系统虽然理论上可行，但计算复杂度为 $O(n^6)$，实际中不可接受。Bartels-Stewart 算法将复杂度降低到 $O(n^3)$。
 
@@ -477,6 +513,12 @@ Riccati 方程是一个**非线性**矩阵方程，在最优控制、滤波和�
 ---
 
 ## 20.6 Penrose 方程
+
+<div class="context-flow" markdown>
+
+**脉络**：四个Penrose方程公理化定义 $A^+$ · (1)内逆 → (1)(3)最小二乘 → (1)(4)最小范数 → (1)(2)(3)(4)唯一Moore-Penrose伪逆 · SVD给出存在性和显式公式
+
+</div>
 
 Penrose 方程组给出了 Moore-Penrose 伪逆的公理化刻画。
 

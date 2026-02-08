@@ -1,10 +1,23 @@
 # 第 24 章 矩阵流形
 
+<div class="context-flow" markdown>
+
+**前置**：正交矩阵(Ch7) · SVD(Ch8) · 正定矩阵(Ch7) · **脉络**：矩阵约束集 → 光滑流形 → Riemannian 几何(测地线/梯度) → 流形优化
+**核心对象**：$O(n)$ / $\text{St}(k,n)$ / $\text{Gr}(k,n)$ / $\mathcal{P}(n)$ ——将约束优化转化为流形上的无约束优化 → 链接 Ch25
+
+</div>
+
 矩阵流形（Matrix Manifold）是指由满足特定约束条件的矩阵所构成的光滑流形。这些流形在控制理论、信号处理、计算机视觉、机器学习等领域中无处不在。本章将系统介绍若干重要的矩阵流形，包括一般线性群、正交群、Stiefel 流形、Grassmann 流形和正定矩阵流形，以及它们上的微分几何结构与优化方法。
 
 ---
 
 ## 24.1 矩阵流形基本概念
+
+<div class="context-flow" markdown>
+
+**基础工具箱**：嵌入子流形($h^{-1}(0)$, 隐函数定理) → 切空间($\ker Dh$) → Riemannian 度量(切空间上的内积) → 测地线(局部最短路) → 指数映射
+
+</div>
 
 我们首先回顾流形论的基本语言，并说明矩阵集合如何自然地获得流形结构。
 
@@ -45,6 +58,13 @@
 ---
 
 ## 24.2 一般线性群 $GL(n)$
+
+<div class="context-flow" markdown>
+
+**母群**：$GL(n) = \{\det \ne 0\}$ 是 $\mathbb{R}^{n^2}$ 的开集 → Lie 代数 $\mathfrak{gl}(n) = \mathbb{R}^{n \times n}$ → 矩阵指数 $e^A$ 连接 Lie 代数与 Lie 群
+**所有矩阵 Lie 群都是 $GL(n)$ 的闭子群**（Cartan 定理）
+
+</div>
 
 !!! definition "定义 24.6 (一般线性群)"
     **一般线性群**（General Linear Group）$GL(n, \mathbb{R})$（简记 $GL(n)$）是所有 $n \times n$ 可逆实矩阵的集合：
@@ -89,6 +109,12 @@
 ---
 
 ## 24.3 正交群与酉群
+
+<div class="context-flow" markdown>
+
+**约束 → 流形**：$Q^TQ = I$ → $O(n)$，$\dim = \frac{n(n-1)}{2}$ · Lie 代数 = **反对称矩阵** $\text{Skew}(n)$ → 测地线 $\gamma(t) = Qe^{t\Omega}$ · Ch23 GOE 的不变性正是 $O(n)$-共轭不变
+
+</div>
 
 正交群和酉群是最重要的矩阵 Lie 群，在几何、物理和工程中有广泛应用。
 
@@ -173,6 +199,12 @@
 
 ## 24.4 Stiefel 流形
 
+<div class="context-flow" markdown>
+
+**推广链**：$S^{n-1} = \text{St}(1,n) \subset \text{St}(k,n) \subset O(n) = \text{St}(n,n)$ · 切空间：$X^TZ$ 反对称 → 投影 $\Pi_X(Z) = Z - X\text{sym}(X^TZ)$ → 链接 §24.8 Riemannian 梯度下降
+
+</div>
+
 Stiefel 流形推广了正交群，是约束优化中的重要对象。
 
 !!! definition "定义 24.10 (Stiefel 流形)"
@@ -227,6 +259,13 @@ Stiefel 流形推广了正交群，是约束优化中的重要对象。
 ---
 
 ## 24.5 Grassmann 流形
+
+<div class="context-flow" markdown>
+
+**商空间**：$\text{Gr}(k,n) = \text{St}(k,n)/O(k)$——参数化 $k$ 维子空间而非基 · 距离 = **主角** $\theta_i = \arccos\sigma_i(X_1^TX_2)$（SVD, Ch8）
+**应用**：PCA = $\text{Gr}(k,n)$ 上的优化（Ch25）· 子空间跟踪/计算机视觉
+
+</div>
 
 Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等问题中自然出现。
 
@@ -300,6 +339,13 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 
 ## 24.6 正定矩阵流形
 
+<div class="context-flow" markdown>
+
+**特殊几何**：$\mathcal{P}(n)$ 上仿射不变度量 $\langle \xi,\eta\rangle_P = \text{tr}(P^{-1}\xi P^{-1}\eta)$ → 测地线 $P^{1/2}e^{tP^{-1/2}\xi P^{-1/2}}P^{1/2}$ → **Hadamard 流形**（非正曲率，唯一 Frechet 均值）
+**应用**：协方差估计、扩散张量成像中的几何均值 · $\mathcal{P}(1) = (0,\infty)$ 上距离 $= |\ln(p/q)|$
+
+</div>
+
 对称正定矩阵在统计学、扩散张量成像、协方差估计等领域中扮演重要角色。
 
 !!! definition "定义 24.13 (正定矩阵流形)"
@@ -315,6 +361,12 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
     \langle \xi, \eta \rangle_P = \operatorname{tr}(P^{-1} \xi P^{-1} \eta), \quad \xi, \eta \in T_P \mathcal{P}(n) = \operatorname{Sym}(n).
     $$
     该度量在群作用 $P \mapsto APA^T$（$A \in GL(n)$）下不变。
+
+<div class="context-flow" markdown>
+
+**洞察**：仿射不变度量下 $d(P,Q) = \|\log(P^{-1/2}QP^{-1/2})\|_F$ ——距离由特征值的**对数比**决定，几何均值取代算术均值成为自然的"中心"概念
+
+</div>
 
 !!! theorem "定理 24.11 ($\mathcal{P}(n)$ 上的测地线)"
     在仿射不变度量下，$\mathcal{P}(n)$ 上从 $P$ 出发、初始速度 $\xi \in \operatorname{Sym}(n)$ 的测地线为
@@ -363,6 +415,13 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 ---
 
 ## 24.7 矩阵 Lie 群与 Lie 代数
+
+<div class="context-flow" markdown>
+
+**统一理论**：BCH 公式 $e^Xe^Y = e^{X+Y+\frac{1}{2}[X,Y]+\cdots}$ 将群乘法编码为 Lie 括号 → Lie 群同态 ↔ Lie 代数同态（单连通时完全对应）
+**实用**：$SO(3)$ 中 Rodrigues 公式 · 机器人学/计算机视觉中的小旋转合成
+
+</div>
 
 本节系统讨论矩阵 Lie 群的一般理论。
 
@@ -429,6 +488,13 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 ---
 
 ## 24.8 矩阵流形上的优化
+
+<div class="context-flow" markdown>
+
+**核心转化**：约束优化($X^TX=I$ 等) → 流形上无约束优化 · **Riemannian 梯度** = 欧氏梯度投影到切空间 → **收回映射**(retraction)替代昂贵的测地线步
+**链接**：特征值问题 = $\text{St}(k,n)$ 上 $\max \text{tr}(X^TAX)$（Ch25）· PCA = $\text{Gr}(k,n)$ 上优化
+
+</div>
 
 许多实际问题可以建模为矩阵流形上的优化问题。流形优化将约束优化转化为无约束的 Riemannian 优化。
 

@@ -188,6 +188,80 @@
 }
 
 /* ============================
+   模式切换按钮
+   ============================ */
+
+.mode-toggle-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: currentColor;
+  padding: 0.2em;
+  margin: 0 0.2em;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mode-toggle-btn:hover {
+  opacity: 1;
+}
+
+.mode-toggle-btn svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* ============================
+   深度连接内容（context-flow）
+   ============================ */
+
+.context-flow {
+  border-left: 3px solid var(--md-primary-fg-color);
+  padding: 0.3em 1em;
+  margin: 0.6em 0;
+  font-size: 0.88em;
+  line-height: 1.7;
+  color: var(--md-default-fg-color--light);
+}
+
+[data-md-color-scheme="default"] .context-flow {
+  background: rgba(63, 81, 181, 0.04);
+}
+
+[data-md-color-scheme="slate"] .context-flow {
+  background: rgba(159, 168, 218, 0.07);
+}
+
+.context-flow p {
+  margin: 0.3em 0;
+}
+
+.context-flow strong {
+  color: var(--md-primary-fg-color);
+}
+
+/* ============================
+   定义速查模式
+   ============================ */
+
+body.definition-sheet .context-flow {
+  display: none !important;
+}
+
+body.definition-sheet .md-typeset h2 {
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+}
+
+body.definition-sheet .md-typeset h3 {
+  margin-top: 0.8em;
+  margin-bottom: 0.2em;
+}
+
+/* ============================
    难度标签
    ============================ */
 

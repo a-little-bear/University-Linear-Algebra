@@ -1,10 +1,23 @@
 # 第 6 章 特征值与特征向量
 
+<div class="context-flow" markdown>
+
+**前置**：第 3 章行列式 · 第 5 章相似矩阵 · 不变子空间 · **本章脉络**：$A\mathbf{v}=\lambda\mathbf{v}$ → 特征多项式 $\det(A-\lambda I)=0$ → 代数/几何重数 → 特征空间 → 对角化条件 → 实对称矩阵谱定理 → Cayley-Hamilton → 相似不变量
+**一句话本质**：特征值是线性变换在其"内在缩放方向"上的伸缩因子——找到足够多的特征方向就能对角化
+
+</div>
+
 特征值（eigenvalue）与特征向量（eigenvector）是线性代数中最深刻、应用最广泛的概念之一。直观地说，线性变换的特征向量是那些"方向不变"的向量——变换只改变了它们的长度（伸缩）。这一简单的思想引出了丰富的理论：特征多项式、对角化、谱定理等。特征值理论不仅在纯数学中具有核心地位，在量子力学、振动分析、主成分分析、Google PageRank 算法等领域也有着广泛的应用。本章将系统地研究特征值与特征向量的定义、计算、性质和应用。
 
 ---
 
 ## 6.1 特征值与特征向量的定义
+
+<div class="context-flow" markdown>
+
+**从不变子空间到特征值**：第 5 章一维不变子空间 $\operatorname{span}\{\mathbf{v}\}$ → $T(\mathbf{v})=\lambda\mathbf{v}$ → $\lambda=0$ 时 $\mathbf{v} \in \ker A$（$A$ 不可逆），$\mathbf{v} \neq \mathbf{0}$ 是本质要求
+
+</div>
 
 !!! definition "定义 6.1 (特征值与特征向量)"
     设 $A$ 为 $n$ 阶方阵（或 $T: V \to V$ 为线性算子）。若存在标量 $\lambda \in \mathbb{F}$ 和**非零**向量 $\mathbf{v} \in \mathbb{F}^n$（或 $\mathbf{v} \in V$，$\mathbf{v} \neq \mathbf{0}$），使得
@@ -41,6 +54,12 @@
 ---
 
 ## 6.2 特征多项式
+
+<div class="context-flow" markdown>
+
+**将特征值问题转化为求根**：$A\mathbf{v}=\lambda\mathbf{v}$ → $(A-\lambda I)\mathbf{v}=\mathbf{0}$ 有非零解 → $\det(A-\lambda I)=0$（第 3 章） → $n$ 次多项式有 $n$ 个复根
+
+</div>
 
 !!! definition "定义 6.2 (特征多项式)"
     设 $A$ 为 $n$ 阶方阵，则
@@ -93,6 +112,12 @@
 ---
 
 ## 6.3 特征值的性质
+
+<div class="context-flow" markdown>
+
+**代数与几何的张力**：$1 \le \operatorname{GM}(\lambda) \le \operatorname{AM}(\lambda)$ → 二者相等时可对角化 → $\operatorname{tr}A = \sum\lambda_i$，$\det A = \prod\lambda_i$（连接第 3 章行列式与特征值）
+
+</div>
 
 !!! definition "定义 6.3 (代数重数)"
     特征值 $\lambda_0$ 作为特征多项式 $p(\lambda)$ 的根的重数，称为 $\lambda_0$ 的**代数重数**（algebraic multiplicity），记为 $\operatorname{AM}(\lambda_0)$。
@@ -167,6 +192,12 @@
 
 ## 6.4 特征空间
 
+<div class="context-flow" markdown>
+
+**特征空间 = $\ker(A-\lambda I)$**：第 1 章齐次方程组的解空间 → 其维数 = 几何重数 → 不同特征值的特征空间**直和**（第 4 章）
+
+</div>
+
 !!! definition "定义 6.5 (特征空间)"
     设 $\lambda_0$ 为 $A$ 的特征值，则
 
@@ -208,6 +239,12 @@
 ---
 
 ## 6.5 对角化
+
+<div class="context-flow" markdown>
+
+**线性代数的核心目标之一**：$A = PDP^{-1}$ → $P$ 的列是特征向量，$D$ 的对角元是特征值 → 可对角化 $\Leftrightarrow$ $n$ 个线性无关特征向量 $\Leftrightarrow$ $\forall i:\operatorname{GM}=\operatorname{AM}$
+
+</div>
 
 !!! definition "定义 6.6 (可对角化)"
     $n$ 阶方阵 $A$ 称为**可对角化的**（diagonalizable），若存在可逆矩阵 $P$ 和对角矩阵 $D$ 使得
@@ -263,6 +300,12 @@
 ---
 
 ## 6.6 实对称矩阵的特征值
+
+<div class="context-flow" markdown>
+
+**对称矩阵的完美性质**：特征值全实 → 不同特征值的特征向量正交 → **谱定理**：$A=QDQ^T$（正交对角化） → 连接第 7 章正交矩阵
+
+</div>
 
 !!! definition "定义 6.7 (实对称矩阵)"
     实方阵 $A$ 称为**对称的**（symmetric），若 $A^T = A$。
@@ -322,6 +365,12 @@
 ---
 
 ## 6.7 Cayley-Hamilton 定理
+
+<div class="context-flow" markdown>
+
+**矩阵满足自己的特征多项式**：$p(A)=O$ → 推论：$A^{-1}$ 可表示为 $A$ 的多项式 → 暗示矩阵代数中 $A$ 的幂次是有限维的
+
+</div>
 
 !!! theorem "定理 6.11 (Cayley-Hamilton 定理)"
     设 $A$ 为 $n$ 阶方阵，$p(\lambda) = \det(A - \lambda I)$ 为 $A$ 的特征多项式，则
@@ -392,6 +441,12 @@
 ---
 
 ## 6.8 相似矩阵的性质
+
+<div class="context-flow" markdown>
+
+**相似 = 同一线性算子的不同表示**（第 5 章） → 共享：特征多项式、迹、行列式、秩 → 但特征值相同不一定相似（需考虑 Jordan 结构）
+
+</div>
 
 !!! definition "定义 6.8 (相似不变量)"
     若性质或量在相似变换 $A \mapsto P^{-1}AP$ 下不变，则称其为**相似不变量**（similarity invariant）。

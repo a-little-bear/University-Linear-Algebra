@@ -1,10 +1,23 @@
 # 第 10 章 矩阵分解
 
+<div class="context-flow" markdown>
+
+**前置**：Ch8 正交性/谱定理 · Ch9 正定性 · **本章脉络**：LU（消元） → PLU（选主元） → Cholesky（正定） → QR（正交化） → Schur（三角化） → 谱分解 → 极分解
+本质：将矩阵拆为"结构简单的因子之积"——每种分解回答不同的问题
+
+</div>
+
 矩阵分解（matrix decomposition / matrix factorization）是将一个矩阵表示为若干特殊矩阵之积的技术，是数值线性代数和应用数学的核心工具。不同的矩阵分解适用于不同的应用场景：LU 分解用于高效求解线性方程组，QR 分解用于最小二乘问题，Schur 分解揭示矩阵的深层结构，谱分解刻画了对称矩阵和正规矩阵的本质。本章系统地介绍各种重要的矩阵分解方法。
 
 ---
 
 ## 10.1 LU 分解
+
+<div class="context-flow" markdown>
+
+高斯消元的矩阵化表述：$A = LU$（下三角 × 上三角） → 将 $O(n^3)$ 的分解做一次，之后每个右端 $\mathbf{b}$ 只需 $O(n^2)$
+
+</div>
 
 !!! definition "定义 10.1 (LU 分解)"
     设 $A$ 是 $n \times n$ 矩阵。若存在 $n \times n$ 下三角矩阵 $L$（对角元素全为 1）和上三角矩阵 $U$ 使得
@@ -44,6 +57,12 @@
 ---
 
 ## 10.2 PLU 分解
+
+<div class="context-flow" markdown>
+
+LU 要求顺序主子式非零 → 引入**置换矩阵** $P$（行交换）→ $PA = LU$ 对**任意可逆矩阵**成立
+
+</div>
 
 !!! definition "定义 10.2 (置换矩阵)"
     **置换矩阵**（permutation matrix）是恰好在每行每列有且仅有一个 $1$、其余元素为 $0$ 的方阵。它对应于单位矩阵的行（列）的一个排列。
@@ -97,6 +116,12 @@
 
 ## 10.3 Cholesky 分解
 
+<div class="context-flow" markdown>
+
+Ch9 正定 $A = C^TC$ → 取 $C = L^T$ 得 $A = LL^T$ → 计算量仅 $\frac{1}{3}n^3$（LU 的一半），无需选主元，数值稳定
+
+</div>
+
 !!! definition "定义 10.3 (Cholesky 分解)"
     设 $A$ 是 $n \times n$ 实对称正定矩阵。$A$ 的 **Cholesky 分解**（Cholesky decomposition）是
 
@@ -136,6 +161,12 @@
 ---
 
 ## 10.4 QR 分解
+
+<div class="context-flow" markdown>
+
+正交 × 上三角：$A = QR$ → 三种构造法：**Gram-Schmidt**（Ch8 正交化）、**Householder** 反射、**Givens** 旋转 → 数值最小二乘的核心工具
+
+</div>
 
 !!! definition "定义 10.4 (QR 分解)"
     设 $A$ 是 $m \times n$ 矩阵（$m \geq n$）。$A$ 的 **QR 分解**（QR decomposition）是
@@ -242,6 +273,18 @@
 
 ## 10.5 Schur 分解
 
+<div class="context-flow" markdown>
+
+任意方阵可**酉三角化** $A = UTU^H$ → 对角元 = 特征值 → 比对角化更一般（不要求可对角化） → 正规矩阵时 $T$ 退化为对角
+
+</div>
+
+<div class="context-flow" markdown>
+
+**洞察**：Schur 分解的存在性证明与谱定理同构——找特征向量、正交补不变、归纳降维——但不需正规性假设
+
+</div>
+
 !!! theorem "定理 10.6 (Schur 分解)"
     设 $A$ 是 $n \times n$ 复矩阵。则存在酉矩阵 $U$ 使得
 
@@ -285,12 +328,24 @@
 
 ## 10.6 谱分解
 
+<div class="context-flow" markdown>
+
+$A = \sum \lambda_i P_i$（特征值 × 正交投影之和） → 将矩阵拆为**独立模式的叠加** → Ch11 SVD 是非对称版本，Ch13 $f(A) = \sum f(\lambda_i)P_i$
+
+</div>
+
 !!! definition "定义 10.8 (谱分解)"
     设 $A$ 是可对角化的矩阵。若 $A$ 有特征值 $\lambda_1, \ldots, \lambda_k$（互不相同），对应的特征空间投影为 $P_1, \ldots, P_k$，则
 
     $$A = \lambda_1 P_1 + \lambda_2 P_2 + \cdots + \lambda_k P_k$$
 
     称为 $A$ 的**谱分解**（spectral decomposition）。
+
+<div class="context-flow" markdown>
+
+**洞察**：$A = \sum \lambda_i \mathbf{q}_i\mathbf{q}_i^T$ 中每个 $\mathbf{q}_i\mathbf{q}_i^T$ 是秩一正交投影——矩阵被分解为"频率分量"，这是 Fourier 分析的有限维版本
+
+</div>
 
 !!! theorem "定理 10.8 (对称矩阵的谱分解)"
     设 $A$ 是 $n \times n$ 实对称矩阵，特征值为 $\lambda_1, \ldots, \lambda_n$（允许重复），对应的标准正交特征向量为 $\mathbf{q}_1, \ldots, \mathbf{q}_n$。则
@@ -330,6 +385,12 @@
 ---
 
 ## 10.7 极分解
+
+<div class="context-flow" markdown>
+
+$A = UP$：酉 × 正定 ↔ 复数极坐标 $z = e^{i\theta}|z|$ → 通过 SVD 计算：$U = VW^H$, $P = W\Sigma W^H$ → 分离"旋转"与"伸缩"
+
+</div>
 
 !!! definition "定义 10.9 (极分解)"
     设 $A$ 是 $n \times n$ 可逆复矩阵。$A$ 的**极分解**（polar decomposition）是

@@ -1,5 +1,11 @@
 # 第 19 章 Kronecker 积与 Vec 算子
 
+<div class="context-flow" markdown>
+
+**前置**：矩阵乘法/特征值(Ch6) · **脉络**：$A\otimes B$ 组合两个空间 → **Vec算子**将矩阵方程 $AXB=C$ 变为 $(B^T\otimes A)\operatorname{vec}(X)=\operatorname{vec}(C)$ → Ch20 Sylvester/Lyapunov求解
+
+</div>
+
 在线性代数的实际应用中，我们经常遇到需要将矩阵方程转化为向量方程的情形，或者需要构造具有特殊结构的大矩阵。**Kronecker 积**（Kronecker product）和 **Vec 算子**（vectorization operator）正是处理这类问题的核心工具。Kronecker 积提供了一种系统的方式来"组合"两个矩阵空间上的线性映射，而 Vec 算子则将矩阵"拉直"为向量，使得矩阵方程可以借助 Kronecker 积转化为标准的线性方程组。
 
 本章从 Kronecker 积的定义和基本性质出发，介绍 Vec 算子及其核心公式，讨论置换矩阵（commutation matrix）的作用，然后展示如何利用这些工具求解矩阵方程，最后介绍 Kronecker 和及其与矩阵指数的关系。
@@ -7,6 +13,12 @@
 ---
 
 ## 19.1 Kronecker 积定义
+
+<div class="context-flow" markdown>
+
+**本质**：$A\otimes B$ 是 $mp\times nq$ 分块矩阵，第$(i,j)$块为 $a_{ij}B$ · 不满足交换律，但置换相似($B\otimes A = P(A\otimes B)P^T$)
+
+</div>
 
 !!! definition "定义 19.1 (Kronecker 积)"
     设 $A = (a_{ij})$ 为 $m \times n$ 矩阵，$B$ 为 $p \times q$ 矩阵。$A$ 与 $B$ 的 **Kronecker 积**（又称**张量积**，tensor product），记作 $A \otimes B$，定义为 $mp \times nq$ **分块矩阵**：
@@ -40,6 +52,12 @@
 ---
 
 ## 19.2 Kronecker 积性质
+
+<div class="context-flow" markdown>
+
+**核心性质**：**混合积** $(A\otimes B)(C\otimes D)=(AC)\otimes(BD)$ → 推出逆、转置、行列式公式 · $\det(A\otimes B)=(\det A)^n(\det B)^m$
+
+</div>
 
 Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论中不可或缺的工具。
 
@@ -127,6 +145,12 @@ Kronecker 积具有丰富而优美的代数性质，使得它成为矩阵理论�
 ---
 
 ## 19.3 Vec 算子
+
+<div class="context-flow" markdown>
+
+**桥梁公式**：$\operatorname{vec}(AXB)=(B^T\otimes A)\operatorname{vec}(X)$ · 特例：$\operatorname{vec}(AX)=(I\otimes A)\operatorname{vec}(X)$，$\operatorname{vec}(XB)=(B^T\otimes I)\operatorname{vec}(X)$
+
+</div>
 
 Vec 算子将矩阵按列堆叠为向量，是连接矩阵方程与向量方程的桥梁。
 
@@ -221,6 +245,12 @@ Vec 算子将矩阵按列堆叠为向量，是连接矩阵方程与向量方程�
 
 ## 19.4 置换矩阵（Commutation Matrix）
 
+<div class="context-flow" markdown>
+
+**作用**：$K_{m,n}\operatorname{vec}(A)=\operatorname{vec}(A^T)$ · 实现 $A\otimes B \leftrightarrow B\otimes A$ 的指标重排 · $K_{n,n}^2=I$(对合)
+
+</div>
+
 Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个特殊的置换矩阵相联系。
 
 !!! definition "定义 19.5 (置换矩阵 / 交换矩阵)"
@@ -292,6 +322,12 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
 ---
 
 ## 19.5 Kronecker 积与矩阵方程
+
+<div class="context-flow" markdown>
+
+**应用**：$\sum A_kXB_k=C$ → $(\sum B_k^T\otimes A_k)\operatorname{vec}(X)=\operatorname{vec}(C)$ · **Sylvester** $AX+XB=C$：可解 $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ → Ch20
+
+</div>
 
 Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化为标准的线性方程组。
 
@@ -370,6 +406,12 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 ## 19.6 Kronecker 积的特征值分解
 
+<div class="context-flow" markdown>
+
+**洞察**：$\sigma(A\otimes B)=\{\lambda_i\mu_j\}$，特征向量 $\mathbf{u}_i\otimes\mathbf{v}_j$ · SVD也乘积化：$\sigma_k(A\otimes B)=\{\sigma_i(A)\sigma_j(B)\}$
+
+</div>
+
 !!! definition "定义 19.7 (Kronecker 积的谱)"
     设 $A$ 为 $m \times m$ 矩阵，特征值 $\lambda_1, \ldots, \lambda_m$；$B$ 为 $n \times n$ 矩阵，特征值 $\mu_1, \ldots, \mu_n$。则 $A \otimes B$ 的 $mn$ 个特征值为：
     $$
@@ -428,6 +470,12 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 ---
 
 ## 19.7 Kronecker 和
+
+<div class="context-flow" markdown>
+
+**脉络**：$A\oplus B = A\otimes I+I\otimes B$，特征值 $\lambda_i+\mu_j$ · **关键等式**：$e^{A\oplus B}=e^A\otimes e^B$(因 $A\otimes I$ 与 $I\otimes B$ 可交换) → Ch20 Lyapunov方程
+
+</div>
 
 Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵指数和 Lyapunov 方程有着深刻联系。
 

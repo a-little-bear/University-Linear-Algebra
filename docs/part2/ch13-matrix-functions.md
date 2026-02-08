@@ -1,10 +1,23 @@
 # 第 13 章 矩阵函数
 
+<div class="context-flow" markdown>
+
+**前置**：Ch12 Jordan 标准形 · Ch10 谱分解 · **本章脉络**：$p(A)$（多项式） → Cayley-Hamilton → 幂级数/收敛 → $e^A$（矩阵指数） → $\log A$, $A^{1/2}$ → 一般 $f(A)$（Jordan/Cauchy 积分）
+本质：$f(\lambda) \to f(A)$ —— Jordan 形让标量函数**逐块作用于矩阵**，导数信息填充超对角线
+
+</div>
+
 在前面的章节中，我们已经熟悉了矩阵的加法、乘法和求逆等基本运算。本章将把函数的概念从标量推广到矩阵：给定一个函数 $f$（如指数函数、对数函数、平方根等），我们希望定义 $f(A)$ 的含义。矩阵函数（matrix function）在微分方程、控制理论、量子力学等领域有着重要应用。本章从矩阵多项式出发，经由幂级数和 Jordan 标准形，逐步建立矩阵函数的完整理论。
 
 ---
 
 ## 13.1 矩阵多项式
+
+<div class="context-flow" markdown>
+
+$p(A) = a_k A^k + \cdots + a_0 I$：最基础的矩阵函数 → 保相似性 $p(PBP^{-1}) = Pp(B)P^{-1}$ → **Cayley-Hamilton**：$p_A(A) = 0$
+
+</div>
 
 矩阵多项式是定义矩阵函数的最基础方式，也是理解更一般矩阵函数的起点。
 
@@ -35,6 +48,12 @@
     $$
 
     **(5)** 设 $A\mathbf{v} = \lambda\mathbf{v}$，则 $A^k\mathbf{v} = \lambda^k\mathbf{v}$，因此 $p(A)\mathbf{v} = p(\lambda)\mathbf{v}$。即 $p(\lambda)$ 为 $p(A)$ 的特征值。$\blacksquare$
+
+<div class="context-flow" markdown>
+
+**洞察**：Cayley-Hamilton 意味着 $A^n$ 可表示为 $I, A, \ldots, A^{n-1}$ 的线性组合——矩阵代数 $\mathbb{F}[A]$ 的维数 $\le n$
+
+</div>
 
 !!! theorem "定理 13.2 (Cayley-Hamilton 定理)"
     设 $A$ 为 $n \times n$ 矩阵，$p_A(\lambda) = \det(\lambda I - A)$ 为其特征多项式，则
@@ -75,6 +94,12 @@
 ---
 
 ## 13.2 矩阵幂级数
+
+<div class="context-flow" markdown>
+
+$f(A) = \sum c_k A^k$ 收敛 ↔ **谱半径** $\rho(A) < R$（收敛半径） → Neumann 级数 $(I-A)^{-1} = \sum A^k$（$\rho(A)<1$）
+
+</div>
 
 将多项式推广到幂级数，需要引入矩阵级数的收敛性概念。
 
@@ -144,6 +169,12 @@
 
 ## 13.3 矩阵指数
 
+<div class="context-flow" markdown>
+
+$e^A = \sum \frac{A^k}{k!}$ 对**任意** $A$ 收敛 → $\det(e^A) = e^{\operatorname{tr}(A)}$ → 但 $e^{A+B} = e^Ae^B$ 仅当 $AB = BA$
+
+</div>
+
 矩阵指数（matrix exponential）是最重要的矩阵函数，在线性微分方程理论中起核心作用。
 
 !!! definition "定义 13.4 (矩阵指数 Matrix Exponential)"
@@ -208,6 +239,12 @@
 ---
 
 ## 13.4 矩阵指数的计算
+
+<div class="context-flow" markdown>
+
+三条路线：**对角化** $e^A = Pe^{\Lambda}P^{-1}$ · **Jordan 形** $e^{J_k(\lambda)t} = e^{\lambda t}\sum \frac{t^j}{j!}N^j$ · **Cayley-Hamilton** 法用特征值条件定系数
+
+</div>
 
 矩阵指数的计算是应用中的核心问题。本节介绍几种主要方法。
 
@@ -305,7 +342,19 @@
 
 ## 13.5 矩阵指数与微分方程
 
+<div class="context-flow" markdown>
+
+$\mathbf{x}' = A\mathbf{x}$ → $\mathbf{x}(t) = e^{At}\mathbf{x}_0$（唯一解） → 非齐次用**常数变易法** → Jordan 形决定解的渐近行为（$e^{\lambda t}$ × 多项式）
+
+</div>
+
 矩阵指数的最重要应用是求解线性常系数微分方程组。
+
+<div class="context-flow" markdown>
+
+**洞察**：唯一性证明的巧妙之处——令 $\mathbf{z}(t) = e^{-At}\mathbf{y}(t)$，利用 $\mathbf{z}'=0$ 即得 $\mathbf{y} = e^{At}\mathbf{x}_0$
+
+</div>
 
 !!! theorem "定理 13.8 (齐次线性微分方程组的解)"
     微分方程组
@@ -386,6 +435,12 @@
 
 ## 13.6 矩阵对数
 
+<div class="context-flow" markdown>
+
+$e^X = A$ 的逆问题 → 可逆矩阵必有对数 → 对 Jordan 块 $\log J_k(\lambda) = (\log\lambda)I + \sum \frac{(-1)^{j+1}}{j}(\lambda^{-1}N)^j$（有限和）
+
+</div>
+
 矩阵对数（matrix logarithm）是矩阵指数的逆运算。
 
 !!! definition "定义 13.6 (矩阵对数 Matrix Logarithm)"
@@ -428,6 +483,12 @@
 ---
 
 ## 13.7 矩阵平方根
+
+<div class="context-flow" markdown>
+
+$X^2 = A$ → 正定矩阵有唯一**正定平方根** $A^{1/2} = Q\Lambda^{1/2}Q^T$ → 也可通过 $e^{\frac{1}{2}\log A}$ 定义 → 出现在 Ch10 极分解 $P = (A^HA)^{1/2}$
+
+</div>
 
 !!! definition "定义 13.7 (矩阵平方根 Matrix Square Root)"
     设 $A$ 为 $n \times n$ 矩阵。若存在矩阵 $X$ 使得 $X^2 = A$，则称 $X$ 为 $A$ 的**矩阵平方根**，记为 $X = A^{1/2}$。
@@ -485,9 +546,21 @@
 
 ## 13.8 一般矩阵函数
 
+<div class="context-flow" markdown>
+
+统一框架：$f(J_k(\lambda))$ 的 $(p,q)$ 元素 = $\frac{f^{(q-p)}(\lambda)}{(q-p)!}$ → Cauchy 积分定义 $f(A) = \frac{1}{2\pi i}\oint f(z)(zI-A)^{-1}dz$ 与之等价 → 谱映射 $\sigma(f(A)) = f(\sigma(A))$
+
+</div>
+
 前面几节讨论了特定的矩阵函数（指数、对数、平方根）。本节给出矩阵函数的一般定义框架。
 
 ### 13.8.1 通过 Jordan 标准形定义
+
+<div class="context-flow" markdown>
+
+**洞察**：$f(J_k(\lambda))$ 中出现 $f, f', f'', \ldots, f^{(k-1)}$ ——Jordan 块的大小决定了 $f$ 需要多少阶**可微性**
+
+</div>
 
 !!! definition "定义 13.9 (一般矩阵函数 — Jordan 形定义)"
     设 $f$ 为定义在 $A$ 的谱上的函数，$A = PJP^{-1}$，$J = \operatorname{diag}(J_{k_1}(\lambda_1), \ldots, J_{k_s}(\lambda_s))$。定义

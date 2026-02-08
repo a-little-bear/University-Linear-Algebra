@@ -1,10 +1,23 @@
 # 第 9 章 二次型
 
+<div class="context-flow" markdown>
+
+**前置**：Ch8 对称矩阵谱定理 · **本章脉络**：$\mathbf{x}^TA\mathbf{x}$ → 配方法/正交法化标准形 → **惯性定理**（签名不变） → 正定性判别 → 几何（椭球/双曲面）
+本质：二次型是对称矩阵的"标量指纹"——签名 $(p,q)$ 完全决定等价类，正定性决定几何形状
+
+</div>
+
 二次型（quadratic form）是二次齐次多项式的代数理论，它与对称矩阵和内积空间有着深刻的联系。二次型的研究不仅是线性代数的重要组成部分，而且在微分几何、优化理论、统计学和物理学中有着广泛的应用。本章将系统地研究二次型的定义、化简方法、惯性定理以及正定性判别等核心理论。
 
 ---
 
 ## 9.1 二次型的定义
+
+<div class="context-flow" markdown>
+
+**对称矩阵** $A$ ↔ 二次型 $Q(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}$ 是一一对应；交叉项 $x_ix_j$ 拆分为 $a_{ij} = a_{ji}$
+
+</div>
 
 !!! definition "定义 9.1 (二次型)"
     设 $\mathbb{F} = \mathbb{R}$（或 $\mathbb{C}$）。$n$ 个变量 $x_1, x_2, \ldots, x_n$ 上的**二次型**（quadratic form）是如下形式的二次齐次多项式：
@@ -45,6 +58,12 @@
 ---
 
 ## 9.2 二次型的标准形
+
+<div class="context-flow" markdown>
+
+消去交叉项 → 只留 $d_i y_i^2$ → **配方法**（Lagrange）是构造性工具，任意二次型均可化标准形
+
+</div>
 
 !!! definition "定义 9.3 (标准形)"
     如果二次型 $Q(\mathbf{x})$ 只含平方项（没有交叉项），即
@@ -101,6 +120,12 @@
 
 ## 9.3 正交化法化标准形
 
+<div class="context-flow" markdown>
+
+配方法的替换矩阵不唯一 → 用 Ch8 **谱定理** $A = Q\Lambda Q^T$ 做正交替换 → 标准形系数 = 特征值，变换 = 等距
+
+</div>
+
 配方法得到的标准形依赖于配方的顺序，变换矩阵不唯一。正交化法（利用谱定理）给出了一种"最自然"的标准形化简方法。
 
 !!! theorem "定理 9.3 (正交对角化法)"
@@ -139,6 +164,12 @@
 
 ## 9.4 惯性定理
 
+<div class="context-flow" markdown>
+
+标准形的系数可变，但**正系数个数 $p$ 和负系数个数 $q$ 不变**——Sylvester 惯性定律是二次型理论的核心不变量
+
+</div>
+
 !!! definition "定义 9.5 (惯性指数)"
     设实二次型 $Q(\mathbf{x})$ 经非退化线性替换化为标准形
 
@@ -149,6 +180,12 @@
     - $p$ 称为二次型的**正惯性指数**（positive index of inertia）；
     - $q$ 称为二次型的**负惯性指数**（negative index of inertia）；
     - $(p, q)$ 称为二次型的**符号差**或**签名**（signature）。
+
+<div class="context-flow" markdown>
+
+**洞察**：证明的核心是**维数论证**——$V_1 \cap V_2 \neq \{0\}$（$\dim V_1 + \dim V_2 > n$）导出矛盾，这一技巧在 Ch11 Eckart-Young 中再现
+
+</div>
 
 !!! theorem "定理 9.4 (Sylvester 惯性定律)"
     实二次型的标准形中正系数的个数 $p$ 和负系数的个数 $q$ 是不变的，与化标准形时所用的非退化线性替换无关。即 $p$ 和 $q$ 仅由二次型本身决定。
@@ -200,6 +237,12 @@
 
 ## 9.5 合同变换与合同矩阵
 
+<div class="context-flow" markdown>
+
+**相似** $P^{-1}AP$（保特征值）vs **合同** $C^TAC$（保签名）——合同是二次型的自然等价关系，对称性和秩不变但特征值可变
+
+</div>
+
 !!! definition "定义 9.6 (合同)"
     设 $A, B$ 是 $n$ 阶实方阵。若存在可逆矩阵 $C$ 使得
 
@@ -247,6 +290,12 @@
 
 ## 9.6 正定二次型与正定矩阵
 
+<div class="context-flow" markdown>
+
+签名 $(n,0)$ ↔ 所有特征值 > 0 ↔ $A = C^TC$ ↔ 顺序主子式全正 → 正定矩阵直通 Ch10 **Cholesky 分解** $A = LL^T$
+
+</div>
+
 正定性是二次型和对称矩阵最重要的性质之一，在优化、统计、微分方程等领域有核心地位。
 
 !!! definition "定义 9.7 (正定性分类)"
@@ -257,6 +306,12 @@
     - **负定的**（negative definite）：若对所有 $\mathbf{x} \neq \mathbf{0}$ 有 $Q(\mathbf{x}) < 0$；
     - **半负定的**（negative semidefinite）：若对所有 $\mathbf{x}$ 有 $Q(\mathbf{x}) \leq 0$；
     - **不定的**（indefinite）：若 $Q$ 既取正值也取负值。
+
+<div class="context-flow" markdown>
+
+**洞察**：五种等价条件统一了代数（特征值）、几何（$A = C^TC$）和组合（顺序主子式）三个视角
+
+</div>
 
 !!! theorem "定理 9.6 (正定的等价条件)"
     设 $A$ 是 $n$ 阶实对称矩阵。以下条件等价：
@@ -315,6 +370,12 @@
 ---
 
 ## 9.7 二次型的几何意义
+
+<div class="context-flow" markdown>
+
+$\mathbf{x}^TA\mathbf{x} = c$ 定义二次曲面 → 正交替换沿**特征向量方向**（主轴）消去交叉项 → 曲面类型由签名 $(p,q)$ 决定
+
+</div>
 
 二次型在几何上描述了二次曲线和二次曲面。
 

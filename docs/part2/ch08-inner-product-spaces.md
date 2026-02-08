@@ -1,10 +1,23 @@
 # 第 8 章 内积空间
 
+<div class="context-flow" markdown>
+
+**前置**：Ch7 $\mathbb{R}^n$ 的正交性 · **本章脉络**：内积公理 → 范数/Cauchy-Schwarz → 正交补/投影 → 伴随算子 → 正规/自伴算子 → **谱定理**
+本质：给向量空间装上"几何尺子"——一旦有内积，就有长度、角度、正交分解，最终让算子可对角化
+
+</div>
+
 内积空间（inner product space）是线性代数中最富有几何直觉的结构之一。通过在向量空间上引入内积运算，我们可以严格地定义长度、角度、正交性等几何概念，从而将代数结构与几何直觉深度融合。本章从内积的公理化定义出发，系统地建立范数与距离理论，研究正交性与正交分解，深入探讨伴随算子、正规算子和自伴算子的性质，最终推导出线性代数中最深刻的结果之一——谱定理。
 
 ---
 
 ## 8.1 内积的定义
+
+<div class="context-flow" markdown>
+
+将 $\mathbb{R}^n$ 的点积 $\mathbf{x}^T\mathbf{y}$ **公理化**：正定性 + 对称性（或共轭对称性）+ 线性性 → 适用于函数空间等一般空间
+
+</div>
 
 在欧几里得空间 $\mathbb{R}^n$ 中，点积 $\mathbf{x} \cdot \mathbf{y} = \sum_{i=1}^n x_i y_i$ 赋予了向量以长度和角度的概念。内积是点积的推广，它将这种几何结构引入到一般的向量空间中。
 
@@ -81,6 +94,13 @@
 
 ## 8.2 范数与距离
 
+<div class="context-flow" markdown>
+
+内积 → 范数 $\|\mathbf{v}\| = \sqrt{\langle \mathbf{v},\mathbf{v}\rangle}$ → **Cauchy-Schwarz**（内积空间最基本不等式） → 三角不等式 → 距离
+关键洞察：平行四边形恒等式刻画了"哪些范数来自内积"
+
+</div>
+
 内积自然地诱导出向量的"长度"概念（范数）和向量之间的"距离"概念。
 
 !!! definition "定义 8.4 (诱导范数)"
@@ -94,6 +114,12 @@
     若 $\|\mathbf{v}\| = 1$，则称 $\mathbf{v}$ 为**单位向量**（unit vector）。对任意非零向量 $\mathbf{v}$，向量 $\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}$ 是单位向量，将 $\mathbf{v}$ 变换为 $\hat{\mathbf{v}}$ 的过程称为**单位化**（normalization）。
 
 ### Cauchy-Schwarz 不等式
+
+<div class="context-flow" markdown>
+
+**洞察**：Cauchy-Schwarz 的证明核心是对 $\|\mathbf{u} - t\mathbf{v}\|^2 \ge 0$ 选取最优 $t$ ——本质是**投影**的最优性
+
+</div>
 
 !!! theorem "定理 8.1 (Cauchy-Schwarz 不等式)"
     设 $(V, \langle \cdot, \cdot \rangle)$ 是内积空间。对任意 $\mathbf{u}, \mathbf{v} \in V$，有
@@ -182,6 +208,12 @@
 
 ## 8.3 正交与正交补
 
+<div class="context-flow" markdown>
+
+$\langle \mathbf{u},\mathbf{v}\rangle = 0$ 定义正交 → 正交集自动线性无关 → **正交补** $W^\perp$ 使 $V = W \oplus W^\perp$（直和分解）
+
+</div>
+
 正交性是内积空间中最重要的概念之一，它推广了"垂直"的几何概念。
 
 !!! definition "定义 8.6 (正交)"
@@ -261,6 +293,12 @@
 
 ## 8.4 正交投影定理
 
+<div class="context-flow" markdown>
+
+正交直和 $V = W \oplus W^\perp$ → 投影 $\operatorname{proj}_W$ 是**最佳逼近**（距离最小） → 投影算子兼具幂等性 $P^2 = P$ 与自伴性 $P^* = P$
+
+</div>
+
 !!! definition "定义 8.8 (正交投影)"
     设 $V$ 是有限维内积空间，$W$ 是 $V$ 的子空间。根据正交直和分解 $V = W \oplus W^\perp$，对任意 $\mathbf{v} \in V$，定义**正交投影**（orthogonal projection）$\operatorname{proj}_W: V \to V$ 为
 
@@ -271,6 +309,12 @@
     若 $\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}$ 是 $W$ 的标准正交基，则
 
     $$\operatorname{proj}_W(\mathbf{v}) = \sum_{i=1}^k \langle \mathbf{v}, \mathbf{e}_i \rangle \mathbf{e}_i$$
+
+<div class="context-flow" markdown>
+
+**洞察**：最佳逼近 = 正交投影，证明核心是勾股定理 $\|\mathbf{v}-\mathbf{w}\|^2 = \|\mathbf{v}-\hat{\mathbf{v}}\|^2 + \|\hat{\mathbf{v}}-\mathbf{w}\|^2$ → 直通 Ch11 最小二乘
+
+</div>
 
 !!! theorem "定理 8.7 (最佳逼近定理)"
     设 $V$ 是内积空间，$W$ 是 $V$ 的有限维子空间。对任意 $\mathbf{v} \in V$，$\operatorname{proj}_W(\mathbf{v})$ 是 $W$ 中距 $\mathbf{v}$ 最近的向量。即对任意 $\mathbf{w} \in W$，
@@ -325,6 +369,12 @@
 
 ## 8.5 Bessel 不等式与 Parseval 等式
 
+<div class="context-flow" markdown>
+
+投影只捕获"部分能量" → **Bessel**：$\sum |\langle \mathbf{v},\mathbf{e}_i\rangle|^2 \le \|\mathbf{v}\|^2$；补全为基时取等 → **Parseval** → 通向 Fourier 分析
+
+</div>
+
 !!! theorem "定理 8.8 (Bessel 不等式)"
     设 $(V, \langle \cdot, \cdot \rangle)$ 是内积空间，$\{\mathbf{e}_1, \ldots, \mathbf{e}_k\}$ 是 $V$ 中的标准正交集。则对任意 $\mathbf{v} \in V$，
 
@@ -370,6 +420,12 @@
 ---
 
 ## 8.6 伴随算子
+
+<div class="context-flow" markdown>
+
+将内积"转移"到另一侧：$\langle T\mathbf{v},\mathbf{w}\rangle = \langle \mathbf{v},T^*\mathbf{w}\rangle$ → 标准正交基下 $T^*$ 的矩阵 = $A^H$ → 连接到 Ch10 的分解理论
+
+</div>
 
 !!! definition "定义 8.9 (伴随算子)"
     设 $V$ 是有限维内积空间，$T: V \to V$ 是线性算子。$T$ 的**伴随算子**（adjoint operator）$T^*: V \to V$ 是满足以下条件的唯一线性算子：
@@ -426,6 +482,12 @@
 
 ## 8.7 正规算子
 
+<div class="context-flow" markdown>
+
+$TT^* = T^*T$（与伴随可交换）→ 不同特征值的特征向量自动正交 → 正规 = 可**酉对角化**的充要条件（复情形）
+
+</div>
+
 !!! definition "定义 8.10 (正规算子)"
     设 $V$ 是有限维内积空间，$T: V \to V$ 是线性算子。若
 
@@ -479,6 +541,12 @@
 
 ## 8.8 自伴算子
 
+<div class="context-flow" markdown>
+
+正规算子的最重要特例：$T^* = T$ → 特征值**全为实数** → 不同特征值的特征向量正交 → 直通谱定理
+
+</div>
+
 !!! definition "定义 8.11 (自伴算子)"
     设 $V$ 是有限维内积空间，$T: V \to V$ 是线性算子。若 $T^* = T$，即
 
@@ -530,9 +598,22 @@
 
 ## 8.9 谱定理
 
+<div class="context-flow" markdown>
+
+**全章高潮**：内积 + 自伴/正规 → 存在**标准正交特征基** → $A = Q\Lambda Q^T$（实对称）/ $A = U\Lambda U^H$（正规）
+→ Ch9 用此对角化二次型，Ch10 用此做谱分解，Ch11 SVD 本质是"两侧的谱定理"
+
+</div>
+
 谱定理是线性代数中最重要、最深刻的定理之一。它指出正规算子（包括自伴算子）可以通过标准正交基对角化。
 
 ### 实谱定理
+
+<div class="context-flow" markdown>
+
+**洞察**：谱定理的归纳证明关键——找到一个特征向量后，其正交补是**不变子空间**，从而可递归降维
+
+</div>
 
 !!! theorem "定理 8.15 (实对称矩阵的谱定理)"
     设 $A$ 是 $n \times n$ 实对称矩阵（即 $A^T = A$）。则
@@ -628,6 +709,12 @@
 ---
 
 ## 8.10 酉算子与正交算子
+
+<div class="context-flow" markdown>
+
+$T^*T = I$ ↔ 保内积/保范数/保标准正交基 → 特征值 $|\lambda|=1$ → 正交矩阵 $\det = \pm 1$（旋转或反射） → Ch10 QR 分解/Ch11 SVD 的"旋转部分"
+
+</div>
 
 !!! definition "定义 8.12 (酉算子与正交算子)"
     设 $V$ 是有限维内积空间，$T: V \to V$ 是线性算子。

@@ -1,10 +1,24 @@
 # 第 25 章 线性代数在优化中的应用
 
+<div class="context-flow" markdown>
+
+**前置**：SVD/特征值(Ch6-8) · 正定性(Ch7) · 流形优化(Ch24) · **脉络**：LP(基=列选取) → 最小二乘(QR/SVD) → SDP(半正定锥) → 矩阵补全/压缩感知(核范数/$\ell_1$) → PCA/Rayleigh 商
+**本质**：线性代数的三大分解（LU/QR/SVD）和特征值理论是现代优化的计算骨架
+
+</div>
+
 优化理论与线性代数有着深刻而广泛的联系。线性代数不仅为优化问题提供了建模语言和分析工具，其核心分解方法（如 QR 分解、SVD、特征值分解）更直接构成了许多优化算法的计算骨架。本章将从线性规划、最小二乘、半定规划、矩阵补全、压缩感知、主成分分析、低秩近似到特征值优化，系统展示线性代数在优化中的核心作用。
 
 ---
 
 ## 25.1 线性规划基础
+
+<div class="context-flow" markdown>
+
+**线性代数视角**：LP 最优解 = **基本可行解** = 选 $m$ 列构成可逆 $A_B$ → 单纯形法的每步 = 解线性方程组 $A_B^{-1}\mathbf{b}$ + 列交换(LU 更新)
+**链接**：Ch22 LU 分解在此处直接应用
+
+</div>
 
 线性规划（Linear Programming, LP）是最基本的优化问题类型，其理论和算法根植于线性代数。
 
@@ -64,6 +78,12 @@
 ---
 
 ## 25.2 最小二乘问题
+
+<div class="context-flow" markdown>
+
+**三种求解**：正规方程($A^TA$, 条件数平方) → QR 分解(稳定, Ch8) → SVD(最通用，伪逆+正则化) · **Tikhonov 正则化** = 谱过滤：大 $\sigma_i$ 保留，小 $\sigma_i$ 压制
+
+</div>
 
 最小二乘问题是线性代数与优化交汇的经典领域。
 
@@ -144,6 +164,13 @@
 
 ## 25.3 半定规划（SDP）
 
+<div class="context-flow" markdown>
+
+**推广链**：LP($\mathbf{x} \ge 0$) → SDP($X \succeq 0$)——将非负约束推广为**半正定锥**约束 · 强对偶性 + 互补松弛 $X^*S^* = 0$
+**威力**：MAX-CUT 的 Goemans-Williamson 松弛(0.878 近似比) · 核范数最小化 = SDP(§25.4)
+
+</div>
+
 半定规划是线性规划在矩阵空间上的自然推广。
 
 !!! definition "定义 25.5 (半定规划)"
@@ -209,6 +236,13 @@
 ---
 
 ## 25.4 矩阵补全
+
+<div class="context-flow" markdown>
+
+**思路**：秩约束(NP-hard) → **核范数**松弛(秩的最紧凸包) = SDP → 非相干条件 + $O(\mu^2 r \log^2 n)$ 个观测 → 精确恢复
+**链接**：Ch21 张量分解的矩阵版本 · Netflix 推荐/协同过滤的数学基础
+
+</div>
 
 矩阵补全（Matrix Completion）是从部分观测恢复低秩矩阵的问题。
 
@@ -282,6 +316,13 @@
 
 ## 25.5 压缩感知
 
+<div class="context-flow" markdown>
+
+**核心条件**：**RIP**——测量矩阵 $A$ 在稀疏向量上近似保距 → $\delta_{2s} < \sqrt{2}-1$ 时 $\ell_1$ 最小化精确恢复 $s$-稀疏信号
+**随机矩阵连接**：高斯随机 $A$ 以 $m = O(s\log(n/s))$ 行满足 RIP（Ch23 集中不等式）→ 远少于 $n$ 次测量即可重建
+
+</div>
+
 压缩感知（Compressed Sensing）利用信号的稀疏性从远少于 Nyquist 采样定理要求的测量中恢复信号。
 
 !!! definition "定义 25.9 (受限等距性质 RIP)"
@@ -339,6 +380,13 @@
 
 ## 25.6 主成分分析（PCA）
 
+<div class="context-flow" markdown>
+
+**SVD 即 PCA**：主成分方向 = $S = \frac{1}{n}\bar{X}^T\bar{X}$ 的特征向量 = $\bar{X}$ 的右奇异向量 → Eckart-Young 最优低秩近似
+**鲁棒 PCA**：$M = L + S$（低秩+稀疏）→ $\|L\|_* + \lambda\|S\|_1$ 凸松弛 → 视频前景/背景分离 · 链接 Ch23 BBP 相变（何时能检测到信号？）
+
+</div>
+
 主成分分析是数据降维和特征提取的经典方法，其数学基础完全建立在线性代数之上。
 
 !!! definition "定义 25.11 (主成分分析)"
@@ -390,6 +438,13 @@
 ---
 
 ## 25.7 低秩近似与降维
+
+<div class="context-flow" markdown>
+
+**两大定理**：**Eckart-Young-Mirsky**（截断 SVD = 最优低秩近似）+ **JL 引理**（随机投影 $\mathbb{R}^n \to \mathbb{R}^{O(\log N/\epsilon^2)}$ 近似保距）
+**链接**：Ch23 高斯随机矩阵的集中性质是 JL 引理的证明核心
+
+</div>
 
 低秩近似和降维是处理高维数据的核心技术。
 
@@ -452,6 +507,13 @@
 
 ## 25.8 特征值优化
 
+<div class="context-flow" markdown>
+
+**特征值 = 极值**：Rayleigh 商 $R_A(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}/\|\mathbf{x}\|^2$ → $\lambda_{\min} \le R_A \le \lambda_{\max}$ · **Courant-Fischer** 极小极大 → **Weyl 扰动不等式** $|\gamma_i - \alpha_i| \le \|B\|$
+**汇聚**：Rayleigh 商迭代(三次收敛, Ch22) · 图 Laplacian 的 $\lambda_2$ = 连通性(Fiedler) · 链接 Ch24 Stiefel 流形上的特征值问题
+
+</div>
+
 许多优化问题的解可以通过特征值来刻画。
 
 !!! definition "定义 25.14 (Rayleigh 商)"
@@ -485,6 +547,12 @@
     \lambda_1 = \lambda_1 \sum c_i^2 \le \sum \lambda_i c_i^2 \le \lambda_n \sum c_i^2 = \lambda_n.
     $$
     下界在 $c_1 = 1$（即 $\mathbf{x} = \mathbf{v}_1$）时达到，上界在 $c_n = 1$ 时达到。$\blacksquare$
+
+<div class="context-flow" markdown>
+
+**洞察**：Courant-Fischer 将特征值从"代数对象"($\det(A-\lambda I)=0$)变为"优化对象"(子空间上的极值)——由此推导 Weyl 扰动、Lidskii 不等式、图分割等一切特征值不等式
+
+</div>
 
 !!! theorem "定理 25.17 (Courant-Fischer 极小极大定理)"
     设 $A \in \operatorname{Sym}(n)$，特征值 $\lambda_1 \le \lambda_2 \le \cdots \le \lambda_n$。则

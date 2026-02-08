@@ -1,8 +1,21 @@
 # 第 22 章 数值线性代数
 
+<div class="context-flow" markdown>
+
+**前置**：LU/QR/SVD/特征值分解(Ch5-8) · **脉络**：浮点误差是根源 → 条件数决定精度 → 直接法(LU, $O(n^3)$) vs 迭代法(Krylov, $O(n \cdot \text{nnz})$) → 稀疏结构决定算法选择
+**本质**：理论线性代数假设精确算术——本章回答"计算机上能算多准、多快"
+
+</div>
+
 数值线性代数（numerical linear algebra）是科学计算的核心。在实际应用中，矩阵运算不可避免地受到浮点舍入误差的影响，算法的稳定性和效率成为关键问题。本章从浮点运算基础出发，系统介绍线性方程组的直接法与迭代法、Krylov 子空间方法、特征值的数值计算以及稀疏矩阵技术。这些方法构成了现代科学计算和工程模拟的基石。
 
 ## 22.1 浮点运算与舍入误差
+
+<div class="context-flow" markdown>
+
+**起点**：实数 → 有限位浮点数 · 机器精度 $\epsilon_{\text{mach}} \approx 10^{-16}$（双精度）是一切误差的原子单位 → **灾难性消去**是最常见陷阱
+
+</div>
 
 ### IEEE 754 浮点数
 
@@ -58,6 +71,13 @@
 
 ## 22.2 数值稳定性
 
+<div class="context-flow" markdown>
+
+**核心框架**：前向误差(输出偏差) ≤ **条件数** × 后向误差(等价输入扰动) → 后向稳定算法 + 良态问题 = 精确结果
+**关键**：$\kappa(A) = \sigma_{\max}/\sigma_{\min}$（SVD, Ch8）——条件数是问题固有的，算法只控制后向误差
+
+</div>
+
 !!! definition "定义 22.3 (前向误差与后向误差)"
     设算法 $\hat{f}$ 是函数 $f$ 的数值近似。对输入 $x$：
 
@@ -106,6 +126,12 @@
     当 $n \geq 13$ 时，$\kappa_2(H_n) > 1/\epsilon_{\text{mach}}$，此时用双精度浮点求解 $H_n \mathbf{x} = \mathbf{b}$ 的结果可能完全不可靠。
 
 ## 22.3 直接法求解线性方程组
+
+<div class="context-flow" markdown>
+
+**直接法**：$PA = LU$（$\frac{2}{3}n^3$）→ 部分选主元保证 $|l_{ij}| \le 1$ → 后向稳定 · 增长因子 $g(n)$ 理论可达 $2^{n-1}$，实际 $O(n)$
+
+</div>
 
 ### 带部分选主元的高斯消元
 
@@ -163,6 +189,13 @@
     **部分选主元**：交换两行后以 $1$ 为主元，乘数 $l_{21} = 0.001$，计算稳定。
 
 ## 22.4 迭代法求解线性方程组
+
+<div class="context-flow" markdown>
+
+**转折**：直接法 $O(n^3)$ 对大稀疏系统不可行 → 迭代法只需矩阵-向量乘 → 收敛性由**谱半径** $\rho(G) < 1$ 决定（特征值理论, Ch6）
+**层次**：Jacobi/GS（经典）→ SOR（加速）→ Krylov（最优多项式近似, §22.5）
+
+</div>
 
 对于大型稀疏系统，直接法的 $O(n^3)$ 复杂度过高，迭代法成为更好的选择。
 
@@ -227,6 +260,13 @@
     Gauss-Seidel 迭代矩阵的谱半径 $\rho(G_{GS}) = \rho(G_J)^2 \approx 0.125$（对称正定情形下的 Stein-Rosenberg 关系）。因此 Gauss-Seidel 收敛更快。
 
 ## 22.5 Krylov 子空间方法
+
+<div class="context-flow" markdown>
+
+**核心思想**：$\mathcal{K}_k(A, \mathbf{b}) = \text{span}\{\mathbf{b}, A\mathbf{b}, \ldots, A^{k-1}\mathbf{b}\}$ = 用 $k$ 次矩阵-向量乘构建的最大信息空间 → Arnoldi 正交化 → Lanczos（对称时三对角化）
+**统一框架**：CG(§22.6) = 对称正定 Krylov 最优化 · GMRES(§22.7) = 一般情形残差最小化
+
+</div>
 
 ### Krylov 子空间
 
@@ -304,6 +344,12 @@
 
 ## 22.6 共轭梯度法
 
+<div class="context-flow" markdown>
+
+**CG 的本质**：在 Krylov 子空间中求 $A$-范数最佳近似 → 收敛速度 $O(\sqrt{\kappa})$（Chebyshev 多项式最优性）→ **预条件**降低有效 $\kappa$ 是实战关键
+
+</div>
+
 ### 算法推导
 
 !!! definition "定义 22.10 ($A$-共轭)"
@@ -328,6 +374,12 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
     由于 $\mathbf{x}_k = \mathbf{x}_0 + \sum_{i=0}^{k-1} \alpha_i \mathbf{p}_i$，且 $\alpha_i$ 的选取使得误差 $\mathbf{e}_k = \mathbf{x}_k - \mathbf{x}^*$ 满足 $\mathbf{e}_k^T A \mathbf{p}_i = 0$（$i = 0, \ldots, k-1$），这正是在 $\mathbf{x}_0 + \mathcal{K}_k$ 中关于 $A$-内积的正交投影，等价于 $A$-范数最小化。
 
 ### 收敛性分析
+
+<div class="context-flow" markdown>
+
+**洞察**：CG 收敛速度 $\propto \sqrt{\kappa}$ 而非 $\kappa$——因为 Chebyshev 多项式在 $[\lambda_{\min}, \lambda_{\max}]$ 上的最优逼近性质，将迭代次数从 $O(\kappa)$ 降到 $O(\sqrt{\kappa})$
+
+</div>
 
 !!! theorem "定理 22.10 (CG 法的收敛速度)"
     设 $A$ 的条件数 $\kappa = \kappa_2(A) = \lambda_{\max}/\lambda_{\min}$。CG 法的误差满足
@@ -372,6 +424,12 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 
 ## 22.7 GMRES 方法
 
+<div class="context-flow" markdown>
+
+**推广**：CG 限于对称正定 → GMRES 处理一般方阵 · Arnoldi 关系将大问题转化为小 Hessenberg 最小二乘 → 收敛取决于特征值聚集程度
+
+</div>
+
 !!! definition "定义 22.12 (GMRES 方法)"
     **GMRES**（Generalized Minimal Residual）方法用于求解一般的（可能非对称的）线性方程组 $A\mathbf{x} = \mathbf{b}$。在第 $k$ 步，GMRES 在 Krylov 子空间中寻找残差 $2$-范数最小的近似：
 
@@ -410,6 +468,13 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
     对上三角矩阵 $A = I + N$（$N$ 严格上三角，$N^n = 0$），GMRES 在至多 $n$ 步内精确收敛（因为 $A$ 的最小多项式次数不超过 $n$）。实际上，若 $N^m = 0$（$m < n$），则 GMRES 在 $m$ 步内收敛。
 
 ## 22.8 特征值的数值计算
+
+<div class="context-flow" markdown>
+
+**层次**：幂迭代（最简单, $|\lambda_2/\lambda_1|^k$）→ 反迭代+Rayleigh 商（三次收敛）→ QR 迭代（全谱, 先 Hessenberg 化再迭代）
+**链接**：QR 分解(Ch8) 在这里不是分解工具，而是迭代引擎 · Ch25 Rayleigh 商优化视角
+
+</div>
 
 ### 幂迭代法
 
@@ -490,6 +555,12 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
     已是 Hessenberg 形式（$3 \times 3$ 矩阵只需一步）。之后的 QR 迭代在此 Hessenberg 矩阵上进行，每步只需 $O(n^2)$ 运算。
 
 ## 22.9 稀疏矩阵
+
+<div class="context-flow" markdown>
+
+**实践**：科学计算中 $n \sim 10^6$ 但 $\text{nnz} \sim O(n)$（如有限元/差分）→ COO/CSR/CSC 格式 → 矩阵-向量乘 $O(\text{nnz})$ 使 Krylov 方法可行
+
+</div>
 
 ### 存储格式
 

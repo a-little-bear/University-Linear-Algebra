@@ -1,10 +1,24 @@
 # 第 23 章 随机矩阵初步
 
+<div class="context-flow" markdown>
+
+**前置**：特征值/SVD(Ch6-8) · 正定矩阵(Ch7) · **脉络**：$n \to \infty$ 时特征值的统计行为——半圆律(Wigner) → MP 律(Wishart/样本协方差) → Tracy-Widom(边缘涨落) → 普适性
+**本质**：确定性矩阵关注单个特征值；随机矩阵关注 $n$ 个特征值的**集体行为**——从代数到概率的飞跃
+
+</div>
+
 随机矩阵理论（Random Matrix Theory, RMT）研究矩阵元素为随机变量时，矩阵特征值和特征向量的统计性质。该理论起源于 20 世纪 50 年代 Wigner 对原子核能级统计的研究，此后在数学物理、数论、无线通信、高维统计等众多领域产生了深远影响。本章将系统介绍随机矩阵的基本概念、核心极限定理以及若干前沿应用。
 
 ---
 
 ## 23.1 随机矩阵基本概念
+
+<div class="context-flow" markdown>
+
+**三大系综**：GOE($\beta=1$, 实对称) / GUE($\beta=2$, Hermite) / GSE($\beta=4$, 四元数) → 对称性决定 $\beta$ → 联合密度 $\propto \prod_{i<j}|\lambda_i - \lambda_j|^\beta \cdot e^{-\sum \lambda_i^2}$
+**Wishart 矩阵** $W = \frac{1}{n}X^TX$：样本协方差矩阵的原型 → 链接 Ch25 PCA
+
+</div>
 
 随机矩阵是指其元素由随机变量构成的矩阵。我们关注的核心问题是：当矩阵维数 $n \to \infty$ 时，特征值的经验分布呈现何种确定性极限？
 
@@ -82,6 +96,13 @@
 ---
 
 ## 23.2 Wigner 矩阵与半圆律
+
+<div class="context-flow" markdown>
+
+**核心定理**：Wigner 矩阵（对称+独立+零均值+方差1）的经验谱分布 → $\rho_{sc}(x) = \frac{1}{2\pi}\sqrt{4-x^2}$（半圆）
+**证明路线**：矩量法——$\frac{1}{n}\mathbb{E}[\text{tr}(W^{2m})]$ → 闭合路径计数 → **Catalan 数** $C_m$ → 唯一确定半圆分布
+
+</div>
 
 Wigner 半圆律是随机矩阵理论中最基本的极限定理，它描述了 Wigner 矩阵经验谱分布的极限行为。
 
@@ -164,6 +185,13 @@ Wigner 半圆律是随机矩阵理论中最基本的极限定理，它描述了 
 
 ## 23.3 样本协方差矩阵与 Marchenko-Pastur 律
 
+<div class="context-flow" markdown>
+
+**从 Wigner 到 Wishart**：半圆律 = 对称矩阵的谱极限 → **MP 律** = $\frac{1}{n}X^TX$ 的谱极限，支撑 $[(1-\sqrt{y})^2, (1+\sqrt{y})^2]$，$y = p/n$
+**高维统计的基石**：$p/n \to y > 0$ 时样本协方差矩阵与真实协方差偏差巨大 → 经典统计理论失效 → 链接 Ch25 PCA
+
+</div>
+
 当我们从高维总体中抽取样本时，样本协方差矩阵的谱行为由 Marchenko-Pastur 律刻画。
 
 !!! definition "定义 23.8 (样本协方差矩阵)"
@@ -234,6 +262,12 @@ Wigner 半圆律是随机矩阵理论中最基本的极限定理，它描述了 
 
 ## 23.4 经验谱分布与 Stieltjes 变换方法
 
+<div class="context-flow" markdown>
+
+**方法论**：矩量法适合证明存在性 → **Stieltjes 变换** $s(z) = \int \frac{d\mu(x)}{x-z}$ 才是计算利器 → 反转公式 $\rho(x) = \frac{1}{\pi}\text{Im}\,s(x+i0^+)$ 从变换还原密度
+
+</div>
+
 Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 
 !!! definition "定义 23.9 (Stieltjes 变换)"
@@ -282,6 +316,12 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 ---
 
 ## 23.5 特征值间距与排斥现象
+
+<div class="context-flow" markdown>
+
+**微观行为**：半圆律/MP律 = 宏观（密度）→ 间距统计 = 微观 · **排斥**：$p(s) \sim s^\beta$（$s \to 0$）vs Poisson $p(s) = e^{-s}$ → 特征值"互相推开"，这是随机矩阵与独立随机变量的本质区别
+
+</div>
 
 随机矩阵的一个显著特征是特征值之间的排斥效应：特征值倾向于互相远离，其间距统计与独立随机变量有本质区别。
 
@@ -337,6 +377,13 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 ---
 
 ## 23.6 Tracy-Widom 分布
+
+<div class="context-flow" markdown>
+
+**精细尺度**：半圆律(宏观) → 间距(微观) → **最大特征值涨落**(边缘) · $\lambda_{\max} \approx 2 + n^{-2/3} \cdot F_\beta$ → Airy 核 + Painleve II 方程
+**普适性**：$F_\beta$ 不依赖于矩阵元素的具体分布，只依赖对称性类 $\beta$ → 链接 §23.7 统计检验
+
+</div>
 
 半圆律描述了特征值的整体分布，而 Tracy-Widom 分布刻画了最大特征值的涨落。
 
@@ -394,10 +441,22 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 
 ## 23.7 随机矩阵在统计中的应用
 
+<div class="context-flow" markdown>
+
+**落地**：**BBP 相变**——信号强度 $\theta > \sqrt{p/n}$ 时最大特征值从 MP 边缘"弹出" → 信号检测的理论阈值 · Tracy-Widom 分布替代经典 $F$/$\chi^2$ 分布用于高维假设检验
+
+</div>
+
 随机矩阵理论为高维统计提供了理论基础和实用工具。
 
 !!! definition "定义 23.12 (高维渐近框架)"
     在 **高维渐近框架**（high-dimensional asymptotic framework）中，数据维数 $p$ 和样本量 $n$ 同时趋于无穷，且比值 $p/n \to y \in (0, \infty)$。这与经典统计中 $p$ 固定、$n \to \infty$ 的框架根本不同。
+
+<div class="context-flow" markdown>
+
+**洞察**：BBP 相变揭示了一个深刻的"信息论极限"——信号强度 $\theta$ 低于 $\sqrt{y}$ 时，**任何方法**都无法从样本协方差的特征值中检测到信号
+
+</div>
 
 !!! theorem "定理 23.12 (Baik-Ben Arous-Peche 相变)"
     **BBP 相变**（BBP phase transition）：设总体协方差矩阵 $\Sigma = I + \theta \mathbf{v}\mathbf{v}^T$（秩一扰动），$p/n \to y$。令 $\ell_1$ 为样本协方差矩阵 $S_n$ 的最大特征值。则：
@@ -429,6 +488,13 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 ---
 
 ## 23.8 自由概率简介
+
+<div class="context-flow" markdown>
+
+**代数化**：随机矩阵 $A_n, B_n$ 独立 → 渐近**自由**（Voiculescu）→ $A+B$ 的极限谱由 **$R$-变换**可加性计算 → 自由 CLT：极限是半圆分布（对比经典 CLT → 正态分布）
+**统一视角**：半圆律 = 自由概率的中心极限定理
+
+</div>
 
 自由概率论（Free Probability）是研究非交换随机变量的数学理论，它为随机矩阵的渐近谱行为提供了代数化框架。
 

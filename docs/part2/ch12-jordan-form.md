@@ -1,10 +1,23 @@
 # 第 12 章 Jordan 标准形
 
+<div class="context-flow" markdown>
+
+**前置**：Ch8 谱定理（可对角化情形） · **本章脉络**：不变子空间 → 广义特征向量 → 幂零矩阵 → Jordan 块 $J_k(\lambda) = \lambda I + N_k$ → **Jordan 标准形定理** → 最小多项式 → 矩阵幂/ODE
+本质：对角化的终极推广——每个矩阵在复数域上都有唯一的"近对角"标准形，结构由**最小多项式**决定
+
+</div>
+
 并非所有矩阵都可以对角化。当一个矩阵的特征值的几何重数小于代数重数时，它不存在由特征向量组成的基，因而无法对角化。然而，每个方阵都可以化为一种"几乎对角"的标准形式——**Jordan 标准形**（Jordan Normal Form / Jordan Canonical Form）。Jordan 标准形是对角化的自然推广，它在矩阵理论、微分方程、控制论等领域具有核心地位。本章将从不变子空间出发，逐步构建 Jordan 标准形理论。
 
 ---
 
 ## 12.1 不变子空间
+
+<div class="context-flow" markdown>
+
+$A(W) \subseteq W$ → 不变子空间直和分解 ↔ **分块对角化** → 将大矩阵问题分解为小块独立处理
+
+</div>
 
 不变子空间（invariant subspace）是理解线性变换结构的基本工具，也是 Jordan 分解理论的起点。
 
@@ -56,6 +69,12 @@
 ---
 
 ## 12.2 广义特征向量
+
+<div class="context-flow" markdown>
+
+特征向量不够 → 放宽为 $(A-\lambda I)^k\mathbf{v} = \mathbf{0}$ → 广义特征空间 $G_\lambda$ 的维数 = **代数重数** → $\mathbb{C}^n = \bigoplus G_{\lambda_i}$
+
+</div>
 
 当特征值的几何重数小于代数重数时，特征向量不足以构成一组基。广义特征向量（generalized eigenvectors）通过放宽条件来弥补这一不足。
 
@@ -111,6 +130,12 @@
 
 ## 12.3 幂零矩阵
 
+<div class="context-flow" markdown>
+
+$N^k = 0$ → 所有特征值为 $0$ → $(I-N)^{-1} = I + N + \cdots + N^{k-1}$（有限 Neumann 级数） → Jordan 块 = $\lambda I + N$
+
+</div>
+
 幂零矩阵（nilpotent matrix）是理解 Jordan 标准形的关键。每个 Jordan 块可以分解为一个标量矩阵加一个幂零矩阵。
 
 !!! definition "定义 12.5 (幂零矩阵 Nilpotent Matrix)"
@@ -158,6 +183,12 @@
 ---
 
 ## 12.4 Jordan 块
+
+<div class="context-flow" markdown>
+
+$J_k(\lambda) = \lambda I + N_k$：唯一特征值 $\lambda$，代数重数 $k$，几何重数 **1** → 二项式定理 $J_k(\lambda)^m = \sum \binom{m}{j}\lambda^{m-j}N_k^j$
+
+</div>
 
 Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
@@ -208,12 +239,24 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
 ## 12.5 Jordan 标准形定理
 
+<div class="context-flow" markdown>
+
+**全章核心**：任意复矩阵 $A = PJP^{-1}$，$J$ 由 Jordan 块拼成且**在排列意义下唯一** → 块结构由 $\operatorname{rank}(A-\lambda I)^j$ 序列确定
+
+</div>
+
 !!! definition "定义 12.7 (Jordan 矩阵 Jordan Matrix)"
     **Jordan 矩阵**是分块对角矩阵
     $$
     J = \operatorname{diag}(J_{k_1}(\lambda_1), J_{k_2}(\lambda_2), \ldots, J_{k_s}(\lambda_s)),
     $$
     其中每个 $J_{k_i}(\lambda_i)$ 是 Jordan 块。不同块可以有相同的 $\lambda$ 值。
+
+<div class="context-flow" markdown>
+
+**洞察**：存在性三步——广义特征空间分解 → 在每个 $G_\lambda$ 上化幂零问题 → 构造 **Jordan 链**逐块解决
+
+</div>
 
 !!! theorem "定理 12.8 (Jordan 标准形定理)"
     设 $A$ 为 $n \times n$ 复数矩阵。则存在可逆矩阵 $P$ 使得
@@ -296,6 +339,12 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 
 ## 12.6 最小多项式
 
+<div class="context-flow" markdown>
+
+$m_A(\lambda) = \prod(\lambda - \lambda_i)^{d_i}$，$d_i$ = 最大 Jordan 块大小 → **可对角化** ↔ $m_A$ 无重根 → 直连 Ch13 矩阵函数的定义条件
+
+</div>
+
 最小多项式（minimal polynomial）与 Jordan 标准形有着密切联系。
 
 !!! definition "定义 12.8 (最小多项式 Minimal Polynomial)"
@@ -344,6 +393,12 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 ---
 
 ## 12.7 Jordan 标准形的计算
+
+<div class="context-flow" markdown>
+
+算法：特征多项式 → 逐步计算 $\dim\ker(A-\lambda I)^j$ 确定块结构 → 构造 Jordan 链得过渡矩阵 $P$
+
+</div>
 
 本节通过系统方法和详细例题展示如何计算 Jordan 标准形和过渡矩阵。
 
@@ -445,6 +500,12 @@ Jordan 块（Jordan block）是构成 Jordan 标准形的基本单元。
 ---
 
 ## 12.8 Jordan 形的应用
+
+<div class="context-flow" markdown>
+
+$A^n = PJ^nP^{-1}$（矩阵幂）· $e^{At} = Pe^{Jt}P^{-1}$（微分方程）→ Jordan 形让所有矩阵函数变为对 Jordan 块的运算 → Ch13 的基础
+
+</div>
 
 ### 12.8.1 矩阵幂的计算
 

@@ -1,8 +1,21 @@
 # 第 21 章 多线性代数与张量
 
+<div class="context-flow" markdown>
+
+**前置**：线性映射(Ch3) · 行列式(Ch5) · 内积空间(Ch7) · **脉络**：对偶空间 → 张量积（泛性质） → 外代数（行列式的真正家园） → 张量分解（高维数据）
+**本质**：线性代数从"一个向量空间上的线性"推广到"多个空间上的多线性"——维数相乘而非相加
+
+</div>
+
 多线性代数是线性代数的自然推广，它研究多个向量空间之间的多线性关系。张量（tensor）作为多线性代数的核心对象，不仅为微分几何、广义相对论提供了基本语言，也在近年来的机器学习、量子计算和数据科学中扮演着越来越重要的角色。本章从对偶空间出发，系统建立多线性映射、张量积、外代数等基本理论，并介绍张量分解等现代应用方向。
 
 ## 21.1 对偶空间
+
+<div class="context-flow" markdown>
+
+**动机**：向量空间 $V$ 上的线性泛函 $V \to \mathbb{F}$ 本身构成空间 $V^*$ → 对偶基与原基"对偶配对" → $V \cong V^{**}$（自然同构，无需选基）
+
+</div>
 
 ### 线性泛函与对偶空间
 
@@ -59,6 +72,12 @@
 
 ### 双对偶空间与自然同构
 
+<div class="context-flow" markdown>
+
+**关键洞察**：$V \to V^*$ 的同构依赖基的选取；$V \to V^{**}$ 的同构 $\Phi(\mathbf{v})(f) = f(\mathbf{v})$ **不依赖基**——这就是"自然"的含义，预示了范畴论思想
+
+</div>
+
 !!! definition "定义 21.4 (双对偶空间)"
     $V$ 的**双对偶空间**（double dual space）定义为 $(V^*)^*$，记作 $V^{**}$。$V^{**}$ 的元素是 $V^*$ 上的线性泛函。
 
@@ -91,6 +110,13 @@
     因此 $\Phi(\mathbf{v}) = 3(\mathbf{e}^1)^* + 2(\mathbf{e}^2)^*$，其中 $\{(\mathbf{e}^1)^*, (\mathbf{e}^2)^*\}$ 是 $V^{**}$ 中 $\{\mathbf{e}^1, \mathbf{e}^2\}$ 的对偶基。
 
 ## 21.2 多线性映射
+
+<div class="context-flow" markdown>
+
+**过渡**：对偶空间 = 1-线性型 → 推广到 $k$-线性型 · 内积、行列式、矩阵乘法都是多线性映射的实例
+**核心**：$k$-线性映射由基上的 $n_1 n_2 \cdots n_k$ 个值唯一确定 → 维数相乘
+
+</div>
 
 ### 双线性映射
 
@@ -142,6 +168,13 @@
 
 ## 21.3 张量积
 
+<div class="context-flow" markdown>
+
+**核心思想**：张量积将"双线性问题"线性化——**泛性质**：任意双线性 $B: V \times W \to U$ 唯一分解为 $V \otimes W \xrightarrow{\tilde{B}} U$
+**维数**：$\dim(V \otimes W) = \dim V \cdot \dim W$ · $V^* \otimes W \cong \operatorname{Hom}(V, W)$ 统一了线性映射与张量
+
+</div>
+
 ### 泛性质定义
 
 !!! definition "定义 21.7 (张量积的泛性质)"
@@ -156,6 +189,12 @@
     $$\qquad \quad U$$
 
     元素 $\mathbf{v} \otimes \mathbf{w}$（$\mathbf{v} \in V, \mathbf{w} \in W$）称为**简单张量**（simple tensor 或 decomposable tensor）。
+
+<div class="context-flow" markdown>
+
+**洞察**：泛性质保证张量积在同构意义下唯一——构造方法（商空间）只是存在性证明，唯一性来自范畴论的抽象论证
+
+</div>
 
 !!! theorem "定理 21.4 (张量积的存在性与唯一性)"
     对任意向量空间 $V, W$，张量积 $V \otimes W$ 存在且在同构意义下唯一。
@@ -217,6 +256,12 @@
 
 ## 21.4 张量的分量表示
 
+<div class="context-flow" markdown>
+
+**过渡**：抽象张量积 → 坐标表示 · $(r,s)$ 型张量 = $r$ 个逆变 + $s$ 个协变指标 → **Einstein 约定**简化书写 → 变换律体现"张量是不依赖基的几何对象"
+
+</div>
+
 ### 指标记法
 
 在物理学和工程学中，张量通常用**指标记法**（index notation）来表示。设 $V$ 是 $n$ 维向量空间，基为 $\{\mathbf{e}_i\}$，对偶基为 $\{\mathbf{e}^i\}$。
@@ -262,6 +307,12 @@
 
 ## 21.5 对称张量与反对称张量
 
+<div class="context-flow" markdown>
+
+**分支**：$V^{\otimes k}$ 按置换群作用分解 → **对称**部分(Sym) + **反对称**部分(Alt) · Alt 是投影算子，$\text{Alt}^2 = \text{Alt}$ → 引出外代数
+
+</div>
+
 !!! definition "定义 21.10 (对称张量与反对称张量)"
     设 $T \in V^{\otimes k} = \underbrace{V \otimes \cdots \otimes V}_{k}$ 是一个 $k$ 阶张量。
 
@@ -301,6 +352,13 @@
     注意 $\text{Alt}(T)(\mathbf{u}, \mathbf{v})$ 恰好是 $\frac{1}{2} \det \begin{pmatrix} u_1 & u_2 \\ v_1 & v_2 \end{pmatrix}$。
 
 ## 21.6 外代数
+
+<div class="context-flow" markdown>
+
+**核心**：楔积 $\wedge$ = 反对称化的张量积 → $\dim \Lambda^k(V) = \binom{n}{k}$ → $\Lambda^n(V)$ 一维 → **行列式是 $n$ 个向量的楔积在 $\Lambda^n$ 中的坐标**
+**链接**：Ch5 行列式的代数性质（多线性+反对称）在这里获得几何解释 · 叉积 = $\mathbb{R}^3$ 中 $\Lambda^2$ 的对偶
+
+</div>
 
 ### 楔积与外幂
 
@@ -355,6 +413,12 @@
 
 ### 行列式作为外积
 
+<div class="context-flow" markdown>
+
+**洞察**：$\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \det(A) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n$ ——行列式的 Leibniz 公式不再是"凭空定义"，而是楔积多线性+反对称的自然结果
+
+</div>
+
 !!! theorem "定理 21.10 (行列式的外积解释)"
     设 $\mathbf{v}_1, \ldots, \mathbf{v}_n \in V$（$\dim V = n$），且 $\mathbf{v}_i = \sum_j a_{ji} \mathbf{e}_j$（即 $a_{ji}$ 是 $\mathbf{v}_i$ 的第 $j$ 个分量）。则
 
@@ -383,6 +447,13 @@
     这对应于 $\mathbf{v}_1 \times \mathbf{v}_2 = (6, -3, 1)^T$（外积与叉积的联系）。
 
 ## 21.7 张量分解
+
+<div class="context-flow" markdown>
+
+**过渡**：理论 → 应用 · 矩阵 SVD(Ch8) 推广到高阶 → **CP 分解**（秩一之和）/**Tucker 分解**（核心张量+因子矩阵）
+**警告**：张量秩 ≠ 矩阵秩——计算 NP-hard，实秩 ≠ 复秩 · 链接 Ch25 低秩近似/推荐系统
+
+</div>
 
 张量分解（tensor decomposition）是将高阶张量表示为简单张量之和的技术，在信号处理、机器学习和化学计量学中有广泛应用。
 
@@ -434,6 +505,12 @@
     这是一个秩为 $2$ 的张量。Tucker 分解则可以取 $U^{(1)} \in \mathbb{R}^{3 \times 2}$，$U^{(2)} \in \mathbb{R}^{4 \times 2}$，$U^{(3)} \in \mathbb{R}^{2 \times 2}$，核心张量 $\mathcal{G} \in \mathbb{R}^{2 \times 2 \times 2}$。
 
 ## 21.8 张量的应用
+
+<div class="context-flow" markdown>
+
+**应用面**：推荐系统(用户⊗物品⊗时间) · 量子计算($(\mathbb{C}^2)^{\otimes n}$，纠缠 = 张量秩 > 1) → 张量网络、MPS 是量子多体物理的计算语言
+
+</div>
 
 ### 多维数据分析
 

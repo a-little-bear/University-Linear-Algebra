@@ -1,10 +1,23 @@
 # 第 3 章 行列式
 
+<div class="context-flow" markdown>
+
+**前置**：第 2 章方阵 · 可逆性 · 初等矩阵 · **本章脉络**：排列与逆序数 → 行列式定义 → 性质（行变换效应） → 余子式展开 → 伴随矩阵求逆 → 行列式乘法公式 → Cramer 法则 → 几何意义
+**一句话本质**：行列式是方阵到标量的唯一交替多重线性函数——$\det(A) \neq 0 \Leftrightarrow A$ 可逆，$|\det(A)|$ = 体积缩放因子
+
+</div>
+
 行列式（determinant）是方阵特有的一个标量值，蕴含着矩阵的大量信息——可逆性、线性变换对体积的缩放效应、特征值之积等。本章从排列与逆序数出发建立行列式的严格定义，系统推导行列式的基本性质，介绍按行（列）展开定理与各种计算方法，最后证明 Cramer 法则并阐述行列式的几何意义。
 
 ---
 
 ## 3.1 排列与逆序数
+
+<div class="context-flow" markdown>
+
+**行列式的组合基础**：$n!$ 个排列的符号（奇/偶）决定了行列式定义中每项的正负号
+
+</div>
 
 !!! definition "定义 3.1 (排列)"
     由 $1, 2, \ldots, n$ 组成的一个有序排列 $\sigma = (j_1, j_2, \ldots, j_n)$ 称为 $\{1, 2, \ldots, n\}$ 的一个**排列**（permutation）。$n$ 个元素的全部排列共有 $n!$ 个。
@@ -33,6 +46,12 @@
 ---
 
 ## 3.2 行列式的定义
+
+<div class="context-flow" markdown>
+
+**从排列到定义**：$\det(A) = \sum_\sigma \operatorname{sgn}(\sigma) \prod_i a_{i\sigma(i)}$ → 每项从每行每列各取恰好一个元素 → $n!$ 项求和
+
+</div>
 
 !!! definition "定义 3.3 ($n$ 阶行列式)"
     设 $A = (a_{ij})$ 为 $n$ 阶方阵，$A$ 的**行列式**（determinant）定义为
@@ -72,6 +91,12 @@
 ---
 
 ## 3.3 行列式的性质
+
+<div class="context-flow" markdown>
+
+**计算基础**：行交换变号 → 行倍乘乘 $c$ → 行倍加不变 → 三者对应第 1 章三种初等行变换 → $\det(AB)=\det(A)\det(B)$ 是乘法公式的精髓
+
+</div>
 
 以下性质构成行列式计算的理论基础。
 
@@ -149,6 +174,12 @@
 ??? proof "证明"
     以上三角矩阵为例。在行列式定义式 $\sum_\sigma \operatorname{sgn}(\sigma) a_{1\sigma(1)} \cdots a_{n\sigma(n)}$ 中，由于 $a_{ij} = 0$（$i > j$），要使乘积 $a_{1\sigma(1)}\cdots a_{n\sigma(n)} \neq 0$，需要对每个 $i$ 都有 $\sigma(i) \ge i$。又因为 $\sigma$ 是排列（双射），唯一可能是 $\sigma(i) = i$（恒等排列），其符号为 $+1$。因此 $\det(A) = a_{11}a_{22}\cdots a_{nn}$。$\blacksquare$
 
+<div class="context-flow" markdown>
+
+**关键洞察**：$\det(AB)=\det(A)\det(B)$ 使行列式成为从矩阵乘法群到标量乘法群的**同态** → 第 6 章推论：$\det A = \prod \lambda_i$
+
+</div>
+
 !!! theorem "定理 3.8 (行列式的乘法公式)"
     设 $A, B$ 为 $n$ 阶方阵，则
 
@@ -169,6 +200,12 @@
 
 ## 3.4 余子式与代数余子式
 
+<div class="context-flow" markdown>
+
+**降阶工具**：删去第 $i$ 行第 $j$ 列得 $(n-1)$ 阶子式 → 带符号 $(-1)^{i+j}$ 即为代数余子式 → 为 Laplace 展开和伴随矩阵做准备
+
+</div>
+
 !!! definition "定义 3.4 (余子式与代数余子式)"
     设 $A$ 为 $n$ 阶方阵。去掉 $A$ 的第 $i$ 行和第 $j$ 列后所得的 $(n-1)$ 阶子方阵的行列式称为元素 $a_{ij}$ 的**余子式**（minor），记为 $M_{ij}$。
 
@@ -188,6 +225,12 @@
 ---
 
 ## 3.5 行列式按行（列）展开
+
+<div class="context-flow" markdown>
+
+**递归计算**：$\det(A) = \sum_j a_{ij}A_{ij}$（按第 $i$ 行展开） → 异行展开为零 → 综合得 $A \cdot \operatorname{adj}(A) = \det(A) \cdot I$ → 由此推出 $A^{-1} = \frac{1}{\det A}\operatorname{adj}(A)$
+
+</div>
 
 !!! theorem "定理 3.9 (Laplace 展开定理)"
     $n$ 阶行列式 $\det(A)$ 可以按第 $i$ 行展开为
@@ -265,6 +308,12 @@ $$
 ---
 
 ## 3.6 行列式的计算方法
+
+<div class="context-flow" markdown>
+
+**实用方法**：三角化（利用性质 3.2–3.6） · 递推法（利用展开建立递推关系） · Vandermonde 行列式（经典公式） · 分块行列式
+
+</div>
 
 ### 三角化法
 
@@ -357,6 +406,12 @@ $$
 
 ## 3.7 Cramer 法则
 
+<div class="context-flow" markdown>
+
+**行列式解方程**：$x_j = \det(A_j)/\det(A)$ → 理论意义 > 计算意义（$n+1$ 个行列式太贵） → 实际求解仍用第 1 章高斯消元
+
+</div>
+
 !!! theorem "定理 3.14 (Cramer 法则)"
     设 $A$ 为 $n$ 阶可逆矩阵（即 $\det(A) \neq 0$），则线性方程组 $A\mathbf{x} = \mathbf{b}$ 有唯一解，且
 
@@ -396,6 +451,12 @@ $$
 ---
 
 ## 3.8 行列式的几何意义
+
+<div class="context-flow" markdown>
+
+**代数与几何的桥梁**：$|\det A|$ = 列向量张成的平行体的体积 → $\det A$ 的符号 = 定向（右手/左手系） → 线性变换面积缩放 $|\det A|$ 倍（→ 第 5 章）
+
+</div>
 
 行列式与几何中的面积和体积有着深刻的联系。
 

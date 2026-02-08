@@ -1,10 +1,22 @@
 # 第 17 章 非负矩阵与 Perron-Frobenius 理论
 
+<div class="context-flow" markdown>
+
+**前置**：谱半径(Ch14) · 有向图 · **脉络**：非负矩阵 → 不可约=强连通 → **Perron-Frobenius**：存在主导正特征值 → Markov链收敛/PageRank
+
+</div>
+
 非负矩阵理论是线性代数中一个美丽而深刻的分支，其核心是 Perron-Frobenius 定理——它揭示了非负矩阵的谱结构具有令人惊叹的规律性。该理论最初源于 Perron（1907）对正矩阵的研究和 Frobenius（1912）对不可约非负矩阵的推广，后来成为概率论（Markov 链）、经济学（投入产出模型）、网络分析（PageRank 算法）和人口动力学等领域的数学基础。
 
 ---
 
 ## 17.1 非负矩阵的定义
+
+<div class="context-flow" markdown>
+
+**注意**：元素序 $A\geq B$ (逐元素) $\neq$ Löwner序 $A\succeq B$ (Ch16半正定差) · 非负矩阵封闭于加法和乘法
+
+</div>
 
 !!! definition "定义 17.1 (非负矩阵与正矩阵)"
     设 $A = (a_{ij}) \in \mathbb{R}^{m \times n}$。
@@ -38,6 +50,12 @@
 ---
 
 ## 17.2 Perron 定理（正矩阵）
+
+<div class="context-flow" markdown>
+
+**核心**：$A>O$ $\Rightarrow$ $\rho(A)$是代数单根，对应正特征向量，且严格支配其他特征值 · 证明关键：单纯形上的极值论证
+
+</div>
 
 !!! theorem "定理 17.1 (Perron 定理)"
     设 $A > O$ 是 $n \times n$ 正矩阵（$n \geq 2$）。则：
@@ -91,6 +109,12 @@
 
 ## 17.3 不可约矩阵
 
+<div class="context-flow" markdown>
+
+**洞察**：不可约 $\Leftrightarrow$ 有向图**强连通** $\Leftrightarrow$ $(I+A)^{n-1}>O$ · 连接线性代数与图论的桥梁
+
+</div>
+
 !!! definition "定义 17.3 (可约与不可约矩阵)"
     设 $A \in \mathbb{R}^{n \times n}$（$n \geq 2$）。若存在置换矩阵 $P$ 使得
 
@@ -132,6 +156,12 @@
 
 ## 17.4 Perron-Frobenius 定理（不可约非负矩阵）
 
+<div class="context-flow" markdown>
+
+**Perron→Perron-Frobenius**：从正矩阵推广到不可约非负矩阵 · 新增现象：循环指数 $h$ 个特征值均匀分布在 $|\lambda|=\rho$ 的圆上
+
+</div>
+
 !!! theorem "定理 17.3 (Perron-Frobenius 定理)"
     设 $A \geq O$ 是 $n \times n$ 不可约非负矩阵。则：
 
@@ -172,6 +202,12 @@
 ---
 
 ## 17.5 本原矩阵
+
+<div class="context-flow" markdown>
+
+**脉络**：本原 = 不可约 + 非周期($h=1$) $\Leftrightarrow$ $\exists k, A^k>O$ · $(A/\rho)^k\to\mathbf{v}\mathbf{w}^T$ → Ch14幂收敛在非负矩阵的具体化
+
+</div>
 
 !!! definition "定义 17.5 (本原矩阵)"
     非负不可约矩阵 $A$ 称为**本原的（primitive）**，若其循环指数 $h = 1$，即 $\rho(A)$ 是唯一的模等于 $\rho(A)$ 的特征值。
@@ -222,6 +258,12 @@
 
 ## 17.6 随机矩阵
 
+<div class="context-flow" markdown>
+
+**脉络**：行随机 $\Rightarrow$ $\rho=1$，$\mathbf{1}$为右特征向量 · **Birkhoff定理**：双随机矩阵 = 置换矩阵的凸组合 → Ch18 majorization
+
+</div>
+
 !!! definition "定义 17.6 (随机矩阵)"
     设 $P = (p_{ij}) \in \mathbb{R}^{n \times n}$。
 
@@ -252,6 +294,12 @@
 ---
 
 ## 17.7 Markov 链
+
+<div class="context-flow" markdown>
+
+**应用**：本原转移矩阵 → 唯一平稳分布 $\boldsymbol{\pi}$ · $P^k\to\mathbf{1}\boldsymbol{\pi}^T$ 即"遗忘初始状态" · 收敛速率由 $|\lambda_2|$ 决定(谱间隙)
+
+</div>
 
 !!! definition "定义 17.7 (Markov 链与转移矩阵)"
     设 $\{X_t\}_{t=0,1,2,\ldots}$ 是取值在有限状态空间 $\{1, 2, \ldots, n\}$ 上的随机过程。若
@@ -299,6 +347,12 @@
 ---
 
 ## 17.8 非负矩阵的谱性质
+
+<div class="context-flow" markdown>
+
+**脉络**：循环指数 $h$ = 回路长度的 $\gcd$ → 谱 $h$-重旋转对称 → 循环分块标准形 · PageRank: $|\lambda_2|\leq\alpha$ 保证快速收敛
+
+</div>
 
 !!! definition "定义 17.9 (循环指数)"
     不可约非负矩阵 $A$ 的**循环指数（index of imprimitivity）**（或**周期**）$h$ 定义为关联有向图 $G(A)$ 中所有回路长度的最大公约数。

@@ -1,10 +1,23 @@
 # 第 5 章 线性变换
 
+<div class="context-flow" markdown>
+
+**前置**：第 4 章向量空间 · 基与维数 · 坐标 · **本章脉络**：线性变换定义 → 核与像 → 秩-零化度定理 → 矩阵表示 → 基变换/相似 → 复合与逆 → 同构 → 不变子空间
+**一句话本质**：线性变换是向量空间之间的**结构保持映射**——选定基后它就是矩阵乘法，换基则对应相似变换
+
+</div>
+
 线性变换（linear transformation）是线性代数中最核心的概念之一，它将向量空间的代数结构与几何直觉统一起来。在前几章中，我们已经看到矩阵乘法 $A\mathbf{x}$ 将一个向量映射为另一个向量；本章将从抽象的角度认识到，这种映射的本质——保持加法和标量乘法——才是最关键的性质。我们将系统地研究线性变换的定义与性质、核与像、秩-零化度定理、矩阵表示、基变换与相似矩阵、复合与逆、同构以及不变子空间等内容，为后续的特征值理论和内积空间理论打下坚实基础。
 
 ---
 
 ## 5.1 线性变换的定义
+
+<div class="context-flow" markdown>
+
+**核心公理**：$T(c\mathbf{u}+d\mathbf{v}) = cT(\mathbf{u})+dT(\mathbf{v})$ → 保持线性组合 → 旋转、投影、微分都是线性变换，平移不是 → $T$ 由基上的值**唯一确定**（定理 5.2）
+
+</div>
 
 !!! definition "定义 5.1 (线性变换)"
     设 $V$ 和 $W$ 为数域 $\mathbb{F}$ 上的向量空间。映射 $T: V \to W$ 称为从 $V$ 到 $W$ 的一个**线性变换**（linear transformation），若对所有 $\mathbf{u}, \mathbf{v} \in V$ 和所有标量 $c \in \mathbb{F}$，满足：
@@ -92,6 +105,12 @@
 
 ## 5.2 核与像
 
+<div class="context-flow" markdown>
+
+**信息的损失与覆盖**：$\ker(T)$ = 被映到 $\mathbf{0}$ 的向量（第 1 章齐次解集的推广） → $\operatorname{im}(T)$ = 值域 → 单射 $\Leftrightarrow$ $\ker(T)=\{\mathbf{0}\}$
+
+</div>
+
 !!! definition "定义 5.2 (核)"
     设 $T: V \to W$ 为线性变换。$T$ 的**核**（kernel），也称**零空间**（null space），定义为
 
@@ -155,6 +174,12 @@
 
 ## 5.3 秩-零化度定理
 
+<div class="context-flow" markdown>
+
+**有限维线性代数的基本等式**：$\dim V = \dim\ker T + \dim\operatorname{im} T$ → 推论：等维空间间单射 $\Leftrightarrow$ 满射 $\Leftrightarrow$ 双射
+
+</div>
+
 !!! theorem "定理 5.5 (秩-零化度定理 / Rank-Nullity Theorem)"
     设 $V$ 为有限维向量空间，$T: V \to W$ 为线性变换，则
 
@@ -198,6 +223,12 @@
 ---
 
 ## 5.4 线性变换的矩阵表示
+
+<div class="context-flow" markdown>
+
+**抽象 → 计算**：选定 $V$ 和 $W$ 的基后，$T$ 完全等价于一个 $m \times n$ 矩阵 → $[T(\mathbf{v})]_\mathcal{C} = [T]_\mathcal{B}^\mathcal{C} \cdot [\mathbf{v}]_\mathcal{B}$ → 矩阵乘法就是线性变换的坐标化
+
+</div>
 
 !!! definition "定义 5.5 (线性变换的矩阵表示)"
     设 $V$ 为 $n$ 维向量空间，$W$ 为 $m$ 维向量空间，$\mathcal{B} = \{\mathbf{v}_1, \ldots, \mathbf{v}_n\}$ 为 $V$ 的基，$\mathcal{C} = \{\mathbf{w}_1, \ldots, \mathbf{w}_m\}$ 为 $W$ 的基。设 $T: V \to W$ 为线性变换。
@@ -244,6 +275,12 @@
 ---
 
 ## 5.5 基变换与相似矩阵
+
+<div class="context-flow" markdown>
+
+**同一变换，不同矩阵**：换基 → $[T]_{\mathcal{B}'} = P^{-1}[T]_\mathcal{B}P$ → **相似矩阵**是同一线性算子的不同"语言描述" → 找好基 = 化简矩阵（→ 第 6 章对角化）
+
+</div>
 
 !!! definition "定义 5.6 (过渡矩阵)"
     设 $V$ 为 $n$ 维向量空间，$\mathcal{B} = \{\mathbf{v}_1, \ldots, \mathbf{v}_n\}$ 和 $\mathcal{B}' = \{\mathbf{v}_1', \ldots, \mathbf{v}_n'\}$ 是 $V$ 的两组基。从 $\mathcal{B}$ 到 $\mathcal{B}'$ 的**过渡矩阵**（transition matrix / change of basis matrix）$P$ 是 $n \times n$ 矩阵，其第 $j$ 列为 $\mathbf{v}_j$ 在基 $\mathcal{B}'$ 下的坐标向量：
@@ -306,6 +343,12 @@
 
 ## 5.6 线性变换的复合与逆
 
+<div class="context-flow" markdown>
+
+**复合 ↔ 矩阵乘法**：$[S \circ T] = [S][T]$ → 可逆变换 $\Leftrightarrow$ 双射 $\Leftrightarrow$ 矩阵可逆（第 2 章）
+
+</div>
+
 !!! theorem "定理 5.9 (线性变换的复合仍为线性变换)"
     设 $T: U \to V$ 和 $S: V \to W$ 为线性变换，则复合映射 $S \circ T: U \to W$ 也是线性变换，且
 
@@ -365,6 +408,12 @@
 
 ## 5.7 同构
 
+<div class="context-flow" markdown>
+
+**维数决定一切**：$V \cong W \Leftrightarrow \dim V = \dim W$ → 所有 $n$ 维空间同构于 $\mathbb{R}^n$ → 这就是为什么矩阵能解决一切有限维线性代数问题
+
+</div>
+
 !!! definition "定义 5.9 (同构)"
     若存在可逆线性变换 $T: V \to W$，则称 $V$ 与 $W$ **同构**（isomorphic），记为 $V \cong W$。此时 $T$ 称为从 $V$ 到 $W$ 的一个**同构映射**（isomorphism）。
 
@@ -412,6 +461,12 @@
 ---
 
 ## 5.8 不变子空间
+
+<div class="context-flow" markdown>
+
+**对角化的理论基础**：$T(U) \subseteq U$ → 不变子空间上 $T$ 可"独立研究" → 直和分解 $V = U_1 \oplus U_2$ 对应分块对角矩阵 → 一维不变子空间 = 特征向量（→ 第 6 章）
+
+</div>
 
 !!! definition "定义 5.10 (不变子空间)"
     设 $T: V \to V$ 为线性算子，$U$ 为 $V$ 的子空间。若 $T(U) \subseteq U$（即对任意 $\mathbf{u} \in U$，有 $T(\mathbf{u}) \in U$），则称 $U$ 为 $T$ 的**不变子空间**（invariant subspace）。

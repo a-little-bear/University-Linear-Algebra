@@ -1,10 +1,22 @@
 # 第 15 章 范数与扰动理论
 
+<div class="context-flow" markdown>
+
+**前置**：Ch14 谱半径与范数 · **脉络**：向量范数 → 矩阵范数(算子/Frobenius) → **条件数**量化病态性 → Bauer-Fike/Weyl 量化特征值灵敏度
+
+</div>
+
 范数为向量空间和矩阵空间提供了"大小"的度量，是矩阵分析和数值线性代数的基石。扰动理论则研究当矩阵发生微小变化时，其特征值、奇异值和线性方程组的解如何变化。这些理论对于理解数值计算的稳定性和精度至关重要。本章系统地建立向量范数和矩阵范数的理论，引入条件数的概念，并深入讨论特征值和奇异值的扰动界。
 
 ---
 
 ## 15.1 向量范数
+
+<div class="context-flow" markdown>
+
+**脉络**：$\ell_p$ 范数族($p=1,2,\infty$) → Hölder 不等式($p,q$ 共轭) → 有限维范数等价(拓扑唯一)
+
+</div>
 
 !!! definition "定义 15.1 (向量范数)"
     $\mathbb{C}^n$ 上的**向量范数（vector norm）** 是函数 $\|\cdot\| : \mathbb{C}^n \to \mathbb{R}$，满足对所有 $\mathbf{x}, \mathbf{y} \in \mathbb{C}^n$ 和 $\alpha \in \mathbb{C}$：
@@ -92,6 +104,12 @@
 
 ## 15.2 矩阵范数
 
+<div class="context-flow" markdown>
+
+**脉络**：矩阵范数 + **次可乘性** $\|AB\|\leq\|A\|\|B\|$ → Frobenius范数 $=\sqrt{\sum\sigma_i^2}$ 是酉不变的"元素级"范数
+
+</div>
+
 !!! definition "定义 15.3 (矩阵范数)"
     $\mathbb{C}^{m \times n}$ 上的**矩阵范数（matrix norm）** 是函数 $\|\cdot\| : \mathbb{C}^{m \times n} \to \mathbb{R}$，满足对所有 $A, B$ 和 $\alpha \in \mathbb{C}$：
 
@@ -142,6 +160,12 @@
 ---
 
 ## 15.3 算子范数（诱导范数）
+
+<div class="context-flow" markdown>
+
+**洞察**：$\|A\|_1$=最大列和，$\|A\|_\infty$=最大行和，$\|A\|_2=\sigma_1(A)$ · 算子范数自动次可乘且 $\rho(A)\leq\|A\|$
+
+</div>
 
 !!! definition "定义 15.5 (算子范数)"
     设 $\|\cdot\|_\alpha$ 和 $\|\cdot\|_\beta$ 分别是 $\mathbb{C}^n$ 和 $\mathbb{C}^m$ 上的向量范数。由它们**诱导（induced）** 的**算子范数（operator norm）** 定义为
@@ -206,6 +230,12 @@
 
 ## 15.4 范数之间的关系
 
+<div class="context-flow" markdown>
+
+**关键不等式**：$\|A\|_2\leq\|A\|_F\leq\sqrt{r}\|A\|_2$ · $\|A\|_2\leq\sqrt{\|A\|_1\|A\|_\infty}$ 连通三种算子范数
+
+</div>
+
 !!! theorem "定理 15.6 (矩阵范数之间的不等式)"
     设 $A \in \mathbb{C}^{m \times n}$，则：
 
@@ -243,6 +273,12 @@
 ---
 
 ## 15.5 条件数
+
+<div class="context-flow" markdown>
+
+**核心**：$\kappa(A)=\|A\|\|A^{-1}\|=\sigma_1/\sigma_n$ · 条件数是"扰动放大器"：$\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|}\leq\kappa(A)\frac{\|\delta\mathbf{b}\|}{\|\mathbf{b}\|}$ · 正规矩阵 $\kappa_2=\rho(A)/|\lambda_{\min}|$
+
+</div>
 
 条件数衡量了求解线性方程组时问题本身对输入扰动的敏感程度，是数值线性代数中最重要的概念之一。
 
@@ -321,6 +357,12 @@
 
 ## 15.6 特征值的扰动
 
+<div class="context-flow" markdown>
+
+**脉络**：**Bauer-Fike**($\kappa(X)\|E\|$ 界) → **Weyl**(Hermitian矩阵 $|\Delta\lambda_i|\leq\|E\|_2$) → **Wielandt-Hoffman**(Frobenius范数界) · 正规矩阵最稳定($\kappa=1$)
+
+</div>
+
 !!! theorem "定理 15.9 (Bauer-Fike 定理)"
     设 $A \in \mathbb{C}^{n \times n}$ 可对角化，$A = X\Lambda X^{-1}$（$\Lambda = \operatorname{diag}(\lambda_1, \ldots, \lambda_n)$）。设 $\mu$ 是 $A + E$ 的任意特征值，则存在 $A$ 的某个特征值 $\lambda_j$ 使得
 
@@ -395,6 +437,12 @@
 
 ## 15.7 奇异值的扰动
 
+<div class="context-flow" markdown>
+
+**洞察**：构造 Hermitian 膨胀 $\hat{A}=\begin{pmatrix}0&A\\A^*&0\end{pmatrix}$ 将奇异值扰动归结为特征值扰动 → Ch18 统一不等式框架
+
+</div>
+
 !!! theorem "定理 15.12 (奇异值的 Weyl 不等式)"
     设 $A, B \in \mathbb{C}^{m \times n}$，奇异值分别降序排列为 $\sigma_1(A) \geq \cdots \geq \sigma_p(A)$ 和 $\sigma_1(B) \geq \cdots \geq \sigma_p(B)$（$p = \min(m,n)$）。则对每个 $i$，
 
@@ -434,6 +482,12 @@
 ---
 
 ## 15.8 线性方程组的扰动分析
+
+<div class="context-flow" markdown>
+
+**脉络**：残量小 $\not\Rightarrow$ 误差小(条件数放大) · $\frac{1}{\kappa}\cdot\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|}\leq\frac{\|\delta\mathbf{x}\|}{\|\mathbf{x}\|}\leq\kappa\cdot\frac{\|\mathbf{r}\|}{\|\mathbf{b}\|}$ → 双向夹逼
+
+</div>
 
 !!! definition "定义 15.7 (前向误差与后向误差)"
     设 $\hat{\mathbf{x}}$ 是线性方程组 $A\mathbf{x} = \mathbf{b}$ 的近似解。

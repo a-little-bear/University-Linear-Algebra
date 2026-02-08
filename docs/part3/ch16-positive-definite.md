@@ -1,10 +1,22 @@
 # 第 16 章 正定矩阵
 
+<div class="context-flow" markdown>
+
+**前置**：Hermitian矩阵谱分解(Ch6) · **脉络**：$A\succ 0$ $\Leftrightarrow$ 特征值全正 $\Leftrightarrow$ Cholesky可分解 $\Leftrightarrow$ 二次型正 → **Schur补**是分块正定的钥匙 → Ch18不等式
+
+</div>
+
 正定矩阵是线性代数中最重要的矩阵类之一，它在优化、统计、微分方程、信号处理和机器学习等领域无处不在。正定矩阵的理论联系了二次型、特征值、行列式、矩阵分解等多个核心概念，是线性代数应用的基石。本章系统地建立正定矩阵和半正定矩阵的理论，讨论 Schur 补、Löwner 偏序、正定矩阵的运算性质，以及若干重要的行列式不等式。
 
 ---
 
 ## 16.1 正定矩阵的定义与等价条件
+
+<div class="context-flow" markdown>
+
+**洞察**：8个等价条件的核心逻辑——二次型正 $\leftrightarrow$ 谱全正 $\leftrightarrow$ $A=C^*C$($C$可逆) $\leftrightarrow$ Cholesky $\leftrightarrow$ 顺序主子式全正
+
+</div>
 
 !!! definition "定义 16.1 (正定矩阵)"
     设 $A \in \mathbb{C}^{n \times n}$ 是 Hermitian 矩阵（$A = A^*$）。若对所有非零向量 $\mathbf{x} \in \mathbb{C}^n$，有
@@ -89,6 +101,12 @@
 
 ## 16.2 半正定矩阵
 
+<div class="context-flow" markdown>
+
+**脉络**：$A\succeq 0$ $\Leftrightarrow$ $\lambda_i\geq 0$ $\Leftrightarrow$ $A=C^*C$ · 半正定锥 $\mathbb{S}_+^n$ 是凸锥 → Ch18 Löwner偏序与优化
+
+</div>
+
 !!! definition "定义 16.3 (半正定矩阵)"
     设 $A \in \mathbb{C}^{n \times n}$ 是 Hermitian 矩阵。若对所有 $\mathbf{x} \in \mathbb{C}^n$，有
 
@@ -138,6 +156,12 @@
 ---
 
 ## 16.3 Schur 补
+
+<div class="context-flow" markdown>
+
+**核心工具**：$M/A = C-B^*A^{-1}B$ · 分块LDL分解 → $M\succ 0 \Leftrightarrow A\succ 0$ 且 $M/A\succ 0$ · 行列式公式 $\det M=\det A\cdot\det(M/A)$ → Fischer不等式
+
+</div>
 
 Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统计学和优化中有广泛应用。
 
@@ -202,6 +226,12 @@ Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统�
 
 ## 16.4 Löwner 偏序
 
+<div class="context-flow" markdown>
+
+**脉络**：$A\succeq B \Leftrightarrow A-B\succeq 0$ 定义矩阵上的偏序 · 合同不变性 + **逆序性**($A\succeq B\succ 0 \Rightarrow B^{-1}\succeq A^{-1}$) → Ch18 矩阵单调函数
+
+</div>
+
 !!! definition "定义 16.6 (Löwner 偏序)"
     对 Hermitian 矩阵 $A$ 和 $B$，定义 **Löwner 偏序（Löwner partial order）**：
 
@@ -247,6 +277,12 @@ Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统�
 ---
 
 ## 16.5 正定矩阵的运算性质
+
+<div class="context-flow" markdown>
+
+**脉络**：和/数乘保正定 · $AB$特征值全正(但未必Hermitian) · **Schur积定理**($A\circ B\succeq 0$) · **Kronecker积**保正定 → Ch19
+
+</div>
 
 !!! theorem "定理 16.6 (和与数乘)"
     (1) 若 $A \succ 0$ 且 $B \succ 0$，则 $A + B \succ 0$；
@@ -301,6 +337,12 @@ Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统�
 
 ## 16.6 Hadamard 不等式
 
+<div class="context-flow" markdown>
+
+**洞察**：$\det A\leq\prod a_{ii}$，等号 $\Leftrightarrow$ 对角矩阵 · 两种证法：Cholesky分解 / AM-GM不等式 → Fischer不等式的 $1\times 1$ 特例
+
+</div>
+
 !!! theorem "定理 16.10 (Hadamard 不等式)"
     设 $A = (a_{ij}) \in \mathbb{C}^{n \times n}$ 是正定 Hermitian 矩阵。则
 
@@ -333,6 +375,12 @@ Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统�
 ---
 
 ## 16.7 Fischer 不等式
+
+<div class="context-flow" markdown>
+
+**脉络**：Hadamard不等式的分块推广 · $\det A\leq\det A_{11}\cdot\det A_{22}$，Schur补提供证明 · 等号 $\Leftrightarrow$ 非对角块为零 → Ch18行列式不等式
+
+</div>
 
 Fischer 不等式是 Hadamard 不等式的推广，将对角元替换为分块对角子矩阵的行列式。
 
@@ -381,6 +429,12 @@ Fischer 不等式是 Hadamard 不等式的推广，将对角元替换为分块�
 ---
 
 ## 16.8 正定矩阵与最优化
+
+<div class="context-flow" markdown>
+
+**脉络**：Hessian $A\succ 0$ $\Leftrightarrow$ 严格凸 $\Leftrightarrow$ 唯一极小值 · 水平集 = 椭球(半轴 $1/\sqrt{\lambda_i}$) · 正定性判定 $\to$ 凸优化全局最优保证
+
+</div>
 
 正定矩阵在最优化理论中扮演核心角色。二次函数的凸性由 Hessian 矩阵的正定性决定，正定矩阵的水平集是椭球。
 

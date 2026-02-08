@@ -1,10 +1,23 @@
 # 第 7 章 正交性与最小二乘
 
+<div class="context-flow" markdown>
+
+**前置**：第 4 章子空间/四个基本子空间 · 第 6 章实对称矩阵/谱定理 · **本章脉络**：内积/范数 → Cauchy-Schwarz → 正交集 → 正交补 → 正交投影 → Gram-Schmidt → 正交矩阵 → 最小二乘 → QR 分解
+**一句话本质**：内积为向量空间引入**几何结构**（长度、角度、垂直）——正交投影是"最佳逼近"的代数表达，QR 分解是其算法实现
+
+</div>
+
 正交性（orthogonality）是线性代数中几何直觉与代数理论交汇的核心概念。在 $\mathbb{R}^n$ 中，内积赋予了向量"长度"和"角度"的概念，使得我们能够讨论正交、投影、最佳逼近等问题。本章将从内积与范数出发，系统地研究正交向量、正交补、正交投影、Gram-Schmidt 正交化过程、正交矩阵、最小二乘法以及 QR 分解。这些工具不仅具有深刻的理论意义，在数值线性代数、统计学、信号处理和数据科学中也有着极其广泛的应用。
 
 ---
 
 ## 7.1 $\mathbb{R}^n$ 中的内积与范数
+
+<div class="context-flow" markdown>
+
+**几何结构的注入**：前 6 章纯代数（加法/乘法/行列式） → 内积 $\langle\mathbf{u},\mathbf{v}\rangle = \mathbf{u}^T\mathbf{v}$ 赋予长度与角度 → Cauchy-Schwarz 不等式是一切的基石
+
+</div>
 
 !!! definition "定义 7.1 (内积)"
     $\mathbb{R}^n$ 中向量 $\mathbf{u} = (u_1, \ldots, u_n)^T$ 和 $\mathbf{v} = (v_1, \ldots, v_n)^T$ 的**内积**（inner product），也称**点积**（dot product），定义为
@@ -82,6 +95,12 @@
 
 ## 7.2 正交向量与正交集
 
+<div class="context-flow" markdown>
+
+**正交 = "最独立"**：$\langle\mathbf{u},\mathbf{v}\rangle=0$ → 正交集自动线性无关（第 4 章证法的内积升级） → 正交基使坐标公式简化为内积运算
+
+</div>
+
 !!! definition "定义 7.4 (正交)"
     两个向量 $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$ 称为**正交的**（orthogonal），若 $\langle \mathbf{u}, \mathbf{v} \rangle = 0$，记为 $\mathbf{u} \perp \mathbf{v}$。
 
@@ -134,6 +153,12 @@
 ---
 
 ## 7.3 正交补
+
+<div class="context-flow" markdown>
+
+**正交分解**：$\mathbb{R}^n = W \oplus W^\perp$（第 4 章直和的几何化） → 行空间与零空间互为正交补 $\operatorname{Row}(A)^\perp = \operatorname{Null}(A)$ → 四个基本子空间的完整几何图景
+
+</div>
 
 !!! definition "定义 7.6 (正交补)"
     设 $W$ 为 $\mathbb{R}^n$ 的子空间。$W$ 的**正交补**（orthogonal complement）定义为
@@ -210,6 +235,12 @@
 
 ## 7.4 正交投影
 
+<div class="context-flow" markdown>
+
+**最佳逼近**：$\operatorname{proj}_W(\mathbf{v})$ 是 $W$ 中距 $\mathbf{v}$ 最近的点 → 投影矩阵 $P = A(A^TA)^{-1}A^T$ 满足 $P^2=P$, $P^T=P$ → 最小二乘法的几何基础
+
+</div>
+
 !!! definition "定义 7.7 (正交投影)"
     设 $W$ 为 $\mathbb{R}^n$ 的子空间。向量 $\mathbf{v}$ 在 $W$ 上的**正交投影**（orthogonal projection）定义为正交分解 $\mathbf{v} = \mathbf{w} + \mathbf{w}^\perp$ 中的 $\mathbf{w}$ 分量，记为
 
@@ -285,6 +316,12 @@
 
 ## 7.5 Gram-Schmidt 正交化
 
+<div class="context-flow" markdown>
+
+**任意基 → 正交基的算法**：逐步减去已有方向上的投影分量 → $\mathbf{v}_j = \mathbf{x}_j - \operatorname{proj}_{W_{j-1}}(\mathbf{x}_j)$ → 直接产生 QR 分解
+
+</div>
+
 !!! theorem "定理 7.10 (Gram-Schmidt 正交化过程)"
     设 $\{\mathbf{x}_1, \mathbf{x}_2, \ldots, \mathbf{x}_k\}$ 为子空间 $W$ 的一组基。定义：
 
@@ -350,6 +387,12 @@
 
 ## 7.6 正交矩阵
 
+<div class="context-flow" markdown>
+
+**保持几何结构的矩阵**：$Q^TQ=I$ → 列标准正交 → 保内积/保范数（等距） → $\det Q = \pm 1$（旋转或反射） → 第 6 章谱定理 $A=QDQ^T$ 中的 $Q$
+
+</div>
+
 !!! definition "定义 7.9 (正交矩阵)"
     实方阵 $Q$ 称为**正交矩阵**（orthogonal matrix），若
 
@@ -406,6 +449,12 @@
 ---
 
 ## 7.7 最小二乘法
+
+<div class="context-flow" markdown>
+
+**$A\mathbf{x}=\mathbf{b}$ 无解时的最优替代**：将 $\mathbf{b}$ 投影到 $\operatorname{Col}(A)$ → 残差 $\perp$ 列空间 → 法方程 $A^TA\hat{\mathbf{x}}=A^T\mathbf{b}$ → 回到第 1 章：解一个**方程组**
+
+</div>
 
 当线性方程组 $A\mathbf{x} = \mathbf{b}$ 无解（即 $\mathbf{b} \notin \operatorname{Col}(A)$）时，我们寻找使误差最小的近似解——这就是最小二乘法（least squares method）的核心思想。
 
@@ -467,6 +516,12 @@
 ---
 
 ## 7.8 QR 分解
+
+<div class="context-flow" markdown>
+
+**Gram-Schmidt 的矩阵化**：$A = QR$（正交 $\times$ 上三角） → 最小二乘解简化为 $R\hat{\mathbf{x}}=Q^T\mathbf{b}$（上三角回代） → 数值稳定性优于法方程
+
+</div>
 
 !!! definition "定义 7.11 (QR 分解)"
     设 $A$ 为 $m \times n$ 矩阵（$m \geq n$）且列线性无关。$A$ 的 **QR 分解**（QR factorization / QR decomposition）是将 $A$ 写成
