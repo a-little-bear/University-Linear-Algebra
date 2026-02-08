@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**前置**：特征值与对角化(Ch6) · Jordan 标准形(Ch12) · 矩阵函数(Ch13) · **脉络**：$\mathbf{x}' = A\mathbf{x}$(齐次系统) → $e^{At}$(矩阵指数) → 特征值实部(稳定性) → 相平面(几何分类) → 友矩阵(高阶化为系统) → 变参法(非齐次) → Sturm-Liouville(PDE) → Floquet(周期系统)
-**本质**：微分方程的定性与定量理论，核心工具均来自线性代数——特征值决定稳定性，矩阵指数给出解，Jordan 形处理重根
+**前置**：特征值与对角化(Ch6) · Jordan 标准形(Ch12) · 矩阵函数(Ch13)
+
+**脉络**：$\mathbf{x}' = A\mathbf{x}$(齐次系统) → $e^{At}$(矩阵指数) → 特征值实部(稳定性) → 相平面(几何分类) → 友矩阵(高阶化为系统) → 变参法(非齐次) → Sturm-Liouville(PDE) → Floquet(周期系统)
 
 </div>
 
@@ -16,6 +17,7 @@
 <div class="context-flow" markdown>
 
 **核心结构**：$\mathbf{x}' = A\mathbf{x}$ 的解空间是 $n$ 维线性空间 → 基本解矩阵 $\Phi(t)$ 的每一列是一个解 → $\Phi(t) = e^{At}$ 当 $\Phi(0) = I$
+
 **链接**：Ch4 线性空间的维数定理在此直接体现
 
 </div>
@@ -100,6 +102,7 @@
 <div class="context-flow" markdown>
 
 **核心公式**：$e^{At} = \sum_{k=0}^{\infty} \frac{(At)^k}{k!}$ → 可对角化时 $e^{At} = P\, \text{diag}(e^{\lambda_i t})\, P^{-1}$ → Jordan 块时含 $t^k e^{\lambda t}$ 项
+
 **链接**：Ch13 矩阵函数理论的最重要特例
 
 </div>
@@ -206,6 +209,7 @@
 <div class="context-flow" markdown>
 
 **判据链**：所有 $\operatorname{Re}(\lambda_i) < 0$ ⇔ 渐近稳定 → Lyapunov 方程 $A^T P + PA = -Q$ 有正定解 ⇔ Hurwitz 矩阵
+
 **应用**：控制理论中系统是否收敛、信号处理中滤波器是否稳定
 
 </div>
@@ -274,6 +278,7 @@
 <div class="context-flow" markdown>
 
 **分类**：$2 \times 2$ 系统的完整分类依赖于 $\operatorname{tr}(A)$ 和 $\det(A)$ → 特征值符号和虚实性决定结点/鞍点/焦点/中心
+
 **几何**：轨迹的定性形状完全由特征值和特征向量决定
 
 </div>
@@ -329,6 +334,7 @@
 <div class="context-flow" markdown>
 
 **化归**：$n$ 阶线性 ODE → 一阶 $n \times n$ 系统 → 友矩阵 $C$ 的特征多项式 = 原方程的特征多项式
+
 **链接**：Ch6 特征多项式理论在此直接应用
 
 </div>
@@ -385,6 +391,7 @@
 <div class="context-flow" markdown>
 
 **非齐次通解** = 齐次通解 + 特解 → 特解由 $e^{At}$ 的卷积积分给出（变参法）→ 实质是 Green 函数/脉冲响应
+
 **链接**：Ch4 商空间和仿射子空间的直接体现
 
 </div>
@@ -448,6 +455,7 @@
 <div class="context-flow" markdown>
 
 **分离变量** → 空间部分为特征值问题 $\mathcal{L}u = \lambda u$ → Sturm-Liouville 理论保证实特征值、正交特征函数 → 无穷维内积空间上的谱定理
+
 **链接**：Ch8 内积空间谱定理的无穷维推广
 
 </div>
@@ -514,6 +522,7 @@
 <div class="context-flow" markdown>
 
 **问题**：$\mathbf{x}' = A(t)\mathbf{x}$，$A(t+T) = A(t)$ → 解不再是 $e^{At}$ → Floquet 定理：$\Phi(t) = P(t)e^{Bt}$（周期部分 $\times$ 指数部分）→ 稳定性由 $B$ 的特征值决定
+
 **应用**：参数共振（Mathieu 方程）、晶格中的 Bloch 定理
 
 </div>

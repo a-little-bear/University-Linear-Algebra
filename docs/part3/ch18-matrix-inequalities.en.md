@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch15 Weyl/Wielandt-Hoffman · Ch16 Positive definite matrices · **Chapter arc**: Courant-Fischer → Weyl/Cauchy interlacing → Singular value inequalities → Trace (von Neumann) → Determinant (Hadamard/Minkowski) → **Majorization** as a unifying framework
+**Prerequisites**: Ch15 Weyl/Wielandt-Hoffman · Ch16 Positive definite matrices
+
+**Chapter arc**: Courant-Fischer → Weyl/Cauchy interlacing → Singular value inequalities → Trace (von Neumann) → Determinant (Hadamard/Minkowski) → **Majorization** as a unifying framework
+
+**Further connections**：Matrix inequalities are central to quantum information (entanglement witnesses, channel capacity bounds), control theory (LMI methods), and statistics (Cramér-Rao bounds); majorization theory connects information theory (Shannon entropy) with measures of quantum entanglement
 
 </div>
 
@@ -187,7 +191,9 @@ Eigenvalues are the most fundamental invariants of a matrix. For Hermitian matri
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: Singular values are submultiplicative $\sigma_{i+j-1}(AB)\leq\sigma_i(A)\sigma_j(B)$ · **Ky Fan $k$-norm** $=\sum_{i=1}^k\sigma_i$ satisfies the triangle inequality → Unified perspective via unitarily invariant norms
+**Chapter arc**: Singular values are submultiplicative $\sigma_{i+j-1}(AB)\leq\sigma_i(A)\sigma_j(B)$
+
+**Ky Fan $k$-norm** $=\sum_{i=1}^k\sigma_i$ satisfies the triangle inequality → Unified perspective via unitarily invariant norms
 
 </div>
 
@@ -540,7 +546,9 @@ The determinant, as another fundamental invariant of a matrix, also satisfies se
 
 <div class="context-flow" markdown>
 
-**Core framework**: $\mathbf{x}\prec\mathbf{y}$ $\Leftrightarrow$ $\mathbf{x}=D\mathbf{y}$ ($D$ doubly stochastic) $\Leftrightarrow$ $\mathbf{x}$ lies in the convex hull of permutations of $\mathbf{y}$ · **Schur-Horn**: diagonal entries $\prec$ eigenvalues · Birkhoff's theorem is the bridge
+**Core framework**: $\mathbf{x}\prec\mathbf{y}$ $\Leftrightarrow$ $\mathbf{x}=D\mathbf{y}$ ($D$ doubly stochastic) $\Leftrightarrow$ $\mathbf{x}$ lies in the convex hull of permutations of $\mathbf{y}$
+
+**Schur-Horn**: diagonal entries $\prec$ eigenvalues · Birkhoff's theorem is the bridge
 
 </div>
 
@@ -722,7 +730,9 @@ Schur-convex functions are a class of functions closely related to majorization 
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: $t^r$ ($0\leq r\leq 1$) and $\log t$ are matrix monotone, $t^2$ is not · **Loewner's theorem**: matrix monotone $\Leftrightarrow$ Pick function (self-map of the upper half-plane) · Jensen matrix inequality → Quantum information
+**Chapter arc**: $t^r$ ($0\leq r\leq 1$) and $\log t$ are matrix monotone, $t^2$ is not
+
+**Loewner's theorem**: matrix monotone $\Leftrightarrow$ Pick function (self-map of the upper half-plane) · Jensen matrix inequality → Quantum information
 
 </div>
 

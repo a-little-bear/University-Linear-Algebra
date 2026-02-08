@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 4 vector spaces · basis and dimension · coordinates · **Chapter arc**: definition of linear transformation → kernel and image → rank-nullity theorem → matrix representation → change of basis/similarity → composition and inverse → isomorphism → invariant subspaces
-**One-line essence**: A linear transformation is a **structure-preserving map** between vector spaces — choosing bases reduces it to matrix multiplication, and changing bases corresponds to similarity transformations
+**Prerequisites**: Chapter 4 vector spaces · basis and dimension · coordinates
+
+**Chapter arc**: definition of linear transformation → kernel and image → rank-nullity theorem → matrix representation → change of basis/similarity → composition and inverse → isomorphism → invariant subspaces
+
+**Further connections**：Linear transformations are fundamental in differential equations (linear operator $D = d/dx$), quantum mechanics (operator algebras), and signal processing (linear filters); infinite-dimensional operator theory (spectral theory, compact operators) is central to functional analysis
 
 </div>
 

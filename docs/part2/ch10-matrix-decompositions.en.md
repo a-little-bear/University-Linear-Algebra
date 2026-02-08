@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch8 Orthogonality/Spectral theorem · Ch9 Positive definiteness · **Chapter arc**: LU (elimination) → PLU (pivoting) → Cholesky (positive definite) → QR (orthogonalization) → Schur (triangularization) → Spectral decomposition → Polar decomposition
-Essence: Factoring a matrix into a product of "structurally simple factors" — each decomposition answers a different question
+**Prerequisites**: Ch8 Orthogonality/Spectral theorem · Ch9 Positive definiteness
+
+**Chapter arc**: LU (elimination) → PLU (pivoting) → Cholesky (positive definite) → QR (orthogonalization) → Schur (triangularization) → Spectral decomposition → Polar decomposition
+
+**Further connections**：LU decomposition is the industrial standard for large-scale linear system solvers (LAPACK); QR decomposition is at the heart of eigenvalue algorithms (QR iteration); Cholesky decomposition is widely used in financial engineering (covariance matrix simulation) and geophysics (Kriging)
 
 </div>
 

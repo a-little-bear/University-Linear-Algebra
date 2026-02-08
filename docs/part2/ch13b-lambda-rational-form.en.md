@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch5 Eigenvalues and characteristic polynomials · Ch7 Jordan normal form · **Chapter arc**: $\lambda$-matrices → Elementary operations → Smith normal form → Invariant factors / Elementary divisors → Companion matrix and **Rational canonical form** → Unified derivation of Jordan form → Complete invariants of matrix similarity
-Essence: Jordan form depends on an algebraically closed field ($\mathbb{C}$), while the rational canonical form holds over **any field** — invariant factors are "characteristic polynomial hierarchies without factorization"
+**Prerequisites**: Ch5 Eigenvalues and characteristic polynomials · Ch7 Jordan normal form
+
+**Chapter arc**: $\lambda$-matrices → Elementary operations → Smith normal form → Invariant factors / Elementary divisors → Companion matrix and **Rational canonical form** → Unified derivation of Jordan form → Complete invariants of matrix similarity
+
+**Further connections**：Rational canonical form corresponds to observable canonical form in control theory (companion matrix realization); Smith normal form is used for integer matrix classification (structure theorem for abelian groups) and algebraic K-theory
 
 </div>
 

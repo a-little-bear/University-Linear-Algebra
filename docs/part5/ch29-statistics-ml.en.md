@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues/SVD (Ch6, 11) · positive definite matrices (Ch16) · least squares (Ch25) · matrix decompositions (Ch10) · **Chapter arc**: Covariance matrix (symmetric PSD) → PCA (eigendecomposition/SVD) → linear regression (normal equations/QR) → LDA (generalized eigenvalue) → kernel methods (Gram matrix) → SVM (quadratic programming) → neural networks (matrix chain multiplication/gradients) → recommender systems (low-rank matrix factorization)
-**Essence**: The core operations of statistical learning — projection, decomposition, optimization — are fundamentally linear algebra operations; the spectral structure of data matrices determines the performance of learning algorithms
+**Prerequisites**: Eigenvalues/SVD (Ch6, 11) · positive definite matrices (Ch16) · least squares (Ch25) · matrix decompositions (Ch10)
+
+**Chapter arc**: Covariance matrix (symmetric PSD) → PCA (eigendecomposition/SVD) → linear regression (normal equations/QR) → LDA (generalized eigenvalue) → kernel methods (Gram matrix) → SVM (quadratic programming) → neural networks (matrix chain multiplication/gradients) → recommender systems (low-rank matrix factorization)
 
 </div>
 
@@ -16,6 +17,7 @@ Statistics and machine learning represent one of the most important application 
 <div class="context-flow" markdown>
 
 **Linear algebra perspective**: $n$ samples, $p$ features → data matrix $X \in \mathbb{R}^{n \times p}$ → covariance matrix $\Sigma = \frac{1}{n-1}X_c^T X_c$ (positive semidefinite, Ch16) → eigenvalues = variance in each direction → Mahalanobis distance = $\Sigma^{-1}$-weighted inner product
+
 **Link**: Ch8 inner product spaces · Ch16 positive definite matrices
 
 </div>
@@ -119,6 +121,7 @@ The foundation of multivariate statistics is organizing data into matrices and c
 <div class="context-flow" markdown>
 
 **Core idea**: PCA = eigendecompose the covariance matrix = SVD of centered data → top $k$ principal components = $k$ orthogonal directions of maximum variance = best rank-$k$ approximation
+
 **Link**: Ch11 SVD · Ch6 eigenvalues · Eckart-Young theorem
 
 </div>
@@ -194,6 +197,7 @@ Principal component analysis is the most fundamental dimensionality reduction me
 <div class="context-flow" markdown>
 
 **Linear algebra core**: $\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{y}$ (normal equations) = project $\mathbf{y}$ onto $\operatorname{col}(X)$ → ridge regression = spectral filtering ($\sigma_i^2 \to \sigma_i^2 + \lambda$) → LASSO = $\ell_1$ sparsity
+
 **Link**: Ch25 least squares · Ch11 SVD · Ch7 orthogonal projection
 
 </div>
@@ -270,6 +274,7 @@ Linear regression is the most fundamental statistical modeling tool, with its so
 <div class="context-flow" markdown>
 
 **Core idea**: Fisher's discriminant = find direction $\mathbf{w}$ maximizing between-class scatter / within-class scatter → generalized eigenvalue problem $S_B\mathbf{w} = \lambda S_W\mathbf{w}$
+
 **Link**: Ch6 generalized eigenvalues · Ch7 Rayleigh quotient
 
 </div>
@@ -333,6 +338,7 @@ Linear discriminant analysis finds optimal classification projection directions 
 <div class="context-flow" markdown>
 
 **Core idea**: Nonlinear map $\phi: \mathbb{R}^p \to \mathcal{H}$ (high/infinite-dimensional) linearizes data → kernel trick: $k(\mathbf{x},\mathbf{y}) = \langle\phi(\mathbf{x}),\phi(\mathbf{y})\rangle$ avoids computing $\phi$ explicitly → Gram matrix $K$ replaces $X^TX$
+
 **Link**: Ch8 inner product spaces · Ch16 positive definite matrices · Mercer's theorem
 
 </div>
@@ -397,6 +403,7 @@ Kernel methods extend linear methods to nonlinear problems through implicit high
 <div class="context-flow" markdown>
 
 **Core idea**: Maximum-margin classifier = constrained optimization (QP) → dual problem involves only inner products $\mathbf{x}_i^T\mathbf{x}_j$ → kernelization → support vectors = samples with $\alpha_i > 0$
+
 **Link**: Ch25 optimization · kernel methods (29.5)
 
 </div>
@@ -462,6 +469,7 @@ Support vector machines are one of the most successful applications of kernel me
 <div class="context-flow" markdown>
 
 **Core idea**: Forward propagation = matrix chain multiplication + elementwise nonlinearities → backpropagation = Jacobian matrix multiplication in the chain rule → condition number of weight matrices affects training stability
+
 **Link**: Ch2 matrix multiplication · Ch6 eigenvalues · Ch15 norms
 
 </div>
@@ -527,6 +535,7 @@ The core operation at each layer of a deep neural network is matrix multiplicati
 <div class="context-flow" markdown>
 
 **Core idea**: User-item rating matrix $R$ is sparse and incomplete → low-rank approximation $R \approx UV^T$ → NMF yields interpretable nonnegative factors → regularization prevents overfitting
+
 **Link**: Ch11 SVD · Ch10 matrix decompositions · Ch17 nonnegative matrices
 
 </div>

@@ -87,6 +87,52 @@ plugins:
             第28章 线性代数在量子信息中的应用: "Ch 28  Linear Algebra in Quantum Information"
             第29章 线性代数在统计与机器学习中的应用: "Ch 29  Linear Algebra in Statistics & ML"
             第30章 线性代数在信号处理与编码中的应用: "Ch 30  Linear Algebra in Signal Processing & Coding"
+            第六部分 矩阵理论专题: "Part VI  Matrix Theory"
+            第31章 Majorization与双随机矩阵: "Ch 31  Majorization & Doubly Stochastic Matrices"
+            第32章 数值域与数值半径: "Ch 32  Numerical Range & Numerical Radius"
+            第33章 广义逆: "Ch 33  Generalized Inverses"
+            第34章 Schur补: "Ch 34  Schur Complement"
+            第35章 Hadamard积: "Ch 35  Hadamard Product"
+            第36章 矩阵稳定性与惯性: "Ch 36  Matrix Stability & Inertia"
+            第37章 结构化矩阵: "Ch 37  Structured Matrices"
+            第38章 特殊矩阵类: "Ch 38  Special Matrix Classes"
+            第39章 全正矩阵: "Ch 39  Totally Positive Matrices"
+            第40章 永久式与Immanant: "Ch 40  Permanents & Immanants"
+            第41章 矩阵束与Kronecker标准形: "Ch 41  Matrix Pencils & Kronecker Canonical Form"
+            第42章 不变子空间与扰动: "Ch 42  Invariant Subspaces & Perturbation"
+            第43章 伪谱与非正规矩阵分析: "Ch 43  Pseudospectra & Nonnormal Analysis"
+            第44章 Weyr标准形: "Ch 44  Weyr Canonical Form"
+            第45章 完全正矩阵与共正矩阵: "Ch 45  Completely Positive & Copositive Matrices"
+            第46章 算子单调函数与矩阵均值: "Ch 46  Operator Monotone Functions & Matrix Means"
+            第47章 矩阵微积分与Fréchet导数: "Ch 47  Matrix Calculus & Fréchet Derivatives"
+            第七部分 代数结构与推广: "Part VII  Algebraic Structures"
+            第48章 主理想整环上的模: "Ch 48  Modules over PIDs"
+            第49章 外代数与Grassmannian: "Ch 49  Exterior Algebra & Grassmannian"
+            第50章 Clifford代数与几何代数: "Ch 50  Clifford Algebras & Geometric Algebra"
+            第51章 四元数矩阵: "Ch 51  Quaternion Matrices"
+            第52章 有限域上的线性代数: "Ch 52  Linear Algebra over Finite Fields"
+            第53章 辛矩阵与Hamilton矩阵: "Ch 53  Symplectic & Hamiltonian Matrices"
+            第54章 Quiver表示: "Ch 54  Quiver Representations"
+            第55章 矩阵群与经典Lie群: "Ch 55  Matrix Groups & Classical Lie Groups"
+            第56章 Pfaffian: "Ch 56  Pfaffian"
+            第八部分 现代前沿专题: "Part VIII  Modern Frontiers"
+            第57章 矩阵浓度不等式: "Ch 57  Matrix Concentration Inequalities"
+            第58章 非负矩阵分解: "Ch 58  Nonnegative Matrix Factorization"
+            第59章 热带线性代数: "Ch 59  Tropical Linear Algebra"
+            第60章 线性保持问题: "Ch 60  Linear Preserver Problems"
+            第61章 逆特征值问题: "Ch 61  Inverse Eigenvalue Problems"
+            第62章 矩阵补全问题: "Ch 62  Matrix Completion"
+            第63章 联合谱半径与同时三角化: "Ch 63  Joint Spectral Radius & Simultaneous Triangularization"
+            第64章 矩阵空间中的凸性: "Ch 64  Convexity in Matrix Spaces"
+            第65章 组合矩阵论: "Ch 65  Combinatorial Matrix Theory"
+            第九部分 更多应用: "Part IX  More Applications"
+            第66章 线性代数在控制理论中的应用: "Ch 66  Linear Algebra in Control Theory"
+            第67章 线性代数在计算机图形学中的应用: "Ch 67  Linear Algebra in Computer Graphics"
+            第68章 线性代数在机器人学中的应用: "Ch 68  Linear Algebra in Robotics"
+            第69章 线性代数在经济学中的应用: "Ch 69  Linear Algebra in Economics"
+            第70章 线性代数在生物学中的应用: "Ch 70  Linear Algebra in Biology"
+            第71章 Markov链: "Ch 71  Markov Chains"
+            第72章 矩阵值分布: "Ch 72  Matrix-Variate Distributions"
   - search:
       separator: '[\s\-\.\u200b\u3000]+'
       lang:
@@ -163,10 +209,56 @@ nav:
     - 第22章 数值线性代数: part4/ch22-numerical-linear-algebra.md
     - 第23章 随机矩阵初步: part4/ch23-random-matrices.md
     - 第24章 矩阵流形: part4/ch24-matrix-manifolds.md
-    - 第25章 线性代数在优化中的应用: part4/ch25-optimization.md
   - 第五部分 应用专题:
+    - 第25章 线性代数在优化中的应用: part4/ch25-optimization.md
     - 第26章 线性代数在微分方程中的应用: part5/ch26-differential-equations.md
     - 第27章 线性代数在图论与网络中的应用: part5/ch27-graph-theory.md
     - 第28章 线性代数在量子信息中的应用: part5/ch28-quantum-computing.md
     - 第29章 线性代数在统计与机器学习中的应用: part5/ch29-statistics-ml.md
     - 第30章 线性代数在信号处理与编码中的应用: part5/ch30-signal-processing.md
+  - 第六部分 矩阵理论专题:
+    - 第31章 Majorization与双随机矩阵: part6/ch31-majorization.md
+    - 第32章 数值域与数值半径: part6/ch32-numerical-range.md
+    - 第33章 广义逆: part6/ch33-generalized-inverses.md
+    - 第34章 Schur补: part6/ch34-schur-complement.md
+    - 第35章 Hadamard积: part6/ch35-hadamard-product.md
+    - 第36章 矩阵稳定性与惯性: part6/ch36-matrix-stability.md
+    - 第37章 结构化矩阵: part6/ch37-structured-matrices.md
+    - 第38章 特殊矩阵类: part6/ch38-special-matrix-classes.md
+    - 第39章 全正矩阵: part6/ch39-totally-positive.md
+    - 第40章 永久式与Immanant: part6/ch40-permanent-immanant.md
+    - 第41章 矩阵束与Kronecker标准形: part6/ch41-matrix-pencils.md
+    - 第42章 不变子空间与扰动: part6/ch42-invariant-subspaces.md
+    - 第43章 伪谱与非正规矩阵分析: part6/ch43-pseudospectra.md
+    - 第44章 Weyr标准形: part6/ch44-weyr-form.md
+    - 第45章 完全正矩阵与共正矩阵: part6/ch45-cp-copositive.md
+    - 第46章 算子单调函数与矩阵均值: part6/ch46-operator-monotone.md
+    - 第47章 矩阵微积分与Fréchet导数: part6/ch47-matrix-calculus.md
+  - 第七部分 代数结构与推广:
+    - 第48章 主理想整环上的模: part7/ch48-modules-pid.md
+    - 第49章 外代数与Grassmannian: part7/ch49-exterior-algebra.md
+    - 第50章 Clifford代数与几何代数: part7/ch50-clifford-algebra.md
+    - 第51章 四元数矩阵: part7/ch51-quaternion-matrices.md
+    - 第52章 有限域上的线性代数: part7/ch52-finite-fields.md
+    - 第53章 辛矩阵与Hamilton矩阵: part7/ch53-symplectic-matrices.md
+    - 第54章 Quiver表示: part7/ch54-quiver-representations.md
+    - 第55章 矩阵群与经典Lie群: part7/ch55-matrix-groups.md
+    - 第56章 Pfaffian: part7/ch56-pfaffian.md
+  - 第八部分 现代前沿专题:
+    - 第57章 矩阵浓度不等式: part8/ch57-matrix-concentration.md
+    - 第58章 非负矩阵分解: part8/ch58-nmf.md
+    - 第59章 热带线性代数: part8/ch59-tropical-algebra.md
+    - 第60章 线性保持问题: part8/ch60-linear-preservers.md
+    - 第61章 逆特征值问题: part8/ch61-inverse-eigenvalue.md
+    - 第62章 矩阵补全问题: part8/ch62-matrix-completion.md
+    - 第63章 联合谱半径与同时三角化: part8/ch63-joint-spectral-radius.md
+    - 第64章 矩阵空间中的凸性: part8/ch64-convexity.md
+    - 第65章 组合矩阵论: part8/ch65-combinatorial-matrix.md
+  - 第九部分 更多应用:
+    - 第66章 线性代数在控制理论中的应用: part9/ch66-control-theory.md
+    - 第67章 线性代数在计算机图形学中的应用: part9/ch67-computer-graphics.md
+    - 第68章 线性代数在机器人学中的应用: part9/ch68-robotics.md
+    - 第69章 线性代数在经济学中的应用: part9/ch69-economics.md
+    - 第70章 线性代数在生物学中的应用: part9/ch70-biology.md
+    - 第71章 Markov链: part9/ch71-markov-chains.md
+    - 第72章 矩阵值分布: part9/ch72-matrix-distributions.md

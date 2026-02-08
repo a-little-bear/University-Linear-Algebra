@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Inner product spaces and unitary transformations (Ch7-8) · tensor products (Ch21) · positive definite matrices (Ch16) · SVD (Ch11) · matrix inequalities (Ch18) · Kronecker product (Ch19) · **Arc**: Quantum states (unit vectors in Hilbert spaces) → quantum gates (unitary matrices) → tensor products (multi-body systems) → entanglement (Bell states / Schmidt decomposition) → measurement (projective / POVM) → density matrices and quantum channels (Kraus operators) → quantum error correction (stabilizer codes) → matrix inequalities (von Neumann entropy / strong subadditivity)
-**Essence**: The mathematical language of quantum mechanics is linear algebra — states are vectors, evolution is unitary matrices, observables are self-adjoint operators, entanglement is nontrivial structure in tensor products, and information measures are inequalities on matrix functions
+**Prerequisites**: Inner product spaces and unitary transformations (Ch7-8) · tensor products (Ch21) · positive definite matrices (Ch16) · SVD (Ch11) · matrix inequalities (Ch18) · Kronecker product (Ch19)
+
+**Arc**: Quantum states (unit vectors in Hilbert spaces) → quantum gates (unitary matrices) → tensor products (multi-body systems) → entanglement (Bell states / Schmidt decomposition) → measurement (projective / POVM) → density matrices and quantum channels (Kraus operators) → quantum error correction (stabilizer codes) → matrix inequalities (von Neumann entropy / strong subadditivity)
 
 </div>
 
@@ -16,6 +17,7 @@ Quantum information science is built entirely on the foundation of linear algebr
 <div class="context-flow" markdown>
 
 **Basic correspondence**: Classical bit $\{0, 1\}$ → qubit $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle \in \mathbb{C}^2$ → Dirac notation → pure vs mixed states
+
 **Link**: Direct application of inner product spaces from Ch8
 
 </div>
@@ -86,6 +88,7 @@ The qubit is the fundamental unit of quantum information, mathematically describ
 <div class="context-flow" markdown>
 
 **Core principle**: Quantum evolution = unitary transformation $U^\dagger U = I$ → preserves inner products (probability conservation) → single-qubit gates (Pauli, Hadamard, S, T) → multi-qubit gates (CNOT, Toffoli) → universal gate sets
+
 **Link**: Direct application of unitary matrix theory from Ch7
 
 </div>
@@ -158,6 +161,7 @@ The evolution of a closed quantum system is described by unitary matrices. Quant
 <div class="context-flow" markdown>
 
 **Core**: $\mathcal{H}_A \otimes \mathcal{H}_B$ = state space of the composite system → Kronecker product gives the matrix representation → exponential dimension growth = source of quantum advantage
+
 **Link**: Direct application of Kronecker products from Ch19 and tensor algebra from Ch21
 
 </div>
@@ -213,6 +217,7 @@ The mathematical description of multi-body quantum systems relies on tensor prod
 <div class="context-flow" markdown>
 
 **Core concept**: Product state $|\alpha\rangle \otimes |\beta\rangle$ vs entangled state (non-separable) → Bell states (maximally entangled) → Schmidt decomposition = quantum version of SVD → Schmidt rank determines entanglement
+
 **Link**: Core application of SVD from Ch11 and tensor products from Ch21
 
 </div>
@@ -281,6 +286,7 @@ Quantum entanglement is the most essential distinction between quantum and class
 <div class="context-flow" markdown>
 
 **Projective measurement**: Orthogonal decomposition $I = \sum_m P_m$ → Born rule $p(m) = \langle\psi|P_m|\psi\rangle$ → post-measurement state collapse → POVM generalizes to non-orthogonal measurements → Naimark dilation theorem
+
 **Link**: Direct application of orthogonal projections and spectral decomposition from Ch7
 
 </div>
@@ -355,6 +361,7 @@ Quantum measurement combines the theory of projection operators from linear alge
 <div class="context-flow" markdown>
 
 **Open systems**: Mixed state $\rho$ → partial trace (reduced density matrix) → quantum channel $\mathcal{E}(\rho) = \sum_k K_k \rho K_k^\dagger$ (Kraus representation) → CPTP maps → Choi-Kraus representation theorem
+
 **Link**: Extension of positive definite matrices / PSD cone from Ch16 and tensor products from Ch21
 
 </div>
@@ -440,6 +447,7 @@ Quantum channels describe the evolution of open quantum systems, and their mathe
 <div class="context-flow" markdown>
 
 **Core idea**: Logical qubits encoded into subspace of physical qubits → errors = linear operators → Knill-Laflamme conditions = orthogonality conditions on the code space → stabilizer codes → CSS codes
+
 **Link**: Core application of subspaces from Ch4 and projections from Ch7
 
 </div>
@@ -519,6 +527,7 @@ Quantum error correction is the foundation of fault-tolerant quantum computation
 <div class="context-flow" markdown>
 
 **Core tools**: Von Neumann entropy $S(\rho) = -\operatorname{tr}(\rho \log \rho)$ → quantum relative entropy → strong subadditivity → data processing inequality
+
 **Link**: Quantum information extensions of matrix inequalities from Ch18
 
 </div>

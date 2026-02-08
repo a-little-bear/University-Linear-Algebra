@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Hermitian矩阵谱分解(Ch6) · **脉络**：$A\succ 0$ $\Leftrightarrow$ 特征值全正 $\Leftrightarrow$ Cholesky可分解 $\Leftrightarrow$ 二次型正 → **Schur补**是分块正定的钥匙 → Ch18不等式
+**前置**：Hermitian矩阵谱分解(Ch6)
+
+**脉络**：$A\succ 0$ $\Leftrightarrow$ 特征值全正 $\Leftrightarrow$ Cholesky可分解 $\Leftrightarrow$ 二次型正 → **Schur补**是分块正定的钥匙 → Ch18不等式
+
+**延伸**：正定矩阵在统计学（协方差矩阵）、机器学习（核矩阵、Fisher 信息矩阵）、优化（Newton 法的 Hessian）、弹性力学（应力-应变关系）中无处不在；Löwner 偏序在矩阵单调函数和量子信息论中有深刻应用
 
 </div>
 
@@ -280,7 +284,11 @@ Schur 补是分析分块矩阵正定性的核心工具，在控制理论、统�
 
 <div class="context-flow" markdown>
 
-**脉络**：和/数乘保正定 · $AB$特征值全正(但未必Hermitian) · **Schur积定理**($A\circ B\succeq 0$) · **Kronecker积**保正定 → Ch19
+**脉络**：和/数乘保正定 · $AB$特征值全正(但未必Hermitian)
+
+**Schur积定理**($A\circ B\succeq 0$)
+
+**Kronecker积**保正定 → Ch19
 
 </div>
 

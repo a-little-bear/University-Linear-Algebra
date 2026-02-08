@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：特征值/SVD(Ch6-8) · 正定矩阵(Ch7) · **脉络**：$n \to \infty$ 时特征值的统计行为——半圆律(Wigner) → MP 律(Wishart/样本协方差) → Tracy-Widom(边缘涨落) → 普适性
-**本质**：确定性矩阵关注单个特征值；随机矩阵关注 $n$ 个特征值的**集体行为**——从代数到概率的飞跃
+**前置**：特征值/SVD(Ch6-8) · 正定矩阵(Ch7)
+
+**脉络**：$n \to \infty$ 时特征值的统计行为——半圆律(Wigner) → MP 律(Wishart/样本协方差) → Tracy-Widom(边缘涨落) → 普适性
+
+**延伸**：随机矩阵在无线通信（MIMO 信道容量）、量子混沌、数论（Riemann zeta 函数零点的 Montgomery-Odlyzko 统计）、金融数学（资产相关性建模）中有深刻应用
 
 </div>
 
@@ -16,6 +19,7 @@
 <div class="context-flow" markdown>
 
 **三大系综**：GOE($\beta=1$, 实对称) / GUE($\beta=2$, Hermite) / GSE($\beta=4$, 四元数) → 对称性决定 $\beta$ → 联合密度 $\propto \prod_{i<j}|\lambda_i - \lambda_j|^\beta \cdot e^{-\sum \lambda_i^2}$
+
 **Wishart 矩阵** $W = \frac{1}{n}X^TX$：样本协方差矩阵的原型 → 链接 Ch25 PCA
 
 </div>
@@ -119,6 +123,7 @@
 <div class="context-flow" markdown>
 
 **核心定理**：Wigner 矩阵（对称+独立+零均值+方差1）的经验谱分布 → $\rho_{sc}(x) = \frac{1}{2\pi}\sqrt{4-x^2}$（半圆）
+
 **证明路线**：矩量法——$\frac{1}{n}\mathbb{E}[\text{tr}(W^{2m})]$ → 闭合路径计数 → **Catalan 数** $C_m$ → 唯一确定半圆分布
 
 </div>
@@ -222,6 +227,7 @@ Wigner 半圆律是随机矩阵理论中最基本的极限定理，它描述了 
 <div class="context-flow" markdown>
 
 **从 Wigner 到 Wishart**：半圆律 = 对称矩阵的谱极限 → **MP 律** = $\frac{1}{n}X^TX$ 的谱极限，支撑 $[(1-\sqrt{y})^2, (1+\sqrt{y})^2]$，$y = p/n$
+
 **高维统计的基石**：$p/n \to y > 0$ 时样本协方差矩阵与真实协方差偏差巨大 → 经典统计理论失效 → 链接 Ch25 PCA
 
 </div>
@@ -381,7 +387,9 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 
 <div class="context-flow" markdown>
 
-**微观行为**：半圆律/MP律 = 宏观（密度）→ 间距统计 = 微观 · **排斥**：$p(s) \sim s^\beta$（$s \to 0$）vs Poisson $p(s) = e^{-s}$ → 特征值"互相推开"，这是随机矩阵与独立随机变量的本质区别
+**微观行为**：半圆律/MP律 = 宏观（密度）→ 间距统计 = 微观
+
+**排斥**：$p(s) \sim s^\beta$（$s \to 0$）vs Poisson $p(s) = e^{-s}$ → 特征值"互相推开"，这是随机矩阵与独立随机变量的本质区别
 
 </div>
 
@@ -453,6 +461,7 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 <div class="context-flow" markdown>
 
 **精细尺度**：半圆律(宏观) → 间距(微观) → **最大特征值涨落**(边缘) · $\lambda_{\max} \approx 2 + n^{-2/3} \cdot F_\beta$ → Airy 核 + Painleve II 方程
+
 **普适性**：$F_\beta$ 不依赖于矩阵元素的具体分布，只依赖对称性类 $\beta$ → 链接 §23.7 统计检验
 
 </div>
@@ -578,6 +587,7 @@ Stieltjes 变换是研究随机矩阵极限谱分布的核心分析工具。
 <div class="context-flow" markdown>
 
 **代数化**：随机矩阵 $A_n, B_n$ 独立 → 渐近**自由**（Voiculescu）→ $A+B$ 的极限谱由 **$R$-变换**可加性计算 → 自由 CLT：极限是半圆分布（对比经典 CLT → 正态分布）
+
 **统一视角**：半圆律 = 自由概率的中心极限定理
 
 </div>

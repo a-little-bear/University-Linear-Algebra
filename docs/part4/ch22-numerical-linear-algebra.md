@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：LU/QR/SVD/特征值分解(Ch5-8) · **脉络**：浮点误差是根源 → 条件数决定精度 → 直接法(LU, $O(n^3)$) vs 迭代法(Krylov, $O(n \cdot \text{nnz})$) → 稀疏结构决定算法选择
-**本质**：理论线性代数假设精确算术——本章回答"计算机上能算多准、多快"
+**前置**：LU/QR/SVD/特征值分解(Ch5-8)
+
+**脉络**：浮点误差是根源 → 条件数决定精度 → 直接法(LU, $O(n^3)$) vs 迭代法(Krylov, $O(n \cdot \text{nnz})$) → 稀疏结构决定算法选择
+
+**延伸**：数值线性代数是所有大规模科学计算的引擎：有限元分析（结构工程）、计算流体力学、量子化学（Hartree-Fock 方程）、天气预报模型都依赖高效的数值线性代数算法
 
 </div>
 
@@ -74,6 +77,7 @@
 <div class="context-flow" markdown>
 
 **核心框架**：前向误差(输出偏差) ≤ **条件数** × 后向误差(等价输入扰动) → 后向稳定算法 + 良态问题 = 精确结果
+
 **关键**：$\kappa(A) = \sigma_{\max}/\sigma_{\min}$（SVD, Ch8）——条件数是问题固有的，算法只控制后向误差
 
 </div>
@@ -193,6 +197,7 @@
 <div class="context-flow" markdown>
 
 **转折**：直接法 $O(n^3)$ 对大稀疏系统不可行 → 迭代法只需矩阵-向量乘 → 收敛性由**谱半径** $\rho(G) < 1$ 决定（特征值理论, Ch6）
+
 **层次**：Jacobi/GS（经典）→ SOR（加速）→ Krylov（最优多项式近似, §22.5）
 
 </div>
@@ -264,6 +269,7 @@
 <div class="context-flow" markdown>
 
 **核心思想**：$\mathcal{K}_k(A, \mathbf{b}) = \text{span}\{\mathbf{b}, A\mathbf{b}, \ldots, A^{k-1}\mathbf{b}\}$ = 用 $k$ 次矩阵-向量乘构建的最大信息空间 → Arnoldi 正交化 → Lanczos（对称时三对角化）
+
 **统一框架**：CG(§22.6) = 对称正定 Krylov 最优化 · GMRES(§22.7) = 一般情形残差最小化
 
 </div>
@@ -472,6 +478,7 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 <div class="context-flow" markdown>
 
 **层次**：幂迭代（最简单, $|\lambda_2/\lambda_1|^k$）→ 反迭代+Rayleigh 商（三次收敛）→ QR 迭代（全谱, 先 Hessenberg 化再迭代）
+
 **链接**：QR 分解(Ch8) 在这里不是分解工具，而是迭代引擎 · Ch25 Rayleigh 商优化视角
 
 </div>

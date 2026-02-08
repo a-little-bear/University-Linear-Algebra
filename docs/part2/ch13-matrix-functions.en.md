@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch12 Jordan normal form · Ch10 Spectral decomposition · **Chapter arc**: $p(A)$ (polynomials) → Cayley-Hamilton → Power series/convergence → $e^A$ (matrix exponential) → $\log A$, $A^{1/2}$ → General $f(A)$ (Jordan/Cauchy integral)
-Essence: $f(\lambda) \to f(A)$ — the Jordan form lets scalar functions **act on matrices block by block**, with derivative information filling the superdiagonal
+**Prerequisites**: Ch12 Jordan normal form · Ch10 Spectral decomposition
+
+**Chapter arc**: $p(A)$ (polynomials) → Cayley-Hamilton → Power series/convergence → $e^A$ (matrix exponential) → $\log A$, $A^{1/2}$ → General $f(A)$ (Jordan/Cauchy integral)
+
+**Further connections**：The matrix exponential $e^{tA}$ is the solution operator for linear ODE systems $\dot{x} = Ax$, widely used in control engineering and quantum mechanics; matrix logarithms are crucial in Lie group–Lie algebra connections (BCH formula); matrix function theory is the finite-dimensional precursor to operator semigroup theory
 
 </div>
 
@@ -276,7 +279,11 @@ The matrix exponential is the most important matrix function, playing a central 
 
 <div class="context-flow" markdown>
 
-Three approaches: **Diagonalization** $e^A = Pe^{\Lambda}P^{-1}$ · **Jordan form** $e^{J_k(\lambda)t} = e^{\lambda t}\sum \frac{t^j}{j!}N^j$ · **Cayley-Hamilton** method using eigenvalue conditions to determine coefficients
+Three approaches: **Diagonalization** $e^A = Pe^{\Lambda}P^{-1}$
+
+**Jordan form** $e^{J_k(\lambda)t} = e^{\lambda t}\sum \frac{t^j}{j!}N^j$
+
+**Cayley-Hamilton** method using eigenvalue conditions to determine coefficients
 
 </div>
 

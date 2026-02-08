@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**前置**：特征值/SVD(Ch6,11) · 正定矩阵(Ch16) · 最小二乘(Ch25) · 矩阵分解(Ch10) · **脉络**：协方差矩阵(对称半正定) → PCA(特征分解/SVD) → 线性回归(正规方程/QR) → LDA(广义特征值) → 核方法(Gram矩阵) → SVM(二次规划) → 神经网络(矩阵链乘/梯度) → 推荐系统(低秩矩阵分解)
-**本质**：统计学习的核心运算——投影、分解、优化——本质上都是线性代数操作；数据矩阵的谱结构决定了学习算法的性能
+**前置**：特征值/SVD(Ch6,11) · 正定矩阵(Ch16) · 最小二乘(Ch25) · 矩阵分解(Ch10)
+
+**脉络**：协方差矩阵(对称半正定) → PCA(特征分解/SVD) → 线性回归(正规方程/QR) → LDA(广义特征值) → 核方法(Gram矩阵) → SVM(二次规划) → 神经网络(矩阵链乘/梯度) → 推荐系统(低秩矩阵分解)
 
 </div>
 
@@ -16,6 +17,7 @@
 <div class="context-flow" markdown>
 
 **线性代数视角**：$n$ 个样本、$p$ 个特征 → 数据矩阵 $X \in \mathbb{R}^{n \times p}$ → 协方差矩阵 $\Sigma = \frac{1}{n-1}X_c^T X_c$（半正定, Ch16）→ 特征值 = 各方向方差 → Mahalanobis 距离 = $\Sigma^{-1}$ 加权内积
+
 **链接**：Ch8 内积空间 · Ch16 正定矩阵
 
 </div>
@@ -119,6 +121,7 @@
 <div class="context-flow" markdown>
 
 **核心**：PCA = 对协方差矩阵做特征分解 = 对中心化数据矩阵做 SVD → 前 $k$ 个主成分 = 方差最大的 $k$ 个正交方向 = 最佳秩-$k$ 近似
+
 **链接**：Ch11 SVD · Ch6 特征值 · Eckart-Young 定理
 
 </div>
@@ -194,6 +197,7 @@
 <div class="context-flow" markdown>
 
 **线性代数核心**：$\hat{\boldsymbol{\beta}} = (X^TX)^{-1}X^T\mathbf{y}$（正规方程）= 投影 $\mathbf{y}$ 到 $\operatorname{col}(X)$ → 岭回归 = 谱过滤（$\sigma_i^2 \to \sigma_i^2 + \lambda$） → LASSO = $\ell_1$ 稀疏
+
 **链接**：Ch25 最小二乘 · Ch11 SVD · Ch7 正交投影
 
 </div>
@@ -270,6 +274,7 @@
 <div class="context-flow" markdown>
 
 **核心**：Fisher 判别 = 找方向 $\mathbf{w}$ 使类间散布/类内散布之比最大 → 广义特征值问题 $S_B\mathbf{w} = \lambda S_W\mathbf{w}$
+
 **链接**：Ch6 广义特征值 · Ch7 Rayleigh 商
 
 </div>
@@ -333,6 +338,7 @@
 <div class="context-flow" markdown>
 
 **核心思想**：通过非线性映射 $\phi: \mathbb{R}^p \to \mathcal{H}$（高维/无穷维）将数据线性化 → 核技巧：$k(\mathbf{x},\mathbf{y}) = \langle\phi(\mathbf{x}),\phi(\mathbf{y})\rangle$ 避免显式计算 $\phi$ → Gram 矩阵 $K$ 取代 $X^TX$
+
 **链接**：Ch8 内积空间 · Ch16 正定矩阵 · Mercer 定理
 
 </div>
@@ -397,6 +403,7 @@
 <div class="context-flow" markdown>
 
 **核心**：最大间隔分类器 = 约束优化（二次规划） → 对偶问题仅涉及内积 $\mathbf{x}_i^T\mathbf{x}_j$ → 核化 → 支持向量 = $\alpha_i > 0$ 的样本
+
 **链接**：Ch25 优化 · 核方法(29.5)
 
 </div>
@@ -462,6 +469,7 @@
 <div class="context-flow" markdown>
 
 **核心**：前向传播 = 矩阵链乘 + 逐元素非线性 → 反向传播 = 链式法则中的 Jacobian 矩阵乘法 → 权重矩阵的条件数影响训练稳定性
+
 **链接**：Ch2 矩阵乘法 · Ch6 特征值 · Ch15 范数
 
 </div>
@@ -527,6 +535,7 @@
 <div class="context-flow" markdown>
 
 **核心**：用户-物品评分矩阵 $R$ 稀疏且不完整 → 低秩近似 $R \approx UV^T$ → NMF 给出可解释的非负因子 → 正则化防过拟合
+
 **链接**：Ch11 SVD · Ch10 矩阵分解 · Ch17 非负矩阵
 
 </div>

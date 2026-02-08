@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch19 Kronecker product / Vec operator · **Chapter arc**: $AX=B$ (pseudoinverse) → **Sylvester** $AX+XB=C$ (eigenvalue separation condition) → **Lyapunov** (stability) → **Riccati** (optimal control, nonlinear) → Penrose equations (axiomatization of pseudoinverse)
+**Prerequisites**: Ch19 Kronecker product / Vec operator
+
+**Chapter arc**: $AX=B$ (pseudoinverse) → **Sylvester** $AX+XB=C$ (eigenvalue separation condition) → **Lyapunov** (stability) → **Riccati** (optimal control, nonlinear) → Penrose equations (axiomatization of pseudoinverse)
+
+**Further connections**：Sylvester/Lyapunov equations are central to control system stability analysis and model reduction; Riccati equations arise in optimal control (LQR/LQG), Kalman filtering, and game theory; numerical solution of matrix equations (Bartels-Stewart algorithm) is an important topic in scientific computing
 
 </div>
 
@@ -234,7 +238,9 @@ The Sylvester equation is one of the most important matrix equations, appearing 
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: $AX+XA^*=-Q$: Sylvester equation with $B=A^*$ · **Stability equivalence**: $A$ stable ($\operatorname{Re}\lambda_i<0$) $\Leftrightarrow$ $\exists X\succ 0$ satisfying the equation ($Q\succ 0$) · Integral solution $X=\int_0^\infty e^{At}Qe^{A^*t}dt$
+**Chapter arc**: $AX+XA^*=-Q$: Sylvester equation with $B=A^*$
+
+**Stability equivalence**: $A$ stable ($\operatorname{Re}\lambda_i<0$) $\Leftrightarrow$ $\exists X\succ 0$ satisfying the equation ($Q\succ 0$) · Integral solution $X=\int_0^\infty e^{At}Qe^{A^*t}dt$
 
 </div>
 

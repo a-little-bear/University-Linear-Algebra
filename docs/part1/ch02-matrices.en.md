@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 1 augmented matrices · elementary row operations · **Chapter arc**: Matrix definition → addition/scalar multiplication → matrix multiplication (abstraction of $A\mathbf{x}=\mathbf{b}$) → transpose → inverse matrices → elementary matrices → block matrices → rank
-**One-line essence**: Upgrade the row operations of Chapter 1 into **algebraic objects** — matrices themselves become "elements" that can be computed with
+**Prerequisites**: Chapter 1 augmented matrices · elementary row operations
+
+**Chapter arc**: Matrix definition → addition/scalar multiplication → matrix multiplication (abstraction of $A\mathbf{x}=\mathbf{b}$) → transpose → inverse matrices → elementary matrices → block matrices → rank
+
+**Further connections**：Matrices are central to quantum mechanics (observables as Hermitian matrices), graph theory (adjacency matrices), and Markov chains (transition matrices); sparse matrix storage and operations are key to large-scale scientific computing
 
 </div>
 

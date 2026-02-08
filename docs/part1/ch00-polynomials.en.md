@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Basic concepts of fields ($\mathbb{Q}, \mathbb{R}, \mathbb{C}$) · **Chapter arc**: Polynomial rings → Divisibility and GCD → Coprime polynomials → Irreducible polynomials → Unique factorization → Roots → Multiple roots and discriminant → Irreducibles over $\mathbb{R}$ and $\mathbb{C}$ → Irreducibles over $\mathbb{Q}$ → Polynomial interpolation
-**One-line essence**: Polynomial algebra is the preparatory language of linear algebra — characteristic polynomials, minimal polynomials, and Jordan normal forms all rest on the divisibility and factorization theory of polynomials
+**Prerequisites**: Basic concepts of fields ($\mathbb{Q}, \mathbb{R}, \mathbb{C}$)
+
+**Chapter arc**: Polynomial rings → Divisibility and GCD → Coprime polynomials → Irreducible polynomials → Unique factorization → Roots → Multiple roots and discriminant → Irreducibles over $\mathbb{R}$ and $\mathbb{C}$ → Irreducibles over $\mathbb{Q}$ → Polynomial interpolation
+
+**Further connections**：Extends to formal power series rings $\mathbb{F}[[x]]$; polynomial ideals correspond to affine varieties in algebraic geometry (Hilbert's Nullstellensatz); polynomials over $\mathbb{F}_q[x]$ underpin Reed-Solomon codes
 
 </div>
 

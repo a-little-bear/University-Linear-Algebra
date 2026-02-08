@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues/SVD (Ch6-8) · Positive definite matrices (Ch7) · **Arc**: Statistical behavior of eigenvalues as $n \to \infty$ — Semicircle law (Wigner) → MP law (Wishart/sample covariance) → Tracy-Widom (edge fluctuations) → Universality
-**Essence**: Deterministic matrix theory concerns individual eigenvalues; random matrix theory concerns the **collective behavior** of $n$ eigenvalues — a leap from algebra to probability
+**Prerequisites**: Eigenvalues/SVD (Ch6-8) · Positive definite matrices (Ch7)
+
+**Arc**: Statistical behavior of eigenvalues as $n \to \infty$ — Semicircle law (Wigner) → MP law (Wishart/sample covariance) → Tracy-Widom (edge fluctuations) → Universality
+
+**Further connections**：Random matrices have deep applications in wireless communications (MIMO channel capacity), quantum chaos, number theory (Montgomery-Odlyzko statistics of Riemann zeta zeros), and financial mathematics (asset correlation modeling)
 
 </div>
 
@@ -16,6 +19,7 @@ Random matrix theory (RMT) studies the statistical properties of eigenvalues and
 <div class="context-flow" markdown>
 
 **Three main ensembles**: GOE ($\beta=1$, real symmetric) / GUE ($\beta=2$, Hermitian) / GSE ($\beta=4$, quaternion) → Symmetry determines $\beta$ → Joint density $\propto \prod_{i<j}|\lambda_i - \lambda_j|^\beta \cdot e^{-\sum \lambda_i^2}$
+
 **Wishart matrix** $W = \frac{1}{n}X^TX$: prototype of the sample covariance matrix → Links to Ch25 PCA
 
 </div>
@@ -119,6 +123,7 @@ A random matrix is a matrix whose entries are random variables. The core questio
 <div class="context-flow" markdown>
 
 **Core theorem**: Wigner matrices (symmetric + independent + zero mean + variance 1) have empirical spectral distribution → $\rho_{sc}(x) = \frac{1}{2\pi}\sqrt{4-x^2}$ (semicircle)
+
 **Proof route**: Method of moments — $\frac{1}{n}\mathbb{E}[\text{tr}(W^{2m})]$ → Closed path counting → **Catalan numbers** $C_m$ → Uniquely determine the semicircle distribution
 
 </div>
@@ -222,6 +227,7 @@ The Wigner semicircle law is the most fundamental limit theorem in random matrix
 <div class="context-flow" markdown>
 
 **From Wigner to Wishart**: Semicircle law = spectral limit of symmetric matrices → **MP law** = spectral limit of $\frac{1}{n}X^TX$, supported on $[(1-\sqrt{y})^2, (1+\sqrt{y})^2]$, $y = p/n$
+
 **Cornerstone of high-dimensional statistics**: When $p/n \to y > 0$, the sample covariance matrix deviates enormously from the true covariance → Classical statistical theory breaks down → Links to Ch25 PCA
 
 </div>
@@ -375,7 +381,9 @@ The Stieltjes transform is the core analytical tool for studying limiting spectr
 
 <div class="context-flow" markdown>
 
-**Microscopic behavior**: Semicircle law / MP law = macroscopic (density) → Spacing statistics = microscopic · **Repulsion**: $p(s) \sim s^\beta$ ($s \to 0$) vs Poisson $p(s) = e^{-s}$ → Eigenvalues "push each other apart"; this is the essential difference between random matrices and independent random variables
+**Microscopic behavior**: Semicircle law / MP law = macroscopic (density) → Spacing statistics = microscopic
+
+**Repulsion**: $p(s) \sim s^\beta$ ($s \to 0$) vs Poisson $p(s) = e^{-s}$ → Eigenvalues "push each other apart"; this is the essential difference between random matrices and independent random variables
 
 </div>
 
@@ -447,6 +455,7 @@ A remarkable feature of random matrices is the repulsion effect between eigenval
 <div class="context-flow" markdown>
 
 **Fine scale**: Semicircle law (macroscopic) → Spacing (microscopic) → **Largest eigenvalue fluctuations** (edge) · $\lambda_{\max} \approx 2 + n^{-2/3} \cdot F_\beta$ → Airy kernel + Painleve II equation
+
 **Universality**: $F_\beta$ does not depend on the specific distribution of matrix entries, only on the symmetry class $\beta$ → Links to S23.7 statistical tests
 
 </div>
@@ -572,6 +581,7 @@ Random matrix theory provides both theoretical foundations and practical tools f
 <div class="context-flow" markdown>
 
 **Algebraization**: Independent random matrices $A_n, B_n$ → Asymptotically **free** (Voiculescu) → The limiting spectrum of $A+B$ is computed via **$R$-transform** additivity → Free CLT: the limit is the semicircle distribution (compare classical CLT → normal distribution)
+
 **Unified perspective**: Semicircle law = central limit theorem of free probability
 
 </div>

@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 1 solution set structure · Chapter 2 properties of $\mathbb{R}^{m \times n}$ · **Chapter arc**: 8 axioms → subspaces → linear combinations/span → linear independence → basis and dimension → coordinates/transition matrices → four fundamental subspaces → rank-nullity theorem
-**One-line essence**: Abstract from $\mathbb{R}^n$ to an axiomatic framework — "dimension" becomes the sole essential invariant of a vector space (→ Chapter 5 isomorphism theorem)
+**Prerequisites**: Chapter 1 solution set structure · Chapter 2 properties of $\mathbb{R}^{m \times n}$
+
+**Chapter arc**: 8 axioms → subspaces → linear combinations/span → linear independence → basis and dimension → coordinates/transition matrices → four fundamental subspaces → rank-nullity theorem
+
+**Further connections**：Vector spaces generalize to infinite dimensions: Hilbert spaces (mathematical framework of quantum mechanics), Banach spaces (functional analysis); topological vector spaces combine algebraic and topological structure; module theory generalizes vector spaces from fields to rings
 
 </div>
 

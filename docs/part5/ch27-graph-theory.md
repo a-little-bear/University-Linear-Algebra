@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**前置**：特征值(Ch6) · 对称矩阵谱定理(Ch7-8) · 非负矩阵(Ch17) · **脉络**：邻接/关联/Laplacian 矩阵(图的线性代数表示) → 图谱(谱图论) → Laplacian 与连通性(Kirchhoff 矩阵树定理) → Cheeger 不等式(谱聚类) → 随机游走/PageRank(Markov 链) → 扩展图(Ramanujan 界) → 图着色(特征值界) → 网络流(LP 对偶)
-**本质**：图的组合性质（连通性、膨胀性、着色数）可以通过矩阵的谱（特征值）精确刻画——这是离散数学与线性代数最深刻的桥梁
+**前置**：特征值(Ch6) · 对称矩阵谱定理(Ch7-8) · 非负矩阵(Ch17)
+
+**脉络**：邻接/关联/Laplacian 矩阵(图的线性代数表示) → 图谱(谱图论) → Laplacian 与连通性(Kirchhoff 矩阵树定理) → Cheeger 不等式(谱聚类) → 随机游走/PageRank(Markov 链) → 扩展图(Ramanujan 界) → 图着色(特征值界) → 网络流(LP 对偶)
 
 </div>
 
@@ -16,6 +17,7 @@
 <div class="context-flow" markdown>
 
 **三种矩阵**：邻接矩阵 $A$（对称 ↔ 无向图） → 关联矩阵 $B$（顶点-边关系） → Laplacian $L = D - A$（最重要）
+
 **链接**：Ch7 对称矩阵的谱性质直接应用于图的邻接矩阵和 Laplacian
 
 </div>
@@ -95,6 +97,7 @@
 <div class="context-flow" markdown>
 
 **核心概念**：图的谱 = 邻接矩阵（或 Laplacian）的特征值集合 → 谱携带丰富的图结构信息（正则性、二部性、直径等）
+
 **链接**：Ch7 对称矩阵特征值的极值性质（Courant-Fischer）在谱图论中反复出现
 
 </div>
@@ -138,6 +141,7 @@
 <div class="context-flow" markdown>
 
 **核心结论**：$\mu_2 > 0$ ⇔ 图连通 → $\mu_2$（Fiedler 值/代数连通度）度量连通的"强度" → Kirchhoff 定理：生成树数 = $\frac{1}{n}\lambda_1(L)\cdots\lambda_{n-1}(L)$
+
 **链接**：Ch3 行列式理论在 Kirchhoff 定理中的核心应用
 
 </div>
@@ -195,6 +199,7 @@ Laplacian 矩阵的谱完整地刻画了图的连通性。
 <div class="context-flow" markdown>
 
 **核心不等式**：$\frac{h^2}{2d_{\max}} \le \mu_2 \le 2h$ → Fiedler 值 $\mu_2$ 与 Cheeger 常数 $h$ 等价 → 谱聚类算法：用 Fiedler 向量将顶点分为两组
+
 **应用**：图像分割、社区发现、数据聚类
 
 </div>
@@ -245,6 +250,7 @@ Cheeger 不等式将代数量（$\mu_2$）与组合量（图的最优割）联�
 <div class="context-flow" markdown>
 
 **链条**：图上随机游走 → 转移矩阵 $P = D^{-1}A$ → Perron-Frobenius 定理(Ch17) → 平稳分布 → Google PageRank = 阻尼随机游走的平稳分布
+
 **链接**：Ch17 非负矩阵理论直接应用
 
 </div>
@@ -297,6 +303,7 @@ Cheeger 不等式将代数量（$\mu_2$）与组合量（图的最优割）联�
 <div class="context-flow" markdown>
 
 **定义**：$d$-正则图的 $\lambda_2(A) \le d - \varepsilon$ → 好的扩展图 = 谱间隙大 → Alon-Boppana 界：$\lambda_2 \ge 2\sqrt{d-1} - o(1)$ → Ramanujan 图达到此界
+
 **应用**：纠错码、去随机化、网络设计
 
 </div>
@@ -354,6 +361,7 @@ Cheeger 不等式将代数量（$\mu_2$）与组合量（图的最优割）联�
 <div class="context-flow" markdown>
 
 **界**：$\chi(G) \ge 1 + \lambda_1 / |\lambda_n|$（Hoffman 界）→ 特征值给出色数下界 → 独立数上界：$\alpha(G) \le n \cdot |\lambda_n| / (\lambda_1 + |\lambda_n|)$
+
 **应用**：组合优化中的松弛界
 
 </div>
@@ -415,6 +423,7 @@ Cheeger 不等式将代数量（$\mu_2$）与组合量（图的最优割）联�
 <div class="context-flow" markdown>
 
 **模型**：网络流 = 图上的线性约束优化 → 最大流/最小割 = LP 对偶的特例 → 关联矩阵 $B$ 在流守恒约束中的核心角色
+
 **链接**：Ch25 线性规划理论在图上的具体化
 
 </div>

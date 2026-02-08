@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：矩阵乘法/特征值(Ch6) · **脉络**：$A\otimes B$ 组合两个空间 → **Vec算子**将矩阵方程 $AXB=C$ 变为 $(B^T\otimes A)\operatorname{vec}(X)=\operatorname{vec}(C)$ → Ch20 Sylvester/Lyapunov求解
+**前置**：矩阵乘法/特征值(Ch6)
+
+**脉络**：$A\otimes B$ 组合两个空间 → **Vec算子**将矩阵方程 $AXB=C$ 变为 $(B^T\otimes A)\operatorname{vec}(X)=\operatorname{vec}(C)$ → Ch20 Sylvester/Lyapunov求解
+
+**延伸**：Kronecker 积在量子计算（多量子比特系统）、信号处理（MIMO 系统）、统计学（向量化协方差估计）中不可或缺；Vec 算子将矩阵方程转化为向量方程，是计算矩阵导数的标准工具
 
 </div>
 
@@ -16,7 +20,6 @@
 
 <div class="context-flow" markdown>
 
-**本质**：$A\otimes B$ 是 $mp\times nq$ 分块矩阵，第$(i,j)$块为 $a_{ij}B$ · 不满足交换律，但置换相似($B\otimes A = P(A\otimes B)P^T$)
 
 </div>
 
@@ -352,7 +355,9 @@ Kronecker 积不满足交换律，但两种顺序的 Kronecker 积通过一个�
 
 <div class="context-flow" markdown>
 
-**应用**：$\sum A_kXB_k=C$ → $(\sum B_k^T\otimes A_k)\operatorname{vec}(X)=\operatorname{vec}(C)$ · **Sylvester** $AX+XB=C$：可解 $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ → Ch20
+**应用**：$\sum A_kXB_k=C$ → $(\sum B_k^T\otimes A_k)\operatorname{vec}(X)=\operatorname{vec}(C)$
+
+**Sylvester** $AX+XB=C$：可解 $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ → Ch20
 
 </div>
 
@@ -519,7 +524,9 @@ Kronecker 积和 Vec 算子的一个最重要的应用是将矩阵方程转化�
 
 <div class="context-flow" markdown>
 
-**脉络**：$A\oplus B = A\otimes I+I\otimes B$，特征值 $\lambda_i+\mu_j$ · **关键等式**：$e^{A\oplus B}=e^A\otimes e^B$(因 $A\otimes I$ 与 $I\otimes B$ 可交换) → Ch20 Lyapunov方程
+**脉络**：$A\oplus B = A\otimes I+I\otimes B$，特征值 $\lambda_i+\mu_j$
+
+**关键等式**：$e^{A\oplus B}=e^A\otimes e^B$(因 $A\otimes I$ 与 $I\otimes B$ 可交换) → Ch20 Lyapunov方程
 
 </div>
 

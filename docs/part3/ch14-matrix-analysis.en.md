@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · Norms (Ch15 preview) · **Chapter arc**: Topology of matrix spaces → **Spectral radius** governs convergence → **Gershgorin** locates eigenvalues → Matrix calculus → Eigenvalue–singular value bridge
+**Prerequisites**: Eigenvalues (Ch6) · Norms (Ch15 preview)
+
+**Chapter arc**: Topology of matrix spaces → **Spectral radius** governs convergence → **Gershgorin** locates eigenvalues → Matrix calculus → Eigenvalue–singular value bridge
+
+**Further connections**：Spectral radius is crucial in dynamical system stability analysis, convergence of iterative methods (Jacobi, Gauss-Seidel), and population dynamics; Gershgorin's theorem provides quick eigenvalue bounds in engineering without exact computation
 
 </div>
 

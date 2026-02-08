@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**前置**：特征值(Ch6) · 矩阵分解(Ch10-11) · 正定矩阵(Ch16) · Kronecker 积(Ch19) · **脉络**：DFT 矩阵(酉变换) → FFT(稀疏矩阵分解) → 循环矩阵与卷积(DFT 对角化) → 滤波与频域分析(频率响应) → 采样定理与插值(带限信号) → 压缩感知(稀疏恢复/RIP) → 线性纠错码(有限域上的线性代数) → LDPC 码(稀疏校验矩阵) → 小波变换(多分辨率分析)
-**本质**：信号处理的核心运算——变换、滤波、卷积——都是矩阵-向量乘法；编码理论的核心概念——码字、校验、纠错——都是有限域上的线性代数；压缩感知与小波变换则在稀疏性和多尺度分析中开辟了线性代数的新应用
+**前置**：特征值(Ch6) · 矩阵分解(Ch10-11) · 正定矩阵(Ch16) · Kronecker 积(Ch19)
+
+**脉络**：DFT 矩阵(酉变换) → FFT(稀疏矩阵分解) → 循环矩阵与卷积(DFT 对角化) → 滤波与频域分析(频率响应) → 采样定理与插值(带限信号) → 压缩感知(稀疏恢复/RIP) → 线性纠错码(有限域上的线性代数) → LDPC 码(稀疏校验矩阵) → 小波变换(多分辨率分析)
 
 </div>
 
@@ -16,6 +17,7 @@
 <div class="context-flow" markdown>
 
 **线性代数视角**：DFT = 乘以酉矩阵 $F_n$（$F_n^* F_n = nI$）→ 特征值/特征向量全部已知 → DFT 将循环卷积对角化 → FFT 将 $F_n$ 分解为 $\log_2 n$ 个稀疏矩阵的乘积
+
 **链接**：Ch8 酉矩阵 · Ch6 特征值
 
 </div>
@@ -91,6 +93,7 @@
 <div class="context-flow" markdown>
 
 **核心**：循环矩阵 = DFT 矩阵对角化 $C = \frac{1}{n}F_n^*\operatorname{diag}(\hat{\mathbf{c}})F_n$ → 循环卷积 = 频域逐点乘法 → 卷积定理 → "FFT → 逐点乘 → IFFT" $O(n\log n)$ 加速
+
 **链接**：Ch6 特征值 · 30.1 DFT
 
 </div>
@@ -151,6 +154,7 @@
 <div class="context-flow" markdown>
 
 **核心**：线性时不变（LTI）系统 = Toeplitz 矩阵乘法 → 频率响应 $H(\omega)$ = 传递函数 → FIR 滤波器 = 有限卷积 → IIR 滤波器 = 递归差分方程 → Toeplitz 矩阵的循环嵌入与 FFT 加速
+
 **链接**：30.2 循环矩阵 · Ch22 数值线性代数
 
 </div>
@@ -213,6 +217,7 @@
 <div class="context-flow" markdown>
 
 **核心**：Shannon-Nyquist 定理 = 带限函数由其采样点唯一确定 → 采样矩阵与 sinc 插值 → 混叠 = 欠采样导致的频谱折叠 → 插值公式的线性代数表示
+
 **链接**：30.1 DFT · Ch11 SVD/伪逆
 
 </div>
@@ -261,6 +266,7 @@
 <div class="context-flow" markdown>
 
 **核心**：稀疏信号可以从远少于 Nyquist 率的测量中精确恢复 → 测量矩阵 $A$（$m \ll n$）→ 受限等距性质（RIP）→ $\ell_1$ 最小化（basis pursuit）等价于 $\ell_0$ 最小化 → 恢复条件与矩阵的几何性质
+
 **链接**：Ch11 SVD · Ch10 矩阵范数 · Ch25 线性规划（$\ell_1$ 最小化）
 
 </div>
@@ -327,6 +333,7 @@
 <div class="context-flow" markdown>
 
 **核心**：线性码 = 有限域 $\mathbb{F}_q$ 上的线性子空间 → 生成矩阵 $G$（列空间）和校验矩阵 $H$（零空间） → 最小距离 = $H$ 的最小线性相关列数 → Hamming 码与 Reed-Solomon 码
+
 **链接**：Ch4 向量空间 · Ch1 线性方程组
 
 </div>
@@ -384,6 +391,7 @@
 <div class="context-flow" markdown>
 
 **核心**：LDPC 码 = 校验矩阵 $H$ 稀疏 → Tanner 图（二部图）表示 → 置信传播译码利用稀疏结构 → 逼近 Shannon 极限 → 度分布优化
+
 **链接**：30.6 线性码 · Ch17 稀疏矩阵/非负矩阵
 
 </div>
@@ -455,6 +463,7 @@
 <div class="context-flow" markdown>
 
 **核心**：小波变换 = 多分辨率分析（MRA）→ 尺度函数 $\phi$ 和小波函数 $\psi$ 的正交性 → 离散小波变换 = 滤波器组（低通 $h$ + 高通 $g$）→ 矩阵分解为稀疏正交矩阵的乘积 → Haar 小波 = 最简单的例子
+
 **链接**：Ch8 正交性 · 30.1 DFT(对比) · Ch11 矩阵分解
 
 </div>

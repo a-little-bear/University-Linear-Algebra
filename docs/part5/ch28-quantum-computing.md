@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**前置**：内积空间与酉变换(Ch7-8) · 张量积(Ch21) · 正定矩阵(Ch16) · SVD(Ch11) · 矩阵不等式(Ch18) · Kronecker 积(Ch19) · **脉络**：量子态(Hilbert 空间中的单位向量) → 量子门(酉矩阵) → 张量积(多体系统) → 纠缠(Bell 态/Schmidt 分解) → 测量(投影/POVM) → 密度矩阵与量子信道(Kraus 算子) → 量子纠错(稳定子码) → 矩阵不等式(von Neumann 熵/强次可加性)
-**本质**：量子力学的数学语言就是线性代数——态是向量、演化是酉矩阵、可观测量是自伴算子、纠缠是张量积的非平凡结构、信息度量是矩阵函数的不等式
+**前置**：内积空间与酉变换(Ch7-8) · 张量积(Ch21) · 正定矩阵(Ch16) · SVD(Ch11) · 矩阵不等式(Ch18) · Kronecker 积(Ch19)
+
+**脉络**：量子态(Hilbert 空间中的单位向量) → 量子门(酉矩阵) → 张量积(多体系统) → 纠缠(Bell 态/Schmidt 分解) → 测量(投影/POVM) → 密度矩阵与量子信道(Kraus 算子) → 量子纠错(稳定子码) → 矩阵不等式(von Neumann 熵/强次可加性)
 
 </div>
 
@@ -16,6 +17,7 @@
 <div class="context-flow" markdown>
 
 **基本对应**：经典比特 $\{0, 1\}$ → 量子比特 $|\psi\rangle = \alpha|0\rangle + \beta|1\rangle \in \mathbb{C}^2$ → Dirac 记号 → 纯态 vs 混合态
+
 **链接**：Ch8 内积空间的直接应用
 
 </div>
@@ -86,6 +88,7 @@
 <div class="context-flow" markdown>
 
 **核心原理**：量子演化 = 酉变换 $U^\dagger U = I$ → 保持内积（概率守恒）→ 单比特门（Pauli, Hadamard, S, T）→ 多比特门（CNOT, Toffoli）→ 通用门集
+
 **链接**：Ch7 酉矩阵理论的直接应用
 
 </div>
@@ -158,6 +161,7 @@
 <div class="context-flow" markdown>
 
 **核心**：$\mathcal{H}_A \otimes \mathcal{H}_B$ = 复合系统的状态空间 → Kronecker 积给出矩阵表示 → 维数指数增长 = 量子优势的根源
+
 **链接**：Ch19 Kronecker 积和 Ch21 张量代数的直接应用
 
 </div>
@@ -213,6 +217,7 @@
 <div class="context-flow" markdown>
 
 **核心概念**：乘积态 $|\alpha\rangle \otimes |\beta\rangle$ vs 纠缠态（不可分）→ Bell 态（最大纠缠）→ Schmidt 分解 = SVD 的量子版本 → Schmidt 秩判定纠缠
+
 **链接**：Ch11 SVD 和 Ch21 张量积的核心应用
 
 </div>
@@ -281,6 +286,7 @@
 <div class="context-flow" markdown>
 
 **投影测量**：正交分解 $I = \sum_m P_m$ → Born 规则 $p(m) = \langle\psi|P_m|\psi\rangle$ → 测后态塌缩 → POVM 推广到非正交测量 → Naimark 膨胀定理
+
 **链接**：Ch7 正交投影和谱分解的直接应用
 
 </div>
@@ -355,6 +361,7 @@
 <div class="context-flow" markdown>
 
 **开放系统**：混合态 $\rho$ → 偏迹(约化密度矩阵) → 量子信道 $\mathcal{E}(\rho) = \sum_k K_k \rho K_k^\dagger$（Kraus 表示）→ CPTP 映射 → Choi-Kraus 表示定理
+
 **链接**：Ch16 正定矩阵/半正定锥和 Ch21 张量积的推广
 
 </div>
@@ -440,6 +447,7 @@
 <div class="context-flow" markdown>
 
 **核心思想**：逻辑比特编码到物理比特的子空间 → 错误 = 线性算子 → Knill-Laflamme 条件 = 码空间上的正交性条件 → 稳定子码 → CSS 码
+
 **链接**：Ch4 子空间和 Ch7 投影的核心应用
 
 </div>
@@ -519,6 +527,7 @@
 <div class="context-flow" markdown>
 
 **核心工具**：von Neumann 熵 $S(\rho) = -\operatorname{tr}(\rho \log \rho)$ → 量子相对熵 → 强次可加性 → 数据处理不等式
+
 **链接**：Ch18 矩阵不等式的量子信息推广
 
 </div>

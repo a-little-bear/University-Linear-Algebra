@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Ch8 正交/谱定理 · Ch10 Schur/谱分解 · **本章脉络**：$\sigma_i = \sqrt{\lambda_i(A^TA)}$ → $A = U\Sigma V^T$ → 几何（旋转×缩放×旋转） → **Eckart-Young**（最优低秩逼近） → 伪逆/PCA/条件数
-本质：SVD 是谱定理对**任意矩阵**的推广——用两组正交基同时对角化 $A$
+**前置**：Ch8 正交/谱定理 · Ch10 Schur/谱分解
+
+**本章脉络**：$\sigma_i = \sqrt{\lambda_i(A^TA)}$ → $A = U\Sigma V^T$ → 几何（旋转×缩放×旋转） → **Eckart-Young**（最优低秩逼近） → 伪逆/PCA/条件数
+
+**延伸**：SVD 是推荐系统（Netflix Prize）、图像压缩、自然语言处理（LSA/LSI）、基因组学（主成分回归）的核心算法；伪逆为欠定/超定系统提供最优解；SVD 的无穷维推广是紧算子的奇异值理论
 
 </div>
 

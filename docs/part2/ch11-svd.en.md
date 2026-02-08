@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch8 Orthogonality/Spectral theorem · Ch10 Schur/Spectral decomposition · **Chapter arc**: $\sigma_i = \sqrt{\lambda_i(A^TA)}$ → $A = U\Sigma V^T$ → Geometry (rotation × scaling × rotation) → **Eckart-Young** (optimal low-rank approximation) → Pseudoinverse/PCA/Condition number
-Essence: SVD is the generalization of the spectral theorem to **arbitrary matrices** — simultaneously diagonalizing $A$ with two orthonormal bases
+**Prerequisites**: Ch8 Orthogonality/Spectral theorem · Ch10 Schur/Spectral decomposition
+
+**Chapter arc**: $\sigma_i = \sqrt{\lambda_i(A^TA)}$ → $A = U\Sigma V^T$ → Geometry (rotation × scaling × rotation) → **Eckart-Young** (optimal low-rank approximation) → Pseudoinverse/PCA/Condition number
+
+**Further connections**：SVD powers recommendation systems (Netflix Prize), image compression, NLP (LSA/LSI), and genomics (principal component regression); the pseudoinverse provides optimal solutions for under/over-determined systems; SVD generalizes to singular value theory for compact operators in infinite dimensions
 
 </div>
 

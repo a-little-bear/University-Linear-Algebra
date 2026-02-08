@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：谱半径(Ch14) · 有向图 · **脉络**：非负矩阵 → 不可约=强连通 → **Perron-Frobenius**：存在主导正特征值 → Markov链收敛/PageRank
+**前置**：谱半径(Ch14) · 有向图
+
+**脉络**：非负矩阵 → 不可约=强连通 → **Perron-Frobenius**：存在主导正特征值 → Markov链收敛/PageRank
+
+**延伸**：Perron-Frobenius 理论是 Google PageRank 的数学基础，也用于生态学（种群模型）、经济学（投入产出分析）、社会网络分析；非负矩阵分解（NMF）是文本挖掘和图像处理中的重要工具
 
 </div>
 
@@ -260,7 +264,9 @@
 
 <div class="context-flow" markdown>
 
-**脉络**：行随机 $\Rightarrow$ $\rho=1$，$\mathbf{1}$为右特征向量 · **Birkhoff定理**：双随机矩阵 = 置换矩阵的凸组合 → Ch18 majorization
+**脉络**：行随机 $\Rightarrow$ $\rho=1$，$\mathbf{1}$为右特征向量
+
+**Birkhoff定理**：双随机矩阵 = 置换矩阵的凸组合 → Ch18 majorization
 
 </div>
 

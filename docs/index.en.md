@@ -70,7 +70,6 @@ For doctoral students and researchers, introducing frontier topics in linear alg
 | [Chapter 22  Numerical Linear Algebra](part4/ch22-numerical-linear-algebra.md) | Iterative methods, Krylov subspaces, numerical stability |
 | [Chapter 23  Introduction to Random Matrices](part4/ch23-random-matrices.md) | Wigner semicircle law, Marchenko–Pastur law, eigenvalue distributions |
 | [Chapter 24  Matrix Manifolds](part4/ch24-matrix-manifolds.md) | Stiefel manifold, Grassmann manifold, matrix Lie groups |
-| [Chapter 25  Linear Algebra in Optimization](part4/ch25-optimization.md) | Semidefinite programming, matrix completion, compressed sensing, PCA |
 
 ### Part V: Applications <span class="difficulty-tag research">Interdisciplinary</span>
 
@@ -78,6 +77,7 @@ Core applications of linear algebra across disciplines.
 
 | Chapter | Overview |
 |---------|----------|
+| [Chapter 25  Linear Algebra in Optimization](part4/ch25-optimization.md) | Semidefinite programming, matrix completion, compressed sensing, PCA |
 | [Chapter 26  Linear Algebra in Differential Equations](part5/ch26-differential-equations.md) | Linear ODE systems, matrix exponential, stability analysis |
 | [Chapter 27  Linear Algebra in Graph Theory and Networks](part5/ch27-graph-theory.md) | Spectral graph theory, Laplacian, PageRank, expander graphs |
 | [Chapter 28  Linear Algebra in Quantum Information](part5/ch28-quantum-computing.md) | Quantum states, unitary transformations, entanglement, quantum channels |

@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues and diagonalization (Ch6) · Jordan canonical form (Ch12) · Matrix functions (Ch13) · **Chapter arc**: $\mathbf{x}' = A\mathbf{x}$ (homogeneous systems) → $e^{At}$ (matrix exponential) → real parts of eigenvalues (stability) → phase plane (geometric classification) → companion matrix (higher-order to systems) → variation of parameters (nonhomogeneous) → Sturm-Liouville (PDEs) → Floquet (periodic systems)
-**Essence**: Both qualitative and quantitative theory of differential equations rely on linear algebra at their core — eigenvalues determine stability, matrix exponentials give solutions, Jordan form handles repeated roots
+**Prerequisites**: Eigenvalues and diagonalization (Ch6) · Jordan canonical form (Ch12) · Matrix functions (Ch13)
+
+**Chapter arc**: $\mathbf{x}' = A\mathbf{x}$ (homogeneous systems) → $e^{At}$ (matrix exponential) → real parts of eigenvalues (stability) → phase plane (geometric classification) → companion matrix (higher-order to systems) → variation of parameters (nonhomogeneous) → Sturm-Liouville (PDEs) → Floquet (periodic systems)
 
 </div>
 
@@ -16,6 +17,7 @@ Linear differential equations represent one of the most classical and important 
 <div class="context-flow" markdown>
 
 **Core structure**: The solution space of $\mathbf{x}' = A\mathbf{x}$ is an $n$-dimensional linear space → each column of the fundamental matrix $\Phi(t)$ is a solution → $\Phi(t) = e^{At}$ when $\Phi(0) = I$
+
 **Link**: The dimension theorem from Ch4 (linear spaces) is directly manifested here
 
 </div>
@@ -100,6 +102,7 @@ Linear constant-coefficient ODE systems are fundamental models in dynamical syst
 <div class="context-flow" markdown>
 
 **Core formula**: $e^{At} = \sum_{k=0}^{\infty} \frac{(At)^k}{k!}$ → when diagonalizable, $e^{At} = P\, \text{diag}(e^{\lambda_i t})\, P^{-1}$ → for Jordan blocks, terms involve $t^k e^{\lambda t}$
+
 **Link**: The most important special case of Ch13 matrix function theory
 
 </div>
@@ -206,6 +209,7 @@ The matrix exponential is the central tool in linear ODE theory, perfectly unify
 <div class="context-flow" markdown>
 
 **Criterion chain**: All $\operatorname{Re}(\lambda_i) < 0$ $\iff$ asymptotically stable → Lyapunov equation $A^T P + PA = -Q$ has positive definite solution $\iff$ Hurwitz matrix
+
 **Applications**: Convergence of control systems, stability of filters in signal processing
 
 </div>
@@ -274,6 +278,7 @@ The stability of linear systems is entirely determined by the eigenvalues of the
 <div class="context-flow" markdown>
 
 **Classification**: Complete classification of $2 \times 2$ systems depends on $\operatorname{tr}(A)$ and $\det(A)$ → the sign and real/imaginary nature of eigenvalues determine nodes/saddles/spirals/centers
+
 **Geometry**: The qualitative shape of trajectories is completely determined by eigenvalues and eigenvectors
 
 </div>
@@ -329,6 +334,7 @@ Phase plane analysis of two-dimensional linear systems $\mathbf{x}' = A\mathbf{x
 <div class="context-flow" markdown>
 
 **Reduction**: $n$-th order linear ODE → first-order $n \times n$ system → the companion matrix $C$'s characteristic polynomial = the original equation's characteristic polynomial
+
 **Link**: The characteristic polynomial theory of Ch6 is directly applied here
 
 </div>
@@ -385,6 +391,7 @@ Higher-order linear ODEs can be converted to first-order systems by introducing 
 <div class="context-flow" markdown>
 
 **General solution of nonhomogeneous** = general homogeneous solution + particular solution → particular solution given by convolution integral with $e^{At}$ (variation of parameters) → essentially a Green's function / impulse response
+
 **Link**: A direct manifestation of Ch4 quotient spaces and affine subspaces
 
 </div>
@@ -448,6 +455,7 @@ The solution of nonhomogeneous linear systems $\mathbf{x}' = A\mathbf{x} + \math
 <div class="context-flow" markdown>
 
 **Separation of variables** → spatial part becomes eigenvalue problem $\mathcal{L}u = \lambda u$ → Sturm-Liouville theory guarantees real eigenvalues, orthogonal eigenfunctions → spectral theorem on infinite-dimensional inner product spaces
+
 **Link**: An infinite-dimensional generalization of the Ch8 spectral theorem for inner product spaces
 
 </div>
@@ -514,6 +522,7 @@ The method of separation of variables in partial differential equations converts
 <div class="context-flow" markdown>
 
 **Problem**: $\mathbf{x}' = A(t)\mathbf{x}$, $A(t+T) = A(t)$ → solutions are no longer $e^{At}$ → Floquet's theorem: $\Phi(t) = P(t)e^{Bt}$ (periodic part $\times$ exponential part) → stability determined by eigenvalues of $B$
+
 **Applications**: Parametric resonance (Mathieu equation), Bloch's theorem in crystal lattices
 
 </div>

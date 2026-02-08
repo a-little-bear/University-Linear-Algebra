@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: None (starting point of linear algebra) · **Chapter arc**: Linear equations → augmented matrices → elementary row operations → Gaussian elimination → REF/RREF → existence and uniqueness of solutions → homogeneous systems → solution structure
-**One-line essence**: The prototype of every linear algebra problem is $A\mathbf{x}=\mathbf{b}$ — this chapter establishes the complete algorithmic framework for solving it and the structural theory of solution sets
+**Prerequisites**: None (starting point of linear algebra)
+
+**Chapter arc**: Linear equations → augmented matrices → elementary row operations → Gaussian elimination → REF/RREF → existence and uniqueness of solutions → homogeneous systems → solution structure
+
+**Further connections**：Linear systems arise everywhere: circuit analysis (Kirchhoff's laws), economics (Leontief input-output models), computer graphics (homogeneous coordinate transforms); the infinite-dimensional generalization leads to integral equations and Fredholm theory
 
 </div>
 

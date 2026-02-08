@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 2 square matrices · invertibility · elementary matrices · **Chapter arc**: Permutations and inversions → determinant definition → properties (effects of row operations) → cofactor expansion → adjugate matrix for inversion → determinant product formula → Cramer's rule → geometric interpretation
-**One-line essence**: The determinant is the unique alternating multilinear function from square matrices to scalars — $\det(A) \neq 0 \Leftrightarrow A$ is invertible, $|\det(A)|$ = volume scaling factor
+**Prerequisites**: Chapter 2 square matrices · invertibility · elementary matrices
+
+**Chapter arc**: Permutations and inversions → determinant definition → properties (effects of row operations) → cofactor expansion → adjugate matrix for inversion → determinant product formula → Cramer's rule → geometric interpretation
+
+**Further connections**：Determinants appear in differential geometry (volume forms, Jacobians for change of variables), statistical mechanics (partition functions), and algebraic topology (incidence matrix determinants and Euler characteristic)
 
 </div>
 

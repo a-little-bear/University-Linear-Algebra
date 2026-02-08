@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Ch12 Jordan 标准形 · Ch10 谱分解 · **本章脉络**：$p(A)$（多项式） → Cayley-Hamilton → 幂级数/收敛 → $e^A$（矩阵指数） → $\log A$, $A^{1/2}$ → 一般 $f(A)$（Jordan/Cauchy 积分）
-本质：$f(\lambda) \to f(A)$ —— Jordan 形让标量函数**逐块作用于矩阵**，导数信息填充超对角线
+**前置**：Ch12 Jordan 标准形 · Ch10 谱分解
+
+**本章脉络**：$p(A)$（多项式） → Cayley-Hamilton → 幂级数/收敛 → $e^A$（矩阵指数） → $\log A$, $A^{1/2}$ → 一般 $f(A)$（Jordan/Cauchy 积分）
+
+**延伸**：矩阵指数 $e^{tA}$ 是线性 ODE 系统 $\dot{x} = Ax$ 的解算子，广泛用于控制工程和量子力学；矩阵对数在 Lie 群与 Lie 代数的联系（BCH 公式）中至关重要；矩阵函数理论是算子半群理论的有限维先导
 
 </div>
 
@@ -276,7 +279,11 @@ $e^A = \sum \frac{A^k}{k!}$ 对**任意** $A$ 收敛 → $\det(e^A) = e^{\operat
 
 <div class="context-flow" markdown>
 
-三条路线：**对角化** $e^A = Pe^{\Lambda}P^{-1}$ · **Jordan 形** $e^{J_k(\lambda)t} = e^{\lambda t}\sum \frac{t^j}{j!}N^j$ · **Cayley-Hamilton** 法用特征值条件定系数
+三条路线：**对角化** $e^A = Pe^{\Lambda}P^{-1}$
+
+**Jordan 形** $e^{J_k(\lambda)t} = e^{\lambda t}\sum \frac{t^j}{j!}N^j$
+
+**Cayley-Hamilton** 法用特征值条件定系数
 
 </div>
 

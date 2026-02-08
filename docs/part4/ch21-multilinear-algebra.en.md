@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Linear maps (Ch3) · Determinants (Ch5) · Inner product spaces (Ch7) · **Arc**: Dual spaces → Tensor products (universal property) → Exterior algebra (the true home of determinants) → Tensor decompositions (high-dimensional data)
-**Essence**: Linear algebra generalizes from "linearity on one vector space" to "multilinearity on multiple spaces" — dimensions multiply rather than add
+**Prerequisites**: Linear maps (Ch3) · Determinants (Ch5) · Inner product spaces (Ch7)
+
+**Arc**: Dual spaces → Tensor products (universal property) → Exterior algebra (the true home of determinants) → Tensor decompositions (high-dimensional data)
+
+**Further connections**：Tensors pervade general relativity (Riemann curvature tensor), continuum mechanics (stress tensor), and machine learning (higher-order data analysis); exterior algebra underpins differential forms, which are the mathematical language of modern physics (Maxwell's equations, gauge field theory)
 
 </div>
 
@@ -114,6 +117,7 @@ Multilinear algebra is the natural generalization of linear algebra that studies
 <div class="context-flow" markdown>
 
 **Transition**: Dual space = 1-linear form → Generalize to $k$-linear forms · Inner products, determinants, and matrix multiplication are all instances of multilinear maps
+
 **Core**: A $k$-linear map is uniquely determined by $n_1 n_2 \cdots n_k$ values on basis elements → Dimensions multiply
 
 </div>
@@ -171,6 +175,7 @@ Multilinear algebra is the natural generalization of linear algebra that studies
 <div class="context-flow" markdown>
 
 **Core idea**: The tensor product linearizes "bilinear problems" — **Universal property**: Any bilinear $B: V \times W \to U$ factors uniquely as $V \otimes W \xrightarrow{\tilde{B}} U$
+
 **Dimension**: $\dim(V \otimes W) = \dim V \cdot \dim W$ · $V^* \otimes W \cong \operatorname{Hom}(V, W)$ unifies linear maps and tensors
 
 </div>
@@ -356,6 +361,7 @@ In physics and engineering, tensors are usually represented using **index notati
 <div class="context-flow" markdown>
 
 **Core**: Wedge product $\wedge$ = antisymmetrized tensor product → $\dim \Lambda^k(V) = \binom{n}{k}$ → $\Lambda^n(V)$ is one-dimensional → **The determinant is the coordinate of the wedge product of $n$ vectors in $\Lambda^n$**
+
 **Link**: The algebraic properties of determinants from Ch5 (multilinearity + antisymmetry) receive geometric interpretation here · Cross product = dual of $\Lambda^2$ in $\mathbb{R}^3$
 
 </div>
@@ -451,6 +457,7 @@ In physics and engineering, tensors are usually represented using **index notati
 <div class="context-flow" markdown>
 
 **Transition**: Theory → Applications · Matrix SVD (Ch8) generalized to higher orders → **CP decomposition** (sum of rank-ones) / **Tucker decomposition** (core tensor + factor matrices)
+
 **Warning**: Tensor rank $\neq$ matrix rank — computing it is NP-hard, real rank $\neq$ complex rank · Links to Ch25 low-rank approximation / recommender systems
 
 </div>

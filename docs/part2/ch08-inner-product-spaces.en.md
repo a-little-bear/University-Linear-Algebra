@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch7 Orthogonality in $\mathbb{R}^n$ · **Chapter arc**: Inner product axioms → Norm/Cauchy-Schwarz → Orthogonal complement/Projection → Adjoint operators → Normal/Self-adjoint operators → **Spectral theorem**
-Essence: Equipping a vector space with a "geometric ruler" — once there is an inner product, there are lengths, angles, orthogonal decompositions, and ultimately operators become diagonalizable
+**Prerequisites**: Ch7 Orthogonality in $\mathbb{R}^n$
+
+**Chapter arc**: Inner product axioms → Norm/Cauchy-Schwarz → Orthogonal complement/Projection → Adjoint operators → Normal/Self-adjoint operators → **Spectral theorem**
+
+**Further connections**：Inner product spaces generalize to Hilbert spaces ($L^2$ spaces, Sobolev spaces) in infinite dimensions; quantum mechanical state spaces are Hilbert spaces; Fourier analysis is essentially orthogonal expansion in $L^2$; reproducing kernel Hilbert spaces (RKHS) underpin kernel methods in machine learning
 
 </div>
 
@@ -97,6 +100,7 @@ In Euclidean space $\mathbb{R}^n$, the dot product $\mathbf{x} \cdot \mathbf{y} 
 <div class="context-flow" markdown>
 
 Inner product → Norm $\|\mathbf{v}\| = \sqrt{\langle \mathbf{v},\mathbf{v}\rangle}$ → **Cauchy-Schwarz** (the most fundamental inequality in inner product spaces) → Triangle inequality → Distance
+
 Key insight: The parallelogram identity characterizes "which norms come from an inner product"
 
 </div>
@@ -601,6 +605,7 @@ The most important special case of normal operators: $T^* = T$ → Eigenvalues a
 <div class="context-flow" markdown>
 
 **Chapter climax**: Inner product + self-adjoint/normal → There exists an **orthonormal eigenbasis** → $A = Q\Lambda Q^T$ (real symmetric) / $A = U\Lambda U^H$ (normal)
+
 → Ch9 uses this to diagonalize quadratic forms, Ch10 uses this for spectral decomposition, Ch11 SVD is essentially "spectral theorem on both sides"
 
 </div>

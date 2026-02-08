@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: LU/QR/SVD/eigenvalue decompositions (Ch5-8) · **Arc**: Floating-point errors are the root cause → Condition numbers determine accuracy → Direct methods (LU, $O(n^3)$) vs iterative methods (Krylov, $O(n \cdot \text{nnz})$) → Sparsity structure dictates algorithm choice
-**Essence**: Theoretical linear algebra assumes exact arithmetic — this chapter answers "how accurately and how fast can we compute?"
+**Prerequisites**: LU/QR/SVD/eigenvalue decompositions (Ch5-8)
+
+**Arc**: Floating-point errors are the root cause → Condition numbers determine accuracy → Direct methods (LU, $O(n^3)$) vs iterative methods (Krylov, $O(n \cdot \text{nnz})$) → Sparsity structure dictates algorithm choice
+
+**Further connections**：Numerical linear algebra powers all large-scale scientific computing: finite element analysis (structural engineering), computational fluid dynamics, quantum chemistry (Hartree-Fock equations), and weather prediction models all rely on efficient numerical linear algebra algorithms
 
 </div>
 
@@ -74,6 +77,7 @@ Numerical linear algebra is the core of scientific computing. In practical appli
 <div class="context-flow" markdown>
 
 **Core framework**: Forward error (output deviation) $\leq$ **condition number** $\times$ backward error (equivalent input perturbation) → Backward stable algorithm + well-conditioned problem = accurate result
+
 **Key**: $\kappa(A) = \sigma_{\max}/\sigma_{\min}$ (SVD, Ch8) — the condition number is inherent to the problem; the algorithm only controls backward error
 
 </div>
@@ -193,6 +197,7 @@ Numerical linear algebra is the core of scientific computing. In practical appli
 <div class="context-flow" markdown>
 
 **Turning point**: Direct methods at $O(n^3)$ are infeasible for large sparse systems → Iterative methods only require matrix-vector products → Convergence is determined by the **spectral radius** $\rho(G) < 1$ (eigenvalue theory, Ch6)
+
 **Hierarchy**: Jacobi/GS (classical) → SOR (accelerated) → Krylov (optimal polynomial approximation, S22.5)
 
 </div>
@@ -264,6 +269,7 @@ For large sparse systems, the $O(n^3)$ complexity of direct methods is prohibiti
 <div class="context-flow" markdown>
 
 **Core idea**: $\mathcal{K}_k(A, \mathbf{b}) = \text{span}\{\mathbf{b}, A\mathbf{b}, \ldots, A^{k-1}\mathbf{b}\}$ = the maximal information space built from $k$ matrix-vector products → Arnoldi orthogonalization → Lanczos (tridiagonalization in the symmetric case)
+
 **Unified framework**: CG (S22.6) = symmetric positive definite Krylov optimization · GMRES (S22.7) = general case residual minimization
 
 </div>
@@ -472,6 +478,7 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 <div class="context-flow" markdown>
 
 **Hierarchy**: Power iteration (simplest, $|\lambda_2/\lambda_1|^k$) → Inverse iteration + Rayleigh quotient (cubic convergence) → QR iteration (full spectrum, first reduce to Hessenberg then iterate)
+
 **Link**: QR decomposition (Ch8) is not a decomposition tool here but an iteration engine · Ch25 Rayleigh quotient optimization perspective
 
 </div>

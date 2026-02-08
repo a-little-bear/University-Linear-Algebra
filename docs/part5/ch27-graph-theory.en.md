@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · spectral theorem for symmetric matrices (Ch7-8) · nonnegative matrices (Ch17) · **Arc**: Adjacency/incidence/Laplacian matrices (linear algebra representations of graphs) → graph spectrum (spectral graph theory) → Laplacian and connectivity (Kirchhoff's matrix tree theorem) → Cheeger inequality (spectral clustering) → random walks/PageRank (Markov chains) → expander graphs (Ramanujan bound) → graph coloring (eigenvalue bounds) → network flows (LP duality)
-**Essence**: Combinatorial properties of graphs (connectivity, expansion, chromatic number) can be precisely characterized through matrix spectra (eigenvalues) — this is the deepest bridge between discrete mathematics and linear algebra
+**Prerequisites**: Eigenvalues (Ch6) · spectral theorem for symmetric matrices (Ch7-8) · nonnegative matrices (Ch17)
+
+**Arc**: Adjacency/incidence/Laplacian matrices (linear algebra representations of graphs) → graph spectrum (spectral graph theory) → Laplacian and connectivity (Kirchhoff's matrix tree theorem) → Cheeger inequality (spectral clustering) → random walks/PageRank (Markov chains) → expander graphs (Ramanujan bound) → graph coloring (eigenvalue bounds) → network flows (LP duality)
 
 </div>
 
@@ -16,6 +17,7 @@ The intersection of graph theory and linear algebra gave birth to spectral graph
 <div class="context-flow" markdown>
 
 **Three matrices**: Adjacency matrix $A$ (symmetric $\leftrightarrow$ undirected graph) → incidence matrix $B$ (vertex-edge relationships) → Laplacian $L = D - A$ (most important)
+
 **Links**: Spectral properties of symmetric matrices from Ch7 apply directly to the adjacency matrix and Laplacian of graphs
 
 </div>
@@ -95,6 +97,7 @@ The combinatorial information of a graph can be completely encoded as a matrix, 
 <div class="context-flow" markdown>
 
 **Core concept**: Graph spectrum = eigenvalue set of the adjacency matrix (or Laplacian) → the spectrum carries rich structural information about the graph (regularity, bipartiteness, diameter, etc.)
+
 **Links**: Extremal properties of eigenvalues of symmetric matrices (Courant-Fischer) from Ch7 appear repeatedly in spectral graph theory
 
 </div>
@@ -138,6 +141,7 @@ The spectrum of a graph — the set of eigenvalues of its matrix representation 
 <div class="context-flow" markdown>
 
 **Core result**: $\mu_2 > 0$ $\iff$ graph is connected → $\mu_2$ (Fiedler value / algebraic connectivity) measures the "strength" of connectivity → Kirchhoff's theorem: number of spanning trees $= \frac{1}{n}\mu_2\cdots\mu_n$
+
 **Links**: Core application of determinant theory from Ch3 in Kirchhoff's theorem
 
 </div>
@@ -195,6 +199,7 @@ The spectrum of the Laplacian matrix completely characterizes graph connectivity
 <div class="context-flow" markdown>
 
 **Core inequality**: $\frac{h^2}{2d_{\max}} \le \mu_2 \le 2h$ → the Fiedler value $\mu_2$ is equivalent to the Cheeger constant $h$ → spectral clustering algorithm: use the Fiedler vector to partition vertices into two groups
+
 **Applications**: Image segmentation, community detection, data clustering
 
 </div>
@@ -245,6 +250,7 @@ The Cheeger inequality connects an algebraic quantity ($\mu_2$) to a combinatori
 <div class="context-flow" markdown>
 
 **Chain**: Random walk on graph → transition matrix $P = D^{-1}A$ → Perron-Frobenius theorem (Ch17) → stationary distribution → Google PageRank = stationary distribution of a damped random walk
+
 **Links**: Direct application of nonnegative matrix theory from Ch17
 
 </div>
@@ -297,6 +303,7 @@ Random walks on graphs transform graph-theoretic problems into stochastic matrix
 <div class="context-flow" markdown>
 
 **Definition**: $d$-regular graph with $\lambda_2(A) \le d - \varepsilon$ → good expander = large spectral gap → Alon-Boppana bound: $\lambda_2 \ge 2\sqrt{d-1} - o(1)$ → Ramanujan graphs achieve this bound
+
 **Applications**: Error-correcting codes, derandomization, network design
 
 </div>
@@ -354,6 +361,7 @@ Expander graphs are sparse graphs with good connectivity and pseudorandom proper
 <div class="context-flow" markdown>
 
 **Bounds**: $\chi(G) \ge 1 + \lambda_1 / |\lambda_n|$ (Hoffman bound) → eigenvalues give lower bounds on chromatic number → independence number upper bound: $\alpha(G) \le n \cdot |\lambda_n| / (\lambda_1 + |\lambda_n|)$
+
 **Applications**: Relaxation bounds in combinatorial optimization
 
 </div>
@@ -415,6 +423,7 @@ Eigenvalues of a graph can provide effective bounds on its chromatic number and 
 <div class="context-flow" markdown>
 
 **Model**: Network flow = linearly constrained optimization on graphs → max-flow/min-cut = special case of LP duality → the incidence matrix $B$ plays a central role in flow conservation constraints
+
 **Links**: LP theory from Ch25 made concrete on graphs
 
 </div>

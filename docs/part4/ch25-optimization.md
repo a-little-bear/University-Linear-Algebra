@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：SVD/特征值(Ch6-8) · 正定性(Ch7) · 流形优化(Ch24) · **脉络**：LP(基=列选取) → 最小二乘(QR/SVD) → SDP(半正定锥) → 矩阵补全/压缩感知(核范数/$\ell_1$) → PCA/Rayleigh 商
-**本质**：线性代数的三大分解（LU/QR/SVD）和特征值理论是现代优化的计算骨架
+**前置**：SVD/特征值(Ch6-8) · 正定性(Ch7) · 流形优化(Ch24)
+
+**脉络**：LP(基=列选取) → 最小二乘(QR/SVD) → SDP(半正定锥) → 矩阵补全/压缩感知(核范数/$\ell_1$) → PCA/Rayleigh 商
+
+**延伸**：半定规划在组合优化（MAX-CUT 的 Goemans-Williamson 近似）、控制理论（鲁棒控制）、量子信息（纠缠判定）中至关重要；压缩感知革新了 MRI 成像、雷达信号处理和天文观测
 
 </div>
 
@@ -16,6 +19,7 @@
 <div class="context-flow" markdown>
 
 **线性代数视角**：LP 最优解 = **基本可行解** = 选 $m$ 列构成可逆 $A_B$ → 单纯形法的每步 = 解线性方程组 $A_B^{-1}\mathbf{b}$ + 列交换(LU 更新)
+
 **链接**：Ch22 LU 分解在此处直接应用
 
 </div>
@@ -88,7 +92,9 @@
 
 <div class="context-flow" markdown>
 
-**三种求解**：正规方程($A^TA$, 条件数平方) → QR 分解(稳定, Ch8) → SVD(最通用，伪逆+正则化) · **Tikhonov 正则化** = 谱过滤：大 $\sigma_i$ 保留，小 $\sigma_i$ 压制
+**三种求解**：正规方程($A^TA$, 条件数平方) → QR 分解(稳定, Ch8) → SVD(最通用，伪逆+正则化)
+
+**Tikhonov 正则化** = 谱过滤：大 $\sigma_i$ 保留，小 $\sigma_i$ 压制
 
 </div>
 
@@ -189,6 +195,7 @@
 <div class="context-flow" markdown>
 
 **推广链**：LP($\mathbf{x} \ge 0$) → SDP($X \succeq 0$)——将非负约束推广为**半正定锥**约束 · 强对偶性 + 互补松弛 $X^*S^* = 0$
+
 **威力**：MAX-CUT 的 Goemans-Williamson 松弛(0.878 近似比) · 核范数最小化 = SDP(§25.4)
 
 </div>
@@ -276,6 +283,7 @@
 <div class="context-flow" markdown>
 
 **思路**：秩约束(NP-hard) → **核范数**松弛(秩的最紧凸包) = SDP → 非相干条件 + $O(\mu^2 r \log^2 n)$ 个观测 → 精确恢复
+
 **链接**：Ch21 张量分解的矩阵版本 · Netflix 推荐/协同过滤的数学基础
 
 </div>
@@ -372,6 +380,7 @@
 <div class="context-flow" markdown>
 
 **核心条件**：**RIP**——测量矩阵 $A$ 在稀疏向量上近似保距 → $\delta_{2s} < \sqrt{2}-1$ 时 $\ell_1$ 最小化精确恢复 $s$-稀疏信号
+
 **随机矩阵连接**：高斯随机 $A$ 以 $m = O(s\log(n/s))$ 行满足 RIP（Ch23 集中不等式）→ 远少于 $n$ 次测量即可重建
 
 </div>
@@ -448,6 +457,7 @@
 <div class="context-flow" markdown>
 
 **SVD 即 PCA**：主成分方向 = $S = \frac{1}{n}\bar{X}^T\bar{X}$ 的特征向量 = $\bar{X}$ 的右奇异向量 → Eckart-Young 最优低秩近似
+
 **鲁棒 PCA**：$M = L + S$（低秩+稀疏）→ $\|L\|_* + \lambda\|S\|_1$ 凸松弛 → 视频前景/背景分离 · 链接 Ch23 BBP 相变（何时能检测到信号？）
 
 </div>
@@ -513,6 +523,7 @@
 <div class="context-flow" markdown>
 
 **两大定理**：**Eckart-Young-Mirsky**（截断 SVD = 最优低秩近似）+ **JL 引理**（随机投影 $\mathbb{R}^n \to \mathbb{R}^{O(\log N/\epsilon^2)}$ 近似保距）
+
 **链接**：Ch23 高斯随机矩阵的集中性质是 JL 引理的证明核心
 
 </div>
@@ -591,7 +602,10 @@
 
 <div class="context-flow" markdown>
 
-**特征值 = 极值**：Rayleigh 商 $R_A(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}/\|\mathbf{x}\|^2$ → $\lambda_{\min} \le R_A \le \lambda_{\max}$ · **Courant-Fischer** 极小极大 → **Weyl 扰动不等式** $|\gamma_i - \alpha_i| \le \|B\|$
+**特征值 = 极值**：Rayleigh 商 $R_A(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}/\|\mathbf{x}\|^2$ → $\lambda_{\min} \le R_A \le \lambda_{\max}$
+
+**Courant-Fischer** 极小极大 → **Weyl 扰动不等式** $|\gamma_i - \alpha_i| \le \|B\|$
+
 **汇聚**：Rayleigh 商迭代(三次收敛, Ch22) · 图 Laplacian 的 $\lambda_2$ = 连通性(Fiedler) · 链接 Ch24 Stiefel 流形上的特征值问题
 
 </div>

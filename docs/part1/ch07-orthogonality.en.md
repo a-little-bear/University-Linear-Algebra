@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 4 subspaces/four fundamental subspaces · Chapter 6 real symmetric matrices/spectral theorem · **Chapter arc**: inner product/norm → Cauchy-Schwarz → orthogonal sets → orthogonal complements → orthogonal projection → Gram-Schmidt → orthogonal matrices → least squares → QR decomposition
-**One-line essence**: The inner product endows a vector space with **geometric structure** (length, angle, perpendicularity) — orthogonal projection is the algebraic expression of "best approximation," and QR decomposition is its algorithmic realization
+**Prerequisites**: Chapter 4 subspaces/four fundamental subspaces · Chapter 6 real symmetric matrices/spectral theorem
+
+**Chapter arc**: inner product/norm → Cauchy-Schwarz → orthogonal sets → orthogonal complements → orthogonal projection → Gram-Schmidt → orthogonal matrices → least squares → QR decomposition
+
+**Further connections**：Least squares is the cornerstone of statistical regression and machine learning; orthogonal projection is used in signal denoising and data compression; Gram-Schmidt evolves into the numerically stable Householder/Givens methods in scientific computing
 
 </div>
 

@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Ch15 Weyl/Wielandt-Hoffman · Ch16 正定矩阵 · **脉络**：Courant-Fischer → Weyl/Cauchy交错 → 奇异值不等式 → 迹(von Neumann) → 行列式(Hadamard/Minkowski) → **Majorization**统一框架
+**前置**：Ch15 Weyl/Wielandt-Hoffman · Ch16 正定矩阵
+
+**脉络**：Courant-Fischer → Weyl/Cauchy交错 → 奇异值不等式 → 迹(von Neumann) → 行列式(Hadamard/Minkowski) → **Majorization**统一框架
+
+**延伸**：矩阵不等式在量子信息（entanglement witness、信道容量界）、控制理论（LMI 方法）、统计学（Cramér-Rao 界）中有核心应用；majorization 理论连接了信息论（Shannon 熵）和量子纠缠的度量
 
 </div>
 
@@ -187,7 +191,9 @@
 
 <div class="context-flow" markdown>
 
-**脉络**：奇异值次可乘 $\sigma_{i+j-1}(AB)\leq\sigma_i(A)\sigma_j(B)$ · **Ky Fan $k$-范数** $=\sum_{i=1}^k\sigma_i$ 满足三角不等式 → 酉不变范数的统一视角
+**脉络**：奇异值次可乘 $\sigma_{i+j-1}(AB)\leq\sigma_i(A)\sigma_j(B)$
+
+**Ky Fan $k$-范数** $=\sum_{i=1}^k\sigma_i$ 满足三角不等式 → 酉不变范数的统一视角
 
 </div>
 
@@ -540,7 +546,9 @@
 
 <div class="context-flow" markdown>
 
-**核心框架**：$\mathbf{x}\prec\mathbf{y}$ $\Leftrightarrow$ $\mathbf{x}=D\mathbf{y}$($D$双随机) $\Leftrightarrow$ $\mathbf{x}$在$\mathbf{y}$置换凸包内 · **Schur-Horn**：对角元 $\prec$ 特征值 · Birkhoff定理是桥梁
+**核心框架**：$\mathbf{x}\prec\mathbf{y}$ $\Leftrightarrow$ $\mathbf{x}=D\mathbf{y}$($D$双随机) $\Leftrightarrow$ $\mathbf{x}$在$\mathbf{y}$置换凸包内
+
+**Schur-Horn**：对角元 $\prec$ 特征值 · Birkhoff定理是桥梁
 
 </div>
 
@@ -722,7 +730,9 @@ Schur 凸函数是与优超理论密切相关的一类函数，它为判断矩�
 
 <div class="context-flow" markdown>
 
-**脉络**：$t^r$($0\leq r\leq 1$)和 $\log t$ 矩阵单调，$t^2$ 不是 · **Löwner定理**：矩阵单调 $\Leftrightarrow$ Pick函数(上半平面自映) · Jensen矩阵不等式 → 量子信息
+**脉络**：$t^r$($0\leq r\leq 1$)和 $\log t$ 矩阵单调，$t^2$ 不是
+
+**Löwner定理**：矩阵单调 $\Leftrightarrow$ Pick函数(上半平面自映) · Jensen矩阵不等式 → 量子信息
 
 </div>
 

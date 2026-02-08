@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(sort:*)",
+      "Bash(pip install:*)",
+      "Bash(python -m mkdocs:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: 线性代数全览 — 25章完整内容\n\n基于 MkDocs Material 构建的线性代数知识库网站，涵盖从大一到博士的全部核心内容：\n- 第一部分（第1-7章）：基础线性代数\n- 第二部分（第8-13章）：中级线性代数\n- 第三部分（第14-20章）：高级线性代数\n- 第四部分（第21-25章）：专题研究\n\n包含 MathJax 数学渲染、中英文搜索、GitHub Actions 自动部署。\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(gh api:*)",
+      "Bash(where:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nUse actions/deploy-pages for GitHub Pages deployment\n\nSwitch from mkdocs gh-deploy \\(gh-pages branch\\) to the modern\nactions/deploy-pages approach that deploys directly from Actions.\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd content mode toggle: deep connections vs definition sheet\n\n- Toggle button in header \\(left of dark/light switch\\)\n- Default: deep connections mode — concise context-flow blocks linking\n  concepts with logical arrows, key insights, and cross-chapter references\n- Toggle: definition sheet mode — hides all context-flow blocks, showing\n  only formal definitions/theorems/proofs for quick exam review\n- ~230 context-flow blocks added across all 25 chapters\n- State persisted in localStorage\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(ls:*)",
+      "Bash(mkdocs build:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd English translation with language toggle \\(mkdocs-static-i18n\\)\n\n- Add mkdocs-static-i18n plugin for bilingual zh/en support\n- Add language selector dropdown in header \\(中文 / English\\)\n- Create 26 .en.md files: index + 25 chapters \\(full English translations\\)\n- Configure nav_translations for all navigation elements\n- English site served at /en/ prefix, Chinese remains default\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(gh run list:*)",
+      "Bash(git commit:*)",
+      "Bash(python fix_math.py:*)",
+      "Bash(git checkout:*)",
+      "Bash(wc:*)",
+      "Bash(python fix_context_flow.py:*)",
+      "WebSearch",
+      "Bash(for f in ch34-schur-complement ch35-hadamard-product ch39-totally-positive ch40-permanent-immanant ch41-matrix-pencils ch45-cp-copositive ch46-operator-monotone ch47-matrix-calculus)",
+      "Bash(do test -f \"C:\\\\Users\\\\alitt\\\\Downloads\\\\Linear Algebra\\\\docs\\\\part6/$f.md\")",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(for f in ch49-exterior-algebra ch50-clifford-algebra ch51-quaternion-matrices ch52-finite-fields ch55-matrix-groups ch56-pfaffian)",
+      "Bash(do test -f \"C:\\\\Users\\\\alitt\\\\Downloads\\\\Linear Algebra\\\\docs\\\\part7/$f.md\")",
+      "Bash(for f in ch59-tropical-algebra ch60-linear-preservers ch61-inverse-eigenvalue ch62-matrix-completion ch64-convexity ch65-combinatorial-matrix)",
+      "Bash(do test:*)",
+      "Bash(for f in ch66-control-theory ch67-computer-graphics ch68-robotics ch70-biology ch71-markov-chains ch72-matrix-distributions)",
+      "Bash(do test -f \"C:\\\\Users\\\\alitt\\\\Downloads\\\\Linear Algebra\\\\docs\\\\part9/$f.md\")"
+    ]
+  }
+}

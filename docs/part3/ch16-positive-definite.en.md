@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Spectral decomposition of Hermitian matrices (Ch6) · **Chapter arc**: $A\succ 0$ $\Leftrightarrow$ all eigenvalues positive $\Leftrightarrow$ Cholesky decomposable $\Leftrightarrow$ positive quadratic form → **Schur complement** is the key to block positive definiteness → Ch18 inequalities
+**Prerequisites**: Spectral decomposition of Hermitian matrices (Ch6)
+
+**Chapter arc**: $A\succ 0$ $\Leftrightarrow$ all eigenvalues positive $\Leftrightarrow$ Cholesky decomposable $\Leftrightarrow$ positive quadratic form → **Schur complement** is the key to block positive definiteness → Ch18 inequalities
+
+**Further connections**：Positive definite matrices pervade statistics (covariance matrices), machine learning (kernel matrices, Fisher information), optimization (Newton's method Hessian), and elasticity (stress-strain relations); Löwner partial order has deep applications in matrix monotone functions and quantum information theory
 
 </div>
 
@@ -278,7 +282,11 @@ The Schur complement is the core tool for analyzing positive definiteness of blo
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: Sum/scalar multiplication preserve positive definiteness · Eigenvalues of $AB$ are all positive (but $AB$ is not necessarily Hermitian) · **Schur product theorem** ($A\circ B\succeq 0$) · **Kronecker product** preserves positive definiteness → Ch19
+**Chapter arc**: Sum/scalar multiplication preserve positive definiteness · Eigenvalues of $AB$ are all positive (but $AB$ is not necessarily Hermitian)
+
+**Schur product theorem** ($A\circ B\succeq 0$)
+
+**Kronecker product** preserves positive definiteness → Ch19
 
 </div>
 

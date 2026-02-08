@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch8 Spectral theorem (diagonalizable case) · **Chapter arc**: Invariant subspaces → Generalized eigenvectors → Nilpotent matrices → Jordan blocks $J_k(\lambda) = \lambda I + N_k$ → **Jordan normal form theorem** → Minimal polynomial → Matrix powers/ODEs
-Essence: The ultimate generalization of diagonalization — every matrix over the complex numbers has a unique "nearly diagonal" canonical form, whose structure is determined by the **minimal polynomial**
+**Prerequisites**: Ch8 Spectral theorem (diagonalizable case)
+
+**Chapter arc**: Invariant subspaces → Generalized eigenvectors → Nilpotent matrices → Jordan blocks $J_k(\lambda) = \lambda I + N_k$ → **Jordan normal form theorem** → Minimal polynomial → Matrix powers/ODEs
+
+**Further connections**：Jordan normal form directly applies to control theory (controllability canonical form) and differential equations (solutions of non-diagonalizable systems); its generalization analyzes behavior of matrix functions at defective eigenvalues
 
 </div>
 

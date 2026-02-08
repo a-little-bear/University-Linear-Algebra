@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix multiplication / eigenvalues (Ch6) · **Chapter arc**: $A\otimes B$ combines two spaces → **Vec operator** transforms matrix equation $AXB=C$ into $(B^T\otimes A)\operatorname{vec}(X)=\operatorname{vec}(C)$ → Ch20 Sylvester/Lyapunov solving
+**Prerequisites**: Matrix multiplication / eigenvalues (Ch6)
+
+**Chapter arc**: $A\otimes B$ combines two spaces → **Vec operator** transforms matrix equation $AXB=C$ into $(B^T\otimes A)\operatorname{vec}(X)=\operatorname{vec}(C)$ → Ch20 Sylvester/Lyapunov solving
+
+**Further connections**：Kronecker products are indispensable in quantum computing (multi-qubit systems), signal processing (MIMO systems), and statistics (vectorized covariance estimation); the Vec operator converts matrix equations to vector equations and is the standard tool for computing matrix derivatives
 
 </div>
 
@@ -16,7 +20,6 @@ Starting from the definition and basic properties of the Kronecker product, this
 
 <div class="context-flow" markdown>
 
-**Essence**: $A\otimes B$ is an $mp\times nq$ block matrix whose $(i,j)$-block is $a_{ij}B$ · Not commutative, but permutation similar ($B\otimes A = P(A\otimes B)P^T$)
 
 </div>
 
@@ -344,7 +347,9 @@ The Kronecker product is not commutative, but the two orderings of the Kronecker
 
 <div class="context-flow" markdown>
 
-**Application**: $\sum A_kXB_k=C$ → $(\sum B_k^T\otimes A_k)\operatorname{vec}(X)=\operatorname{vec}(C)$ · **Sylvester** $AX+XB=C$: solvable $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ → Ch20
+**Application**: $\sum A_kXB_k=C$ → $(\sum B_k^T\otimes A_k)\operatorname{vec}(X)=\operatorname{vec}(C)$
+
+**Sylvester** $AX+XB=C$: solvable $\Leftrightarrow$ $\sigma(A)\cap\sigma(-B)=\emptyset$ → Ch20
 
 </div>
 
@@ -511,7 +516,9 @@ One of the most important applications of the Kronecker product and Vec operator
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: $A\oplus B = A\otimes I+I\otimes B$, eigenvalues $\lambda_i+\mu_j$ · **Key identity**: $e^{A\oplus B}=e^A\otimes e^B$ (because $A\otimes I$ and $I\otimes B$ commute) → Ch20 Lyapunov equation
+**Chapter arc**: $A\oplus B = A\otimes I+I\otimes B$, eigenvalues $\lambda_i+\mu_j$
+
+**Key identity**: $e^{A\oplus B}=e^A\otimes e^B$ (because $A\otimes I$ and $I\otimes B$ commute) → Ch20 Lyapunov equation
 
 </div>
 

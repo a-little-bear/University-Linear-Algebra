@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch14 spectral radius and norms · **Chapter arc**: Vector norms → Matrix norms (operator/Frobenius) → **Condition number** quantifies ill-conditioning → Bauer--Fike/Weyl quantify eigenvalue sensitivity
+**Prerequisites**: Ch14 spectral radius and norms
+
+**Chapter arc**: Vector norms → Matrix norms (operator/Frobenius) → **Condition number** quantifies ill-conditioning → Bauer--Fike/Weyl quantify eigenvalue sensitivity
+
+**Further connections**：Condition numbers determine result reliability in numerical weather prediction, finite element analysis, and GPS positioning; eigenvalue perturbation theory (Weyl, Bauer-Fike) underpins operator perturbation analysis in random matrix theory and quantum information
 
 </div>
 

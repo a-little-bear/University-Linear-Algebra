@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Ch19 Kronecker积/Vec算子 · **脉络**：$AX=B$(伪逆) → **Sylvester** $AX+XB=C$(特征值分离条件) → **Lyapunov**(稳定性) → **Riccati**(最优控制，非线性) → Penrose方程(伪逆公理化)
+**前置**：Ch19 Kronecker积/Vec算子
+
+**脉络**：$AX=B$(伪逆) → **Sylvester** $AX+XB=C$(特征值分离条件) → **Lyapunov**(稳定性) → **Riccati**(最优控制，非线性) → Penrose方程(伪逆公理化)
+
+**延伸**：Sylvester/Lyapunov 方程在控制系统稳定性分析和模型降阶中是核心工具；Riccati 方程出现在最优控制（LQR/LQG）、Kalman 滤波、博弈论中；矩阵方程的数值求解（Bartels-Stewart 算法）是科学计算的重要课题
 
 </div>
 
@@ -236,7 +240,9 @@ Sylvester 方程是最重要的矩阵方程之一，广泛出现在控制论、�
 
 <div class="context-flow" markdown>
 
-**脉络**：$AX+XA^*=-Q$：Sylvester方程取 $B=A^*$ · **稳定性等价**：$A$稳定($\operatorname{Re}\lambda_i<0$) $\Leftrightarrow$ $\exists X\succ 0$ 满足方程($Q\succ 0$) · 积分解 $X=\int_0^\infty e^{At}Qe^{A^*t}dt$
+**脉络**：$AX+XA^*=-Q$：Sylvester方程取 $B=A^*$
+
+**稳定性等价**：$A$稳定($\operatorname{Re}\lambda_i<0$) $\Leftrightarrow$ $\exists X\succ 0$ 满足方程($Q\succ 0$) · 积分解 $X=\int_0^\infty e^{At}Qe^{A^*t}dt$
 
 </div>
 
@@ -358,7 +364,9 @@ Lyapunov 方程是 Sylvester 方程的重要特殊情形，在系统稳定性分
 
 <div class="context-flow" markdown>
 
-**脉络**：$A^*X+XA-XBR^{-1}B^*X+Q=0$（非线性！） · **Hamilton矩阵**的稳定不变子空间 → 稳定化解 $X=U_2U_1^{-1}$ · 可镇定+可检测 $\Rightarrow$ 唯一半正定解
+**脉络**：$A^*X+XA-XBR^{-1}B^*X+Q=0$（非线性！）
+
+**Hamilton矩阵**的稳定不变子空间 → 稳定化解 $X=U_2U_1^{-1}$ · 可镇定+可检测 $\Rightarrow$ 唯一半正定解
 
 </div>
 

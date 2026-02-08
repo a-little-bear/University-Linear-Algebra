@@ -2,8 +2,13 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Orthogonal matrices (Ch7) · SVD (Ch8) · Positive definite matrices (Ch7) · **Arc**: Matrix constraint sets → Smooth manifolds → Riemannian geometry (geodesics/gradients) → Manifold optimization
+**Prerequisites**: Orthogonal matrices (Ch7) · SVD (Ch8) · Positive definite matrices (Ch7)
+
+**Arc**: Matrix constraint sets → Smooth manifolds → Riemannian geometry (geodesics/gradients) → Manifold optimization
+
 **Core objects**: $O(n)$ / $\text{St}(k,n)$ / $\text{Gr}(k,n)$ / $\mathcal{P}(n)$ — turning constrained optimization into unconstrained optimization on manifolds → Links to Ch25
+
+**Further connections**：Matrix manifolds are widely applied in computer vision (essential matrix estimation, shape analysis), robotics (pose estimation on $SO(3)$), medical imaging (diffusion tensor MRI), and machine learning (low-rank optimization, subspace tracking)
 
 </div>
 
@@ -66,6 +71,7 @@ We first review the basic language of manifold theory and explain how matrix set
 <div class="context-flow" markdown>
 
 **Parent group**: $GL(n) = \{\det \ne 0\}$ is an open subset of $\mathbb{R}^{n^2}$ → Lie algebra $\mathfrak{gl}(n) = \mathbb{R}^{n \times n}$ → Matrix exponential $e^A$ connects Lie algebra and Lie group
+
 **All matrix Lie groups are closed subgroups of $GL(n)$** (Cartan's theorem)
 
 </div>
@@ -303,6 +309,7 @@ The Stiefel manifold generalizes the orthogonal group and is an important object
 <div class="context-flow" markdown>
 
 **Quotient space**: $\text{Gr}(k,n) = \text{St}(k,n)/O(k)$ — parameterizing $k$-dimensional subspaces rather than bases · Distance = **principal angles** $\theta_i = \arccos\sigma_i(X_1^TX_2)$ (SVD, Ch8)
+
 **Applications**: PCA = optimization on $\text{Gr}(k,n)$ (Ch25) · Subspace tracking / computer vision
 
 </div>
@@ -398,6 +405,7 @@ The Grassmann manifold parameterizes subspaces of fixed dimension and arises nat
 <div class="context-flow" markdown>
 
 **Special geometry**: Affine-invariant metric on $\mathcal{P}(n)$: $\langle \xi,\eta\rangle_P = \text{tr}(P^{-1}\xi P^{-1}\eta)$ → Geodesic $P^{1/2}e^{tP^{-1/2}\xi P^{-1/2}}P^{1/2}$ → **Hadamard manifold** (nonpositive curvature, unique Frechet mean)
+
 **Applications**: Covariance estimation, diffusion tensor imaging, geometric means · $\mathcal{P}(1) = (0,\infty)$ with distance $= |\ln(p/q)|$
 
 </div>
@@ -489,6 +497,7 @@ Symmetric positive definite matrices play important roles in statistics, diffusi
 <div class="context-flow" markdown>
 
 **Unified theory**: BCH formula $e^Xe^Y = e^{X+Y+\frac{1}{2}[X,Y]+\cdots}$ encodes group multiplication as Lie brackets → Lie group homomorphism $\leftrightarrow$ Lie algebra homomorphism (full correspondence when simply connected)
+
 **Practical**: Rodrigues formula in $SO(3)$ · Composition of small rotations in robotics / computer vision
 
 </div>
@@ -576,7 +585,10 @@ This section systematically discusses the general theory of matrix Lie groups.
 
 <div class="context-flow" markdown>
 
-**Core transformation**: Constrained optimization ($X^TX=I$, etc.) → Unconstrained optimization on manifolds · **Riemannian gradient** = Euclidean gradient projected onto the tangent space → **Retraction** replaces the expensive geodesic step
+**Core transformation**: Constrained optimization ($X^TX=I$, etc.) → Unconstrained optimization on manifolds
+
+**Riemannian gradient** = Euclidean gradient projected onto the tangent space → **Retraction** replaces the expensive geodesic step
+
 **Links**: Eigenvalue problem = $\max \text{tr}(X^TAX)$ on $\text{St}(k,n)$ (Ch25) · PCA = optimization on $\text{Gr}(k,n)$
 
 </div>

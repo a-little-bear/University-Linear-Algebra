@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Vector spaces and subspaces (Chapter 4) · Linear maps (Chapter 5) · Dimension formula (Chapter 5) · **Chapter arc**: Equivalence classes and quotient spaces → Dimension formula and isomorphism theorems → Linear functionals and dual spaces → Dual basis → Annihilators → Transpose maps → Double dual and canonical isomorphism → Applications in finite dimensions
-**One-line essence**: Quotient spaces "collapse" a subspace to zero to simplify structure, while dual spaces encode the information of linear maps into linear functionals — together they are key tools for understanding the deep symmetries of linear algebra
+**Prerequisites**: Vector spaces and subspaces (Chapter 4) · Linear maps (Chapter 5) · Dimension formula (Chapter 5)
+
+**Chapter arc**: Equivalence classes and quotient spaces → Dimension formula and isomorphism theorems → Linear functionals and dual spaces → Dual basis → Annihilators → Transpose maps → Double dual and canonical isomorphism → Applications in finite dimensions
+
+**Further connections**：Quotient spaces are widely used in algebraic topology (construction of homology groups) and functional analysis (quotient Banach spaces); dual spaces underlie distribution theory (Schwartz distributions = dual of test function spaces) and weak topologies; in algebraic geometry, duality manifests as Serre duality
 
 </div>
 

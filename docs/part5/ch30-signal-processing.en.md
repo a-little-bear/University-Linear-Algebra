@@ -2,8 +2,9 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · matrix decompositions (Ch10-11) · positive definite matrices (Ch16) · Kronecker products (Ch19) · **Arc**: DFT matrix (unitary transform) → FFT (sparse matrix factorization) → circulant matrices and convolution (DFT diagonalization) → filtering and frequency domain analysis (frequency response) → sampling theorem and interpolation (bandlimited signals) → compressed sensing (sparse recovery / RIP) → linear error-correcting codes (linear algebra over finite fields) → LDPC codes (sparse parity-check matrices) → wavelet transform (multiresolution analysis)
-**Essence**: The core operations of signal processing — transforms, filtering, convolution — are all matrix-vector multiplications; the core concepts of coding theory — codewords, parity checks, error correction — are all linear algebra over finite fields; compressed sensing and wavelet transforms open new applications of linear algebra in sparsity and multiscale analysis
+**Prerequisites**: Eigenvalues (Ch6) · matrix decompositions (Ch10-11) · positive definite matrices (Ch16) · Kronecker products (Ch19)
+
+**Arc**: DFT matrix (unitary transform) → FFT (sparse matrix factorization) → circulant matrices and convolution (DFT diagonalization) → filtering and frequency domain analysis (frequency response) → sampling theorem and interpolation (bandlimited signals) → compressed sensing (sparse recovery / RIP) → linear error-correcting codes (linear algebra over finite fields) → LDPC codes (sparse parity-check matrices) → wavelet transform (multiresolution analysis)
 
 </div>
 
@@ -16,6 +17,7 @@ Signal processing and coding theory are among the most classical engineering app
 <div class="context-flow" markdown>
 
 **Linear algebra perspective**: DFT = multiplication by the unitary matrix $F_n$ ($F_n^* F_n = nI$) → eigenvalues/eigenvectors completely known → DFT diagonalizes circular convolution → FFT decomposes $F_n$ into a product of $\log_2 n$ sparse matrices
+
 **Links**: Ch8 unitary matrices · Ch6 eigenvalues
 
 </div>
@@ -91,6 +93,7 @@ The discrete Fourier transform (DFT) is the most fundamental tool in signal proc
 <div class="context-flow" markdown>
 
 **Core**: Circulant matrix = diagonalized by the DFT matrix $C = \frac{1}{n}F_n^*\operatorname{diag}(\hat{\mathbf{c}})F_n$ → circular convolution = pointwise multiplication in the frequency domain → convolution theorem → "FFT → pointwise multiply → IFFT" $O(n\log n)$ speedup
+
 **Links**: Ch6 eigenvalues · 30.1 DFT
 
 </div>
@@ -151,6 +154,7 @@ Circulant matrices are a class of matrices with special structure, deeply connec
 <div class="context-flow" markdown>
 
 **Core**: Linear time-invariant (LTI) system = Toeplitz matrix multiplication → frequency response $H(\omega)$ = transfer function → FIR filter = finite convolution → IIR filter = recursive difference equation → circulant embedding of Toeplitz matrices and FFT acceleration
+
 **Links**: 30.2 circulant matrices · Ch22 numerical linear algebra
 
 </div>
@@ -213,6 +217,7 @@ Filtering is the core operation of signal processing, and its mathematical essen
 <div class="context-flow" markdown>
 
 **Core**: Shannon-Nyquist theorem = a bandlimited function is uniquely determined by its samples → sampling matrix and sinc interpolation → aliasing = spectral folding caused by undersampling → linear algebra formulation of interpolation
+
 **Links**: 30.1 DFT · Ch11 SVD/pseudoinverse
 
 </div>
@@ -261,6 +266,7 @@ The sampling theorem bridges continuous and discrete signals, and its mathematic
 <div class="context-flow" markdown>
 
 **Core**: Sparse signals can be exactly recovered from far fewer measurements than the Nyquist rate → measurement matrix $A$ ($m \ll n$) → Restricted Isometry Property (RIP) → $\ell_1$ minimization (basis pursuit) equivalent to $\ell_0$ minimization → recovery conditions linked to geometric properties of matrices
+
 **Links**: Ch11 SVD · Ch10 matrix norms · Ch25 linear programming ($\ell_1$ minimization)
 
 </div>
@@ -327,6 +333,7 @@ Compressed sensing is one of the most influential mathematical discoveries of th
 <div class="context-flow" markdown>
 
 **Core**: Linear code = linear subspace over $\mathbb{F}_q$ → generator matrix $G$ (column space) and parity-check matrix $H$ (null space) → minimum distance = minimum number of linearly dependent columns of $H$ → Hamming codes and Reed-Solomon codes
+
 **Links**: Ch4 vector spaces · Ch1 systems of linear equations
 
 </div>
@@ -384,6 +391,7 @@ The fundamental idea of coding theory is to introduce redundancy into transmitte
 <div class="context-flow" markdown>
 
 **Core**: LDPC code = sparse parity-check matrix $H$ → Tanner graph (bipartite graph) representation → belief propagation decoding exploits sparsity → approaches Shannon limit → degree distribution optimization
+
 **Links**: 30.6 linear codes · Ch17 sparse matrices / nonnegative matrices
 
 </div>
@@ -455,6 +463,7 @@ Low-Density Parity-Check (LDPC) codes are among the highest-performing code fami
 <div class="context-flow" markdown>
 
 **Core**: Wavelet transform = multiresolution analysis (MRA) → orthogonality of scaling function $\phi$ and wavelet function $\psi$ → discrete wavelet transform = filter bank (lowpass $h$ + highpass $g$) → matrix factorization into products of sparse orthogonal matrices → Haar wavelet = simplest example
+
 **Links**: Ch8 orthogonality · 30.1 DFT (comparison) · Ch11 matrix decompositions
 
 </div>

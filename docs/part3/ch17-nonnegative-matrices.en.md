@@ -2,7 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Spectral radius (Ch14) · Directed graphs · **Chapter arc**: Nonnegative matrices → Irreducible = strongly connected → **Perron-Frobenius**: existence of a dominant positive eigenvalue → Markov chain convergence / PageRank
+**Prerequisites**: Spectral radius (Ch14) · Directed graphs
+
+**Chapter arc**: Nonnegative matrices → Irreducible = strongly connected → **Perron-Frobenius**: existence of a dominant positive eigenvalue → Markov chain convergence / PageRank
+
+**Further connections**：Perron-Frobenius theory is the mathematical foundation of Google PageRank and is used in ecology (population models), economics (input-output analysis), and social network analysis; nonnegative matrix factorization (NMF) is an important tool in text mining and image processing
 
 </div>
 
@@ -260,7 +264,9 @@ Nonnegative matrix theory is a beautiful and profound branch of linear algebra, 
 
 <div class="context-flow" markdown>
 
-**Chapter arc**: Row stochastic $\Rightarrow$ $\rho=1$, $\mathbf{1}$ is right eigenvector · **Birkhoff's theorem**: Doubly stochastic matrices = convex combinations of permutation matrices → Ch18 majorization
+**Chapter arc**: Row stochastic $\Rightarrow$ $\rho=1$, $\mathbf{1}$ is right eigenvector
+
+**Birkhoff's theorem**: Doubly stochastic matrices = convex combinations of permutation matrices → Ch18 majorization
 
 </div>
 

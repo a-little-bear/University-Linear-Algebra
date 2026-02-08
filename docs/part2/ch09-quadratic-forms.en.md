@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Ch8 Spectral theorem for symmetric matrices · **Chapter arc**: $\mathbf{x}^TA\mathbf{x}$ → Completing the square / Orthogonal diagonalization to canonical form → **Law of inertia** (signature invariance) → Positive definiteness criteria → Geometry (ellipsoids/hyperboloids)
-Essence: A quadratic form is the "scalar fingerprint" of a symmetric matrix — the signature $(p,q)$ completely determines the equivalence class, and positive definiteness determines the geometric shape
+**Prerequisites**: Ch8 Spectral theorem for symmetric matrices
+
+**Chapter arc**: $\mathbf{x}^TA\mathbf{x}$ → Completing the square / Orthogonal diagonalization to canonical form → **Law of inertia** (signature invariance) → Positive definiteness criteria → Geometry (ellipsoids/hyperboloids)
+
+**Further connections**：Quadratic forms pervade optimization (quadratic programming), statistics ($\chi^2$ distribution), and differential geometry (Riemannian metric); the antisymmetric case of bilinear forms yields symplectic forms — symplectic geometry is the mathematical language of classical mechanics (Hamilton's equations) and quantum field theory; Hermitian forms provide the mathematical structure for observables in quantum mechanics
 
 </div>
 

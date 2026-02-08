@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Ch7 $\mathbb{R}^n$ 的正交性 · **本章脉络**：内积公理 → 范数/Cauchy-Schwarz → 正交补/投影 → 伴随算子 → 正规/自伴算子 → **谱定理**
-本质：给向量空间装上"几何尺子"——一旦有内积，就有长度、角度、正交分解，最终让算子可对角化
+**前置**：Ch7 $\mathbb{R}^n$ 的正交性
+
+**本章脉络**：内积公理 → 范数/Cauchy-Schwarz → 正交补/投影 → 伴随算子 → 正规/自伴算子 → **谱定理**
+
+**延伸**：内积空间推广到无穷维得到 Hilbert 空间（$L^2$ 空间、Sobolev 空间）；在量子力学中态空间是 Hilbert 空间；Fourier 分析本质上是 $L^2$ 空间中的正交展开；再生核 Hilbert 空间（RKHS）是核方法与机器学习的理论基础
 
 </div>
 
@@ -97,6 +100,7 @@
 <div class="context-flow" markdown>
 
 内积 → 范数 $\|\mathbf{v}\| = \sqrt{\langle \mathbf{v},\mathbf{v}\rangle}$ → **Cauchy-Schwarz**（内积空间最基本不等式） → 三角不等式 → 距离
+
 关键洞察：平行四边形恒等式刻画了"哪些范数来自内积"
 
 </div>
@@ -601,6 +605,7 @@ $TT^* = T^*T$（与伴随可交换）→ 不同特征值的特征向量自动正
 <div class="context-flow" markdown>
 
 **全章高潮**：内积 + 自伴/正规 → 存在**标准正交特征基** → $A = Q\Lambda Q^T$（实对称）/ $A = U\Lambda U^H$（正规）
+
 → Ch9 用此对角化二次型，Ch10 用此做谱分解，Ch11 SVD 本质是"两侧的谱定理"
 
 </div>

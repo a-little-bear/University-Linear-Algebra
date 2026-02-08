@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: SVD/eigenvalues (Ch6-8) · positive definiteness (Ch7) · manifold optimization (Ch24) · **Chapter arc**: LP (basis = column selection) → least squares (QR/SVD) → SDP (positive semidefinite cone) → matrix completion/compressed sensing (nuclear norm/$\ell_1$) → PCA/Rayleigh quotient
-**Essence**: The three major decompositions of linear algebra (LU/QR/SVD) and eigenvalue theory form the computational backbone of modern optimization
+**Prerequisites**: SVD/eigenvalues (Ch6-8) · positive definiteness (Ch7) · manifold optimization (Ch24)
+
+**Chapter arc**: LP (basis = column selection) → least squares (QR/SVD) → SDP (positive semidefinite cone) → matrix completion/compressed sensing (nuclear norm/$\ell_1$) → PCA/Rayleigh quotient
+
+**Further connections**：Semidefinite programming is crucial in combinatorial optimization (Goemans-Williamson approximation for MAX-CUT), control theory (robust control), and quantum information (entanglement detection); compressed sensing has revolutionized MRI imaging, radar signal processing, and astronomical observation
 
 </div>
 
@@ -16,6 +19,7 @@ Optimization theory and linear algebra share deep and extensive connections. Lin
 <div class="context-flow" markdown>
 
 **Linear algebra perspective**: LP optimal solution = **basic feasible solution** = selecting $m$ columns to form an invertible $A_B$ → each step of the simplex method = solving the linear system $A_B^{-1}\mathbf{b}$ + column exchange (LU update)
+
 **Link**: Ch22 LU decomposition is directly applied here
 
 </div>
@@ -88,7 +92,9 @@ Linear Programming (LP) is the most fundamental type of optimization problem, wi
 
 <div class="context-flow" markdown>
 
-**Three solution methods**: normal equations ($A^TA$, squared condition number) → QR decomposition (stable, Ch8) → SVD (most general, pseudoinverse + regularization) · **Tikhonov regularization** = spectral filtering: large $\sigma_i$ retained, small $\sigma_i$ suppressed
+**Three solution methods**: normal equations ($A^TA$, squared condition number) → QR decomposition (stable, Ch8) → SVD (most general, pseudoinverse + regularization)
+
+**Tikhonov regularization** = spectral filtering: large $\sigma_i$ retained, small $\sigma_i$ suppressed
 
 </div>
 
@@ -189,6 +195,7 @@ The least squares problem is a classical area at the intersection of linear alge
 <div class="context-flow" markdown>
 
 **Generalization chain**: LP ($\mathbf{x} \ge 0$) → SDP ($X \succeq 0$) — generalizing nonnegativity constraints to **positive semidefinite cone** constraints · strong duality + complementary slackness $X^*S^* = 0$
+
 **Power**: Goemans-Williamson relaxation for MAX-CUT (0.878 approximation ratio) · nuclear norm minimization = SDP (Section 25.4)
 
 </div>
@@ -276,6 +283,7 @@ Semidefinite programming is a natural generalization of linear programming to ma
 <div class="context-flow" markdown>
 
 **Idea**: rank constraint (NP-hard) → **nuclear norm** relaxation (tightest convex envelope of rank) = SDP → incoherence condition + $O(\mu^2 r \log^2 n)$ observations → exact recovery
+
 **Link**: Matrix version of Ch21 tensor decomposition · mathematical foundation of Netflix recommendation/collaborative filtering
 
 </div>
@@ -372,6 +380,7 @@ Matrix completion is the problem of recovering a low-rank matrix from partial ob
 <div class="context-flow" markdown>
 
 **Core condition**: **RIP** — the measurement matrix $A$ approximately preserves distances on sparse vectors → $\delta_{2s} < \sqrt{2}-1$ guarantees $\ell_1$ minimization exactly recovers $s$-sparse signals
+
 **Random matrix connection**: Gaussian random $A$ with $m = O(s\log(n/s))$ rows satisfies RIP (Ch23 concentration inequalities) → far fewer than $n$ measurements suffice for reconstruction
 
 </div>
@@ -448,6 +457,7 @@ Compressed sensing exploits signal sparsity to recover signals from far fewer me
 <div class="context-flow" markdown>
 
 **SVD is PCA**: principal component directions = eigenvectors of $S = \frac{1}{n}\bar{X}^T\bar{X}$ = right singular vectors of $\bar{X}$ → Eckart-Young optimal low-rank approximation
+
 **Robust PCA**: $M = L + S$ (low-rank + sparse) → $\|L\|_* + \lambda\|S\|_1$ convex relaxation → video foreground/background separation · link to Ch23 BBP phase transition (when can the signal be detected?)
 
 </div>
@@ -513,6 +523,7 @@ Principal component analysis is a classical method for data dimensionality reduc
 <div class="context-flow" markdown>
 
 **Two major theorems**: **Eckart-Young-Mirsky** (truncated SVD = optimal low-rank approximation) + **JL lemma** (random projection $\mathbb{R}^n \to \mathbb{R}^{O(\log N/\epsilon^2)}$ approximately preserves distances)
+
 **Link**: The concentration properties of Gaussian random matrices from Ch23 are at the core of the JL lemma proof
 
 </div>
@@ -591,7 +602,10 @@ Low-rank approximation and dimensionality reduction are core techniques for hand
 
 <div class="context-flow" markdown>
 
-**Eigenvalues = extrema**: Rayleigh quotient $R_A(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}/\|\mathbf{x}\|^2$ → $\lambda_{\min} \le R_A \le \lambda_{\max}$ · **Courant-Fischer** minimax → **Weyl perturbation inequality** $|\gamma_i - \alpha_i| \le \|B\|$
+**Eigenvalues = extrema**: Rayleigh quotient $R_A(\mathbf{x}) = \mathbf{x}^TA\mathbf{x}/\|\mathbf{x}\|^2$ → $\lambda_{\min} \le R_A \le \lambda_{\max}$
+
+**Courant-Fischer** minimax → **Weyl perturbation inequality** $|\gamma_i - \alpha_i| \le \|B\|$
+
 **Convergence**: Rayleigh quotient iteration (cubic convergence, Ch22) · graph Laplacian $\lambda_2$ = connectivity (Fiedler) · link to Ch24 eigenvalue problems on Stiefel manifolds
 
 </div>

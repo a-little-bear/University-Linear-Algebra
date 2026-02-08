@@ -2,8 +2,13 @@
 
 <div class="context-flow" markdown>
 
-**前置**：正交矩阵(Ch7) · SVD(Ch8) · 正定矩阵(Ch7) · **脉络**：矩阵约束集 → 光滑流形 → Riemannian 几何(测地线/梯度) → 流形优化
+**前置**：正交矩阵(Ch7) · SVD(Ch8) · 正定矩阵(Ch7)
+
+**脉络**：矩阵约束集 → 光滑流形 → Riemannian 几何(测地线/梯度) → 流形优化
+
 **核心对象**：$O(n)$ / $\text{St}(k,n)$ / $\text{Gr}(k,n)$ / $\mathcal{P}(n)$ ——将约束优化转化为流形上的无约束优化 → 链接 Ch25
+
+**延伸**：矩阵流形在计算机视觉（本质矩阵估计、形状分析）、机器人学（姿态估计 $SO(3)$）、医学影像（扩散张量 MRI）、机器学习（低秩优化、子空间跟踪）中有广泛应用
 
 </div>
 
@@ -66,6 +71,7 @@
 <div class="context-flow" markdown>
 
 **母群**：$GL(n) = \{\det \ne 0\}$ 是 $\mathbb{R}^{n^2}$ 的开集 → Lie 代数 $\mathfrak{gl}(n) = \mathbb{R}^{n \times n}$ → 矩阵指数 $e^A$ 连接 Lie 代数与 Lie 群
+
 **所有矩阵 Lie 群都是 $GL(n)$ 的闭子群**（Cartan 定理）
 
 </div>
@@ -303,6 +309,7 @@ Stiefel 流形推广了正交群，是约束优化中的重要对象。
 <div class="context-flow" markdown>
 
 **商空间**：$\text{Gr}(k,n) = \text{St}(k,n)/O(k)$——参数化 $k$ 维子空间而非基 · 距离 = **主角** $\theta_i = \arccos\sigma_i(X_1^TX_2)$（SVD, Ch8）
+
 **应用**：PCA = $\text{Gr}(k,n)$ 上的优化（Ch25）· 子空间跟踪/计算机视觉
 
 </div>
@@ -398,6 +405,7 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 <div class="context-flow" markdown>
 
 **特殊几何**：$\mathcal{P}(n)$ 上仿射不变度量 $\langle \xi,\eta\rangle_P = \text{tr}(P^{-1}\xi P^{-1}\eta)$ → 测地线 $P^{1/2}e^{tP^{-1/2}\xi P^{-1/2}}P^{1/2}$ → **Hadamard 流形**（非正曲率，唯一 Frechet 均值）
+
 **应用**：协方差估计、扩散张量成像中的几何均值 · $\mathcal{P}(1) = (0,\infty)$ 上距离 $= |\ln(p/q)|$
 
 </div>
@@ -489,6 +497,7 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 <div class="context-flow" markdown>
 
 **统一理论**：BCH 公式 $e^Xe^Y = e^{X+Y+\frac{1}{2}[X,Y]+\cdots}$ 将群乘法编码为 Lie 括号 → Lie 群同态 ↔ Lie 代数同态（单连通时完全对应）
+
 **实用**：$SO(3)$ 中 Rodrigues 公式 · 机器人学/计算机视觉中的小旋转合成
 
 </div>
@@ -576,7 +585,10 @@ Grassmann 流形参数化固定维数的子空间，在 PCA、子空间跟踪等
 
 <div class="context-flow" markdown>
 
-**核心转化**：约束优化($X^TX=I$ 等) → 流形上无约束优化 · **Riemannian 梯度** = 欧氏梯度投影到切空间 → **收回映射**(retraction)替代昂贵的测地线步
+**核心转化**：约束优化($X^TX=I$ 等) → 流形上无约束优化
+
+**Riemannian 梯度** = 欧氏梯度投影到切空间 → **收回映射**(retraction)替代昂贵的测地线步
+
 **链接**：特征值问题 = $\text{St}(k,n)$ 上 $\max \text{tr}(X^TAX)$（Ch25）· PCA = $\text{Gr}(k,n)$ 上优化
 
 </div>

@@ -2,8 +2,11 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Chapter 3 determinants · Chapter 5 similar matrices · invariant subspaces · **Chapter arc**: $A\mathbf{v}=\lambda\mathbf{v}$ → characteristic polynomial $\det(A-\lambda I)=0$ → algebraic/geometric multiplicity → eigenspaces → diagonalization conditions → spectral theorem for real symmetric matrices → Cayley-Hamilton → similarity invariants
-**One-line essence**: Eigenvalues are the scaling factors of a linear transformation along its "intrinsic scaling directions" — finding enough eigendirections enables diagonalization
+**Prerequisites**: Chapter 3 determinants · Chapter 5 similar matrices · invariant subspaces
+
+**Chapter arc**: $A\mathbf{v}=\lambda\mathbf{v}$ → characteristic polynomial $\det(A-\lambda I)=0$ → algebraic/geometric multiplicity → eigenspaces → diagonalization conditions → spectral theorem for real symmetric matrices → Cayley-Hamilton → similarity invariants
+
+**Further connections**：Eigenvalues directly apply to Google PageRank (Perron vector), quantum mechanics (energy eigenstates), vibration analysis (natural frequencies), and population models (Leslie matrices); the infinite-dimensional generalization is spectral theory, where the distinction between continuous and point spectra is central to quantum mechanics
 
 </div>
 
