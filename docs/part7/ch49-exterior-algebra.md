@@ -516,6 +516,191 @@
 
 ---
 
+## 49.9 内积（缩并）
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何定义向量对 $k$-形式的"插入"运算？这在微分形式和物理学中为何如此重要？
+
+</div>
+
+!!! definition "定义 49.13 (内积 / 缩并)"
+    设 $V$ 是 $n$ 维 $\mathbb{F}$-向量空间，$V^*$ 为其对偶。对 $v \in V$，**内积**（interior product / contraction）是线性映射
+
+    $$\iota_v: \Lambda^k(V^*) \to \Lambda^{k-1}(V^*),$$
+
+    定义为：对 $\alpha \in \Lambda^k(V^*)$ 和 $v_1, \ldots, v_{k-1} \in V$，
+
+    $$(\iota_v \alpha)(v_1, \ldots, v_{k-1}) = \alpha(v, v_1, \ldots, v_{k-1}).$$
+
+    即将 $v$ "插入"到 $\alpha$ 的第一个变元中。约定 $\iota_v: \Lambda^0(V^*) \to 0$（标量上的内积为零）。
+
+    更一般地，若 $V$ 配备了非退化双线性形式，可将 $V$ 与 $V^*$ 等同，定义 $\iota_v: \Lambda^k(V) \to \Lambda^{k-1}(V)$。
+
+!!! theorem "定理 49.13 (内积的性质)"
+    设 $v, w \in V$，$\alpha \in \Lambda^p(V^*)$，$\beta \in \Lambda^q(V^*)$。则：
+
+    1. **线性**：$\iota_{av+bw} = a\,\iota_v + b\,\iota_w$；
+    2. **幂零性**：$\iota_v \circ \iota_v = 0$；
+    3. **分次 Leibniz 法则**（反导子）：
+
+    $$\iota_v(\alpha \wedge \beta) = (\iota_v \alpha) \wedge \beta + (-1)^p \alpha \wedge (\iota_v \beta);$$
+
+    4. **反交换性**：$\iota_v \circ \iota_w = -\iota_w \circ \iota_v$；
+    5. **降次**：$\iota_v$ 将 $\Lambda^k$ 映到 $\Lambda^{k-1}$，即 $\iota_v$ 是**次数 $-1$ 的反导子**。
+
+??? proof "证明"
+    **(2)** 对可分解元素 $\alpha = \varphi_1 \wedge \cdots \wedge \varphi_k$（$\varphi_i \in V^*$），
+
+    $$\iota_v \alpha = \sum_{i=1}^{k} (-1)^{i-1} \varphi_i(v) \, \varphi_1 \wedge \cdots \wedge \widehat{\varphi_i} \wedge \cdots \wedge \varphi_k,$$
+
+    其中 $\widehat{\varphi_i}$ 表示省略。再施加 $\iota_v$：
+
+    $$\iota_v(\iota_v \alpha) = \sum_{i<j} (-1)^{i-1}(-1)^{j-2} \varphi_i(v)\varphi_j(v)(\cdots) + \sum_{j<i} (-1)^{i-1}(-1)^{j-1} \varphi_i(v)\varphi_j(v)(\cdots).$$
+
+    交换 $i, j$ 的求和指标后，两部分逐项抵消，故 $\iota_v^2 = 0$。
+
+    **(3)** 对可分解元素用归纳法。设 $\alpha = \varphi \in \Lambda^1(V^*) = V^*$。则
+
+    $$\iota_v(\varphi \wedge \beta) = \varphi(v)\beta - \varphi \wedge \iota_v\beta = (\iota_v\varphi)\wedge\beta + (-1)^1 \varphi \wedge (\iota_v\beta).$$
+
+    一般情形通过对 $p$ 归纳和线性扩展得到。
+
+!!! example "例 49.11 (内积的具体计算)"
+    在 $\mathbb{R}^3$ 中取标准基 $\{e_1, e_2, e_3\}$ 和对偶基 $\{e^1, e^2, e^3\}$。设 $v = e_1$。
+
+    **(a)** $\iota_{e_1}(e^1 \wedge e^2) = e^1(e_1)\,e^2 - e^2(e_1)\,e^1 = 1 \cdot e^2 - 0 \cdot e^1 = e^2$。
+
+    **(b)** $\iota_{e_1}(e^2 \wedge e^3) = e^2(e_1)\,e^3 - e^3(e_1)\,e^2 = 0$。
+
+    **(c)** $\iota_{e_1}(e^1 \wedge e^2 \wedge e^3) = e^2 \wedge e^3$（将 $e_1$ 插入第一个位置）。
+
+    **(d)** 设 $v = 2e_1 + 3e_2$，$\alpha = e^1 \wedge e^2 \wedge e^3$。则
+
+    $$\iota_v \alpha = 2\,e^2 \wedge e^3 - 3\,e^1 \wedge e^3 = 2\,e^2 \wedge e^3 + 3\,e^3 \wedge e^1.$$
+
+!!! theorem "定理 49.14 (Cartan 魔术公式)"
+    设 $M$ 是光滑流形，$X$ 是向量场，$d$ 是外微分算子，$\iota_X$ 是关于 $X$ 的内积。则 **Lie 导数**满足
+
+    $$\mathcal{L}_X = \iota_X \circ d + d \circ \iota_X.$$
+
+    这一公式将三个基本运算——Lie 导数、外微分、内积——统一起来，是微分几何和理论物理中最重要的公式之一。
+
+    进一步，$\mathcal{L}_X$ 满足：
+
+    - $\mathcal{L}_X(\alpha \wedge \beta) = (\mathcal{L}_X \alpha) \wedge \beta + \alpha \wedge (\mathcal{L}_X \beta)$；
+    - $[\mathcal{L}_X, \iota_Y] = \iota_{[X,Y]}$；
+    - $[\mathcal{L}_X, d] = 0$。
+
+---
+
+## 49.10 Cauchy-Binet 公式
+
+<div class="context-flow" markdown>
+
+**核心问题**：对于非方阵 $A$ 和 $B$，$\det(AB)$ 如何用子式表达？
+
+</div>
+
+!!! theorem "定理 49.15 (Cauchy-Binet 公式)"
+    设 $A \in \mathbb{F}^{m \times n}$，$B \in \mathbb{F}^{n \times m}$，$m \leq n$。则
+
+    $$\det(AB) = \sum_{S \in \binom{[n]}{m}} \det(A_S)\det(B_S),$$
+
+    其中 $\binom{[n]}{m}$ 是 $\{1, \ldots, n\}$ 的所有 $m$ 元子集，$A_S$ 是 $A$ 的列限制在 $S$ 上的 $m \times m$ 子矩阵，$B_S$ 是 $B$ 的行限制在 $S$ 上的 $m \times m$ 子矩阵。
+
+    当 $m = n$ 时，唯一的 $S = \{1, \ldots, n\}$，退化为 $\det(AB) = \det(A)\det(B)$。
+
+??? proof "证明"
+    **外代数方法**：设 $a_1, \ldots, a_m$ 是 $A$ 的行向量（$a_i \in \mathbb{F}^n$），$b_1, \ldots, b_m$ 是 $B$ 的列向量（$b_j \in \mathbb{F}^n$）。则 $AB$ 的 $(i,j)$ 元素为 $\langle a_i, b_j \rangle$。
+
+    在 $\Lambda^m(\mathbb{F}^n)$ 中，设 $\{e_1, \ldots, e_n\}$ 为标准基。将 $A$ 视为线性映射 $\mathbb{F}^n \to \mathbb{F}^m$，$B$ 视为 $\mathbb{F}^m \to \mathbb{F}^n$。
+
+    设 $f_1, \ldots, f_m$ 是 $\mathbb{F}^m$ 的标准基。则
+
+    $$B(f_j) = \sum_{i=1}^n B_{ij} e_i, \quad j = 1, \ldots, m.$$
+
+    $$\Lambda^m(B)(f_1 \wedge \cdots \wedge f_m) = B(f_1) \wedge \cdots \wedge B(f_m) = \sum_{S \in \binom{[n]}{m}} \det(B_S)\, e_{s_1} \wedge \cdots \wedge e_{s_m}.$$
+
+    类似地，$\Lambda^m(A)$ 作用于 $e_{s_1} \wedge \cdots \wedge e_{s_m}$ 得到 $\det(A_S)\, f_1 \wedge \cdots \wedge f_m$。
+
+    由 $\Lambda^m(AB) = \Lambda^m(A) \circ \Lambda^m(B)$，
+
+    $$\det(AB)\, f_1 \wedge \cdots \wedge f_m = \sum_{S} \det(A_S)\det(B_S)\, f_1 \wedge \cdots \wedge f_m.$$
+
+    比较系数即得。
+
+!!! example "例 49.12 (Cauchy-Binet 公式的应用)"
+    设 $A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$，$B = A^T$。则 $AB$ 是 $2 \times 2$ 矩阵。
+
+    $S$ 取遍 $\{1,2\}, \{1,3\}, \{2,3\}$：
+
+    - $S = \{1,2\}$：$\det(A_S) = 1 \cdot 5 - 2 \cdot 4 = -3$，$\det(B_S) = -3$；
+    - $S = \{1,3\}$：$\det(A_S) = 1 \cdot 6 - 3 \cdot 4 = -6$，$\det(B_S) = -6$；
+    - $S = \{2,3\}$：$\det(A_S) = 2 \cdot 6 - 3 \cdot 5 = -3$，$\det(B_S) = -3$。
+
+    $$\det(AA^T) = (-3)^2 + (-6)^2 + (-3)^2 = 9 + 36 + 9 = 54.$$
+
+    验证：$AA^T = \begin{pmatrix} 14 & 32 \\ 32 & 77 \end{pmatrix}$，$\det = 14 \cdot 77 - 32^2 = 1078 - 1024 = 54$。
+
+---
+
+## 49.11 Koszul 复形
+
+<div class="context-flow" markdown>
+
+**核心问题**：外代数如何产生重要的链复形？这与交换代数中的正则序列有什么关系？
+
+</div>
+
+!!! definition "定义 49.14 (Koszul 复形)"
+    设 $R$ 是交换环，$x_1, \ldots, x_n \in R$。设 $V$ 为秩 $n$ 的自由 $R$-模，基为 $e_1, \ldots, e_n$。定义映射 $\partial: \Lambda^k(V) \to \Lambda^{k-1}(V)$ 为
+
+    $$\partial(e_{i_1} \wedge \cdots \wedge e_{i_k}) = \sum_{j=1}^{k} (-1)^{j-1} x_{i_j}\, e_{i_1} \wedge \cdots \wedge \widehat{e_{i_j}} \wedge \cdots \wedge e_{i_k}.$$
+
+    即 $\partial = \sum_{i=1}^n x_i \, \iota_{e_i^*}$（用内积语言），其中 $\iota_{e_i^*}$ 是关于对偶基元素的缩并。
+
+    **Koszul 复形** $K_\bullet(x_1, \ldots, x_n)$ 是
+
+    $$0 \to \Lambda^n(V) \xrightarrow{\partial} \Lambda^{n-1}(V) \xrightarrow{\partial} \cdots \xrightarrow{\partial} \Lambda^1(V) \xrightarrow{\partial} \Lambda^0(V) = R \to 0.$$
+
+!!! theorem "定理 49.16 ($\partial^2 = 0$)"
+    上述 $\partial$ 满足 $\partial \circ \partial = 0$，即 $K_\bullet$ 确实构成链复形。
+
+??? proof "证明"
+    对基元素 $e_{i_1} \wedge \cdots \wedge e_{i_k}$ 计算 $\partial^2$：
+
+    $$\partial^2(e_{i_1} \wedge \cdots \wedge e_{i_k}) = \partial\left(\sum_{j=1}^k (-1)^{j-1} x_{i_j} \, e_{i_1} \wedge \cdots \wedge \widehat{e_{i_j}} \wedge \cdots \wedge e_{i_k}\right)$$
+
+    $$= \sum_{j=1}^k \sum_{\substack{l=1 \\ l \neq j}}^k (-1)^{j-1}(-1)^{l'-1} x_{i_j} x_{i_l}\, e_{i_1} \wedge \cdots \wedge \widehat{e_{i_j}} \wedge \cdots \wedge \widehat{e_{i_l}} \wedge \cdots \wedge e_{i_k},$$
+
+    其中 $l'$ 是 $l$ 在删去第 $j$ 项后的重新编号。对每对 $(j, l)$（$j < l$），出现的两项为
+
+    $$(-1)^{j-1}(-1)^{l-2} x_{i_j} x_{i_l}(\cdots) + (-1)^{l-1}(-1)^{j-1} x_{i_l} x_{i_j}(\cdots).$$
+
+    由于 $(-1)^{j-1+l-2} + (-1)^{l-1+j-1} = (-1)^{j+l-3} + (-1)^{j+l-2} = 0$，故 $\partial^2 = 0$。
+
+!!! theorem "定理 49.17 (Koszul 复形的正合性)"
+    设 $R$ 是 Noetherian 交换环，$x_1, \ldots, x_n \in R$。Koszul 复形 $K_\bullet(x_1, \ldots, x_n)$ 是**正合**的（即所有同调群为零）当且仅当 $x_1, \ldots, x_n$ 构成 $R$ 的一个**正则序列**，即：
+
+    1. $(x_1, \ldots, x_n) \neq R$；
+    2. 对每个 $i = 1, \ldots, n$，$x_i$ 不是 $R/(x_1, \ldots, x_{i-1})$ 的零因子。
+
+    特别地，当 $R$ 是局部环且 $x_1, \ldots, x_n$ 在极大理想中时，Koszul 复形正合等价于 $x_1, \ldots, x_n$ 是正则序列。
+
+!!! example "例 49.13 (简单的 Koszul 复形)"
+    设 $R = \mathbb{F}[x, y]$，$n = 2$，元素为 $x, y$。Koszul 复形为
+
+    $$0 \to R \xrightarrow{\partial_2} R^2 \xrightarrow{\partial_1} R \to 0,$$
+
+    其中 $\partial_2(1) = (-y, x)$（即 $\partial_2(e_1 \wedge e_2) = x \cdot e_2 - y \cdot e_1$），$\partial_1(a, b) = xa + yb$。
+
+    验证 $\partial_1 \circ \partial_2 = 0$：$\partial_1(-y, x) = x(-y) + y(x) = 0$。
+
+    由于 $x, y$ 是 $\mathbb{F}[x,y]$ 的正则序列，此复形正合。其同调计算了 $R/(x,y) \cong \mathbb{F}$ 的自由消解。
+
+---
+
 ### 本章总结
 
 外代数 $\Lambda(V)$ 是向量空间 $V$ 上的基本代数结构，它：
@@ -524,7 +709,10 @@
 - 通过顶外幂 $\Lambda^n(V)$ 给出行列式的最内在定义，使行列式的性质成为外代数函子性的直接推论；
 - 通过复合矩阵 $C_k(A)$ 将线性变换的特征值乘积信息编码在外幂映射中；
 - 通过 Plücker 嵌入将 Grassmannian 实现为射影空间中的代数簇；
-- 通过 Hodge 对偶连接不同次的外幂空间，统一了梯度、旋度、散度等微分算子。
+- 通过 Hodge 对偶连接不同次的外幂空间，统一了梯度、旋度、散度等微分算子；
+- 通过内积（缩并）$\iota_v$ 为微分形式理论提供基础运算，并通过 Cartan 魔术公式统一 Lie 导数、外微分和内积；
+- 通过 Cauchy-Binet 公式给出非方阵乘积的行列式的子式展开；
+- 通过 Koszul 复形连接外代数与同调代数，正合性等价于正则序列条件。
 
 ---
 

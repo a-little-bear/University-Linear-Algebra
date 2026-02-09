@@ -186,37 +186,91 @@
     **(e)** $n \geq 5$：NIEP **仍是开放问题**。
 
 !!! example "例 61.3"
-    **$n = 3$ 的具体验证。** $\Lambda = \{4, -1, -2\}$。
+    **$n = 3$ 的具体验证与构造。** $\Lambda = \{4, -1, -2\}$。
+
+    **第一步：验证必要条件。**
 
     - Perron 条件：$4 \geq |-1|, |-2|$，成立。
     - $s_1 = 4 + (-1) + (-2) = 1 \geq 0$。
     - $s_2 = 16 + 1 + 4 = 21 \geq 0$。
     - $s_3 = 64 + (-1) + (-8) = 55 \geq 0$。
-    - Loewy-London：$1^3 + 2 \cdot 55 = 111 \geq 3 \cdot 1 \cdot 21 = 63$。成立。
+    - Loewy-London：$s_1^3 + 2s_3 = 1 + 110 = 111 \geq 3 s_1 s_2 = 63$。成立。
 
-    构造：取
+    所有必要条件满足。又由 Suleimanova 充分条件（一正两负，$s_1 = 1 > 0$），$\Lambda$ 可实现。
 
-    $$A = \begin{pmatrix}0 & 2 & 0\\2 & 0 & 0\\1 & 0 & 1\end{pmatrix}.$$
+    **第二步：Suleimanova 秩-1 构造。** 取对角矩阵 $D = \mathrm{diag}(-1, -2, 0)$，令
 
-    特征多项式 $\det(\lambda I - A) = \lambda^3 - \lambda^2 - 4\lambda + 4 = (\lambda - 1)(\lambda^2 - 4) = (\lambda-1)(\lambda-2)(\lambda+2)$。
+    $$A = D + \mathbf{e} v^\top = \begin{pmatrix}-1 & 0 & 0\\0 & -2 & 0\\0 & 0 & 0\end{pmatrix} + \begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}a & b & c\end{pmatrix} = \begin{pmatrix}a-1 & b & c\\a & b-2 & c\\a & b & c\end{pmatrix}.$$
 
-    不对，这给出特征值 $\{1, 2, -2\}$，不是我们要的。需要调整。实际上由 Suleimanova 充分条件，$\{4, -1, -2\}$：$s_1 = 1 > 0$，可以构造
+    秩-1 修正的特征值分析：$D$ 的特征值为 $\{-1, -2, 0\}$，秩-1 修正 $\mathbf{e}v^\top$ 保留 $\ker(v^\top)$ 中的特征值不变。具体地，$v^\top$ 对 $D$ 的特征向量 $e_i$ 的作用为 $v^\top e_i = v_i$，因此修正后的特征值由**世俗方程**（secular equation）决定：
 
-    $$A = \begin{pmatrix}-1 & 0\\0 & -2\end{pmatrix} + \begin{pmatrix}1\\1\end{pmatrix}(a, b), \quad a, b \geq 0,$$
+    $$1 = \sum_{i=1}^{3} \frac{v_i}{\lambda - d_i} = \frac{a}{\lambda + 1} + \frac{b}{\lambda + 2} + \frac{c}{\lambda}.$$
 
-    使得新特征值添加 $\lambda_1 = 4$。需要 $-1 + a + (-2) + b = 4 + (-1) + (-2)$，即 $a + b = 8$，且 $A$ 非负：$a - 1 \geq 0$，$b - 2 \geq 0$，所以 $a \geq 1$，$b \geq 2$。取 $a = 5, b = 3$。
+    我们需要此方程的根为 $\lambda = 4, -1, -2$。但这里 $d_1 = -1, d_2 = -2$ 与目标特征值 $-1, -2$ 重合，这意味着需要 $v_1 = a = 0$ 或 $v_2 = b = 0$ 来保留对应特征值。
 
-    $$A = \begin{pmatrix}4 & 3\\5 & 1\end{pmatrix}. \quad \text{嗯，这是 } 2 \times 2.$$
+    实际上更直接的方法：令 $D$ 的对角元素为我们要保留的特征值。取 $D = \mathrm{diag}(-1, -2, 0)$，要保留 $-1$ 和 $-2$，令 $v = (0, 0, c)^\top$（使得 $v^\top e_1 = v^\top e_2 = 0$，即 $-1, -2$ 对应的特征向量不受影响）。则
 
-    对 $3 \times 3$：
+    $$A = \begin{pmatrix}-1 & 0 & c\\0 & -2 & c\\0 & 0 & c\end{pmatrix}.$$
 
-    $$A = \begin{pmatrix}-1 & 0 & 0\\0 & -2 & 0\\0 & 0 & 0\end{pmatrix} + \begin{pmatrix}1\\1\\1\end{pmatrix}(a, b, c)^\top = \begin{pmatrix}a-1 & b & c\\a & b-2 & c\\a & b & c\end{pmatrix}.$$
+    此上三角矩阵的特征值为对角元素 $\{-1, -2, c\}$。令 $c = 4$：
 
-    特征值为 $-1, -2$ 和 $a + b + c - 3$（秩-1 修正）。要 $a+b+c-3 = 4$，即 $a+b+c = 7$。非负性要求 $a \geq 1$，$b \geq 2$，$c \geq 0$。取 $a = 2, b = 3, c = 2$：
+    $$A = \begin{pmatrix}-1 & 0 & 4\\0 & -2 & 4\\0 & 0 & 4\end{pmatrix}.$$
 
-    $$A = \begin{pmatrix}1 & 3 & 2\\2 & 1 & 2\\2 & 3 & 2\end{pmatrix}.$$
+    但 $A$ 含负元素，不是非负矩阵。
 
-    验证：$\mathrm{tr}(A) = 4 - 1 - 2 = 1$？不对，$\mathrm{tr}(A) = 1 + 1 + 2 = 4$。秩-1 更新的特征值分析需要修正。实际上 Suleimanova 构造在此情况下工作方式略有不同。重要的是存在性结论成立。
+    **第三步：使用正确的 Suleimanova 构造。** 令 $D = \mathrm{diag}(\lambda_2, \lambda_3) = \mathrm{diag}(-1, -2)$，构造
+
+    $$A = \begin{pmatrix}-1 & 0 & 0\\0 & -2 & 0\\0 & 0 & 0\end{pmatrix} + \begin{pmatrix}1\\1\\1\end{pmatrix}\begin{pmatrix}a & b & c\end{pmatrix}$$
+
+    并要求 (i) $A$ 非负，(ii) $\sigma(A) = \{4, -1, -2\}$。
+
+    条件 (ii)：$\mathrm{tr}(A) = (a-1) + (b-2) + c = a + b + c - 3 = 4 + (-1) + (-2) = 1$，所以 $a + b + c = 4$。
+
+    秩-1 修正理论：$D' = \mathrm{diag}(-1, -2, 0)$ 经过秩-1 修正 $\mathbf{e}v^\top$（$\mathbf{e} = (1,1,1)^\top$，$v = (a,b,c)^\top$）后，新特征值满足世俗方程。由于 $\mathbf{e}$ 不是 $D'$ 的特征向量，需要更仔细的分析。
+
+    换一种方法：直接选取参数并验证。取 $a = 1, b = 2, c = 1$（满足 $a+b+c = 4$）：
+
+    $$A = \begin{pmatrix}0 & 2 & 1\\1 & 0 & 1\\1 & 2 & 1\end{pmatrix}.$$
+
+    验证非负性：所有元素 $\geq 0$，成立。
+
+    特征多项式：$\det(\lambda I - A) = \det\begin{pmatrix}\lambda & -2 & -1\\-1 & \lambda & -1\\-1 & -2 & \lambda-1\end{pmatrix}$。
+
+    展开：$\lambda[\lambda(\lambda-1) - (-1)(-2)] - (-2)[(-1)(\lambda-1) - (-1)(-1)] + (-1)[(-1)(-2) - \lambda(-1)]$
+
+    $= \lambda[\lambda^2 - \lambda - 2] + 2[-\lambda + 1 - 1] + (-1)[2 + \lambda]$
+
+    $= \lambda^3 - \lambda^2 - 2\lambda + 2(-\lambda) + (-2 - \lambda)$
+
+    $= \lambda^3 - \lambda^2 - 2\lambda - 2\lambda - 2 - \lambda$
+
+    $= \lambda^3 - \lambda^2 - 5\lambda - 2$。
+
+    检验 $\lambda = 4$：$64 - 16 - 20 - 2 = 26 \neq 0$。不正确。
+
+    **第四步：系统性构造。** 使用伴随矩阵（companion matrix）方法。目标特征多项式为
+
+    $$p(\lambda) = (\lambda - 4)(\lambda + 1)(\lambda + 2) = \lambda^3 - \lambda^2 - 6\lambda - 8.$$
+
+    展开验证：$(\lambda - 4)(\lambda + 1) = \lambda^2 - 3\lambda - 4$，$(\lambda^2 - 3\lambda - 4)(\lambda + 2) = \lambda^3 + 2\lambda^2 - 3\lambda^2 - 6\lambda - 4\lambda - 8 = \lambda^3 - \lambda^2 - 10\lambda - 8$。
+
+    修正：$(\lambda^2 - 3\lambda - 4)(\lambda + 2) = \lambda^3 - 3\lambda^2 - 4\lambda + 2\lambda^2 - 6\lambda - 8 = \lambda^3 - \lambda^2 - 10\lambda - 8$。
+
+    因此 $p(\lambda) = \lambda^3 - \lambda^2 - 10\lambda - 8$，$s_1 = 1, s_2 = 21, s_3 = 55$，迹为 $1$。
+
+    非负伴随矩阵：
+
+    $$C = \begin{pmatrix}0 & 0 & 8\\1 & 0 & 10\\0 & 1 & 1\end{pmatrix}.$$
+
+    特征多项式为 $\lambda^3 - 1 \cdot \lambda^2 - 10\lambda - 8 = p(\lambda)$。所有元素非负。特征值 $\{4, -1, -2\}$。
+
+    验证 $\lambda = 4$：$64 - 16 - 40 - 8 = 0$。$\checkmark$
+
+    验证 $\lambda = -1$：$-1 - 1 + 10 - 8 = 0$。$\checkmark$
+
+    验证 $\lambda = -2$：$-8 - 4 + 20 - 8 = 0$。$\checkmark$
+
+    因此 $A = C = \begin{pmatrix}0 & 0 & 8\\1 & 0 & 10\\0 & 1 & 1\end{pmatrix}$ 是一个 $3 \times 3$ 非负矩阵，特征值恰为 $\{4, -1, -2\}$。
 
 ---
 
@@ -430,7 +484,198 @@
 
 ---
 
-## 61.8 开放问题
+## 61.8 特征值与奇异值的关系
+
+<div class="context-flow" markdown>
+
+**核心问题**：矩阵的特征值和奇异值之间有什么约束关系？给定特征值和奇异值，何时存在相应的矩阵？
+
+</div>
+
+特征值和奇异值是矩阵的两组基本不变量。特征值描述线性变换的"缩放-旋转"行为，奇异值描述其"伸缩"行为。它们之间的关系由一系列深刻的不等式刻画。
+
+!!! theorem "定理 61.14 (Weyl-Horn 定理)"
+    设 $A \in M_n(\mathbb{C})$ 的特征值为 $\lambda_1, \ldots, \lambda_n$（按模递减排列：$|\lambda_1| \geq \cdots \geq |\lambda_n|$），奇异值为 $s_1 \geq \cdots \geq s_n \geq 0$。则：
+
+    **(a) Weyl 乘积不等式**：对所有 $k = 1, \ldots, n$，
+
+    $$\prod_{i=1}^k |\lambda_i| \leq \prod_{i=1}^k s_i,$$
+
+    且 $k = n$ 时取等号：$\prod_{i=1}^n |\lambda_i| = \prod_{i=1}^n s_i = |\det(A)|$。
+
+    **(b) Horn 对数优超条件**：设 $\alpha_i = \log|\lambda_i|$，$\beta_i = \log s_i$（当 $\lambda_i \neq 0, s_i > 0$ 时）。则 $\alpha \prec_w \beta$（弱优超），即
+
+    $$\sum_{i=1}^k \log|\lambda_i| \leq \sum_{i=1}^k \log s_i, \quad k = 1, \ldots, n,$$
+
+    且 $k = n$ 时取等号。
+
+    **(c) Horn 的充分性 (1954)**：反过来，给定 $\lambda_1, \ldots, \lambda_n \in \mathbb{C}$ 和 $s_1 \geq \cdots \geq s_n \geq 0$，如果满足上述条件 (a)（所有乘积不等式和最终等式），则存在 $A \in M_n(\mathbb{C})$ 具有特征值 $\{\lambda_i\}$ 和奇异值 $\{s_i\}$。
+
+??? proof "证明"
+    **(a) 必要性。** 设 $A = U\Sigma V^*$ 是 $A$ 的奇异值分解，$A = QTQ^*$ 是 Schur 分解（$T$ 上三角，对角元为 $\lambda_i$）。
+
+    考虑 $A$ 的 $k$ 阶复合矩阵（compound matrix）$C_k(A)$。$C_k(A)$ 的特征值为 $\{\lambda_{i_1}\cdots\lambda_{i_k} : i_1 < \cdots < i_k\}$，谱半径为 $|\lambda_1 \cdots \lambda_k|$（因为特征值按模递减排列）。$C_k(A)$ 的算子范数为 $s_1 \cdots s_k$。由谱半径不超过算子范数：
+
+    $$|\lambda_1 \cdots \lambda_k| \leq s_1 \cdots s_k.$$
+
+    等式情形 $k = n$：$|\lambda_1 \cdots \lambda_n| = |\det(A)| = s_1 \cdots s_n$。
+
+    **(c) 充分性（思路）。** Horn 的证明是构造性的。核心步骤：
+
+    1. 先处理 $n = 2$ 的情形：给定 $|\lambda_1| \geq |\lambda_2|$，$s_1 \geq s_2 \geq 0$，$|\lambda_1| \leq s_1$，$|\lambda_1\lambda_2| = s_1 s_2$，构造 $2 \times 2$ 矩阵。这可以通过直接参数化 $A = \begin{pmatrix}a & b\\c & d\end{pmatrix}$ 并求解方程组来实现。
+
+    2. 对一般 $n$，用归纳法。关键引理：给定满足条件的 $(\lambda_i, s_i)$，可以选择 $A$ 的第一行，使得删去第一行第一列后的 $(n-1) \times (n-1)$ 子问题仍满足条件。$\blacksquare$
+
+!!! theorem "定理 61.15 (Mirsky 定理, 1958)"
+    设 $\lambda_1, \ldots, \lambda_n \in \mathbb{C}$（给定特征值）和 $s_1 \geq \cdots \geq s_n \geq 0$（给定奇异值）。存在 $n \times n$ 复矩阵 $A$ 使得 $\sigma(A) = \{\lambda_i\}$ 且 $A$ 的奇异值为 $\{s_i\}$，当且仅当以下条件**全部**成立：
+
+    (a) $\prod_{i=1}^k |\lambda_{\pi(i)}| \leq \prod_{i=1}^k s_i$，对所有 $k = 1, \ldots, n-1$ 和特征值的所有排列 $\pi$（使得 $|\lambda_{\pi(1)}| \geq \cdots \geq |\lambda_{\pi(n)}|$，即按模递减排列后的乘积不等式）。
+
+    (b) $\prod_{i=1}^n |\lambda_i| = \prod_{i=1}^n s_i$。
+
+    (c) 非实特征值成共轭对。
+
+    实际上条件 (a)(b) 等价于 Weyl-Horn 条件（定理 61.14），条件 (c) 在考虑实矩阵时额外需要。对复矩阵，条件 (a)(b) 已经充分。
+
+!!! example "例 61.9"
+    **特征值-奇异值兼容性检验。** 给定 $\lambda_1 = 3, \lambda_2 = -1$，$s_1 = 3, s_2 = 1$。
+
+    - $|\lambda_1| = 3 \leq s_1 = 3$：成立。
+    - $|\lambda_1||\lambda_2| = 3 = s_1 s_2 = 3$：成立（等号）。
+
+    构造：需要 $2 \times 2$ 实矩阵 $A$，特征值 $3, -1$，奇异值 $3, 1$。
+
+    取 $A = \begin{pmatrix}a & b\\c & d\end{pmatrix}$。$a + d = 3 + (-1) = 2$，$ad - bc = 3 \cdot (-1) = -3$。
+    $A^\top A$ 的特征值为 $s_1^2 = 9, s_2^2 = 1$，所以 $\mathrm{tr}(A^\top A) = 10$，$\det(A^\top A) = 9$。
+    $a^2 + b^2 + c^2 + d^2 = 10$，$(ad-bc)^2 = 9$。
+
+    取 $A = \begin{pmatrix}2 & 1\\1 & 0\end{pmatrix}$：特征值 $1 \pm \sqrt{2}$——不对。
+
+    取对角化方法：$A = PDP^{-1}$，$D = \mathrm{diag}(3, -1)$。取 $P = \begin{pmatrix}\cos\theta & -\sin\theta\\\sin\theta & \cos\theta\end{pmatrix}$，则 $A = P\begin{pmatrix}3&0\\0&-1\end{pmatrix}P^\top = \begin{pmatrix}3\cos^2\theta - \sin^2\theta & 4\sin\theta\cos\theta\\4\sin\theta\cos\theta & 3\sin^2\theta - \cos^2\theta\end{pmatrix}$。
+
+    $A^\top A$ 的特征值（即奇异值平方）为 $9, 1$ 当且仅当 $\mathrm{tr}(A^\top A) = 10$ 且 $\det(A^\top A) = 9$。由于 $A$ 是对称的（$P$ 正交且 $D$ 对称），$A^\top A = A^2 = P D^2 P^\top$，奇异值为 $|3| = 3$ 和 $|-1| = 1$。因此取 $\theta = 0$：$A = \mathrm{diag}(3, -1)$，奇异值 $3, 1$。成功。
+
+---
+
+## 61.9 Friedland 充分条件与 NIEP 的进展
+
+<div class="context-flow" markdown>
+
+**核心问题**：在 Suleimanova 条件之外，还有哪些 NIEP 可实现性的充分条件？
+
+</div>
+
+!!! theorem "定理 61.16 (Friedland 充分条件, 1978)"
+    设 $\Lambda = \{\lambda_1, \ldots, \lambda_n\} \subset \mathbb{C}$，$\lambda_1 \geq |\lambda_i|$（Perron 根条件），非实特征值成共轭对。如果
+
+    $$\lambda_1 \geq \sum_{i=2}^n |\lambda_i|,$$
+
+    则 $\Lambda$ 是可实现的（存在 $n \times n$ 非负矩阵具有谱 $\Lambda$）。
+
+??? proof "证明"
+    构造伴随矩阵。设特征多项式为 $p(\lambda) = \prod_{i=1}^n (\lambda - \lambda_i) = \lambda^n - c_1\lambda^{n-1} - \cdots - c_n$。
+
+    $c_1 = \sum \lambda_i = s_1$。由 Newton 恒等式和条件 $\lambda_1 \geq \sum_{i \geq 2}|\lambda_i|$，可以证明所有 $c_i \geq 0$。
+
+    关键不等式：$c_k = e_k(\lambda_1, \ldots, \lambda_n)$（初等对称函数的符号调整）。由 $\lambda_1$ 的主导性，$\lambda_1$ 的贡献控制了其余特征值的影响，保证非负性。
+
+    具体地，伴随矩阵
+
+    $$C = \begin{pmatrix}0 & 0 & \cdots & 0 & c_n\\1 & 0 & \cdots & 0 & c_{n-1}\\0 & 1 & \cdots & 0 & c_{n-2}\\\vdots & & \ddots & & \vdots\\0 & 0 & \cdots & 1 & c_1\end{pmatrix}$$
+
+    的所有元素在条件 $\lambda_1 \geq \sum_{i \geq 2}|\lambda_i|$ 下非负。$\blacksquare$
+
+!!! theorem "定理 61.17 (Kellogg-Stephens 充分条件)"
+    设 $\Lambda = \{\lambda_1, \ldots, \lambda_n\} \subset \mathbb{C}$，$\lambda_1 \geq 0$ 为 Perron 根。如果
+
+    $$s_k(\Lambda) = \sum_{i=1}^n \lambda_i^k \geq 0, \quad \forall k = 1, 2, \ldots, 2n-2,$$
+
+    且 $\lambda_1 \geq |\lambda_i|$，非实特征值成共轭对，则 $\Lambda$ 是可实现的。
+
+    这一条件比 Suleimanova 条件更一般（允许复特征值），但仍不是充要的。
+
+!!! theorem "定理 61.18 (Laffey-Smigoc 充分条件, 2006)"
+    设 $\Lambda = \{\lambda_1, \lambda_2, \ldots, \lambda_n\}$ 满足 $\lambda_1 \geq |\lambda_i|$ 和共轭对称。如果存在**可实现的**分划 $\Lambda = \Lambda_1 \cup \Lambda_2$（$\Lambda_1 \cap \Lambda_2 = \emptyset$），即 $\Lambda_1$ 和 $\Lambda_2$ 分别可被非负矩阵 $A_1, A_2$ 实现，且 Perron 根满足适当的兼容条件，则 $\Lambda$ 也是可实现的。
+
+    此"可实现分划"方法为 NIEP 提供了递归构造工具。
+
+!!! example "例 61.10"
+    **Friedland 条件的应用。** $\Lambda = \{6, -1, -2, -3\}$。
+
+    检验 Friedland 条件：$\lambda_1 = 6 \geq |-1| + |-2| + |-3| = 6$。等号成立。
+
+    Friedland 条件要求 $\lambda_1 \geq \sum_{i \geq 2}|\lambda_i|$（含等号），因此适用。
+
+    构造特征多项式：$p(\lambda) = (\lambda-6)(\lambda+1)(\lambda+2)(\lambda+3) = (\lambda-6)(\lambda^3 + 6\lambda^2 + 11\lambda + 6)$
+    $= \lambda^4 + 6\lambda^3 + 11\lambda^2 + 6\lambda - 6\lambda^3 - 36\lambda^2 - 66\lambda - 36$
+    $= \lambda^4 - 25\lambda^2 - 60\lambda - 36$。
+
+    即 $\lambda^4 - 0\cdot\lambda^3 - 25\lambda^2 - 60\lambda - 36$。$c_1 = 0, c_2 = 25, c_3 = 60, c_4 = 36$，均 $\geq 0$。
+
+    伴随矩阵：
+
+    $$C = \begin{pmatrix}0 & 0 & 0 & 36\\1 & 0 & 0 & 60\\0 & 1 & 0 & 25\\0 & 0 & 1 & 0\end{pmatrix}.$$
+
+    所有元素非负，特征值为 $\{6, -1, -2, -3\}$。
+
+---
+
+## 61.10 逆奇异值问题
+
+<div class="context-flow" markdown>
+
+**核心问题**：给定奇异值和结构约束，何时能构造相应的矩阵？
+
+</div>
+
+!!! definition "定义 61.13 (逆奇异值问题)"
+    **逆奇异值问题**（Inverse Singular Value Problem, ISVP）：给定 $s_1 \geq s_2 \geq \cdots \geq s_n \geq 0$ 和矩阵结构类 $\mathcal{S}$，构造 $A \in \mathcal{S}$ 使得 $A$ 的奇异值为 $\{s_i\}$。
+
+!!! theorem "定理 61.19 (无约束 ISVP)"
+    给定任意 $s_1 \geq \cdots \geq s_n \geq 0$，总存在 $n \times n$ 实矩阵 $A$ 具有这些奇异值。
+
+??? proof "证明"
+    取 $A = \mathrm{diag}(s_1, \ldots, s_n)$。$\blacksquare$
+
+    更一般地，$A = U \,\mathrm{diag}(s_1, \ldots, s_n)\, V^\top$ 对任意正交矩阵 $U, V$ 均可。
+
+!!! theorem "定理 61.20 (带规定对角元的 ISVP)"
+    给定 $s_1 \geq \cdots \geq s_n \geq 0$ 和 $d_1, \ldots, d_n \in \mathbb{R}$，存在实矩阵 $A$ 使得 $A$ 的奇异值为 $\{s_i\}$ 且对角元素为 $\{d_i\}$，当且仅当
+
+    $$(d_1, \ldots, d_n) \in \mathrm{conv}\{(\pm s_{\sigma(1)}, \ldots, \pm s_{\sigma(n)}) : \sigma \in S_n\}.$$
+
+    即对角元素向量属于奇异值的所有带符号置换形成的凸包。
+
+!!! definition "定义 61.14 (Jacobi 型 ISVP)"
+    **Jacobi 逆奇异值问题**：给定奇异值 $s_1 \geq \cdots \geq s_n > 0$，构造具有这些奇异值的 **Jacobi 矩阵**（对称正定三对角矩阵）。
+
+    此问题等价于：给定 $s_i^2$（即 $A^2 = A^\top A = A^2$ 的特征值），构造对称正定三对角 $A$，使得 $A^2$ 的特征值为 $\{s_i^2\}$。
+
+!!! theorem "定理 61.21 (Jacobi ISVP 的可解性)"
+    给定 $s_1 \geq \cdots \geq s_n > 0$，如果 $s_i$ 两两不同，则存在（不一定唯一的）对称正定三对角矩阵 $J$，使得 $J$ 的奇异值为 $\{s_i\}$。
+
+    构造方法类似于 Jacobi IEP：先将 $\{s_i^2\}$ 作为 $J^2$ 的目标特征值，利用 $J^2$ 的五对角结构和 Lanczos 过程来恢复 $J$。
+
+!!! example "例 61.11"
+    **简单的 ISVP 构造。** 给定奇异值 $s_1 = 5, s_2 = 3$，且要求 $A$ 为 $2 \times 2$ 上三角矩阵。
+
+    设 $A = \begin{pmatrix}a & b\\0 & d\end{pmatrix}$。$A^\top A = \begin{pmatrix}a^2 & ab\\ab & b^2+d^2\end{pmatrix}$。
+
+    条件：$\mathrm{tr}(A^\top A) = a^2 + b^2 + d^2 = 25 + 9 = 34$，$\det(A^\top A) = a^2 d^2 = 225$。
+
+    由 $ad = 15$（取正值），$d = 15/a$。$a^2 + b^2 + 225/a^2 = 34$。
+
+    取 $a = 5$：$25 + b^2 + 9 = 34$，$b^2 = 0$，$b = 0$。$A = \mathrm{diag}(5, 3)$。
+
+    取 $a = 3$：$9 + b^2 + 25 = 34$，$b^2 = 0$，$b = 0$。$A = \mathrm{diag}(3, 5)$。
+
+    取 $a = 4$：$16 + b^2 + 225/16 = 34$，$b^2 = 34 - 16 - 14.0625 = 3.9375$，$b = \sqrt{63/16} = 3\sqrt{7}/4$。
+
+    $A = \begin{pmatrix}4 & 3\sqrt{7}/4\\0 & 15/4\end{pmatrix}$，奇异值为 $5, 3$。
+
+---
+
+## 61.11 开放问题
 
 <div class="context-flow" markdown>
 
@@ -438,7 +683,7 @@
 
 </div>
 
-!!! definition "定义 61.12 (主要开放问题列表)"
+!!! definition "定义 61.15 (主要开放问题列表)"
     以下是逆特征值理论中最重要的开放问题：
 
     **(1) 一般 NIEP**：对 $n \geq 5$，给出非负矩阵可实现谱的完整充要条件。这是该领域最著名的开放问题，自 1949 年 Suleimanova 开始研究以来已超过 75 年。
@@ -451,12 +696,16 @@
 
     **(5) Perfect-Mirsky 猜想**：完整刻画 $n \times n$ 双随机矩阵可能的谱的区域 $\Pi_n$。
 
-!!! theorem "定理 61.14 (已知的部分结果)"
+    **(6) 结构化 ISVP**：对一般带宽约束的逆奇异值问题的完整可解性条件。
+
+!!! theorem "定理 61.22 (已知的部分结果)"
     **(a) Boyle-Handelman 定理 (1991)**：$\Lambda = \{\lambda_1, \ldots, \lambda_n\}$ 是某个非负整数矩阵的非零特征值的充要条件是：$\lambda_1$ 是 Perron 根，且对所有 $k \geq 1$，$s_k \geq 0$，且 $\Lambda$ 关于复共轭封闭。但这不直接解决 NIEP，因为矩阵大小不固定。
 
     **(b) Johnson-Loewy-London 猜想**：RNIEP 和 SNIEP 在所有 $n$ 上等价。这在 $n \leq 4$ 时已证明，$n = 5$ 时已被 Johnson 等人否定。
 
-!!! example "例 61.8"
+    **(c) Weyl-Horn 定理的完备性**：Weyl-Horn 条件完全刻画了特征值-奇异值的兼容关系（对无结构约束的复矩阵），但带结构约束的联合逆问题（同时规定特征值、奇异值和矩阵结构）仍大量未解。
+
+!!! example "例 61.12"
     **SNIEP 与 RNIEP 不等价的例子 ($n = 5$)。** Johnson, Loewy 和 London 证明存在谱 $\Lambda = \{5 + 5\epsilon, 5 - 5\epsilon, -2 + \epsilon, -2 + \epsilon, -6 - 2\epsilon\}$（适当选择 $\epsilon$），可以被非负矩阵实现但不能被对称非负矩阵实现。
 
     这说明对称性约束与非负约束之间的微妙差异——非负性允许的谱范围严格大于对称非负性允许的谱范围（在 $n \geq 5$ 时）。
@@ -471,4 +720,7 @@
 4. Jacobi IEP 由两组交错谱唯一确定，de Boor-Golub 算法通过正交多项式给出构造。
 5. Toeplitz IEP 和随机矩阵 IEP 的一般完整存在性条件也是开放问题。
 6. 数值方法包括提升-投影、Newton 迭代和同伦延拓。
-7. 逆特征值问题在结构工程（弹簧系统设计）和控制理论（极点配置）中有直接应用。
+7. Weyl-Horn 定理完全刻画了特征值与奇异值的兼容关系；Mirsky 定理给出联合存在性的充要条件。
+8. Friedland 条件和 Laffey-Smigoc 分划方法为 NIEP 提供了 Suleimanova 之外的充分条件。
+9. 逆奇异值问题是逆特征值问题的自然伴侣，带结构约束时同样困难。
+10. 逆特征值问题在结构工程（弹簧系统设计）、控制理论（极点配置）和分子光谱学中有直接应用。

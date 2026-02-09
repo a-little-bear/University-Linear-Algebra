@@ -4,7 +4,7 @@
 
 **前置**：矩阵运算(Ch2) · 线性变换(Ch5) · 正交矩阵(Ch7) · 特征值(Ch6)
 
-**本章脉络**：齐次坐标 → 仿射变换 → 旋转表示(矩阵/四元数/Euler角) → 模型-视图-投影矩阵 → 透视与正交投影 → 法向量变换 → 颜色空间变换 → 样条曲面
+**本章脉络**：齐次坐标 → 仿射变换 → 旋转表示(矩阵/四元数/Euler角/SLERP) → 模型-视图-投影矩阵 → 透视与正交投影 → 视口变换 → 透视校正插值 → 反射矩阵 → 法向量变换 → 颜色空间变换 → 样条曲面
 
 **延伸**：计算机图形学是线性代数最直观的应用领域之一；GPU 硬件本质上是大规模矩阵乘法加速器；现代实时渲染管线中每一帧都执行数百万次 4×4 矩阵变换
 
@@ -239,6 +239,57 @@
     | 内存 | 9 floats | 3 floats | 4 floats |
     | 应用旋转 | 矩阵-向量乘 | 需转换 | 四元数乘法 |
 
+### SLERP 球面线性插值
+
+在动画和运动控制中，需要在两个旋转之间进行平滑插值。四元数的 **SLERP**（Spherical Linear Interpolation，球面线性插值）是解决这一问题的标准方法。
+
+!!! definition "定义 67.17 (SLERP)"
+    给定两个单位四元数 $q_0$ 和 $q_1$，它们之间的**球面线性插值**定义为
+
+    $$\mathrm{Slerp}(q_0, q_1; t) = q_0 \frac{\sin((1-t)\theta)}{\sin\theta} + q_1 \frac{\sin(t\theta)}{\sin\theta}, \quad t \in [0, 1],$$
+
+    其中 $\theta = \arccos(q_0 \cdot q_1)$ 是两个四元数在 $S^3$ 上的夹角（$q_0 \cdot q_1 = w_0 w_1 + x_0 x_1 + y_0 y_1 + z_0 z_1$）。
+
+    当 $t = 0$ 时得到 $q_0$，$t = 1$ 时得到 $q_1$。
+
+??? proof "推导"
+    **从 $S^3$ 上的测地线推导。** 单位四元数构成三维球面 $S^3$。$S^3$ 上连接 $q_0$ 和 $q_1$ 的最短路径（测地线）是大圆弧。
+
+    在二维情形下类比：$S^1$ 上从 $p_0$ 到 $p_1$ 的大圆弧参数化为 $p(t) = \alpha(t) p_0 + \beta(t) p_1$，要求 $|p(t)| = 1$ 且 $p(0) = p_0$，$p(1) = p_1$。
+
+    设 $\cos\theta = q_0 \cdot q_1$。寻找系数 $\alpha(t), \beta(t)$ 使得 $q(t) = \alpha(t) q_0 + \beta(t) q_1$ 满足：
+    - $q(0) = q_0$：$\alpha(0) = 1, \beta(0) = 0$。
+    - $q(1) = q_1$：$\alpha(1) = 0, \beta(1) = 1$。
+    - $|q(t)| = 1$ 且参数 $t$ 是角度的线性函数（等角速度）。
+
+    从测地线方程 $q(t) = q_0 \cos(t\theta) + \frac{q_1 - q_0\cos\theta}{\sin\theta}\sin(t\theta)$ 出发，整理得：
+
+    $$q(t) = q_0\frac{\cos(t\theta)\sin\theta - \sin(t\theta)\cos\theta + \sin(t\theta)\cos\theta}{\sin\theta} + q_1\frac{\sin(t\theta)}{\sin\theta}$$
+
+    $$= q_0\frac{\sin((1-t)\theta)}{\sin\theta} + q_1\frac{\sin(t\theta)}{\sin\theta}. \quad \blacksquare$$
+
+!!! theorem "定理 67.11 (SLERP 的性质)"
+    **(a)** **等角速度**：$\mathrm{Slerp}(q_0, q_1; t)$ 沿 $S^3$ 大圆弧以恒定角速度运动。具体地，$q(t)$ 与 $q(t + \Delta t)$ 之间的角度为 $|\Delta t| \cdot \theta$，与 $t$ 无关。
+
+    **(b)** **最短路径**：SLERP 给出 $S^3$ 上连接 $q_0$ 和 $q_1$ 的最短测地线（前提是 $\theta \leq \pi$）。
+
+    **(c)** **旋转不变性**：$\mathrm{Slerp}(pq_0, pq_1; t) = p \cdot \mathrm{Slerp}(q_0, q_1; t)$，即 SLERP 与左乘旋转交换。
+
+!!! note "注"
+    **与 NLERP 的比较。** 归一化线性插值（Normalized Linear Interpolation）定义为
+
+    $$\mathrm{Nlerp}(q_0, q_1; t) = \frac{(1-t)q_0 + tq_1}{\|(1-t)q_0 + tq_1\|}.$$
+
+    NLERP 计算简单（无三角函数），但不具有等角速度：在 $t = 0$ 和 $t = 1$ 附近速度慢，$t = 0.5$ 附近速度快。当 $\theta$ 较小时（$\theta < 20°$），NLERP 近似于 SLERP；$\theta$ 较大时速度不均匀性明显。游戏引擎中常对小角度用 NLERP、大角度用 SLERP 以平衡性能和质量。
+
+!!! note "注"
+    **实现注意事项：双重覆盖与反足问题。** 单位四元数到旋转的映射是 2-1 的：$q$ 和 $-q$ 表示同一旋转（$SU(2) \to SO(3)$ 的核为 $\{\pm 1\}$）。因此在进行 SLERP 之前，必须检查 $q_0 \cdot q_1$ 的符号：
+
+    - 若 $q_0 \cdot q_1 < 0$，将 $q_1$ 替换为 $-q_1$（表示同一旋转，但选择短弧而非长弧）。
+    - 这保证 $\theta \leq \pi/2$，SLERP 走最短路径。
+
+    当 $\theta \approx 0$ 时（$\sin\theta \approx 0$），SLERP 公式有数值不稳定性。此时应退化为线性插值 $(1-t)q_0 + tq_1$（无需归一化，因为已经几乎是单位四元数）。
+
 ---
 
 ## 67.4 模型-视图-投影管线
@@ -344,9 +395,119 @@
 
     这导致近处的深度精度远高于远处。深度缓冲的精度不均匀是图形学中"z-fighting"伪影的根本原因。
 
+### 视口变换
+
+MVP 管线将顶点变换到裁剪空间（clip space），经齐次除法后进入标准化设备坐标（NDC，范围 $[-1, 1]^3$）。但最终需要将 NDC 映射到屏幕像素坐标——这就是**视口变换**。
+
+!!! definition "定义 67.18 (视口变换)"
+    设屏幕窗口的左下角为 $(x_0, y_0)$，宽度为 $w$，高度为 $h$，深度范围为 $[d_{near}, d_{far}]$（通常 $[0, 1]$）。视口变换将 NDC 坐标 $(x_{ndc}, y_{ndc}, z_{ndc}) \in [-1,1]^3$ 映射到屏幕坐标 $(x_s, y_s, z_s)$：
+
+    $$\begin{pmatrix} x_s \\ y_s \\ z_s \end{pmatrix} = \begin{pmatrix} \frac{w}{2} x_{ndc} + x_0 + \frac{w}{2} \\ \frac{h}{2} y_{ndc} + y_0 + \frac{h}{2} \\ \frac{d_{far} - d_{near}}{2} z_{ndc} + \frac{d_{far} + d_{near}}{2} \end{pmatrix}$$
+
+    用矩阵形式表示（齐次坐标）：
+
+    $$V_{port} = \begin{pmatrix} w/2 & 0 & 0 & x_0 + w/2 \\ 0 & h/2 & 0 & y_0 + h/2 \\ 0 & 0 & \frac{d_{far} - d_{near}}{2} & \frac{d_{far} + d_{near}}{2} \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
+
+!!! note "注"
+    完整的顶点变换管线为：
+
+    $$\mathbf{v}_{local} \xrightarrow{M} \mathbf{v}_{world} \xrightarrow{V} \mathbf{v}_{eye} \xrightarrow{P} \mathbf{v}_{clip} \xrightarrow{\div w} \mathbf{v}_{ndc} \xrightarrow{V_{port}} \mathbf{v}_{screen}$$
+
+    其中齐次除法 $\div w$ 是唯一的非线性步骤。所有其他步骤都是矩阵乘法。
+
+### 透视校正插值
+
+!!! definition "定义 67.19 (重心坐标)"
+    屏幕空间中三角形的三个顶点 $\mathbf{p}_0, \mathbf{p}_1, \mathbf{p}_2$ 内部的点 $\mathbf{p}$ 可以用**重心坐标** $(\lambda_0, \lambda_1, \lambda_2)$ 表示：
+
+    $$\mathbf{p} = \lambda_0 \mathbf{p}_0 + \lambda_1 \mathbf{p}_1 + \lambda_2 \mathbf{p}_2, \quad \lambda_0 + \lambda_1 + \lambda_2 = 1, \quad \lambda_i \geq 0.$$
+
+!!! theorem "定理 67.12 (透视校正插值)"
+    透视投影后，在屏幕空间三角形内对顶点属性（如纹理坐标、颜色）进行插值时，**不能**简单地用屏幕空间重心坐标做线性插值——这会导致失真（因为透视除法是非线性的）。
+
+    正确的**透视校正插值**公式：设三角形顶点的齐次坐标的 $w$ 分量分别为 $w_0, w_1, w_2$（即 clip space 的 $w = -z_{eye}$），顶点属性值为 $a_0, a_1, a_2$，屏幕空间重心坐标为 $(\lambda_0, \lambda_1, \lambda_2)$。则像素处的正确属性值为
+
+    $$a = \frac{\lambda_0 a_0 / w_0 + \lambda_1 a_1 / w_1 + \lambda_2 a_2 / w_2}{\lambda_0 / w_0 + \lambda_1 / w_1 + \lambda_2 / w_2}.$$
+
+??? proof "证明"
+    在 clip space 中，属性沿三角形线性变化：$a(\mathbf{v}) = \mu_0 a_0 + \mu_1 a_1 + \mu_2 a_2$，其中 $(\mu_0, \mu_1, \mu_2)$ 是 clip space 的重心坐标。
+
+    齐次除法将 clip space 的点 $\tilde{\mathbf{v}}_i = (x_i, y_i, z_i, w_i)$ 映射到 NDC 的 $\mathbf{v}_i = (x_i/w_i, y_i/w_i, z_i/w_i)$。
+
+    设屏幕空间的重心坐标为 $\lambda_i$，clip space 的重心坐标为 $\mu_i$。由于齐次除法的非线性，$\lambda_i \neq \mu_i$。它们的关系为：
+
+    $$\mu_i = \frac{\lambda_i / w_i}{\sum_j \lambda_j / w_j}.$$
+
+    将此代入 $a = \sum_i \mu_i a_i$ 即得透视校正公式。
+
+    推导 $\mu_i$ 与 $\lambda_i$ 的关系：在 clip space 中点 $\tilde{\mathbf{v}} = \mu_0 \tilde{\mathbf{v}}_0 + \mu_1 \tilde{\mathbf{v}}_1 + \mu_2 \tilde{\mathbf{v}}_2$，其第四分量 $w = \mu_0 w_0 + \mu_1 w_1 + \mu_2 w_2$。齐次除法后 $\mathbf{v} = \tilde{\mathbf{v}} / w$。在屏幕空间中 $\mathbf{v} = \lambda_0 \mathbf{v}_0 + \lambda_1 \mathbf{v}_1 + \lambda_2 \mathbf{v}_2$，故 $\tilde{\mathbf{v}}/w = \lambda_0 \tilde{\mathbf{v}}_0/w_0 + \lambda_1 \tilde{\mathbf{v}}_1/w_1 + \lambda_2 \tilde{\mathbf{v}}_2/w_2$。与 $\tilde{\mathbf{v}} = w(\lambda_0 \tilde{\mathbf{v}}_0/w_0 + \cdots)$ 和 $\tilde{\mathbf{v}} = \sum \mu_i \tilde{\mathbf{v}}_i$ 对比，得 $\mu_i = w \lambda_i / w_i$。由 $\sum \mu_i = 1$ 得 $w = 1/\sum_j(\lambda_j / w_j)$。$\blacksquare$
+
+!!! note "注"
+    现代 GPU 硬件在光栅化阶段自动执行透视校正插值。顶点着色器输出的属性值在传递给片段着色器之前，由硬件按上述公式进行透视校正。程序员通常无需手动实现，但理解其数学原理对于调试渲染错误和实现自定义光栅化至关重要。
+
 ---
 
-## 67.6 法向量变换
+## 67.6 反射矩阵
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何用矩阵表示反射变换？反射与旋转有什么关系？
+
+</div>
+
+反射是与旋转同样基本的几何变换，广泛应用于镜面效果、对称建模和法向量计算。
+
+!!! definition "定义 67.20 (Householder 反射矩阵)"
+    给定单位法向量 $\mathbf{n} \in \mathbb{R}^3$（$\|\mathbf{n}\| = 1$），关于通过原点、以 $\mathbf{n}$ 为法线的平面的**反射矩阵**（Householder 矩阵）为
+
+    $$H = I - 2\mathbf{n}\mathbf{n}^T.$$
+
+    对任意向量 $\mathbf{v}$：
+    $$H\mathbf{v} = \mathbf{v} - 2(\mathbf{n} \cdot \mathbf{v})\mathbf{n},$$
+    即 $\mathbf{v}$ 的平行于 $\mathbf{n}$ 的分量取反，垂直于 $\mathbf{n}$ 的分量不变。
+
+!!! theorem "定理 67.13 (反射矩阵的性质)"
+    **(a)** $H$ 是对称的：$H^T = H$。
+
+    **(b)** $H$ 是正交的：$H^T H = I$。
+
+    **(c)** $H$ 是对合的（自逆的）：$H^2 = I$，即 $H^{-1} = H$。
+
+    **(d)** $\det H = -1$（反射是保距变换但不保持定向——它是"反向"正交变换）。
+
+    **(e)** $H$ 的特征值为 $-1$（对应 $\mathbf{n}$，一重）和 $+1$（对应 $\mathbf{n}^\perp$ 平面，$n-1$ 重）。
+
+??? proof "证明"
+    **(b)** $H^TH = (I - 2\mathbf{n}\mathbf{n}^T)(I - 2\mathbf{n}\mathbf{n}^T) = I - 4\mathbf{n}\mathbf{n}^T + 4\mathbf{n}(\mathbf{n}^T\mathbf{n})\mathbf{n}^T = I - 4\mathbf{n}\mathbf{n}^T + 4\mathbf{n}\mathbf{n}^T = I$。
+
+    **(d)** $\det H = \det(I - 2\mathbf{n}\mathbf{n}^T)$。由矩阵行列式引理 $\det(I + \mathbf{u}\mathbf{v}^T) = 1 + \mathbf{v}^T\mathbf{u}$，得 $\det H = 1 + (-2)\mathbf{n}^T\mathbf{n} = 1 - 2 = -1$。$\blacksquare$
+
+!!! definition "定义 67.21 (一般平面反射)"
+    关于通过点 $\mathbf{p}$、法向量为 $\mathbf{n}$ 的平面的反射，在齐次坐标下为
+
+    $$H_{gen} = T(\mathbf{p}) \begin{pmatrix} I - 2\mathbf{n}\mathbf{n}^T & \mathbf{0} \\ \mathbf{0}^T & 1 \end{pmatrix} T(-\mathbf{p})$$
+
+    即先平移使 $\mathbf{p}$ 到原点，做反射，再平移回去。
+
+!!! theorem "定理 67.14 (Cartan-Dieudonne 定理)"
+    $\mathbb{R}^n$ 中的每个正交变换都可以表示为**至多 $n$ 次反射的复合**。
+
+    特别地：
+    - 二维旋转 = 两次反射的复合。
+    - 三维旋转 = 两次反射的复合（绕两个反射平面的交线旋转，旋转角为两平面夹角的两倍）。
+
+    这意味着旋转可以由反射"生成"，这在数值线性代数中有重要应用（Householder QR 分解）。
+
+!!! example "例 67.5"
+    **二维反射生成旋转。** 设 $H_1$ 是关于 $x$ 轴的反射（$\mathbf{n}_1 = (0, 1)^T$），$H_2$ 是关于与 $x$ 轴成角 $\theta/2$ 的直线的反射（$\mathbf{n}_2 = (-\sin(\theta/2), \cos(\theta/2))^T$）。则
+
+    $$H_2 H_1 = \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix} = R(\theta).$$
+
+    复合两次反射（$\det = (-1)^2 = 1$）得到旋转，旋转角等于两反射轴夹角的两倍。
+
+---
+
+## 67.7 法向量变换
 
 <div class="context-flow" markdown>
 
@@ -371,7 +532,7 @@
 
     设 $\mathbf{n}' = N\mathbf{n}$，则 $(\mathbf{n}')^T \mathbf{t}' = \mathbf{n}^T N^T M \mathbf{t}$。要求这对所有切向量 $\mathbf{t}$ 为零，需要 $N^T M = I$（或更一般地 $N^T M = cI$），即 $N = (M^{-1})^T = (M^T)^{-1}$。
 
-!!! example "例 67.5"
+!!! example "例 67.6"
     **非均匀缩放的例子**：设 $M = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}$（$x$ 方向拉伸 2 倍，$y$ 不变）。
 
     考虑直线 $y = x$，切向量 $\mathbf{t} = (1, 1)^T$，法向量 $\mathbf{n} = (1, -1)^T$（$\mathbf{n}^T\mathbf{t} = 0$）。
@@ -382,7 +543,7 @@
 
 ---
 
-## 67.7 颜色空间变换
+## 67.8 颜色空间变换
 
 <div class="context-flow" markdown>
 
@@ -425,7 +586,7 @@
 
 ---
 
-## 67.8 Bezier 曲线与样条
+## 67.9 Bezier 曲线与样条
 
 <div class="context-flow" markdown>
 
@@ -489,7 +650,7 @@
     $$
     其中 $\mathbf{u} = (1, u, u^2, u^3)^T$，$\mathbf{v} = (1, v, v^2, v^3)^T$，$\mathbf{G}$ 是 $4 \times 4$ 控制点矩阵。
 
-!!! example "例 67.6"
+!!! example "例 67.7"
     **茶壶模型**（Utah teapot）——计算机图形学的标志性模型——由 32 个双三次 Bezier 曲面片组成，每个片由 16 个控制点定义。整个茶壶共有约 306 个控制点（因为相邻曲面片共享边界控制点）。
 
 ---
@@ -502,17 +663,19 @@
 
 2. **基本几何变换**（平移、旋转、缩放、剪切）都有简洁的矩阵表示，变换组合对应矩阵乘法。顺序至关重要，因为矩阵乘法不满足交换律。
 
-3. **旋转表示**有三种主要方式：旋转矩阵（Rodrigues 公式）、Euler 角（有万向锁问题）和四元数（无奇异性，适合插值）。
+3. **旋转表示**有三种主要方式：旋转矩阵（Rodrigues 公式）、Euler 角（有万向锁问题）和四元数（无奇异性，适合插值）。**SLERP** 球面线性插值提供等角速度的最短路径旋转插值。
 
-4. **MVP 管线**将顶点从局部空间经由模型、视图、投影三个矩阵变换到裁剪空间，是实时渲染的核心。
+4. **MVP 管线**将顶点从局部空间经由模型、视图、投影三个矩阵变换到裁剪空间，经齐次除法到 NDC，最后通过**视口变换**映射到屏幕像素坐标。
 
-5. **透视投影**通过齐次除法自动实现近大远小的效果，深度值的非线性分布导致远处精度不足。
+5. **透视投影**通过齐次除法自动实现近大远小的效果，深度值的非线性分布导致远处精度不足。**透视校正插值**通过 $1/w$ 加权修正屏幕空间重心坐标的非线性失真。
 
-6. **法向量变换**使用 $(M^{-1})^T$ 而非 $M$，这是许多图形学初学者容易忽略的重要细节。
+6. **反射矩阵** $H = I - 2\mathbf{n}\mathbf{n}^T$ 是正交但行列式为 $-1$ 的变换。Cartan-Dieudonne 定理表明每个正交变换都可以分解为至多 $n$ 次反射。
 
-7. **颜色空间变换**（RGB-YCbCr、XYZ-sRGB）是矩阵乘法（加上 gamma 校正这一非线性步骤）。
+7. **法向量变换**使用 $(M^{-1})^T$ 而非 $M$，这是许多图形学初学者容易忽略的重要细节。
 
-8. **Bezier 曲线和 B 样条**都有优雅的矩阵表示，使得曲线计算和连续性分析都可以用矩阵语言进行。
+8. **颜色空间变换**（RGB-YCbCr、XYZ-sRGB）是矩阵乘法（加上 gamma 校正这一非线性步骤）。
+
+9. **Bezier 曲线和 B 样条**都有优雅的矩阵表示，使得曲线计算和连续性分析都可以用矩阵语言进行。
 
 ---
 

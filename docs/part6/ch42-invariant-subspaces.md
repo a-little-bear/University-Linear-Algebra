@@ -4,7 +4,7 @@
 
 **前置**：向量空间(Ch4) · 线性变换(Ch5) · 特征值(Ch6) · Jordan形(Ch12) · 范数与扰动(Ch15)
 
-**本章脉络**：不变子空间定义 → 不变子空间格 → 超不变子空间 → 约化子空间 → 互补不变子空间 → 子空间之间的角度 → Davis-Kahan sin Θ 定理 → 谱投影扰动
+**本章脉络**：不变子空间定义 → 不变子空间格 → 超不变子空间 → 约化子空间 → 互补不变子空间 → 子空间之间的角度 → Davis-Kahan sin Θ 定理 → 谱投影扰动 → Wedin sin Θ 定理 → Stewart tan Θ 定理 → Rosenblum 定理 → 无穷维不变子空间问题
 
 **延伸**：Davis-Kahan 定理是现代统计学和机器学习中 PCA 扰动分析的理论基石；不变子空间理论在算子代数（von Neumann 代数中的投影格）中有无穷维推广
 
@@ -508,3 +508,192 @@ $$AX = XB.$$
       Davis-Kahan 估计：$\|\sin \Theta\|_2 \leq 0.1 / 4 = 0.025$。
 
     这些估计表明，谱间隙越大，不变子空间对扰动越稳定。
+
+---
+
+## 42.8 Wedin sin Θ 定理
+
+<div class="context-flow" markdown>
+
+**核心问题**：Davis-Kahan 定理适用于 Hermite 矩阵的特征子空间扰动。对于一般矩阵的**奇异子空间**（左奇异向量和右奇异向量张成的子空间），扰动界如何建立？
+
+</div>
+
+Wedin sin Θ 定理是 Davis-Kahan 定理在 SVD 框架下的推广，由 Per-Åke Wedin 于 1972 年建立。它在 PCA 扰动分析、低秩矩阵逼近、信号处理等领域具有核心地位。
+
+!!! theorem "定理 42.13 (Wedin sin Θ 定理)"
+    设 $A, \tilde{A} \in \mathbb{C}^{m \times n}$，$E = \tilde{A} - A$。设 $A$ 的 SVD 中，奇异值分为两组：$\Sigma_1 = \operatorname{diag}(\sigma_1, \ldots, \sigma_k)$（对应左奇异向量矩阵 $U_1$ 和右奇异向量矩阵 $V_1$）及其余 $\Sigma_2$。类似地，$\tilde{A}$ 的对应分组为 $\tilde{\Sigma}_1, \tilde{U}_1, \tilde{V}_1$。
+
+    设奇异值间隙
+    $$\delta = \min\bigl(\min_{i \leq k, j > k} |\sigma_i - \tilde{\sigma}_j|,\; \min_{i \leq k} \sigma_i\bigr) > 0.$$
+
+    更标准的表述：设 $\alpha = \min_{i \leq k} \sigma_i$ 且 $\tilde{\beta} = \max_{j > k} \tilde{\sigma}_j$，若 $\alpha > \tilde{\beta}$，则
+
+    $$\max\!\bigl(\|\sin \Theta(U_1, \tilde{U}_1)\|_F,\; \|\sin \Theta(V_1, \tilde{V}_1)\|_F\bigr) \leq \frac{\max(\|EU_1\|_F, \|E^* V_1\|_F)}{\alpha - \tilde{\beta}}.$$
+
+    对谱范数同样成立：
+
+    $$\max\!\bigl(\|\sin \Theta(U_1, \tilde{U}_1)\|_2,\; \|\sin \Theta(V_1, \tilde{V}_1)\|_2\bigr) \leq \frac{\max(\|E\|_2, \|E\|_2)}{\alpha - \tilde{\beta}} = \frac{\|E\|_2}{\alpha - \tilde{\beta}}.$$
+
+??? proof "证明"
+    **CS 分解方法。** 设 $A$ 的紧 SVD 分组为
+
+    $$A = (U_1 \mid U_2)\begin{pmatrix} \Sigma_1 & 0 \\ 0 & \Sigma_2 \end{pmatrix}(V_1 \mid V_2)^*, \quad \tilde{A} = (\tilde{U}_1 \mid \tilde{U}_2)\begin{pmatrix} \tilde{\Sigma}_1 & 0 \\ 0 & \tilde{\Sigma}_2 \end{pmatrix}(\tilde{V}_1 \mid \tilde{V}_2)^*.$$
+
+    由 $\tilde{A} \tilde{V}_1 = \tilde{U}_1 \tilde{\Sigma}_1$，左乘 $U_2^*$ 得
+
+    $$U_2^* \tilde{A} \tilde{V}_1 = U_2^* \tilde{U}_1 \tilde{\Sigma}_1.$$
+
+    另一方面，$A^* \tilde{U}_1 = V \Sigma^* U^* \tilde{U}_1$，因此
+
+    $$\tilde{A}^* \tilde{U}_1 = \tilde{V}_1 \tilde{\Sigma}_1, \quad V_2^* \tilde{A}^* \tilde{U}_1 = V_2^* \tilde{V}_1 \tilde{\Sigma}_1.$$
+
+    由 $\tilde{A} = A + E$，展开 $U_2^* \tilde{A} \tilde{V}_1$：
+
+    $$U_2^* (A + E) \tilde{V}_1 = U_2^* A \tilde{V}_1 + U_2^* E \tilde{V}_1.$$
+
+    注意 $U_2^* A = \Sigma_2 V_2^*$（由 SVD），因此
+
+    $$\Sigma_2 V_2^* \tilde{V}_1 + U_2^* E \tilde{V}_1 = U_2^* \tilde{U}_1 \tilde{\Sigma}_1.$$
+
+    这给出 Sylvester 型方程：
+
+    $$(U_2^* \tilde{U}_1) \tilde{\Sigma}_1 - \Sigma_2 (V_2^* \tilde{V}_1) = U_2^* E \tilde{V}_1.$$
+
+    类似地，从 $\tilde{A}^* = A^* + E^*$ 出发可得
+
+    $$(V_2^* \tilde{V}_1) \tilde{\Sigma}_1 - \Sigma_2^* (U_2^* \tilde{U}_1) = V_2^* E^* \tilde{U}_1.$$
+
+    设 $P = U_2^* \tilde{U}_1$，$Q = V_2^* \tilde{V}_1$。$P$ 的奇异值是 $\sin \theta_j(U_1, \tilde{U}_1)$，$Q$ 的奇异值是 $\sin \theta_j(V_1, \tilde{V}_1)$。
+
+    将两个方程合并写成分块 Sylvester 方程后，利用 $\alpha > \tilde{\beta}$ 条件（确保 $\tilde{\Sigma}_1$ 的奇异值与 $\Sigma_2$ 的奇异值分离），由 Sylvester 方程解的范数估计得
+
+    $$\max(\|P\|, \|Q\|) \leq \frac{\max(\|U_2^* E \tilde{V}_1\|, \|V_2^* E^* \tilde{U}_1\|)}{\alpha - \tilde{\beta}} \leq \frac{\max(\|E\|, \|E\|)}{\alpha - \tilde{\beta}}.$$
+
+    由此得到 $\sin \Theta$ 界。$\blacksquare$
+
+!!! example "例 42.11 (PCA 扰动分析——Wedin 定理的应用)"
+    在主成分分析中，数据矩阵 $X \in \mathbb{R}^{n \times p}$（$n$ 个样本，$p$ 个特征）的前 $k$ 个右奇异向量张成**主成分子空间** $\mathcal{V}_k$。在统计应用中，$X = X_0 + E$，其中 $X_0$ 是信号部分，$E$ 是噪声。
+
+    设 $X_0$ 的前 $k$ 个奇异值为 $\sigma_1 \geq \cdots \geq \sigma_k$，第 $k+1$ 个奇异值为 $\sigma_{k+1}$（若 $X_0$ 是秩 $k$ 的则 $\sigma_{k+1} = 0$）。由 Weyl 不等式，$\tilde{\sigma}_{k+1} \leq \sigma_{k+1} + \|E\|_2$。
+
+    **信噪比条件**：若 $\sigma_k \gg \|E\|_2 + \sigma_{k+1}$，则奇异值间隙 $\alpha - \tilde{\beta} \approx \sigma_k - \sigma_{k+1} - \|E\|_2$，Wedin 定理给出
+
+    $$\|\sin \Theta(\mathcal{V}_k, \tilde{\mathcal{V}}_k)\|_F \leq \frac{\|E\|_F}{\sigma_k - \sigma_{k+1} - \|E\|_2}.$$
+
+    **数值例子**：设 $n = 500$，$p = 200$，$k = 5$，$\sigma_5 = 20$，$\sigma_6 = 0$（秩 5 信号），$\|E\|_2 = 5$，$\|E\|_F = 30$。则
+
+    $$\|\sin \Theta\|_F \leq \frac{30}{20 - 0 - 5} = 2.0.$$
+
+    由于 $\|\sin \Theta\|_F \leq \sqrt{k} = \sqrt{5} \approx 2.24$（自然上界），此界是有信息量的。若信号更强（$\sigma_5 = 50$），则界改善为 $30/45 \approx 0.67$。
+
+    此分析在高维统计中极为重要：它告诉我们 PCA 所估计的子空间与真实信号子空间之间的偏差，直接受信噪比（$\sigma_k / \|E\|$）控制。
+
+---
+
+## 42.9 Stewart 的 tan Θ 定理
+
+<div class="context-flow" markdown>
+
+**核心问题**：能否得到比 sin Θ 更紧的子空间扰动界？
+
+</div>
+
+G. W. Stewart 的 tan Θ 定理在某些情形下给出比 sin Θ 定理更强的结果，因为 $\tan \theta \geq \sin \theta$（当 $\theta \in [0, \pi/2)$ 时）意味着 tan Θ 界控制了 sin Θ 界。
+
+!!! theorem "定理 42.14 (Stewart tan Θ 定理)"
+    设 $A \in \mathbb{C}^{n \times n}$ 是 Hermite 矩阵，其不变子空间分解为
+
+    $$U^* A U = \begin{pmatrix} A_1 & 0 \\ 0 & A_2 \end{pmatrix},$$
+
+    其中 $U = (\hat{V} \mid \hat{V}_\perp)$ 是酉矩阵。设 $R \in \mathbb{C}^{(n-k) \times k}$ 满足 $\hat{V}_\perp^* \tilde{A} \hat{V} = R$（残差矩阵），且谱分离条件 $\delta = \inf\{|\lambda - \mu| : \lambda \in \sigma(A_1), \mu \in \sigma(A_2)\} > 0$ 成立。
+
+    若 $\tilde{\mathcal{V}}$ 是 $\tilde{A} = A + E$ 的对应不变子空间，则
+
+    $$\|\tan \Theta(\mathcal{V}, \tilde{\mathcal{V}})\| \leq \frac{\|R\|}{\delta}$$
+
+    对任意酉不变范数成立，其中 $R = \hat{V}_\perp^* \tilde{A} \hat{V}$ 是残差。
+
+??? proof "证明"
+    设 $\tilde{\mathcal{V}}$ 的标准正交基为 $\hat{\tilde{V}}$。将 $\hat{\tilde{V}}$ 分解在 $\mathcal{V}$ 和 $\mathcal{V}^\perp$ 上：
+
+    $$\hat{\tilde{V}} = \hat{V} C + \hat{V}_\perp S',$$
+
+    其中 $C = \hat{V}^* \hat{\tilde{V}}$，$S' = \hat{V}_\perp^* \hat{\tilde{V}}$。$C$ 的奇异值是 $\cos \theta_j$，$S'$ 的奇异值是 $\sin \theta_j$。
+
+    由 $\tilde{A} \hat{\tilde{V}} = \hat{\tilde{V}} \tilde{A}_1$，左乘 $\hat{V}_\perp^*$：
+
+    $$\hat{V}_\perp^* \tilde{A} \hat{\tilde{V}} = S' \tilde{A}_1,$$
+
+    即 $\hat{V}_\perp^* \tilde{A} (\hat{V} C + \hat{V}_\perp S') = S' \tilde{A}_1$。
+
+    展开并利用 $A_2 S' - S' \tilde{A}_1 = -\hat{V}_\perp^* E \hat{\tilde{V}}$ 的 Sylvester 方程结构，结合 $R = \hat{V}_\perp^* \tilde{A} \hat{V}$，可得
+
+    $$S' = RC^{-1} \cdot (\text{bounded factor involving Sylvester equation}).$$
+
+    更直接地，$\tan \Theta$ 矩阵的奇异值为 $\sin \theta_j / \cos \theta_j$，即 $S' C^{-1}$ 的奇异值（当 $\cos \theta_j > 0$）。由精确的 Sylvester 方程
+
+    $$A_2 (S' C^{-1}) - (S' C^{-1}) \tilde{A}_1 = -R,$$
+
+    其解范数受控于 $\|R\| / \delta$，从而 $\|\tan \Theta\| \leq \|R\| / \delta$。$\blacksquare$
+
+tan Θ 定理的优势在于：$\|R\|$ 是**残差**的大小，而非整个扰动 $\|E\|$。当 $\tilde{\mathcal{V}}$ 是 $\tilde{A}$ 的精确不变子空间时，$R = 0$，界为零——这是自然的。在迭代算法（如子空间迭代法）中，残差通常比扰动更小，因此 tan Θ 定理给出更紧的收敛保证。
+
+---
+
+## 42.10 Rosenblum 定理与 Sylvester 方程
+
+<div class="context-flow" markdown>
+
+**核心问题**：Davis-Kahan 和 Wedin 定理的证明中反复出现 Sylvester 方程 $AX - XB = C$。该方程的可解性条件是什么？
+
+</div>
+
+!!! theorem "定理 42.15 (Rosenblum 定理)"
+    设 $A \in \mathbb{C}^{m \times m}$，$B \in \mathbb{C}^{n \times n}$。Sylvester 方程
+
+    $$AX - XB = C$$
+
+    对任意 $C \in \mathbb{C}^{m \times n}$ 有唯一解 $X$，当且仅当 $\sigma(A) \cap \sigma(B) = \emptyset$（即 $A$ 与 $B$ 没有公共特征值）。
+
+??? proof "证明"
+    **必要性**：若 $\sigma(A) \cap \sigma(B) \neq \emptyset$，设 $\lambda$ 是公共特征值。存在 $u \neq 0$ 使得 $Au = \lambda u$，$v \neq 0$ 使得 $Bv = \lambda v$（或 $B^* \bar{v} = \bar{\lambda} \bar{v}$）。
+
+    考虑齐次方程 $AX - XB = 0$。取 $X_0 = u v^*$，则
+
+    $$AX_0 - X_0 B = Au v^* - u v^* B = \lambda u v^* - u (\lambda v^*) = 0.$$
+
+    因此 $X_0 \neq 0$ 是齐次方程的非平凡解，方程 $AX - XB = C$ 的解不唯一。
+
+    **充分性**：定义线性算子 $\mathcal{T}: \mathbb{C}^{m \times n} \to \mathbb{C}^{m \times n}$，$\mathcal{T}(X) = AX - XB$。$\mathcal{T}$ 的特征值恰好是 $\{\lambda_i - \mu_j : \lambda_i \in \sigma(A), \mu_j \in \sigma(B)\}$。
+
+    当 $\sigma(A) \cap \sigma(B) = \emptyset$ 时，$0 \notin \sigma(\mathcal{T})$，因此 $\mathcal{T}$ 可逆，方程对任意 $C$ 有唯一解。
+
+    解的显式表示可通过环路积分给出：
+
+    $$X = \frac{1}{2\pi i} \oint_\Gamma (zI - A)^{-1} C (zI - B)^{-1} dz,$$
+
+    其中 $\Gamma$ 是围绕 $\sigma(A)$ 但不包含 $\sigma(B)$ 的简单闭曲线。$\blacksquare$
+
+Rosenblum 定理给出了不变子空间扰动理论中的核心代数工具。Davis-Kahan 定理证明中出现的方程 $A_2 S - S \tilde{A}_1 = -\hat{V}_\perp^* E \hat{\tilde{V}}$ 正是 Sylvester 方程，其可解性由谱间隙 $\delta > 0$ 保证。解的范数估计 $\|X\| \leq \|C\| / \delta$ 直接给出了 sin Θ 界。
+
+---
+
+## 42.11 无穷维不变子空间问题
+
+**不变子空间问题**（invariant subspace problem）是泛函分析中最著名的未解决问题之一：
+
+> 设 $\mathcal{H}$ 是可分的无穷维复 Hilbert 空间，$T: \mathcal{H} \to \mathcal{H}$ 是有界线性算子。$T$ 是否一定存在非平凡的闭不变子空间？
+
+这里"非平凡"指既不是 $\{0\}$ 也不是 $\mathcal{H}$ 的闭子空间。
+
+在有限维情形中，答案是肯定的——每个特征值对应的特征空间就是非平凡不变子空间（因为代数闭域上的线性变换总有特征值）。但在无穷维情形中，算子可能没有特征值，问题变得深刻得多。
+
+已知的部分结果包括：
+
+- **紧算子**：Aronszajn-Smith 定理（1954）证明了紧算子在可分 Hilbert 空间上总有非平凡闭不变子空间。
+- **正规算子**：由谱定理，正规算子的谱投影提供了丰富的不变子空间。
+- **反例在 Banach 空间中存在**：Enflo（1976，发表于 1987）和 Read（1984）分别构造了在某些 Banach 空间上没有非平凡闭不变子空间的有界线性算子。Read 甚至在 $\ell^1$ 上给出了反例。
+- 然而，对于 **Hilbert 空间**上的一般有界算子，问题仍然开放。
+
+此问题与算子代数、复分析（解析函数空间上的算子）、遍历理论等领域有深刻的联系。

@@ -4,7 +4,7 @@
 
 **前置**：矩阵运算(Ch2) · 最小二乘(Ch7) · SVD(Ch11)
 
-**本章脉络**：$\{1\}$-逆 → Moore-Penrose 逆（四个 Penrose 条件）→ SVD 表示 → 最小范数最小二乘解 → Drazin 逆 → 群逆 → 加权广义逆 → 扰动分析
+**本章脉络**：$\{1\}$-逆 → Moore-Penrose 逆（四个 Penrose 条件）→ SVD 表示 → 最小范数最小二乘解 → Drazin 逆 → 群逆 → 扰动分析 → 加权 Moore-Penrose 逆 → 逆序律 → 并联和
 
 **延伸**：Drazin 逆在奇异微分方程和 Markov 链（稳态分布计算）中不可或缺；广义逆理论推广到 Hilbert 空间中的闭算子（von Neumann 正则逆）和 Banach 代数
 
@@ -629,4 +629,227 @@ Moore（1920）和 Penrose（1955）独立定义了最重要的广义逆——Mo
 !!! note "注"
     广义逆理论将逆矩阵的概念从可逆方阵推广到任意矩阵，提供了处理奇异性和非方性的统一框架。Moore-Penrose 逆侧重几何（正交投影、最小范数），Drazin 逆侧重代数（交换性、谱分解）。两者在各自的应用领域中都是不可或缺的工具。
 
-    读者应注意广义逆与正则逆的一个根本区别：$(AB)^\dagger \neq B^\dagger A^\dagger$（一般地）。只有当 $A$ 和 $B$ 满足特定的秩条件时，"逆的乘积 = 乘积的逆"才成立。
+    读者应注意广义逆与正则逆的一个根本区别：$(AB)^\dagger \neq B^\dagger A^\dagger$（一般地）。只有当 $A$ 和 $B$ 满足特定的秩条件时，"逆的乘积 = 乘积的逆"才成立。下面我们将详细讨论这个问题。
+
+---
+
+## 33.8 加权 Moore-Penrose 逆
+
+<div class="context-flow" markdown>
+
+**核心问题**：当内积空间的度量不是标准的（如加权内积），如何定义和计算相应的"最优"广义逆？
+
+</div>
+
+在许多应用中（特别是加权最小二乘问题），自变量和因变量的不同分量具有不同的重要性或不同的量纲，需要在非标准内积下考虑最小化问题。加权 Moore-Penrose 逆正是为此而定义的。
+
+### 定义与刻画
+
+!!! definition "定义 33.8 (加权 Moore-Penrose 逆)"
+    设 $A \in \mathbb{C}^{m \times n}$，$M \in \mathbb{C}^{m \times m}$ 和 $N \in \mathbb{C}^{n \times n}$ 是 Hermite 正定矩阵。$A$ 关于权矩阵 $(M, N)$ 的**加权 Moore-Penrose 逆** $A^\dagger_{M,N}$ 定义为满足以下条件的唯一矩阵 $X \in \mathbb{C}^{n \times m}$：
+
+    对任意 $\boldsymbol{b} \in \mathbb{C}^m$，$X\boldsymbol{b}$ 是加权最小二乘问题
+
+    $$\min_{\boldsymbol{x}} \|A\boldsymbol{x} - \boldsymbol{b}\|_M \quad \text{subject to} \quad \|\boldsymbol{x}\|_N \text{ 最小}$$
+
+    的唯一解，其中 $\|\boldsymbol{y}\|_M = \sqrt{\boldsymbol{y}^* M \boldsymbol{y}}$，$\|\boldsymbol{x}\|_N = \sqrt{\boldsymbol{x}^* N \boldsymbol{x}}$。
+
+!!! theorem "定理 33.16 (加权 Penrose 条件)"
+    $X = A^\dagger_{M,N}$ 当且仅当 $X$ 满足以下四个**加权 Penrose 条件**：
+
+    1. $AXA = A$
+    2. $XAX = X$
+    3. $(MAX)^* = MAX$（即 $AX$ 关于 $M$-内积是 Hermite 的）
+    4. $(NXA)^* = NXA$（即 $XA$ 关于 $N$-内积是 Hermite 的）
+
+    等价地，$AX$ 是关于 $M$-内积到 $\operatorname{col}(A)$ 的正交投影，$XA$ 是关于 $N$-内积到 $\operatorname{row}(A)$ 的正交投影。
+
+??? proof "证明"
+    令 $\hat{A} = M^{1/2} A N^{-1/2}$。则加权最小二乘问题
+
+    $$\min_{\boldsymbol{x}} \|A\boldsymbol{x} - \boldsymbol{b}\|_M, \quad \|\boldsymbol{x}\|_N \text{ 最小}$$
+
+    通过变量替换 $\boldsymbol{y} = N^{1/2}\boldsymbol{x}$，$\hat{\boldsymbol{b}} = M^{1/2}\boldsymbol{b}$ 转化为
+
+    $$\min_{\boldsymbol{y}} \|\hat{A}\boldsymbol{y} - \hat{\boldsymbol{b}}\|_2, \quad \|\boldsymbol{y}\|_2 \text{ 最小}.$$
+
+    其解为 $\boldsymbol{y}^* = \hat{A}^\dagger \hat{\boldsymbol{b}}$。回到原变量：$\boldsymbol{x}^* = N^{-1/2}\hat{A}^\dagger M^{1/2}\boldsymbol{b}$。
+
+    因此 $A^\dagger_{M,N} = N^{-1/2}\hat{A}^\dagger M^{1/2} = N^{-1/2}(M^{1/2}AN^{-1/2})^\dagger M^{1/2}$。
+
+    验证四个加权 Penrose 条件可通过将标准 Penrose 条件对 $\hat{A}$ 翻译回 $A$ 来完成。$\blacksquare$
+
+### 显式公式
+
+!!! theorem "定理 33.17 (加权 Moore-Penrose 逆的显式公式)"
+    设 $A \in \mathbb{C}^{m \times n}$，$\operatorname{rank}(A) = r$，$M, N$ 正定。则：
+
+    1. **一般公式**：$A^\dagger_{M,N} = N^{-1/2}(M^{1/2}AN^{-1/2})^\dagger M^{1/2}$。
+
+    2. **当 $A$ 列满秩时**（$r = n$）：
+
+        $$A^\dagger_{M,N} = (A^*MA)^{-1}A^*M.$$
+
+        这是 $M$-加权最小二乘的法方程 $A^*MA\boldsymbol{x} = A^*M\boldsymbol{b}$ 的解。
+
+    3. **当 $A$ 行满秩时**（$r = m$）：
+
+        $$A^\dagger_{M,N} = N^{-1}A^*(AN^{-1}A^*)^{-1}.$$
+
+        这给出 $N$-范数最小的解。
+
+    4. **一般情形**：利用 $A$ 的秩分解 $A = FG$（$F \in \mathbb{C}^{m \times r}$ 列满秩，$G \in \mathbb{C}^{r \times n}$ 行满秩），
+
+        $$A^\dagger_{M,N} = N^{-1}G^*(GN^{-1}G^*)^{-1}(F^*MF)^{-1}F^*M.$$
+
+### 性质
+
+!!! theorem "定理 33.18 (加权 Moore-Penrose 逆的性质)"
+    设 $A \in \mathbb{C}^{m \times n}$，$M, N$ 正定。则：
+
+    1. **投影性质**：$AA^\dagger_{M,N}$ 是关于 $M$-内积到 $\operatorname{col}(A)$ 的正交投影；$A^\dagger_{M,N}A$ 是关于 $N$-内积到 $\operatorname{row}(A)$ 的正交投影。
+
+    2. **退化为标准情形**：当 $M = I_m$，$N = I_n$ 时，$A^\dagger_{I,I} = A^\dagger$。
+
+    3. **秩保持**：$\operatorname{rank}(A^\dagger_{M,N}) = \operatorname{rank}(A)$。
+
+    4. **对偶性**：$(A^*)^\dagger_{N,M} = (A^\dagger_{M,N})^*$。
+
+### 应用：加权最小二乘
+
+!!! example "例 33.9 (加权最小二乘)"
+    在统计回归中，模型 $\boldsymbol{b} = A\boldsymbol{x} + \boldsymbol{\epsilon}$，其中误差 $\boldsymbol{\epsilon}$ 的协方差矩阵为 $\operatorname{Cov}(\boldsymbol{\epsilon}) = M^{-1}$（$M$ 正定）。**广义最小二乘**（GLS）估计量
+
+    $$\hat{\boldsymbol{x}}_{\text{GLS}} = (A^*MA)^{-1}A^*M\boldsymbol{b} = A^\dagger_{M,I}\boldsymbol{b}$$
+
+    是最佳线性无偏估计量（Gauss-Markov 定理的推广）。
+
+    **数值例子**：设 $A = \begin{pmatrix} 1 & 1 \\ 1 & 2 \\ 1 & 3 \end{pmatrix}$，$\boldsymbol{b} = \begin{pmatrix} 1 \\ 3 \\ 4 \end{pmatrix}$，权矩阵 $M = \operatorname{diag}(1, 2, 1)$（第二个观测更可靠）。
+
+    $A^*MA = \begin{pmatrix} 4 & 8 \\ 8 & 18 \end{pmatrix}$，$A^*M\boldsymbol{b} = \begin{pmatrix} 11 \\ 25 \end{pmatrix}$。
+
+    $\hat{\boldsymbol{x}}_{\text{GLS}} = \begin{pmatrix} 4 & 8 \\ 8 & 18 \end{pmatrix}^{-1}\begin{pmatrix} 11 \\ 25 \end{pmatrix} = \frac{1}{8}\begin{pmatrix} 18 & -8 \\ -8 & 4 \end{pmatrix}\begin{pmatrix} 11 \\ 25 \end{pmatrix} = \frac{1}{8}\begin{pmatrix} -2 \\ 12 \end{pmatrix} = \begin{pmatrix} -0.25 \\ 1.5 \end{pmatrix}.$
+
+    与普通最小二乘 $\hat{\boldsymbol{x}}_{\text{OLS}} = A^\dagger \boldsymbol{b}$ 比较：$A^\dagger \boldsymbol{b} = (A^*A)^{-1}A^*\boldsymbol{b} = \begin{pmatrix} -1/3 \\ 3/2 \end{pmatrix} \approx \begin{pmatrix} -0.333 \\ 1.5 \end{pmatrix}$。加权使截距估计向零偏移，因为更可靠的第二个观测对应更大的权重。
+
+---
+
+## 33.9 逆的乘积律
+
+<div class="context-flow" markdown>
+
+**核心问题**：$(AB)^\dagger = B^\dagger A^\dagger$ 何时成立？
+
+</div>
+
+对于可逆矩阵，$(AB)^{-1} = B^{-1}A^{-1}$ 总是成立。但对 Moore-Penrose 逆，**逆序律**（reverse order law）$(AB)^\dagger = B^\dagger A^\dagger$ 一般不成立。精确条件的刻画是广义逆理论中的重要课题。
+
+### 精确条件
+
+!!! theorem "定理 33.19 (逆序律的充要条件)"
+    设 $A \in \mathbb{C}^{m \times k}$，$B \in \mathbb{C}^{k \times n}$。则 $(AB)^\dagger = B^\dagger A^\dagger$ 当且仅当以下两个条件同时成立：
+
+    1. $A^*AB B^* = B B^* A^*A$（即 $A^*A$ 和 $BB^*$ 交换），
+    2. $\operatorname{col}(A^*AB) \subseteq \operatorname{col}(B)$ 且 $\operatorname{col}(BB^*A^*) \subseteq \operatorname{col}(A^*)$。
+
+    这些条件等价于 $A^\dagger A B B^\dagger$ 是正交投影。
+
+### 充分条件
+
+!!! theorem "定理 33.20 (逆序律成立的充分条件)"
+    $(AB)^\dagger = B^\dagger A^\dagger$ 在以下任一条件下成立：
+
+    1. $A$ 具有**正交列**：$A^*A = \alpha I$（$\alpha > 0$），即 $A$ 的列两两正交且等范数。
+    2. $B$ 具有**正交行**：$BB^* = \beta I$（$\beta > 0$）。
+    3. $A$ 是**列满秩**且 $B$ 是**行满秩**的。
+    4. $A$ 或 $B$ 是酉/正交矩阵。
+
+??? proof "证明"
+    **(1)** 设 $A^*A = \alpha I$。验证 $X = B^\dagger A^\dagger$ 满足关于 $AB$ 的四个 Penrose 条件。
+
+    条件 1：$ABX(AB) = AB B^\dagger A^\dagger AB = AB B^\dagger (\alpha I) B / \alpha = AB B^\dagger B$。由于 $B B^\dagger B = B$（Penrose 条件 1 对 $B$），得 $AB$。✓
+
+    条件 3：$(ABX)^* = (AB B^\dagger A^\dagger)^*$。注意 $A^\dagger = \frac{1}{\alpha}A^*$（因为 $A^*A = \alpha I$），所以 $A^\dagger A = I$。因此 $ABX = AB B^\dagger \frac{1}{\alpha}A^* = \frac{1}{\alpha}AB B^\dagger A^*$。
+
+    $ABB^\dagger$ 是 Hermite 的（Penrose 条件 3 对 $B$），即 $(BB^\dagger)^* = BB^\dagger$。因此
+
+    $(ABX)^* = \frac{1}{\alpha}(ABB^\dagger A^*)^* = \frac{1}{\alpha}A(BB^\dagger)^*A^* = \frac{1}{\alpha}ABB^\dagger A^* = ABX$。✓
+
+    条件 2 和 4 的验证类似。
+
+    **(2)** 完全对偶的论证。
+
+    **(3)** 当 $A$ 列满秩时 $A^\dagger = (A^*A)^{-1}A^*$，$A^\dagger A = I$。当 $B$ 行满秩时 $B^\dagger = B^*(BB^*)^{-1}$，$BB^\dagger = I$。因此 $B^\dagger A^\dagger AB = B^\dagger B$，$ABB^\dagger A^\dagger = AA^\dagger$。验证四个 Penrose 条件是直接的。$\blacksquare$
+
+!!! example "例 33.10 (逆序律失效)"
+    设 $A = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$，$B = \begin{pmatrix} 1 & 0 \end{pmatrix}$。
+
+    $AB = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$，$(AB)^\dagger = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$。
+
+    $B^\dagger = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$，$A^\dagger = \begin{pmatrix} 1 & 0 \end{pmatrix}$。
+
+    $B^\dagger A^\dagger = \begin{pmatrix} 1 \\ 0 \end{pmatrix}\begin{pmatrix} 1 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = (AB)^\dagger$。
+
+    此处恰好成立（因为 $A$ 列满秩，$B$ 行满秩）。
+
+    但取 $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$，$B = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$。
+
+    $AB = 0$，$(AB)^\dagger = 0$。但 $B^\dagger A^\dagger = BA = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = 0$。
+
+    此处也成立。取更有意义的反例：$A = \begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$，$B = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$。
+
+    $AB = \begin{pmatrix} 2 \\ 0 \end{pmatrix}$，$(AB)^\dagger = \begin{pmatrix} 1/2 & 0 \end{pmatrix}$。
+
+    $A^\dagger = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$，$B^\dagger = \frac{1}{2}\begin{pmatrix} 1 & 1 \end{pmatrix}$。
+
+    $B^\dagger A^\dagger = \frac{1}{4}\begin{pmatrix} 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} = \frac{1}{4}\begin{pmatrix} 2 & 0 \end{pmatrix} = \begin{pmatrix} 1/2 & 0 \end{pmatrix} = (AB)^\dagger$。
+
+    仍然成立！实际上反例需要更精心的构造。取 $A = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$，$B = \begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$。
+
+    $AB = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，$(AB)^\dagger = \frac{1}{4}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。
+
+    $A^\dagger = \frac{1}{2}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$，$B^\dagger = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$。
+
+    $B^\dagger A^\dagger = \frac{1}{4}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix} = \frac{1}{4}\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} = (AB)^\dagger$。✓
+
+    逆序律失效的典型例子是当 $A^*A$ 和 $BB^*$ 不交换时。
+
+---
+
+## 33.10 并联和
+
+<div class="context-flow" markdown>
+
+**核心问题**：能否用广义逆定义矩阵的"并联连接"运算？
+
+</div>
+
+并联和（parallel sum）是矩阵运算中一个源于电学网络理论的优美概念。它将电阻并联的公式推广到正定矩阵（以及一般矩阵）。
+
+!!! definition "定义 33.9 (并联和)"
+    设 $A, B \in \mathbb{C}^{n \times n}$ 为半正定矩阵。$A$ 与 $B$ 的**并联和**定义为
+
+    $$A : B = A(A + B)^\dagger B.$$
+
+    当 $A + B$ 可逆时，简化为 $A : B = A(A+B)^{-1}B$。
+
+!!! theorem "定理 33.21 (并联和的性质)"
+    设 $A, B \succeq 0$。则：
+
+    1. **对称性**：$A : B = B : A$。
+    2. **变分刻画**：$\boldsymbol{x}^*(A : B)\boldsymbol{x} = \inf_{\boldsymbol{y}} \{\boldsymbol{y}^* A \boldsymbol{y} + (\boldsymbol{x} - \boldsymbol{y})^* B (\boldsymbol{x} - \boldsymbol{y})\}$。
+    3. **标量情形**：当 $A = aI$，$B = bI$（$a, b > 0$）时，$A : B = \frac{ab}{a+b}I$，恰好是标量的**调和均值**。
+    4. **半正定性**：$A : B \succeq 0$。
+    5. **单调性**：若 $A \preceq A'$，则 $A : B \preceq A' : B$。
+    6. **并联公式**：$(A : B)^{-1} = A^{-1} + B^{-1}$（当 $A, B$ 正定时）。
+
+??? proof "证明"
+    **(6)** 当 $A, B$ 正定时，$A : B = A(A+B)^{-1}B$。则
+
+    $(A:B)^{-1} = B^{-1}(A+B)A^{-1} = B^{-1} + A^{-1}$。✓
+
+    **(1)** $A(A+B)^\dagger B = B(B+A)^\dagger A$。这可以通过验证两者都满足相同的 Penrose 条件来证明。
+
+    **(2)** 对 $\boldsymbol{y}$ 求导令其为零：$2A\boldsymbol{y} - 2B(\boldsymbol{x}-\boldsymbol{y}) = 0$，即 $(A+B)\boldsymbol{y} = B\boldsymbol{x}$，故 $\boldsymbol{y} = (A+B)^\dagger B\boldsymbol{x}$。代入得最小值 $\boldsymbol{x}^* A(A+B)^\dagger B \boldsymbol{x} = \boldsymbol{x}^*(A:B)\boldsymbol{x}$。$\blacksquare$
+
+**电学网络解释**：在电路理论中，正定矩阵 $A$ 和 $B$ 可以视为多端口网络的阻抗矩阵。$A : B$ 正是将两个网络并联后的等效阻抗。性质 (6) 的 $(A:B)^{-1} = A^{-1} + B^{-1}$ 就是将导纳相加的并联规则在矩阵情形的推广。Anderson 和 Duffin（1969）率先系统研究了矩阵并联和，并发现它在电路综合、控制论和统计学中的广泛应用。

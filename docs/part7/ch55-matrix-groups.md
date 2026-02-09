@@ -4,7 +4,7 @@
 
 **前置**：矩阵运算 (Ch2) · 行列式 (Ch3) · 特征值 (Ch6) · 矩阵指数 (Ch13) · 正交矩阵/酉矩阵 (Ch7-Ch8)
 
-**本章脉络**：矩阵群定义 → $\mathrm{GL}(n)$ → $\mathrm{SL}(n)$ → $\mathrm{O}(n)/\mathrm{SO}(n)$ → $\mathrm{U}(n)/\mathrm{SU}(n)$ → $\mathrm{Sp}(2n)$ → Lie 代数（切空间） → 指数映射 → 伴随表示 → Baker-Campbell-Hausdorff 公式
+**本章脉络**：矩阵群定义 → $\mathrm{GL}(n)$ → $\mathrm{SL}(n)$ → $\mathrm{O}(n)/\mathrm{SO}(n)$ → $\mathrm{U}(n)/\mathrm{SU}(n)$ → $\mathrm{Sp}(2n)$ → Lie 代数（切空间） → 指数映射 → 伴随表示 → Baker-Campbell-Hausdorff 公式 → $\mathfrak{sl}(2)$ 表示论 → 根系与 Dynkin 图 → Weyl 完全可约性 → Peter-Weyl 定理 → 例外 Lie 群
 
 **延伸**：矩阵 Lie 群是微分几何、粒子物理（规范对称性群 $SU(3) \times SU(2) \times U(1)$）和机器人学（$SE(3)$ 刚体运动群）的核心数学结构
 
@@ -495,6 +495,241 @@
 
 ---
 
+## 55.11 $\mathfrak{sl}(2)$ 的不可约表示分类
+
+<div class="context-flow" markdown>
+
+**核心问题**：Lie 代数 $\mathfrak{sl}(2, \mathbb{C})$ 有哪些不可约表示？如何显式构造？
+
+</div>
+
+$\mathfrak{sl}(2, \mathbb{C})$ 的表示论是整个半单 Lie 代数表示论的基石。所有半单 Lie 代数的有限维表示理论最终都归结为对若干 $\mathfrak{sl}(2)$ 子代数的分析。
+
+!!! definition "定义 55.13 (权空间与权向量)"
+    设 $(\rho, V)$ 是 $\mathfrak{sl}(2, \mathbb{C})$ 的有限维表示，即 $\rho: \mathfrak{sl}(2) \to \mathfrak{gl}(V)$ 是 Lie 代数同态。利用例 55.2 中的标准基 $\{e, f, h\}$，定义 $V$ 的**权空间**（weight space）：
+
+    $$V_\lambda = \{v \in V : \rho(h) v = \lambda v\}, \quad \lambda \in \mathbb{C}.$$
+
+    非零的 $V_\lambda$ 中的向量称为权 $\lambda$ 的**权向量**。标量 $\lambda$ 称为**权**（weight）。
+
+!!! theorem "定理 55.18 (权空间的基本性质)"
+    设 $(\rho, V)$ 是 $\mathfrak{sl}(2, \mathbb{C})$ 的有限维表示。
+
+    **(a)** $V$ 是权空间的直和：$V = \bigoplus_{\lambda} V_\lambda$（因为 $\rho(h)$ 在有限维空间上可对角化）。
+
+    **(b)** $\rho(e)$ 将 $V_\lambda$ 映入 $V_{\lambda+2}$：若 $v \in V_\lambda$，则 $\rho(e)v \in V_{\lambda+2}$。
+
+    **(c)** $\rho(f)$ 将 $V_\lambda$ 映入 $V_{\lambda-2}$：若 $v \in V_\lambda$，则 $\rho(f)v \in V_{\lambda-2}$。
+
+    因此 $\rho(e)$ 是"升权算子"，$\rho(f)$ 是"降权算子"。
+
+??? proof "证明"
+    **(a)** 由 $\rho(h)$ 在有限维复向量空间上的 Jordan 分解。利用 $[h, e] = 2e$ 和 $[h, f] = -2f$，可以证明 $\rho(h)$ 的所有广义特征值的广义特征空间就是特征空间（即 $\rho(h)$ 半单/可对角化）。
+
+    **(b)** 设 $v \in V_\lambda$。利用 $[h, e] = 2e$：
+    $$\rho(h)\rho(e)v = \rho(e)\rho(h)v + \rho([h,e])v = \rho(e)(\lambda v) + 2\rho(e)v = (\lambda + 2)\rho(e)v.$$
+    故 $\rho(e)v \in V_{\lambda+2}$。**(c)** 的证明完全类似。$\blacksquare$
+
+!!! definition "定义 55.14 (最高权向量)"
+    表示 $(\rho, V)$ 中的非零向量 $v_0 \in V_\lambda$ 称为**最高权向量**（highest weight vector），如果 $\rho(e)v_0 = 0$。对应的权 $\lambda$ 称为**最高权**。
+
+!!! theorem "定理 55.19 ($\mathfrak{sl}(2)$ 不可约表示的分类)"
+    **(a)** 对每个非负整数 $n \in \mathbb{Z}_{\geq 0}$，存在唯一（至同构）的 $\mathfrak{sl}(2, \mathbb{C})$ 的 $(n+1)$ 维不可约表示 $V_n$。
+
+    **(b)** $V_n$ 有基 $\{v_0, v_1, \ldots, v_n\}$，$\mathfrak{sl}(2)$ 的作用为：
+
+    $$\rho(h) v_k = (n - 2k) v_k, \quad k = 0, 1, \ldots, n,$$
+
+    $$\rho(e) v_k = k(n - k + 1) v_{k-1}, \quad k = 1, \ldots, n, \quad \rho(e) v_0 = 0,$$
+
+    $$\rho(f) v_k = v_{k+1}, \quad k = 0, \ldots, n-1, \quad \rho(f) v_n = 0.$$
+
+    **(c)** $V_n$ 的权为 $n, n-2, n-4, \ldots, -n+2, -n$（每个权的重数为 1）。最高权为 $n$。
+
+    **(d)** 每个 $\mathfrak{sl}(2)$ 的有限维不可约表示都同构于某个 $V_n$。
+
+??? proof "证明"
+    **存在性（显式构造）。** 设 $V_n$ 是以 $\{v_0, v_1, \ldots, v_n\}$ 为基的 $(n+1)$ 维向量空间。定义 $\rho(h), \rho(e), \rho(f)$ 的作用如定理所述。需要验证 Lie 括号关系被保持：
+
+    - $[\rho(h), \rho(e)] = 2\rho(e)$：$\rho(h)\rho(e)v_k - \rho(e)\rho(h)v_k = (n-2(k-1))k(n-k+1)v_{k-1} - (n-2k)k(n-k+1)v_{k-1} = 2k(n-k+1)v_{k-1} = 2\rho(e)v_k$。
+    - $[\rho(h), \rho(f)] = -2\rho(f)$：类似验证。
+    - $[\rho(e), \rho(f)] = \rho(h)$：$\rho(e)\rho(f)v_k - \rho(f)\rho(e)v_k = (k+1)(n-k)v_k - k(n-k+1)v_k = (n-2k)v_k = \rho(h)v_k$。
+
+    **唯一性。** 设 $W$ 是最高权为 $n$ 的不可约表示，$w_0$ 为最高权向量。令 $w_k = \rho(f)^k w_0 / k!$（适当归一化）。由不可约性，$\{w_0, w_1, \ldots\}$ 生成 $W$。利用权的约束，$\rho(f)^{n+1}w_0 = 0$（否则权无下界，矛盾于有限维），故 $\dim W = n + 1$。括号关系唯一确定了 $\rho(e), \rho(f), \rho(h)$ 在此基上的作用，从而 $W \cong V_n$。
+
+    **不可约性。** 设 $W \subset V_n$ 是非零子表示。$W$ 是权空间的直和，取 $W$ 中最高权的权向量 $w$。反复施加 $\rho(f)$ 得到所有基向量（因为 $\rho(f)v_k = v_{k+1}$ 非零直到 $k = n$），故 $W = V_n$。$\blacksquare$
+
+!!! example "例 55.10"
+    **低维不可约表示：**
+
+    - $V_0$：1 维平凡表示。$\rho(e) = \rho(f) = \rho(h) = 0$。
+    - $V_1$：2 维标准表示（$\mathfrak{sl}(2)$ 在 $\mathbb{C}^2$ 上的自然作用）。基 $v_0, v_1$，权为 $1, -1$。
+    - $V_2$：3 维伴随表示（$\mathfrak{sl}(2)$ 对自身的伴随作用 $\mathrm{ad}$）。基 $v_0, v_1, v_2$，权为 $2, 0, -2$。
+
+    也可以将 $V_n$ 实现为 $\mathbb{C}^2$ 上 $n$ 次齐次多项式空间 $\mathbb{C}[x, y]_n$：
+    $$\rho(e) = x\frac{\partial}{\partial y}, \quad \rho(f) = y\frac{\partial}{\partial x}, \quad \rho(h) = x\frac{\partial}{\partial x} - y\frac{\partial}{\partial y}.$$
+    基向量 $v_k = \frac{x^{n-k}y^k}{k!}$，$\dim \mathbb{C}[x,y]_n = n + 1$。
+
+!!! theorem "定理 55.20 ($\mathfrak{sl}(2)$ 表示的完全可约性)"
+    $\mathfrak{sl}(2, \mathbb{C})$ 的每个有限维表示都是不可约表示的直和：
+
+    $$V \cong V_{n_1} \oplus V_{n_2} \oplus \cdots \oplus V_{n_k}.$$
+
+    分解由 $V$ 的权的重数唯一确定。
+
+??? proof "证明"
+    这是 Weyl 完全可约性定理（定理 55.23）的特殊情形。但对 $\mathfrak{sl}(2)$ 有更初等的证明。
+
+    **Casimir 算子法**：定义 $C = \rho(h)^2 + 2\rho(e)\rho(f) + 2\rho(f)\rho(e) \in \mathrm{End}(V)$。可以验证 $C$ 与 $\rho(\mathfrak{sl}(2))$ 中的所有算子交换（$C$ 是泛包络代数的中心元素）。由 Schur 引理，$C$ 在每个不可约分量 $V_n$ 上是标量 $n(n+2)$。
+
+    若 $V$ 不是完全可约的，则存在不可约子表示 $W \subset V$，使得 $V/W$ 有不可约子表示 $V_m$，但 $V$ 中对应的子空间不是 $W$ 的直和补。然而 $C$ 在 $W$ 上为标量 $n(n+2)$，在提升到 $V$ 中的 $V_m$ 部分为标量 $m(m+2)$。当 $n \neq m$ 时，$C - n(n+2)I$ 的核给出直和分裂。当 $n = m$ 时，利用 $\rho(e), \rho(f)$ 的具体公式可以直接证明扩张分裂。$\blacksquare$
+
+---
+
+## 55.12 根系初步
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何将 $\mathfrak{sl}(2)$ 的权空间分解推广到一般半单 Lie 代数？
+
+</div>
+
+!!! definition "定义 55.15 (Cartan 子代数)"
+    半单 Lie 代数 $\mathfrak{g}$ 的**Cartan 子代数** $\mathfrak{h}$ 是极大交换半单子代数。对矩阵 Lie 代数，$\mathfrak{h}$ 由可同时对角化的元素组成。
+
+    例如，$\mathfrak{sl}(n, \mathbb{C})$ 的 Cartan 子代数为对角迹零矩阵空间，维数 $\ell = n - 1$。$\ell = \dim \mathfrak{h}$ 称为 $\mathfrak{g}$ 的**秩**（rank）。
+
+!!! theorem "定理 55.21 (根分解)"
+    设 $\mathfrak{g}$ 是复半单 Lie 代数，$\mathfrak{h}$ 为 Cartan 子代数。则 $\mathfrak{g}$ 有**根分解**（root decomposition）：
+
+    $$\mathfrak{g} = \mathfrak{h} \oplus \bigoplus_{\alpha \in \Phi} \mathfrak{g}_\alpha,$$
+
+    其中 $\Phi \subset \mathfrak{h}^* \setminus \{0\}$ 是**根系**（root system），$\mathfrak{g}_\alpha = \{X \in \mathfrak{g} : [H, X] = \alpha(H) X, \forall H \in \mathfrak{h}\}$ 是**根空间**。
+
+    基本性质：
+    - 每个根空间 $\mathfrak{g}_\alpha$ 都是一维的。
+    - 若 $\alpha \in \Phi$，则 $-\alpha \in \Phi$。
+    - $[\mathfrak{g}_\alpha, \mathfrak{g}_\beta] \subseteq \mathfrak{g}_{\alpha+\beta}$（若 $\alpha + \beta \in \Phi$），否则为 $\{0\}$。
+    - 对每个 $\alpha \in \Phi$，$\mathfrak{g}_\alpha \oplus \mathfrak{g}_{-\alpha} \oplus [\mathfrak{g}_\alpha, \mathfrak{g}_{-\alpha}]$ 构成 $\mathfrak{sl}(2)$ 的一个副本。
+
+!!! example "例 55.11"
+    **经典 Lie 代数的根系：**
+
+    - **$A_{n-1}$ 型**（$\mathfrak{sl}(n)$）：根为 $\alpha_{ij} = \varepsilon_i - \varepsilon_j$（$i \neq j$），其中 $\varepsilon_i$ 是 $\mathfrak{h}^*$ 的标准基。共有 $n(n-1)$ 个根，秩 $n - 1$。根空间 $\mathfrak{g}_{\varepsilon_i - \varepsilon_j}$ 由矩阵单位 $E_{ij}$ 生成。
+
+    - **$B_n$ 型**（$\mathfrak{so}(2n+1)$）：根为 $\pm \varepsilon_i \pm \varepsilon_j$（$i \neq j$）和 $\pm \varepsilon_i$。共有 $2n^2$ 个根。
+
+    - **$C_n$ 型**（$\mathfrak{sp}(2n)$）：根为 $\pm \varepsilon_i \pm \varepsilon_j$（$i \neq j$）和 $\pm 2\varepsilon_i$。共有 $2n^2$ 个根。
+
+    - **$D_n$ 型**（$\mathfrak{so}(2n)$）：根为 $\pm \varepsilon_i \pm \varepsilon_j$（$i \neq j$）。共有 $2n(n-1)$ 个根。
+
+!!! definition "定义 55.16 (Weyl 群)"
+    根系 $\Phi$ 的 **Weyl 群** $W$ 是由根反射 $s_\alpha$（$\alpha \in \Phi$）生成的 $\mathfrak{h}^*$ 上的有限群：
+
+    $$s_\alpha(\lambda) = \lambda - \frac{2\langle \lambda, \alpha \rangle}{\langle \alpha, \alpha \rangle}\alpha, \quad \lambda \in \mathfrak{h}^*.$$
+
+    $W$ 是有限 Coxeter 群。例如，$A_{n-1}$ 的 Weyl 群是对称群 $S_n$（置换 $\varepsilon_1, \ldots, \varepsilon_n$），$B_n$ 和 $C_n$ 的 Weyl 群是超八面体群 $S_n \ltimes (\mathbb{Z}/2)^n$。
+
+!!! definition "定义 55.17 (Dynkin 图)"
+    选取根系 $\Phi$ 的一组**单根**（simple roots）$\Delta = \{\alpha_1, \ldots, \alpha_\ell\}$（$\ell$ = 秩），则 **Dynkin 图**是以单根为顶点的图，顶点 $\alpha_i$ 和 $\alpha_j$ 之间的连线数由 Cartan 矩阵 $A_{ij} = \frac{2\langle \alpha_i, \alpha_j \rangle}{\langle \alpha_j, \alpha_j \rangle}$ 决定。
+
+!!! theorem "定理 55.22 (Killing-Cartan 分类)"
+    不可约根系（从而单 Lie 代数）的 Dynkin 图恰好有以下类型：
+
+    - **经典型**：$A_n$（$n \geq 1$）、$B_n$（$n \geq 2$）、$C_n$（$n \geq 3$）、$D_n$（$n \geq 4$），分别对应 $\mathfrak{sl}(n+1)$、$\mathfrak{so}(2n+1)$、$\mathfrak{sp}(2n)$、$\mathfrak{so}(2n)$。
+
+    - **例外型**：$G_2$、$F_4$、$E_6$、$E_7$、$E_8$。
+
+    没有其他的。这是数学中最深刻、最优美的分类定理之一。
+
+---
+
+## 55.13 Weyl 完全可约性定理
+
+<div class="context-flow" markdown>
+
+**核心问题**：半单 Lie 代数的有限维表示是否总能分解为不可约表示的直和？
+
+</div>
+
+!!! theorem "定理 55.23 (Weyl 完全可约性定理)"
+    设 $\mathfrak{g}$ 是**半单** Lie 代数（即 Killing 型非退化）。则 $\mathfrak{g}$ 的每个有限维表示都是**完全可约**的，即可以分解为不可约子表示的直和。
+
+    等价表述：若 $W \subset V$ 是子表示，则存在子表示 $W'$ 使得 $V = W \oplus W'$。
+
+??? proof "证明（概要）"
+    **第一步（Casimir 算子）。** 利用 $\mathfrak{g}$ 上的 Killing 型 $B$ 非退化，取 $\mathfrak{g}$ 的基 $\{X_i\}$ 和对偶基 $\{Y_i\}$（即 $B(X_i, Y_j) = \delta_{ij}$）。定义 **Casimir 算子**
+
+    $$C_\rho = \sum_i \rho(X_i)\rho(Y_i) \in \mathrm{End}(V).$$
+
+    由 Killing 型的 $\mathrm{ad}$-不变性，$C_\rho$ 与 $\rho(\mathfrak{g})$ 中的所有算子交换。由 Schur 引理，$C_\rho$ 在每个不可约子表示上是标量。
+
+    **第二步（一维扩张分裂）。** 设 $0 \to W \to V \to \mathbb{C} \to 0$ 是短正合列（$\mathbb{C}$ 是平凡表示）。$C_\rho$ 在 $\mathbb{C}$ 上为 $0$，在 $W$ 的不可约分量上为非零标量（对非平凡不可约表示可以计算 $C_\rho$ 的值非零）。因此 $C_\rho$ 的核给出分裂。
+
+    **第三步（一般情形归约）。** 设 $W \subset V$ 是子表示。考虑 $\mathrm{Hom}(V/W, V)$ 上的 $\mathfrak{g}$-表示。利用第二步的结论（对 $\mathrm{Hom}$ 空间中的一维子表示），找到 $\mathfrak{g}$-不变的投影 $V \to W$，其核就是 $W$ 的直和补。$\blacksquare$
+
+!!! remark "注记"
+    Weyl 完全可约性定理对**可解**或**幂零** Lie 代数一般不成立。例如，上三角矩阵 Lie 代数 $\mathfrak{b} \subset \mathfrak{sl}(2)$ 在 $\mathbb{C}^2$ 上的自然表示不完全可约：子空间 $\mathbb{C} e_1$ 是子表示，但没有 $\mathfrak{b}$-不变的补。
+
+---
+
+## 55.14 紧 Lie 群上的调和分析
+
+<div class="context-flow" markdown>
+
+**核心问题**：紧 Lie 群上的函数如何用表示论来分析？
+
+</div>
+
+!!! theorem "定理 55.24 (Peter-Weyl 定理)"
+    设 $G$ 是紧 Lie 群，$\hat{G}$ 是 $G$ 的所有（有限维）不可约酉表示的等价类集合。则 $L^2(G)$（关于 Haar 测度的平方可积函数空间）有正交分解：
+
+    $$L^2(G) = \widehat{\bigoplus_{\pi \in \hat{G}}} \, d_\pi \cdot V_\pi,$$
+
+    其中 $d_\pi = \dim \pi$，求和是 Hilbert 空间的直和。具体地，$\pi$ 的矩阵元素 $\pi_{ij}(g)$（$1 \leq i, j \leq d_\pi$）组成 $L^2(G)$ 的完备正交系（适当归一化后）。
+
+    这是 Fourier 分析从 $S^1 \cong U(1)$ 到一般紧群的推广：$U(1)$ 的不可约表示是 $e^{in\theta}$（$n \in \mathbb{Z}$），Peter-Weyl 定理退化为经典 Fourier 级数。
+
+!!! theorem "定理 55.25 (极大环面定理)"
+    设 $G$ 是紧连通 Lie 群。
+
+    **(a)** $G$ 包含**极大环面** $T$（即极大连通交换子群，同构于 $(S^1)^\ell$），$\ell$ 称为 $G$ 的秩。
+
+    **(b)** 每个 $g \in G$ 都共轭于 $T$ 中的某个元素：$G = \bigcup_{x \in G} xTx^{-1}$。
+
+    **(c)** $G$ 的不可约表示由其在 $T$ 上的限制（即**最高权**）唯一确定。
+
+    例如，$U(n)$ 的极大环面是对角酉矩阵 $T = \{diag(e^{i\theta_1}, \ldots, e^{i\theta_n})\}$，秩为 $n$。
+
+---
+
+## 55.15 例外 Lie 群
+
+<div class="context-flow" markdown>
+
+**核心问题**：除了经典矩阵群，还有哪些单 Lie 群？
+
+</div>
+
+Killing-Cartan 分类（定理 55.22）表明，除了经典系列 $A_n, B_n, C_n, D_n$ 之外，还有五个例外单 Lie 代数：
+
+!!! definition "定义 55.18 (例外 Lie 群)"
+
+    | 例外型 | 秩 | $\dim \mathfrak{g}$ | 简要描述 |
+    |:------|:---|:-------------------|:---------|
+    | $G_2$ | 2 | 14 | 八元数自同构群 $\mathrm{Aut}(\mathbb{O})$；与 7 维叉积相关 |
+    | $F_4$ | 4 | 52 | 八元数射影平面 $\mathbb{OP}^2$ 的等距群 |
+    | $E_6$ | 6 | 78 | 出现在弦论的 Calabi-Yau 紧化中 |
+    | $E_7$ | 7 | 133 | 与超引力理论中的对称性相关 |
+    | $E_8$ | 8 | 248 | 最大的例外 Lie 群；其根格是 8 维中最密球堆积 |
+
+    例外 Lie 群虽然不能用经典矩阵群（正交、酉、辛）直接描述，但都可以实现为某种矩阵群（由 Cartan 定理保证）。$E_8$ 的最小忠实表示是 248 维的（恰好等于 $\dim \mathfrak{e}_8$，即伴随表示本身就是最小表示）。
+
+!!! remark "注记"
+    例外 Lie 群在纯数学（代数几何、数论）和理论物理（弦论、M 理论）中都有深刻的应用。$E_8 \times E_8$ 是杂化弦理论的规范群。$G_2$ 流形是 M 理论紧化的重要几何结构。
+
+---
+
 ## 本章小结
 
 | 矩阵群 | 定义条件 | Lie 代数 | 维数 | 连通/紧 |
@@ -513,6 +748,10 @@
 - **指数映射** $\exp: \mathfrak{g} \to G$：在原点局部微分同胚；紧连通群上满射。
 - **伴随表示**：$\mathrm{Ad}_g(X) = gXg^{-1}$，$\mathrm{ad}_X(Y) = [X,Y]$。
 - **BCH 公式**：$\log(e^X e^Y) = X + Y + \frac{1}{2}[X,Y] + \cdots$（纯括号表达式）。
+- **$\mathfrak{sl}(2)$ 表示论**：不可约表示由最高权 $n \in \mathbb{Z}_{\geq 0}$ 分类，维度 $n + 1$。
+- **根系与 Dynkin 图**：半单 Lie 代数的结构编码在有限组合数据中。
+- **Weyl 定理**：半单 Lie 代数的有限维表示完全可约。
+- **Peter-Weyl 定理**：紧群上的 $L^2$ 函数按不可约表示分解。
 
 ---
 

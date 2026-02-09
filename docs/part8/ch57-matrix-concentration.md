@@ -4,7 +4,7 @@
 
 **前置**：矩阵范数(Ch15) · 特征值(Ch6) · 随机矩阵(Ch23) · 矩阵指数(Ch13)
 
-**本章脉络**：标量浓度不等式回顾 → 矩阵 Laplace 变换方法 → 矩阵 Chernoff 界 → 矩阵 Bernstein 不等式 → 矩阵 Hoeffding → 内在维度 → 应用（协方差估计、矩阵补全）
+**本章脉络**：标量浓度不等式回顾 → 矩阵 Laplace 变换方法（含 Lieb 凹性定理证明概要）→ 矩阵 Chernoff 界 → 矩阵 Bernstein 不等式 → 矩阵 Hoeffding → 内在维度 → 应用 → 非交换 Khintchine 不等式 → 矩阵 Freedman 不等式
 
 **延伸**：矩阵浓度不等式是随机化线性代数（随机投影、随机化 SVD）和高维统计（高维协方差估计、压缩感知的 RIP 证明）的理论基石
 
@@ -142,7 +142,44 @@
 
     在正定矩阵锥上是**凹函数**。
 
-此定理的证明需要用到矩阵分析的深层结果，我们在此略去。其在矩阵浓度不等式中的关键应用是以下推论。
+以下给出此定理的证明概要。
+
+??? proof "证明概要（Epstein 复插值方法）"
+    **第一步：问题重述。** 需证明对正定矩阵 $A$，映射 $f(A) = \mathrm{tr}\,\exp(H + \log A)$ 是凹的，即对正定 $A, B$ 和 $\lambda \in [0,1]$，
+
+    $$f(\lambda A + (1-\lambda)B) \geq \lambda f(A) + (1-\lambda)f(B).$$
+
+    **第二步：Epstein 的复插值框架。** 对正定 $A, B$，定义解析族
+
+    $$F(z) = \mathrm{tr}\,\exp\!\bigl(H + \log(A^{1/2}(A^{-1/2}BA^{-1/2})^z A^{1/2})\bigr), \quad z \in \mathbb{C},$$
+
+    其中 $(A^{-1/2}BA^{-1/2})^z = \exp(z \log(A^{-1/2}BA^{-1/2}))$ 在带状区域 $0 \leq \mathrm{Re}(z) \leq 1$ 上解析。
+
+    $F(0) = \mathrm{tr}\,\exp(H + \log A) = f(A)$，$F(1) = \mathrm{tr}\,\exp(H + \log B) = f(B)$。
+
+    **第三步：对数凸性论证。** Lieb 的关键洞察是利用 Hadamard 三线定理（Three Lines Theorem）。在带状区域 $\{z : 0 \leq \mathrm{Re}(z) \leq 1\}$ 的边界上，$|F(it)|$ 和 $|F(1+it)|$ 可以被控制（利用矩阵指数的迹在纯虚方向上的周期性和酉不变性）。
+
+    具体地，$\log|F(z)|$ 在带状区域内是次调和函数。由 Hadamard 三线定理，
+
+    $$\log|F(\lambda)| \leq (1-\lambda)\log\sup_t|F(it)| + \lambda\log\sup_t|F(1+it)|.$$
+
+    **第四步：关键估计。** 在虚轴上，$(A^{-1/2}BA^{-1/2})^{it}$ 是酉矩阵，因此
+
+    $$F(it) = \mathrm{tr}\,\exp(H + \log A + it\log(A^{-1/2}BA^{-1/2})).$$
+
+    利用 Golden-Thompson 不等式 $\mathrm{tr}\,e^{X+Y} \leq \mathrm{tr}(e^X e^Y)$（对 Hermite $X, Y$）以及酉矩阵的迹范数性质，可以证明 $|F(it)| \leq F(0) = f(A)$。类似地 $|F(1+it)| \leq F(1) = f(B)$。
+
+    **第五步：综合。** 由 Hadamard 三线定理的结果，
+
+    $$F(\lambda) \leq F(0)^{1-\lambda} F(1)^{\lambda} \leq (1-\lambda)F(0) + \lambda F(1),$$
+
+    其中最后一步使用算术-几何均值不等式。
+
+    但上述论证实际上证明的是**对数凹性**（更强的结论），凹性作为推论得出。更精细的处理需要验证 $F(\lambda)$ 确实等于 $f(\lambda A + (1-\lambda)B)$，这需要利用 $\log$ 函数的算子凹性以及追踪变量替换中的细节。
+
+    完整的严格证明参见 Lieb (1973) 或 Bhatia (1997, Chapter IX)。$\blacksquare$
+
+其在矩阵浓度不等式中的关键应用是以下推论。
 
 !!! theorem "定理 57.6 (迹指数的次可加性)"
     设 $X_1, X_2, \ldots, X_n$ 是独立的随机对称矩阵。则
@@ -568,10 +605,112 @@
 
 ---
 
+## 57.8 非交换 Khintchine 不等式
+
+<div class="context-flow" markdown>
+
+**核心问题**：对于随机符号（Rademacher）加权的矩阵和 $\sum \epsilon_i A_i$，能否给出比矩阵 Hoeffding 更精细的矩估计？
+
+</div>
+
+非交换 Khintchine 不等式是算子代数和随机矩阵理论中的基本工具。它精确刻画了 Rademacher 随机矩阵和的矩的增长行为，其最优常数已被 Buchholz（2001）和 Haagerup-Musat 确定。
+
+!!! theorem "定理 57.19 (非交换 Khintchine 不等式)"
+    设 $A_1, \ldots, A_n \in \mathbb{C}^{d_1 \times d_2}$ 是确定性矩阵，$\epsilon_1, \ldots, \epsilon_n$ 是独立 Rademacher 随机变量（$\pm 1$ 等概率）。则对任意 $p \geq 2$，
+
+    **行版本**：
+    $$\Bigl(\mathbb{E}\Bigl\|\sum_{i=1}^n \epsilon_i A_i\Bigr\|^p\Bigr)^{1/p} \leq \sqrt{p} \cdot \max\!\Bigl(\Bigl\|\sum_{i=1}^n A_i A_i^*\Bigr\|^{1/2},\; \Bigl\|\sum_{i=1}^n A_i^* A_i\Bigr\|^{1/2}\Bigr).$$
+
+    **列版本**（等价表述）：
+    $$\Bigl(\mathbb{E}\Bigl\|\sum_{i=1}^n \epsilon_i A_i\Bigr\|^p\Bigr)^{1/p} \leq \sqrt{p} \cdot \sigma, \quad \sigma = \max(\sigma_R, \sigma_C),$$
+
+    其中 $\sigma_R = \|\sum A_i A_i^*\|^{1/2}$（行方差），$\sigma_C = \|\sum A_i^* A_i\|^{1/2}$（列方差）。
+
+    反方向，存在绝对常数 $c > 0$ 使得
+
+    $$\Bigl(\mathbb{E}\Bigl\|\sum_{i=1}^n \epsilon_i A_i\Bigr\|^p\Bigr)^{1/p} \geq c \cdot \sigma.$$
+
+    当 $p = 2$ 时，$\sqrt{p}$ 因子是最优的。
+
+!!! note "注"
+    对于 $p = 2$，非交换 Khintchine 不等式给出
+
+    $$\Bigl(\mathbb{E}\Bigl\|\sum \epsilon_i A_i\Bigr\|^2\Bigr)^{1/2} \leq \sqrt{2}\,\sigma.$$
+
+    结合 Markov 不等式，可以得到尾概率估计。与矩阵 Hoeffding 不等式相比，Khintchine 不等式在矩的层面上更精确——它捕捉了行方差和列方差的**非对称结构**。
+
+    在量子信息论中，非交换 Khintchine 不等式用于分析随机量子信道的性质。在压缩感知中，它用于证明某些随机测量矩阵的受限等距性质（RIP）。
+
+!!! example "例 57.9"
+    设 $A_i = e_i e_i^*$（$d \times d$ 标准基对角矩阵），$n = d$。
+
+    $\sigma_R = \sigma_C = \|\sum e_i e_i^* \cdot e_i e_i^*\|^{1/2} = \|I\|^{1/2} = 1$。
+
+    Khintchine 不等式给出 $(\mathbb{E}\|\sum \epsilon_i e_i e_i^*\|^p)^{1/p} \leq \sqrt{p}$。
+
+    但 $\sum \epsilon_i e_i e_i^* = \operatorname{diag}(\epsilon_1, \ldots, \epsilon_d)$，其谱范数为 $\max_i |\epsilon_i| = 1$（几乎处处）。因此左边恒等于 $1 \leq \sqrt{p}$，界成立但有冗余。
+
+    若取 $A_i = e_1 e_i^*$（秩-1 矩阵，所有行向量集中在 $e_1$），则 $\sigma_R = \|\sum e_1 e_i^* e_i e_1^*\|^{1/2} = \|d \cdot e_1 e_1^*\|^{1/2} = \sqrt{d}$，$\sigma_C = \|\sum e_i e_1^* e_1 e_i^*\|^{1/2} = \|I\|^{1/2} = 1$。此时行方差和列方差的差异被非交换 Khintchine 不等式精确捕捉。
+
+---
+
+## 57.9 矩阵 Freedman 不等式
+
+<div class="context-flow" markdown>
+
+**核心问题**：对于矩阵值鞅，能否利用条件方差（而非最坏情形方差）得到更精细的浓度界？
+
+</div>
+
+矩阵 Azuma 不等式（定理 57.13）使用的是鞅增量的**确定性**界。当鞅的增量方差具有随机性且远小于最坏情形时，矩阵 Freedman 不等式给出显著更紧的界。
+
+!!! definition "定义 57.8 (矩阵可预测方差过程)"
+    设 $\{Y_k\}_{k=0}^n$ 是关于滤子 $\{\mathcal{F}_k\}$ 的矩阵值鞅，差分 $D_k = Y_k - Y_{k-1}$。**可预测方差过程**定义为
+
+    $$W_k = \sum_{j=1}^k \mathbb{E}[D_j^2 \mid \mathcal{F}_{j-1}], \quad k = 1, \ldots, n.$$
+
+    这是一个矩阵值的递增过程（$W_k \succeq W_{k-1}$），度量了鞅截止到时刻 $k$ 的"累积条件方差"。
+
+!!! theorem "定理 57.20 (矩阵 Freedman 不等式)"
+    设 $\{Y_k\}_{k=0}^n$ 是 $d \times d$ 对称矩阵值鞅，差分 $D_k = Y_k - Y_{k-1}$ 满足 $\|D_k\| \leq R$（几乎处处）。设可预测方差过程为 $W_n = \sum_{k=1}^n \mathbb{E}[D_k^2 \mid \mathcal{F}_{k-1}]$。则对所有 $t > 0$ 和 $\sigma^2 > 0$，
+
+    $$\mathbb{P}\!\bigl(\lambda_{\max}(Y_n - Y_0) \geq t \;\text{且}\; \lambda_{\max}(W_n) \leq \sigma^2\bigr) \leq d \cdot \exp\!\Bigl(-\frac{t^2/2}{\sigma^2 + Rt/3}\Bigr).$$
+
+    因此
+
+    $$\mathbb{P}\!\bigl(\lambda_{\max}(Y_n - Y_0) \geq t\bigr) \leq d \cdot \exp\!\Bigl(-\frac{t^2/2}{\sigma^2 + Rt/3}\Bigr) + \mathbb{P}\!\bigl(\lambda_{\max}(W_n) > \sigma^2\bigr).$$
+
+??? proof "证明"
+    **第一步：超鞅构造。** 固定 $\theta > 0$。定义过程
+
+    $$Z_k = \mathrm{tr}\,\exp\!\bigl(\theta(Y_k - Y_0) - g(\theta) W_k\bigr),$$
+
+    其中 $g(\theta) = \frac{e^{\theta R} - \theta R - 1}{R^2}$。关键是证明 $\{Z_k\}$ 是（标量值的）上鞅（supermartingale）。
+
+    **第二步：上鞅性质。** 利用 Lieb 凹性定理，对条件期望进行估计：
+
+    $$\mathbb{E}[Z_k \mid \mathcal{F}_{k-1}] = \mathrm{tr}\,\mathbb{E}\!\bigl[\exp\!\bigl(\theta(Y_{k-1}-Y_0) + \theta D_k - g(\theta)W_{k-1} - g(\theta)\mathbb{E}[D_k^2|\mathcal{F}_{k-1}]\bigr) \mid \mathcal{F}_{k-1}\bigr].$$
+
+    设 $H = \theta(Y_{k-1}-Y_0) - g(\theta)W_{k-1}$（$\mathcal{F}_{k-1}$-可测）。由 Lieb 凹性定理和 $\mathbb{E}[e^{\theta D_k}|\mathcal{F}_{k-1}] \preceq \exp(g(\theta)\mathbb{E}[D_k^2|\mathcal{F}_{k-1}])$（利用 $\|D_k\|\leq R$ 和中心化条件），可得
+
+    $$\mathbb{E}[Z_k | \mathcal{F}_{k-1}] \leq Z_{k-1}.$$
+
+    **第三步：停时论证。** 定义停时 $\tau = \min\{k : \lambda_{\max}(W_k) > \sigma^2\}$。在事件 $\{\lambda_{\max}(W_n) \leq \sigma^2\}$ 上，利用上鞅性质和 $Z_0 = \mathrm{tr}(I) = d$，得到
+
+    $$\mathbb{P}\!\bigl(\lambda_{\max}(Y_n-Y_0) \geq t,\; \lambda_{\max}(W_n) \leq \sigma^2\bigr) \leq d \cdot \exp(-\theta t + g(\theta)\sigma^2).$$
+
+    对 $\theta > 0$ 优化（取 $\theta^* = \frac{t}{\sigma^2 + Rt/3}$）即得最终界。$\blacksquare$
+
+矩阵 Freedman 不等式优于矩阵 Azuma 不等式的关键在于：它使用**可预测方差** $\sigma^2$（可以远小于 $\sum \|A_k\|^2$），只需另外控制可预测方差超过 $\sigma^2$ 的"坏事件"的概率。在鞅增量方差高度随机且通常较小的场景（如在线学习、自适应采样等）中，矩阵 Freedman 不等式提供了实质性更强的保证。
+
+---
+
 **本章要点总结：**
 
 1. 矩阵浓度不等式将标量尾概率估计推广到矩阵值随机变量。
-2. 核心工具是 Lieb 凹性定理，它克服了矩阵指数的非交换性障碍。
+2. 核心工具是 Lieb 凹性定理（可通过 Epstein 复插值方法证明），它克服了矩阵指数的非交换性障碍。
 3. 矩阵 Bernstein 不等式是最常用的工具，形式类似标量 Bernstein 但带有维度因子。
 4. 内在维度框架将维度因子从 $d$ 降低为矩阵方差的有效秩。
-5. 这些工具在协方差估计、矩阵补全、随机投影等问题中提供了精确的理论保证。
+5. 非交换 Khintchine 不等式精确刻画了 Rademacher 矩阵和的矩增长，捕捉行列方差的非对称性。
+6. 矩阵 Freedman 不等式利用可预测方差改进了矩阵 Azuma 不等式。
+7. 这些工具在协方差估计、矩阵补全、随机投影等问题中提供了精确的理论保证。

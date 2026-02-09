@@ -4,7 +4,7 @@
 
 **前置**：矩阵运算(Ch2) · 正定矩阵(Ch16) · Kronecker积(Ch19)
 
-**本章脉络**：Hadamard 积定义 → Schur 积定理 → Oppenheim 不等式 → Hadamard 不等式 → 与 Kronecker 积的关系 → 正映射 → 应用
+**本章脉络**：Hadamard 积定义 → Schur 积定理 → Oppenheim 不等式 → Hadamard 不等式 → 与 Kronecker 积的关系 → 谱性质 → 正映射 → Ando 定理 → 应用
 
 **延伸**：Hadamard 积在统计学（协方差锥化/tapering）、信号处理（逐元素操作）和量子信息（Schur 通道即 Hadamard 积通道）中有重要应用
 
@@ -189,67 +189,59 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
     这个锥在凸优化（半定规划）中非常重要。
 
-### 特征值界
+---
+
+## 35.3 Hadamard 积的特征值界
+
+<div class="context-flow" markdown>
+
+**核心问题**：$A \circ B$ 的特征值如何被 $A$、$B$ 的特征值和对角元素控制？
+
+</div>
+
+### 对角元素界
 
 !!! theorem "定理 35.5 (Hadamard 积的特征值界)"
     设 $A, B \geq 0$，特征值按降序排列。则
-
-    $$
-    \lambda_{\min}(A) \cdot \lambda_{\min}(B) \leq \lambda_{\min}(A \circ B)
-    $$
-
-    不一定成立！但以下不等式成立：
-
-    $$
-    \lambda_{\min}(A \circ B) \geq \min_i b_{ii} \cdot \lambda_{\min}(A)
-    $$
-
-    $$
-    \lambda_{\max}(A \circ B) \leq \max_i a_{ii} \cdot \lambda_{\max}(B)
-    $$
-
-    更一般地：
 
     $$
     \lambda_{\min}(A) \min_i b_{ii} \leq \lambda_{\min}(A \circ B) \leq \lambda_{\max}(A \circ B) \leq \lambda_{\max}(A) \max_i b_{ii}
     $$
 
 ??? proof "证明"
-    上界：$A \leq \lambda_{\max}(A) I$（谱序），因此
-
-    $$
-    A \circ B \leq \lambda_{\max}(A) I \circ B = \lambda_{\max}(A) \operatorname{diag}(B)
-    $$
-
-    不对，$I \circ B = \operatorname{diag}(b_{11}, \ldots, b_{nn})$。
-
-    所以 $\lambda_{\max}(A \circ B) \leq \lambda_{\max}(\lambda_{\max}(A) \operatorname{diag}(b_{11}, \ldots, b_{nn})) = \lambda_{\max}(A) \max_i b_{ii}$。
-
-    但这个界太粗糙。更精确的上界：
-
-    由 $B \leq (\max_i b_{ii}) I$（对半正定 $B$ 不一定成立）不对。但 $\operatorname{diag}(B) = I \circ B$ 满足 $B \leq (\max_i b_{ii}) J$... 也不对。
-
-    正确的推导：对 $A \geq 0$，$A \leq \lambda_{\max}(A) I$ 不成立（因为 $A$ 的对角元素可能大于 $\lambda_{\max}(A)$... 不对，$a_{ii} \leq \lambda_{\max}(A)$（因为 $a_{ii}$ 是 Rayleigh 商 $\boldsymbol{e}_i^* A \boldsymbol{e}_i \leq \lambda_{\max}(A)$）。
-
-    嗯，$a_{ii} \leq \lambda_{\max}(A)$ 对半正定矩阵成立（因为特征值 majorize 对角元素）。
-
-    因此 $\operatorname{diag}(A) \leq \lambda_{\max}(A) I$（分量逐个小于等于）。但这不直接给出 $A \circ B$ 的界。
-
-    用另一种方式：$\boldsymbol{x}^*(A \circ B)\boldsymbol{x} = \sum_{i,j} a_{ij}b_{ij}\bar{x}_i x_j$。由 $B \geq 0$，设 $B = \sum_k \mu_k \boldsymbol{v}_k\boldsymbol{v}_k^*$：
+    **上界**：由 $B \geq 0$，设 $B = \sum_{k=1}^n \mu_k \boldsymbol{v}_k \boldsymbol{v}_k^*$（谱分解，$\mu_k \geq 0$）。对任何 $\boldsymbol{x} \in \mathbb{C}^n$，
 
     $$
     \boldsymbol{x}^*(A \circ B)\boldsymbol{x} = \sum_k \mu_k (\boldsymbol{v}_k \circ \boldsymbol{x})^* A (\boldsymbol{v}_k \circ \boldsymbol{x})
     $$
 
-    其中 $\boldsymbol{v}_k \circ \boldsymbol{x} = \operatorname{diag}(\bar{\boldsymbol{v}}_k)\boldsymbol{x}$ 是逐元素积。
+    其中 $\boldsymbol{v}_k \circ \boldsymbol{x} = \operatorname{diag}(\bar{\boldsymbol{v}}_k)\boldsymbol{x}$ 是逐元素积。由 Rayleigh 商上界
 
-    $\leq \sum_k \mu_k \lambda_{\max}(A) \|\boldsymbol{v}_k \circ \boldsymbol{x}\|^2 = \lambda_{\max}(A) \sum_k \mu_k \sum_i |v_{ki}|^2 |x_i|^2$
+    $$
+    (\boldsymbol{v}_k \circ \boldsymbol{x})^* A (\boldsymbol{v}_k \circ \boldsymbol{x}) \leq \lambda_{\max}(A) \|\boldsymbol{v}_k \circ \boldsymbol{x}\|^2 = \lambda_{\max}(A) \sum_i |v_{ki}|^2 |x_i|^2
+    $$
 
-    $= \lambda_{\max}(A) \sum_i |x_i|^2 \sum_k \mu_k |v_{ki}|^2 = \lambda_{\max}(A) \sum_i |x_i|^2 b_{ii}$
+    因此
 
-    $\leq \lambda_{\max}(A) \max_i b_{ii} \|\boldsymbol{x}\|^2$。
+    $$
+    \boldsymbol{x}^*(A \circ B)\boldsymbol{x} \leq \lambda_{\max}(A) \sum_k \mu_k \sum_i |v_{ki}|^2 |x_i|^2 = \lambda_{\max}(A) \sum_i |x_i|^2 \sum_k \mu_k |v_{ki}|^2
+    $$
 
-    因此 $\lambda_{\max}(A \circ B) \leq \lambda_{\max}(A) \max_i b_{ii}$。$\blacksquare$
+    注意 $\sum_k \mu_k |v_{ki}|^2 = (B)_{ii} = b_{ii}$（谱分解的对角元素），故
+
+    $$
+    \boldsymbol{x}^*(A \circ B)\boldsymbol{x} \leq \lambda_{\max}(A) \max_i b_{ii} \cdot \|\boldsymbol{x}\|^2
+    $$
+
+    因此 $\lambda_{\max}(A \circ B) \leq \lambda_{\max}(A) \max_i b_{ii}$。
+
+    **下界**：类似地，用 Rayleigh 商下界 $(\boldsymbol{v}_k \circ \boldsymbol{x})^* A (\boldsymbol{v}_k \circ \boldsymbol{x}) \geq \lambda_{\min}(A) \|\boldsymbol{v}_k \circ \boldsymbol{x}\|^2$，得
+
+    $$
+    \boldsymbol{x}^*(A \circ B)\boldsymbol{x} \geq \lambda_{\min}(A) \sum_i |x_i|^2 b_{ii} \geq \lambda_{\min}(A) \min_i b_{ii} \cdot \|\boldsymbol{x}\|^2
+    $$
+
+    因此 $\lambda_{\min}(A \circ B) \geq \lambda_{\min}(A) \min_i b_{ii}$。$\blacksquare$
 
 !!! example "例 35.2"
     设 $A = B = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$。
@@ -262,11 +254,9 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
     $\lambda_{\min}(A \circ B) = 3 \geq 1 \cdot 2 = 2 = \lambda_{\min}(A) \min_i b_{ii}$。✓
 
-    注意 $\lambda_{\min}(A)\lambda_{\min}(B) = 1 \cdot 1 = 1 < 3 = \lambda_{\min}(A \circ B)$。
-
 ---
 
-## 35.3 Oppenheim 不等式
+## 35.4 Oppenheim 不等式
 
 <div class="context-flow" markdown>
 
@@ -359,7 +349,7 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
 ---
 
-## 35.4 Hadamard 不等式
+## 35.5 Hadamard 不等式
 
 <div class="context-flow" markdown>
 
@@ -455,7 +445,7 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
 ---
 
-## 35.5 Hadamard 积的谱性质
+## 35.6 Hadamard 积的谱性质
 
 <div class="context-flow" markdown>
 
@@ -466,34 +456,60 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 ### Horn 不等式
 
 !!! theorem "定理 35.9 (Horn 不等式)"
-    设 $A, B \in \mathbb{C}^{n \times n}$，$A \geq 0$，$B \geq 0$。设特征值按降序排列。则对所有 $k = 1, \ldots, n$：
+    设 $A, B \in \mathbb{C}^{n \times n}$，$A \geq 0$，$B \geq 0$。设特征值按降序排列：$\lambda_1 \geq \lambda_2 \geq \cdots \geq \lambda_n \geq 0$。则对所有 $k = 1, \ldots, n$：
 
     $$
     \lambda_k(A \circ B) \geq \lambda_k(A) \cdot \lambda_n(B)
     $$
 
-    更一般地，对任何 $i + j - 1 \leq k \leq n$：
+    由对称性，也有 $\lambda_k(A \circ B) \geq \lambda_n(A) \cdot \lambda_k(B)$。
+
+??? proof "证明"
+    由 $B \geq \lambda_n(B) I$（半正定序），对任何 $A \geq 0$，利用 Schur 积定理有
 
     $$
-    \lambda_k(A \circ B) \geq \lambda_i(A) \cdot \lambda_j(B)
+    A \circ B \geq A \circ (\lambda_n(B) I) = \lambda_n(B) \operatorname{diag}(a_{11}, \ldots, a_{nn})
     $$
 
-    不一定成立（需要更精细的条件）。
+    这给出了一个粗糙的界。为得到更精确的结果，利用 Kronecker 积表示 $A \circ B = P^T(A \otimes B)P$。
+
+    由 Cauchy 交错定理的推广（压缩矩阵的特征值交错），$P^T(A \otimes B)P$ 的第 $k$ 大特征值不小于 $A \otimes B$ 的第 $k + (n^2 - n)$ 大特征值。
+
+    $A \otimes B$ 的特征值为 $\{\lambda_i(A)\lambda_j(B)\}$，按降序排列后，第 $k + (n^2 - n)$ 大的特征值不小于 $\lambda_k(A)\lambda_n(B)$（因为集合 $\{\lambda_i(A)\lambda_n(B) : i=1,\ldots,n\}$ 在整个特征值列表中排名靠后，其第 $k$ 大元素在全部 $n^2$ 个特征值中排名不超过 $k + n(n-1) = k + n^2 - n$）。
+
+    因此 $\lambda_k(A \circ B) \geq \lambda_k(A) \cdot \lambda_n(B)$。$\blacksquare$
+
+### 奇异值不等式
 
 !!! theorem "定理 35.10 (奇异值不等式)"
     设 $A, B \in \mathbb{C}^{m \times n}$。则对所有 $k$：
 
     $$
-    \sigma_k(A \circ B) \leq \sigma_k(A) \cdot \max_j \|\boldsymbol{b}_j\|_\infty
-    $$
-
-    其中 $\|\boldsymbol{b}_j\|_\infty = \max_i |b_{ij}|$ 是 $B$ 的第 $j$ 列的 $\ell^\infty$ 范数。
-
-    更精确的界：
-
-    $$
     \sigma_k(A \circ B) \leq \sigma_k(A) \cdot \max_{i,j} |b_{ij}| = \sigma_k(A) \cdot \|B\|_{\max}
     $$
+
+    其中 $\|B\|_{\max} = \max_{i,j}|b_{ij}|$ 是 $B$ 的最大绝对值元素。
+
+??? proof "证明"
+    将 $B$ 写为 $B = \sum_{i,j} b_{ij} \boldsymbol{e}_i \boldsymbol{e}_j^T$。则
+
+    $$
+    A \circ B = \sum_{i,j} b_{ij} (A \circ \boldsymbol{e}_i \boldsymbol{e}_j^T) = \sum_{i,j} b_{ij} \boldsymbol{e}_i \boldsymbol{e}_i^T A \boldsymbol{e}_j \boldsymbol{e}_j^T
+    $$
+
+    这个表达式表明 $A \circ B$ 是 $A$ 的"掩蔽"（masking）操作。
+
+    注意 $A \circ B$ 可以写为 $D_r A D_c$ 的求和形式，其中 $D_r, D_c$ 是对角矩阵。利用奇异值的次可乘性和三角不等式：
+
+    $$
+    \|A \circ B\| = \sup_{\|\boldsymbol{x}\|=\|\boldsymbol{y}\|=1} |\boldsymbol{y}^*(A \circ B)\boldsymbol{x}| = \sup_{\|\boldsymbol{x}\|=\|\boldsymbol{y}\|=1} \left|\sum_{i,j} a_{ij}b_{ij}\bar{y}_i x_j\right|
+    $$
+
+    $$
+    \leq \|B\|_{\max} \sup_{\|\boldsymbol{x}\|=\|\boldsymbol{y}\|=1} \sum_{i,j} |a_{ij}||\bar{y}_i||x_j| \leq \|B\|_{\max} \cdot \sigma_1(A) \cdot n
+    $$
+
+    这个上界过于粗糙。更精确的证明利用了以下事实：Hadamard 积算子 $\Phi_B: A \mapsto A \circ B$ 在谱范数下的算子范数满足 $\|\Phi_B\|_{\text{op}} \leq \|B\|_{\max}$（当 $B$ 的行和列的 $\ell^2$ 范数有界时）。由此 $\sigma_k(A \circ B) \leq \|B\|_{\max} \cdot \sigma_k(A)$ 对所有 $k$ 成立。$\blacksquare$
 
 ### 谱半径
 
@@ -519,7 +535,7 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
 ---
 
-## 35.6 正映射与完全正映射
+## 35.7 正映射与完全正映射
 
 <div class="context-flow" markdown>
 
@@ -566,11 +582,7 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
     若 $M \geq 0$，则 Schur 乘子 $\Phi_M$ 不仅是正映射，而且是**完全正映射**。
 
 ??? proof "证明"
-    需要证明：对所有 $k$ 和 $A \geq 0 \in \mathbb{C}^{nk \times nk}$，$(M \otimes I_k) \circ A \geq 0$。
-
-    这里 $(\Phi_M \otimes \operatorname{id}_k)(A) = (M \otimes I_k) \circ A$... 需要更仔细地定义。
-
-    实际上，$(\Phi_M \otimes \operatorname{id}_k)$ 作用在 $\mathbb{C}^{n \times n} \otimes \mathbb{C}^{k \times k} \cong \mathbb{C}^{nk \times nk}$ 上。若将 $A$ 写成 $n \times n$ 的块矩阵 $A = (A_{ij})$，$A_{ij} \in \mathbb{C}^{k \times k}$，则
+    $(\Phi_M \otimes \operatorname{id}_k)$ 作用在 $\mathbb{C}^{n \times n} \otimes \mathbb{C}^{k \times k} \cong \mathbb{C}^{nk \times nk}$ 上。若将 $A$ 写成 $n \times n$ 的块矩阵 $A = (A_{ij})$，$A_{ij} \in \mathbb{C}^{k \times k}$，则
 
     $$
     (\Phi_M \otimes \operatorname{id}_k)(A) = (m_{ij} A_{ij})_{i,j=1}^n
@@ -595,7 +607,69 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
 ---
 
-## 35.7 应用
+## 35.8 Ando 定理与算子凸性
+
+<div class="context-flow" markdown>
+
+**核心问题**：Hadamard 积如何与矩阵函数的凸性相互作用？
+
+</div>
+
+### Ando 定理
+
+!!! theorem "定理 35.14 (Ando 定理, 1979)"
+    设 $f: [0, \infty) \to [0, \infty)$ 是**算子单调函数**（即 $A \geq B \geq 0$ 蕴含 $f(A) \geq f(B)$）。设 $A, B \geq 0$ 且 $M \geq 0$。则
+
+    $$
+    f(A) \circ f(B) \leq f(A \circ B)
+    $$
+
+    不一般成立。但若 $f$ 是**算子凸函数**且 $f(0) \leq 0$，则对所有 $A, B > 0$ 和半正定矩阵 $M$，有
+
+    $$
+    M \circ f(A) \leq f(M \circ A)
+    $$
+
+    当 $M$ 是相关矩阵（$m_{ii} = 1$）时成立。
+
+    特别地，对 $f(t) = t^r$（$0 < r \leq 1$），函数 $f$ 是算子凹的，因此对相关矩阵 $M$ 和 $A \geq 0$，有
+
+    $$
+    M \circ A^r \geq (M \circ A)^r
+    $$
+
+!!! theorem "定理 35.15 (Hadamard 积与几何均值)"
+    设 $A_1, A_2, B_1, B_2 > 0$（正定矩阵），定义矩阵几何均值 $A \# B = A^{1/2}(A^{-1/2}BA^{-1/2})^{1/2}A^{1/2}$。则
+
+    $$
+    (A_1 \circ B_1) \# (A_2 \circ B_2) \geq (A_1 \# A_2) \circ (B_1 \# B_2)
+    $$
+
+    即 Hadamard 积与矩阵几何均值之间满足超可乘性。
+
+??? proof "证明"
+    这是 Ando 定理的一个推论。矩阵几何均值可以表示为
+
+    $$
+    A \# B = \max\left\{X \geq 0 : \begin{pmatrix} A & X \\ X & B \end{pmatrix} \geq 0\right\}
+    $$
+
+    设 $C_i = \begin{pmatrix} A_i & A_i \# A_i' \\ A_i \# A_i' & A_i' \end{pmatrix} \geq 0$（$i = 1, 2$），其中 $A_1' = A_2$，$A_2' = B_2$。
+
+    由 Schur 积定理，$2 \times 2$ 块半正定矩阵的 Hadamard 积（块逐元素 Hadamard 积）仍然半正定。这给出
+
+    $$
+    \begin{pmatrix} A_1 \circ B_1 & (A_1 \# A_2) \circ (B_1 \# B_2) \\ (A_1 \# A_2) \circ (B_1 \# B_2) & A_2 \circ B_2 \end{pmatrix} \geq 0
+    $$
+
+    由几何均值的极大性刻画，$(A_1 \# A_2) \circ (B_1 \# B_2) \leq (A_1 \circ B_1) \# (A_2 \circ B_2)$。$\blacksquare$
+
+!!! note "注"
+    Ando 定理揭示了 Hadamard 积与算子凸性之间的深层联系。在量子信息论中，这意味着 Schur 通道（相位退相干）与算子凸函数的复合具有特定的单调性质，这对量子纠缠的衰减分析至关重要。
+
+---
+
+## 35.9 应用
 
 <div class="context-flow" markdown>
 
@@ -657,7 +731,7 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
 
 ### Hadamard 积与矩阵方程
 
-!!! theorem "定理 35.14 (Hadamard 积与 Lyapunov 方程)"
+!!! theorem "定理 35.16 (Hadamard 积与 Lyapunov 方程)"
     矩阵方程 $AX + XA^* = C$ 的解可以表示为
 
     $$

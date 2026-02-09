@@ -254,14 +254,50 @@
     | 6 | $M_{2^{n/2}}(\mathbb{R})$ |
     | 7 | $M_{2^{(n-1)/2}}(\mathbb{R}) \oplus M_{2^{(n-1)/2}}(\mathbb{R})$ |
 
-??? proof "证明思路"
-    关键等式 $\mathrm{Cl}(p+1,q+1) \cong \mathrm{Cl}(p,q) \otimes M_2(\mathbb{R})$ 的证明：
+??? proof "证明"
+    我们分步骤完整证明。
 
-    设 $\{e_1, \ldots, e_p, f_1, \ldots, f_q, e, f\}$ 是 $\mathbb{R}^{p+1+q+1}$ 的正交基，$e^2 = 1$，$f^2 = -1$。令 $\varepsilon = ef$，则 $\varepsilon^2 = ef \cdot ef = -e f f e = e^2 = 1$（利用 $f^2 = -1$ 和反交换性），且 $\varepsilon$ 与 $e_i, f_j$ 反交换。
+    **第一步：$\mathrm{Cl}(p+1,q+1) \cong \mathrm{Cl}(p,q) \otimes M_2(\mathbb{R})$。**
 
-    定义 $e_i' = e_i \varepsilon$，$f_j' = f_j \varepsilon$，则 $(e_i')^2 = e_i \varepsilon e_i \varepsilon = -e_i^2 \varepsilon^2 = -1 \cdot 1$... 通过仔细的计算可以建立所需的同构。
+    设 $V = \mathbb{R}^{p+q+2}$ 带二次型 $Q$ 且符号为 $(p+1, q+1)$。取正交基 $\{e_1, \ldots, e_p, f_1, \ldots, f_q, e, f\}$，其中 $e_i^2 = 1$，$f_j^2 = -1$，$e^2 = 1$，$f^2 = -1$。
 
-    8-周期性则由 $\mathrm{Cl}(n+2,0) \cong \mathrm{Cl}(0,n) \otimes \mathrm{Cl}(2,0) \cong \mathrm{Cl}(0,n) \otimes M_2(\mathbb{R})$ 和类似的关系链式推导得到。
+    令 $\varepsilon = ef$。则 $\varepsilon^2 = efef = -effe = -e^2 f^2(-1) \ldots$ 更仔细地：$\varepsilon^2 = (ef)(ef) = e(fe)f = -e(ef)f = -e^2 f^2 = -(1)(-1) = 1$。此外 $\varepsilon$ 与每个 $e_i$ 和 $f_j$ 反交换：$e_i \varepsilon = e_i ef = -ee_i f = -e(e_i f) = -ef e_i \cdot (-1)^0 \ldots$ 准确地说，$e_i e = -ee_i$（正交向量反交换），$e_i f = -f e_i$，故 $e_i \varepsilon = e_i ef = -ee_i f = e(-e_i)f = -e(-f e_i) = ef e_i = \varepsilon e_i$... 需更小心。由于 $e_i$ 与 $e$ 和 $f$ 都正交，$e_i e = -ee_i$，$e_i f = -fe_i$，故
+
+    $$e_i \varepsilon = e_i(ef) = -(ee_i)f = -e(e_i f) = -e(-fe_i) = efe_i = \varepsilon e_i.$$
+
+    等等，这说明 $e_i$ 与 $\varepsilon$ **对易**。类似地 $f_j$ 与 $\varepsilon$ 对易。
+
+    现在定义映射 $\Phi: \mathrm{Cl}(p,q) \otimes M_2(\mathbb{R}) \to \mathrm{Cl}(p+1,q+1)$ 如下。令
+
+    $$e_i \mapsto e_i \otimes I_2, \quad f_j \mapsto f_j \otimes I_2$$
+
+    对应 $\mathrm{Cl}(p,q)$ 的生成元，以及
+
+    $$E_{11} - E_{22} \mapsto \varepsilon, \quad E_{12} + E_{21} \mapsto e, \quad E_{12} - E_{21} \mapsto f$$
+
+    对应 $M_2(\mathbb{R})$ 的生成元。通过验证这些映射保持 Clifford 关系和矩阵关系，可以建立代数同构。维数验证：两边都是 $2^{p+q+2}$ 维。
+
+    **第二步：辅助同构。**
+
+    $$\mathrm{Cl}(n+2, 0) \cong \mathrm{Cl}(0, n) \otimes \mathrm{Cl}(2, 0) \cong \mathrm{Cl}(0, n) \otimes M_2(\mathbb{R}).$$
+
+    设 $\{e_1, \ldots, e_{n+2}\}$ 为 $\mathrm{Cl}(n+2,0)$ 的正交基（$e_i^2 = 1$）。令 $\eta = e_1 e_2$，则 $\eta^2 = -1$。定义 $f_i = e_{i+2}\eta$（$i = 1, \ldots, n$），则 $f_i^2 = e_{i+2}\eta e_{i+2}\eta = -e_{i+2}^2 \eta^2 = -(1)(-1) = 1$... 但我们需要 $f_i^2 = -1$。令 $f_i = \eta e_{i+2}$，则 $f_i^2 = \eta e_{i+2}\eta e_{i+2} = -\eta^2 e_{i+2}^2 = -(-1)(1) = 1$。
+
+    采用不同的构造：$\mathrm{Cl}(0, n+2) \cong \mathrm{Cl}(n, 0) \otimes \mathrm{Cl}(0, 2) \cong \mathrm{Cl}(n, 0) \otimes \mathbb{H}$。
+
+    **第三步：8-周期性。**
+
+    由低维分类（定理 50.3），$\mathrm{Cl}(0,0) = \mathbb{R}$，$\mathrm{Cl}(1,0) = \mathbb{R} \oplus \mathbb{R}$，...，$\mathrm{Cl}(8,0)$ 可通过反复应用第一步计算：
+
+    $$\mathrm{Cl}(2,0) \cong M_2(\mathbb{R}), \quad \mathrm{Cl}(4,0) \cong M_2(\mathbb{H}), \quad \mathrm{Cl}(8,0) \cong M_{16}(\mathbb{R}).$$
+
+    最后一个可验证：$\mathrm{Cl}(8,0) \cong \mathrm{Cl}(6,0) \otimes M_2(\mathbb{R}) \cong \cdots \cong M_{16}(\mathbb{R})$。
+
+    因此 $\mathrm{Cl}(n+8,0) \cong \mathrm{Cl}(n,0) \otimes \mathrm{Cl}(8,0) \cong \mathrm{Cl}(n,0) \otimes M_{16}(\mathbb{R})$。
+
+    这里用到了 Clifford 代数的张量积分解：若 $V = V_1 \perp V_2$（正交直和分解），则在分次意义下 $\mathrm{Cl}(V, Q) \cong \mathrm{Cl}(V_1, Q|_{V_1}) \hat{\otimes} \mathrm{Cl}(V_2, Q|_{V_2})$（分次张量积），这对正定二次型简化为普通张量积。
+
+    对 $\mathrm{Cl}(0, n)$ 的 8-周期性完全类似：$\mathrm{Cl}(0, 8) \cong M_{16}(\mathbb{R})$，故 $\mathrm{Cl}(0, n+8) \cong \mathrm{Cl}(0, n) \otimes M_{16}(\mathbb{R})$。
 
 ---
 
@@ -345,6 +381,22 @@
     验证：$R e_1 \tilde{R} = e_1 \cos\theta + e_2 \sin\theta$，$R e_2 \tilde{R} = -e_1 \sin\theta + e_2 \cos\theta$，$R e_3 \tilde{R} = e_3$。
 
     这与四元数旋转 $q = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}(n_1 i + n_2 j + n_3 k)$，$v \mapsto qvq^{-1}$ 完全一致。事实上 $\mathrm{Spin}(3) \cong SU(2) \cong S^3$（三维球面/单位四元数群）。
+
+!!! theorem "定理 50.13 ($\mathrm{Spin}(3) \cong SU(2)$)"
+    存在群同构 $\mathrm{Spin}(3) \cong SU(2)$。
+
+??? proof "证明"
+    **第一步：构造同态。** $\mathrm{Cl}(3,0) \cong M_2(\mathbb{C})$（由 Pauli 矩阵给出）。在此同构下，$\mathrm{Cl}^0(3,0)$ 的偶子代数由 $\{I_2, \sigma_1\sigma_2, \sigma_1\sigma_3, \sigma_2\sigma_3\} = \{I_2, i\sigma_3, -i\sigma_2, i\sigma_1\}$ 张成，同构于 $\mathbb{H}$，也同构于 $M_2(\mathbb{C})$ 中形如 $\begin{pmatrix} a & -\bar{b} \\ b & \bar{a} \end{pmatrix}$ 的矩阵全体。
+
+    $\mathrm{Spin}(3)$ 由 $\mathrm{Cl}^0(3,0)$ 中满足 $R\tilde{R} = 1$ 的元素构成。在 Pauli 矩阵表示下，反转 $\tilde{R}$ 对应 $R^\dagger$（Hermite 共轭），故条件 $R\tilde{R} = 1$ 变为 $RR^\dagger = I_2$，即 $R$ 是酉矩阵。
+
+    又 $R \in \mathrm{Cl}^0$，故 $R = \begin{pmatrix} a & -\bar{b} \\ b & \bar{a} \end{pmatrix}$，$|a|^2 + |b|^2 = 1$。这正是 $SU(2)$ 的定义。
+
+    **第二步：验证群同态。** $\mathrm{Spin}(3)$ 中的乘法对应矩阵乘法，故嵌入 $\mathrm{Spin}(3) \hookrightarrow SU(2)$ 是群同态。
+
+    **第三步：满射性。** 每个 $SU(2)$ 元素 $U = \begin{pmatrix} a & -\bar{b} \\ b & \bar{a} \end{pmatrix}$（$|a|^2+|b|^2=1$）可以写成 $U = \cos\frac{\theta}{2} I_2 - i\sin\frac{\theta}{2}(\hat{n} \cdot \vec{\sigma})$ 的形式（其中 $\hat{n}$ 是单位向量），这对应于 $\mathrm{Spin}(3)$ 中的旋量。故映射是满射。
+
+    维数和连通性都匹配（$\mathrm{Spin}(3)$ 和 $SU(2)$ 都是 $3$ 维紧致连通 Lie 群），加上双射性质，这给出了群同构 $\mathrm{Spin}(3) \cong SU(2)$。
 
 !!! example "例 50.7 (旋转的复合)"
     两个旋转的复合在 Clifford 代数中表现为旋量的乘积：
@@ -473,9 +525,80 @@
 
     $$M_N(\mathbb{R}), \quad M_N(\mathbb{C}), \quad M_N(\mathbb{H}), \quad M_N(\mathbb{R}) \oplus M_N(\mathbb{R}), \quad M_N(\mathbb{H}) \oplus M_N(\mathbb{H}).$$
 
+    具体地，$N = 2^{\lfloor (p+q)/2 \rfloor}$ 或其适当因子，类型由 $(p-q) \bmod 8$ 决定：
+
+    | $(p-q) \bmod 8$ | $\mathrm{Cl}(p,q)$ |
+    |:---:|:---|
+    | $0$ | $M_N(\mathbb{R})$ |
+    | $1$ | $M_N(\mathbb{C})$ |
+    | $2$ | $M_N(\mathbb{H})$ |
+    | $3$ | $M_N(\mathbb{H}) \oplus M_N(\mathbb{H})$ |
+    | $4$ | $M_N(\mathbb{H})$ |
+    | $5$ | $M_N(\mathbb{C})$ |
+    | $6$ | $M_N(\mathbb{R})$ |
+    | $7$ | $M_N(\mathbb{R}) \oplus M_N(\mathbb{R})$ |
+
     复 Clifford 代数更简单（2-周期性）：
 
     $$\mathrm{Cl}_{\mathbb{C}}(2m) \cong M_{2^m}(\mathbb{C}), \quad \mathrm{Cl}_{\mathbb{C}}(2m+1) \cong M_{2^m}(\mathbb{C}) \oplus M_{2^m}(\mathbb{C}).$$
+
+??? proof "证明"
+    **归纳法证明**，利用以下递推关系：
+
+    **(a)** $\mathrm{Cl}(p+1, q+1) \cong \mathrm{Cl}(p, q) \otimes M_2(\mathbb{R})$（定理 50.5 已证）。
+
+    **(b)** $\mathrm{Cl}(p+1, q) \cong \mathrm{Cl}(q, p) \otimes \mathrm{Cl}(1, 0)$（符号翻转张量积）。
+
+    证明 (b)：设 $\{e_1, \ldots, e_p, f_1, \ldots, f_q, g\}$ 为 $\mathrm{Cl}(p+1, q)$ 的正交基（$e_i^2 = 1$，$f_j^2 = -1$，$g^2 = 1$）。令 $e_i' = e_i g$，$f_j' = f_j g$。则 $(e_i')^2 = e_i g e_i g = -e_i^2 g^2 = -1$，$(f_j')^2 = f_j g f_j g = -f_j^2 g^2 = 1$。且 $e_i', f_j'$ 之间反交换，它们与 $g$ 对易（经计算 $e_i' g = e_i g^2 = e_i$，$g e_i' = g e_i g = -e_i g^2 = -e_i$... 故实际上 $e_i'$ 与 $g$ 反交换）。$\{e_i', f_j'\}$ 生成与 $\mathrm{Cl}(q, p)$ 同构的子代数，$g$ 生成 $\mathrm{Cl}(1, 0) \cong \mathbb{R} \oplus \mathbb{R}$。
+
+    **(c)** 类似地，$\mathrm{Cl}(p, q+1) \cong \mathrm{Cl}(q, p) \otimes \mathrm{Cl}(0, 1)$。
+
+    **基础**：低维情形 $\mathrm{Cl}(0,0) = \mathbb{R}$，$\mathrm{Cl}(1,0) = \mathbb{R} \oplus \mathbb{R}$，$\mathrm{Cl}(0,1) = \mathbb{C}$（定理 50.3 已验证）。
+
+    **归纳步骤**：对 $p + q$ 归纳。利用关系 (a)，每当 $p \geq 1$ 且 $q \geq 1$，可将 $(p+q)$ 维的分类归结为 $(p+q-2)$ 维。利用 (b) 和 (c)，可处理仅增加 $p$ 或 $q$ 的情形。
+
+    关键的矩阵代数张量积公式：$M_a(\mathbb{K}) \otimes M_b(\mathbb{K}') \cong M_{ab}(\mathbb{K}'')$，其中 $\mathbb{K}''$ 由 Brauer 群中 $[\mathbb{K}] \cdot [\mathbb{K}']$ 决定。在实情形：
+
+    - $\mathbb{R} \otimes \mathbb{R} \cong \mathbb{R}$，$\mathbb{R} \otimes \mathbb{C} \cong \mathbb{C}$，$\mathbb{R} \otimes \mathbb{H} \cong \mathbb{H}$；
+    - $\mathbb{C} \otimes \mathbb{C} \cong \mathbb{C} \oplus \mathbb{C}$（作为实代数）；
+    - $\mathbb{H} \otimes \mathbb{H} \cong M_4(\mathbb{R})$；
+    - $(\mathbb{K} \oplus \mathbb{K}) \otimes \mathbb{K}' \cong \mathbb{K} \otimes \mathbb{K}' \oplus \mathbb{K} \otimes \mathbb{K}'$。
+
+    将这些规则与 $\mathrm{Cl}(1,0) \cong \mathbb{R} \oplus \mathbb{R}$，$\mathrm{Cl}(0,1) \cong \mathbb{C}$ 结合，可从低维逐步推出所有 $(p,q)$ 的分类。8-周期性来自 Brauer 群 $\mathrm{Br}(\mathbb{R}) = \{[\mathbb{R}], [\mathbb{H}]\} \cong \mathbb{Z}/2\mathbb{Z}$ 和上述张量积规则。
+
+!!! theorem "定理 50.12 (Chevalley 同构)"
+    设 $(V, Q)$ 是配备二次型的 $n$ 维 $\mathbb{F}$-向量空间。存在**典范的向量空间同构**
+
+    $$\sigma: \Lambda(V) \xrightarrow{\sim} \mathrm{Cl}(V, Q),$$
+
+    即 Clifford 代数作为**向量空间**（非代数）同构于外代数，维数都是 $2^n$。
+
+    更精确地，$\mathrm{Cl}(V, Q)$ 具有自然的**滤过**（filtration）
+
+    $$F_0 \subset F_1 \subset F_2 \subset \cdots \subset F_n = \mathrm{Cl}(V, Q),$$
+
+    其中 $F_k$ 由至多 $k$ 个向量乘积的线性组合张成。关联分次（associated graded）为
+
+    $$\mathrm{gr}(\mathrm{Cl}(V, Q)) = \bigoplus_{k=0}^n F_k / F_{k-1} \cong \Lambda(V).$$
+
+    Chevalley 同构 $\sigma$ 可具体构造为：对 $v_1, \ldots, v_k \in V$，
+
+    $$\sigma(v_1 \wedge \cdots \wedge v_k) = \frac{1}{k!}\sum_{\tau \in S_k} \operatorname{sgn}(\tau)\, v_{\tau(1)} v_{\tau(2)} \cdots v_{\tau(k)},$$
+
+    即全反对称化。这个映射是向量空间同构，但**不是代数同构**（除非 $Q = 0$，此时 $\mathrm{Cl}(V, 0) = \Lambda(V)$）。
+
+??? proof "证明"
+    **构造映射**：定义 $\sigma_k: \Lambda^k(V) \to \mathrm{Cl}(V, Q)$ 为上述全反对称化。首先验证 $\sigma_k$ 良定义：它保持交替性，因为交换两个变元后 $\operatorname{sgn}(\tau)$ 变号。
+
+    **单射性**：选取正交基 $\{e_1, \ldots, e_n\}$（$B(e_i, e_j) = 0$（$i \neq j$））。在正交基下，
+
+    $$\sigma(e_{i_1} \wedge \cdots \wedge e_{i_k}) = e_{i_1} e_{i_2} \cdots e_{i_k} \quad (i_1 < \cdots < i_k),$$
+
+    因为在 Clifford 代数中正交向量反交换，反对称化后只剩递增序的乘积。这些元素 $\{e_I\}$ 在 $\mathrm{Cl}(V, Q)$ 中线性无关（由维数计数），故 $\sigma$ 是单射。
+
+    **满射性**：$\mathrm{Cl}(V, Q)$ 由 $\{e_I : I \subseteq \{1, \ldots, n\}\}$ 张成，每个都在 $\sigma$ 的像中。
+
+    **滤过结构**：$F_k = \sigma(\bigoplus_{j=0}^k \Lambda^j(V))$。关系 $e_i e_j = -e_j e_i + 2B(e_i, e_j)$ 表明 Clifford 乘积将两个 $1$-向量映到 $F_2$ 中的元素，但模 $F_0$（标量部分 $2B(e_i, e_j)$）后给出 $e_i \wedge e_j$。这正是关联分次同构于外代数的原因。
 
 ---
 

@@ -215,6 +215,12 @@
 
     共 $\prod_{i=0}^{n-1}(q^n - q^i)$。
 
+    可以进一步化简。提取公因子 $q^i$：
+
+    $$|\mathrm{GL}(n,q)| = \prod_{i=0}^{n-1}(q^n - q^i) = q^{0+1+\cdots+(n-1)}\prod_{i=0}^{n-1}(q^{n-i}-1) = q^{n(n-1)/2}\prod_{j=1}^{n}(q^j - 1).$$
+
+    这个公式表明 $|\mathrm{GL}(n,q)|$ 可被 $q^{n(n-1)/2}$ 整除（对应幂幺上三角矩阵群 $U(n,q)$ 的阶），商为 $\prod_{j=1}^n(q^j-1)$。
+
 !!! example "例 52.4 (低阶一般线性群)"
     **(a)** $|\mathrm{GL}(2,2)| = (4-1)(4-2) = 3 \cdot 2 = 6$。$\mathrm{GL}(2,2) \cong S_3$（对称群），因为它置换 $\mathrm{GF}(2)^2$ 的 $3$ 个非零向量。
 
@@ -387,6 +393,33 @@
 
     MacWilliams 恒等式将码 $C$ 的重量分布与对偶码 $C^{\perp}$ 的重量分布联系起来。
 
+??? proof "证明"
+    **利用特征和的 Poisson 求和公式。**
+
+    设 $\chi: \mathrm{GF}(q) \to \mathbb{C}^*$ 为非平凡加法特征（即 $\chi(a+b) = \chi(a)\chi(b)$，$\chi \neq 1$）。对 $u \in \mathrm{GF}(q)^n$，定义 $\chi_u(v) = \chi(\langle u, v \rangle)$。
+
+    **关键引理（Poisson 求和）：** 对任意线性码 $C \leq \mathrm{GF}(q)^n$ 和函数 $f: \mathrm{GF}(q)^n \to \mathbb{C}$，
+
+    $$\sum_{c \in C} f(c) = \frac{|C|}{q^n} \sum_{u \in C^{\perp}} \hat{f}(u),$$
+
+    其中 $\hat{f}(u) = \sum_{v \in \mathrm{GF}(q)^n} f(v)\chi(\langle u, v\rangle)$ 是 $f$ 的 Fourier 变换。
+
+    取 $f(v) = x^{n-w_H(v)} y^{w_H(v)}$。则 $\sum_{c \in C} f(c) = W_C(x, y)$。
+
+    计算 $\hat{f}(u)$：按坐标分解，
+
+    $$\hat{f}(u) = \prod_{i=1}^n \left(\sum_{v_i \in \mathrm{GF}(q)} (x \text{ 或 } y) \cdot \chi(u_i v_i)\right).$$
+
+    当 $u_i = 0$ 时，第 $i$ 个因子为 $x \cdot q + y \cdot 0 = qx$... 更仔细地：$\sum_{v_i} x^{[v_i=0]} y^{[v_i \neq 0]} \chi(0) = x + (q-1)y$。当 $u_i \neq 0$ 时，$\sum_{v_i} x^{[v_i=0]}y^{[v_i \neq 0]}\chi(u_i v_i) = x \cdot 1 + y \sum_{v_i \neq 0}\chi(u_i v_i) = x + y(-1) = x - y$（利用 $\sum_{v_i \in \mathrm{GF}(q)}\chi(u_i v_i) = 0$ 当 $u_i \neq 0$）。
+
+    因此 $\hat{f}(u) = (x+(q-1)y)^{n-w_H(u)}(x-y)^{w_H(u)}$。
+
+    代入 Poisson 求和公式：
+
+    $$W_C(x,y) = \frac{|C|}{q^n}\sum_{u \in C^{\perp}} (x+(q-1)y)^{n-w_H(u)}(x-y)^{w_H(u)} = \frac{|C|}{q^n}W_{C^{\perp}}(x+(q-1)y, x-y).$$
+
+    由 $|C| = q^k$ 和 $q^n / |C| = q^{n-k} = |C^{\perp}|$，变换得 $W_{C^{\perp}}(x,y) = \frac{1}{|C|}W_C(x+(q-1)y, x-y)$。
+
 !!! definition "定义 52.14 (Reed-Muller 码)"
     **Reed-Muller 码** $\mathrm{RM}(r, m)$ 定义在 $\mathrm{GF}(2)$ 上：
 
@@ -474,6 +507,21 @@
 
     达到此界的码称为**完美码**。Hamming 码和 Golay 码是完美码。
 
+??? proof "证明"
+    **球填充论证**（sphere packing argument）。对每个码字 $c \in C$，定义 Hamming 球
+
+    $$B(c, t) = \{v \in \mathrm{GF}(q)^n : d_H(v, c) \leq t\}.$$
+
+    $B(c, t)$ 中的向量数为 $|B(c,t)| = \sum_{i=0}^t \binom{n}{i}(q-1)^i$（选 $i$ 个坐标变化，每个坐标有 $q-1$ 种非零取值）。
+
+    由于 $d(C) = 2t+1$，任意两个码字 $c_1 \neq c_2$ 满足 $d_H(c_1, c_2) \geq 2t+1$。因此 $B(c_1, t) \cap B(c_2, t) = \emptyset$（若 $v$ 同时在两个球中，则 $d_H(c_1, c_2) \leq d_H(c_1, v) + d_H(v, c_2) \leq 2t < 2t+1$，矛盾）。
+
+    $|C|$ 个互不相交的球都包含在 $\mathrm{GF}(q)^n$ 中，故
+
+    $$|C| \cdot \sum_{i=0}^t \binom{n}{i}(q-1)^i \leq q^n.$$
+
+    由 $|C| = q^k$，得 $q^k \sum_{i=0}^t \binom{n}{i}(q-1)^i \leq q^n$。
+
 !!! example "例 52.11 (有限域线性代数的更多应用)"
     | 应用领域 | 有限域 | 线性代数工具 |
     |:---|:---|:---|
@@ -487,6 +535,189 @@
 
 ---
 
+## 52.9 循环码
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何利用多项式代数的理想结构来构造线性码？
+
+</div>
+
+!!! definition "定义 52.15 (循环码)"
+    **循环码**是满足以下性质的线性码 $C \subseteq \mathrm{GF}(q)^n$：若 $(c_0, c_1, \ldots, c_{n-1}) \in C$，则其循环移位 $(c_{n-1}, c_0, c_1, \ldots, c_{n-2}) \in C$。
+
+    将码字 $(c_0, c_1, \ldots, c_{n-1})$ 与多项式 $c(x) = c_0 + c_1 x + \cdots + c_{n-1}x^{n-1} \in \mathrm{GF}(q)[x]/(x^n - 1)$ 对应。则循环移位对应于乘以 $x$ 模 $x^n - 1$。
+
+    因此，**循环码等价于商环 $R_n = \mathrm{GF}(q)[x]/(x^n - 1)$ 中的理想**。
+
+!!! theorem "定理 52.13 (循环码的生成多项式)"
+    设 $C$ 是 $\mathrm{GF}(q)^n$ 中的循环码（$\gcd(n, q) = 1$）。则：
+
+    1. $C$ 作为 $R_n$ 的理想由唯一的首一多项式 $g(x)$ 生成（称为**生成多项式**），且 $g(x) \mid (x^n - 1)$。
+    2. $\deg g = n - k$，其中 $k = \dim C$。
+    3. $C$ 的**校验多项式**为 $h(x) = (x^n - 1)/g(x)$，$\deg h = k$。
+    4. $C = \{m(x)g(x) \bmod (x^n-1) : m(x) \in \mathrm{GF}(q)[x], \, \deg m < k\}$。
+    5. $C$ 的生成矩阵可取为
+
+    $$G = \begin{pmatrix} g(x) \\ xg(x) \\ \vdots \\ x^{k-1}g(x) \end{pmatrix},$$
+
+    即 $g(x)$ 及其前 $k-1$ 次循环移位。
+
+??? proof "证明"
+    **(1)** 由于 $\mathrm{GF}(q)[x]$ 是主理想整环，$R_n = \mathrm{GF}(q)[x]/(x^n-1)$ 中的理想对应 $\mathrm{GF}(q)[x]$ 中包含 $(x^n-1)$ 的理想，即形如 $(g(x))$ 的理想，其中 $g(x) \mid (x^n-1)$。
+
+    **(2)** $C$ 的维数（作为 $\mathrm{GF}(q)$-向量空间）等于 $n - \deg g$，因为 $C = \{m(x)g(x) : \deg m < n - \deg g\}$ 的基为 $\{g(x), xg(x), \ldots, x^{n-\deg g - 1}g(x)\}$。
+
+    **(3)(4)** 直接由 (1)(2) 推出。
+
+!!! definition "定义 52.16 (循环码的根)"
+    设 $\alpha$ 是 $x^n - 1$ 在 $\overline{\mathrm{GF}(q)}$ 中的本原 $n$ 次根（即 $\alpha$ 的阶为 $n$）。循环码 $C$ 的生成多项式 $g(x)$ 的根集合 $T = \{i : g(\alpha^i) = 0\} \subseteq \mathbb{Z}/n\mathbb{Z}$ 称为 $C$ 的**定义集**（defining set）。
+
+    $c(x) \in C$ 当且仅当 $g(x) \mid c(x)$，等价于 $c(\alpha^i) = 0$ 对所有 $i \in T$。
+
+!!! example "例 52.12 (循环码示例)"
+    在 $\mathrm{GF}(2)$ 上，$x^7 - 1 = (x-1)(x^3+x+1)(x^3+x^2+1)$。
+
+    - 取 $g(x) = x^3 + x + 1$：得 $[7, 4, 3]_2$ 循环码，即 Hamming 码。
+    - 取 $g(x) = (x-1)(x^3+x+1) = x^4+x^3+x^2+1$：得 $[7, 3, 4]_2$ 循环码。
+    - 取 $g(x) = x^3+x^2+1$：得另一个 $[7, 4, 3]_2$ Hamming 码（等价码）。
+
+---
+
+## 52.10 BCH 码
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何通过指定根的连续性来构造具有可控最小距离的循环码？
+
+</div>
+
+!!! definition "定义 52.17 (BCH 码)"
+    设 $\alpha$ 是 $\mathrm{GF}(q^m)$ 中的本原 $n$ 次单位根（$n \mid q^m - 1$）。**BCH 码**（Bose-Chaudhuri-Hocquenghem code）$\mathrm{BCH}(n, \delta)$ 定义为生成多项式为
+
+    $$g(x) = \mathrm{lcm}(m_b(x), m_{b+1}(x), \ldots, m_{b+\delta-2}(x))$$
+
+    的循环码，其中 $m_i(x)$ 是 $\alpha^i$ 在 $\mathrm{GF}(q)$ 上的最小多项式，$b$ 是起始整数（通常取 $b = 1$），$\delta$ 是**设计距离**。
+
+    当 $n = q^m - 1$ 时称为**本原 BCH 码**。当 $b = 1$ 时称为**狭义 BCH 码**。
+
+!!! theorem "定理 52.14 (BCH 界)"
+    BCH 码 $\mathrm{BCH}(n, \delta)$ 的最小距离满足
+
+    $$d \geq \delta.$$
+
+    即**设计距离是最小距离的下界**。
+
+??? proof "证明"
+    设 $c(x) \in C$ 是非零码字，$w_H(c) = w$。需证 $w \geq \delta$。
+
+    由定义，$c(\alpha^j) = 0$ 对 $j = b, b+1, \ldots, b+\delta-2$。设 $c(x) = \sum_{i \in S} c_i x^i$，其中 $S = \{i : c_i \neq 0\}$，$|S| = w$。
+
+    则对每个 $j \in \{b, \ldots, b+\delta-2\}$：
+
+    $$\sum_{i \in S} c_i \alpha^{ij} = 0.$$
+
+    这 $\delta - 1$ 个方程可写成矩阵形式：
+
+    $$\begin{pmatrix} \alpha^{bs_1} & \alpha^{bs_2} & \cdots & \alpha^{bs_w} \\ \alpha^{(b+1)s_1} & \alpha^{(b+1)s_2} & \cdots & \alpha^{(b+1)s_w} \\ \vdots & & & \vdots \\ \alpha^{(b+\delta-2)s_1} & \alpha^{(b+\delta-2)s_2} & \cdots & \alpha^{(b+\delta-2)s_w} \end{pmatrix} \begin{pmatrix} c_{s_1} \\ c_{s_2} \\ \vdots \\ c_{s_w} \end{pmatrix} = 0,$$
+
+    其中 $S = \{s_1, \ldots, s_w\}$。此矩阵为 $(\delta-1) \times w$ 的 Vandermonde 型矩阵。
+
+    若 $w < \delta$，则此矩阵有 $\delta - 1 > w$ 行、$w$ 列。取其 $w \times w$ 子矩阵，它是 Vandermonde 矩阵
+
+    $$V = (\alpha^{(b+l)s_j})_{0 \leq l \leq w-1, \, 1 \leq j \leq w},$$
+
+    行列式 $\det V = \alpha^{b(s_1+\cdots+s_w)} \prod_{j<k}(\alpha^{s_k} - \alpha^{s_j}) \neq 0$（因为 $s_j$ 互不相同，$\alpha$ 是本原根）。
+
+    因此齐次方程组只有零解 $(c_{s_1}, \ldots, c_{s_w}) = 0$，与 $c \neq 0$ 矛盾。故 $w \geq \delta$。
+
+!!! example "例 52.13 (BCH 码的构造)"
+    **$\mathrm{GF}(2)$ 上的 $[15, 7, 5]_2$ BCH 码：**
+
+    $n = 15 = 2^4 - 1$（本原 BCH 码），$\delta = 5$。设 $\alpha$ 是 $\mathrm{GF}(2^4)$ 的本原元（$\alpha^{15} = 1$），最小多项式 $m_1(x) = x^4+x+1$。
+
+    $\alpha, \alpha^2, \alpha^4, \alpha^8$ 有相同的最小多项式 $m_1(x)$（Frobenius 轨道）。$\alpha^3, \alpha^6, \alpha^{12}, \alpha^{9}$ 的最小多项式为 $m_3(x) = x^4+x^3+x^2+x+1$。
+
+    $g(x) = \mathrm{lcm}(m_1(x), m_2(x), m_3(x), m_4(x)) = m_1(x) \cdot m_3(x) = (x^4+x+1)(x^4+x^3+x^2+x+1)$。
+
+    $\deg g = 8$，$k = 15 - 8 = 7$。BCH 界保证 $d \geq 5$，实际 $d = 5$。
+
+!!! definition "定义 52.18 (Reed-Solomon 码作为 BCH 码)"
+    **Reed-Solomon 码**是 BCH 码的特殊情形：取 $n = q - 1$，$m = 1$（不需要扩域，所有根都在 $\mathrm{GF}(q)$ 中）。
+
+    $[q-1, k, q-k]_q$ RS 码的生成多项式为
+
+    $$g(x) = (x - \alpha)(x - \alpha^2) \cdots (x - \alpha^{q-1-k}),$$
+
+    其中 $\alpha$ 是 $\mathrm{GF}(q)^{\times}$ 的生成元。
+
+    RS 码的最小距离恰为 $d = n - k + 1$（达到 Singleton 界），因此是 MDS 码。每个 RS 码既是 BCH 码也是 MDS 码。
+
+!!! theorem "定理 52.15 (BCH 码的译码)"
+    BCH 码可通过以下步骤高效译码（**Peterson-Gorenstein-Zierler 算法**）：
+
+    1. **计算伴随式**：$S_j = r(\alpha^j)$，$j = b, \ldots, b+\delta-2$，其中 $r(x)$ 是接收多项式。
+    2. **求解关键方程**：找错误位置多项式 $\Lambda(x)$，使得 $S(x)\Lambda(x) \equiv \Omega(x) \pmod{x^{\delta-1}}$。
+    3. **Chien 搜索**：找 $\Lambda(x)$ 的根 $\alpha^{-i}$，确定错误位置 $i$。
+    4. **Forney 公式**：计算错误值 $e_i = -\frac{\Omega(\alpha^{-i})}{\Lambda'(\alpha^{-i})}$。
+
+    时间复杂度为 $O(n \cdot \delta)$。对 RS 码，还可使用更高效的 Berlekamp-Massey 算法（$O(\delta^2)$）或 Euclidean 算法。
+
+---
+
+## 52.11 Gilbert-Varshamov 界
+
+<div class="context-flow" markdown>
+
+**核心问题**：什么样的码参数 $(n, k, d)$ 是可实现的？存在性下界是什么？
+
+</div>
+
+!!! theorem "定理 52.16 (Gilbert-Varshamov 界)"
+    若
+
+    $$\sum_{i=0}^{d-2} \binom{n-1}{i}(q-1)^i < q^{n-k},$$
+
+    则存在 $[n, k, d]_q$ 线性码。等价地，存在 $[n, k]_q$ 线性码，其最小距离 $d$ 满足
+
+    $$d \geq \max\left\{d' : \sum_{i=0}^{d'-2}\binom{n-1}{i}(q-1)^i < q^{n-k}\right\}.$$
+
+??? proof "证明"
+    **贪心构造法（体积计数论证）。** 我们逐列构造校验矩阵 $H$（$(n-k) \times n$ 矩阵）。
+
+    由定理 52.9，$d \geq d'$ 等价于 $H$ 的任意 $d'-1$ 列线性无关。
+
+    **第 1 列**：取 $\mathrm{GF}(q)^{n-k}$ 中任意非零向量 $h_1$。
+
+    **第 $j$ 列**（$j = 2, \ldots, n$）：选取 $h_j$ 使得 $h_j$ 不在 $\{h_1, \ldots, h_{j-1}\}$ 的任意 $d'-2$ 个向量的线性包（span）中。
+
+    需排除的向量数：至多 $\binom{j-1}{d'-2}$ 个 $(d'-2)$-子集，每个线性包至多 $q^{d'-2}$ 个元素。但更精确地，以 $h_j$ 和已选的 $d'-2$ 个列的所有线性组合来估计。包含 $h_j$ 的"禁止集合"的大小为
+
+    $$\sum_{i=0}^{d'-2} \binom{j-1}{i}(q-1)^i \leq \sum_{i=0}^{d'-2}\binom{n-1}{i}(q-1)^i.$$
+
+    只要此数严格小于 $q^{n-k}$（$\mathrm{GF}(q)^{n-k}$ 中可用向量的总数），就可以找到合法的 $h_j$。
+
+    条件 $\sum_{i=0}^{d-2}\binom{n-1}{i}(q-1)^i < q^{n-k}$ 保证所有 $n$ 步都可完成，得到最小距离至少为 $d$ 的码。
+
+!!! theorem "定理 52.17 (编码界的比较)"
+    对 $[n, k, d]_q$ 线性码，三个主要界的关系为：
+
+    **Singleton 界**（上界）：$d \leq n - k + 1$。
+
+    **Hamming 界**（上界）：$q^k \sum_{i=0}^{\lfloor(d-1)/2\rfloor}\binom{n}{i}(q-1)^i \leq q^n$。
+
+    **Gilbert-Varshamov 界**（下界/存在性）：存在码当 $\sum_{i=0}^{d-2}\binom{n-1}{i}(q-1)^i < q^{n-k}$。
+
+    渐近地（$n \to \infty$，码率 $R = k/n$ 和相对距离 $\delta = d/n$ 固定），用 $q$-ary 熵函数 $H_q(\delta) = \delta\log_q(q-1) - \delta\log_q\delta - (1-\delta)\log_q(1-\delta)$ 表示：
+
+    - Singleton 界：$R \leq 1 - \delta$；
+    - Hamming 界：$R \leq 1 - H_q(\delta/2)$；
+    - GV 界：$R \geq 1 - H_q(\delta)$。
+
+    GV 界和 Hamming 界之间存在一个"间隙"，确定其间是否存在码（**渐近界问题**）至今是编码理论的核心开放问题之一。
+
+---
+
 ### 本章总结
 
 有限域上的线性代数保留了向量空间理论的代数框架，但引入了丰富的组合结构：
@@ -494,7 +725,10 @@
 - **子空间的个数**由 Gauss 二项式系数 $\binom{n}{k}_q$ 给出，它是普通二项式系数的 $q$-模拟；
 - **$\mathrm{GL}(n,q)$ 的阶**有精确的闭合公式，反映了有限域上"非退化"条件的组合意义；
 - **标准形理论**中，Jordan 形需要代数闭域，但有理标准形对任意域成立；
-- **线性码**将子空间的代数结构转化为纠错能力，通过生成矩阵和校验矩阵的对偶关系实现编码和译码。
+- **线性码**将子空间的代数结构转化为纠错能力，通过生成矩阵和校验矩阵的对偶关系实现编码和译码；
+- **循环码**利用 $\mathrm{GF}(q)[x]/(x^n-1)$ 的理想结构，将编码问题转化为多项式整除性；
+- **BCH 码**通过指定连续根来保证设计距离，是最重要的代数码族之一；Reed-Solomon 码是其达到 Singleton 界的特殊情形；
+- **Gilbert-Varshamov 界**通过体积计数证明了好码的存在性，而 Hamming 界和 Singleton 界给出了性能上限。
 
 这些工具在信息时代的应用——从手机通信到量子计算——使得有限域线性代数成为最具实际影响力的数学分支之一。
 

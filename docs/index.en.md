@@ -10,7 +10,7 @@
 
 This site is a **comprehensive, systematic, and self-contained** linear algebra knowledge base, covering all core linear algebra content from undergraduate introductory courses through doctoral-level research. Whether you are a beginner or a researcher, you can find the knowledge you need here.
 
-The content is organized into five parts with 30+ chapters, arranged by increasing difficulty and logical coherence. Each chapter contains complete definitions, theorems, proofs, and examples, striving for rigor and clarity.
+The content is organized into eight parts with 90 chapters, arranged by increasing difficulty and logical coherence. Each chapter contains complete definitions, theorems, proofs, and examples, striving for rigor and clarity.
 
 ---
 
@@ -60,29 +60,26 @@ Suitable for master's and doctoral students, covering matrix analysis and advanc
 | [Chapter 19  Kronecker Product and Vec Operator](part3/ch19-kronecker.md) | Kronecker product, Vec operator, and applications to matrix equations |
 | [Chapter 20  Matrix Equations](part3/ch20-matrix-equations.md) | Sylvester equation, Lyapunov equation, Riccati equation |
 
-### Part IV: Special Topics <span class="difficulty-tag research">Doctoral</span>
+### Part IV: Algebraic Structures & Generalizations <span class="difficulty-tag research">Doctoral/Research</span>
 
-For doctoral students and researchers, introducing frontier topics in linear algebra.
+Algebraic foundations and structural generalizations of linear algebra.
 
 | Chapter | Overview |
 |---------|----------|
 | [Chapter 21  Multilinear Algebra and Tensors](part4/ch21-multilinear-algebra.md) | Dual spaces, tensor products, exterior algebra, tensor decomposition |
-| [Chapter 22  Numerical Linear Algebra](part4/ch22-numerical-linear-algebra.md) | Iterative methods, Krylov subspaces, numerical stability |
-| [Chapter 23  Introduction to Random Matrices](part4/ch23-random-matrices.md) | Wigner semicircle law, Marchenko–Pastur law, eigenvalue distributions |
-| [Chapter 24  Matrix Manifolds](part4/ch24-matrix-manifolds.md) | Stiefel manifold, Grassmann manifold, matrix Lie groups |
+| [Chapter 48  Modules over PIDs](part7/ch48-modules-pid.md) | Structure theorem for modules, invariant factors, unified Jordan/rational form |
+| [Chapter 49  Exterior Algebra & Grassmannian](part7/ch49-exterior-algebra.md) | Wedge product, exterior powers, compound matrices, Plücker coordinates |
+| [Chapter 50  Clifford Algebras & Geometric Algebra](part7/ch50-clifford-algebra.md) | Geometric product, spinors, Spin groups, Bott periodicity |
+| [Chapter 51  Quaternion Matrices](part7/ch51-quaternion-matrices.md) | Quaternion algebra, left/right eigenvalues, quaternion SVD |
+| [Chapter 52  Linear Algebra over Finite Fields](part7/ch52-finite-fields.md) | Vector spaces over GF(q), Gaussian binomials, GL(n,q), linear codes |
+| [Chapter 53  Symplectic & Hamiltonian Matrices](part7/ch53-symplectic-matrices.md) | Symplectic group, Hamiltonian matrices, Williamson's theorem |
+| [Chapter 54  Quiver Representations](part7/ch54-quiver-representations.md) | Quiver representations, Gabriel's theorem, Dynkin diagrams |
+| [Chapter 55  Matrix Groups & Classical Lie Groups](part7/ch55-matrix-groups.md) | GL, SL, O, SO, U, SU, Sp, Lie algebras, exponential map, BCH formula |
+| [Chapter 56  Pfaffian](part7/ch56-pfaffian.md) | Pfaffian properties, pf(A)²=det(A), FKT algorithm, perfect matchings |
 
-### Part V: Applications <span class="difficulty-tag research">Interdisciplinary</span>
+### Part V–VIII: Advanced Topics
 
-Core applications of linear algebra across disciplines.
-
-| Chapter | Overview |
-|---------|----------|
-| [Chapter 25  Linear Algebra in Optimization](part4/ch25-optimization.md) | Semidefinite programming, matrix completion, compressed sensing, PCA |
-| [Chapter 26  Linear Algebra in Differential Equations](part5/ch26-differential-equations.md) | Linear ODE systems, matrix exponential, stability analysis |
-| [Chapter 27  Linear Algebra in Graph Theory and Networks](part5/ch27-graph-theory.md) | Spectral graph theory, Laplacian, PageRank, expander graphs |
-| [Chapter 28  Linear Algebra in Quantum Information](part5/ch28-quantum-computing.md) | Quantum states, unitary transformations, entanglement, quantum channels |
-| [Chapter 29  Linear Algebra in Statistics and Machine Learning](part5/ch29-statistics-ml.md) | PCA, regression, kernel methods, dimensionality reduction |
-| [Chapter 30  Linear Algebra in Signal Processing and Coding](part5/ch30-signal-processing.md) | DFT, compressed sensing, error-correcting codes, wavelet transform |
+Parts V through VIII cover matrix structures, operator theory, modern frontiers, and applications across 66 chapters. These parts are currently available in Chinese; English translations are in progress.
 
 ---
 

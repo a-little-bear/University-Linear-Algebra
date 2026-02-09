@@ -4,7 +4,7 @@
 
 **前置**：正定矩阵(Ch16) · SVD(Ch11) · 优化(Ch25) · 图论(Ch27)
 
-**本章脉络**：矩阵补全的一般框架 → 正定补全（弦图条件） → 低秩补全（Netflix 问题） → 核范数最小化 → 精确恢复条件 → 欧氏距离矩阵补全 → 惯性补全 → 算法
+**本章脉络**：矩阵补全的一般框架 → 正定补全（弦图条件） → 低秩补全（Netflix 问题） → 核范数最小化 → 精确恢复条件 → 欧氏距离矩阵补全 → 算法 → 含噪声补全 → OptSpace 算法 → 矩阵感知
 
 **延伸**：低秩矩阵补全是推荐系统（Netflix、Amazon）和协同过滤的数学基础；正定补全在空间统计（稀疏协方差估计）和凸优化（SDP 松弛的对偶）中有重要应用
 
@@ -471,12 +471,169 @@
 
 ---
 
+## 62.9 含噪声矩阵补全
+
+<div class="context-flow" markdown>
+
+**核心问题**：当观测条目包含噪声时，如何稳健地恢复低秩矩阵？误差能控制到多小？
+
+</div>
+
+在实际应用中，观测到的矩阵条目几乎总是含有噪声的。Netflix 的用户评分包含主观波动，传感器测量包含物理噪声。含噪声矩阵补全是理论与实践之间的关键桥梁。
+
+!!! definition "定义 62.16 (含噪声矩阵补全问题)"
+    设 $M \in \mathbb{R}^{m \times n}$ 是未知的秩-$r$ 矩阵。对 $(i,j) \in \Omega$，我们观测到含噪声的条目：
+
+    $$Y_{ij} = M_{ij} + Z_{ij},$$
+
+    其中 $Z_{ij}$ 是噪声（通常假设为独立、零均值、有界方差 $\sigma^2$ 的随机变量）。目标是从 $\{Y_{ij} : (i,j) \in \Omega\}$ 估计 $M$。
+
+!!! definition "定义 62.17 (含噪声核范数最小化)"
+    含噪声情形下的核范数最小化为约束松弛形式：
+
+    $$\hat{X} = \arg\min_X \|X\|_* \quad \text{s.t.} \quad \|\mathcal{P}_\Omega(X) - \mathcal{P}_\Omega(Y)\|_F \leq \delta,$$
+
+    其中 $\delta$ 是与噪声水平匹配的参数（典型取 $\delta = \sigma\sqrt{|\Omega|}$）。
+
+    等价地，可以使用正则化形式（Lagrangian 对偶）：
+
+    $$\hat{X} = \arg\min_X \frac{1}{2|\Omega|}\|\mathcal{P}_\Omega(X - Y)\|_F^2 + \lambda\|X\|_*.$$
+
+    正则化参数 $\lambda > 0$ 控制秩-精度之间的平衡。
+
+!!! theorem "定理 62.15 (Candes-Plan 误差界, 2010)"
+    设 $M \in \mathbb{R}^{n \times n}$ 是秩-$r$ 矩阵，不相干性参数为 $\mu_0$。$\Omega$ 中每个条目独立以概率 $p$ 被采样，噪声满足 $|Z_{ij}| \leq \sigma$。若 $p \geq C\mu_0^2 r \log^2(n) / n$，则核范数最小化的解 $\hat{X}$ 满足
+
+    $$\frac{1}{n}\|\hat{X} - M\|_F \leq C' \sigma \sqrt{\frac{r}{p}} + C'' \sigma \sqrt{\frac{\log n}{n \cdot p}}$$
+
+    以高概率成立（概率至少 $1 - n^{-3}$）。
+
+    特别地，当 $p = \Theta(r \log^2 n / n)$（最小采样率量级）时，每个条目的平均误差为 $O(\sigma)$，这与已知所有条目但有噪声的情形量级相同。
+
+??? proof "证明（概要）"
+    **第一步（对偶证书的稳定版本）。** 与无噪声情形类似，构造近似对偶证书。关键区别在于约束从等式 $\mathcal{P}_\Omega(X) = \mathcal{P}_\Omega(M)$ 放松为不等式。
+
+    **第二步（误差分解）。** 令 $\Delta = \hat{X} - M$。利用 $\hat{X}$ 的最优性和三角不等式，将 $\Delta$ 分解为在 $M$ 的切空间 $T$ 上的分量 $\mathcal{P}_T(\Delta)$ 和法空间 $T^\perp$ 上的分量。最优性条件给出 $\|\mathcal{P}_{T^\perp}(\Delta)\|_* \leq 3\|\mathcal{P}_T(\Delta)\|_*$（"锥约束"）。
+
+    **第三步（受限强凸性）。** 在锥约束下，采样算子 $\frac{1}{p}\mathcal{P}_\Omega$ 在秩-$2r$ 矩阵附近满足受限等距性质（RIP），从而
+
+    $$\|\Delta\|_F^2 \leq C \cdot \frac{1}{p}\|\mathcal{P}_\Omega(\Delta)\|_F^2 + \text{低阶项}.$$
+
+    结合噪声的约束 $\|\mathcal{P}_\Omega(\Delta)\|_F \leq 2\delta$，得到最终误差界。$\blacksquare$
+
+!!! theorem "定理 62.16 (信息论极小极大下界)"
+    对含噪声矩阵补全问题，任何估计方法 $\hat{X}$（无论计算量多大），在最坏情形下的均方误差满足
+
+    $$\inf_{\hat{X}} \sup_{M: \mathrm{rank}(M) \leq r} \mathbb{E}\Big[\frac{1}{mn}\|\hat{X} - M\|_F^2\Big] \geq c \cdot \sigma^2 \cdot \frac{r(m + n)}{|\Omega|}.$$
+
+    这说明核范数最小化的误差界是**近最优**的（至多差对数因子）。
+
+??? proof "证明（概要）"
+    利用 Fano 不等式。构造秩-$r$ 矩阵的 $\epsilon$-packing（在 Frobenius 范数下），使得不同矩阵在 $\Omega$ 上的观测分布难以区分。packing 数的对数（信息维度）为 $\Theta(r(m+n-r))$，结合 KL 散度的计算给出下界。$\blacksquare$
+
+!!! example "例 62.12"
+    **含噪声 Netflix 问题。** 若用户评分的噪声标准差 $\sigma \approx 1$（1 星波动），采样率 $p \approx 10^8 / (5 \times 10^5 \times 1.8 \times 10^4) \approx 0.01$，秩 $r \approx 20$，则理论误差界为
+
+    $$\text{RMSE} \approx \sigma\sqrt{r/p} / \sqrt{n} \approx 1 \times \sqrt{20/0.01}/\sqrt{18000} \approx 0.33 \text{ 星}.$$
+
+    这与 Netflix 竞赛中最佳算法的实际 RMSE $\approx 0.85$ 星（在测试集上）大致吻合量级。
+
+---
+
+## 62.10 OptSpace 算法
+
+<div class="context-flow" markdown>
+
+**核心问题**：如何结合谱方法和局部优化来高效求解矩阵补全？
+
+</div>
+
+!!! definition "定义 62.18 (OptSpace 算法, Keshavan-Montanari-Oh 2010)"
+    **OptSpace** 算法分两步进行矩阵补全：
+
+    **第一步（谱初始化）。** 构造修剪后的观测矩阵 $\tilde{Y}$（将行/列度数异常大的条目置零以减少偏差），计算 $\frac{n}{|\Omega|}\tilde{Y}$ 的前 $r$ 个奇异向量 $U_0 \in \mathbb{R}^{m \times r}$，$V_0 \in \mathbb{R}^{n \times r}$。
+
+    **第二步（局部精化）。** 在 Grassmann 流形上执行梯度下降，迭代优化
+
+    $$\min_{U \in \mathbb{R}^{m \times r}, V \in \mathbb{R}^{n \times r}, \Sigma \in \mathbb{R}^{r \times r}} F(U, \Sigma, V) = \sum_{(i,j) \in \Omega}\big(Y_{ij} - (U\Sigma V^T)_{ij}\big)^2,$$
+
+    初始点由第一步的 $U_0, V_0$ 和最小二乘 $\Sigma_0$ 给出。
+
+!!! theorem "定理 62.17 (OptSpace 的性能保证)"
+    在不相干性条件和 $|\Omega| \geq C\mu_0 rn \log n$ 的采样条件下：
+
+    **(a)** 谱初始化给出的 $U_0, V_0$ 与真实子空间之间的距离为 $O(\sigma\sqrt{n/|\Omega|})$，足够接近全局最优使局部优化收敛。
+
+    **(b)** 经过 $O(\log(1/\epsilon))$ 步梯度下降后，OptSpace 达到近最优误差：
+
+    $$\frac{1}{\sqrt{mn}}\|\hat{X} - M\|_F \leq C'\sigma\sqrt{\frac{r}{|\Omega|/n}} + \epsilon.$$
+
+    **(c)** 总计算复杂度为 $O(|\Omega| r \log(1/\epsilon))$，对大规模问题非常高效。
+
+!!! remark "注记"
+    OptSpace 的关键优势在于：谱初始化避免了非凸优化中陷入局部极小的风险，而 Grassmann 流形上的梯度下降利用了低秩结构，每步只需 $O(|\Omega| r)$ 的运算量。这一"谱方法 + 局部精化"的范式后来成为非凸矩阵恢复的标准框架。
+
+---
+
+## 62.11 矩阵感知
+
+<div class="context-flow" markdown>
+
+**核心问题**：当观测不是单个条目而是线性测量时，如何恢复低秩矩阵？
+
+</div>
+
+!!! definition "定义 62.19 (矩阵感知问题)"
+    **矩阵感知**（matrix sensing）问题：给定 $k$ 个线性测量
+
+    $$y_i = \langle A_i, X \rangle = \mathrm{tr}(A_i^T X), \quad i = 1, \ldots, k,$$
+
+    其中 $A_i \in \mathbb{R}^{m \times n}$ 是已知的测量矩阵，$X \in \mathbb{R}^{m \times n}$ 是秩-$r$ 的未知矩阵。从 $\{y_i\}_{i=1}^k$ 恢复 $X$。
+
+    矩阵补全是矩阵感知的特殊情形：取 $A_i = e_{r_i}e_{c_i}^T$（标准基矩阵），则 $y_i = X_{r_i, c_i}$。
+
+!!! definition "定义 62.20 (矩阵 RIP)"
+    线性映射 $\mathcal{A}: \mathbb{R}^{m \times n} \to \mathbb{R}^k$（$\mathcal{A}(X) = (\langle A_1, X\rangle, \ldots, \langle A_k, X\rangle)^T$）满足**秩-$r$ 受限等距性质**（RIP），常数为 $\delta_r$，如果对所有秩不超过 $r$ 的矩阵 $X$：
+
+    $$(1 - \delta_r)\|X\|_F^2 \leq \|\mathcal{A}(X)\|_2^2 \leq (1 + \delta_r)\|X\|_F^2.$$
+
+!!! theorem "定理 62.18 (矩阵感知的精确恢复)"
+    若测量矩阵 $A_i$ 的元素为独立标准正态分布，且测量数 $k \geq Cr(m + n)$，则 $\mathcal{A}$ 以高概率满足秩-$2r$ RIP（常数 $\delta_{2r} < 1/2$）。
+
+    此时核范数最小化
+
+    $$\hat{X} = \arg\min_X \|X\|_* \quad \text{s.t.} \quad \mathcal{A}(X) = \mathcal{A}(M)$$
+
+    精确恢复 $M$（$\hat{X} = M$）。
+
+??? proof "证明（概要）"
+    证明与压缩感知中 $\ell_1$ 最小化的 RIP 分析平行。
+
+    **第一步（RIP 验证）。** 高斯测量矩阵满足矩阵 RIP。利用秩-$r$ 矩阵的 SVD 参数化和 $\epsilon$-网论证：秩-$r$、Frobenius 范数为 1 的矩阵集合可以用 $(9/\epsilon)^{r(m+n)}$ 个点的网覆盖。对每个网点，$\|\mathcal{A}(X)\|_2^2$ 是 $\chi^2$ 分布，集中在 1 附近。取 union bound 得到 $k \geq Cr(m+n)/\delta^2$ 即可。
+
+    **第二步（核范数最小化的正确性）。** 利用 RIP 条件和凸优化的 KKT 条件，证明 $M$ 是核范数最小化的唯一解。关键不等式是：对任意 $\Delta = X - M$（$\mathcal{A}(\Delta) = 0$），RIP 给出 $\|\Delta\|_F = 0$（当 $\Delta$ 满足由核范数最优性导出的锥约束时）。$\blacksquare$
+
+!!! example "例 62.13"
+    **矩阵感知与矩阵补全的采样效率比较。**
+
+    | 问题 | 测量类型 | 所需测量数 | RIP 适用？ |
+    |------|---------|-----------|-----------|
+    | 矩阵感知（高斯） | $y_i = \langle A_i, X\rangle$ | $O(r(m+n))$ | 是 |
+    | 矩阵补全（均匀采样） | $Y_{ij} = X_{ij}$ | $O(\mu_0 rn \log n)$ | 需不相干性 |
+
+    矩阵感知需要的测量数与自由度 $r(m+n-r)$ 同量级（无对数因子），但每次测量需要访问整个矩阵（不切实际于 Netflix 等应用）。矩阵补全每次只观测一个条目（实际可行），但需要额外的不相干性假设和对数因子。
+
+---
+
 **本章要点总结：**
 
 1. 矩阵补全问题从部分观测条目恢复满足特定性质的完整矩阵。
 2. Grone 定理：正定补全存在当且仅当稀疏模式图是弦图。
 3. 低秩矩阵补全需要不相干性条件：矩阵的信息不能集中在少数行/列。
 4. 核范数是秩的最佳凸代理；核范数最小化在 $O(rn\log n)$ 个随机样本下精确恢复。
-5. 欧氏距离矩阵补全通过 Gram 矩阵化归为正定补全加秩约束。
-6. 高效算法包括交替最小化、SVT 和流形梯度下降，规模可达百万级。
-7. 核心应用包括推荐系统（Netflix）、传感器定位和运动结构恢复。
+5. 含噪声矩阵补全：核范数正则化达到近最优误差 $O(\sigma\sqrt{r(m+n)/|\Omega|})$。
+6. OptSpace 算法结合谱初始化与流形梯度下降，计算复杂度 $O(|\Omega|r)$。
+7. 矩阵感知以一般线性测量取代逐条目观测，高斯测量满足 RIP。
+8. 欧氏距离矩阵补全通过 Gram 矩阵化归为正定补全加秩约束。
+9. 高效算法包括交替最小化、SVT、OptSpace 和流形梯度下降，规模可达百万级。
+10. 核心应用包括推荐系统（Netflix）、传感器定位和运动结构恢复。

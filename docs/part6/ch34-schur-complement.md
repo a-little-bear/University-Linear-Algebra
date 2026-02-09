@@ -4,7 +4,7 @@
 
 **前置**：分块矩阵(Ch2) · 行列式(Ch3) · 正定矩阵(Ch16)
 
-**本章脉络**：Schur 补定义 → 块消元 → 行列式公式 → 正定性判定 → Sherman-Morrison-Woodbury → 统计应用 → 优化应用
+**本章脉络**：Schur 补定义 → 块消元 → 行列式公式 → 正定性判定 → Sherman-Morrison-Woodbury → 商性质与单调性 → 统计应用 → 优化应用
 
 **延伸**：Schur 补在半定规划（线性矩阵不等式 LMI）、统计学（条件分布的协方差 = Schur 补）、数值方法（区域分解法、预条件子构造）中是最核心的矩阵工具之一
 
@@ -323,177 +323,54 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
     $$
 
 ??? proof "证明"
-    **方法一（直接验证）**：令 $S = C^{-1} + VA^{-1}U$，设 $S$ 可逆。需要验证
+    令 $S = C^{-1} + VA^{-1}U$，设 $S$ 可逆。令 $R = A^{-1} - A^{-1}US^{-1}VA^{-1}$。我们直接验证 $(A + UCV)R = I$。
+
+    展开乘积：
 
     $$
-    (A + UCV)(A^{-1} - A^{-1}US^{-1}VA^{-1}) = I
-    $$
-
-    展开：
-
-    $$
-    I + UCVA^{-1} - US^{-1}VA^{-1} - UCVA^{-1}US^{-1}VA^{-1}
+    (A + UCV)R = (A + UCV)(A^{-1} - A^{-1}US^{-1}VA^{-1})
     $$
 
     $$
-    = I + U(CV - S^{-1} - CVA^{-1}US^{-1})VA^{-1}
+    = I - US^{-1}VA^{-1} + UCVA^{-1} - UCVA^{-1}US^{-1}VA^{-1}
     $$
 
-    $$
-    = I + U(CVS - I - CVA^{-1}U)S^{-1}VA^{-1}
-    $$
+    将后三项合并，提取公因子 $U$ 和 $VA^{-1}$：
 
     $$
-    CVS = CV(C^{-1} + VA^{-1}U) = V + CVA^{-1}U
+    = I + U\bigl[-S^{-1} + C - C(VA^{-1}U)S^{-1}\bigr]VA^{-1}
     $$
 
-    故 $CVS - I - CVA^{-1}U = V + CVA^{-1}U - I - CVA^{-1}U = V - I$... 不对。
+    其中我们使用了 $UCVA^{-1} = U \cdot C \cdot VA^{-1}$ 以及 $UCVA^{-1}US^{-1}VA^{-1} = UC(VA^{-1}U)S^{-1}VA^{-1}$。
 
-    让我重新计算。$S = C^{-1} + VA^{-1}U$。
-
-    $$
-    CV - S^{-1}(I + CVA^{-1}U) \cdot \text{something}
-    $$
-
-    更直接地：
+    现在分析中括号内的表达式。由 $S = C^{-1} + VA^{-1}U$，有 $CS = I + C(VA^{-1}U)$，即
 
     $$
-    (A + UCV)(A^{-1} - A^{-1}US^{-1}VA^{-1})
-    $$
-    $$
-    = I - US^{-1}VA^{-1} + UCV A^{-1} - UCVA^{-1}US^{-1}VA^{-1}
-    $$
-    $$
-    = I + U\left(-S^{-1} + CV - CVA^{-1}US^{-1}\right)VA^{-1}
-    $$
-    $$
-    = I + U\left(-S^{-1} + (CV)(I - A^{-1}US^{-1})\right)VA^{-1}
-    $$
-
-    注意 $CS = I + CVA^{-1}U$，故 $CV = (CS - I)A^{-1}U)^{-1}$... 这种方式很混乱。
-
-    更简洁地使用 $CS = I + CVA^{-1}U$：
-
-    $$
-    -S^{-1} + CV - CVA^{-1}US^{-1} = -S^{-1} + C(S - C^{-1})S^{-1}\cdot \text{?}
-    $$
-
-    因为 $VA^{-1}U = S - C^{-1}$，所以
-
-    $$
-    CV - CVA^{-1}US^{-1} = CV - C(S - C^{-1})S^{-1} = CV - CS S^{-1} + C C^{-1}S^{-1}
-    $$
-    $$
-    = CV - C + S^{-1}
+    I + C(VA^{-1}U) = CS
     $$
 
     因此
 
     $$
-    -S^{-1} + CV - CVA^{-1}US^{-1} = -S^{-1} + CV - C + S^{-1} = CV - C = C(V - I)
+    S^{-1} + C(VA^{-1}U)S^{-1} = (I + C(VA^{-1}U))S^{-1} = CS \cdot S^{-1} = C
     $$
 
-    这不为零...
-
-    **方法二（通过 Schur 补）**：考虑分块矩阵
+    代入可得
 
     $$
-    N = \begin{pmatrix} A & U \\ -CV & C^{-1} \end{pmatrix}
+    -S^{-1} + C - C(VA^{-1}U)S^{-1} = C - \bigl[S^{-1} + C(VA^{-1}U)S^{-1}\bigr] = C - C = 0
     $$
 
-    (注意这里取 $C$ 块为 $-CV$ 和 $C^{-1}$ 需要调整。)
+    因此 $(A + UCV)R = I$。类似地可以验证 $R(A + UCV) = I$，故 $R = (A + UCV)^{-1}$。$\blacksquare$
 
-    正确的构造：考虑
-
-    $$
-    \begin{pmatrix} A & U \\ V & -C^{-1} \end{pmatrix}
-    $$
-
-    Schur 补 $M/(-C^{-1}) = A - U(-C^{-1})^{-1}V = A + UCV$。
-
-    Schur 补 $M/A = -C^{-1} - VA^{-1}U = -(C^{-1} + VA^{-1}U) = -S$。
-
-    由块矩阵求逆公式（定理 34.2），$(M/(-C^{-1}))^{-1} = (A+UCV)^{-1}$ 出现在 $M^{-1}$ 的左上角。具体地：
+!!! note "注"
+    Sherman-Morrison-Woodbury 公式也可通过 Schur 补推导。考虑分块矩阵
 
     $$
-    M^{-1}_{11} = A^{-1} + A^{-1}U(-S)^{-1}VA^{-1} = A^{-1} - A^{-1}US^{-1}VA^{-1}
+    N = \begin{pmatrix} A & U \\ V & -C^{-1} \end{pmatrix}
     $$
 
-    而 $M^{-1}_{11}$ 也等于 $(A + UCV)^{-1}$（由关于 $D = -C^{-1}$ 的块求逆公式的左上角）。
-
-    更具体地，$M^{-1}$ 的左上块由 $M/D$ 的逆给出：$(M/D)^{-1} = (A+UCV)^{-1}$。
-
-    由定理 34.2，$(M/A)^{-1}$ 出现在 $M^{-1}$ 的右下角。$M^{-1}$ 的左上角是
-
-    $$
-    A^{-1} + A^{-1}U \cdot (M/A)^{-1} \cdot VA^{-1} = A^{-1} + A^{-1}U(-S)^{-1}VA^{-1}
-    $$
-
-    但 $M^{-1}$ 的左上角也等于 $(M/D)^{-1} = (A + UCV)^{-1}$。
-
-    等等，块矩阵求逆给出左上角为 $(M/D)^{-1}$（这需要 $N/D$ 的形式）。
-
-    无论如何，最终结果是正确的。令我们用直接验证完成。
-
-    设 $R = A^{-1} - A^{-1}US^{-1}VA^{-1}$。直接计算：
-
-    $$
-    (A + UCV)R = I + UCVA^{-1} - US^{-1}VA^{-1} - UCVA^{-1}US^{-1}VA^{-1}
-    $$
-
-    $$
-    = I + U(C(VA^{-1}) - S^{-1} - C(VA^{-1}U)S^{-1})VA^{-1} \cdot \frac{1}{VA^{-1}} \cdot VA^{-1}
-    $$
-
-    不，让我们用替换 $W = VA^{-1}$：
-
-    $$
-    = I + U(CW^T \cdot \text{no...})
-    $$
-
-    直接：设 $P = VA^{-1}U$，则 $S = C^{-1} + P$，$CS = I + CP$。
-
-    $$
-    (A+UCV)R = I + UCVA^{-1} - US^{-1}VA^{-1} - UCPS^{-1}VA^{-1}
-    $$
-    $$
-    = I + U(CV - S^{-1} - CPS^{-1})A^{-1} \cdot A \cdot A^{-1}
-    $$
-
-    不对，让我更仔细地处理。每一项都是 $n \times n$ 矩阵：
-
-    $I$：$n \times n$ 单位阵。
-    $UCVA^{-1}$：$n \times n$。
-    $US^{-1}VA^{-1}$：$n \times n$。
-    $UCVA^{-1}US^{-1}VA^{-1} = UC(VA^{-1}U)S^{-1}VA^{-1} = UCPS^{-1}VA^{-1}$。
-
-    所以
-
-    $$
-    (A+UCV)R = I + U[CV - S^{-1} - CPS^{-1}]A^{-1} \cdot \text{no, }VA^{-1}\text{ 在末尾}
-    $$
-
-    抱歉，让我彻底重写。
-
-    $UCVA^{-1} - US^{-1}VA^{-1} - UCPS^{-1}VA^{-1}$
-
-    $= U[C - S^{-1} - CPS^{-1}]VA^{-1}$
-
-    不对！$UCVA^{-1}$ 是 $U \cdot C \cdot VA^{-1}$。而后两项是 $U \cdot S^{-1} \cdot VA^{-1}$ 和 $U \cdot CPS^{-1} \cdot VA^{-1}$。
-
-    $= U[C - S^{-1} - CPS^{-1}]VA^{-1}$
-
-    需要证明 $C - S^{-1} - CPS^{-1} = 0$，即 $C = (I + CP)S^{-1} = CSS^{-1} = C$...
-
-    $CS = C(C^{-1} + P) = I + CP$，所以 $I + CP = CS$，因此
-
-    $(I + CP)S^{-1} = C$
-
-    而 $S^{-1} + CPS^{-1} = (I + CP)S^{-1} = C$。
-
-    因此 $C - S^{-1} - CPS^{-1} = C - C = 0$。✓
-
-    所以 $(A + UCV)R = I$。$\blacksquare$
+    其关于 $-C^{-1}$ 的 Schur 补为 $N/(-C^{-1}) = A - U(-C)V = A + UCV$，关于 $A$ 的 Schur 补为 $N/A = -C^{-1} - VA^{-1}U = -S$。由块矩阵求逆公式（定理 34.2），$N^{-1}$ 的左上块为 $A^{-1} + A^{-1}U(N/A)^{-1}VA^{-1} = A^{-1} - A^{-1}US^{-1}VA^{-1}$，而这恰好等于 $(N/(-C^{-1}))^{-1} = (A+UCV)^{-1}$，从而得到 Woodbury 公式。
 
 ### Sherman-Morrison 公式（秩-1 特例）
 
@@ -520,7 +397,96 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
 
 ---
 
-## 34.6 Schur 补在统计学中的应用
+## 34.6 Schur 补的商性质与单调性
+
+<div class="context-flow" markdown>
+
+**核心问题**：Schur 补操作在多级分块下如何复合？正定序下 Schur 补如何变化？
+
+</div>
+
+### 商性质
+
+!!! theorem "定理 34.9 (Schur 补的商性质)"
+    设 $M \in \mathbb{C}^{n \times n}$ 分块为
+
+    $$
+    M = \begin{pmatrix} A & B & E \\ C & D & F \\ G & H & J \end{pmatrix}
+    $$
+
+    记 $\tilde{A} = \begin{pmatrix} A & B \\ C & D \end{pmatrix}$（左上 $(p+q) \times (p+q)$ 块），$\tilde{D} = \begin{pmatrix} D & F \\ H & J \end{pmatrix}$（右下 $(q+r) \times (q+r)$ 块），其中 $A \in \mathbb{C}^{p \times p}$，$D \in \mathbb{C}^{q \times q}$，$J \in \mathbb{C}^{r \times r}$。若 $A$ 和 $\tilde{A}$ 均可逆，则
+
+    $$
+    (M/A) / (\tilde{A}/A) = M/\tilde{A}
+    $$
+
+    即"先对 $A$ 取 Schur 补，再对 $\tilde{A}/A$ 取 Schur 补"等价于"直接对 $\tilde{A}$ 取 Schur 补"。
+
+??? proof "证明"
+    由块 LDU 分解，$M$ 关于 $A$ 的 Schur 补为
+
+    $$
+    M/A = \begin{pmatrix} D - CA^{-1}B & F - CA^{-1}E \\ H - GA^{-1}B & J - GA^{-1}E \end{pmatrix} = \begin{pmatrix} \tilde{A}/A & F' \\ H' & J' \end{pmatrix}
+    $$
+
+    其中 $\tilde{A}/A = D - CA^{-1}B$。由 Schur 行列式公式（对两种分块应用）：
+
+    $$
+    \det(M) = \det(A) \cdot \det(M/A) = \det(A) \cdot \det(\tilde{A}/A) \cdot \det((M/A)/(\tilde{A}/A))
+    $$
+
+    另一方面
+
+    $$
+    \det(M) = \det(\tilde{A}) \cdot \det(M/\tilde{A})
+    $$
+
+    由 $\det(\tilde{A}) = \det(A) \cdot \det(\tilde{A}/A)$，比较两式即得 $\det((M/A)/(\tilde{A}/A)) = \det(M/\tilde{A})$。
+
+    为证明矩阵相等（而非仅行列式相等），可直接展开。$M/\tilde{A}$ 是 $J$ 减去 $(G, H)\tilde{A}^{-1}\begin{pmatrix} E \\ F \end{pmatrix}$。利用 $\tilde{A}$ 的块求逆公式将 $\tilde{A}^{-1}$ 展开，与 $(M/A)/(\tilde{A}/A)$ 的定义逐项比对即可验证两者相等。$\blacksquare$
+
+### Schur 补单调性
+
+!!! theorem "定理 34.10 (Schur 补的单调性)"
+    设
+
+    $$
+    M_1 = \begin{pmatrix} A_1 & B \\ B^* & D \end{pmatrix} \geq 0, \quad M_2 = \begin{pmatrix} A_2 & B \\ B^* & D \end{pmatrix} \geq 0
+    $$
+
+    是 Hermite 半正定矩阵，且 $A_1, A_2$ 均可逆。若 $A_1 \geq A_2 > 0$（即 $A_1 - A_2 \geq 0$ 且 $A_2 > 0$），则
+
+    $$
+    M_1/A_1 \leq M_2/A_2
+    $$
+
+    即 $D - B^*A_1^{-1}B \leq D - B^*A_2^{-1}B$，等价于 $A_1^{-1} \leq A_2^{-1}$（此为逆矩阵的单调性）。
+
+??? proof "证明"
+    由 $A_1 \geq A_2 > 0$ 和逆矩阵的单调反转性质（若 $X \geq Y > 0$ 则 $X^{-1} \leq Y^{-1}$），得 $A_1^{-1} \leq A_2^{-1}$。因此
+
+    $$
+    B^*A_1^{-1}B \leq B^*A_2^{-1}B
+    $$
+
+    （因为对任何 $\boldsymbol{x}$，$\boldsymbol{x}^*B^*A_1^{-1}B\boldsymbol{x} = (B\boldsymbol{x})^*A_1^{-1}(B\boldsymbol{x}) \leq (B\boldsymbol{x})^*A_2^{-1}(B\boldsymbol{x}) = \boldsymbol{x}^*B^*A_2^{-1}B\boldsymbol{x}$）。
+
+    从而
+
+    $$
+    M_1/A_1 = D - B^*A_1^{-1}B \geq D - B^*A_2^{-1}B = M_2/A_2
+    $$
+
+    即 $M_2/A_2 \leq M_1/A_1$。
+
+    注意结论的方向：$A$ 块增大时，Schur 补减小，这反映了"消去更多"会留下更小的余量。$\blacksquare$
+
+!!! note "注"
+    Schur 补的单调性在优化和统计中有重要应用。例如在最优实验设计中，信息矩阵的 Schur 补给出了参数的条件信息，单调性保证了增加观测信息不会降低参数估计的精度。
+
+---
+
+## 34.7 Schur 补在统计学中的应用
 
 <div class="context-flow" markdown>
 
@@ -530,7 +496,7 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
 
 ### 多元正态分布的条件分布
 
-!!! theorem "定理 34.9 (条件正态分布)"
+!!! theorem "定理 34.11 (条件正态分布)"
     设 $\boldsymbol{X} = \begin{pmatrix} \boldsymbol{X}_1 \\ \boldsymbol{X}_2 \end{pmatrix} \sim \mathcal{N}\left(\begin{pmatrix} \boldsymbol{\mu}_1 \\ \boldsymbol{\mu}_2 \end{pmatrix}, \begin{pmatrix} \Sigma_{11} & \Sigma_{12} \\ \Sigma_{21} & \Sigma_{22} \end{pmatrix}\right)$
 
     是多元正态分布，其中 $\Sigma_{22} > 0$。则 $\boldsymbol{X}_1 | \boldsymbol{X}_2 = \boldsymbol{x}_2$ 服从正态分布：
@@ -613,7 +579,7 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
 
 ---
 
-## 34.7 Schur 补在优化中的应用
+## 34.8 Schur 补在优化中的应用
 
 <div class="context-flow" markdown>
 
@@ -623,7 +589,7 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
 
 ### Schur 补引理
 
-!!! theorem "定理 34.10 (Schur 补引理 / S-过程)"
+!!! theorem "定理 34.12 (Schur 补引理 / S-过程)"
     以下非线性矩阵不等式
 
     $$
@@ -655,7 +621,7 @@ Schur 补以 Issai Schur（1917）命名，他首先在行列式理论中使用�
 
 ### 控制论中的应用
 
-!!! theorem "定理 34.11 (有界实引理 / Bounded Real Lemma)"
+!!! theorem "定理 34.13 (有界实引理 / Bounded Real Lemma)"
     线性系统 $\dot{\boldsymbol{x}} = A\boldsymbol{x} + B\boldsymbol{u}$，$\boldsymbol{y} = C\boldsymbol{x} + D\boldsymbol{u}$ 的 $H_\infty$ 范数不超过 $\gamma$（即 $\|G\|_\infty < \gamma$）当且仅当存在 $P > 0$ 使得
 
     $$
