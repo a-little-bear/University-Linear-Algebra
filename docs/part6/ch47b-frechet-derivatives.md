@@ -901,3 +901,65 @@ Daleckii-Krein 定理是矩阵函数 Fréchet 导数理论的核心结果。它�
     (c) 由隐函数定理，$dX$ 满足什么方程？这个方程的结构是什么？
 
     (d) 讨论该方程条件数与闭环矩阵 $A - BR^{-1}B^TX$ 的稳定性之间的关系。
+
+## 练习题
+
+1. **[概念] 什么是 Fréchet 导数？它与 Gâteaux 导数的主要区别是什么？**
+   ??? success "参考答案"
+       Fréchet 导数是一个线性算子 $L_f(A)$，满足 $f(A+E) = f(A) + L_f(A)[E] + o(\|E\|)$。Gâteaux 导数仅要求沿特定方向的极限存在，而 Fréchet 导数要求在全方向上的一致逼近。Fréchet 可微必导致 Gâteaux 可微，且导数相等。
+
+2. **[求逆] 利用定义证明矩阵求逆 $f(A) = A^{-1}$ 的 Fréchet 导数为 $L_{A^{-1}}(A)[E] = -A^{-1}EA^{-1}$。**
+   ??? success "参考答案"
+       $(A+E)^{-1} - A^{-1} = (A(I+A^{-1}E))^{-1} - A^{-1} = (I+A^{-1}E)^{-1}A^{-1} - A^{-1}$。
+       利用级数展开 $(I+X)^{-1} \approx I - X$，得：
+       $(I - A^{-1}E + O(\|E\|^2))A^{-1} - A^{-1} = -A^{-1}EA^{-1} + O(\|E\|^2)$。
+       线性主部即为所求。
+
+3. **[Daleckii-Krein] 若 $A = \operatorname{diag}(\lambda_1, \lambda_2)$，写出矩阵指数 $e^A$ 的 Fréchet 导数在方向 $E = \begin{pmatrix} e_{11} & e_{12} \\ e_{21} & e_{22} \end{pmatrix}$ 上的作用。**
+   ??? success "参考答案"
+       根据公式 $L_f(A)[E] = f^{[1]}(\Lambda) \odot E$：
+       $L_{e^A}(A)[E] = \begin{pmatrix} e^{\lambda_1} e_{11} & \frac{e^{\lambda_1}-e^{\lambda_2}}{\lambda_1-\lambda_2} e_{12} \\ \frac{e^{\lambda_2}-e^{\lambda_1}}{\lambda_2-\lambda_1} e_{21} & e^{\lambda_2} e_{22} \end{pmatrix}$。
+
+4. **[特征值] 证明单特征值 $\lambda$ 的导数满足 $d\lambda = \mathbf{w}^H (dA) \mathbf{v}$，其中 $\mathbf{v}, \mathbf{w}$ 分别是右和左特征向量。**
+   ??? success "参考答案"
+       对 $A\mathbf{v} = \lambda \mathbf{v}$ 求微分：$(dA)\mathbf{v} + A(d\mathbf{v}) = (d\lambda)\mathbf{v} + \lambda(d\mathbf{v})$。
+       两侧左乘 $\mathbf{w}^H$，利用 $\mathbf{w}^H A = \lambda \mathbf{w}^H$：
+       $\mathbf{w}^H (dA) \mathbf{v} + \lambda \mathbf{w}^H d\mathbf{v} = d\lambda (\mathbf{w}^H \mathbf{v}) + \lambda \mathbf{w}^H d\mathbf{v}$。
+       消去相同项并设 $\mathbf{w}^H \mathbf{v} = 1$ 即得结果。
+
+5. **[平方根] 矩阵平方根 $X = A^{1/2}$ 的导数 $dX$ 满足什么方程？**
+   ??? success "参考答案"
+       满足 Sylvester 方程：$X(dX) + (dX)X = dA$。这是由于对 $X^2 = A$ 两侧求微分得到的。
+
+6. **[条件数] 为什么矩阵求逆的条件数 $\operatorname{cond}(A^{-1}, A)$ 正好等于矩阵本身的条件数 $\kappa(A)$？**
+   ??? success "参考答案"
+       因为 $\|L_{A^{-1}}\| = \|A^{-1}\|^2$（算子范数）。根据条件数定义：
+       $\frac{\|L\| \cdot \|A\|}{\|f(A)\|} = \frac{\|A^{-1}\|^2 \cdot \|A\|}{\|A^{-1}\|} = \|A^{-1}\| \cdot \|A\| = \kappa(A)$。
+
+7. **[链式法则] 设 $h(A) = \exp(A^2)$。利用链式法则写出其 Fréchet 导数。**
+   ??? success "参考答案"
+       设 $f(A) = A^2$, $g(X) = e^X$。则 $L_h(A)[E] = L_g(A^2)[L_f(A)[E]]$。
+       其中 $L_f(A)[E] = AE + EA$，将其作为整体代入指数函数的积分或除商公式中。
+
+8. **[分解] 在 Cholesky 分解 $A = LL^T$ 中，已知 $dA$，求 $dL$ 的基本思路是什么？**
+   ??? success "参考答案"
+       思路是利用 $dA = (dL)L^T + L(dL^T)$。通过左乘 $L^{-1}$ 和右乘 $L^{-T}$ 将其对称化，然后利用 $L^{-1}dL$ 是下三角矩阵的性质，提取出对称矩阵的下三角部分（对角线减半）。
+
+9. **[SVD导数] 简述奇异值 $\sigma_i$ 的导数公式。**
+   ??? success "参考答案"
+       $d\sigma_i = \operatorname{Re}(\mathbf{u}_i^H (dA) \mathbf{v}_i)$，其中 $\mathbf{u}_i, \mathbf{v}_i$ 是对应的左右奇异向量。这说明奇异值的变化只取决于扰动在奇异向量方向上的投影。
+
+10. **[爱因斯坦思考题] 爱因斯坦在发展广义相对论时，使用了黎曼几何中的联络（Connection）来描述度规张量的变化。Fréchet 导数在算子空间中扮演了类似的角色：它描述了当算子“坐标”（矩阵元素）微动时，算子整体（如指数映射）如何“弯曲”。为什么在研究如矩阵 Riccati 方程等非线性算子方程时，我们必须使用 Fréchet 导数而非简单的偏导数？**
+    ??? success "参考答案"
+        因为非线性算子方程（如 $A^T X + XA - XBR^{-1}B^T X + Q = 0$）中的变量 $X$ 处于一个具有特定结构的流形或 Banach 空间中。简单的偏导数只能处理“分量”的变化，而 Fréchet 导数捕捉的是算子作为**整体线性映射**的内在灵敏度。它不依赖于具体的矩阵表示，能够直接揭示系统稳定性（如闭环极点）与解的变化率之间的几何联系。这正是爱因斯坦“几何即物理”思想在算子理论中的体现：系统的微分结构决定了它的物理响应。
+
+## 本章小结
+
+本章将微积分的触角延伸至算子空间，建立了严谨的矩阵函数导数理论——Fréchet 导数，主要内容包括：
+
+1. **Fréchet 导数体系**：定义了作为线性算子的 Fréchet 导数，并对比了其与方向导数（Gâteaux 导数）的层级关系。
+2. **运算律与经典函数**：推导了求逆、指数、对数及平方根等核心矩阵函数的导数公式，揭示了指数函数的积分表示与平方根的 Sylvester 方程表示。
+3. **Daleckii-Krein 定理**：给出了基于特征值除商差分的统一导数表达形式，这是矩阵分析中连接解析性质与谱性质的枢纽。
+4. **扰动与灵敏度**：详细论述了特征值、奇异值以及各种矩阵分解（LU, QR, Cholesky）的微分性质，确立了矩阵函数条件数作为衡量不稳定性量度的权威地位。
+5. **现代计算连接**：展示了 Fréchet 导数如何在隐函数定理下统一处理矩阵方程的灵敏度，并为深度学习中的矩阵反向传播提供了坚实的算子代数基础。
+

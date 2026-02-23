@@ -4,7 +4,7 @@
 
 **前置**：第 3 章行列式 · 第 5 章相似矩阵 · 不变子空间
 
-**本章脉络**：$A\mathbf{v}=\lambda\mathbf{v}$ → 特征多项式 $\det(A-\lambda I)=0$ → 代数/几何重数 → 特征空间 → 对角化条件 → 实对称矩阵谱定理 → Cayley-Hamilton → 相似不变量
+**本章脉络**：$A\mathbf{v}=\lambda\mathbf{v}$ → 特征多项式 $\det(A-\lambda I)=0$ → 代数/几何重数 → 特征空间 → 对角化条件 → 实对称矩阵谱定理 → Schur 三角化 → Gershgorin 圆盘 → Cayley-Hamilton → 相似不变量
 
 **延伸**：特征值在 Google PageRank（Perron 向量）、量子力学（能量本征态）、振动分析（固有频率）、人口模型（Leslie 矩阵）中有直接应用；无穷维推广为谱理论，连续谱与点谱的区分是量子力学的核心问题
 
@@ -367,7 +367,61 @@
 
 ---
 
-## 6.7 Cayley-Hamilton 定理
+## 6.7 Schur 三角化定理
+
+<div class="context-flow" markdown>
+
+**更普遍的"对角化"**：并非所有矩阵可对角化，但所有复矩阵都可**酉三角化** → 揭示特征值是算子在某种基下的对角元 → 谱定理的真正起点
+
+</div>
+
+!!! theorem "定理 6.11 (Schur 三角化定理)"
+    设 $A$ 为 $n$ 阶复方阵，则存在酉矩阵 $U$（$U^*U = I$）和上三角矩阵 $T$，使得
+    
+    $$A = UTU^*$$
+    
+    其中 $T$ 的对角元素恰好是 $A$ 的特征值。若 $A$ 为实矩阵且特征值均为实数，则 $U$ 可取为实正交矩阵。
+
+??? proof "证明"
+    对 $n$ 进行归纳。$n=1$ 时显然。
+    设 $n-1$ 时成立。取 $A$ 的一个特征值 $\lambda_1$ 及单位特征向量 $\mathbf{u}_1$。扩充为 $\mathbb{C}^n$ 的标准正交基 $\{ \mathbf{u}_1, \ldots, \mathbf{u}_n \}$。令 $U_1 = (\mathbf{u}_1 \;\; \cdots \;\; \mathbf{u}_n)$，则
+    
+    $$U_1^* A U_1 = \begin{pmatrix} \lambda_1 & \mathbf{w}^* \\ \mathbf{0} & A_1 \end{pmatrix}$$
+    
+    其中 $A_1$ 是 $n-1$ 阶方阵。由归纳假设，存在 $n-1$ 阶酉矩阵 $\tilde{U}$ 使得 $\tilde{U}^* A_1 \tilde{U} = T_1$ 为上三角。令 $U = U_1 \begin{pmatrix} 1 & \mathbf{0}^* \\ \mathbf{0} & \tilde{U} \end{pmatrix}$，则 $U^* A U$ 为上三角。 $\blacksquare$
+
+---
+
+## 6.8 Gershgorin 圆盘定理
+
+<div class="context-flow" markdown>
+
+**特征值的包含区域**：无需解方程即可确定特征值的大致位置 → 基于对角占优思想 → 数值分析与矩阵扰动的基础
+
+</div>
+
+!!! theorem "定理 6.12 (Gershgorin 圆盘定理)"
+    设 $A = (a_{ij})$ 为 $n$ 阶复方阵。定义第 $i$ 个 **Gershgorin 圆盘** 为复平面上的闭圆盘：
+    
+    $$D_i = \{ z \in \mathbb{C} : |z - a_{ii}| \le R_i \}, \quad R_i = \sum_{j \neq i} |a_{ij}|$$
+    
+    则 $A$ 的所有特征值都位于这些圆盘的并集 $\bigcup_{i=1}^n D_i$ 之中。
+
+??? proof "证明"
+    设 $\lambda$ 为 $A$ 的特征值，$\mathbf{x} = (x_1, \ldots, x_n)^T$ 为对应特征向量。取索引 $i$ 使得 $|x_i| = \max_j |x_j| > 0$。
+    由 $A\mathbf{x} = \lambda \mathbf{x}$ 的第 $i$ 行：
+    
+    $$\sum_{j=1}^n a_{ij} x_j = \lambda x_i \implies (\lambda - a_{ii}) x_i = \sum_{j \neq i} a_{ij} x_j$$
+    
+    两边取绝对值并利用三角不等式：
+    
+    $$|\lambda - a_{ii}| |x_i| \le \sum_{j \neq i} |a_{ij}| |x_j| \le \left( \sum_{j \neq i} |a_{ij}| \right) |x_i| = R_i |x_i|$$
+    
+    由于 $|x_i| > 0$，消去得 $|\lambda - a_{ii}| \le R_i$，即 $\lambda \in D_i$。 $\blacksquare$
+
+---
+
+## 6.9 Cayley-Hamilton 定理
 
 <div class="context-flow" markdown>
 
@@ -375,7 +429,7 @@
 
 </div>
 
-!!! theorem "定理 6.11 (Cayley-Hamilton 定理)"
+!!! theorem "定理 6.13 (Cayley-Hamilton 定理)"
     设 $A$ 为 $n$ 阶方阵，$p(\lambda) = \det(A - \lambda I)$ 为 $A$ 的特征多项式，则
 
     $$p(A) = O$$
@@ -443,7 +497,7 @@
 
 ---
 
-## 6.8 相似矩阵的性质
+## 6.10 相似矩阵的性质
 
 <div class="context-flow" markdown>
 
@@ -454,7 +508,7 @@
 !!! definition "定义 6.8 (相似不变量)"
     若性质或量在相似变换 $A \mapsto P^{-1}AP$ 下不变，则称其为**相似不变量**（similarity invariant）。
 
-!!! theorem "定理 6.12 (相似矩阵的基本性质)"
+!!! theorem "定理 6.14 (相似矩阵的基本性质)"
     若 $A \sim B$（$B = P^{-1}AP$），则：
 
     1. $\det A = \det B$
@@ -498,6 +552,48 @@
 
 ---
 
+## 练习题
+
+1. **[概念] $A$ 的特征值可以是 0 吗？特征向量可以是 $\mathbf{0}$ 吗？**
+   ??? success "参考答案"
+       特征值可以是 0（此时矩阵不可逆，零空间非平凡）。但特征向量按照定义必须是**非零向量**。
+
+2. **[计算] 若矩阵 $A$ 满足 $A^2 = A$（幂等矩阵），它可能的特征值有哪些？**
+   ??? success "参考答案"
+       设 $A\mathbf{x} = \lambda\mathbf{x}$。则 $A^2\mathbf{x} = \lambda^2\mathbf{x}$。又 $A^2=A$，故 $\lambda^2\mathbf{x} = \lambda\mathbf{x}$。因为 $\mathbf{x} \ne \mathbf{0}$，得出 $\lambda^2 = \lambda$，所以 $\lambda$ 只能是 0 或 1。
+
+3. **[性质] 证明若 $\lambda$ 是可逆矩阵 $A$ 的特征值，则 $\lambda^{-1}$ 是 $A^{-1}$ 的特征值。**
+   ??? success "参考答案"
+       $A\mathbf{x} = \lambda\mathbf{x} \implies A^{-1}A\mathbf{x} = A^{-1}(\lambda\mathbf{x}) \implies \mathbf{x} = \lambda A^{-1}\mathbf{x} \implies A^{-1}\mathbf{x} = \lambda^{-1}\mathbf{x}$。
+
+4. **[对角化] 如果一个 $3 \times 3$ 矩阵的特征值为 1, 2, 3，它一定可对角化吗？**
+   ??? success "参考答案"
+       一定。三个不同的特征值对应三个线性无关的特征向量，它们足以构成 $\mathbb{C}^3$ 的基。
+
+5. **[复特征值] 实矩阵为什么会产生共轭的复特征值对？**
+   ??? success "参考答案"
+       实矩阵的特征多项式是实系数多项式。实系数多项式的复数根必定成共轭对出现（代数基本定理的推论）。
+
+6. **[迹与行列式] 若 $2 \times 2$ 矩阵 $A$ 迹为 5，行列式为 6，求其特征值。**
+   ??? success "参考答案"
+       由性质知 $\lambda_1 + \lambda_2 = 5$ 且 $\lambda_1 \lambda_2 = 6$。解特征方程 $\lambda^2 - 5\lambda + 6 = 0$，得特征值为 2 和 3。
+
+7. **[代数重数] 为什么几何重数永远不超过代数重数？**
+   ??? success "参考答案"
+       通过选取特征空间的基并将其扩充为全空间的基，将矩阵通过相似变换转化为上三角分块阵。此时特征多项式的分解式中，该特征值的因子次数（代数重数）显然至少包含特征空间子块带来的维数（几何重数）。
+
+8. **[马尔可夫] 行随机矩阵（每行之和为 1）必有一个特征值是什么？对应的特征向量是什么？**
+   ??? success "参考答案"
+       特征值必有 1。对应的右特征向量是全 1 向量 $\mathbf{1} = (1, 1, \dots, 1)^T$。
+
+9. **[相似] 证明若矩阵 $A$ 相似于数量矩阵 $cI$，则 $A$ 只能是 $cI$ 本身。**
+   ??? success "参考答案"
+       $A = P(cI)P^{-1} = c(PIP^{-1}) = c(PP^{-1}) = cI$。这说明数量矩阵的相似等价类只包含它自己一个元素。
+
+10. **[爱因斯坦思考题] 薛定谔方程 $H\psi = E\psi$ 中，$H$ 是系统总能量的哈密顿算符。这在数学上是一个什么方程？它说明了宇宙怎样的深层逻辑？**
+    ??? success "参考答案"
+        这是一个典型的**特征值方程**。它说明了微观系统被观测时，只能处于某些离散的、确定的“纯状态”（特征向量 $\psi$），并表现出确定的能量（特征值 $E$）。宇宙的“量子化”本质，在数学上就是线性算子谱的离散化。
+
 ## 本章小结
 
 本章系统研究了特征值与特征向量理论，主要内容包括：
@@ -508,5 +604,6 @@
 4. **特征空间**：属于同一特征值的所有特征向量（加上零向量）构成子空间。
 5. **对角化**：矩阵可对角化的充要条件是每个特征值的几何重数等于代数重数。
 6. **实对称矩阵**：特征值必为实数，不同特征值的特征向量正交，可正交对角化（谱定理）。
-7. **Cayley-Hamilton 定理**：每个方阵满足其自身的特征多项式。
-8. **相似不变量**：相似矩阵共享特征多项式、迹、行列式、秩等性质。
+7. **Schur 三角化与 Gershgorin 圆盘**：提供了特征值存在的结构形式与范围估计。
+8. **Cayley-Hamilton 定理**：每个方阵满足其自身的特征多项式。
+9. **相似不变量**：相似矩阵共享特征多项式、迹、行列式、秩等性质。

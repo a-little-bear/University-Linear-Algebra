@@ -644,6 +644,48 @@
 
 ---
 
+## 练习题
+
+1. **[概念] 两个正交的非零向量，它们一定线性无关吗？**
+   ??? success "参考答案"
+       一定。如果 $\alpha\mathbf{u} + \beta\mathbf{v} = \mathbf{0}$，用 $\mathbf{u}$ 取内积，得 $\alpha\|\mathbf{u}\|^2 + 0 = 0 \implies \alpha = 0$。同理 $\beta = 0$。因此线性无关。
+
+2. **[投影] 正交投影矩阵 $P$ 为什么必须满足 $P^2 = P$ 和 $P^T = P$？**
+   ??? success "参考答案"
+       $P^2=P$ 意味着投影两次和投影一次效果相同（向量已经到了投影面上）。$P^T=P$（对称性）保证了残差向量 $\mathbf{b} - P\mathbf{b}$ 与投影面上的任意向量垂直。
+
+3. **[QR] QR 分解 $A = QR$ 中的 $Q$ 和 $R$ 分别代表什么几何操作？**
+   ??? success "参考答案"
+       $Q$ 是等距变换（保留了原列向量张成的子空间的几何形态且正交化）；$R$ 记录了 Gram-Schmidt 正交化过程中的组合系数。
+
+4. **[最小二乘] 当 $A\mathbf{x} = \mathbf{b}$ 无解时，最小二乘法寻找的 $\hat{\mathbf{x}}$ 在几何上使什么最小化？**
+   ??? success "参考答案"
+       使误差向量（残差） $\mathbf{e} = \mathbf{b} - A\hat{\mathbf{x}}$ 的长度 $\|\mathbf{e}\|^2$ 最小化，几何上 $A\hat{\mathbf{x}}$ 恰好是 $\mathbf{b}$ 在 $A$ 的列空间上的正交投影。
+
+5. **[Gram-Schmidt] 为什么数值计算中常使用改进的 Gram-Schmidt（MGS）而不是经典版本（CGS）？**
+   ??? success "参考答案"
+       因为经典版本在浮点数舍入误差累积下，后生成的向量会迅速丧失正交性（不再严格垂直）。MGS 在每步立刻减去已计算出的基向量在未处理向量上的投影分量，数值稳定性更好。
+
+6. **[正交矩阵] 若 $Q$ 是正交矩阵，证明 $\|Q\mathbf{x}\| = \|\mathbf{x}\|$ 对所有 $\mathbf{x}$ 成立。**
+   ??? success "参考答案"
+       $\|Q\mathbf{x}\|^2 = (Q\mathbf{x})^T(Q\mathbf{x}) = \mathbf{x}^TQ^TQ\mathbf{x} = \mathbf{x}^TI\mathbf{x} = \|\mathbf{x}\|^2$。说明正交矩阵不改变长度。
+
+7. **[法方程] 推导最小二乘的法方程 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$。**
+   ??? success "参考答案"
+       要求误差向量 $\mathbf{b} - A\hat{\mathbf{x}}$ 垂直于列空间 $\operatorname{Col}(A)$，即正交于 $A$ 的每一列。因此要求 $A^T(\mathbf{b} - A\hat{\mathbf{x}}) = \mathbf{0}$，展开即得 $A^TA\hat{\mathbf{x}} = A^T\mathbf{b}$。
+
+8. **[空间] 子空间 $W$ 与其正交补 $W^\perp$ 的交集是什么？**
+   ??? success "参考答案"
+       仅包含零向量 $\{\mathbf{0}\}$。因为交集中的向量 $\mathbf{v}$ 必须与自己正交，即 $\langle\mathbf{v}, \mathbf{v}\rangle = 0$，由正定性得 $\mathbf{v}=\mathbf{0}$。
+
+9. **[正交多项式] 如果在多项式空间中引入积分内积 $\langle f, g \rangle = \int_{-1}^{1} f(x)g(x)dx$，如何从 $1, x, x^2$ 构造正交基？**
+   ??? success "参考答案"
+       应用 Gram-Schmidt 正交化即可。由此产生的多项式称为勒让德多项式（Legendre polynomials）。
+
+10. **[爱因斯坦思考题] 如果将“误差平方和最小”看作自然界的某种行动准则，它与物理学中的什么原理不谋而合？**
+    ??? success "参考答案"
+        它本质上是**最小作用量原理**（Principle of Least Action）。光沿着极值路径（通常是最短时间）传播，系统演化使得作用量取极值；在数学数据拟合中，最小二乘就是数据在高维空间中寻找“最短路径”的正交投影过程。自然界总是选择最经济、方差最小的几何路径。
+
 ## 本章小结
 
 本章系统地研究了 $\mathbb{R}^n$ 中的正交性理论及其应用，主要内容包括：

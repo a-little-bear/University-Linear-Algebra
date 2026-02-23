@@ -500,17 +500,14 @@ Moore（1920）和 Penrose（1955）独立定义了最重要的广义逆——Mo
     $\operatorname{ind}(A) \leq 1$ 等价于 $\operatorname{rank}(A) = \operatorname{rank}(A^2)$，即 $\operatorname{col}(A)$ 和 $\operatorname{col}(A^2)$ 相同。
 
 !!! theorem "定理 33.11 (群逆与 Moore-Penrose 逆的关系)"
-    设 $\operatorname{ind}(A) \leq 1$。则：
+    设 $A \in \mathbb{C}^{n \times n}$ 满足 $\operatorname{ind}(A) \leq 1$。则：
 
     1. $A^\#$ 存在当且仅当 $\operatorname{rank}(A) = \operatorname{rank}(A^2)$。
-    2. 若 $A$ 是正规矩阵（$AA^* = A^*A$），则 $A^\# = A^\dagger$。
-    3. 一般地，$A^\# = A(A^3)^\dagger A = A^\dagger A A^\dagger$... 不对，后者只对正规矩阵成立。
+    2. $A^\# = A^\dagger$ 当且仅当 $A$ 是 **EP 矩阵**（Range-Hermitian），即 $\operatorname{col}(A) = \operatorname{col}(A^*)$。
+    3. 一个重要的计算公式为 $A^\# = A(A^2)^\dagger A$。
 
-    正确的关系：$A^\# = A(A^2)^\dagger = (A^2)^\dagger A$（当 $\operatorname{ind}(A) \leq 1$ 时，但这需要验证）。
-
-    更准确的公式：$A^\# = (A^2)^\dagger A = A(A^2)^\dagger$（这些在 $\operatorname{ind}(A) \leq 1$ 时不一定对，需要额外条件）。
-
-    实际上，在一般情况下群逆与 Moore-Penrose 逆没有简单的公式关系。但对 EP 矩阵（$AA^\dagger = A^\dagger A$），$A^\# = A^\dagger$。
+!!! note "注"
+    EP 矩阵类包含所有正规矩阵（$AA^* = A^*A$）、可逆矩阵和正定矩阵。对于这些矩阵，群逆与 Moore-Penrose 逆重合。但在非 EP 情形下，两者通常不同。例如 $\begin{pmatrix} 1 & 1 \\ 0 & 0 \end{pmatrix}$ 不是 EP 矩阵，其 $A^\# = A$ 而 $A^\dagger = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$。
 
 ### 核逆
 
@@ -853,3 +850,60 @@ Moore（1920）和 Penrose（1955）独立定义了最重要的广义逆——Mo
     **(2)** 对 $\boldsymbol{y}$ 求导令其为零：$2A\boldsymbol{y} - 2B(\boldsymbol{x}-\boldsymbol{y}) = 0$，即 $(A+B)\boldsymbol{y} = B\boldsymbol{x}$，故 $\boldsymbol{y} = (A+B)^\dagger B\boldsymbol{x}$。代入得最小值 $\boldsymbol{x}^* A(A+B)^\dagger B \boldsymbol{x} = \boldsymbol{x}^*(A:B)\boldsymbol{x}$。$\blacksquare$
 
 **电学网络解释**：在电路理论中，正定矩阵 $A$ 和 $B$ 可以视为多端口网络的阻抗矩阵。$A : B$ 正是将两个网络并联后的等效阻抗。性质 (6) 的 $(A:B)^{-1} = A^{-1} + B^{-1}$ 就是将导纳相加的并联规则在矩阵情形的推广。Anderson 和 Duffin（1969）率先系统研究了矩阵并联和，并发现它在电路综合、控制论和统计学中的广泛应用。
+
+## 练习题
+
+1. **[基础] 所有的矩阵（包括非方阵和奇异阵）都有 $\{1\}$-逆吗？它是唯一的吗？**
+   ??? success "参考答案"
+       是的，所有矩阵都存在 $\{1\}$-逆（满足 $AXA=A$）。但它通常不唯一，除非原矩阵 $A$ 是可逆方阵。
+
+2. **[Moore-Penrose] 什么是 Moore-Penrose 逆必须满足的四个条件？**
+   ??? success "参考答案"
+       1. $AXA = A$ (内逆)
+       2. $XAX = X$ (外逆)
+       3. $(AX)^H = AX$ (左自伴)
+       4. $(XA)^H = XA$ (右自伴)
+
+3. **[计算] 如果 $A = \operatorname{diag}(\sigma_1, \sigma_2, 0)$，求其 Moore-Penrose 逆 $A^\dagger$。**
+   ??? success "参考答案"
+       $A^\dagger = \operatorname{diag}(1/\sigma_1, 1/\sigma_2, 0)$。非零元素取倒数，零元素保持为零。
+
+4. **[投影] 证明 $A A^\dagger$ 是一个正交投影矩阵。它投影到哪个空间？**
+   ??? success "参考答案"
+       满足 $(AA^\dagger)^2 = A(A^\dagger A)A^\dagger = AA^\dagger$ 且 $(AA^\dagger)^H = AA^\dagger$。它投影到 $A$ 的**列空间** $\operatorname{col}(A)$。
+
+5. **[最小二乘] 为什么说 $x = A^\dagger b$ 是线性方程组 $Ax = b$ 的“最优解”？**
+   ??? success "参考答案"
+       它不仅使残差 $\|Ax-b\|_2$ 达到最小（最小二乘解），而且在所有使残差最小的解中，它的范数 $\|x\|_2$ 也是最小的（最小范数解）。
+
+6. **[性质] 证明 $(A^\dagger)^\dagger = A$。**
+   ??? success "参考答案"
+       将 $A$ 代入 $A^\dagger$ 满足的四个 Penrose 条件中，可以发现它们是对称的。矩阵 $A$ 完美满足作为 $A^\dagger$ 之广义逆的所有条件。
+
+7. **[秩] $\operatorname{rank}(A^\dagger)$ 与 $\operatorname{rank}(A)$ 有什么关系？**
+   ??? success "参考答案"
+       它们严格相等。这可以从 SVD 的构造中一眼看出：非零奇异值的个数在取倒数后保持不变。
+
+8. **[Drazin逆] Drazin 逆与 Moore-Penrose 逆的主要区别是什么？**
+   ??? success "参考答案"
+       Moore-Penrose 逆侧重于**正交投影与最小二乘**（适用于任何矩阵）；而 Drazin 逆侧重于**保持矩阵的幂次结构与交换性**（仅适用于方阵），它满足 $AX = XA$。
+
+9. **[逆序律] 为什么一般情况下 $(AB)^\dagger \neq B^\dagger A^\dagger$？**
+   ??? success "参考答案"
+       因为广义逆的定义涉及投影方向。只有当 $A$ 的列空间和 $B$ 的行空间满足特定的正交或对齐条件（如 $A$ 列满秩且 $B$ 行满秩）时，逆序律才成立。
+
+10. **[爱因斯坦思考题] 假设宇宙中某处存在一条不相容的定律（方程组无解）。广义逆告诉我们，即便没有完美解，依然存在一个使“能量扰动”（残差）最小的解。这反映了自然界怎样的折中原则？**
+    ??? success "参考答案"
+        这反映了“最小作用量原理”的代数版：自然界不会因为无法达到理想状态而停摆。广义逆提供了一个在现有约束下最经济、最不“浮夸”的妥协方案。它承认了误差（不相容性）的存在，但通过向已知事实（列空间）进行正交投影，守住了客观真实性的底线。
+
+## 本章小结
+
+本章将逆矩阵的概念推广到了最一般的情形，建立了奇异和非方阵系统的统一代数框架：
+
+1. **内逆与 $\{1\}$-逆**：确立了广义逆存在性的基本逻辑，解决了不相容方程组的特解构造问题。
+2. **Moore-Penrose 逆**：通过四个 Penrose 条件定义了唯一的“最佳广义逆”，并给出了基于 SVD 的构造算法。
+3. **投影几何**：揭示了广义逆与正交投影的内在联系，证明了 $A^\dagger$ 是连接四个基本子空间的桥梁。
+4. **最小范数最小二乘解**：论证了 $A^\dagger b$ 在处理不相容系统时的最优性，是现代信号处理和统计估计的理论核心。
+5. **Drazin 逆与群逆**：讨论了在处理微分方程和马尔可夫链时，具有良好交换性质和幂次保持特性的代数广义逆。
+6. **逆序律与计算稳定性**：探讨了广义逆运算在复合映射下的复杂行为，以及秩亏损时的数值不稳定性。
+

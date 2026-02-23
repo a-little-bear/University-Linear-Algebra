@@ -759,3 +759,61 @@ Hadamard 积（又称 Schur 积、逐元素积）是矩阵的另一种乘法运�
     本章建立的 Hadamard 积理论展示了一个重要主题：看似简单的逐元素运算具有深刻的矩阵分析内涵。Schur 积定理（半正定的保持）是核心，Oppenheim 和 Hadamard 不等式是行列式层面的体现，而与 Kronecker 积的关系提供了理论理解的框架。
 
     读者应特别注意 Hadamard 积与通常矩阵乘法的本质区别：Hadamard 积保持半正定性（Schur 积定理），但通常矩阵乘法不保持——$A \geq 0$ 且 $B \geq 0$ 不蕴含 $AB \geq 0$（除非 $AB$ 是 Hermite 的）。这一对比揭示了两种矩阵乘法在正定锥上的不同几何行为。
+
+## 练习题
+
+1. **[基础] Hadamard 积 $A \circ B$ 的单位元矩阵是什么？**
+   ??? success "参考答案"
+       全 1 矩阵 $J$（所有元素均为 1 的矩阵）。满足 $J \circ A = A \circ J = A$ 对所有同阶矩阵 $A$ 成立。
+
+2. **[Schur定理] 若 $A$ 和 $B$ 都是半正定矩阵，证明 $A \circ B$ 也必定是半正定矩阵。**
+   ??? success "参考答案"
+       这是 Schur 积定理的核心。利用与 Kronecker 积的关系 $A \circ B = P^T (A \otimes B) P$。由于 $A, B$ 半正定，它们的张量积 $A \otimes B$ 也半正定。对半正定矩阵进行全等压缩（左乘 $P^T$ 右乘 $P$）仍然保持半正定性。
+
+3. **[秩] 证明：$\operatorname{rank}(A \circ B) \le \operatorname{rank}(A) \operatorname{rank}(B)$。**
+   ??? success "参考答案"
+       矩阵 $A$ 可写为 $\sum_{i=1}^{r_A} \mathbf{u}_i \mathbf{v}_i^H$，矩阵 $B$ 可写为 $\sum_{j=1}^{r_B} \mathbf{x}_j \mathbf{y}_j^H$。
+       则 $A \circ B = \sum_{i,j} (\mathbf{u}_i \circ \mathbf{x}_j) (\mathbf{v}_i \circ \mathbf{y}_j)^H$。
+       这是一个由 $r_A \times r_B$ 个秩 1 矩阵构成的组合，因此其秩最大不超过 $r_A r_B$。
+
+4. **[对角阵] 两个对角矩阵的 Hadamard 积与其普通矩阵积有何关系？**
+   ??? success "参考答案"
+       对于对角矩阵，Hadamard 积与普通矩阵乘法的结果完全相同：$\operatorname{diag}(\mathbf{a}) \circ \operatorname{diag}(\mathbf{b}) = \operatorname{diag}(\mathbf{a}) \cdot \operatorname{diag}(\mathbf{b}) = \operatorname{diag}(a_1 b_1, \dots, a_n b_n)$。
+
+5. **[Oppenheim] 验证 Oppenheim 不等式：对正定阵 $A, B$，$\det(A \circ B) \ge \det(A) \prod b_{ii}$。取 $B=I$ 时，这退化为什么著名不等式？**
+   ??? success "参考答案"
+       当 $B=I$ 时，由于 $A \circ I = \operatorname{diag}(a_{ii})$，其行列式为 $\prod a_{ii}$。不等式变为 $\prod a_{ii} \ge \det(A)$，这正是经典的 **Hadamard 行列式不等式**。
+
+6. **[计算] 求 $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$ 与 $B = \begin{pmatrix} 0 & 3 \\ 3 & 0 \end{pmatrix}$ 的 Hadamard 积。它是半正定的吗？**
+   ??? success "参考答案"
+       $A \circ B = \begin{pmatrix} 0 & 6 \\ 6 & 0 \end{pmatrix}$。它的特征值是 $\pm 6$，不是半正定的。这并不违背 Schur 积定理，因为原矩阵 $A$（特征值 $3, -1$）本身不是半正定的。
+
+7. **[谱半径] 证明：若 $B$ 是相关矩阵（对角元全为 1），则 $\rho(A \circ B) \le \rho(A)$。**
+   ??? success "参考答案"
+       由于 $B$ 的对角元为 1，根据定理 35.11，$\rho(A \circ B) \le \rho(A) \cdot \max b_{ii} = \rho(A)$。这意味着相关性“过滤”过程往往会压缩系统的谱能量。
+
+8. **[迹] 证明 $\operatorname{tr}(A \circ B) = \operatorname{tr}(A^T B)$。**
+   ??? success "参考答案"
+       $\operatorname{tr}(A \circ B) = \sum a_{ii} b_{ii}$。
+       $\operatorname{tr}(A^T B) = \sum_i \sum_j (A^T)_{ij} b_{ji} = \sum_i \sum_j a_{ji} b_{ji}$。
+       注意这里的索引对齐。如果 $A, B$ 是对称的，结果显然成立；通常这是定义逐元素内积的方式。
+
+9. **[Schur乘子] 为什么在量子信息中，Hadamard 积被用来描述“相位退相干”过程？**
+   ??? success "参考答案"
+       相位退相干（Phase Damping）保持了基态概率（密度矩阵的对角元）不变，但会按比例衰减非对角项（量子相干项）。这种“保留对角，衰减非对角”的操作正好可以通过 $\rho \circ M$ 实现，其中 $M$ 的对角元为 1，非对角元小于 1。
+
+10. **[爱因斯坦思考题] 矩阵乘法 $AB$ 代表了变换的“串联”（一种因果链），而 Hadamard 积 $A \circ B$ 则代表了变换的“并联叠加”或“掩蔽过滤”。爱因斯坦认为物理规律应该是局部且协变的。为什么说 Hadamard 积虽然破坏了基变换的全局协变性（即 $(P^{-1}AP) \circ (P^{-1}BP) \neq P^{-1}(A \circ B)P$），却在描述如“偏振片过滤光线”这种局部物理掩蔽中是不可或缺的？**
+    ??? success "参考答案"
+        因为并非所有物理相互作用都是基无关的演化。Hadamard 积描述的是**特定观测基下的点对点响应**。比如偏振片或彩色滤镜，它们的作用不是旋转整个 Hilbert 空间，而是根据特定的物理维度（坐标轴）直接削弱或增强分量。这种基依赖性（Basis-dependence）反映了观察者通过特定实验仪器对系统施加的“硬掩模”，它是将抽象的代数演化落实到具体的局部测量坐标系中的代数体现。
+
+## 本章小结
+
+本章系统探讨了矩阵的逐元素乘法运算及其背后的解析威力，主要内容包括：
+
+1. **Hadamard 积的代数结构**：确立了其作为交换代数的地位，并利用选择矩阵 $P$ 建立了其与庞大的 Kronecker 积空间之间的深刻联系。
+2. **Schur 积定理**：证明了 Hadamard 积是正定锥上的闭运算，这一结论奠定了统计学中协方差建模和神经网络核方法稳定性分析的基础。
+3. **行列式不等式链**：从 Oppenheim 不等式出发，重新审视并统一了 Hadamard 不等式和 Fischer 不等式，揭示了元素级乘法如何单调地扩张行列式边界。
+4. **谱分析与映射**：推导了 $A \circ B$ 的特征值界与谱半径界，展示了逐元素相乘如何起到一种“能量衰减器”的作用。
+5. **完全正映射与 Schur 通道**：将 Hadamard 积提升为线性算子（Schur 乘子），论证了其在刻画量子退相干和信息通道中的核心价值。
+6. **应用领域**：介绍了在空间统计、协方差锥化、神经网络 NTK 核更新以及 Lyapunov 矩阵方程求解中的实战技巧。
+

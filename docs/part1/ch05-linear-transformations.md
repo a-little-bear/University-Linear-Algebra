@@ -529,6 +529,48 @@
 
 ---
 
+## 练习题
+
+1. **[概念] 平移变换 $T(\mathbf{x}) = \mathbf{x} + \mathbf{c}$ ($\mathbf{c} \neq \mathbf{0}$) 是线性变换吗？**
+   ??? success "参考答案"
+       不是。线性变换必须满足 $T(\mathbf{0}) = \mathbf{0}$，而平移后原点移动了。它被称为仿射变换（Affine transformation）。
+
+2. **[微积分] 证明微分算子 $D(f) = f'$ 在无穷可微函数空间中是一个线性变换，并求其零空间（核）。**
+   ??? success "参考答案"
+       $(\alpha f + \beta g)' = \alpha f' + \beta g'$ 证明了线性性。核是所有满足 $f' = 0$ 的函数，即所有常数函数。
+
+3. **[秩-零度] 设 $T: \mathbb{R}^5 \to \mathbb{R}^3$ 是线性变换。它的零空间维数最小是多少？**
+   ??? success "参考答案"
+       由秩-零度定理 $\dim(\ker T) + \operatorname{rank}(T) = 5$。因为 $\operatorname{rank}(T) \le 3$，所以 $\dim(\ker T) \ge 2$。
+
+4. **[矩阵表示] 恒等变换 $I(\mathbf{x}) = \mathbf{x}$ 在以 $\mathcal{B}$ 为定义域基，以 $\mathcal{C}$ 为值域基时的矩阵是什么？**
+   ??? success "参考答案"
+       它是从基 $\mathcal{B}$ 到基 $\mathcal{C}$ 的过渡矩阵 $P_{\mathcal{C} \leftarrow \mathcal{B}}$。
+
+5. **[同构] 为什么同维数的有限维实向量空间彼此都是同构的？**
+   ??? success "参考答案"
+       因为它们都可以通过选取基而与 $\mathbb{R}^n$ 建立双射（坐标映射），同构的传递性决定了它们彼此同构。
+
+6. **[复合] 若 $T_1$ 和 $T_2$ 是线性变换，证明它们的复合 $T_1 \circ T_2$ 也是线性的。**
+   ??? success "参考答案"
+       $T_1(T_2(\alpha\mathbf{u}+\beta\mathbf{v})) = T_1(\alpha T_2(\mathbf{u}) + \beta T_2(\mathbf{v})) = \alpha T_1(T_2(\mathbf{u})) + \beta T_1(T_2(\mathbf{v}))$。
+
+7. **[相似] 证明相似矩阵具有相同的迹（Trace）。**
+   ??? success "参考答案"
+       $\operatorname{tr}(P^{-1}AP) = \operatorname{tr}(APP^{-1}) = \operatorname{tr}(A)$。利用了迹的循环不变性。
+
+8. **[不变子空间] $T$ 旋转 $\mathbb{R}^2$ 平面 $90^\circ$。它有 1 维不变子空间吗？**
+   ??? success "参考答案"
+       在实数域内没有。任何非零实向量旋转 $90^\circ$ 后都不与自身共线。但在复数域上有。
+
+9. **[单射与满射] 如果 $T: V \to V$ 是单射（$V$ 是有限维），证明它也必定是满射。**
+   ??? success "参考答案"
+       单射意味着 $\dim(\ker T) = 0$。由秩-零度定理，$\operatorname{rank}(T) = \dim V - 0 = \dim V$。因此像空间等于目标空间，故满射。
+
+10. **[爱因斯坦思考题] 爱因斯坦的“等效原理”指出局部的引力场等效于参考系的加速。在线性代数中，如果两个矩阵代表同一个物理过程，仅仅是因为参考系（基）不同，它们之间满足什么代数关系？**
+    ??? success "参考答案"
+        它们是**相似矩阵**。形式为 $B = P^{-1}AP$。相似不变量（如特征值、行列式、迹）就是不依赖于观察者参考系的物理“守恒量”或内禀性质。
+
 ## 本章小结
 
 本章从抽象角度研究了向量空间之间保持线性结构的映射——线性变换。核心内容包括：

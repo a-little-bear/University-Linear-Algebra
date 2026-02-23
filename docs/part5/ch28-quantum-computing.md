@@ -628,3 +628,56 @@
 
 !!! note "注"
     本章的线性代数工具贯穿了量子信息的各个领域：Hilbert 空间提供状态空间的框架（Ch8），酉矩阵描述量子演化（Ch7），SVD 给出 Schmidt 分解（Ch11），Kronecker 积描述多体系统（Ch19），正定矩阵理论刻画密度矩阵和 POVM（Ch16），矩阵不等式约束信息处理的极限（Ch18）。量子信息科学是线性代数最深刻、最活跃的应用领域之一。
+
+## 练习题
+
+1. **[量子态] 为什么量子力学中的纯态必须表示为复希尔伯特空间中的单位向量？**
+   ??? success "参考答案"
+       “单位向量”是为了保证所有互斥测量结果的概率之和严格等于 1（玻恩定则）；“复数”则是为了提供量子干涉必不可少的相位信息。
+
+2. **[演化] 为什么封闭量子系统的演化必须用酉矩阵（Unitary Matrix）来描述？**
+   ??? success "参考答案"
+       酉矩阵保持向量的内积（因而保持 $\ell_2$ 范数）不变。这在物理上保证了量子态在时间演化过程中，总的概率始终守恒为 1，并且微观物理过程具有可逆性（酉矩阵总是可逆的，其逆即共轭转置）。
+
+3. **[泡利矩阵] 验证泡利矩阵 $\sigma_x, \sigma_y, \sigma_z$ 不仅是厄米特矩阵，而且同时是酉矩阵。这赋予了它们什么双重物理身份？**
+   ??? success "参考答案"
+       计算可得 $\sigma_k^\dagger = \sigma_k$（厄米特），且 $\sigma_k^\dagger \sigma_k = I$（酉）。这意味着它们既是可以被实际测量出的“物理可观测量”（特征值 $\pm 1$），又可以作为执行量子门操作的“演化算符”。
+
+4. **[张量积] 两个独立量子比特处于状态 $\alpha|0\rangle + \beta|1\rangle$ 和 $\gamma|0\rangle + \delta|1\rangle$。写出它们的联合状态向量。**
+   ??? success "参考答案"
+       联合状态是它们的 Kronecker 积：$\begin{pmatrix} \alpha \\ \beta \end{pmatrix} \otimes \begin{pmatrix} \gamma \\ \delta \end{pmatrix} = (\alpha\gamma, \alpha\delta, \beta\gamma, \beta\delta)^T$。对应基态 $|00\rangle, |01\rangle, |10\rangle, |11\rangle$。
+
+5. **[量子纠缠] 利用 SVD 的视角，如何判断一个双量子比特态 $|\psi\rangle = \sum c_{ij} |ij\rangle$ 是否是纠缠态？**
+   ??? success "参考答案"
+       将系数 $c_{ij}$ 排列成一个 $2 \times 2$ 的矩阵 $C$。对 $C$ 进行 SVD（即 Schmidt 分解）。如果 $C$ 的非零奇异值大于 1 个（即 $\operatorname{rank}(C) > 1$），则该态无法写成张量积分解，因而是纠缠态。
+
+6. **[密度矩阵] 混合态的密度矩阵 $\rho$ 必须满足哪三个数学条件？**
+   ??? success "参考答案"
+       1. 厄米特（$\rho = \rho^\dagger$）；2. 半正定（$\rho \succeq 0$）；3. 迹为 1（$\operatorname{tr}(\rho) = 1$）。
+
+7. **[测量] 如果我们对态 $|\psi\rangle$ 沿着基态 $|0\rangle$ 进行测量，测得 $|0\rangle$ 的概率用投影矩阵 $P = |0\rangle\langle 0|$ 怎么表示？**
+   ??? success "参考答案"
+       概率 $p = \langle \psi | P | \psi \rangle = \operatorname{tr}(P |\psi\rangle\langle\psi|)$。
+
+8. **[量子门] Hadamard 门 $H$ 的矩阵形式是什么？它对基态 $|0\rangle$ 和 $|1\rangle$ 会产生什么效果？**
+   ??? success "参考答案"
+       $H = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$。它制造了完美的均匀叠加态：$H|0\rangle = \frac{|0\rangle+|1\rangle}{\sqrt{2}} \equiv |+\rangle$，$H|1\rangle = \frac{|0\rangle-|1\rangle}{\sqrt{2}} \equiv |-\rangle$。
+
+9. **[部分迹] 设双粒子系统处于最大纠缠态 $|\Phi^+\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}$，求对第二个粒子求偏迹（Partial Trace）后得到的约化密度矩阵 $\rho_A$。**
+   ??? success "参考答案"
+       全局密度矩阵 $\rho = \frac{1}{2}(|00\rangle\langle00| + |00\rangle\langle11| + |11\rangle\langle00| + |11\rangle\langle11|)$。求偏迹相当于抹去第二个粒子的信息：$\rho_A = \operatorname{tr}_B(\rho) = \frac{1}{2}(|0\rangle\langle 0| + |1\rangle\langle 1|) = \frac{1}{2}I$。这意味着，尽管全局处于纯态，但单独观察子系统时，它表现得如同完全随机的热噪声（最大混合态）。
+
+10. **[爱因斯坦思考题] EPR 佯谬中所谓的“幽灵般的超距作用”，在现代量子信息代数（特别是张量积与密度矩阵）中是如何被合理解释的？**
+    ??? success "参考答案"
+        通过线性代数的“偏迹”运算可以证明：虽然对粒子 A 的测量会瞬间改变全局张量态（波函数坍缩），但这绝对无法改变远处的粒子 B 的约化密度矩阵 $\rho_B$。由于 B 的任何可观测现象仅仅依赖于 $\rho_B$，因此纠缠态不能用来超光速传递经典信息。线性代数在底层维护了相对论的因果铁律。
+
+## 本章小结
+
+本章全景式地展示了线性代数作为量子力学与量子计算唯一“母语”的绝对统治力：
+
+1. **量子态与演化**：以复向量和酉矩阵重构了量子力学的公理体系。薛定谔方程不过是酉群 $U(N)$ 在希尔伯特空间上的连续李群作用。
+2. **多体系统与纠缠**：通过张量积（Kronecker 积）将孤立的量子比特拼合成指数级爆炸的组合空间。借助 SVD（Schmidt 分解），我们获得了数学上极其精确的“量子纠缠”判据。
+3. **量子测量与密度矩阵**：超越了传统的正交投影测量，引入了基于正定矩阵的 POVM 测量和刻画混合态的密度矩阵 $\rho$。展示了偏迹运算如何自然地描述子系统信息的丢失。
+4. **量子门与算法**：将量子计算机视作一台极其庞大的硬件矩阵乘法器，介绍了 Pauli、Hadamard、CNOT 等基本酉门，及其在构建诸如量子隐形传态和 Grover 搜索等算法中的基石作用。
+5. **量子误差纠正**：利用有限域 $\mathbb{F}_2$ 上的线性代数和 Pauli 群的代数结构，引出了稳定子码（Stabilizer Codes），证明了不可观测的“综合征测量”如何保护脆弱的量子叠加态。
+6. **量子信息不等式**：将经典香农熵自然过渡为基于矩阵对数函数的冯·诺依曼熵，并在矩阵不等式的武装下，证明了决定一切量子通信极限的强次可加性（SSA）定理。

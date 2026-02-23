@@ -541,47 +541,55 @@ Levinson-Durbin 算法是求解对称正定 Toeplitz 系统最经典的快速算
 
 ---
 
-## 37A.12 习题
+## 练习题
 
-!!! example "例 37A.7 (习题 1)"
-    证明：$n$ 阶 Toeplitz 矩阵 $T$ 可以嵌入到 $2n$ 阶循环矩阵 $C$ 中，使得 $T$ 是 $C$ 的某个主子矩阵。利用此嵌入说明 Toeplitz 矩阵-向量乘法可以在 $O(n\log n)$ 内完成。
+1. **[结构] 证明 $n$ 阶 Toeplitz 矩阵 $T$ 可以嵌入到一个 $2n$ 阶循环矩阵 $C$ 中。利用此性质说明如何利用 FFT 在 $O(n\log n)$ 时间内计算 $T\mathbf{x}$。**
+   ??? success "参考答案"
+       构造 $2n$ 阶循环矩阵 $C$，其第一列由 $T$ 的第一列、一个 0 以及 $T$ 的第一行逆序排列组成。将 $\mathbf{x}$ 补零至 $2n$ 维得到 $\tilde{\mathbf{x}}$，则 $C\tilde{\mathbf{x}}$ 的前 $n$ 个分量即为 $T\mathbf{x}$。循环矩阵乘法通过 FFT 加速。
 
-!!! example "例 37A.8 (习题 2)"
-    设 $T_n$ 为 $n$ 阶对称正定 Toeplitz 矩阵，$f > 0$ 为其生成函数。证明：
-    $$\lim_{n\to\infty} \frac{1}{n}\log\det(T_n) = \frac{1}{2\pi}\int_0^{2\pi}\log f(\theta)\, d\theta.$$
+2. **[对角化] 设 $C = \operatorname{circ}(c_0, c_1, \dots, c_{n-1})$。证明 $C$ 的特征值 $\lambda_k$ 恰好是向量 $\mathbf{c}$ 的离散傅里叶变换（DFT）。**
+   ??? success "参考答案"
+       定义 $\omega = e^{2\pi i/n}$。令 $\mathbf{v}_k = (1, \omega^k, \dots, \omega^{k(n-1)})^T$。直接验证 $C\mathbf{v}_k = (\sum c_j \omega^{jk}) \mathbf{v}_k$。特征向量 $\mathbf{v}_k$ 与 $\mathbf{c}$ 无关，这一性质使得循环矩阵在工程中极具价值。
 
-!!! example "例 37A.9 (习题 3)"
-    设 $H$ 为 $n \times n$ Hankel 矩阵。证明 $H^2$ 既不一定是 Hankel 矩阵也不一定是 Toeplitz 矩阵。
+3. **[Levinson] 在 Levinson-Durbin 递推中，如果某个反射系数 $|\alpha_k| = 1$，说明了矩阵 $T$ 的什么性质？**
+   ??? success "参考答案"
+       说明 $T_{k+1}$ 是奇异的。如果 $|\alpha_k| < 1$ 对所有 $k$ 成立，则 $T$ 是正定的。这提供了判定 Toeplitz 矩阵正定性的高效方法。
 
-!!! example "例 37A.10 (习题 4)"
-    计算循环矩阵 $C = \operatorname{circ}(1, 2, 3, 4)$ 的特征值、行列式和逆（若存在）。
+4. **[Hankel] 证明：如果 $H$ 是 Hankel 矩阵，则 $J H$ 是 Toeplitz 矩阵（其中 $J$ 是反对角单位阵）。**
+   ??? success "参考答案"
+       $(JH)_{ij} = H_{n-i+1, j}$。由于 $H$ 的元素取决于指标之和，即 $(n-i+1) + j = n + 1 + (j-i)$。由于此值仅取决于 $j-i$，故 $JH$ 符合 Toeplitz 矩阵的定义。
 
-!!! example "例 37A.11 (习题 5)"
-    证明：$n$ 阶循环矩阵 $C = \operatorname{circ}(c_0, c_1, \ldots, c_{n-1})$ 的行列式为
-    $$\det(C) = \prod_{k=0}^{n-1}\left(\sum_{j=0}^{n-1} c_j \omega^{jk}\right).$$
-    利用此公式计算 $\operatorname{circ}(1, 1, 1, \ldots, 1)$ 和 $\operatorname{circ}(2, -1, 0, \ldots, 0, -1)$ 的行列式。
+5. **[Szegő] 根据 Szegő 等分布定理，三对角矩阵 $\operatorname{tridiag}(-1, 2, -1)$ 在维数 $n \to \infty$ 时的特征值分布倾向于什么函数？**
+   ??? success "参考答案"
+       生成函数为 $f(\theta) = 2 - e^{i\theta} - e^{-i\theta} = 2 - 2\cos\theta$。特征值在 $[0, 4]$ 区间内按此余弦函数的形状分布。
 
-!!! example "例 37A.12 (习题 6)"
-    设 $T$ 为 $n \times n$ 对称 Toeplitz 矩阵，$J$ 为反序矩阵。证明 $T$ 和 $J$ 可以同时对角化，并由此推导 $T$ 的特征值可以分为两组：对应于 $J$ 的特征值 $+1$ 和 $-1$ 的特征向量。
+6. **[逆矩阵] 循环矩阵的逆矩阵（若存在）一定还是循环矩阵吗？为什么？**
+   ??? success "参考答案"
+       是。因为循环矩阵全体在 DFT 变换下对应于对角矩阵。对角矩阵的逆（逐元素取倒数）仍是对角矩阵，逆变换回原空间后仍是循环矩阵。
 
-!!! example "例 37A.13 (习题 7)"
-    **Levinson 算法的数值稳定性**。构造一个对称正定 Toeplitz 矩阵使得某个反射系数 $|\alpha_k|$ 接近 $1$，并讨论此时 Levinson 算法的数值行为。
+7. **[卷积] 说明循环矩阵与向量的乘法 $C\mathbf{x}$ 实际上对应于序列的什么运算？**
+   ??? success "参考答案"
+       对应于向量 $\mathbf{c}$ 与 $\mathbf{x}$ 的**循环卷积**（Circular Convolution）。这解释了为什么 FFT 可以加速此类运算。
 
-!!! example "例 37A.14 (习题 8)"
-    证明 Hamburger 矩问题的解唯一（**确定的**矩问题）当且仅当 Jacobi 矩阵（由三项递推系数构成的三对角矩阵）是本质自伴的。给出一个不确定矩问题的例子。
+8. **[行列式] 利用特征值公式，求全 1 矩阵 $J_n$（它是特殊的循环矩阵）的行列式。**
+   ??? success "参考答案"
+       $J_n$ 的特征值为 $\hat{c}_0 = n$ 且 $\hat{c}_k = 0$ ($k \ge 1$)。由于存在零特征值，对于 $n > 1$，$\det(J_n) = 0$。
 
-!!! example "例 37A.15 (习题 9)"
-    设 $f(\theta) = |1 - e^{i\theta}|^{2\alpha}$（$\alpha > 0$）。计算 $\det(T_n)$ 的渐近行为，验证 Fisher-Hartwig 猜想中 $\alpha$ 的角色。
+9. **[预处理] 为什么在求解大型 Toeplitz 方程组时，常用循环矩阵作为预处理子（Preconditioner）？**
+   ??? success "参考答案"
+       因为循环矩阵的逆极易计算（通过 FFT），且对于很多平稳过程产生的 Toeplitz 矩阵，循环矩阵能很好地逼近其谱特性，从而将特征值聚类在 1 附近，加速共轭梯度法的收敛。
 
-!!! example "例 37A.16 (习题 10)"
-    证明：若 $C_1, C_2$ 为 $n$ 阶循环矩阵，则 $C_1 C_2 = C_2 C_1$，且这个乘积对应于两个向量的**循环卷积**。利用 DFT 解释"卷积定理"：循环卷积在频域变为逐点乘积。
+10. **[爱因斯坦思考题] 爱因斯坦的广义相对论强调物理规律在坐标变换下的不变性。循环矩阵的“基无关性”（对所有循环矩阵，DFT 矩阵都是通用的特征向量基）反映了离散空间的哪种对称性？**
+    ??? success "参考答案"
+        反映了**离散平移对称性**（Cyclic Shift Invariance）。DFT 矩阵本质上是离散平移群的表示。这意味着在具有周期性边界条件的均匀宇宙中，无论我们站在哪个格点上，空间的动力学结构（特征模态）看起来都是完全一样的。循环矩阵是这种“空间均匀性”在代数上的最直接体现。
 
-!!! example "例 37A.17 (习题 11)"
-    **分块 Toeplitz 矩阵的 Szegő 定理**。设 $\mathcal{T}_n$ 为 $np \times np$ 的分块 Toeplitz 矩阵，生成函数为 $p \times p$ 矩阵值函数 $F(\theta)$。陈述并证明（或给出证明思路）分块 Szegő 定理：
-    $$\lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^{np}g(\lambda_k^{(n)}) = \frac{1}{2\pi}\int_0^{2\pi}\frac{1}{p}\sum_{j=1}^p g(\mu_j(\theta))\, d\theta,$$
-    其中 $\mu_j(\theta)$ 是 $F(\theta)$ 的特征值。
+## 本章小结
 
-!!! example "例 37A.18 (习题 12)"
-    证明 Toeplitz 矩阵的完成问题：给定 $t_0 = 1$，$t_1 = 0.9$，求所有 $t_2$ 的值使得
-    $$T_3 = \begin{pmatrix} 1 & 0.9 & t_2 \\ 0.9 & 1 & 0.9 \\ t_2 & 0.9 & 1 \end{pmatrix}$$
-    正定。确定最大熵完成对应的 $t_2$ 值。
+本章研究了具有高度参数冗余的结构化矩阵，它们是连接代数与分析、信号处理的纽带：
+
+1. **Toeplitz 与 Hankel 结构**：定义了沿对角线或反对角线恒定的矩阵，揭示了它们在描述平稳过程和矩问题中的天然优势。
+2. **Levinson-Durbin 递推**：展示了如何利用结构特性将计算复杂度从 $O(n^3)$ 优化至 $O(n^2)$，这是结构化矩阵算法的典范。
+3. **循环矩阵与傅里叶分析**：证明了循环矩阵可被 DFT 矩阵统一对角化，确立了卷积、滤波与线性代数之间的深刻同构关系。
+4. **渐近谱理论**：通过 Szegő 定理描述了大型 Toeplitz 矩阵特征值的分布规律，将矩阵的局部性质与生成函数的全局分析联系起来。
+5. **快速算法与应用**：讨论了循环预处理在 PCG 算法中的应用，以及这些结构在现代统计、预测理论和数值模拟中的基石作用。
+

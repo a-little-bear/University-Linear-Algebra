@@ -34,7 +34,17 @@
       "Bash(for f in ch59-tropical-algebra ch60-linear-preservers ch61-inverse-eigenvalue ch62-matrix-completion ch64-convexity ch65-combinatorial-matrix)",
       "Bash(do test:*)",
       "Bash(for f in ch66-control-theory ch67-computer-graphics ch68-robotics ch70-biology ch71-markov-chains ch72-matrix-distributions)",
-      "Bash(do test -f \"C:\\\\Users\\\\alitt\\\\Downloads\\\\Linear Algebra\\\\docs\\\\part9/$f.md\")"
+      "Bash(do test -f \"C:\\\\Users\\\\alitt\\\\Downloads\\\\Linear Algebra\\\\docs\\\\part9/$f.md\")",
+      "Bash(for f in ch37-structured-matrices ch38-special-matrix-classes ch40-permanent-immanant ch41-matrix-pencils ch45-cp-copositive ch46-operator-monotone ch47-matrix-calculus)",
+      "Bash(for f in ch59-tropical-algebra ch63-joint-spectral-radius ch64-convexity ch65-combinatorial-matrix)",
+      "Bash(for f in ch66-control-theory ch68-robotics ch70-biology ch72-matrix-distributions)",
+      "Bash(for f in ch37a-toeplitz-hankel-circulant ch37b-displacement-structure ch38a-m-matrices ch38b-p-h-matrices ch40a-permanents ch40b-immanants ch41a-regular-pencils ch41b-kronecker-applications ch45a-completely-positive ch45b-copositive-programming ch46a-operator-monotone ch46b-matrix-means ch47a-matrix-calculus-elementary ch47b-frechet-derivatives)",
+      "Bash(for f in ch59a-tropical-semiring ch59b-tropical-geometry ch63a-simultaneous-triangularization ch63b-joint-spectral-radius ch64a-convex-sets-matrices ch64b-matrix-convex-functions ch65a-sign-patterns ch65b-combinatorial-structures)",
+      "Bash(for f in ch66a-state-space-control ch66b-optimal-robust-control ch68a-robot-kinematics ch68b-robot-dynamics ch70a-population-ecology ch70b-molecular-biology ch72a-matrix-distributions ch72b-multivariate-inference)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip show:*)",
+      "Bash(pip3 show:*)"
     ]
   }
 }

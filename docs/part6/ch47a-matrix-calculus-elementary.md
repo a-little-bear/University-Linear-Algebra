@@ -805,3 +805,60 @@
     证明交换矩阵的性质 $K_{p,m}(A \otimes B)K_{n,q} = B \otimes A$，其中 $A \in \mathbb{R}^{m \times n}$，$B \in \mathbb{R}^{p \times q}$。
 
     提示：对任意 $X \in \mathbb{R}^{q \times n}$，利用 $\operatorname{vec}(A^T X^T B^T) = \operatorname{vec}((BXA)^T) = K_{n,p}\operatorname{vec}(BXA)$。
+
+## 练习题
+
+1. **[基础] 设 $f(\mathbf{x}) = \mathbf{a}^T \mathbf{x} + \mathbf{x}^T A \mathbf{x}$，其中 $A$ 是对称矩阵。求梯度 $\nabla f$。**
+   ??? success "参考答案"
+       $\nabla f = \mathbf{a} + 2A\mathbf{x}$。这是矩阵微积分中最基本的公式之一。
+
+2. **[最小二乘] 证明函数 $f(\mathbf{x}) = \|A\mathbf{x} - \mathbf{b}\|^2$ 的梯度为 $2A^T(A\mathbf{x} - \mathbf{b})$。**
+   ??? success "参考答案"
+       展开得 $f(\mathbf{x}) = \mathbf{x}^T A^T A \mathbf{x} - 2\mathbf{b}^T A \mathbf{x} + \mathbf{b}^T \mathbf{b}$。
+       对 $\mathbf{x}$ 求导：$2(A^T A)\mathbf{x} - 2A^T \mathbf{b} = 2A^T(A\mathbf{x} - \mathbf{b})$。
+
+3. **[迹导数] 设 $X$ 是矩阵变量，证明 $\frac{\partial \operatorname{tr}(AX)}{\partial X} = A^T$。**
+   ??? success "参考答案"
+       利用微分法：$d\operatorname{tr}(AX) = \operatorname{tr}(A dX)$。
+       根据迹与内积的关系 $\operatorname{tr}(G^T dX)$，读出 $G^T = A$，故 $G = A^T$。
+
+4. **[求逆] 证明矩阵逆的导数满足 $d(X^{-1}) = -X^{-1}(dX)X^{-1}$。**
+   ??? success "参考答案"
+       从 $X X^{-1} = I$ 开始，两侧微分：$(dX)X^{-1} + X d(X^{-1}) = 0$。
+       移项并左乘 $X^{-1}$ 即得：$d(X^{-1}) = -X^{-1}(dX)X^{-1}$。
+
+5. **[行列式] 求 $\frac{\partial \ln \det(X)}{\partial X}$，其中 $X$ 是正定对称矩阵。**
+   ??? success "参考答案"
+       $d \ln \det(X) = \frac{1}{\det(X)} d \det(X) = \frac{1}{\det(X)} \det(X) \operatorname{tr}(X^{-1} dX) = \operatorname{tr}(X^{-1} dX)$。
+       故导数为 $(X^{-1})^T$。由于 $X$ 是对称的，结果即为 $X^{-1}$。
+
+6. **[Vec化] 证明 $\operatorname{vec}(ABC) = (C^T \otimes A) \operatorname{vec}(B)$。**
+   ??? success "参考答案"
+       这是 Vec 算子与 Kronecker 积的核心转换公式。其直观物理意义是将矩阵的“三体相互作用”线性化为向量空间中的单一矩阵乘法。
+
+7. **[Hessian] 什么是 Hessian 矩阵？它在判定极值点时有什么作用？**
+   ??? success "参考答案"
+       Hessian 矩阵是二阶偏导数矩阵。若驻点处（$\nabla f = 0$）的 Hessian 矩阵正定，则该点为局部极小点；若负定，则为局部极大点；若不定，则为鞍点。
+
+8. **[Wirtinger] 在复数域求导中，Wirtinger 导数 $\frac{\partial f}{\partial \bar{z}}$ 为 0 意味着什么？**
+   ??? success "参考答案"
+       意味着函数 $f$ 满足 Cauchy-Riemann 方程，即该函数在复平面上是**全纯的**（复解析的）。
+
+9. **[布局] 简述“分子布局”与“分母布局”的主要区别。**
+   ??? success "参考答案"
+       分子布局中，导数结果的维度与函数输出维度对齐（梯度为行向量）；分母布局中，结果维度与自变量维度对齐（梯度为列向量）。深度学习常倾向于分子布局（便于链式法则左乘），而统计优化常倾向于分母布局（便于梯度下降更新）。
+
+10. **[爱因斯坦思考题] 广义相对论中的张量分析要求物理规律在任何坐标系下都是等价的。矩阵微积分中的“微分法”（Differential Method，即 $df = \operatorname{tr}(G^T dX)$）如何体现了这种“坐标无关性”？为什么它比直接操作偏导数更稳健？**
+    ??? success "参考答案"
+        微分法操作的是标量全微分 $df$，它是一个几何上的不变量，不依赖于你选取的具体布局约定（分子或分母布局）。直接操作偏导数矩阵就像是在选定的坐标系下画投影，极其容易因为行列约定的不同而产生转置错误。而微分法类似于张量分析中的微分形式，它先抓住变化的整体几何特征，最后再根据需要退化到具体的梯度表示。这种从“整体到局部”的策略，正是爱因斯坦在处理复杂弯曲时空几何时所采用的核心逻辑：守住不变量，导数自现。
+
+## 本章小结
+
+本章系统建立了多维变量空间的微积分运算框架，将经典的导数概念扩展至向量与矩阵维度：
+
+1. **梯度与 Jacobi 矩阵**：确立了标量对向量（梯度）和向量对向量（Jacobi 矩阵）求导的标准化定义，并统一了链式法则的表达。
+2. **二阶分析**：通过 Hessian 矩阵刻画了多元函数的曲率特征，奠定了最优化理论中的凸性判据基础。
+3. **微分法（The Differential Method）**：引入了基于迹算子的标量对矩阵求导技术，通过 $df = \operatorname{tr}(G^T dX)$ 提供了一种布局无关的高效计算范式。
+4. **特殊算子与结构**：详细论述了 Vec 算子与 Kronecker 积的协同作用，展示了如何通过线性化手段处理复杂的矩阵函数导数。
+5. **约束与复域**：探讨了对称矩阵约束下的导数修正，以及基于 Wirtinger 微积分的复矩阵求导规则，为信号处理与深度学习提供了严谨的代数工具。
+

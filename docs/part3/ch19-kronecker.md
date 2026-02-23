@@ -638,3 +638,54 @@ Kronecker 和是与 Kronecker 积密切相关的另一种运算，它与矩阵�
     $A \oplus B = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 2 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$。
 
     $e^{A \oplus B} = \begin{pmatrix} e & 0 & 0 & 0 \\ 0 & e^2 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & e \end{pmatrix} = e^A \otimes e^B$。验证成功。
+
+## 练习题
+
+1. **[定义] $A \otimes B$ 的阶数是如何决定的？**
+   ??? success "参考答案"
+       若 $A$ 是 $m \times n$ 矩阵，$B$ 是 $p \times q$ 矩阵，则 $A \otimes B$ 是一个 $mp \times nq$ 的分块矩阵。
+
+2. **[性质] 为什么 $A \otimes B \neq B \otimes A$？但它们有什么深层联系？**
+   ??? success "参考答案"
+       虽然由于元素排布顺序不同导致它们不相等（不满足交换律），但它们是置换等价的，即存在只依赖于维度的置换矩阵 $P, Q$ 使得 $A \otimes B = P(B \otimes A)Q$。如果是方阵，它们彼此相似，拥有完全相同的特征值。
+
+3. **[混合乘积] $(A \otimes B)(C \otimes D)$ 等于什么？前提条件是什么？**
+   ??? success "参考答案"
+       等于 $(AC) \otimes (BD)$。前提是普通矩阵乘法 $AC$ 和 $BD$ 在维度上是相容的。
+
+4. **[特征值] 若 $A\mathbf{x}=\lambda\mathbf{x}$ 且 $B\mathbf{y}=\mu\mathbf{y}$，那么 $A \otimes B$ 有什么对应的特征值和特征向量？**
+   ??? success "参考答案"
+       特征值为 $\lambda\mu$，对应的特征向量为 $\mathbf{x} \otimes \mathbf{y}$。
+
+5. **[迹与行列式] 若 $A$ 为 $m$ 阶方阵，$B$ 为 $n$ 阶方阵，$\operatorname{tr}(A \otimes B)$ 和 $\det(A \otimes B)$ 分别等于什么？**
+   ??? success "参考答案"
+       $\operatorname{tr}(A \otimes B) = \operatorname{tr}(A)\operatorname{tr}(B)$。$\det(A \otimes B) = \det(A)^n \det(B)^m$（注意指数交叉）。
+
+6. **[Vec算子] $\operatorname{vec}(ABC)$ 可以如何用 Kronecker 积和 Vec 算子线性表示？**
+   ??? success "参考答案"
+       $\operatorname{vec}(ABC) = (C^T \otimes A) \operatorname{vec}(B)$。这是解矩阵方程的“核武器”。
+
+7. **[Kronecker和] 矩阵指数 $e^{A \oplus B}$ 等于什么？**
+   ??? success "参考答案"
+       等于 $e^A \otimes e^B$。这是因为 $A \otimes I$ 和 $I \otimes B$ 在乘法上是严格可交换的。
+
+8. **[Sylvester方程] 连续时间 Sylvester 方程 $AX + XB = C$ 如何转化为标准的列向量线性方程组？**
+   ??? success "参考答案"
+       利用 Vec 算子，方程等价于 $(I \otimes A + B^T \otimes I)\operatorname{vec}(X) = \operatorname{vec}(C)$，即 $(A \oplus B^T)\operatorname{vec}(X) = \operatorname{vec}(C)$。
+
+9. **[正定性] 若 $A, B$ 皆为正定矩阵，$A \otimes B$ 是否正定？**
+   ??? success "参考答案"
+       是。因为 $A \otimes B$ 依然是对称（Hermite）矩阵，且它的所有特征值形式为 $\lambda_i \mu_j$。由于 $\lambda_i > 0$ 且 $\mu_j > 0$，其乘积必定全大于 0。
+
+10. **[爱因斯坦思考题] 在量子力学中，两个独立系统的联合状态空间为什么是它们各自状态空间的张量积（Kronecker积）而不是直和？**
+    ??? success "参考答案"
+        直和空间（维度 $m+n$）只能描述“系统处于 A 态 **或** 处于 B 态”；而张量积空间（维度 $m \times n$）才能描述“系统 A 处于某个态 **同时** 系统 B 处于某个态”。正是这种自由度的相乘法则，为量子纠缠（无法写成单一因子乘积的张量态）和量子计算机指数级算力的爆发提供了数学土壤。
+
+## 本章小结
+
+本章系统探讨了将矩阵维度进行相乘扩充的代数工具，主要内容包括：
+
+1. **Kronecker 积的定义与性质**：引入了矩阵的张量积运算，证明了其满足混合乘积性质 $(A \otimes B)(C \otimes D) = AC \otimes BD$。
+2. **谱映射法则**：明确了 $A \otimes B$ 的特征值是 $A$ 与 $B$ 特征值的两两乘积，特征向量是相应的张量积，并给出了迹和行列式的显式公式。
+3. **Vec 算子**：建立了一个将矩阵“拉直”为列向量的同构映射，通过恒等式 $\operatorname{vec}(AXB) = (B^T \otimes A)\operatorname{vec}(X)$ 彻底打通了矩阵方程与传统向量线性方程组的壁垒。
+4. **Kronecker 和**：定义了 $A \oplus B = A \otimes I + I \otimes B$，证明了其在计算联合矩阵指数以及分析 Lyapunov / Sylvester 稳定性方程中的支配作用。
