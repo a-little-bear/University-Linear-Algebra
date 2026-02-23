@@ -91,7 +91,8 @@ Kinematics tells us *where* a robot is, but **Robot Dynamics** tells us *how muc
         $n^3$ symbols. Each $C_{ij} = \sum c_{ijk} \dot{q}_k$.
 
 10. **[Identification] Why must the $Y$ matrix be full column rank in dynamics identification?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Only with full column rank can the least-squares solution $\hat{\boldsymbol{\phi}} = (Y^T Y)^{-1} Y^T \tau$ be unique, thereby uniquely determining the robot's physical parameters.
 
 ## Chapter Summary

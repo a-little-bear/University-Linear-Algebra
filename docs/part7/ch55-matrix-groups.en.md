@@ -83,7 +83,8 @@ In previous chapters, we focused on the properties of individual matrices. Now, 
         $(e^X)^T = e^{X^T} = e^{-X} = (e^X)^{-1}$. Thus $(e^X)^T e^X = I$.
 
 10. **[Application] What is a Haar measure?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         A shift-invariant integral measure defined on a compact matrix group, allowing for averaging over the group (e.g., averaging over all possible rotation orientations).
 
 ## Chapter Summary

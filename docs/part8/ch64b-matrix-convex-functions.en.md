@@ -93,7 +93,8 @@ In classical analysis, a convex function satisfies $f(\lambda x + (1-\lambda)y) 
         $S(\rho_{ABC}) + S(\rho_B) \le S(\rho_{AB}) + S(\rho_{BC})$. Its algebraic proof relies heavily on the operator convexity of $x \log x$ and the resulting trace inequalities.
 
 10. **[Differentiation] Why does operator convexity require $f$ to be at least $C^2$?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Actually, operator convexity is a much stronger condition; it implies that the second Fréchet derivative, as a bilinear form, must be positive definite (or that the second-order divided difference matrix is PSD).
 
 ## Chapter Summary

@@ -114,7 +114,8 @@ In most of linear algebra, we work in flat vector spaces. However, many importan
         It is the second-order derivative of a function on a manifold, accounting for the curvature of the surface. It is essential for Riemannian Newton methods.
 
 10. **[Deep Learning] Why use matrix manifolds in Recurrent Neural Networks (RNNs)?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         To prevent gradient vanishing or explosion, one can constrain the hidden-to-hidden weight matrices to stay on the Stiefel manifold ($W \in St(n, n)$). This ensures that the transformation is orthogonal and preserves the norm of the hidden state.
 
 ## Chapter Summary

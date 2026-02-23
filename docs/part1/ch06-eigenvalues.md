@@ -54,43 +54,53 @@
 ## 练习题
 
 1. **[计算] 求 $A = \begin{pmatrix} 4 & -5 \\ 2 & -3 \end{pmatrix}$ 的特征值。**
+
    ??? success "参考答案"
        $\det(A-\lambda I) = (4-\lambda)(-3-\lambda) + 10 = \lambda^2 - \lambda - 2 = 0$。解得 $\lambda_1 = 2, \lambda_2 = -1$。
 
 2. **[特征向量] 求上题中 $\lambda = 2$ 对应的特征向量。**
+
    ??? success "参考答案"
        解 $(A-2I)\mathbf{v} = 0$，即 $\begin{pmatrix} 2 & -5 \\ 2 & -5 \end{pmatrix}\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0$。解得 $\mathbf{v} = k \begin{pmatrix} 5 \\ 2 \end{pmatrix}$。
 
 3. **[对角化] 若 $A$ 的特征值各不相同，它是否一定可对角化？**
+
    ??? success "参考答案"
        是的。不同特征值对应的特征向量必然线性无关。
 
 4. **[性质] 证明：若 $A$ 可逆，则其特征值均不为 0。**
+
    ??? success "参考答案"
        $A\mathbf{v} = \lambda\mathbf{v}$。若 $\lambda = 0$，则 $A\mathbf{v} = \mathbf{0}$。由于 $\mathbf{v} \neq \mathbf{0}$，这说明 $A$ 奇异，与可逆矛盾。
 
 5. **[迹与行列式] 矩阵的迹与特征值之和有什么关系？**
+
    ??? success "参考答案"
        $\operatorname{tr}(A) = \sum \lambda_i$。
 
 6. **[三角阵] 上三角矩阵的特征值是什么？**
+
    ??? success "参考答案"
        其主对角线上的元素。
 
 7. **[相似] 证明相似矩阵具有相同的特征多项式。**
+
    ??? success "参考答案"
        $\det(P^{-1}AP - \lambda I) = \det(P^{-1}(A-\lambda I)P) = \det(P^{-1})\det(A-\lambda I)\det(P) = \det(A-\lambda I)$。
 
 8. **[幂运算] 若 $A = PDP^{-1}$，计算 $A^{10}$。**
+
    ??? success "参考答案"
        $A^{10} = P D^{10} P^{-1}$。
 
 9. **[C-H定理] 已知 $A^2 - 3A + 2I = O$，若 $A$ 可逆，求 $A^{-1}$。**
+
    ??? success "参考答案"
        两边同乘 $A^{-1}$：$A - 3I + 2A^{-1} = O \implies A^{-1} = \frac{1}{2}(3I - A)$。
 
 10. **[重数] 举例说明几何重数小于代数重数的情况。**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$。特征值 0 的代数重数为 2，但特征向量只有 $\operatorname{span}\{e_1\}$，几何重数为 1。
 
 ## 本章小结

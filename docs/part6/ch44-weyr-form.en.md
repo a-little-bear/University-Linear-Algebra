@@ -29,6 +29,7 @@ While the Jordan form is the most famous matrix canonical form, it is often cumb
 ## Exercises
 
 1. **[Conjugate Partitions] Find the Weyr characteristic for a matrix with Jordan partition $(3, 2, 1)$.**
+
    ??? success "Solution"
        The Jordan partition is $(3, 2, 1)$. The conjugate partition is found by counting how many parts are $\ge j$.
        $w_1 = |\{3, 2, 1\} \ge 1| = 3$.
@@ -37,6 +38,7 @@ While the Jordan form is the most famous matrix canonical form, it is often cumb
        The Weyr characteristic is $(3, 2, 1)$ (Self-conjugate).
 
 2. **[Weyr to Jordan] If the Weyr characteristic is $(4, 2, 2, 1)$, what is the corresponding Jordan partition?**
+
    ??? success "Solution"
        The Jordan partition is the conjugate of $(4, 2, 2, 1)$.
        $n_1 = |\{4, 2, 2, 1\} \ge 1| = 4$.
@@ -46,29 +48,35 @@ While the Jordan form is the most famous matrix canonical form, it is often cumb
        Jordan partition: $(4, 3, 1, 1)$.
 
 3. **[Matrix Construction] Write the Weyr matrix for the Weyr characteristic $(2, 1)$ with $\lambda = 0$.**
+
    ??? success "Solution"
        $w_1 = 2, w_2 = 1$.
        $W = \begin{pmatrix} 0 & 0 & 1 \ 0 & 0 & 0 \ 0 & 0 & 0 \end{pmatrix}$.
        Here $\lambda I_2 = \begin{pmatrix} 0 & 0 \ 0 & 0 \end{pmatrix}$ and $F_1 = \begin{pmatrix} 1 \ 0 \end{pmatrix}$.
 
 4. **[Dimensions] What is the dimension of the centralizer $\mathcal{C}(A)$ for a $5 	imes 5$ nilpotent matrix with Jordan partition $(3, 2)$?**
+
    ??? success "Solution"
        Weyr characteristic is $(2, 2, 1)$.
        $\dim \mathcal{C}(A) = \sum w_j^2 = 2^2 + 2^2 + 1^2 = 4 + 4 + 1 = 9$.
 
 5. **[Commuting Structure] Why is the Weyr form preferred over the Jordan form for finding all matrices commuting with $A$?**
+
    ??? success "Solution"
        In the Weyr form, commuting matrices are simply block upper triangular. In the Jordan form, the structure involves complex Toeplitz couplings between different blocks.
 
 6. **[Uniqueness] Is the Weyr canonical form unique?**
+
    ??? success "Solution"
        Yes, it is unique up to the ordering of the blocks corresponding to distinct eigenvalues, just like the Jordan form.
 
 7. **[Nilpotency] If a matrix is in Weyr form with $\lambda=0$, what is its nilpotency index?**
+
    ??? success "Solution"
        The nilpotency index is the length of the Weyr characteristic sequence $s$, which is also the size of the largest Jordan block.
 
 8. **[Calculation] Determine the Weyr characteristic of $A$ if $\dim \ker(A) = 3$, $\dim \ker(A^2) = 5$, and $\dim \ker(A^3) = 6$.**
+
    ??? success "Solution"
        $w_1 = 3 - 0 = 3$.
        $w_2 = 5 - 3 = 2$.
@@ -76,11 +84,13 @@ While the Jordan form is the most famous matrix canonical form, it is often cumb
        Weyr characteristic is $(3, 2, 1)$.
 
 9. **[Diagonal Matrices] What is the Weyr form of a diagonalizable matrix with distinct eigenvalues?**
+
    ??? success "Solution"
        It is identical to the diagonal (Jordan) form, as each Weyr characteristic is simply $(1)$.
 
 10. **[Transpose] Relate the Weyr form of $A$ to the Jordan form of $A^T$.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         The Weyr form of $A$ has blocks whose structure is the "transpose" (conjugate) of the blocks in the Jordan form of $A$. This reflects the row-wise vs. column-wise organization of the same information.
 
 ## Chapter Summary

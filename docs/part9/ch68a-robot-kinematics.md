@@ -56,44 +56,54 @@
 ## 练习题
 
 1. **[基础] 两个转动关节的 2D 机械臂，末端坐标 $(x, y)$ 与关节角 $(\theta_1, \theta_2)$ 的关系。**
+
    ??? success "参考答案"
        $x = l_1 \cos\theta_1 + l_2 \cos(\theta_1+\theta_2)$
        $y = l_1 \sin\theta_1 + l_2 \sin(\theta_1+\theta_2)$
 
 2. **[Jacobian] 计算上题 2D 臂的 Jacobian 矩阵。**
+
    ??? success "参考答案"
        $J = \begin{pmatrix} \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} \\ \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} \end{pmatrix} = \begin{pmatrix} -y & -l_2 \sin(\theta_1+\theta_2) \\ x & l_2 \cos(\theta_1+\theta_2) \end{pmatrix}$。
 
 3. **[奇异性] 对于 2D 臂，当 $l_2 \sin\theta_2 = 0$ 时会发生什么？**
+
    ??? success "参考答案"
        此时 $\det(J) = 0$。机器人处于奇异状态（手臂完全伸直或完全折叠），无法产生沿手臂方向的径向分速度。
 
 4. **[D-H参数] 为什么 D-H 方法中每个连杆只需要 4 个参数而非 6 个？**
+
    ??? success "参考答案"
        因为 D-H 坐标系选取满足特定约束（$x$ 轴与前一 $z$ 轴相交且垂直），消除了两个自由度，简化了模型。
 
 5. **[逆向求解] 为什么逆向运动学通常比正向更难？**
+
    ??? success "参考答案"
        正向是唯一的代数连乘，而逆向涉及非线性方程组的求解，可能存在多解（多形态）、唯一解或无解（超出工作空间）。
 
 6. **[工作空间] 什么是机器人的“可达工作空间”？**
+
    ??? success "参考答案"
        末端执行器所有可能到达的位置点的集合。在线性代数视角下，这是关节空间流形在算子 $f$ 下的像。
 
 7. **[静力学] 关节力矩 $\tau$ 与末端作用力 $F$ 的代数关系。**
+
    ??? success "参考答案"
        $\tau = J^T F$。这展示了 Jacobian 的转置在虚功原理下的重要性。
 
 8. **[冗余] 若一个 7 自由度机械臂在 3D 空间工作，其 Jacobian 矩阵的维度是多少？**
+
    ??? success "参考答案"
        $6 \times 7$（6 个速度分量，7 个关节变量）。由于列数多于行数，系统是冗余的。
 
 9. **[PoE公式] 什么是指数积 (PoE) 公式？**
+
    ??? success "参考答案"
        基于螺旋理论 (Screw Theory) 的 FK 表示法：$T = e^{S_1 \theta_1} \cdots e^{S_n \theta_n} M$。相比 D-H，它更具几何直观且易于求导。
 
 10. **[应用] 为什么在手术机器人中需要高精度的 IK 算法？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为手术需要在狭窄空间内精确控制末端位置，任何微小的代数误差都可能导致医疗事故；同时需要利用冗余自由度避开人体组织。
 
 ## 本章小结

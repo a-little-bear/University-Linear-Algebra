@@ -53,43 +53,53 @@ Matrix inequalities are among the most sophisticated branches of matrix analysis
 ## Exercises
 
 1. **[Weyl] Given $\|E\|_2 = 0.1$, if an eigenvalue of $A$ is 5, in what interval must the corresponding eigenvalue of $A+E$ lie?**
+
    ??? success "Solution"
        By Weyl's inequality, $|\lambda_i(A+E) - \lambda_i(A)| \le \|E\|_2$. Thus, it lies in $[4.9, 5.1]$.
 
 2. **[Hadamard] Calculate the determinant of $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ and verify Hadamard's inequality.**
+
    ??? success "Solution"
        $\det = 3$. Product of diagonals $2 \cdot 2 = 4$. $3 \le 4$ is verified.
 
 3. **[Interlacing] If a $3 \times 3$ matrix has eigenvalues 10, 5, 1, can its $2 \times 2$ principal submatrix have a maximum eigenvalue of 12?**
+
    ??? success "Solution"
        No. By the interlacing theorem, $\lambda_1(B) \le \lambda_1(A) = 10$.
 
 4. **[Trace] Prove for positive definite $A, B$ that $\operatorname{tr}(AB) \le \operatorname{tr}(A)\operatorname{tr}(B)$.**
+
    ??? success "Solution"
        $\operatorname{tr}(AB) = \sum \lambda_i(AB) \le \sum \sigma_i(A)\sigma_i(B) \le (\sum \sigma_i(A))(\sum \sigma_i(B)) = \operatorname{tr}(A)\operatorname{tr}(B)$.
 
 5. **[Majorization] Determine the majorization relationship between $(1, 1)$ and $(2, 0)$.**
+
    ??? success "Solution"
        $(1, 1) \prec (2, 0)$ because $1 < 2$ and $1+1 = 2+0$.
 
 6. **[Fischer] State Fischer's Inequality.**
+
    ??? success "Solution"
        For a partitioned positive definite matrix $\begin{pmatrix} A & B \\ B^T & C \end{pmatrix}$, $\det \begin{pmatrix} A & B \\ B^T & C \end{pmatrix} \le \det(A)\det(C)$.
 
 7. **[Ky Fan] What is the Ky Fan $k$-norm?**
+
    ??? success "Solution"
        The sum of the $k$ largest singular values: $\|A\|_{(k)} = \sum_{i=1}^k \sigma_i(A)$.
 
 8. **[Arithmetic-Geometric] Prove $\det(A)^{1/n} \le \frac{1}{n} \operatorname{tr}(A)$ for $A \succ 0$.**
+
    ??? success "Solution"
        This is the arithmetic-geometric mean inequality applied to eigenvalues: $(\prod \lambda_i)^{1/n} \le \frac{1}{n} \sum \lambda_i$.
 
 9. **[Concavity] Prove the mapping $A \mapsto \log \det A$ is concave on the positive definite cone.**
+
    ??? success "Solution"
        This is equivalent to verifying $\det(\lambda A + (1-\lambda)B) \ge (\det A)^\lambda (\det B)^{1-\lambda}$, which is the matrix version of the Brunn-Minkowski inequality.
 
 10. **[Application] How are matrix inequalities used in quantum information?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         They are used to prove the Strong Subadditivity of quantum entropy, establishing upper limits on quantum communication capacity.
 
 ## Chapter Summary

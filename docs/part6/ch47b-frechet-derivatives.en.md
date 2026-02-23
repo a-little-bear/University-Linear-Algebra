@@ -86,7 +86,8 @@ abla \det) E) = \operatorname{tr}(\det(A) A^{-T} E) = \det(A) \operatorname{tr}(
         No. Since the trace is linear, its derivative is always $E \mapsto \operatorname{tr}(E)$.
 
 10. **[Application] Why focus on the norm of the divided difference matrix in sensitivity analysis?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         The infinity norm of the divided difference matrix determines the condition number for calculating matrix functions. If eigenvalues are very close, the differences are large, meaning the calculation of $f(A)$ is highly unstable.
 
 ## Chapter Summary

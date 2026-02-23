@@ -55,43 +55,53 @@
 ## 练习题
 
 1. **[LU] 求 $A = \begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$ 的 LU 分解。**
+
    ??? success "参考答案"
        $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}, U = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$。
 
 2. **[Cholesky] 为上题中的 $A$ 求 Cholesky 分解。**
+
    ??? success "参考答案"
        由于上题中 $U = L^T$，故 $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$ 且 $A = LL^T$。
 
 3. **[QR] 矩阵 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ 的 QR 分解是什么？**
+
    ??? success "参考答案"
        由于它本身就是上三角且列正交（虽然不单位化），若要求 $Q$ 为标准正交，则 $Q=I, R=A$。
 
 4. **[Schur] 证明 Schur 分解中 $T$ 的迹等于 $A$ 的迹。**
+
    ??? success "参考答案"
        迹是相似不变量：$\operatorname{tr}(T) = \operatorname{tr}(U^* A U) = \operatorname{tr}(A U U^*) = \operatorname{tr}(A)$。
 
 5. **[存在性] 举例说明一个没有 LU 分解的非奇异矩阵。**
+
    ??? success "参考答案"
        $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。第一个顺序主子式为 0，无法进行初步消元。
 
 6. **[选主元] 什么是 PLU 分解？**
+
    ??? success "参考答案"
        通过置换矩阵 $P$ 交换行，使得 $PA = LU$。这能处理主子式为 0 的情况并提高稳定性。
 
 7. **[极分解] 极分解 $A = UP$ 中 $P$ 满足什么性质？**
+
    ??? success "参考答案"
        $P$ 是半正定矩阵（几何上对应缩放），而 $U$ 是正交阵（对应旋转）。
 
 8. **[秩分解] 若 $\operatorname{rank}(A) = r$，将其分解为 $A = FG$（$F$ 为 $m \times r$, $G$ 为 $r \times n$）有什么好处？**
+
    ??? success "参考答案"
        将大矩阵压缩为两个窄矩阵，节省存储并简化运算。
 
 9. **[稳定性] 为什么 Householder 变换优于 Gram-Schmidt？**
+
    ??? success "参考答案"
        Householder 通过正交反射避免了 GS 过程中因舍入误差导致的正交性丢失。
 
 10. **[应用] 分解论如何加速求解 $Ax=b$？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         通过一次性的高成本分解（如 $O(n^3)$ 的 LU），将后续的求解转化为低成本的三角回代（$O(n^2)$）。
 
 ## 本章小结

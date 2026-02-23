@@ -152,7 +152,8 @@ Linear algebra primarily deals with mappings between two spaces (matrices). **Mu
         The contraction is the scalar $T^i_i$ (summing over $i=j$), which is exactly the **trace** of the corresponding matrix.
 
 10. **[Physics] Why is the Stress Tensor in mechanics a type (0, 2) tensor?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Stress measures force (a covector/functional) acting on an area element (another vector/functional property). It maps two vectors to a scalar energy density.
 
 ## Chapter Summary

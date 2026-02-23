@@ -48,44 +48,54 @@
 ## 练习题
 
 1. **[基础] 写出系统 $y'' + 3y' + 2y = u$ 的状态空间表示。**
+
    ??? success "参考答案"
        令 $x_1 = y, x_2 = y'$。则 $\dot{x}_1 = x_2, \dot{x}_2 = -2x_1 - 3x_2 + u$。
        $A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}, B = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, C = \begin{pmatrix} 1 & 0 \end{pmatrix}$。
 
 2. **[能控性] 判定 $A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, B = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ 是否能控。**
+
    ??? success "参考答案"
        $\mathcal{C} = [B \ AB] = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。秩为 1 < 2，故不可控。
 
 3. **[能观测性] 若 $C = \begin{pmatrix} 1 & 0 \end{pmatrix}$ 且 $A$ 是上三角阵，系统一定能观测吗？**
+
    ??? success "参考答案"
        不一定。需检查 $\mathcal{O}$ 矩阵的秩。若 $A$ 的右上角元素为 0 且对角元相同，则可能不可观测。
 
 4. **[传递函数] LTI 系统的传递函数 $G(s)$ 用矩阵如何表示？**
+
    ??? success "参考答案"
        $G(s) = C(sI - A)^{-1}B + D$。
 
 5. **[稳定性] 闭环系统 $(A-BK)$ 稳定的充要条件是什么？**
+
    ??? success "参考答案"
        $A-BK$ 是 Hurwitz 稳定的（特征值实部全为负）。
 
 6. **[观测器] Luenberger 观测器的误差方程是什么？**
+
    ??? success "参考答案"
        $\dot{e} = (A-LC)e$。我们需要设计 $L$ 使得 $A-LC$ 稳定，从而使估算状态收敛到真实状态。
 
 7. **[Cayley-Hamilton] 为什么能控性矩阵只取到 $A^{n-1}B$？**
+
    ??? success "参考答案"
        由 Cayley-Hamilton 定理，$A^n$ 及更高次幂都是低次幂的线性组合，不会增加矩阵的秩。
 
 8. **[计算] 求系统 $\dot{x} = x+u$ 在 $u=-2x$ 反馈下的极点。**
+
    ??? success "参考答案"
        $\dot{x} = (1-2)x = -x$。极点在 -1（系统由不稳定变为稳定）。
 
 9. **[实现] 什么是最小实现？**
+
    ??? success "参考答案"
        维数最小的状态空间实现。一个实现是最小的，当且仅当它既是能控的又是能观测的。
 
 10. **[应用] 为什么在航空航天中必须使用状态空间法？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为飞行器具有多个高度耦合的控制面（多输入多输出），且涉及大量内部传感器数据（状态），状态空间法能提供统一的最优控制与滤波框架。
 
 ## 本章小结

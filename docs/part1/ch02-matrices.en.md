@@ -62,43 +62,53 @@ If systems of linear equations are the language of linear algebra, then matrices
 ## Exercises
 
 1. **[Fundamentals] Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Calculate $AB$ and $BA$.**
+
    ??? success "Solution"
        $AB = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}, BA = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$. Note $AB \neq BA$.
 
 2. **[Identity] Prove that for any $n \times n$ matrix $A$, $AI = IA = A$.**
+
    ??? success "Solution"
        Using the multiplication definition: $(AI)_{ij} = \sum a_{ik} \delta_{kj}$. Since $\delta_{kj}$ is 1 only when $k=j$, the result is $a_{ij}$.
 
 3. **[Transpose] Given $(AB)^T = B^T A^T$, find $(A^T B)^T$.**
+
    ??? success "Solution"
        $(A^T B)^T = B^T (A^T)^T = B^T A$.
 
 4. **[Symmetry] If $A$ is symmetric, prove $A^2$ is also symmetric.**
+
    ??? success "Solution"
        $(A^2)^T = (AA)^T = A^T A^T = AA = A^2$.
 
 5. **[Inversion] Find the inverse of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
+
    ??? success "Solution"
        $\det(A) = 4-6 = -2$. $A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$.
 
 6. **[Powers] Calculate $A^k$ for $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.**
+
    ??? success "Solution"
        $A^2 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, A^3 = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$. By induction, $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$.
 
 7. **[Trace] Prove $\operatorname{tr}(AB) = \operatorname{tr}(BA)$.**
+
    ??? success "Solution"
        $\operatorname{tr}(AB) = \sum_i \sum_k a_{ik}b_{ki} = \sum_k \sum_i b_{ki}a_{ik} = \operatorname{tr}(BA)$.
 
 8. **[Elementary] What is the effect of left-multiplying $A$ by an elementary matrix $E$?**
+
    ??? success "Solution"
        It performs the corresponding elementary row operation on $A$.
 
 9. **[Block] Calculate $\begin{pmatrix} I & A \\ 0 & I \end{pmatrix} \begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}$.**
+
    ??? success "Solution"
        $\begin{pmatrix} I & -A+A \\ 0 & I \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}$. This shows the inverse is found by negating the top-right block.
 
 10. **[Rank] What is the rank of $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         The rank is 1. It has only one non-zero row.
 
 ## Chapter Summary

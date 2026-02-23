@@ -92,7 +92,8 @@ What happens when we generalize a linear transformation (a mapping from a space 
         By placing maps with different eigenvalues $\lambda$ on the loop, one can construct infinitely many non-isomorphic indecomposable representations.
 
 10. **[Dynkin] Which Dynkin diagram corresponds to a set of mutually orthogonal vectors?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Type $A_1$ (isolated vertices), because there is no mapping coupling between the vertices.
 
 ## Chapter Summary

@@ -50,44 +50,54 @@
 ## 练习题
 
 1. **[Smith形] 计算 $\begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$ 的不变因子。**
+
    ??? success "参考答案"
        行列式为 $\lambda^2$。最大公因式 $D_1(\lambda) = \gcd(\lambda, 1, 0, \lambda) = 1$。
        故 $d_1 = D_1 = 1$，$d_2 = D_2/D_1 = \lambda^2$。不变因子为 $1, \lambda^2$。
 
 2. **[相似判定] 若 $A, B$ 的特征多项式相同且均为 $\lambda^2$，它们一定相似吗？**
+
    ??? success "参考答案"
        不一定。例如 $\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ 和 $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$。前者不变因子为 $1, \lambda^2$，后者为 $\lambda, \lambda$。
 
 3. **[伴随阵] 写出 $\lambda^2 - 3\lambda + 2$ 的伴随矩阵。**
+
    ??? success "参考答案"
        $C(p) = \begin{pmatrix} 0 & -2 \\ 1 & 3 \end{pmatrix}$。
 
 4. **[最小多项式] 有理标准形中，哪一个块对应于矩阵的最小多项式？**
+
    ??? success "参考答案"
        最后一个非平凡不变因子 $d_k(\lambda)$ 对应的伴随矩阵块。
 
 5. **[不变因子] 证明 $d_i(\lambda) \mid d_{i+1}(\lambda)$。**
+
    ??? success "参考答案"
        这是 Smith 标准形的结构性质，由 $k$ 阶子式最大公因式的定义推导得出。
 
 6. **[对比] Jordan 形与有理标准形的主要区别是什么？**
+
    ??? success "参考答案"
        Jordan 形将多项式分解到一次因式的幂（初等因子），依赖于域的封闭性；有理标准形直接使用不变因子，不要求分解，适用于任何域。
 
 7. **[初等因子] 若不变因子为 $1, (\lambda-1)(\lambda-2)$，对应的初等因子是什么？**
+
    ??? success "参考答案"
        $\lambda-1$ 和 $\lambda-2$。
 
 8. **[秩] $\lambda I - A$ 的 Smith 标准形中，非零对角元的个数 $r$ 等于什么？**
+
    ??? success "参考答案"
        由于 $\lambda I - A$ 总是非奇异的（行列式为 $n$ 次多项式），故 $r = n$。
 
 9. **[计算] 求 $J_2(\lambda_0)$ 的不变因子。**
+
    ??? success "参考答案"
        $1, (\lambda-\lambda_0)^2$。
 
 10. **[应用] 为什么有理标准形在计算代数中很重要？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为它避开了求特征根的过程（这通常涉及数值近似），只需进行矩阵的初等变换（精确的代数运算）。
 
 ## 本章小结

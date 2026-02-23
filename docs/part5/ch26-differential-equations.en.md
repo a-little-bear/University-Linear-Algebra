@@ -134,7 +134,8 @@ The study of change is the domain of differential equations, and the study of st
         Because the Sturm-Liouville operator is **self-adjoint** under a specific inner product, and the spectral theorem for self-adjoint operators guarantees orthogonal eigenspaces.
 
 10. **[Philosophy] Why is the spectrum of a matrix called the "DNA" of a differential system?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because eigenvalues (frequencies/decay rates) and eigenvectors (mode shapes) encode every possible behavior the system can exhibit, from its vibration patterns to its ultimate stability.
 
 ## Chapter Summary

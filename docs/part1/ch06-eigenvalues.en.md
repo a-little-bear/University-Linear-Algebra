@@ -54,43 +54,53 @@ Eigenvalues and eigenvectors reveal the most essential "invariant directions" of
 ## Exercises
 
 1. **[Calculation] Find the eigenvalues of $A = \begin{pmatrix} 4 & -5 \\ 2 & -3 \end{pmatrix}$.**
+
    ??? success "Solution"
        $\det(A-\lambda I) = (4-\lambda)(-3-\lambda) + 10 = \lambda^2 - \lambda - 2 = 0$. Solving gives $\lambda_1 = 2, \lambda_2 = -1$.
 
 2. **[Eigenvectors] Find the eigenvector corresponding to $\lambda = 2$ for the matrix above.**
+
    ??? success "Solution"
        Solve $(A-2I)\mathbf{v} = 0$, which is $\begin{pmatrix} 2 & -5 \\ 2 & -5 \end{pmatrix}\begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0$. Thus $\mathbf{v} = k \begin{pmatrix} 5 \\ 2 \end{pmatrix}$.
 
 3. **[Diagonalization] If $A$ has distinct eigenvalues, is it always diagonalizable?**
+
    ??? success "Solution"
        Yes. Eigenvectors corresponding to distinct eigenvalues are always linearly independent.
 
 4. **[Properties] Prove: If $A$ is invertible, its eigenvalues are all non-zero.**
+
    ??? success "Solution"
        $A\mathbf{v} = \lambda\mathbf{v}$. If $\lambda = 0$, then $A\mathbf{v} = \mathbf{0}$. Since $\mathbf{v} \neq \mathbf{0}$, $A$ is singular, contradicting invertibility.
 
 5. **[Trace] What is the relationship between the trace and the sum of eigenvalues?**
+
    ??? success "Solution"
        $\operatorname{tr}(A) = \sum \lambda_i$.
 
 6. **[Triangular] What are the eigenvalues of an upper triangular matrix?**
+
    ??? success "Solution"
        The entries on its main diagonal.
 
 7. **[Similarity] Prove similar matrices have the same characteristic polynomial.**
+
    ??? success "Solution"
        $\det(P^{-1}AP - \lambda I) = \det(P^{-1}(A-\lambda I)P) = \det(P^{-1})\det(A-\lambda I)\det(P) = \det(A-\lambda I)$.
 
 8. **[Powers] If $A = PDP^{-1}$, calculate $A^{10}$.**
+
    ??? success "Solution"
        $A^{10} = P D^{10} P^{-1}$.
 
 9. **[C-H Theorem] Given $A^2 - 3A + 2I = O$, if $A$ is invertible, find $A^{-1}$.**
+
    ??? success "Solution"
        Multiply by $A^{-1}$: $A - 3I + 2A^{-1} = O \implies A^{-1} = \frac{1}{2}(3I - A)$.
 
 10. **[Multiplicity] Give an example where geometric multiplicity is less than algebraic multiplicity.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$. The eigenvalue 0 has algebraic multiplicity 2, but the eigenspace is only $\operatorname{span}\{e_1\}$, so the geometric multiplicity is 1.
 
 ## Chapter Summary

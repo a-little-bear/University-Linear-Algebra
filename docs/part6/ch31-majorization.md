@@ -61,43 +61,53 @@
 ## 练习题
 
 1. **[基础] 判定 $(2, 2, 2) \prec (3, 2, 1)$ 是否成立。**
+
    ??? success "参考答案"
        是的。和相等均为 6。前缀和：$2 < 3$，$4 \le 5$。满足定义。
 
 2. **[Birkhoff] 将 $\begin{pmatrix} 0.5 & 0.5 \\ 0.5 & 0.5 \end{pmatrix}$ 分解为置换矩阵的组合。**
+
    ??? success "参考答案"
        $0.5 \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} + 0.5 \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。
 
 3. **[谱性质] 证明双随机矩阵的最大特征值为 1。**
+
    ??? success "参考答案"
        由于 $P \mathbf{1} = \mathbf{1}$，1 是其特征值。由 Perron-Frobenius 理论或谱半径性质，行和为 1 的非负矩阵谱半径为 1。
 
 4. **[Schur-Horn] 若对称阵对角元为 $(5, 5)$，其特征值可能为 $(10, 0)$ 吗？**
+
    ??? success "参考答案"
        可以。因为 $(5, 5) \prec (10, 0)$（和为 10，且 $5 \le 10$）。
 
 5. **[熵] 证明香农熵 $H(p) = -\sum p_i \log p_i$ 是 Schur 凹函数。**
+
    ??? success "参考答案"
        由于 $x \log x$ 是凸函数，故 $\sum x_i \log x_i$ 是 Schur 凸的。其相反数即为 Schur 凹。这说明概率分布越均匀（优序越小），熵越大。
 
 6. **[计算] 计算 $\begin{pmatrix} 1/3 & 2/3 \\ 2/3 & 1/3 \end{pmatrix} \begin{pmatrix} 3 \\ 0 \end{pmatrix}$ 得到的向量 $x$，并验证 $x \prec (3, 0)^T$。**
+
    ??? success "参考答案"
        $x = (1, 2)^T$。排序后 $(2, 1) \prec (3, 0)$。$2 \le 3$ 且和相等。
 
 7. **[极值] 在所有和为 1 的非负向量中，哪一个在优序关系中最小？**
+
    ??? success "参考答案"
        均匀分布向量 $(1/n, \ldots, 1/n)$。
 
 8. **[迹] 证明：若 $A \ge 0$ 是双随机的，则 $\operatorname{tr}(A) \le n$。**
+
    ??? success "参考答案"
        对角元 $a_{ii} \le 1$（因为行和为 1 且非负），故总和 $\le n$。
 
 9. **[凸性] 判定 $\phi(x) = \max(x_i)$ 是否为 Schur 凸函数。**
+
    ??? success "参考答案"
        是的。$x \prec y$ 意味着 $x$ 的分量更平滑，其最大值必然不大于 $y$ 的最大值。
 
 10. **[应用] 为什么在数据均衡中要关注 Majorization？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为它量化了不同数据集之间的“不平等性”。在经济学中，通过 Lorenz 曲线和优序关系可以判定贫富差距的扩大或缩小。
 
 ## 本章小结

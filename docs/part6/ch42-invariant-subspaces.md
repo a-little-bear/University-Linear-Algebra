@@ -703,44 +703,54 @@ Rosenblum 定理给出了不变子空间扰动理论中的核心代数工具。D
 ## 练习题
 
 1. **[基础] 证明：线性变换 $T$ 的核 $\ker(T)$ 和像 $\operatorname{Im}(T)$ 总是 $T$-不变子空间。**
+
    ??? success "参考答案"
        - 若 $v \in \ker(T)$，则 $Tv = 0$。由于 $0$ 属于任何子空间，故 $0 \in \ker(T)$，即 $Tv \in \ker(T)$。
        - 若 $v \in \operatorname{Im}(T)$，则 $Tv$ 显然属于 $T$ 的像集，即 $Tv \in \operatorname{Im}(T)$。
 
 2. **[特征向量] 证明：任何 1 维不变子空间必由一个特征向量张成。**
+
    ??? success "参考答案"
        设 $\mathcal{M} = \operatorname{span}\{v\}$（$v \ne 0$）。若 $\mathcal{M}$ 是不变的，则 $Tv \in \mathcal{M}$，即 $Tv = \lambda v$ 对某个标量 $\lambda$ 成立。这正是特征向量的定义。
 
 3. **[分块形式] 若 $A$ 有一个 $k$ 维不变子空间，证明 $A$ 相似于一个分块上三角矩阵。**
+
    ??? success "参考答案"
        取该子空间的一组基并扩充为全空间的基。在此基下，前 $k$ 列在第 $k$ 行以下全为零（因为变换结果仍落在前 $k$ 个基向量的张成空间内），故呈现 $\begin{pmatrix} B & C \\ 0 & D \end{pmatrix}$ 的形式。
 
 4. **[超不变] 定义超不变子空间。是否每个不变子空间都是超不变的？**
+
    ??? success "参考答案"
        超不变子空间是指在所有与 $T$ 交换的算子作用下都保持不变的子空间。并非所有不变子空间都是超不变的。例如当 $T=I$ 时，所有子空间都是不变的，但只有 $\{0\}$ 和 $V$ 是超不变的。
 
 5. **[约化子空间] 证明：$\mathcal{M}$ 约化 $T$ 当且仅当 $\mathcal{M}$ 和 $\mathcal{M}^\perp$ 都是 $T$-不变的。**
+
    ??? success "参考答案"
        这是约化子空间的定义。在投影算子语言中，这等价于 $T$ 与到 $\mathcal{M}$ 的正交投影算子交换。
 
 6. **[典则角度] 求 $\mathbb{R}^2$ 中 $\mathcal{F} = \operatorname{span}\{e_1\}$ 与 $\mathcal{G} = \operatorname{span}\{(1, 1)^T\}$ 之间的典则角度。**
+
    ??? success "参考答案"
        角度的余弦值等于正交投影乘积的奇异值。$\cos \theta = \frac{|(1,0) \cdot (1,1)|}{1 \cdot \sqrt{2}} = \frac{1}{\sqrt{2}}$。故 $\theta = \pi/4$（即 45 度）。
 
 7. **[sin Θ 界] 利用 Davis-Kahan 定理，估计 $A = \operatorname{diag}(10, 1)$ 的主特征向量在受到扰动 $E = \begin{pmatrix} 0 & 0.1 \\ 0.1 & 0 \end{pmatrix}$ 后的偏转。**
+
    ??? success "参考答案"
        谱间隙 $\delta = 10 - 1 = 9$。扰动范数 $\|E\|_2 = 0.1$。根据定理，$\sin \theta \le 0.1 / 9 \approx 0.011$。
 
 8. **[谱投影] 描述与孤立特征值 $\lambda$ 相关的谱投影。**
+
    ??? success "参考答案"
        它由围道积分 $P = \frac{1}{2\pi i} \oint_\Gamma (zI - A)^{-1} dz$ 给出，其中 $\Gamma$ 仅包围 $\lambda$。对于可对角化矩阵，它等于到该特征值对应特征空间的投影。
 
 9. **[Wedin定理] 何时使用 Wedin sin Θ 定理而不是 Davis-Kahan 定理？**
+
    ??? success "参考答案"
        Wedin 定理用于研究**奇异值分解（SVD）**中的奇异子空间扰动，而 Davis-Kahan 定理专门用于 **Hermite 矩阵**的特征子空间扰动。
 
 10. **[Rosenblum定理] Sylvester 方程 $AX - XB = C$ 何时有唯一解？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         当且仅当 $A$ 和 $B$ 没有公共特征值时，即 $\sigma(A) \cap \sigma(B) = \emptyset$。
 
 ## 本章小结

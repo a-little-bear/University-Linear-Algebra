@@ -54,43 +54,53 @@
 ## 练习题
 
 1. **[公理判定] 验证 $\mathbb{R}^2$ 上的运算 $\langle u, v \rangle = u_1 v_1 + 2u_2 v_2$ 是否构成一个内积。**
+
    ??? success "参考答案"
        是的。它是加权点积。由于权重均为正，它满足正定性；线性性和对称性显然成立。
 
 2. **[Cauchy-Schwarz] 证明：$|\langle u, v \rangle| \le \|u\| \|v\|$。**
+
    ??? success "参考答案"
        考虑 $\|u - tv\|^2 \ge 0$，展开并取 $t = \langle u, v \rangle / \|v\|^2$ 即可。
 
 3. **[伴随算子] 设 $T$ 在标准基下的矩阵为 $A$。证明 $T^*$ 的矩阵为 $A^*$。**
+
    ??? success "参考答案"
        $\langle Au, v \rangle = (Au)^* v = u^* A^* v = \langle u, A^* v \rangle$。由伴随算子定义即得。
 
 4. **[酉算子] 证明酉算子保持内积不变。**
+
    ??? success "参考答案"
        $\langle Uu, Uv \rangle = \langle u, U^* U v \rangle = \langle u, Iv \rangle = \langle u, v \rangle$。
 
 5. **[正规算子] 判定 $A = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}$ 是否为正规矩阵。**
+
    ??? success "参考答案"
        $AA^* = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$，$A^*A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$。相等，故是正规矩阵。
 
 6. **[计算] 在多项式内积 $\langle f, g \rangle = \int_0^1 f(x)g(x) dx$ 下，计算 $1$ 与 $x$ 的内积。**
+
    ??? success "参考答案"
        $\int_0^1 x dx = 1/2$。
 
 7. **[极化恒等式] 写出实内积空间中利用范数表达内积的公式。**
+
    ??? success "参考答案"
        $\langle u, v \rangle = \frac{1}{4}(\|u+v\|^2 - \|u-v\|^2)$。
 
 8. **[投影定理] 证明 $V = W \oplus W^\perp$。**
+
    ??? success "参考答案"
        对任何 $v$，取 $v$ 在 $W$ 上的正交投影 $p$，则 $v = p + (v-p)$。容易验证 $v-p \in W^\perp$。
 
 9. **[Schur定理] 每个复方阵都酉相似于什么矩阵？**
+
    ??? success "参考答案"
        上三角矩阵。
 
 10. **[自伴算子] 证明自伴算子的特征值必为实数。**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         $\lambda \|v\|^2 = \langle Tv, v \rangle = \langle v, Tv \rangle = \bar{\lambda} \|v\|^2 \implies \lambda = \bar{\lambda}$。
 
 ## 本章小结

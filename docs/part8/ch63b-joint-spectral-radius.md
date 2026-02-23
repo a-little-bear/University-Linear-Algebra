@@ -53,43 +53,53 @@
 ## 练习题
 
 1. **[基础] 若 $\mathcal{A} = \{A\}$（只有一个矩阵），$\rho(\mathcal{A})$ 等于什么？**
+
    ??? success "参考答案"
        等于该矩阵的传统谱半径 $\rho(A)$。
 
 2. **[下界] 证明 $\rho(\mathcal{A}) \ge \max_{A \in \mathcal{A}} \rho(A)$。**
+
    ??? success "参考答案"
        考虑序列中一直重复使用同一个矩阵 $A$，则其增长率为 $\rho(A)$。联合谱半径是所有可能序列（包括重复序列）增长率的上确界，故大于等于最大个体谱半径。
 
 3. **[计算] 若 $A_1 = \begin{pmatrix} 0.8 & 0 \\ 0 & 0 \end{pmatrix}, A_2 = \begin{pmatrix} 0 & 0 \\ 0 & 0.8 \end{pmatrix}$，求 $\rho(\{A_1, A_2\})$。**
+
    ??? success "参考答案"
        由于 $A_1 A_2 = 0$ 且 $A_2 A_1 = 0$，任何长度 $\ge 2$ 的乘积均为 0。最大模长由个体给出，故 $\rho = 0.8$。
 
 4. **[发散例子] 举出两个谱半径为 0 但 JSR 大于 0 的矩阵。**
+
    ??? success "参考答案"
        $A_1 = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, A_2 = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$。$\rho(A_1)=\rho(A_2)=0$。但 $A_1 A_2 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$，其谱半径为 1。故 $\rho(\{A_1, A_2\}) = 1^{1/2} = 1$。
 
 5. **[范数] 若存在某种范数满足对所有 $A \in \mathcal{A}$ 均有 $\|A\| \le \gamma$，则 $\rho(\mathcal{A})$ 与 $\gamma$ 有什么关系？**
+
    ??? success "参考答案"
        $\rho(\mathcal{A}) \le \gamma$。因为乘积的范数满足次可乘性 $\|A_k \cdots A_1\| \le \prod \|A_i\| \le \gamma^k$。
 
 6. **[有限性猜想] 什么是有限性猜想？**
+
    ??? success "参考答案"
        该猜想曾认为对于任何有限矩阵集，其 JSR 总是由某个有限长度的循环乘积的谱半径达到。该猜想现已被反例推翻。
 
 7. **[SOS规划] 简述如何利用平方和 (SOS) 规划近似计算 JSR。**
+
    ??? success "参考答案"
        通过寻找一个共同的齐次多项式 Lyapunov 函数（对应于某种高阶范数），将 JSR 的上界估计转化为一个半正定规划问题。
 
 8. **[应用] 为什么在切换控制系统中关注 $\rho(\mathcal{A}) < 1$？**
+
    ??? success "参考答案"
        这是保证切换线性系统对**任意**切换序列都渐近稳定的充要条件。
 
 9. **[交换性] 若矩阵族 $\mathcal{A}$ 彼此交换，$\rho(\mathcal{A})$ 等于什么？**
+
    ??? success "参考答案"
        此时 $\rho(\mathcal{A}) = \max \rho(A_i)$。交换性消除了由于基不匹配导致的瞬态累积。
 
 10. **[测度] 联合谱半径与 Lyapunov 指数有什么区别？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         JSR 关注的是**最坏情况**下的增长，而 Lyapunov 指数通常关注的是在某种概率分布下的**平均**增长率。
 
 ## 本章小结

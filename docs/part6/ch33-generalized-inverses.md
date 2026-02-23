@@ -54,43 +54,53 @@
 ## 练习题
 
 1. **[计算] 求 $A = \begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix}$ 的 Moore-Penrose 逆。**
+
    ??? success "参考答案"
        $A^+ = \begin{pmatrix} 0.5 & 0 \\ 0 & 0 \end{pmatrix}$。验证四个条件：$AA^+ = \operatorname{diag}(1, 0)$，对称且满足定义。
 
 2. **[列满秩] 若 $A$ 是列满秩的，证明 $A^+ = (A^* A)^{-1} A^*$。**
+
    ??? success "参考答案"
        代入 Penrose 四条件验证。例如 $A^+ A = (A^* A)^{-1} A^* A = I$，显然对称且满足性质。
 
 3. **[性质] 证明 $(A^+)^+ = A$。**
+
    ??? success "参考答案"
        由于 $A$ 满足 $A^+$ 的四个 Penrose 条件（角色互换），且 $A^{++}$ 唯一，故相等。
 
 4. **[秩] 证明 $\operatorname{rank}(A^+) = \operatorname{rank}(A)$。**
+
    ??? success "参考答案"
        由 $AA^+A=A$ 知 $\operatorname{rank}(A) \le \operatorname{rank}(A^+)$；由 $A^+AA^+=A^+$ 知 $\operatorname{rank}(A^+) \le \operatorname{rank}(A)$。
 
 5. **[投影] $AA^+$ 几何上代表什么？**
+
    ??? success "参考答案"
        它代表到 $A$ 的列空间 $C(A)$ 的正交投影矩阵。
 
 6. **[最小二乘] 若 $Ax=b$ 有解，证明 $x = A^+ b$ 是其中一个解。**
+
    ??? success "参考答案"
        若有解，则 $b \in C(A)$。$A(A^+ b) = (AA^+)b = b$（投影到所在空间保持不变）。
 
 7. **[群逆] 什么是群逆（Group Inverse）？**
+
    ??? success "参考答案"
        群逆是指数 $k=1$ 时的 Drazin 逆。它满足 $AA^{\#}A = A, A^{\#}AA^{\#} = A^{\#}$ 且 $AA^{\#} = A^{\#}A$。
 
 8. **[奇异值] 矩阵 $A$ 的奇异值为 $2, 1, 0$。求 $A^+$ 的奇异值。**
+
    ??? success "参考答案"
        $1/2, 1, 0$。
 
 9. **[不变量] 证明 $(A^*)^+ = (A^+)^*$。**
+
    ??? success "参考答案"
        对 $A^*$ 和 $(A^+)^*$ 验证 Penrose 条件即可。
 
 10. **[应用] 为什么在求逆时 $A^+$ 包含转置项？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         转置项（或共轭转置）负责将输出空间的残差投影回输入空间，这是实现“最小范数”和“正交性”的关键机制。
 
 ## 本章小结

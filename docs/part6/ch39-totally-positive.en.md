@@ -88,7 +88,8 @@ If positive definite matrices require the quadratic form to be positive, then **
         Yes. By the Cauchy-Binet formula, the minors of the product are weighted sums of the minors of the factors, so positivity is maintained.
 
 10. **[Statistics] Why is total positivity related to stochastic dominance?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         TP ensures that distribution functions maintain monotonicity and extrema stability under transformations, serving as a core tool in multivariate statistical ordering theory.
 
 ## Chapter Summary

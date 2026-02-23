@@ -49,43 +49,53 @@ Not all square matrices can be diagonalized. When the geometric multiplicity of 
 ## Exercises
 
 1. **[Jordan Block] Write the square of $J_2(5)$.**
+
    ??? success "Solution"
        $\begin{pmatrix} 5 & 1 \\ 0 & 5 \end{pmatrix}^2 = \begin{pmatrix} 25 & 10 \\ 0 & 25 \end{pmatrix}$.
 
 2. **[Diagonalization] Determine if $A = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ is diagonalizable.**
+
    ??? success "Solution"
        No. The eigenvalue 2 has algebraic multiplicity 2, but the dimension of the eigenspace (geometric multiplicity) is 1.
 
 3. **[JCF Search] If a $3 \times 3$ matrix $A$ has all eigenvalues equal to 0 and $\operatorname{rank}(A)=1$, what is its JCF?**
+
    ??? success "Solution"
        $\operatorname{rank}(A)=1 \implies \dim \ker(A) = 2$, meaning there are 2 Jordan blocks. Since the total dimension is 3, it must be $\operatorname{diag}(J_2(0), J_1(0))$.
 
 4. **[Minimal] Given $J = \operatorname{diag}(J_3(2), J_2(2))$, find its minimal polynomial.**
+
    ??? success "Solution"
        The size of the largest block for eigenvalue 2 is 3, so $m(\lambda) = (\lambda-2)^3$.
 
 5. **[Possibility] If the characteristic polynomial is $(\lambda-1)^4$ and the minimal polynomial is $(\lambda-1)^2$, find possible JCFs.**
+
    ??? success "Solution"
        The largest block size is 2. Possible forms are $\operatorname{diag}(J_2(1), J_2(1))$ or $\operatorname{diag}(J_2(1), J_1(1), J_1(1))$.
 
 6. **[Nilpotency] Describe $J_k(0)^n$ for $n \ge k$.**
+
    ??? success "Solution"
        It results in the zero matrix (Nilpotency).
 
 7. **[Rank Method] How do you determine the number of blocks of size $\ge 2$ for eigenvalue $\lambda$?**
+
    ??? success "Solution"
        It is given by $\operatorname{rank}(A-\lambda I) - \operatorname{rank}(A-\lambda I)^2$.
 
 8. **[Spaces] What is the difference between an eigenspace and a generalized eigenspace?**
+
    ??? success "Solution"
        The eigenspace is $\ker(A-\lambda I)$, while the generalized eigenspace is $\ker(A-\lambda I)^k$ (where $k$ is the algebraic multiplicity).
 
 9. **[Uniqueness] If $A$ and $B$ have the same JCF, are they similar?**
+
    ??? success "Solution"
        Yes. The JCF is a complete invariant under similarity.
 
 10. **[Numerical] Why is JCF rarely computed directly in numerical software?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         The JCF is extremely sensitive to small perturbations in matrix entries (discontinuous), making it unstable under floating-point arithmetic.
 
 ## Chapter Summary

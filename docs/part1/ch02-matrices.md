@@ -62,43 +62,53 @@
 ## 练习题
 
 1. **[基础] 已知 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。计算 $AB$ 和 $BA$。**
+
    ??? success "参考答案"
        $AB = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}, BA = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$。可见 $AB \neq BA$。
 
 2. **[单位矩阵] 证明对于任何 $n \times n$ 矩阵 $A$，都有 $AI = IA = A$。**
+
    ??? success "参考答案"
        利用乘法定义：$(AI)_{ij} = \sum a_{ik} \delta_{kj}$。由于 $\delta_{kj}$ 仅在 $k=j$ 时为 1，故结果为 $a_{ij}$。
 
 3. **[转置] 已知 $(AB)^T = B^T A^T$。利用此性质求 $(A^T B)^T$。**
+
    ??? success "参考答案"
        $(A^T B)^T = B^T (A^T)^T = B^T A$。
 
 4. **[对称性] 若 $A$ 是对称矩阵，证明 $A^2$ 也是对称矩阵。**
+
    ??? success "参考答案"
        $(A^2)^T = (AA)^T = A^T A^T = AA = A^2$。
 
 5. **[逆矩阵] 求 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ 的逆矩阵。**
+
    ??? success "参考答案"
        $\det(A) = 4-6 = -2$。$A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$。
 
 6. **[幂运算] 计算 $A^k$ 其中 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$。**
+
    ??? success "参考答案"
        $A^2 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, A^3 = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$。归纳得 $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$。
 
 7. **[迹] 证明 $\operatorname{tr}(AB) = \operatorname{tr}(BA)$。**
+
    ??? success "参考答案"
        $\operatorname{tr}(AB) = \sum_i \sum_k a_{ik}b_{ki} = \sum_k \sum_i b_{ki}a_{ik} = \operatorname{tr}(BA)$。
 
 8. **[初等矩阵] 左乘一个初等矩阵 $E$ 相当于对 $A$ 执行什么操作？**
+
    ??? success "参考答案"
        相当于对 $A$ 执行对应的初等行变换。
 
 9. **[分块] 计算 $\begin{pmatrix} I & A \\ 0 & I \end{pmatrix} \begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}$。**
+
    ??? success "参考答案"
        $\begin{pmatrix} I & -A+A \\ 0 & I \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}$。这说明该矩阵的逆是将其右上角变号。
 
 10. **[秩初步] 矩阵 $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 的秩是多少？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         秩为 1。它只有一个非零行。
 
 ## 本章小结

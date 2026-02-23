@@ -46,43 +46,53 @@
 ## 练习题
 
 1. **[基础] 证明两个半正定矩阵的凸组合仍是半正定的。**
+
    ??? success "参考答案"
        对于任何向量 $v$，$v^T(\lambda A + (1-\lambda)B)v = \lambda v^T A v + (1-\lambda) v^T B v$。由于 $v^T A v \ge 0$ 且 $v^T B v \ge 0$，权重 $\lambda, 1-\lambda$ 均非负，故总和 $\ge 0$。
 
 2. **[自对偶] 验证：若 $A, B \in S_n^+$，则 $\operatorname{tr}(AB) \ge 0$。**
+
    ??? success "参考答案"
        取 $B = \sum \lambda_i q_i q_i^T$（谱分解）。$\operatorname{tr}(AB) = \sum \lambda_i q_i^T A q_i$。每一项都是正特征值乘上正二次型，故和为正。
 
 3. **[谱体] 一个圆盘 $\{ (x, y) : x^2 + y^2 \le 1 \}$ 是否为谱体？**
+
    ??? success "参考答案"
        是的。利用 Schur 补，它可以写为 LMI：$\begin{pmatrix} 1+x & y \\ y & 1-x \end{pmatrix} \succeq 0$。
 
 4. **[维数] $n$ 阶对称阵空间 $S_n$ 的维数是多少？**
+
    ??? success "参考答案"
        $n(n+1)/2$。这是正定锥所在的线性空间的维数。
 
 5. **[极值点] 为什么 $I/n$ 不是正定锥单位迹截面的极值点？**
+
    ??? success "参考答案"
        因为 $I/n = \frac{1}{n} \sum e_i e_i^T$，它可以表示为其他点（纯态）的凸组合。极值点必须是秩 1 阵。
 
 6. **[内点] 如何判断一个对称阵是正定锥的内点 (Interior Point)？**
+
    ??? success "参考答案"
        当且仅当该矩阵是**严格正定**的（$\operatorname{rank}(A) = n$）。
 
 7. **[紧致性] 正定锥 $S_n^+$ 是紧集吗？**
+
    ??? success "参考答案"
        不是。它是无界的。但正定锥与超平面 $\operatorname{tr}(A)=1$ 的交集是紧的（量子态空间）。
 
 8. **[分离] 给定 $A \notin S_n^+$，是否存在一个对称阵 $H$ 使得 $\operatorname{tr}(AH) < 0$ 且对所有 $B \in S_n^+$ 均有 $\operatorname{tr}(BH) \ge 0$？**
+
    ??? success "参考答案"
        是的。由超平面分离定理及正定锥的自对偶性，必存在这样的 $H$。
 
 9. **[应用] 在控制理论中，为什么 LMI 常用于描述稳定域？**
+
    ??? success "参考答案"
        因为 Lyapunov 稳定性条件（$A^T P + PA \prec 0$）本身就是一个关于矩阵变量 $P$ 的线性矩阵不等式，定义了一个凸区域。
 
 10. **[量子] 证明所有 $n \times n$ 密度矩阵构成的集合是凸的。**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         密度矩阵满足 $\rho \succeq 0$ 和 $\operatorname{tr}(\rho)=1$。由于半正定性和迹运算均在凸组合下保持，结论成立。
 
 ## 本章小结

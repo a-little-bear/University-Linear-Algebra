@@ -59,43 +59,53 @@
 ## 练习题
 
 1. **[计算] 验证 $J = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ 本身是否是辛矩阵。**
+
    ??? success "参考答案"
        $J^T J J = (-J)J^2 = (-J)(-I) = J$。成立。
 
 2. **[行列式] 证明：若 $M$ 是辛矩阵，则 $M$ 是非奇异的。**
+
    ??? success "参考答案"
        由 $M^T J M = J$，取行列式得 $\det(M)^2 \det(J) = \det(J)$。由于 $\det(J)=1 \neq 0$，故 $\det(M)^2=1 \implies \det(M) = \pm 1$。
 
 3. **[特征值] 解释为什么辛矩阵的特征值不能仅包含一个 2。**
+
    ??? success "参考答案"
        由于特征值成对出现，若有 2，则必有 $1/2 = 0.5$。
 
 4. **[Hamilton] 判定 $\begin{pmatrix} A & B \\ C & -A^T \end{pmatrix}$ 何时是 Hamilton 矩阵（其中 $B, C$ 对称）。**
+
    ??? success "参考答案"
        始终是。代入 $H^T J + JH = 0$ 验证，或观察 $JH = \begin{pmatrix} C & -A^T \\ -A & -B \end{pmatrix}$ 的对称性。
 
 5. **[指数映射] 证明：若 $H$ 是 Hamilton 矩阵，则 $e^{H}$ 是辛矩阵。**
+
    ??? success "参考答案"
        $(e^H)^T J e^H = e^{H^T} J e^H = J e^{-H} e^H = J$。利用了 $H^T J = -JH \implies H^T = -JHJ^{-1}$。
 
 6. **[Williamson] 求 $A = \operatorname{diag}(2, 2)$ 的辛特征值。**
+
    ??? success "参考答案"
        由于它已经是 Williamson 标准形形式，辛特征值为 $d_1 = 2$。
 
 7. **[性质] 证明辛矩阵的逆也是辛矩阵。**
+
    ??? success "参考答案"
        对 $M^T J M = J$ 两边取逆并整理得 $(M^{-1})^T J M^{-1} = J$。
 
 8. **[应用] 什么是辛积分器（Symplectic Integrator）？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         一种数值求解 Hamilton 方程的算法，其每一步迭代矩阵都是辛矩阵，从而保证数值解长时间保持系统的能量和相空间体积不变。
 
 9. **[关系] 辛矩阵与酉矩阵的交集是什么？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         交集是同构于 $U(n)$ 的子群。
 
 10. **[量子应用] 在量子光学中，辛变换对应于什么物理过程？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         对应于高斯态的线性正则变换（如压缩、位移和波束分束），保持正则对易关系不变。
 
 ## 本章小结

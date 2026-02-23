@@ -50,43 +50,53 @@
 ## 练习题
 
 1. **[基础] 计算 $\begin{pmatrix} 0 & 3 \\ -3 & 0 \end{pmatrix}$ 的 Pfaffian。**
+
    ??? success "参考答案"
        $\operatorname{Pf} = 3$。
 
 2. **[行列式] 若 $\det(A) = 16$，且 $A$ 是反对称阵，$\operatorname{Pf}(A)$ 可能的值是多少？**
+
    ??? success "参考答案"
        $\pm 4$。符号取决于矩阵元素的具体排列。
 
 3. **[性质] 证明：若 $A$ 是 $3 \times 3$ 反对称阵，则 $\operatorname{Pf}(A) = 0$。**
+
    ??? success "参考答案"
        奇数阶反对称阵的行列式必为 0，故其 Pfaffian（作为平方根）也必为 0。
 
 4. **[计算] 求 $J = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \oplus \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$ 的 Pfaffian。**
+
    ??? success "参考答案"
        对于分块对角反对称阵，$\operatorname{Pf}(A \oplus B) = \operatorname{Pf}(A)\operatorname{Pf}(B)$。故 $\operatorname{Pf}(J) = 1 \cdot 1 = 1$。
 
 5. **[Cayley] 证明：对于 $4 \times 4$ 反对称阵，其 Pfaffian 有 3 项。**
+
    ??? success "参考答案"
        $\operatorname{Pf}(A) = a_{12}a_{34} - a_{13}a_{24} + a_{14}a_{23}$。这是通过枚举匹配项得到的。
 
 6. **[物理] 在超导理论中，Pfaffian 态对应什么？**
+
    ??? success "参考答案"
        对应于具有非阿贝尔统计特性的 Majorana 束缚态，是拓扑量子计算的候选者。
 
 7. **[特征值] 反对称矩阵的特征值有什么特点？**
+
    ??? success "参考答案"
        特征值成共轭纯虚数对出现：$\pm i\lambda_1, \pm i\lambda_2, \ldots$。Pfaffian 等于这些虚部之积：$\prod \lambda_j$。
 
 8. **[伴随] 证明 $\operatorname{Pf}(k A) = k^n \operatorname{Pf}(A)$。**
+
    ??? success "参考答案"
        由行列式性质 $\det(kA) = k^{2n} \det(A)$，取平方根即得。
 
 9. **[组合] 为什么一般图的匹配计数比平面图难？**
+
    ??? success "参考答案"
        因为一般图不存在统一的 Pfaffian 取向（即无法给边赋正负号使得所有回路贡献一致），这反映了平面性在代数结构上的独特性。
 
 10. **[应用] 简述 Pfaffian 在统计力学 Ising 模型中的作用。**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         通过将配分函数表示为格点关联矩阵的 Pfaffian，可以将统计求和转化为矩阵行列式的计算，从而求得精确解。
 
 ## 本章小结

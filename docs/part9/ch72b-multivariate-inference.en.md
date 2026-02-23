@@ -91,7 +91,8 @@ After establishing the matrix-based description of data (Ch72A), the core task o
         It corresponds to the total sum of squared residuals (Total SSE) across all dependent variables.
 
 10. **[Limits] What distribution does the $T^2$ distribution approach in large samples?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         It approaches a $\chi^2$ distribution with $p$ degrees of freedom.
 
 ## Chapter Summary

@@ -100,7 +100,8 @@ abla_X \operatorname{tr}(X^T X) = 2X$.
         It is simply the matrix $A$.
 
 10. **[Application] In linear regression $\min \|y-Ax\|^2$, what equation is derived from the zero-gradient condition?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         $
 abla_x (y-Ax)^T(y-Ax) = -2A^T(y-Ax) = 0 \implies A^T A x = A^T y$ (the Normal Equations).
 

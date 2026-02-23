@@ -118,7 +118,8 @@ Almost everything in modern telecommunications, audio processing, and image comp
         $k$.
 
 10. **[Identity] Prove $\operatorname{tr}(F_n^2) = 0$ or $n$.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         $F_n^2$ is a permutation matrix (reversal matrix) times $n$. Its trace depends on the number of fixed points in the reversal, which is 1 or 2 for $n$.
 
 ## Chapter Summary

@@ -59,43 +59,53 @@
 ## 练习题
 
 1. **[计算] 求 $A = \begin{pmatrix} 3 & 0 \\ 0 & -2 \end{pmatrix}$ 的奇异值。**
+
    ??? success "参考答案"
        奇异值是长度（正值），故 $\sigma_1 = 3, \sigma_2 = 2$。
 
 2. **[关系] 证明 $A$ 的奇异值的平方是 $A^T A$ 的特征值。**
+
    ??? success "参考答案"
        $A^T A = (V \Sigma^T U^T)(U \Sigma V^T) = V (\Sigma^T \Sigma) V^T$。这是特征值分解形式，特征值为 $\sigma_i^2$。
 
 3. **[秩] 若 $A$ 的奇异值为 $5, 3, 0, 0$，则 $\operatorname{rank}(A)$ 是多少？**
+
    ??? success "参考答案"
        秩等于非零奇异值的个数，即 2。
 
 4. **[范数] 证明 $\|A\|_2 = \sigma_1$。**
+
    ??? success "参考答案"
        谱范数定义为最大拉伸倍数，由 SVD 可知最大拉伸即为最大奇异值 $\sigma_1$。
 
 5. **[低秩] 对奇异值为 $10, 8, 1$ 的矩阵，最佳秩 2 逼近的误差（Frobenius 范数）是多少？**
+
    ??? success "参考答案"
        误差等于被舍弃奇异值的平方和的平方根，即 $\sqrt{1^2} = 1$。
 
 6. **[伪逆] 若 $A = \operatorname{diag}(2, 0)$，求 $A^+$。**
+
    ??? success "参考答案"
        $A^+ = \operatorname{diag}(1/2, 0)$。
 
 7. **[正交性] SVD 中的 $U$ 和 $V$ 是否唯一？**
+
    ??? success "参考答案"
        不唯一（例如特征向量的正负号可变），但奇异值 $\Sigma$ 是唯一的。
 
 8. **[紧SVD] 什么是紧 SVD (Compact SVD)？**
+
    ??? success "参考答案"
        只保留对应于非零奇异值的列和行，即 $A = U_r \Sigma_r V_r^T$，其中 $\Sigma_r$ 是 $r \times r$ 正定对角阵。
 
 9. **[应用] 为什么 SVD 可以用于图像压缩？**
+
    ??? success "参考答案"
        图像矩阵通常是低秩或近似低秩的。通过保留前 $k$ 个最大的奇异值，可以用极少的数据量还原图像的主要特征。
 
 10. **[条件数] 矩阵的条件数 $\kappa(A)$ 用奇异值如何表示？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         $\kappa(A) = \sigma_{\max} / \sigma_{\min}$。
 
 ## 本章小结

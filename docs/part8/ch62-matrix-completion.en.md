@@ -90,7 +90,8 @@ Imagine you have a massive matrix, but 99% of its entries are missing. Is there 
         Relax it to an inequality: $\|P_\Omega(X - M)\|_F \le \delta$.
 
 10. **[Limits] Why can't gradient descent be applied directly to the rank minimization problem?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because the rank function is step-like; its gradient is zero almost everywhere and discontinuous at transitions, providing no directional information for descent.
 
 ## Chapter Summary

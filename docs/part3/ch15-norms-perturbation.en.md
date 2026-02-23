@@ -56,43 +56,53 @@ In pure mathematics, we speak of exact solutions, but in numerical computation, 
 ## Exercises
 
 1. **[Calculation] Compute the $L_1, L_2, L_\infty$ norms of $\mathbf{x} = (3, -4)^T$.**
+
    ??? success "Solution"
        $\|\mathbf{x}\|_1 = 7, \|\mathbf{x}\|_2 = 5, \|\mathbf{x}\|_\infty = 4$.
 
 2. **[Matrix Norm] Find the $\infty$-norm of $A = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}$.**
+
    ??? success "Solution"
        Maximum row sum: $\max(1+2, 0+3) = 3$.
 
 3. **[Condition] If $A = \operatorname{diag}(10, 0.1)$, compute its condition number relative to the 2-norm.**
+
    ??? success "Solution"
        $\|A\|_2 = 10, \|A^{-1}\|_2 = 10 \implies \kappa_2(A) = 100$.
 
 4. **[Properties] Prove the induced matrix norm satisfies sub-multiplicativity: $\|AB\| \le \|A\| \|B\|$.**
+
    ??? success "Solution"
        $\|AB\mathbf{x}\| \le \|A\|\|B\mathbf{x}\| \le \|A\|\|B\|\|\mathbf{x}\|$. The definition follows.
 
 5. **[Error] If $\kappa(A)=10^4$ and input error is $10^{-6}$, what is the approximate upper bound for the relative error of the solution?**
+
    ??? success "Solution"
        Approximately $10^4 \cdot 10^{-6} = 10^{-2}$.
 
 6. **[Unitary] Prove the 2-condition number of an orthogonal matrix is always 1.**
+
    ??? success "Solution"
        Since orthogonal matrices preserve length, $\|Q\|_2 = 1$ and $\|Q^{-1}\|_2 = \|Q^T\|_2 = 1$.
 
 7. **[Bauer-Fike] Why are eigenvalues of symmetric matrices more stable than those of non-normal matrices?**
+
    ??? success "Solution"
        Symmetric matrices are unitarily diagonalizable, meaning $V$ is orthogonal and its condition number is 1, so the error is not magnified.
 
 8. **[Frobenius] Calculate the Frobenius norm of $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
+
    ??? success "Solution"
        $\sqrt{1^2+1^2+1^2+1^2} = 2$.
 
 9. **[Ill-conditioned] Name a well-known ill-conditioned matrix.**
+
    ??? success "Solution"
        The Hilbert matrix $H_{ij} = \frac{1}{i+j-1}$.
 
 10. **[Application] Why are unitary transformations (like Householder) favored in numerical computation?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because their condition number is always 1, they do not magnify rounding errors, preserving the stability of the algorithm.
 
 ## Chapter Summary

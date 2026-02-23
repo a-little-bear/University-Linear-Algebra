@@ -91,7 +91,8 @@ What happens if we redefine the basic rules of arithmetic such that addition tak
         $\min(x, x) = x$.
 
 10. **[Application] Why is tropical algebra used in scheduling theory?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because the earliest start time of a task is the **maximum** ($\max$-plus algebra) of the finish times of its predecessors plus the duration, which perfectly fits the tropical structure.
 
 ## Chapter Summary

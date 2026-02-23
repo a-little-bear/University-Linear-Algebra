@@ -120,7 +120,8 @@ In traditional linear algebra, matrices are deterministic. However, in modern bi
         RMT proves that random Gaussian or Bernoulli matrices satisfy RIP with high probability, meaning they act like an isometry on sparse vectors.
 
 10. **[Tracy-Widom] Compare Tracy-Widom to the Normal distribution.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Tracy-Widom is asymmetric and has a much steeper decay on the right and a slower decay on the left. It describes the "edge" of the spectrum, whereas Normal describes the sum of many independent events.
 
 ## Chapter Summary

@@ -87,7 +87,8 @@ In traditional statistics, we study random variables $X$ or random vectors $\mat
         Matrix distributions focus on exact probability density functions for specific parameters (mean, covariance); RMT focuses on asymptotic spectral properties (universal laws) as dimensions $n \to \infty$.
 
 10. **[Application] How is the Wishart distribution used in signal detection?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         By comparing the observed sample covariance matrix's spectral deviation from a noise model (Wishart). If the largest eigenvalue significantly exceeds the Wishart prediction, a signal is detected.
 
 ## Chapter Summary

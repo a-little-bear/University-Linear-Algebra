@@ -49,43 +49,53 @@
 ## 练习题
 
 1. **[Jordan块] 写出 $J_2(5)$ 的平方。**
+
    ??? success "参考答案"
        $\begin{pmatrix} 5 & 1 \\ 0 & 5 \end{pmatrix}^2 = \begin{pmatrix} 25 & 10 \\ 0 & 25 \end{pmatrix}$。
 
 2. **[对角化] 判定 $A = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ 是否可对角化。**
+
    ??? success "参考答案"
        不可对角化。特征值 2 的代数重数为 2，但特征向量空间维数（几何重数）为 1。
 
 3. **[JCF判定] 若 $3 \times 3$ 矩阵 $A$ 的特征值均为 0，且 $\operatorname{rank}(A)=1$，求其 JCF。**
+
    ??? success "参考答案"
        $\operatorname{rank}(A)=1 \implies \dim \ker(A) = 2$，说明有 2 个 Jordan 块。由于总阶数为 3，必为 $\operatorname{diag}(J_2(0), J_1(0))$。
 
 4. **[最小多项式] 已知 $J = \operatorname{diag}(J_3(2), J_2(2))$，求其最小多项式。**
+
    ??? success "参考答案"
        对应特征值 2 的最大块阶数为 3，故 $m(\lambda) = (\lambda-2)^3$。
 
 5. **[性质] 若 $A$ 的特征多项式为 $(\lambda-1)^4$，最小多项式为 $(\lambda-1)^2$，求 $A$ 的 JCF 可能形式。**
+
    ??? success "参考答案"
        最大块阶数为 2。可能为 $\operatorname{diag}(J_2(1), J_2(1))$ 或 $\operatorname{diag}(J_2(1), J_1(1), J_1(1))$。
 
 6. **[幂运算] 描述 $J_k(0)^n$ 在 $n \ge k$ 时的结果。**
+
    ??? success "参考答案"
        结果为零矩阵（幂零性）。
 
 7. **[秩法] 如何通过秩计算确定特征值 $\lambda$ 对应的阶数 $\ge 2$ 的块的个数？**
+
    ??? success "参考答案"
        由 $\operatorname{rank}(A-\lambda I) - \operatorname{rank}(A-\lambda I)^2$ 确定。
 
 8. **[特征空间] 广义特征空间与特征空间有什么区别？**
+
    ??? success "参考答案"
        特征空间是 $\ker(A-\lambda I)$，广义特征空间是 $\ker(A-\lambda I)^k$ ($k$ 为代数重数)。
 
 9. **[唯一性] 若 $A$ 与 $B$ 的 JCF 相同，它们是否相似？**
+
    ??? success "参考答案"
        是的。JCF 是相似变换下的全系不变量。
 
 10. **[应用] 为什么数值计算中很少直接求 JCF？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为 JCF 对矩阵元素的微小扰动极度敏感（不连续），在浮点运算下极不稳定。
 
 ## 本章小结

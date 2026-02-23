@@ -88,7 +88,8 @@ In studying linear operators $L: M_n \to M_n$ on matrix spaces, a natural questi
         Usually a combination of scalar multiplication and a similarity transformation.
 
 10. **[Radius] If $L$ preserves the spectral radius $\rho(A)$, does it necessarily preserve the spectrum?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         No. It only needs to preserve the maximum modulus of the eigenvalues, not their specific values or distribution.
 
 ## Chapter Summary

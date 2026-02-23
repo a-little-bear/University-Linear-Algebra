@@ -50,43 +50,53 @@ In the real world, most physical quantities (e.g., probability, population, mone
 ## Exercises
 
 1. **[Criteria] Determine if $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ is a positive matrix.**
+
    ??? success "Solution"
        No. It is a non-negative matrix but contains zero entries.
 
 2. **[Irreducibility] Is the matrix $A$ from the previous exercise irreducible?**
+
    ??? success "Solution"
        Yes. Its associated graph $1 \leftrightarrow 2$ is strongly connected.
 
 3. **[Eigenvalue] Find the Perron eigenvalue of $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
+
    ??? success "Solution"
        The eigenvalues are 2 and 0. Thus $r = \rho(A) = 2$.
 
 4. **[Eigenvector] Find the positive eigenvector for $r=2$ from the matrix above.**
+
    ??? success "Solution"
        $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 2 \begin{pmatrix} 1 \\ 1 \end{pmatrix}$. Thus $\mathbf{v} = (1, 1)^T$.
 
 5. **[Stochastic] Prove a stochastic matrix always has an eigenvalue of 1.**
+
    ??? success "Solution"
        The $i$-th component of $A \mathbf{1}$ is the sum of the $i$-th row. By definition, this sum is 1, so $A \mathbf{1} = 1 \cdot \mathbf{1}$.
 
 6. **[Graph] Why is $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ reducible?**
+
    ??? success "Solution"
        It is already upper triangular (or observe the graph: vertex 2 cannot reach vertex 1).
 
 7. **[Frobenius] Give an example of an irreducible non-negative matrix with $|\lambda| = r$ but $\lambda \neq r$.**
+
    ??? success "Solution"
        $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Eigenvalues are 1 and -1. $|-1| = 1$.
 
 8. **[PageRank] Why is a small positive perturbation added to the link matrix in PageRank?**
+
    ??? success "Solution"
        To make the matrix strictly positive, ensuring the uniqueness of the Perron eigenvalue 1 and the convergence of the power method.
 
 9. **[Monotonicity] If $A \ge 0$, prove $\rho(A)$ is a non-decreasing function of the entries of $A$.**
+
    ??? success "Solution"
        From the Collatz-Wielandt formula $\rho(A) = \sup_{x>0} \min_i \frac{(Ax)_i}{x_i}$, increasing an entry of $A$ clearly increases the supremum.
 
 10. **[Limit] If $A$ is primitive, what is $\lim_{k \to \infty} (A/r)^k$?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         It equals $\mathbf{v}\mathbf{w}^T$, where $\mathbf{v}$ and $\mathbf{w}$ are the normalized left and right Perron eigenvectors.
 
 ## Chapter Summary

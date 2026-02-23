@@ -59,43 +59,53 @@ The Singular Value Decomposition (SVD) is often called the "pinnacle" of linear 
 ## Exercises
 
 1. **[Calculation] Find the singular values of $A = \begin{pmatrix} 3 & 0 \\ 0 & -2 \end{pmatrix}$.**
+
    ??? success "Solution"
        Singular values are magnitudes (positive), so $\sigma_1 = 3, \sigma_2 = 2$.
 
 2. **[Relation] Prove that the squares of the singular values of $A$ are the eigenvalues of $A^T A$.**
+
    ??? success "Solution"
        $A^T A = (V \Sigma^T U^T)(U \Sigma V^T) = V (\Sigma^T \Sigma) V^T$. This is an eigenvalue decomposition with eigenvalues $\sigma_i^2$.
 
 3. **[Rank] If the singular values of $A$ are $5, 3, 0, 0$, what is $\operatorname{rank}(A)$?**
+
    ??? success "Solution"
        Rank equals the number of non-zero singular values, which is 2.
 
 4. **[Norm] Prove $\|A\|_2 = \sigma_1$.**
+
    ??? success "Solution"
        The spectral norm is defined as the maximum stretch factor. From SVD, the maximum stretch is clearly the largest singular value $\sigma_1$.
 
 5. **[Low-rank] For a matrix with singular values $10, 8, 1$, what is the Frobenius norm error of the best rank-2 approximation?**
+
    ??? success "Solution"
        The error is the square root of the sum of squares of discarded singular values: $\sqrt{1^2} = 1$.
 
 6. **[Pseudoinverse] If $A = \operatorname{diag}(2, 0)$, find $A^+$.**
+
    ??? success "Solution"
        $A^+ = \operatorname{diag}(1/2, 0)$.
 
 7. **[Uniqueness] Are $U$ and $V$ in the SVD unique?**
+
    ??? success "Solution"
        No (e.g., signs of columns can be flipped), but the singular values in $\Sigma$ are unique.
 
 8. **[Compact] What is the Compact SVD?**
+
    ??? success "Solution"
        It retains only the columns/rows corresponding to non-zero singular values: $A = U_r \Sigma_r V_r^T$, where $\Sigma_r$ is an $r \times r$ positive definite diagonal matrix.
 
 9. **[Compression] Why is SVD used for image compression?**
+
    ??? success "Solution"
        Image matrices are often low-rank or approximately so. By keeping only the top $k$ singular values, one can reconstruct the image's main features using much less data.
 
 10. **[Condition] How is the condition number $\kappa(A)$ expressed in terms of singular values?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         $\kappa(A) = \sigma_{\max} / \sigma_{\min}$ (for square matrices).
 
 ## Chapter Summary

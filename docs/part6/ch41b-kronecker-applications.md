@@ -30,43 +30,53 @@
 ## 练习题
 
 1. **[最小指标] 求 $L(\lambda) = \begin{pmatrix} 1 & -\lambda & 0 \\ 0 & 1 & -\lambda \end{pmatrix}$ 的右最小指标。**
+
    ??? success "参考答案"
        求解 $L(\lambda)x(\lambda) = 0$ 得：$x_1 = \lambda x_2 = \lambda^2 x_3$。取 $x_3=1$ 得 $x(\lambda) = (\lambda^2, \lambda, 1)^T$。其最高次数为 2。故 $\varepsilon_1 = 2$。
 
 2. **[维数] 一个秩为 2 的 $3 \times 5$ 矩阵束有多少个右最小指标和左最小指标？**
+
    ??? success "参考答案"
        右最小指标个数 $p = n - r = 5 - 2 = 3$。左最小指标个数 $q = m - r = 3 - 2 = 1$。满足 $p - q = n - m = 2$。
 
 3. **[Kronecker块] 写出 $2 \times 3$ 的右 Kronecker 块 $L_2$ 的显式形式。**
+
    ??? success "参考答案"
        $L_2 = \begin{pmatrix} 1 & -\lambda & 0 \\ 0 & 1 & -\lambda \end{pmatrix}$。
 
 4. **[Forney] 什么是最小基的“可预测次数性质”？**
+
    ??? success "参考答案"
        指基向量的任何多项式线性组合的次数，都精确等于各分量次数的最大值。这保证了最高次项不会发生意外的抵消。
 
 5. **[阶梯算法] 为什么 Van Dooren 阶梯算法在数值上是稳定的？**
+
    ??? success "参考答案"
        因为它完全依赖于酉变换（SVD 或带选主元的 QR）来识别秩并提取结构指标，避免了多项式运算中的不稳定性。
 
 6. **[Brunovsky] 将控制理论与 Kronecker 指标联系起来。**
+
    ??? success "参考答案"
        对于可控系统 $(A, B)$，其可控性指标 $\kappa_i$ 与矩阵束 $(\lambda I - A, -B)$ 的右最小指标 $\varepsilon_i$ 满足 $\varepsilon_i = \kappa_i - 1$。
 
 7. **[DAE指标] 定义 DAE 方程 $E\dot{x} = Ax + f$ 的指标。**
+
    ??? success "参考答案"
        定义为矩阵束 $sE - A$ 的 Weierstrass 标准形中幂零块 $N$ 的幂零阶数（最大 Jordan 块的大小）。它衡量了求解 DAE 所需的求导次数。
 
 8. **[相容初值] 为什么 DAE 限制了初值 $x(0)$ 的选择？**
+
    ??? success "参考答案"
        因为 DAE 的代数部分 $N\dot{z} = z + h(t)$ 意味着变量 $z(t)$ 完全由 $h$ 及其导数决定。因此 $z(0)$ 必须满足代数约束，不能任意选取。
 
 9. **[描述子系统] 描述子系统 $(E, A, B, C, D)$ 有唯一解的条件是什么？**
+
    ??? success "参考答案"
        当且仅当矩阵束 $sE - A$ 是正则的（即 $\det(sE - A) \not\equiv 0$）。
 
 10. **[谱对称性] $T$-回文束 $A - \lambda A^T$ 的谱具有什么对称性？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         若 $\lambda_0$ 是特征值，则 $1/\lambda_0$ 也是特征值。
 
 ## 本章小结

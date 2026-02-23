@@ -60,43 +60,53 @@
 ## 练习题
 
 1. **[Sylvester] 判定 $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} X + X \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = C$ 是否有唯一解。**
+
    ??? success "参考答案"
        $\sigma(A) = \{1\}, \sigma(-B) = \{-1\}$。交集为空，故有唯一解。
 
 2. **[唯一性] 若 $A$ 与 $B$ 有公共特征值，Sylvester 方程一定无解吗？**
+
    ??? success "参考答案"
        不是。解可能不唯一（有无穷多解），或者对于特定的 $C$ 无解。
 
 3. **[Lyapunov] 为什么 Lyapunov 方程常用于稳定性分析？**
+
    ??? success "参考答案"
        解 $X$ 构成了系统的能量函数 $V(x) = x^T X x$ 的权重矩阵。若 $X \succ 0$ 且 $\dot{V} < 0$，系统渐近稳定。
 
 4. **[向量化] 将 $AXB + CXD = F$ 转化为向量形式。**
+
    ??? success "参考答案"
        $(B^T \otimes A + D^T \otimes C) \operatorname{vec}(X) = \operatorname{vec}(F)$。
 
 5. **[Riccati] 证明：若 $X$ 是 Riccati 方程的解，则其转置 $X^T$ 也是解（假设 $Q, R$ 对称）。**
+
    ??? success "参考答案"
        对方程两边求转置，形式完全相同，故结论成立。
 
 6. **[计算] 求解 $(1)X + X(2) = (6)$（标量情形）。**
+
    ??? success "参考答案"
        $3X = 6 \implies X = 2$。
 
 7. **[性质] 证明若 $A, B$ 是上三角阵，$AX+XB=C$ 的解 $X$ 也是上三角阵吗？**
+
    ??? success "参考答案"
        一般不成立。$X$ 的结构取决于 $C$ 的形式。
 
 8. **[离散情形] 写出离散 Lyapunov 方程的形式。**
+
    ??? success "参考答案"
        $A X A^T - X + Q = 0$。
 
 9. **[Schur应用] 为什么在算法中要先进行 Schur 分解？**
+
    ??? success "参考答案"
        为了将一般矩阵耦合转化为三角矩阵耦合，从而允许使用类似于回代的递推法逐个分量求解 $X$。
 
 10. **[控制应用] 在 LQR 问题中，Riccati 方程的解 $X$ 代表什么？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         代表了系统从当前状态到无限远未来的最小累积成本（代价函数）。
 
 ## 本章小结

@@ -68,43 +68,53 @@ If matrices are the skeleton of linear algebra, then vector spaces are its soul.
 ## Exercises
 
 1. **[Axioms] Verify if the set of all $2 \times 2$ matrices $M_{2,2}$ is a vector space.**
+
    ??? success "Solution"
        Yes. Matrix addition is commutative and associative, there is a zero matrix, every matrix has an inverse, and scalar multiplication distributes.
 
 2. **[Subspace] Determine if $W = \{(x, y) : x \ge 0\}$ is a subspace of $\mathbb{R}^2$.**
+
    ??? success "Solution"
        No. Subspaces must be closed under scalar multiplication. If $(1, 0) \in W$ and $c = -1$, then $c(1, 0) = (-1, 0) \notin W$.
 
 3. **[Independence] Are $(1, 0), (0, 1), (1, 1)$ linearly independent?**
+
    ??? success "Solution"
        No. Because $(1, 1) = (1, 0) + (0, 1)$, they are linearly dependent.
 
 4. **[Basis] Find the dimension of the subspace spanned by $(1, 0, 0)$ and $(0, 1, 0)$ in $\mathbb{R}^3$.**
+
    ??? success "Solution"
        The dimension is 2. These vectors are independent and form a basis for that plane.
 
 5. **[Nullspace] Find the dimension of the nullspace $N(A)$ for $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
+
    ??? success "Solution"
        $\operatorname{rank}(A) = 1$. By the rank-nullity theorem: $\dim N(A) = 2 - 1 = 1$.
 
 6. **[Row Space] Does the column space of $A$ have the same dimension as its row space?**
+
    ??? success "Solution"
        Yes. This is the rank theorem: $\operatorname{rank}(A) = \operatorname{rank}(A^T)$.
 
 7. **[Coordinates] Find the coordinates of $(2, 0)$ relative to the basis $B = \{(1, 1), (1, -1)\}$.**
+
    ??? success "Solution"
        Set $(2, 0) = c_1(1, 1) + c_2(1, -1)$. Solving gives $c_1=1, c_2=1$. Coordinates are $(1, 1)_B$.
 
 8. **[Polynomials] What is the standard basis for $P_2$ (polynomials of degree < 2)?**
+
    ??? success "Solution"
        The standard basis is $\{1, x\}$.
 
 9. **[Rank] If $A$ is $3 \times 5$ and $\operatorname{rank}(A)=3$, what is the nullity?**
+
    ??? success "Solution"
        $\dim N(A) = 5 - 3 = 2$.
 
 10. **[Intersection] Prove the intersection of two subspaces is a subspace.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         If $\mathbf{u}, \mathbf{v} \in W_1 \cap W_2$, they are in both $W_1$ and $W_2$. Since both are subspaces, their sum and scalar multiples are in both, hence in the intersection.
 
 ## Chapter Summary

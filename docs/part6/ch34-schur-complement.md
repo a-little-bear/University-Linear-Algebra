@@ -51,43 +51,53 @@
 ## 练习题
 
 1. **[计算] 计算 $\begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$ 的 Schur 补。**
+
    ??? success "参考答案"
        取 $A=(1)$。$S = 5 - 2(1)^{-1}2 = 1$。
 
 2. **[行列式] 利用 Schur 补计算上题中矩阵的行列式。**
+
    ??? success "参考答案"
        $\det(M) = \det(A)\det(S) = 1 \cdot 1 = 1$。
 
 3. **[性质] 若 $B=0$，$M$ 的 Schur 补是什么？**
+
    ??? success "参考答案"
        $S = D - C A^{-1} 0 = D$。当子块解耦时，Schur 补即为原对角块。
 
 4. **[对称性] 证明：若 $M$ 是对称的，其 Schur 补也是对称的。**
+
    ??? success "参考答案"
        $S^T = (D - C A^{-1} B)^T = D^T - B^T (A^{-1})^T C^T = D - C A^{-1} B = S$。
 
 5. **[秩] 证明 $\operatorname{rank}(M) = \operatorname{rank}(A) + \operatorname{rank}(S)$。**
+
    ??? success "参考答案"
        利用分块消元：$\begin{pmatrix} I & 0 \\ -CA^{-1} & I \end{pmatrix} \begin{pmatrix} A & B \\ C & D \end{pmatrix} \begin{pmatrix} I & -A^{-1}B \\ 0 & I \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & S \end{pmatrix}$。两边秩相等。
 
 6. **[应用] 在统计学中，若 $M$ 是协方差矩阵，$S$ 代表什么？**
+
    ??? success "参考答案"
        $S$ 代表给定变量集 $A$ 后，变量集 $D$ 的**条件协方差**。
 
 7. **[G-S] 写出 $A$ 关于 $D$ 的 Schur 补。**
+
    ??? success "参考答案"
        $S_D = A - B D^{-1} C$（假设 $D$ 可逆）。
 
 8. **[奇异值] $M$ 的奇异值与 $A$ 和 $S$ 的奇异值有简单的加性关系吗？**
+
    ??? success "参考答案"
        没有。奇异值不具有像特征值或惯性指数那样的分块加性。
 
 9. **[求逆] 若 $M$ 是下三角分块矩阵（$B=0$），求其逆。**
+
    ??? success "参考答案"
        $\begin{pmatrix} A^{-1} & 0 \\ -D^{-1} C A^{-1} & D^{-1} \end{pmatrix}$。
 
 10. **[控制应用] 为什么在求解代数 Riccati 方程时经常用到 Schur 补？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         因为 Hamiltonian 矩阵的特征结构分析本质上是对包含状态、控制和对偶变量的大型分块矩阵进行消元和压缩。
 
 ## 本章小结

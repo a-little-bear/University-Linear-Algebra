@@ -50,43 +50,53 @@
 ## 练习题
 
 1. **[基础] 判定 $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ 是否为正矩阵。**
+
    ??? success "参考答案"
        不是。它是非负矩阵，但含有 0 元素。
 
 2. **[不可约] 上题中的 $A$ 是否不可约？**
+
    ??? success "参考答案"
        是的。其关联图 $1 \leftrightarrow 2$ 是强连通的。
 
 3. **[特征值] 求 $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ 的 Perron 特征值。**
+
    ??? success "参考答案"
        特征值为 2, 0。故 $r = \rho(A) = 2$。
 
 4. **[特征向量] 求上题中 $r=2$ 对应的正特征向量。**
+
    ??? success "参考答案"
        $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 2 \begin{pmatrix} 1 \\ 1 \end{pmatrix}$。故 $\mathbf{v} = (1, 1)^T$。
 
 5. **[随机阵] 证明随机矩阵必有一个特征值为 1。**
+
    ??? success "参考答案"
        $A \mathbf{1}$ 的第 $i$ 个分量等于 $A$ 第 $i$ 行元素之和。由定义该和为 1，故 $A \mathbf{1} = 1 \cdot \mathbf{1}$。
 
 6. **[图论] 为什么 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ 是可约的？**
+
    ??? success "参考答案"
        它已经是上三角形式（或者观察图：顶点 2 无法到达顶点 1）。
 
 7. **[支配性] 举出一个不可约非负矩阵，其特征值满足 $|\lambda| = r$ 但 $\lambda \neq r$。**
+
    ??? success "参考答案"
        $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。特征值为 1 和 -1。$|-1| = 1$。
 
 8. **[应用] 在 PageRank 中，为什么要在原始链接矩阵上加一个全正的扰动矩阵？**
+
    ??? success "参考答案"
        为了使矩阵变为全正阵，从而保证 Perron 特征值 1 的唯一性（强连通且非周期），确保幂法迭代收敛。
 
 9. **[性质] 若 $A \ge 0$，证明 $\rho(A)$ 是 $A$ 元素的一个单调不减函数。**
+
    ??? success "参考答案"
        由 Collatz-Wielandt 公式 $\rho(A) = \sup_{x>0} \min_i \frac{(Ax)_i}{x_i}$，增加 $A$ 的元素显然会增加该上确界。
 
 10. **[极限] 若 $A$ 是原初矩阵（Primitive），则 $\lim_{k \to \infty} (A/r)^k$ 等于什么？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         等于 $\mathbf{v}\mathbf{w}^T$，其中 $\mathbf{v}, \mathbf{w}$ 分别是 $A$ 的归一化左右 Perron 特征向量。
 
 ## 本章小结

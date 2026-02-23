@@ -49,44 +49,54 @@
 ## 练习题
 
 1. **[基础] 计算 $f(A) = A^2$ 的 Fréchet 导数 $L_f(A, E)$。**
+
    ??? success "参考答案"
        $(A+E)^2 - A^2 = AE + EA + E^2 \approx AE + EA$。故 $L = AE + EA$。
 
 2. **[逆矩阵] 证明 $f(A) = A^{-1}$ 的导数为 $-A^{-1} E A^{-1}$。**
+
    ??? success "参考答案"
        $(A+E)^{-1} - A^{-1} = (A(I+A^{-1}E))^{-1} - A^{-1} \approx (I - A^{-1}E)A^{-1} - A^{-1} = -A^{-1}EA^{-1}$。
 
 3. **[Daleckii] 若 $A$ 是对角阵 $\operatorname{diag}(1, 2)$，求 $f(A)=A^3$ 沿 $E$ 的导数。**
+
    ??? success "参考答案"
        差商矩阵为 $\begin{pmatrix} 3 & 7 \ 7 & 12 \end{pmatrix}$。故 $L = \begin{pmatrix} 3e_{11} & 7e_{12} \ 7e_{21} & 12e_{22} \end{pmatrix}$。
 
 4. **[简单特征值] 若 $A = \operatorname{diag}(5, 1)$，扰动 $E = \begin{pmatrix} 0.1 & 0.2 \ 0.3 & 0.4 \end{pmatrix}$，估计 $\lambda=5$ 的变化量。**
+
    ??? success "参考答案"
        $x = e_1, y = e_1$。$\Delta \lambda \approx e_1^* E e_1 = E_{11} = 0.1$。
 
 5. **[行列式] 证明 $\det(A)$ 的 Fréchet 导数为 $\det(A) \operatorname{tr}(A^{-1} E)$。**
+
    ??? success "参考答案"
        由 Jacobi 公式，一阶项为 $\operatorname{tr}((
 abla \det) E) = \operatorname{tr}(\det(A) A^{-T} E) = \det(A) \operatorname{tr}(A^{-1}E)$。
 
 6. **[奇异值] 简单奇异值 $\sigma$ 的导数公式是什么？**
+
    ??? success "参考答案"
        若 $A = U\Sigma V^*$，则 $\dot{\sigma} = u^* \dot{A} v$。
 
 7. **[积分表示] 写出 $f(A)$ 导数的积分表示形式。**
+
    ??? success "参考答案"
        $L_f(A, E) = \int_0^1 e^{A(1-s)} E e^{As} ds$（针对 $f(A)=e^A$）。
 
 8. **[高阶] 写出 $f(A) = A^2$ 的二阶 Fréchet 导数。**
+
    ??? success "参考答案"
        $L^{(2)}(A, E, H) = EH + HE$（即二阶项项）。
 
 9. **[不变量] 迹 $\operatorname{tr}(A)$ 的导数是否依赖于 $A$？**
+
    ??? success "参考答案"
        不依赖。因为迹是线性的，其导数始终是 $E \mapsto \operatorname{tr}(E)$。
 
 10. **[应用] 为什么在敏感度分析中要关注差商矩阵的范数？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         差商矩阵的无穷范数决定了矩阵函数计算的条件数。若特征值非常接近，差商极大，意味着 $f(A)$ 的计算极度不稳定。
 
 ## 本章小结

@@ -107,7 +107,8 @@ Machine learning is essentially large-scale, high-dimensional geometry. Every da
         $d = \sqrt{(x-\mu)^T \Sigma^{-1} (x-\mu)}$. It scales distances by the inverse of the data's variance.
 
 10. **[SVD stability] Why compute PCA using SVD of $X$ instead of eigenvalues of $X^T X$?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Computing $X^T X$ squares the condition number, leading to significant precision loss if the data is ill-conditioned. SVD operates on the original scale.
 
 ## Chapter Summary

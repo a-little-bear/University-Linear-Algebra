@@ -87,7 +87,8 @@ Linear algebra is typically taught over the fields of real or complex numbers. H
         The state evolution of an LFSR is equivalent to powers of a companion matrix acting on a vector space over a finite field, determining the period of pseudo-random sequences.
 
 10. **[Cryptography] Upon which finite field is the S-Box of the AES algorithm based?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         $\mathbb{F}_{2^8} = \mathbb{F}_2[x] / (x^8+x^4+x^3+x+1)$.
 
 ## Chapter Summary

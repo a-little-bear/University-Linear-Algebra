@@ -92,7 +92,8 @@ In most of linear algebra, we focus on numerical values. In **Combinatorial Matr
         The eigenvalues (spectrum) of a molecule's skeletal matrix determine its energy levels. Graph symmetries (e.g., Hückel method) allow for direct prediction of chemical properties.
 
 10. **[Limits] What happens to the term rank of a random 0-1 matrix as $n \to \infty$?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         For sparse random matrices, the term rank coincides with the size of the maximum matching in the graph, determined by the edge probability $p$.
 
 ## Chapter Summary

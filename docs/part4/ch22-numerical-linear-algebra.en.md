@@ -125,7 +125,8 @@ Theoretical linear algebra assumes exact arithmetic over fields like $\mathbb{R}
         The convergence rate is governed by the ratio $|\lambda_2 / \lambda_1|$. Here $9.9/10 = 0.99$, which is very close to 1, meaning the error term vanishes very slowly.
 
 10. **[SVD] Why is SVD the most "stable" way to determine the rank of a matrix?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Unlike Gaussian elimination, which uses a hard threshold for zero, SVD provides a continuous spectrum of singular values. Small singular values can be clearly identified as noise, allowing for a "numerical rank" determination.
 
 ## Chapter Summary

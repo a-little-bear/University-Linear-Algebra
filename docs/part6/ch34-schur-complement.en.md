@@ -87,7 +87,8 @@ In handling large-scale systems, we frequently partition matrices into sub-block
         $\begin{pmatrix} A^{-1} & 0 \\ -D^{-1} C A^{-1} & D^{-1} \end{pmatrix}$.
 
 10. **[Control] Why is the Schur complement frequently used in solving algebraic Riccati equations?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because the spectral analysis of Hamiltonian matrices essentially involves the elimination and compression of large block matrices containing state, control, and dual variables.
 
 ## Chapter Summary

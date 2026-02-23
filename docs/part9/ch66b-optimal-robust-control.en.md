@@ -99,7 +99,8 @@ After achieving basic stabilization, the next engineering goal is often "optimal
         LMIs can handle more flexible constraints (e.g., bounds on control gains, pole region restrictions) and benefit from the universality of convex optimization solvers.
 
 10. **[Application] Briefly describe the role of $H_\infty$ control in wind-resistant drones.**
-    ??? success "Solution"
+
+   ??? success "Solution"
         By minimizing the $H_\infty$ norm from wind disturbance to attitude deviation, we ensure that attitude fluctuations remain within safe limits even under strong gusts.
 
 ## Chapter Summary

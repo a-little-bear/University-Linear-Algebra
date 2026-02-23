@@ -65,43 +65,53 @@ The determinant is a function that maps a square matrix to a scalar value. Altho
 ## Exercises
 
 1. **[Calculation] Compute the $2 \times 2$ determinant $\begin{vmatrix} a & b \\ c & d \end{vmatrix}$.**
+
    ??? success "Solution"
        $\det = ad - bc$.
 
 2. **[Scaling] If $\det(A) = 5$ and $A$ is $3 \times 3$, calculate $\det(2A)$.**
+
    ??? success "Solution"
        For an $n \times n$ matrix, $\det(kA) = k^n \det(A)$. Thus $\det(2A) = 2^3 \cdot 5 = 40$.
 
 3. **[Special] Compute the determinant of $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{pmatrix}$.**
+
    ??? success "Solution"
        The determinant of a triangular matrix is the product of its diagonal entries: $1 \cdot 4 \cdot 6 = 24$.
 
 4. **[Laplace] Use expansion along the first column to compute $\begin{vmatrix} 1 & 0 & 2 \\ 0 & 3 & 0 \\ 4 & 0 & 5 \end{vmatrix}$.**
+
    ??? success "Solution"
        $\det = 1 \cdot \begin{vmatrix} 3 & 0 \\ 0 & 5 \end{vmatrix} + 4 \cdot \begin{vmatrix} 0 & 2 \\ 3 & 0 \end{vmatrix} = 15 + 4(-6) = -9$.
 
 5. **[Powers] If $\det(A^2) = 9$, find possible values for $\det(A)$.**
+
    ??? success "Solution"
        $\det(A)^2 = 9 \implies \det(A) = \pm 3$.
 
 6. **[Adjoint] Prove $\det(A^*) = (\det A)^{n-1}$.**
+
    ??? success "Solution"
        From $AA^* = (\det A)I$, taking the determinant gives $(\det A)\det(A^*) = (\det A)^n$. If $\det A \neq 0$, the result follows. By continuity, it holds for singular matrices too.
 
 7. **[Inverse] Prove $\det(A^{-1}) = 1/\det(A)$.**
+
    ??? success "Solution"
        $\det(A A^{-1}) = \det(I) = 1$. Using the multiplicative property, $\det(A)\det(A^{-1}) = 1$.
 
 8. **[Inversion] What is the number of inversions in the permutation $(3, 1, 2)$?**
+
    ??? success "Solution"
        The pairs are (3,1) and (3,2). The count is 2.
 
 9. **[Cramer] Use Cramer's rule to evaluate $x+y=1, x+y=2$.**
+
    ??? success "Solution"
        The coefficient determinant $D = \begin{vmatrix} 1 & 1 \\ 1 & 1 \end{vmatrix} = 0$. Cramer's rule is not applicable (no unique solution).
 
 10. **[Geometry] What does $\det \begin{pmatrix} a & 0 \\ 0 & b \end{pmatrix}$ represent geometrically?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         It represents the area of a rectangle with sides $a$ and $b$.
 
 ## Chapter Summary

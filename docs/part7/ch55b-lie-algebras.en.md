@@ -87,7 +87,8 @@ If matrix groups describe "global transformations," then **Lie Algebras** descri
         An **Abelian Lie algebra**. In this case, the Lie bracket is always zero, corresponding to a commutative group.
 
 10. **[Robotics] Why is the Lie bracket important in robot path planning?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         The Lie bracket of two vector fields (control inputs) represents a new dimension of movement reachable by switching between controls (e.g., parallel parking a car). It is key to reachability analysis.
 
 ## Chapter Summary

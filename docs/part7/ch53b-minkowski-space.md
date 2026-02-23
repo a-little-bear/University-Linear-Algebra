@@ -54,43 +54,53 @@
 ## 练习题
 
 1. **[基础] 计算向量 $v = (1, 1, 0, 0)$ 的闵氏长度平方。它属于哪类向量？**
+
    ??? success "参考答案"
        $s^2 = -1^2 + 1^2 + 0^2 + 0^2 = 0$。它是一个**类光向量**。
 
 2. **[性质] 证明：若 $L$ 是 Lorentz 变换，则 $\det(L) = \pm 1$。**
+
    ??? success "参考答案"
        由 $L^T \eta L = \eta$ 取行列式得 $\det(L)^2 \det(\eta) = \det(\eta)$。由于 $\det(\eta) = -1 \neq 0$，故 $\det(L) = \pm 1$。
 
 3. **[计算] 写出沿 $x$ 轴方向速度为 $v$ 的 Lorentz 推进矩阵（取 $c=1$）。**
+
    ??? success "参考答案"
        $\gamma = 1/\sqrt{1-v^2}$。矩阵为 $\begin{pmatrix} \gamma & -\gamma v & 0 & 0 \\ -\gamma v & \gamma & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$。
 
 4. **[双曲] 证明推进矩阵的行列式为 1。**
+
    ??? success "参考答案"
        $\gamma^2 - (-\gamma v)^2 = \gamma^2(1-v^2) = 1$。
 
 5. **[分类] 向量 $(2, 1, 1, 1)$ 是类时的还是类空的？**
+
    ??? success "参考答案"
        $s^2 = -2^2 + 1^2 + 1^2 + 1^2 = -4 + 3 = -1$。是**类时向量**。
 
 6. **[不变性] 证明 Lorentz 变换保持“光速不变”。**
+
    ??? success "参考答案"
        若 $v$ 是类光向量（代表光速），则 $\langle v, v \rangle_\eta = 0$。变换后 $\langle Lv, Lv \rangle_\eta = \langle v, v \rangle_\eta = 0$，故 $Lv$ 仍是类光向量。
 
 7. **[群结构] Lorentz 群有多少个连通分支？**
+
    ??? success "参考答案"
        4 个。根据 $\det(L)$ 的正负和 $L_{00}$ 的正负划分。
 
 8. **[迹] 推进矩阵的迹与速度 $v$ 有什么关系？**
+
    ??? success "参考答案"
        $\operatorname{tr}(L) = 2\gamma + 2 = 2(1 + 1/\sqrt{1-v^2})$。
 
 9. **[应用] 什么是时空区间 (Spacetime Interval)？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         即闵氏内积 $\Delta s^2 = -\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2$。它是所有观察者都达成共识的客观量。
 
 10. **[几何] 闵氏空间中类时单位向量的集合构成什么曲面？**
-    ??? success "参考答案"
+
+   ??? success "参考答案"
         满足 $-t^2 + x^2 + y^2 + z^2 = -1$ 的点集，这是一个**双叶双曲面**。这解释了为什么相对论与双曲几何息息相关。
 
 ## 本章小结

@@ -93,7 +93,8 @@ How can we make a robotic arm precisely grasp a cup? This is essentially a compl
         An FK representation based on Screw Theory: $T = e^{S_1 \theta_1} \cdots e^{S_n \theta_n} M$. It is more geometrically intuitive and easier to differentiate than D-H.
 
 10. **[Application] Why are high-precision IK algorithms vital in surgical robots?**
-    ??? success "Solution"
+
+   ??? success "Solution"
         Because surgery requires precise control in narrow spaces; small algebraic errors could lead to accidents. Redundant DOFs are used to avoid colliding with delicate tissues.
 
 ## Chapter Summary
