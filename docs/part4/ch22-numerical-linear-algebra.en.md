@@ -86,54 +86,64 @@ Theoretical linear algebra assumes exact arithmetic over fields like $\mathbb{R}
 
 ## Exercises
 
-1.  **[Complexity] Calculate the total number of floating-point operations (FLOPs) for a standard dot product of two $n$-vectors.**
-    ??? success "Solution"
-        $n$ multiplications and $n-1$ additions, total $2n-1 \approx 2n$ FLOPs.
-
-2.  **[Stability] Why is $1.000001 - 1.000000$ dangerous in numerical computing?**
-    ??? success "Solution"
-        This is **catastrophic cancellation**. The result has only one significant digit, losing the precision of the original numbers. In matrix operations, this often happens during elimination without pivoting.
-
-3.  **[Condition] Find the condition number of $\begin{pmatrix} 100 & 0 \\ 0 & 0.01 \end{pmatrix}$ relative to the 2-norm.**
-    ??? success "Solution"
-        $\sigma_{\max}=100, \sigma_{\min}=0.01 \implies \kappa = 100 / 0.01 = 10,000$.
-
-4.  **[Iterative] Under what condition is the Jacobi iteration $x_{k+1} = D^{-1}(b - (L+U)x_k)$ guaranteed to converge?**
-    ??? success "Solution"
-        If $A$ is **strictly diagonally dominant**. This ensures the spectral radius of the iteration matrix is less than 1.
-
-5.  **[Krylov] Define the Krylov subspace $\mathcal{K}_3(A, b)$.**
-    ??? success "Solution"
-        $\operatorname{span}\{b, Ab, A^2b\}$.
-
-6.  **[Preconditioning] Why is the identity matrix $I$ a bad preconditioner?**
-    ??? success "Solution"
-        $I^{-1}A = A$. It does not change the condition number or the spectrum of the problem, thus providing no acceleration.
-
-7.  **[QR Algorithm] Prove that $A_{k+1} = R_k Q_k$ is similar to $A_k$.**
-    ??? success "Solution"
-        $A_k = Q_k R_k \implies R_k = Q_k^{-1} A_k$.
-        Substituting into $A_{k+1}$ gives $A_{k+1} = (Q_k^{-1} A_k) Q_k = Q_k^T A_k Q_k$.
-        Since $A_{k+1}$ is a unitary similarity transform of $A_k$, they share the same eigenvalues.
-
-8.  **[Sparse] What is "fill-in" in sparse LU decomposition?**
-    ??? success "Solution"
-        Fill-in occurs when an entry that was zero in the original matrix becomes non-zero during the elimination process. Minimizing fill-in via row reordering (e.g., Cuthill-McKee) is vital for memory efficiency.
-
-9.  **[Power Method] If the two largest eigenvalues of $A$ are $\lambda_1 = 10$ and $\lambda_2 = 9.9$, why will the Power Method converge slowly?**
-    ??? success "Solution"
-        The convergence rate is governed by the ratio $|\lambda_2 / \lambda_1|$. Here $9.9/10 = 0.99$, which is very close to 1, meaning the error term vanishes very slowly.
 
 ****
-
 ??? success "Solution"
-    
+     $n$ multiplications and $n-1$ additions, total $2n-1 \approx 2n$ FLOPs.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     This is **catastrophic cancellation**. The result has only one significant digit, losing the precision of the original numbers. In matrix operations, this often happens during elimination without pivoting.
+
+
+****
+??? success "Solution"
+     $\sigma_{\max}=100, \sigma_{\min}=0.01 \implies \kappa = 100 / 0.01 = 10,000$.
+
+
+****
+??? success "Solution"
+     If $A$ is **strictly diagonally dominant**. This ensures the spectral radius of the iteration matrix is less than 1.
+
+
+****
+??? success "Solution"
+     $\operatorname{span}\{b, Ab, A^2b\}$.
+
+
+****
+??? success "Solution"
+     $I^{-1}A = A$. It does not change the condition number or the spectrum of the problem, thus providing no acceleration.
+
+
+****
+??? success "Solution"
+     $A_k = Q_k R_k \implies R_k = Q_k^{-1} A_k$.
+     Substituting into $A_{k+1}$ gives $A_{k+1} = (Q_k^{-1} A_k) Q_k = Q_k^T A_k Q_k$.
+     Since $A_{k+1}$ is a unitary similarity transform of $A_k$, they share the same eigenvalues.
+
+
+****
+??? success "Solution"
+     Fill-in occurs when an entry that was zero in the original matrix becomes non-zero during the elimination process. Minimizing fill-in via row reordering (e.g., Cuthill-McKee) is vital for memory efficiency.
+
+
+****
+??? success "Solution"
+     The convergence rate is governed by the ratio $|\lambda_2 / \lambda_1|$. Here $9.9/10 = 0.99$, which is very close to 1, meaning the error term vanishes very slowly.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Numerical Linear Algebra is the physics of mathematical computation:
 
-1.  **Error Awareness**: Recognized that precision is a finite resource and that algorithms must be designed to contain, not amplify, rounding noise.
-2.  **Structural Exploitation**: Showed how SPD, sparse, and banded structures allow for algorithms that bypass the $O(n^3)$ complexity wall.
-3.  **Iterative Dominance**: Established Krylov subspace methods as the primary tools for modern high-dimensional engineering and data science.
-4.  **Stability First**: Validated that backward stability is the essential requirement for any algorithm intended for real-world execution.
+
+****: Recognized that precision is a finite resource and that algorithms must be designed to contain, not amplify, rounding noise.
+
+****: Showed how SPD, sparse, and banded structures allow for algorithms that bypass the $O(n^3)$ complexity wall.
+
+****: Established Krylov subspace methods as the primary tools for modern high-dimensional engineering and data science.
+
+****: Validated that backward stability is the essential requirement for any algorithm intended for real-world execution.

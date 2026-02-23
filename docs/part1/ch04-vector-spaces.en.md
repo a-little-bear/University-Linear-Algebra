@@ -68,59 +68,32 @@ If matrices are the skeleton of linear algebra, then vector spaces are its soul.
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Vector spaces establish the geometric and algebraic foundation of linear algebra:
 
-1.  **Power of Abstraction**: Axiomatization allows us to treat disparate mathematical objects (polynomials, signals) as the same type of entity (vectors).
-2.  **Structural Analysis**: The concepts of basis and dimension quantify the "capacity" and "orientation" of a space, establishing the minimal coordinate system for description.
-3.  **Matrix Depth**: The classification of the four fundamental subspaces reveals the deepest internal construction of a linear operator $A$ and the necessity of dimension conservation between input and output.
+
+****: Axiomatization allows us to treat disparate mathematical objects (polynomials, signals) as the same type of entity (vectors).
+
+****: The concepts of basis and dimension quantify the "capacity" and "orientation" of a space, establishing the minimal coordinate system for description.
+
+****: The classification of the four fundamental subspaces reveals the deepest internal construction of a linear operator $A$ and the necessity of dimension conservation between input and output.

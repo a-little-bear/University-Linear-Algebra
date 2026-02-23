@@ -89,52 +89,62 @@ Quantum information science is arguably the most direct and profound application
 
 ## Exercises
 
-1.  **[Pure/Mixed] Is $\rho = \frac{1}{2} \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ a pure state?**
-    ??? success "Solution"
-        $\rho^2 = \frac{1}{4} \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = \rho$. Yes, it is a pure state ($|+\rangle\langle+|$).
-
-2.  **[Unitary] Prove that the Pauli $X$ gate is both Hermitian and Unitary.**
-    ??? success "Solution"
-        $X = X^\dagger = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. $X^\dagger X = X^2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I$. Thus, it is both.
-
-3.  **[Superposition] Calculate $H|0\rangle$.**
-    ??? success "Solution"
-        $\frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}} = |+\rangle$.
-
-4.  **[Entanglement] Use Schmidt rank to show that $|00\rangle$ is not entangled.**
-    ??? success "Solution"
-        The coefficient matrix is $C = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Its rank is 1. Thus, the Schmidt rank is 1, so it is a product state (not entangled).
-
-5.  **[Bell] Show that for $|\Phi^+\rangle$, the local state of qubit A is maximally mixed.**
-    ??? success "Solution"
-        The partial trace $\rho_A = \operatorname{tr}_B(|\Phi^+\rangle\langle\Phi^+|) = \frac{1}{2} (|0\rangle\langle 0| + |1\rangle\langle 1|) = \frac{1}{2} I$. This is the maximally mixed state.
-
-6.  **[Measurement] If we measure $|\psi\rangle = \frac{\sqrt{3}}{2} |0\rangle + \frac{1}{2} |1\rangle$ in the computational basis, what is the probability of getting $|1\rangle$?**
-    ??? success "Solution"
-        $p(1) = |\langle 1 | \psi \rangle|^2 = |1/2|^2 = 1/4$.
-
-7.  **[Gate] Find the matrix for $H \otimes H$.**
-    ??? success "Solution"
-        $\frac{1}{2} \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & -1 & 1 & -1 \\ 1 & 1 & -1 & -1 \\ 1 & -1 & -1 & 1 \end{pmatrix}$.
-
-8.  **[Entropy] Calculate $S(\rho)$ for $\rho = \frac{1}{2} I$ (single qubit).**
-    ??? success "Solution"
-        Eigenvalues are $1/2, 1/2$. $S(\rho) = -(1/2 \log 1/2 + 1/2 \log 1/2) = \log 2 = 1$ bit.
-
-9.  **[Trace] Prove $\operatorname{tr}(A \otimes B) = \operatorname{tr}(A) \operatorname{tr}(B)$.**
-    ??? success "Solution"
-        $\sum_{i,j} (A \otimes B)_{ii,jj} = \sum_i A_{ii} \sum_j B_{jj} = \operatorname{tr}(A)\operatorname{tr}(B)$.
 
 ****
-
 ??? success "Solution"
-    
+     $\rho^2 = \frac{1}{4} \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = \rho$. Yes, it is a pure state ($|+\rangle\langle+|$).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $X = X^\dagger = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. $X^\dagger X = X^2 = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = I$. Thus, it is both.
+
+
+****
+??? success "Solution"
+     $\frac{1}{\sqrt{2}} \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \frac{|0\rangle + |1\rangle}{\sqrt{2}} = |+\rangle$.
+
+
+****
+??? success "Solution"
+     The coefficient matrix is $C = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Its rank is 1. Thus, the Schmidt rank is 1, so it is a product state (not entangled).
+
+
+****
+??? success "Solution"
+     The partial trace $\rho_A = \operatorname{tr}_B(|\Phi^+\rangle\langle\Phi^+|) = \frac{1}{2} (|0\rangle\langle 0| + |1\rangle\langle 1|) = \frac{1}{2} I$. This is the maximally mixed state.
+
+
+****
+??? success "Solution"
+     $p(1) = |\langle 1 | \psi \rangle|^2 = |1/2|^2 = 1/4$.
+
+
+****
+??? success "Solution"
+     $\frac{1}{2} \begin{pmatrix} 1 & 1 & 1 & 1 \\ 1 & -1 & 1 & -1 \\ 1 & 1 & -1 & -1 \\ 1 & -1 & -1 & 1 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     Eigenvalues are $1/2, 1/2$. $S(\rho) = -(1/2 \log 1/2 + 1/2 \log 1/2) = \log 2 = 1$ bit.
+
+
+****
+??? success "Solution"
+     $\sum_{i,j} (A \otimes B)_{ii,jj} = \sum_i A_{ii} \sum_j B_{jj} = \operatorname{tr}(A)\operatorname{tr}(B)$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra is the "operating system" of the quantum universe:
 
-1.  **State Logic**: Replaced discrete bits with complex vectors, using Hilbert spaces to accommodate the principle of superposition.
-2.  **Symmetry & Evolution**: Identified unitary matrices as the only valid operators for physical change, ensuring that probability is always conserved.
-3.  **Compositional Complexity**: Used tensor products to explain how the state space of a system grows exponentially, providing the mathematical basis for quantum advantage.
-4.  **Information Geometry**: Leveraged density matrices and entropy to bridge the gap between microscopic pure states and macroscopic statistical observations.
+
+****: Replaced discrete bits with complex vectors, using Hilbert spaces to accommodate the principle of superposition.
+
+****: Identified unitary matrices as the only valid operators for physical change, ensuring that probability is always conserved.
+
+****: Used tensor products to explain how the state space of a system grows exponentially, providing the mathematical basis for quantum advantage.
+
+****: Leveraged density matrices and entropy to bridge the gap between microscopic pure states and macroscopic statistical observations.

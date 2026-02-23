@@ -48,52 +48,61 @@ In elementary matrix calculus, we focus on the arrangement of numerical values. 
 
 ## Exercises
 
-1.  **[Basic] Calculate the Fréchet derivative $L_f(A, E)$ for $f(A) = A^2$.**
-    ??? success "Solution"
-        $(A+E)^2 - A^2 = AE + EA + E^2 \approx AE + EA$. Thus $L = AE + EA$.
-
-2.  **[Inverse] Prove that the derivative of $f(A) = A^{-1}$ is $-A^{-1} E A^{-1}$.**
-    ??? success "Solution"
-        $(A+E)^{-1} - A^{-1} = (A(I+A^{-1}E))^{-1} - A^{-1} \approx (I - A^{-1}E)A^{-1} - A^{-1} = -A^{-1}EA^{-1}$.
-
-3.  **[Daleckii] If $A = \operatorname{diag}(1, 2)$, find the derivative of $f(A)=A^3$ in the direction $E$.**
-    ??? success "Solution"
-        The divided difference matrix is $\begin{pmatrix} 3 & 7 \ 7 & 12 \end{pmatrix}$. Thus $L = \begin{pmatrix} 3e_{11} & 7e_{12} \ 7e_{21} & 12e_{22} \end{pmatrix}$.
-
-4.  **[Simple Eigenvalue] If $A = \operatorname{diag}(5, 1)$ and the perturbation is $E = \begin{pmatrix} 0.1 & 0.2 \ 0.3 & 0.4 \end{pmatrix}$, estimate the change in $\lambda=5$.**
-    ??? success "Solution"
-        $x = e_1, y = e_1$. $\Delta \lambda \approx e_1^* E e_1 = E_{11} = 0.1$.
-
-5.  **[Determinant] Prove the Fréchet derivative of $\det(A)$ is $\det(A) \operatorname{tr}(A^{-1} E)$.**
-    ??? success "Solution"
-        By Jacobi's formula, the first-order term is $\operatorname{tr}((
-abla \det) E) = \operatorname{tr}(\det(A) A^{-T} E) = \det(A) \operatorname{tr}(A^{-1}E)$.
-
-6.  **[SVD] What is the derivative formula for a simple singular value $\sigma$?**
-    ??? success "Solution"
-        If $A = U\Sigma V^*$, then $\dot{\sigma} = u^* \dot{A} v$.
-
-7.  **[Integral] Write the integral representation for the derivative of $f(A)=e^A$.**
-    ??? success "Solution"
-        $L_f(A, E) = \int_0^1 e^{A(1-s)} E e^{As} ds$.
-
-8.  **[Higher-order] Write the second-order Fréchet derivative of $f(A) = A^2$.**
-    ??? success "Solution"
-        $L^{(2)}(A, E, H) = EH + HE$.
-
-9.  **[Invariant] Does the derivative of the trace $\operatorname{tr}(A)$ depend on $A$?**
-    ??? success "Solution"
-        No. Since the trace is linear, its derivative is always $E \mapsto \operatorname{tr}(E)$.
 
 ****
-
 ??? success "Solution"
-    
+     $(A+E)^2 - A^2 = AE + EA + E^2 \approx AE + EA$. Thus $L = AE + EA$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $(A+E)^{-1} - A^{-1} = (A(I+A^{-1}E))^{-1} - A^{-1} \approx (I - A^{-1}E)A^{-1} - A^{-1} = -A^{-1}EA^{-1}$.
+
+
+****
+??? success "Solution"
+     The divided difference matrix is $\begin{pmatrix} 3 & 7 \ 7 & 12 \end{pmatrix}$. Thus $L = \begin{pmatrix} 3e_{11} & 7e_{12} \ 7e_{21} & 12e_{22} \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     $x = e_1, y = e_1$. $\Delta \lambda \approx e_1^* E e_1 = E_{11} = 0.1$.
+
+
+****
+??? success "Solution"
+     By Jacobi's formula, the first-order term is $\operatorname{tr}((
+abla \det) E) = \operatorname{tr}(\det(A) A^{-T} E) = \det(A) \operatorname{tr}(A^{-1}E)$.
+
+
+****
+??? success "Solution"
+     If $A = U\Sigma V^*$, then $\dot{\sigma} = u^* \dot{A} v$.
+
+
+****
+??? success "Solution"
+     $L_f(A, E) = \int_0^1 e^{A(1-s)} E e^{As} ds$.
+
+
+****
+??? success "Solution"
+     $L^{(2)}(A, E, H) = EH + HE$.
+
+
+****
+??? success "Solution"
+     No. Since the trace is linear, its derivative is always $E \mapsto \operatorname{tr}(E)$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Fréchet derivatives establish the rigorous logic of operator variation:
 
-1.  **Limits of Linear Approximation**: They flatten complex matrix functions locally, allowing us to describe non-linear evolution using the language of linear operators.
-2.  **Spectrum and Sensitivity**: The Daleckii-Krein theorem reveals how the clustering of eigenvalues directly amplifies calculation errors via the divided difference effect—a theoretical early warning for numerical analysis.
-3.  **Drift of Invariants**: Derivative formulas for eigenvalues and singular values provide precise analytical paths for understanding how complex systems (e.g., structural mechanics, neural networks) respond to fine parameter tuning.
+
+****: They flatten complex matrix functions locally, allowing us to describe non-linear evolution using the language of linear operators.
+
+****: The Daleckii-Krein theorem reveals how the clustering of eigenvalues directly amplifies calculation errors via the divided difference effect—a theoretical early warning for numerical analysis.
+
+****: Derivative formulas for eigenvalues and singular values provide precise analytical paths for understanding how complex systems (e.g., structural mechanics, neural networks) respond to fine parameter tuning.

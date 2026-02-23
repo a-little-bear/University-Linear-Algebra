@@ -52,51 +52,60 @@ When we study a time-varying linear system $\mathbf{x}_{k+1} = A_k \mathbf{x}_k$
 
 ## Exercises
 
-1.  **[Basics] If $\mathcal{A} = \{A\}$ (a singleton set), what is $\rho(\mathcal{A})$?**
-    ??? success "Solution"
-        It equals the standard spectral radius $\rho(A)$.
-
-2.  **[Lower Bound] Prove $\rho(\mathcal{A}) \ge \max_{A \in \mathcal{A}} \rho(A)$.**
-    ??? success "Solution"
-        Consider a sequence that repeatedly uses the same matrix $A$. Its growth rate is $\rho(A)$. Since the JSR is the supremum over all possible sequences, it must be at least as large as the maximum individual growth rate.
-
-3.  **[Calculation] Find $\rho(\{A_1, A_2\})$ for $A_1 = \begin{pmatrix} 0.8 & 0 \\ 0 & 0 \end{pmatrix}$ and $A_2 = \begin{pmatrix} 0 & 0 \\ 0 & 0.8 \end{pmatrix}$.**
-    ??? success "Solution"
-        Since $A_1 A_2 = 0$ and $A_2 A_1 = 0$, any product of length $\ge 2$ is the zero matrix. The maximum norm is provided by the individual matrices, so $\rho = 0.8$.
-
-4.  **[Example] Give an example of two matrices with zero spectral radius but a non-zero JSR.**
-    ??? success "Solution"
-        $A_1 = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, A_2 = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$. $\rho(A_1)=\rho(A_2)=0$. However, $A_1 A_2 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$, which has spectral radius 1. Thus $\rho(\{A_1, A_2\}) = 1^{1/2} = 1$.
-
-5.  **[Norm Relationship] If there exists a norm such that $\|A\| \le \gamma$ for all $A \in \mathcal{A}$, what is the relation between $\rho(\mathcal{A})$ and $\gamma$?**
-    ??? success "Solution"
-        $\rho(\mathcal{A}) \le \gamma$. This follows from the sub-multiplicativity of norms: $\|A_k \cdots A_1\| \le \prod \|A_i\| \le \gamma^k$.
-
-6.  **[Finiteness Conjecture] What was the Finiteness Conjecture?**
-    ??? success "Solution"
-        It conjectured that for any finite set of matrices, the JSR is always achieved by the spectral radius of some finite product. This has been disproven by counter-examples.
-
-7.  **[SOS Programming] Briefly describe how Sum-of-Squares (SOS) programming is used for JSR.**
-    ??? success "Solution"
-        By searching for a common homogeneous polynomial Lyapunov function (which corresponds to a higher-order norm), the estimation of the upper bound of JSR is transformed into a semidefinite program.
-
-8.  **[Control] Why is $\rho(\mathcal{A}) < 1$ critical in switched control systems?**
-    ??? success "Solution"
-        It is the necessary and sufficient condition for the switched linear system to be asymptotically stable for **arbitrary** switching sequences.
-
-9.  **[Commutativity] If the matrices in $\mathcal{A}$ commute, what is $\rho(\mathcal{A})$?**
-    ??? success "Solution"
-        In the commutative case, $\rho(\mathcal{A}) = \max \rho(A_i)$. Commutativity eliminates the transient growth caused by basis mismatch.
 
 ****
-
 ??? success "Solution"
-    
+     It equals the standard spectral radius $\rho(A)$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Consider a sequence that repeatedly uses the same matrix $A$. Its growth rate is $\rho(A)$. Since the JSR is the supremum over all possible sequences, it must be at least as large as the maximum individual growth rate.
+
+
+****
+??? success "Solution"
+     Since $A_1 A_2 = 0$ and $A_2 A_1 = 0$, any product of length $\ge 2$ is the zero matrix. The maximum norm is provided by the individual matrices, so $\rho = 0.8$.
+
+
+****
+??? success "Solution"
+     $A_1 = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, A_2 = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$. $\rho(A_1)=\rho(A_2)=0$. However, $A_1 A_2 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$, which has spectral radius 1. Thus $\rho(\{A_1, A_2\}) = 1^{1/2} = 1$.
+
+
+****
+??? success "Solution"
+     $\rho(\mathcal{A}) \le \gamma$. This follows from the sub-multiplicativity of norms: $\|A_k \cdots A_1\| \le \prod \|A_i\| \le \gamma^k$.
+
+
+****
+??? success "Solution"
+     It conjectured that for any finite set of matrices, the JSR is always achieved by the spectral radius of some finite product. This has been disproven by counter-examples.
+
+
+****
+??? success "Solution"
+     By searching for a common homogeneous polynomial Lyapunov function (which corresponds to a higher-order norm), the estimation of the upper bound of JSR is transformed into a semidefinite program.
+
+
+****
+??? success "Solution"
+     It is the necessary and sufficient condition for the switched linear system to be asymptotically stable for **arbitrary** switching sequences.
+
+
+****
+??? success "Solution"
+     In the commutative case, $\rho(\mathcal{A}) = \max \rho(A_i)$. Commutativity eliminates the transient growth caused by basis mismatch.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The Joint Spectral Radius characterizes extreme instability under multi-operator interaction:
 
-1.  **Cost of Global Mismatch**: Proved that local (individual) stability is insufficient for global balance, revealing the geometric cost of non-commutativity in dynamical evolution.
-2.  **Complexity Gap**: The difficulty of computing JSR reflects the essential leap from single to mixed evolution, representing a core barrier in computational algebra for infinite products.
-3.  **Structural Robustness**: Through extremal norms and numerical approximations, JSR theory provides a metric for risk in modern control, signal processing, and fractal research, establishing the algebraic boundaries for the robust operation of complex systems.
+
+****: Proved that local (individual) stability is insufficient for global balance, revealing the geometric cost of non-commutativity in dynamical evolution.
+
+****: The difficulty of computing JSR reflects the essential leap from single to mixed evolution, representing a core barrier in computational algebra for infinite products.
+
+****: Through extremal norms and numerical approximations, JSR theory provides a metric for risk in modern control, signal processing, and fractal research, establishing the algebraic boundaries for the robust operation of complex systems.

@@ -55,51 +55,60 @@ What happens when we generalize a linear transformation (a mapping from a space 
 
 ## Exercises
 
-1.  **[Basics] Provide a non-zero representation for the quiver $A_2$ ($1 \to 2$).**
-    ??? success "Solution"
-        Assign $V_1 = \mathbb{C}$, $V_2 = \mathbb{C}$, and the edge map $V_a = I$ (the identity map).
-
-2.  **[Dimension] What is the dimension vector of a representation?**
-    ??? success "Solution"
-        It is the vector $\mathbf{d} = (\dim V_1, \dim V_2, \ldots, \dim V_n)$ consisting of the dimensions of the vector spaces at each vertex.
-
-3.  **[Indecomposable] Prove that the representation $V: \mathbb{C} \xrightarrow{1} \mathbb{C}$ of $A_2$ is indecomposable.**
-    ??? success "Solution"
-        This is a 2-dimensional representation. If it were decomposable, it would be the sum of two 1-dimensional representations. However, 1D representations are either $\mathbb{C} \to 0$ or $0 \to \mathbb{C}$. Their sum must have a zero map, which contradicts the original representation.
-
-4.  **[Classification] How many finite-type quivers correspond to the Dynkin diagram $A_3$ ($1-2-3$)?**
-    ??? success "Solution"
-        There are $2^2 = 4$ choices of directions: $1 \to 2 \to 3$, $1 \leftarrow 2 \leftarrow 3$, $1 \leftarrow 2 \to 3$, and $1 \to 2 \leftarrow 3$.
-
-5.  **[Gabriel] Why is the representation theory of $A_n$ type quivers relatively simple?**
-    ??? success "Solution"
-        Because it corresponds to the decomposition of a sequence of linear transformations, essentially a generalization of matrix chains or the SVD problem.
-
-6.  **[Morphism] What commutative diagram must a morphism $\phi: V \to W$ satisfy?**
-    ??? success "Solution"
-        For every edge $a: i \to j$, the diagram must commute: $W_a \phi_i = \phi_j V_a$.
-
-7.  **[Zero] What is the zero representation?**
-    ??? success "Solution"
-        A representation where all vertex spaces are the zero space $\{0\}$.
-
-8.  **[Application] Briefly describe the role of quiver representations in TDA.**
-    ??? success "Solution"
-        Persistent homology analyzes a sequence of nested complexes (an $A_n$ type quiver representation) and uses the "barcodes" of indecomposable representations to identify topological features of data.
-
-9.  **[Loops] Prove that a quiver with a loop (self-loop or cycle) cannot be of finite type.**
-    ??? success "Solution"
-        By placing maps with different eigenvalues $\lambda$ on the loop, one can construct infinitely many non-isomorphic indecomposable representations.
 
 ****
-
 ??? success "Solution"
-    
+     Assign $V_1 = \mathbb{C}$, $V_2 = \mathbb{C}$, and the edge map $V_a = I$ (the identity map).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     It is the vector $\mathbf{d} = (\dim V_1, \dim V_2, \ldots, \dim V_n)$ consisting of the dimensions of the vector spaces at each vertex.
+
+
+****
+??? success "Solution"
+     This is a 2-dimensional representation. If it were decomposable, it would be the sum of two 1-dimensional representations. However, 1D representations are either $\mathbb{C} \to 0$ or $0 \to \mathbb{C}$. Their sum must have a zero map, which contradicts the original representation.
+
+
+****
+??? success "Solution"
+     There are $2^2 = 4$ choices of directions: $1 \to 2 \to 3$, $1 \leftarrow 2 \leftarrow 3$, $1 \leftarrow 2 \to 3$, and $1 \to 2 \leftarrow 3$.
+
+
+****
+??? success "Solution"
+     Because it corresponds to the decomposition of a sequence of linear transformations, essentially a generalization of matrix chains or the SVD problem.
+
+
+****
+??? success "Solution"
+     For every edge $a: i \to j$, the diagram must commute: $W_a \phi_i = \phi_j V_a$.
+
+
+****
+??? success "Solution"
+     A representation where all vertex spaces are the zero space $\{0\}$.
+
+
+****
+??? success "Solution"
+     Persistent homology analyzes a sequence of nested complexes (an $A_n$ type quiver representation) and uses the "barcodes" of indecomposable representations to identify topological features of data.
+
+
+****
+??? success "Solution"
+     By placing maps with different eigenvalues $\lambda$ on the loop, one can construct infinitely many non-isomorphic indecomposable representations.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Quiver representation theory is a perfect symphony of combinatorics and linear algebra:
 
-1.  **Networked Mappings**: It extends isolated linear transformations into complex topological networks, establishing a universal algebraic framework for describing multi-object interactions.
-2.  **Taxonomy of Symmetry**: Gabriel's theorem reveals the geometric "harmony" behind algebraic structures, reducing complex classifications to classic Dynkin diagrams—a hallmark of unified thought in mathematics.
-3.  **Topologizing Computation**: Through path algebras and dimension vectors, quiver theory provides solid theoretical support for modern topological data analysis, proving that "algebraic stability" is "geometric reality."
+
+****: It extends isolated linear transformations into complex topological networks, establishing a universal algebraic framework for describing multi-object interactions.
+
+****: Gabriel's theorem reveals the geometric "harmony" behind algebraic structures, reducing complex classifications to classic Dynkin diagrams—a hallmark of unified thought in mathematics.
+
+****: Through path algebras and dimension vectors, quiver theory provides solid theoretical support for modern topological data analysis, proving that "algebraic stability" is "geometric reality."

@@ -79,64 +79,41 @@ Polynomial algebra is not merely an extension of elementary algebra but the fund
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       Thus $q(x) = x^2 + 2$ and $r(x) = 0$. This shows $x^2+1$ is a factor.
+         Thus $q(x) = x^2 + 2$ and $r(x) = 0$. This shows $x^2+1$ is a factor.
 
 ****
-
 ??? success "Solution"
-    
-       $x^2 - 1 = (x-1)(x+1)$.
-       The common factor is $(x-1)$, so $\gcd(f, g) = x-1$.
+         $x^2 - 1 = (x-1)(x+1)$.
+    The common factor is $(x-1)$, so $\gcd(f, g) = x-1$.
 
 ****
-
 ??? success "Solution"
-    
+    ****
+??? success "Solution"
+         Setting $x=a$ gives $f(a) = 0 + r$. If $f(a)=0$, then $r=0$, so $(x-a) \mid f(x)$.
 
 ****
-
 ??? success "Solution"
-    
-       Setting $x=a$ gives $f(a) = 0 + r$. If $f(a)=0$, then $r=0$, so $(x-a) \mid f(x)$.
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+         - Reducible over $\mathbb{C}[x]$ as it factors into $(x+i)(x-i)$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-       - Reducible over $\mathbb{C}[x]$ as it factors into $(x+i)(x-i)$.
-
-****
-
-??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter establishes the foundation for operator algebra in linear algebra:
 
-1.  **Structural Consistency**: The algebraic structure of the polynomial ring (division, GCD) is highly analogous to the ring of integers, both being Euclidean Domains.
-2.  **Theory of Roots**: Established the correspondence between roots and linear factors; the Fundamental Theorem of Algebra guarantees the existence of eigenvalues for operators.
-3.  **Mapping Tools**: Extended scalar polynomials to matrix variables, and through tools like resultants, prepared for the study of polynomial eigenvalue problems.
+
+****: The algebraic structure of the polynomial ring (division, GCD) is highly analogous to the ring of integers, both being Euclidean Domains.
+
+****: Established the correspondence between roots and linear factors; the Fundamental Theorem of Algebra guarantees the existence of eigenvalues for operators.
+
+****: Extended scalar polynomials to matrix variables, and through tools like resultants, prepared for the study of polynomial eigenvalue problems.

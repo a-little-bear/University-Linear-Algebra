@@ -50,51 +50,60 @@ In general matrix theory, storing an $n \times n$ matrix requires $n^2$ elements
 
 ## Exercises
 
-1.  **[Calculation] Write the $3 \times 3$ circulant matrix with the first row $(1, 2, 3)$.**
-    ??? success "Solution"
-        $\begin{pmatrix} 1 & 2 & 3 \\ 3 & 1 & 2 \\ 2 & 3 & 1 \end{pmatrix}$.
-
-2.  **[Toeplitz] How many independent parameters determine an $n \times n$ Toeplitz matrix?**
-    ??? success "Solution"
-        $2n - 1$ parameters (the first row has $n$ and the first column provides the remaining $n-1$).
-
-3.  **[Spectrum] Prove that the eigenvectors of circulant matrices are independent of their entry values.**
-    ??? success "Solution"
-        True. The eigenvectors of any circulant matrix are the columns of the DFT matrix (complex harmonic vectors).
-
-4.  **[Property] Is the product of two circulant matrices still circulant? Do they commute?**
-    ??? success "Solution"
-        Yes to both. They are diagonalized by the same $F_n$, so their product is circulant and they commute.
-
-5.  **[Hankel] Prove: If $A$ is a Hankel matrix, then $A$ is symmetric.**
-    ??? success "Solution"
-        $a_{ij} = h_{i+j}$ and $a_{ji} = h_{j+i}$. Since scalar addition is commutative, $a_{ij} = a_{ji}$.
-
-6.  **[Inverse] Is the inverse of a Toeplitz matrix necessarily Toeplitz?**
-    ??? success "Solution"
-        Generally no. However, it possesses a "displacement rank of 2" structure (see Ch37B) and is called a Toeplitz-like matrix.
-
-7.  **[Convolution] What operation in signal processing corresponds to multiplying a circulant matrix by a vector?**
-    ??? success "Solution"
-        It corresponds to the **cyclic convolution** of signals.
-
-8.  **[Companion] Is a Companion Matrix one of the three structures mentioned above?**
-    ??? success "Solution"
-        No. A companion matrix is sparse and has a specific structure in only one row and one column; it does not fit these three classes.
-
-9.  **[Condition] Why are large Hilbert matrices (a type of Hankel matrix) difficult to invert?**
-    ??? success "Solution"
-        They are extremely ill-conditioned; their singular values decay exponentially with the size of the matrix, leading to a massive condition number.
 
 ****
-
 ??? success "Solution"
-    
+     $\begin{pmatrix} 1 & 2 & 3 \\ 3 & 1 & 2 \\ 2 & 3 & 1 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $2n - 1$ parameters (the first row has $n$ and the first column provides the remaining $n-1$).
+
+
+****
+??? success "Solution"
+     True. The eigenvectors of any circulant matrix are the columns of the DFT matrix (complex harmonic vectors).
+
+
+****
+??? success "Solution"
+     Yes to both. They are diagonalized by the same $F_n$, so their product is circulant and they commute.
+
+
+****
+??? success "Solution"
+     $a_{ij} = h_{i+j}$ and $a_{ji} = h_{j+i}$. Since scalar addition is commutative, $a_{ij} = a_{ji}$.
+
+
+****
+??? success "Solution"
+     Generally no. However, it possesses a "displacement rank of 2" structure (see Ch37B) and is called a Toeplitz-like matrix.
+
+
+****
+??? success "Solution"
+     It corresponds to the **cyclic convolution** of signals.
+
+
+****
+??? success "Solution"
+     No. A companion matrix is sparse and has a specific structure in only one row and one column; it does not fit these three classes.
+
+
+****
+??? success "Solution"
+     They are extremely ill-conditioned; their singular values decay exponentially with the size of the matrix, leading to a massive condition number.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Structured matrices are the junction of linear algebra and fast algorithms:
 
-1.  **Parameter Compression**: Toeplitz and circulant structures prove that by exploiting shift invariance, we can describe $O(n^2)$ transformations using $O(n)$ space, greatly reducing storage requirements.
-2.  **Frequency Bridge**: The diagonalization theorem for circulant matrices establishes the central role of the Discrete Fourier Transform in operator diagonalization, transforming complex time-domain coupling into simple frequency-domain scaling.
-3.  **Art of Recursion**: Fast algorithms like Levinson-Durbin reveal the overlapping subproblem properties of structured matrices, serving as a brilliant manifestation of dynamic programming in the field of matrix inversion.
+
+****: Toeplitz and circulant structures prove that by exploiting shift invariance, we can describe $O(n^2)$ transformations using $O(n)$ space, greatly reducing storage requirements.
+
+****: The diagonalization theorem for circulant matrices establishes the central role of the Discrete Fourier Transform in operator diagonalization, transforming complex time-domain coupling into simple frequency-domain scaling.
+
+****: Fast algorithms like Levinson-Durbin reveal the overlapping subproblem properties of structured matrices, serving as a brilliant manifestation of dynamic programming in the field of matrix inversion.

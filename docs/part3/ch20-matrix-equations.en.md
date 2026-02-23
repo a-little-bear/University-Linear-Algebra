@@ -60,59 +60,32 @@ When the unknown itself is a matrix, we call it a matrix equation. Matrix equati
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix equations are the algebraic language of advanced linear systems:
 
-1.  **Solution Coupling**: The Sylvester equation characterizes the linear interference between two different operators; its spectral separation condition reveals the essence of system resonance.
-2.  **Energy and Stability**: The Lyapunov equation builds a bridge between algebra and analytical stability through quadratic matrices, serving as the operator expression of Lyapunov's second method in control engineering.
-3.  **Seeking Optimality**: The Riccati equation demonstrates how non-linear structures naturally arise in variational and optimal control problems, marking the transition from linear system analysis to linear system synthesis.
+
+****: The Sylvester equation characterizes the linear interference between two different operators; its spectral separation condition reveals the essence of system resonance.
+
+****: The Lyapunov equation builds a bridge between algebra and analytical stability through quadratic matrices, serving as the operator expression of Lyapunov's second method in control engineering.
+
+****: The Riccati equation demonstrates how non-linear structures naturally arise in variational and optimal control problems, marking the transition from linear system analysis to linear system synthesis.

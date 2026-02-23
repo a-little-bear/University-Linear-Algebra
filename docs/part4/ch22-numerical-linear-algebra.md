@@ -300,11 +300,11 @@
 
     1. $\mathbf{q}_1 = \mathbf{b} / \|\mathbf{b}\|$
     2. **For** $j = 1, 2, \ldots, k$：
-        - $\mathbf{v} = A\mathbf{q}_j$
-        - **For** $i = 1, \ldots, j$：$h_{ij} = \mathbf{q}_i^T \mathbf{v}$，$\mathbf{v} = \mathbf{v} - h_{ij}\mathbf{q}_i$
-        - $h_{j+1,j} = \|\mathbf{v}\|$
-        - 若 $h_{j+1,j} = 0$ 则停止（Krylov 子空间不变）
-        - $\mathbf{q}_{j+1} = \mathbf{v} / h_{j+1,j}$
+     - $\mathbf{v} = A\mathbf{q}_j$
+     - **For** $i = 1, \ldots, j$：$h_{ij} = \mathbf{q}_i^T \mathbf{v}$，$\mathbf{v} = \mathbf{v} - h_{ij}\mathbf{q}_i$
+     - $h_{j+1,j} = \|\mathbf{v}\|$
+     - 若 $h_{j+1,j} = 0$ 则停止（Krylov 子空间不变）
+     - $\mathbf{q}_{j+1} = \mathbf{v} / h_{j+1,j}$
 
     **输出**：正交矩阵 $Q_k = [\mathbf{q}_1, \ldots, \mathbf{q}_k]$ 和上 Hessenberg 矩阵 $H_k = (h_{ij})_{k \times k}$。
 
@@ -490,9 +490,9 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 
     1. 选取初始向量 $\mathbf{q}_0$（$\|\mathbf{q}_0\| = 1$）
     2. **For** $k = 0, 1, 2, \ldots$：
-        - $\mathbf{z}_{k+1} = A\mathbf{q}_k$
-        - $\mathbf{q}_{k+1} = \mathbf{z}_{k+1} / \|\mathbf{z}_{k+1}\|$
-        - $\lambda_{k+1} = \mathbf{q}_{k+1}^T A \mathbf{q}_{k+1}$（Rayleigh 商）
+     - $\mathbf{z}_{k+1} = A\mathbf{q}_k$
+     - $\mathbf{q}_{k+1} = \mathbf{z}_{k+1} / \|\mathbf{z}_{k+1}\|$
+     - $\lambda_{k+1} = \mathbf{q}_{k+1}^T A \mathbf{q}_{k+1}$（Rayleigh 商）
 
 !!! theorem "定理 22.12 (幂迭代的收敛性)"
     设 $A$ 有特征值 $|\lambda_1| > |\lambda_2| \geq \cdots \geq |\lambda_n|$，初始向量 $\mathbf{q}_0$ 在 $\lambda_1$ 对应的特征向量方向上有非零分量，则
@@ -517,16 +517,16 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 
     1. 令 $A_0 = A$
     2. **For** $k = 0, 1, 2, \ldots$：
-        - 计算 QR 分解 $A_k = Q_k R_k$
-        - 令 $A_{k+1} = R_k Q_k$
+     - 计算 QR 分解 $A_k = Q_k R_k$
+     - 令 $A_{k+1} = R_k Q_k$
 
     **带位移的 QR 迭代**：
 
     1. 令 $A_0 = A$
     2. **For** $k = 0, 1, 2, \ldots$：
-        - 选取位移 $\mu_k$（通常为 $A_k$ 的 Wilkinson 位移）
-        - 计算 QR 分解 $A_k - \mu_k I = Q_k R_k$
-        - 令 $A_{k+1} = R_k Q_k + \mu_k I$
+     - 选取位移 $\mu_k$（通常为 $A_k$ 的 Wilkinson 位移）
+     - 计算 QR 分解 $A_k - \mu_k I = Q_k R_k$
+     - 令 $A_{k+1} = R_k Q_k + \mu_k I$
 
 !!! theorem "定理 22.13 (QR 迭代的收敛性)"
     设 $A$ 的特征值满足 $|\lambda_1| > |\lambda_2| > \cdots > |\lambda_n|$（模互不相等）。则基本 QR 迭代中，$A_k$ 收敛到上三角矩阵，对角元素收敛到 $\lambda_1, \ldots, \lambda_n$。
@@ -627,61 +627,36 @@ $$\phi(\mathbf{x}) = \frac{1}{2}\mathbf{x}^T A \mathbf{x} - \mathbf{b}^T \mathbf
 ## 练习题
 
 ****
-
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-****
-
+    ****
 ??? success "参考答案"
-    
-
-## 本章小结
+    ## 本章小结
 
 本章将线性代数从纯理论的理想殿堂引入到了充满误差与计算资源限制的现实世界，主要内容包括：
 
-1. **数值稳定性与条件数**：确立了浮点数运算的误差模型，并利用条件数 $\kappa(A)$ 严格量化了方程求解时由于舍入误差引起的解的漂移。
-2. **直接法与预处理**：回顾了 LU、Cholesky 分解在工业软件中的主导地位，并探讨了如何通过主元选取（Pivoting）维持数值稳定。
-3. **迭代法体系**：介绍了从经典的 Jacobi、Gauss-Seidel 迭代到现代大规模问题首选的 Krylov 子空间方法（如针对正定阵的共轭梯度法 CG 和一般阵的 GMRES）。
-4. **特征值的数值算法**：从求解单一特征值的幂法及其变体出发，深入到求解全谱特征值的工业标准——带位移的 QR 算法（结合 Hessenberg 预处理）。
-5. **稀疏矩阵计算**：介绍了以 CSR/CSC 为代表的稀疏数据结构设计，说明了在大规模稀疏图或偏微分网格中，如何打破 $O(n^3)$ 的算力瓶颈。
+
+****：确立了浮点数运算的误差模型，并利用条件数 $\kappa(A)$ 严格量化了方程求解时由于舍入误差引起的解的漂移。
+
+****：回顾了 LU、Cholesky 分解在工业软件中的主导地位，并探讨了如何通过主元选取（Pivoting）维持数值稳定。
+
+****：介绍了从经典的 Jacobi、Gauss-Seidel 迭代到现代大规模问题首选的 Krylov 子空间方法（如针对正定阵的共轭梯度法 CG 和一般阵的 GMRES）。
+
+****：从求解单一特征值的幂法及其变体出发，深入到求解全谱特征值的工业标准——带位移的 QR 算法（结合 Hessenberg 预处理）。
+
+****：介绍了以 CSR/CSC 为代表的稀疏数据结构设计，说明了在大规模稀疏图或偏微分网格中，如何打破 $O(n^3)$ 的算力瓶颈。

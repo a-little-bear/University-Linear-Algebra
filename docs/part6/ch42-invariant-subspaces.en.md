@@ -28,62 +28,39 @@ Invariant subspaces are fundamental to understanding linear operators. By findin
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       - If $v \in \operatorname{Im}(T)$, then $Tv \in \operatorname{Im}(T)$ by the definition of the image. Thus $\operatorname{Im}(T)$ is invariant.
+         - If $v \in \operatorname{Im}(T)$, then $Tv \in \operatorname{Im}(T)$ by the definition of the image. Thus $\operatorname{Im}(T)$ is invariant.
 
 ****
-
 ??? success "Solution"
     
 e 0$. For $\mathcal{M}$ to be $T$-invariant, $Tv$ must be in $\mathcal{M}$. Thus $Tv = \lambda v$ for some scalar $\lambda$, which is the definition of an eigenvector.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter explores the stability and structure of linear operators:
 
-1. **Subspace Dynamics**: Defined invariant, hyperinvariant, and reducing subspaces as the atoms of operator decomposition.
-2. **Geometric Metrics**: Introduced canonical angles to quantify the distance between linear subspaces.
-3. **Perturbation Robustness**: Decoded the Davis-Kahan and Wedin theorems, linking spectral gaps to the stability of eigenvectors and singular vectors.
-4. **Analytical Tools**: Utilized spectral projections and Rosenblum's theorem to provide a rigorous framework for subspace analysis.
+
+****: Defined invariant, hyperinvariant, and reducing subspaces as the atoms of operator decomposition.
+
+****: Introduced canonical angles to quantify the distance between linear subspaces.
+
+****: Decoded the Davis-Kahan and Wedin theorems, linking spectral gaps to the stability of eigenvectors and singular vectors.
+
+****: Utilized spectral projections and Rosenblum's theorem to provide a rigorous framework for subspace analysis.

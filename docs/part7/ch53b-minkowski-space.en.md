@@ -53,52 +53,61 @@ In Euclidean geometry, the square of the distance is the sum of the squares of t
 
 ## Exercises
 
-1.  **[Basics] Calculate the Minkowski squared length of the vector $v = (1, 1, 0, 0)$. What type of vector is it?**
-    ??? success "Solution"
-        $s^2 = -1^2 + 1^2 + 0^2 + 0^2 = 0$. It is a **light-like (null) vector**.
-
-2.  **[Determinant] Prove: If $L$ is a Lorentz transformation, then $\det(L) = \pm 1$.**
-    ??? success "Solution"
-        From $L^T \eta L = \eta$, taking the determinant yields $\det(L)^2 \det(\eta) = \det(\eta)$. Since $\det(\eta) = -1 
-eq 0$, it follows that $\det(L)^2 = 1 \implies \det(L) = \pm 1$.
-
-3.  **[Boost] Write the Lorentz boost matrix for a velocity $v$ along the $x$-axis (set $c=1$).**
-    ??? success "Solution"
-        Let $\gamma = 1/\sqrt{1-v^2}$. The matrix is $\begin{pmatrix} \gamma & -\gamma v & 0 & 0 \ -\gamma v & \gamma & 0 & 0 \ 0 & 0 & 1 & 0 \ 0 & 0 & 0 & 1 \end{pmatrix}$.
-
-4.  **[Hyperbolic] Prove the determinant of the boost matrix is 1.**
-    ??? success "Solution"
-        $\gamma^2 - (-\gamma v)^2 = \gamma^2(1-v^2) = 1$.
-
-5.  **[Classification] Is the vector $(2, 1, 1, 1)$ time-like or space-like?**
-    ??? success "Solution"
-        $s^2 = -2^2 + 1^2 + 1^2 + 1^2 = -4 + 3 = -1$. It is a **time-like vector**.
-
-6.  **[Invariance] Prove that Lorentz transformations preserve the "speed of light."**
-    ??? success "Solution"
-        If $v$ is a light-like vector (representing light speed), then $\langle v, v angle_\eta = 0$. After transformation, $\langle Lv, Lv angle_\eta = \langle v, v angle_\eta = 0$. Thus $Lv$ remains light-like.
-
-7.  **[Topology] How many connected components does the Lorentz group $O(1, 3)$ have?**
-    ??? success "Solution"
-        There are 4 components, categorized by the sign of $\det(L)$ and the sign of $L_{00}$.
-
-8.  **[Trace] How is the trace of a boost matrix related to velocity $v$?**
-    ??? success "Solution"
-        $\operatorname{tr}(L) = 2\gamma + 2 = 2(1 + 1/\sqrt{1-v^2})$.
-
-9.  **[Interval] What is the Spacetime Interval?**
-    ??? success "Solution"
-        It is the Minkowski inner product $\Delta s^2 = -\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2$. It is an objective quantity upon which all observers agree.
 
 ****
-
 ??? success "Solution"
-    
+     $s^2 = -1^2 + 1^2 + 0^2 + 0^2 = 0$. It is a **light-like (null) vector**.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     From $L^T \eta L = \eta$, taking the determinant yields $\det(L)^2 \det(\eta) = \det(\eta)$. Since $\det(\eta) = -1 
+eq 0$, it follows that $\det(L)^2 = 1 \implies \det(L) = \pm 1$.
+
+
+****
+??? success "Solution"
+     Let $\gamma = 1/\sqrt{1-v^2}$. The matrix is $\begin{pmatrix} \gamma & -\gamma v & 0 & 0 \ -\gamma v & \gamma & 0 & 0 \ 0 & 0 & 1 & 0 \ 0 & 0 & 0 & 1 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     $\gamma^2 - (-\gamma v)^2 = \gamma^2(1-v^2) = 1$.
+
+
+****
+??? success "Solution"
+     $s^2 = -2^2 + 1^2 + 1^2 + 1^2 = -4 + 3 = -1$. It is a **time-like vector**.
+
+
+****
+??? success "Solution"
+     If $v$ is a light-like vector (representing light speed), then $\langle v, v angle_\eta = 0$. After transformation, $\langle Lv, Lv angle_\eta = \langle v, v angle_\eta = 0$. Thus $Lv$ remains light-like.
+
+
+****
+??? success "Solution"
+     There are 4 components, categorized by the sign of $\det(L)$ and the sign of $L_{00}$.
+
+
+****
+??? success "Solution"
+     $\operatorname{tr}(L) = 2\gamma + 2 = 2(1 + 1/\sqrt{1-v^2})$.
+
+
+****
+??? success "Solution"
+     It is the Minkowski inner product $\Delta s^2 = -\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2$. It is an objective quantity upon which all observers agree.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Minkowski space reshapes the causality of the physical world by modifying the algebraic structure of distance:
 
-1.  **Fusion of Dimensions**: The Minkowski metric treats time as a fourth dimension with a negative sign, proving the essential unity of spacetime and establishing the principle of covariance for physical laws.
-2.  **Boundaries of Causality**: The introduction of the light cone structure, via the sign of vector lengths, sets absolute physical limits (the speed of light) for information transmission in the universe.
-3.  **Essence of Transformation**: Lorentz transformations prove that "time dilation" and "length contraction" are merely hyperbolic rotations within Minkowski space—manifestations of objective intervals projected onto different frames.
+
+****: The Minkowski metric treats time as a fourth dimension with a negative sign, proving the essential unity of spacetime and establishing the principle of covariance for physical laws.
+
+****: The introduction of the light cone structure, via the sign of vector lengths, sets absolute physical limits (the speed of light) for information transmission in the universe.
+
+****: Lorentz transformations prove that "time dilation" and "length contraction" are merely hyperbolic rotations within Minkowski space—manifestations of objective intervals projected onto different frames.

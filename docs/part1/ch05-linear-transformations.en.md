@@ -57,59 +57,32 @@ Vector spaces provide the stage, and linear transformations are the primary acto
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Linear transformations build "bridges" between spaces:
 
-1.  **Structure Preservation**: The essence of a linear transformation is maintaining the harmony of vector addition and scalar multiplication.
-2.  **Matrix Realization**: Choosing a basis translates abstract mappings into matrix arithmetic, enabling the use of numerical algorithms for abstract logic.
-3.  **Dimension Conservation**: The relationship between kernel and range (Rank-Nullity Theorem) reveals the patterns of information retention and loss during transformation.
+
+****: The essence of a linear transformation is maintaining the harmony of vector addition and scalar multiplication.
+
+****: Choosing a basis translates abstract mappings into matrix arithmetic, enabling the use of numerical algorithms for abstract logic.
+
+****: The relationship between kernel and range (Rank-Nullity Theorem) reveals the patterns of information retention and loss during transformation.

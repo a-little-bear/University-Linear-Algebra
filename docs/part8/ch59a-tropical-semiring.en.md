@@ -51,54 +51,63 @@ What happens if we redefine the basic rules of arithmetic such that addition tak
 
 ## Exercises
 
-1.  **[Calculation] In the tropical semiring, calculate $3 \oplus 5$ and $3 \otimes 5$.**
-    ??? success "Solution"
-        $3 \oplus 5 = \min(3, 5) = 3$.
-        $3 \otimes 5 = 3 + 5 = 8$.
-
-2.  **[Identity] Verify that $x \oplus \infty = x$.**
-    ??? success "Solution"
-        $\min(x, \infty) = x$ for any real number $x$.
-
-3.  **[Multiplication] Calculate $\begin{pmatrix} 0 & 2 \\ 5 & 1 \end{pmatrix} \otimes \begin{pmatrix} 1 \\ 3 \end{pmatrix}$.**
-    ??? success "Solution"
-        First entry: $\min(0+1, 2+3) = 1$.
-        Second entry: $\min(5+1, 1+3) = 4$.
-        Result: $(1, 4)^T$.
-
-4.  **[Distributivity] Verify $a \otimes (b \oplus c) = (a \otimes b) \oplus (a \otimes c)$.**
-    ??? success "Solution"
-        Left: $a + \min(b, c)$. Right: $\min(a+b, a+c)$. Since addition is monotonic with respect to $\min$, they are equal.
-
-5.  **[Shortest Path] Prove that the $(i,j)$ entry of $A^k$ represents the shortest path from $i$ to $j$ using exactly $k$ edges.**
-    ??? success "Solution"
-        This follows directly from the recursive definition of tropical matrix multiplication; each $\otimes$ step corresponds to a relaxation step in the Bellman-Ford algorithm.
-
-6.  **[Inverses] Does a real number (non-identity) have an additive inverse in the tropical semiring?**
-    ??? success "Solution"
-        No. If $x \oplus y = \infty$, then $\min(x, y) = \infty$, which requires both $x$ and $y$ to be $\infty$. Thus, no real number has an additive inverse.
-
-7.  **[Eigenvector] If $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$, verify if $\lambda=1$ is a tropical eigenvalue.**
-    ??? success "Solution"
-        $A \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} \min(1+0, 2+0) \\ \min(2+0, 1+0) \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 1 \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix}$. Yes, it is.
-
-8.  **[Polynomials] Write the function form of the tropical polynomial $f(x) = (0 \otimes x^2) \oplus (3 \otimes x) \oplus 5$.**
-    ??? success "Solution"
-        $f(x) = \min(2x, x+3, 5)$. This is a piecewise-linear convex function.
-
-9.  **[Idempotency] Prove tropical addition is idempotent: $x \oplus x = x$.**
-    ??? success "Solution"
-        $\min(x, x) = x$.
 
 ****
-
 ??? success "Solution"
-    
+     $3 \oplus 5 = \min(3, 5) = 3$.
+     $3 \otimes 5 = 3 + 5 = 8$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\min(x, \infty) = x$ for any real number $x$.
+
+
+****
+??? success "Solution"
+     First entry: $\min(0+1, 2+3) = 1$.
+     Second entry: $\min(5+1, 1+3) = 4$.
+     Result: $(1, 4)^T$.
+
+
+****
+??? success "Solution"
+     Left: $a + \min(b, c)$. Right: $\min(a+b, a+c)$. Since addition is monotonic with respect to $\min$, they are equal.
+
+
+****
+??? success "Solution"
+     This follows directly from the recursive definition of tropical matrix multiplication; each $\otimes$ step corresponds to a relaxation step in the Bellman-Ford algorithm.
+
+
+****
+??? success "Solution"
+     No. If $x \oplus y = \infty$, then $\min(x, y) = \infty$, which requires both $x$ and $y$ to be $\infty$. Thus, no real number has an additive inverse.
+
+
+****
+??? success "Solution"
+     $A \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} \min(1+0, 2+0) \\ \min(2+0, 1+0) \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 1 \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix}$. Yes, it is.
+
+
+****
+??? success "Solution"
+     $f(x) = \min(2x, x+3, 5)$. This is a piecewise-linear convex function.
+
+
+****
+??? success "Solution"
+     $\min(x, x) = x$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The tropical semiring is the ultimate algebraic tool for handling extremum structures:
 
-1.  **Redefinition of Operations**: By upgrading "summation" to "selection," tropical algebra hard-codes non-linear optimization logic into linear algebraic calculus, enabling a paradigm shift in computation.
-2.  **Identity of Graphs and Matrices**: Tropical matrix powers perfectly encapsulate path-finding algorithms, proving that dynamic programming in graph theory is essentially matrix multiplication under a specific algebraic structure.
-3.  **Logarithmic Limit of Geometry**: As the "frozen limit" of classical algebra, the tropical semiring reveals how discrete combinatorial structures emerge from continuous analytic functions, providing algebraic insights for solving NP-hard problems.
+
+****: By upgrading "summation" to "selection," tropical algebra hard-codes non-linear optimization logic into linear algebraic calculus, enabling a paradigm shift in computation.
+
+****: Tropical matrix powers perfectly encapsulate path-finding algorithms, proving that dynamic programming in graph theory is essentially matrix multiplication under a specific algebraic structure.
+
+****: As the "frozen limit" of classical algebra, the tropical semiring reveals how discrete combinatorial structures emerge from continuous analytic functions, providing algebraic insights for solving NP-hard problems.

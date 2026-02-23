@@ -52,51 +52,60 @@ In traditional matrix decompositions like SVD, basis vectors and coefficients ca
 
 ## Exercises
 
-1.  **[Basics] Prove: If $V = WH$ is an NMF, then for any positive diagonal matrix $D$, $V = (WD)(D^{-1}H)$ is also an NMF.**
-    ??? success "Solution"
-        $(WD)(D^{-1}H) = W(DD^{-1})H = WH = V$. Since both $D$ and its inverse have positive diagonals, non-negativity is preserved. This demonstrates the scale-indeterminacy of NMF.
-
-2.  **[Contrast] What is the primary difference between NMF and PCA?**
-    ??? success "Solution"
-        PCA allows negative values and seeks to maximize variance (often leading to global, non-interpretable features). NMF enforces non-negativity and seeks interpretable local parts.
-
-3.  **[NP-Hard] Why is NMF NP-hard to solve exactly?**
-    ??? success "Solution"
-        NMF is a non-convex optimization problem and is equivalent to finding a specific nesting of simplices, for which no polynomial-time global solver exists in general dimensions.
-
-4.  **[Calculation] Using multiplicative updates, if an entry is initialized to 0, will it ever change?**
-    ??? success "Solution"
-        No. In multiplicative updates, 0 times any factor remains 0. Therefore, initialization is critical for NMF performance.
-
-5.  **[Topic Modeling] In text mining, what do $W$ and $H$ represent?**
-    ??? success "Solution"
-        Each column of $W$ represents a "topic" (a distribution over words); each column of $H$ represents a document's "membership" or weight in each topic.
-
-6.  **[Rank] Is the NMF rank $k$ always equal to the algebraic rank of $V$?**
-    ??? success "Solution"
-        Not necessarily. The non-negative rank is typically greater than or equal to the algebraic rank.
-
-7.  **[Measure] Beyond the Frobenius norm, what other distance metric is common in NMF?**
-    ??? success "Solution"
-        **KL Divergence** (Kullback-Leibler) is frequently used, especially for count data and probability distributions.
-
-8.  **[Uniqueness] Give a simple example where NMF is not unique.**
-    ??? success "Solution"
-        The identity matrix $I = I \cdot I$. Due to scaling and potential rotations that preserve non-negativity, the decomposition is generally not unique.
-
-9.  **[Initialization] Why is all-zero initialization bad for NMF?**
-    ??? success "Solution"
-        Zeros are stationary points for the gradient; the iteration will never move and no features will be extracted. Randomized positive values or SVD-based initializations (like NNDSVD) are used instead.
 
 ****
-
 ??? success "Solution"
-    
+     $(WD)(D^{-1}H) = W(DD^{-1})H = WH = V$. Since both $D$ and its inverse have positive diagonals, non-negativity is preserved. This demonstrates the scale-indeterminacy of NMF.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     PCA allows negative values and seeks to maximize variance (often leading to global, non-interpretable features). NMF enforces non-negativity and seeks interpretable local parts.
+
+
+****
+??? success "Solution"
+     NMF is a non-convex optimization problem and is equivalent to finding a specific nesting of simplices, for which no polynomial-time global solver exists in general dimensions.
+
+
+****
+??? success "Solution"
+     No. In multiplicative updates, 0 times any factor remains 0. Therefore, initialization is critical for NMF performance.
+
+
+****
+??? success "Solution"
+     Each column of $W$ represents a "topic" (a distribution over words); each column of $H$ represents a document's "membership" or weight in each topic.
+
+
+****
+??? success "Solution"
+     Not necessarily. The non-negative rank is typically greater than or equal to the algebraic rank.
+
+
+****
+??? success "Solution"
+     **KL Divergence** (Kullback-Leibler) is frequently used, especially for count data and probability distributions.
+
+
+****
+??? success "Solution"
+     The identity matrix $I = I \cdot I$. Due to scaling and potential rotations that preserve non-negativity, the decomposition is generally not unique.
+
+
+****
+??? success "Solution"
+     Zeros are stationary points for the gradient; the iteration will never move and no features will be extracted. Randomized positive values or SVD-based initializations (like NNDSVD) are used instead.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 NMF achieves a harmony between linear algebra and human cognition:
 
-1.  **Philosophy of Constraint**: Proved that mathematical constraints (non-negativity) are not just limitations but sources of "meaning" (local features), establishing the benchmark for interpretability in reduction algorithms.
-2.  **Challenge of Non-convexity**: Demonstrated how even simple linear products evolve into complex non-convex landscapes when signs are restricted, driving the development of alternating optimization algorithms.
-3.  **Pattern Deconstruction**: From image recognition to genomics, NMF serves as a universal "pattern discovery" tool, proving that complex real-world data are often the superposition of a few pure, non-negative atomic components.
+
+****: Proved that mathematical constraints (non-negativity) are not just limitations but sources of "meaning" (local features), establishing the benchmark for interpretability in reduction algorithms.
+
+****: Demonstrated how even simple linear products evolve into complex non-convex landscapes when signs are restricted, driving the development of alternating optimization algorithms.
+
+****: From image recognition to genomics, NMF serves as a universal "pattern discovery" tool, proving that complex real-world data are often the superposition of a few pure, non-negative atomic components.

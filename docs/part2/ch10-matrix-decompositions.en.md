@@ -55,59 +55,32 @@ Matrix decomposition (also known as matrix factorization) is the process of expr
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix decompositions are the algebraic art of "simplifying the complex":
 
-1.  **Structural Mapping**: Decompositions like LU and QR map general matrices into subgroups with excellent properties (triangular, orthogonal), establishing shortcuts for calculation.
-2.  **Numerical Foundation**: Factorization is not just a tool for theoretical proofs but also the bulwark of numerical stability analysis, distinguishing "robust" from "fragile" algorithms.
-3.  **Information Extraction**: Schur and Rank decompositions demonstrate how to "squeeze" essential information like eigenvalues and rank into the diagonal or a few rows through specific product forms.
+
+****: Decompositions like LU and QR map general matrices into subgroups with excellent properties (triangular, orthogonal), establishing shortcuts for calculation.
+
+****: Factorization is not just a tool for theoretical proofs but also the bulwark of numerical stability analysis, distinguishing "robust" from "fragile" algorithms.
+
+****: Schur and Rank decompositions demonstrate how to "squeeze" essential information like eigenvalues and rank into the diagonal or a few rows through specific product forms.

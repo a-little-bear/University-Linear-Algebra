@@ -47,52 +47,61 @@ In classical control theory, the Laplace transform is used to handle Single-Inpu
 
 ## Exercises
 
-1.  **[Basics] Write the state-space representation for $y'' + 3y' + 2y = u$.**
-    ??? success "Solution"
-        Let $x_1 = y, x_2 = y'$. Then $\dot{x}_1 = x_2$ and $\dot{x}_2 = -2x_1 - 3x_2 + u$.
-        $A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}, B = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, C = \begin{pmatrix} 1 & 0 \end{pmatrix}$.
-
-2.  **[Controllability] Determine if $A = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}, B = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ is controllable.**
-    ??? success "Solution"
-        $\mathcal{C} = [B \ AB] = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$. The rank is 1 < 2, so the system is uncontrollable.
-
-3.  **[Observability] If $C = \begin{pmatrix} 1 & 0 \end{pmatrix}$ and $A$ is upper triangular, is the system always observable?**
-    ??? success "Solution"
-        Not necessarily. One must check the rank of $\mathcal{O}$. If $A = \operatorname{diag}(1, 1)$, the second state never appears in the output, making it unobservable.
-
-4.  **[Transfer Function] How is the transfer function $G(s)$ of an LTI system represented in matrix form?**
-    ??? success "Solution"
-        $G(s) = C(sI - A)^{-1}B + D$.
-
-5.  **[Stability] What is the condition for the stability of the closed-loop system $(A-BK)$?**
-    ??? success "Solution"
-        $A-BK$ must be Hurwitz stable (all eigenvalues have negative real parts).
-
-6.  **[Observer] What is the error equation for a Luenberger observer?**
-    ??? success "Solution"
-        $\dot{e} = (A-LC)e$. We design $L$ such that $A-LC$ is stable, ensuring the estimate converges to the true state.
-
-7.  **[Cayley-Hamilton] Why does the controllability matrix only go up to $A^{n-1}B$?**
-    ??? success "Solution"
-        By the Cayley-Hamilton theorem, $A^n$ and higher powers are linear combinations of lower powers and will not increase the rank of the span.
-
-8.  **[Calculation] Find the poles of $\dot{x} = x+u$ under the feedback $u=-2x$.**
-    ??? success "Solution"
-        $\dot{x} = (1-2)x = -x$. The pole is at -1 (the system is stabilized).
-
-9.  **[Realization] What is a minimal realization?**
-    ??? success "Solution"
-        A state-space realization of minimum dimension. A realization is minimal iff it is both controllable and observable.
 
 ****
-
 ??? success "Solution"
-    
+     Let $x_1 = y, x_2 = y'$. Then $\dot{x}_1 = x_2$ and $\dot{x}_2 = -2x_1 - 3x_2 + u$.
+     $A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}, B = \begin{pmatrix} 0 \\ 1 \end{pmatrix}, C = \begin{pmatrix} 1 & 0 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\mathcal{C} = [B \ AB] = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$. The rank is 1 < 2, so the system is uncontrollable.
+
+
+****
+??? success "Solution"
+     Not necessarily. One must check the rank of $\mathcal{O}$. If $A = \operatorname{diag}(1, 1)$, the second state never appears in the output, making it unobservable.
+
+
+****
+??? success "Solution"
+     $G(s) = C(sI - A)^{-1}B + D$.
+
+
+****
+??? success "Solution"
+     $A-BK$ must be Hurwitz stable (all eigenvalues have negative real parts).
+
+
+****
+??? success "Solution"
+     $\dot{e} = (A-LC)e$. We design $L$ such that $A-LC$ is stable, ensuring the estimate converges to the true state.
+
+
+****
+??? success "Solution"
+     By the Cayley-Hamilton theorem, $A^n$ and higher powers are linear combinations of lower powers and will not increase the rank of the span.
+
+
+****
+??? success "Solution"
+     $\dot{x} = (1-2)x = -x$. The pole is at -1 (the system is stabilized).
+
+
+****
+??? success "Solution"
+     A state-space realization of minimum dimension. A realization is minimal iff it is both controllable and observable.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 State-space control theory is the dynamical pinnacle of linear algebra:
 
-1.  **Discovery of Internal States**: It makes the hidden logic of "black box" systems explicit, proving that the entire future evolution of a system is stored in the interaction between the current vector and the operator.
-2.  **Physical Meaning of Rank**: Controllability and observability transform dry matrix rank definitions into physical measures of "intervention capability" and "depth of insight," defining the algebraic boundaries of human control over the physical world.
-3.  **Pole Design**: Through eigenvalue placement, control theory demonstrates how to use algebraic feedback to reshape an operator's spectrum, forcing chaotic or unstable systems to exhibit desired smoothness and response speeds.
+
+****: It makes the hidden logic of "black box" systems explicit, proving that the entire future evolution of a system is stored in the interaction between the current vector and the operator.
+
+****: Controllability and observability transform dry matrix rank definitions into physical measures of "intervention capability" and "depth of insight," defining the algebraic boundaries of human control over the physical world.
+
+****: Through eigenvalue placement, control theory demonstrates how to use algebraic feedback to reshape an operator's spectrum, forcing chaotic or unstable systems to exhibit desired smoothness and response speeds.

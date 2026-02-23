@@ -50,59 +50,32 @@ Matrix analysis studies the analytical properties of matrices when treated as va
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix analysis endows static algebra with the dimension of time:
 
-1.  **Convergence Criteria**: The spectral radius is the ultimate judge of evolution, determining whether discrete dynamical systems stabilize or explode.
-2.  **Analytical Tools**: Matrix calculus provides the symbolic engine for optimization algorithms and variational problems, allowing for dynamic analysis of complex matrix models.
-3.  **Global Perspective**: Gelfand's formula and the Circle Theorem unify local entry-wise information with global spectral properties, providing efficient paths for numerical stability estimation.
+
+****: The spectral radius is the ultimate judge of evolution, determining whether discrete dynamical systems stabilize or explode.
+
+****: Matrix calculus provides the symbolic engine for optimization algorithms and variational problems, allowing for dynamic analysis of complex matrix models.
+
+****: Gelfand's formula and the Circle Theorem unify local entry-wise information with global spectral properties, providing efficient paths for numerical stability estimation.

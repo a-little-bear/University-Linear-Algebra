@@ -27,64 +27,41 @@ A symmetric matrix $A$ is **completely positive** if it can be decomposed as $A 
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       1. For any $x$, $x^T A x = \|B^T x\|^2 \ge 0$, so $A \succeq 0$.
-       2. $a_{ij} = \sum_l b_{il} b_{jl} \ge 0$ since $b_{il}, b_{jl} \ge 0$.
-       Thus, $A$ is both PSD and non-negative (DNN).
+         1. For any $x$, $x^T A x = \|B^T x\|^2 \ge 0$, so $A \succeq 0$.
+    2. $a_{ij} = \sum_l b_{il} b_{jl} \ge 0$ since $b_{il}, b_{jl} \ge 0$.
+    Thus, $A$ is both PSD and non-negative (DNN).
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
     
 eq \mathcal{DNN}_5$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter explores the boundary between non-negativity and positive semi-definiteness:
 
-1. **Structured Positivity**: Defined CP matrices as those admitting a non-negative factorization.
-2. **Rank Complexity**: Distinguished the cp-rank from the standard rank, highlighting its role as a combinatorial invariant.
-3. **Geometric Limits**: Identified the separation between CP and DNN cones as a phenomenon arising from odd cycles in the underlying graph.
-4. **Quantum Extension**: Introduced CPSD matrices, linking classical matrix positivity to quantum correlation theory.
+
+****: Defined CP matrices as those admitting a non-negative factorization.
+
+****: Distinguished the cp-rank from the standard rank, highlighting its role as a combinatorial invariant.
+
+****: Identified the separation between CP and DNN cones as a phenomenon arising from odd cycles in the underlying graph.
+
+****: Introduced CPSD matrices, linking classical matrix positivity to quantum correlation theory.

@@ -54,59 +54,32 @@ Eigenvalues and eigenvectors reveal the most essential "invariant directions" of
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Eigen-analysis is the deepest deconstruction of a square matrix:
 
-1.  **Coordinate Invariance**: Eigenvalues are intrinsic properties of a matrix, independent of the basis, making them ideal carriers for physical laws.
-2.  **Deconstruction and Reconstruction**: The process of diagonalization is essentially finding a perfect basis that makes the action of a linear operator pure and independent.
-3.  **Polynomial Constraints**: The Cayley-Hamilton theorem establishes the ultimate link between matrix arithmetic and polynomial algebra, revealing a certain self-recursive property of square matrices.
+
+****: Eigenvalues are intrinsic properties of a matrix, independent of the basis, making them ideal carriers for physical laws.
+
+****: The process of diagonalization is essentially finding a perfect basis that makes the action of a linear operator pure and independent.
+
+****: The Cayley-Hamilton theorem establishes the ultimate link between matrix arithmetic and polynomial algebra, revealing a certain self-recursive property of square matrices.

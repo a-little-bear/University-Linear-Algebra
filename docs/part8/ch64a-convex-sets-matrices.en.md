@@ -45,51 +45,60 @@ In classical geometry, we study convex sets in $\mathbb{R}^n$. In modern control
 
 ## Exercises
 
-1.  **[Basics] Prove that the convex combination of two PSD matrices is PSD.**
-    ??? success "Solution"
-        For any vector $v$, $v^T(\lambda A + (1-\lambda)B)v = \lambda v^T A v + (1-\lambda) v^T B v$. Since $v^T A v \ge 0$ and $v^T B v \ge 0$ and the weights are non-negative, the sum is non-negative.
-
-2.  **[Dual] Verify: If $A, B \in S_n^+$, then $\operatorname{tr}(AB) \ge 0$.**
-    ??? success "Solution"
-        Let $B = \sum \lambda_i q_i q_i^T$ be its spectral decomposition. Then $\operatorname{tr}(AB) = \sum \lambda_i q_i^T A q_i$. Since each $\lambda_i \ge 0$ and $q_i^T A q_i \ge 0$, the sum is non-negative.
-
-3.  **[Spectrahedron] Is a disk $\{ (x, y) : x^2 + y^2 \le 1 \}$ a spectrahedron?**
-    ??? success "Solution"
-        Yes. Using the Schur complement, it can be written as the LMI: $\begin{pmatrix} 1+x & y \\ y & 1-x \end{pmatrix} \succeq 0$.
-
-4.  **[Dimension] What is the dimension of the space of symmetric matrices $S_n$?**
-    ??? success "Solution"
-        $n(n+1)/2$. This is the dimension of the linear space containing the PSD cone.
-
-5.  **[Extreme] Why is $I/n$ not an extreme point of the set of unit-trace PSD matrices?**
-    ??? success "Solution"
-        Because $I/n = \frac{1}{n} \sum e_i e_i^T$, it can be written as a convex combination of other points (pure states). Extreme points must have rank 1.
-
-6.  **[Interior] How do you identify an interior point of the PSD cone?**
-    ??? success "Solution"
-        A matrix is an interior point iff it is **strictly positive definite** ($\operatorname{rank}(A) = n$).
-
-7.  **[Compactness] Is the PSD cone $S_n^+$ compact?**
-    ??? success "Solution"
-        No, it is unbounded. However, its intersection with the hyperplane $\operatorname{tr}(A)=1$ is compact (the set of density matrices).
-
-8.  **[Separation] Given $A \notin S_n^+$, does there exist a symmetric matrix $H$ such that $\operatorname{tr}(AH) < 0$ but $\operatorname{tr}(BH) \ge 0$ for all $B \in S_n^+$?**
-    ??? success "Solution"
-        Yes. By the hyperplane separation theorem and the self-duality of the PSD cone, such an $H$ must exist.
-
-9.  **[Control] Why are LMIs used to describe stability regions in control theory?**
-    ??? success "Solution"
-        Because the Lyapunov stability condition ($A^T P + PA \prec 0$) is itself a linear matrix inequality in the variable $P$, defining a convex region of stable parameters.
 
 ****
-
 ??? success "Solution"
-    
+     For any vector $v$, $v^T(\lambda A + (1-\lambda)B)v = \lambda v^T A v + (1-\lambda) v^T B v$. Since $v^T A v \ge 0$ and $v^T B v \ge 0$ and the weights are non-negative, the sum is non-negative.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Let $B = \sum \lambda_i q_i q_i^T$ be its spectral decomposition. Then $\operatorname{tr}(AB) = \sum \lambda_i q_i^T A q_i$. Since each $\lambda_i \ge 0$ and $q_i^T A q_i \ge 0$, the sum is non-negative.
+
+
+****
+??? success "Solution"
+     Yes. Using the Schur complement, it can be written as the LMI: $\begin{pmatrix} 1+x & y \\ y & 1-x \end{pmatrix} \succeq 0$.
+
+
+****
+??? success "Solution"
+     $n(n+1)/2$. This is the dimension of the linear space containing the PSD cone.
+
+
+****
+??? success "Solution"
+     Because $I/n = \frac{1}{n} \sum e_i e_i^T$, it can be written as a convex combination of other points (pure states). Extreme points must have rank 1.
+
+
+****
+??? success "Solution"
+     A matrix is an interior point iff it is **strictly positive definite** ($\operatorname{rank}(A) = n$).
+
+
+****
+??? success "Solution"
+     No, it is unbounded. However, its intersection with the hyperplane $\operatorname{tr}(A)=1$ is compact (the set of density matrices).
+
+
+****
+??? success "Solution"
+     Yes. By the hyperplane separation theorem and the self-duality of the PSD cone, such an $H$ must exist.
+
+
+****
+??? success "Solution"
+     Because the Lyapunov stability condition ($A^T P + PA \prec 0$) is itself a linear matrix inequality in the variable $P$, defining a convex region of stable parameters.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Convex sets of matrices define the physical boundaries of operator space:
 
-1.  **Dominance of the Cone**: The PSD cone, as the natural order structure in matrix space, elevates scalar inequality comparisons to inclusion relations between operators, establishing the geometric framework for stability analysis.
-2.  **Expressive Power of Spectrahedra**: Through LMI representations, spectrahedra unify seemingly non-linear geometric bodies (spheres, ellipsoids, semi-algebraic sets) under the language of linear algebra, greatly expanding the scope of computable problems.
-3.  **Purity of Extrema**: The correspondence between extreme points and rank proves that "simple structures" (low-rank matrices) are the atoms used to build complex convex forms—an insight supporting modern matrix completion and quantum information theory.
+
+****: The PSD cone, as the natural order structure in matrix space, elevates scalar inequality comparisons to inclusion relations between operators, establishing the geometric framework for stability analysis.
+
+****: Through LMI representations, spectrahedra unify seemingly non-linear geometric bodies (spheres, ellipsoids, semi-algebraic sets) under the language of linear algebra, greatly expanding the scope of computable problems.
+
+****: The correspondence between extreme points and rank proves that "simple structures" (low-rank matrices) are the atoms used to build complex convex forms—an insight supporting modern matrix completion and quantum information theory.

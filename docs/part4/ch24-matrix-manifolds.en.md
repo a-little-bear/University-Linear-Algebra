@@ -75,54 +75,64 @@ In most of linear algebra, we work in flat vector spaces. However, many importan
 
 ## Exercises
 
-1.  **[Stiefel] What is the dimension of the Stiefel manifold $St(n, k)$?**
-    ??? success "Solution"
-        The dimension is $nk - \frac{1}{2}k(k+1)$. This accounts for the $nk$ total entries minus the $\frac{1}{2}k(k+1)$ independent constraints imposed by $X^T X = I_k$.
-
-2.  **[Tangent] Show that for the orthogonal group $O(n)$, the tangent space at the identity $I$ is the set of skew-symmetric matrices.**
-    ??? success "Solution"
-        Let $Q(t)$ be a path in $O(n)$ with $Q(0)=I$. $Q(t)^T Q(t) = I$.
-        Differentiating at $t=0$: $\dot{Q}(0)^T Q(0) + Q(0)^T \dot{Q}(0) = 0 \implies \dot{Q}^T + \dot{Q} = 0$.
-        Thus, the tangent vectors $\dot{Q}$ must satisfy $A^T = -A$.
-
-3.  **[Grassmann] Why is $Gr(n, k)$ considered a "quotient space"?**
-    ??? success "Solution"
-        Because many different orthonormal matrices in $St(n, k)$ span the same subspace. Specifically, $Gr(n, k) \cong St(n, k) / O(k)$, where we treat two matrices as equivalent if they differ only by a rotation within the subspace.
-
-4.  **[Projection] How do you project a general matrix $Z$ onto the tangent space of $St(n, k)$ at $X$?**
-    ??? success "Solution"
-        $P_X(Z) = Z - X \operatorname{sym}(X^T Z)$, where $\operatorname{sym}(M) = (M + M^T)/2$.
-
-5.  **[Metric] What is the natural distance between two positive definite matrices $A$ and $B$?**
-    ??? success "Solution"
-        It is the Riemannian distance: $d(A, B) = \|\log(A^{-1/2} B A^{-1/2})\|_F$. This distance is invariant under inversion and congruent transformations.
-
-6.  **[Applications] Give an example of manifold optimization in computer vision.**
-    ??? success "Solution"
-        **Camera Pose Estimation**: Finding the rotation $R \in SO(3)$ and translation $t$ that minimizes the projection error of 3D points onto a 2D image.
-
-7.  **[Exponential] Define the exponential map on a manifold.**
-    ??? success "Solution"
-        The exponential map $\operatorname{Exp}_X(\xi)$ takes a tangent vector $\xi$ and follows the geodesic (the "straightest" possible path on the curved surface) for unit time to reach a new point on the manifold.
-
-8.  **[Low-rank] Is the set of matrices with rank *exactly* $k$ a manifold?**
-    ??? success "Solution"
-        Yes, it is a smooth manifold of dimension $(m+n-k)k$. However, the set of matrices with rank *at most* $k$ is not a manifold because it has singularities at points where the rank drops.
-
-9.  **[Hessian] What is the Riemannian Hessian?**
-    ??? success "Solution"
-        It is the second-order derivative of a function on a manifold, accounting for the curvature of the surface. It is essential for Riemannian Newton methods.
 
 ****
-
 ??? success "Solution"
-    
+     The dimension is $nk - \frac{1}{2}k(k+1)$. This accounts for the $nk$ total entries minus the $\frac{1}{2}k(k+1)$ independent constraints imposed by $X^T X = I_k$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Let $Q(t)$ be a path in $O(n)$ with $Q(0)=I$. $Q(t)^T Q(t) = I$.
+     Differentiating at $t=0$: $\dot{Q}(0)^T Q(0) + Q(0)^T \dot{Q}(0) = 0 \implies \dot{Q}^T + \dot{Q} = 0$.
+     Thus, the tangent vectors $\dot{Q}$ must satisfy $A^T = -A$.
+
+
+****
+??? success "Solution"
+     Because many different orthonormal matrices in $St(n, k)$ span the same subspace. Specifically, $Gr(n, k) \cong St(n, k) / O(k)$, where we treat two matrices as equivalent if they differ only by a rotation within the subspace.
+
+
+****
+??? success "Solution"
+     $P_X(Z) = Z - X \operatorname{sym}(X^T Z)$, where $\operatorname{sym}(M) = (M + M^T)/2$.
+
+
+****
+??? success "Solution"
+     It is the Riemannian distance: $d(A, B) = \|\log(A^{-1/2} B A^{-1/2})\|_F$. This distance is invariant under inversion and congruent transformations.
+
+
+****
+??? success "Solution"
+     **Camera Pose Estimation**: Finding the rotation $R \in SO(3)$ and translation $t$ that minimizes the projection error of 3D points onto a 2D image.
+
+
+****
+??? success "Solution"
+     The exponential map $\operatorname{Exp}_X(\xi)$ takes a tangent vector $\xi$ and follows the geodesic (the "straightest" possible path on the curved surface) for unit time to reach a new point on the manifold.
+
+
+****
+??? success "Solution"
+     Yes, it is a smooth manifold of dimension $(m+n-k)k$. However, the set of matrices with rank *at most* $k$ is not a manifold because it has singularities at points where the rank drops.
+
+
+****
+??? success "Solution"
+     It is the second-order derivative of a function on a manifold, accounting for the curvature of the surface. It is essential for Riemannian Newton methods.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix manifolds transform constrained linear algebra into unconstrained geometric optimization:
 
-1.  **Non-linear Structure**: Established that important sets of matrices (rotations, subspaces) are not vector spaces but curved manifolds.
-2.  **Geometric Calculus**: Developed the concepts of tangent spaces and Riemannian gradients to allow calculus on curved surfaces.
-3.  **Optimization Framework**: Introduced retractions and Riemannian gradient descent as the standard tools for solving optimization problems with matrix constraints.
-4.  **Physical Relevance**: Demonstrated how manifolds provide the natural language for rigid body dynamics, camera geometry, and stable neural network architectures.
+
+****: Established that important sets of matrices (rotations, subspaces) are not vector spaces but curved manifolds.
+
+****: Developed the concepts of tangent spaces and Riemannian gradients to allow calculus on curved surfaces.
+
+****: Introduced retractions and Riemannian gradient descent as the standard tools for solving optimization problems with matrix constraints.
+
+****: Demonstrated how manifolds provide the natural language for rigid body dynamics, camera geometry, and stable neural network architectures.

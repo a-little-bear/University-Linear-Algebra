@@ -49,51 +49,60 @@ In the tropical semiring, addition is taking the minimum and multiplication is s
 
 ## Exercises
 
-1.  **[Basics] Draw the tropical hypersurface (zero set) for $f(x) = 0 \oplus x$.**
-    ??? success "Solution"
-        $f(x) = \min(0, x)$. The non-differentiable point is where $0 = x$. Thus, the hypersurface is the single point $\{0\}$ on the real line.
-
-2.  **[2D Line] List the linear regions for the tropical line $x \oplus y \oplus 5$.**
-    ??? success "Solution"
-        The regions are defined by: $x \le y, x \le 5$; $y \le x, y \le 5$; and $5 \le x, 5 \le y$. The tropical line is the set of boundaries where these regions meet.
-
-3.  **[Dimension] Prove that a tropical hypersurface in $n$-dimensional space is an $(n-1)$-dimensional balanced polyhedral fan.**
-    ??? success "Solution"
-        This follows from the structure of piecewise-linear convex functions. Each piece corresponds to a region where one monomial dominates; the boundaries are where at least two monomials meet, resulting in a codimension-1 complex.
-
-4.  **[Balancing] Explain the "Balancing Condition" for tropical varieties.**
-    ??? success "Solution"
-        At every ridge (face of codimension 2), the sum of the normal vectors to the facets meeting at that ridge, weighted by their multiplicities, must be zero. This is analogous to force balance in physics.
-
-5.  **[Tropicalization] Tropicalize the classical line $z_1 + z_2 + 1 = 0$.**
-    ??? success "Solution"
-        Assuming the valuation of the coefficients is 0, the tropical polynomial is $x \oplus y \oplus 0$. Its graph is the standard three-way "tripod" centered at the origin.
-
-6.  **[Degree] How many "infinite" directions does a tropical curve of degree $d$ have?**
-    ??? success "Solution"
-        Typically $3d$ directions, counting multiplicities.
-
-7.  **[Application] Why can tropical geometry be used to count intersections of algebraic curves?**
-    ??? success "Solution"
-        Because tropicalization preserves topological invariants like intersection numbers (the tropical version of Bézout's Theorem). We can count intersections of tropical lines to infer the intersection count of complex curves.
-
-8.  **[Valuations] What are Puiseux series and their role in tropical geometry?**
-    ??? success "Solution"
-        Puiseux series serve as the standard scalar field for tropical geometry. The valuation map (taking the lowest exponent) maps the series to real numbers, providing the mathematical mechanism for the tropicalization process.
-
-9.  **[Geometry] What does a tropical conic (circle) look like?**
-    ??? success "Solution"
-        It typically looks like a hexagonal skeleton with six rays extending outwards.
 
 ****
-
 ??? success "Solution"
-    
+     $f(x) = \min(0, x)$. The non-differentiable point is where $0 = x$. Thus, the hypersurface is the single point $\{0\}$ on the real line.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     The regions are defined by: $x \le y, x \le 5$; $y \le x, y \le 5$; and $5 \le x, 5 \le y$. The tropical line is the set of boundaries where these regions meet.
+
+
+****
+??? success "Solution"
+     This follows from the structure of piecewise-linear convex functions. Each piece corresponds to a region where one monomial dominates; the boundaries are where at least two monomials meet, resulting in a codimension-1 complex.
+
+
+****
+??? success "Solution"
+     At every ridge (face of codimension 2), the sum of the normal vectors to the facets meeting at that ridge, weighted by their multiplicities, must be zero. This is analogous to force balance in physics.
+
+
+****
+??? success "Solution"
+     Assuming the valuation of the coefficients is 0, the tropical polynomial is $x \oplus y \oplus 0$. Its graph is the standard three-way "tripod" centered at the origin.
+
+
+****
+??? success "Solution"
+     Typically $3d$ directions, counting multiplicities.
+
+
+****
+??? success "Solution"
+     Because tropicalization preserves topological invariants like intersection numbers (the tropical version of Bézout's Theorem). We can count intersections of tropical lines to infer the intersection count of complex curves.
+
+
+****
+??? success "Solution"
+     Puiseux series serve as the standard scalar field for tropical geometry. The valuation map (taking the lowest exponent) maps the series to real numbers, providing the mathematical mechanism for the tropicalization process.
+
+
+****
+??? success "Solution"
+     It typically looks like a hexagonal skeleton with six rays extending outwards.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Tropical geometry is the "low-energy" projection of algebraic geometry:
 
-1.  **Simplification of Form**: It collapses exponentially complex algebraic equations into linear skeletons while preserving topological cores (like intersection counts and genus), greatly simplifying computations.
-2.  **Link between Continuous and Discrete**: Through the limit of amoebas, tropical geometry proves that discrete combinatorial structures (graphs, polyhedral fans) are the ultimate essence of continuous algebraic forms.
-3.  **New Paradigm of Computation**: As a tool for solving enumerative geometry problems, tropical geometry demonstrates how to solve "equation problems" by "counting lines," providing new intuition for modern mathematical physics.
+
+****: It collapses exponentially complex algebraic equations into linear skeletons while preserving topological cores (like intersection counts and genus), greatly simplifying computations.
+
+****: Through the limit of amoebas, tropical geometry proves that discrete combinatorial structures (graphs, polyhedral fans) are the ultimate essence of continuous algebraic forms.
+
+****: As a tool for solving enumerative geometry problems, tropical geometry demonstrates how to solve "equation problems" by "counting lines," providing new intuition for modern mathematical physics.

@@ -28,72 +28,50 @@ In the scalar world, $a \ge b > 0 \Rightarrow a^2 \ge b^2$. However, for matrice
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       Note that $B^{-1} - A^{-1} = B^{-1}(A - B)A^{-1}$. Let $C = A-B \succeq 0$.
-       $B^{-1} - A^{-1} = B^{-1} C A^{-1}$. This product is not obviously PSD.
-       However, $B \preceq A \Rightarrow A^{-1/2} B A^{-1/2} \preceq I \Rightarrow \lambda_{\max}(A^{-1/2} B A^{-1/2}) \le 1$.
-       The eigenvalues of $A^{1/2} B^{-1} A^{1/2}$ are the inverses, so $\lambda_{\min} \ge 1$, which means $A^{1/2} B^{-1} A^{1/2} \succeq I$.
-       Multiplying by $A^{-1/2}$ on both sides gives $B^{-1} \succeq A^{-1}$.
+         Note that $B^{-1} - A^{-1} = B^{-1}(A - B)A^{-1}$. Let $C = A-B \succeq 0$.
+    $B^{-1} - A^{-1} = B^{-1} C A^{-1}$. This product is not obviously PSD.
+    However, $B \preceq A \Rightarrow A^{-1/2} B A^{-1/2} \preceq I \Rightarrow \lambda_{\max}(A^{-1/2} B A^{-1/2}) \le 1$.
+    The eigenvalues of $A^{1/2} B^{-1} A^{1/2}$ are the inverses, so $\lambda_{\min} \ge 1$, which means $A^{1/2} B^{-1} A^{1/2} \succeq I$.
+    Multiplying by $A^{-1/2}$ on both sides gives $B^{-1} \succeq A^{-1}$.
 
 ****
-
 ??? success "Solution"
-    
-       For $z = -1 + i$ (in the upper half-plane), $z^2 = (-1+i)^2 = 1 - 1 - 2i = -2i$.
-       The imaginary part is $-2 < 0$. Thus, $t^2$ is not a Pick function.
+         For $z = -1 + i$ (in the upper half-plane), $z^2 = (-1+i)^2 = 1 - 1 - 2i = -2i$.
+    The imaginary part is $-2 < 0$. Thus, $t^2$ is not a Pick function.
 
 ****
-
 ??? success "Solution"
-    
-       $L_{22} = f'(4) = \frac{1}{2\sqrt{4}} = 0.25$.
-       $L_{12} = L_{21} = \frac{\sqrt{4}-\sqrt{1}}{4-1} = \frac{2-1}{3} = 1/3$.
-       $L_2 = \begin{pmatrix} 0.5 & 1/3 \ 1/3 & 0.25 \end{pmatrix}$. $\det L_2 = 0.125 - 1/9 > 0$. It is positive definite.
+         $L_{22} = f'(4) = \frac{1}{2\sqrt{4}} = 0.25$.
+    $L_{12} = L_{21} = \frac{\sqrt{4}-\sqrt{1}}{4-1} = \frac{2-1}{3} = 1/3$.
+    $L_2 = \begin{pmatrix} 0.5 & 1/3 \ 1/3 & 0.25 \end{pmatrix}$. $\det L_2 = 0.125 - 1/9 > 0$. It is positive definite.
 
 ****
-
 ??? success "Solution"
-    
-       $(\lambda A + (1-\lambda)B)^2 = \lambda^2 A^2 + (1-\lambda)^2 B^2 + \lambda(1-\lambda)(AB + BA)$.
-       The inequality reduces to checking if $\lambda(1-\lambda)(A-B)^2 \succeq 0$, which is true since $(A-B)^2 \succeq 0$ for any Hermitian $A, B$.
+         $(\lambda A + (1-\lambda)B)^2 = \lambda^2 A^2 + (1-\lambda)^2 B^2 + \lambda(1-\lambda)(AB + BA)$.
+    The inequality reduces to checking if $\lambda(1-\lambda)(A-B)^2 \succeq 0$, which is true since $(A-B)^2 \succeq 0$ for any Hermitian $A, B$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter explores the preservation of matrix structure under functional maps:
 
-1. **Order Preservation**: Defined operator monotonicity and identified the barrier at $t^r$ for $r > 1$.
-2. **Analytic Characterization**: Leveraged Löwner's theorem to link operator monotonicity to the theory of Pick functions.
-3. **Convexity Calculus**: Developed operator convexity and Jensen-type inequalities for matrix operators.
-4. **Information Bounds**: Applied these results to establish the joint concavity of trace functions, leading to the proof of Strong Subadditivity in quantum mechanics.
+
+****: Defined operator monotonicity and identified the barrier at $t^r$ for $r > 1$.
+
+****: Leveraged Löwner's theorem to link operator monotonicity to the theory of Pick functions.
+
+****: Developed operator convexity and Jensen-type inequalities for matrix operators.
+
+****: Applied these results to establish the joint concavity of trace functions, leading to the proof of Strong Subadditivity in quantum mechanics.

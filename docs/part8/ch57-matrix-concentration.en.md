@@ -50,51 +50,60 @@ In statistics and computer science, we frequently deal with matrices formed by t
 
 ## Exercises
 
-1.  **[Basics] State the Golden-Thompson Inequality and its role in concentration theory.**
-    ??? success "Solution"
-        $\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$. It is used to decompose the exponential moments of a sum of matrices into the trace of products of individual exponential moments, transforming operator problems into scalar expectation problems.
-
-2.  **[Dimension] Why does the right-hand side of matrix concentration bounds typically contain a factor $d$ (the dimension)?**
-    ??? success "Solution"
-        This factor comes from estimating the trace. It represents the accumulation of possible deviations across all spectral directions, reflecting the "curse of dimensionality" in high-dimensional spaces.
-
-3.  **[Bernstein] In the Matrix Bernstein inequality, if $\sigma^2$ is large, how does the concentration speed of $t$ change?**
-    ??? success "Solution"
-        The speed decreases. Larger variance implies more violent random fluctuations, requiring more terms in the sum to achieve tight concentration.
-
-4.  **[Convergence] Prove that if $P(\lambda_{\max}(S) \ge t) \le d e^{-ct^2}$, the probability of large deviations vanishes rapidly.**
-    ??? success "Solution"
-        The probability decays as a Gaussian (quadratic exponential), meaning large deviations are extremely unlikely.
-
-5.  **[Independence] Do matrix concentration inequalities require the random terms to be independent?**
-    ??? success "Solution"
-        Classic versions (Chernoff/Bernstein) require independence. For dependent terms, one typically uses the Matrix Azuma Inequality based on martingale difference sequences.
-
-6.  **[Calculation] Find the expectation of the sum of $n$ identity matrices of dimension $d=100$.**
-    ??? success "Solution"
-        If $X_i = I_{100}$, then $\sum X_i = n I_{100}$. The eigenvalues are deterministically $n$.
-
-7.  **[Random Graphs] Why is concentration theory needed for the spectral analysis of Laplacian matrices?**
-    ??? success "Solution"
-        Edges in a random graph are generated stochastically, so the Laplacian is a random matrix variable. Concentration ensures that for large graphs, the spectrum of the random graph is extremely close to that of the expected graph (e.g., Erdős-Rényi).
-
-8.  **[Norm] What is the relationship between $\|A\|_2$ and the eigenvalues for a symmetric matrix?**
-    ??? success "Solution"
-        $\|A\|_2 = \max(|\lambda_{\max}|, |\lambda_{\min}|)$. Tail probabilities are usually estimated for both directions separately.
-
-9.  **[Comparison] What is the difference between Matrix Hoeffding and Matrix Bernstein?**
-    ??? success "Solution"
-        Hoeffding depends only on the bounded range $R$ of the random variables, while Bernstein utilizes refined variance information $\sigma^2$, providing tighter bounds when the variance is small.
 
 ****
-
 ??? success "Solution"
-    
+     $\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$. It is used to decompose the exponential moments of a sum of matrices into the trace of products of individual exponential moments, transforming operator problems into scalar expectation problems.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     This factor comes from estimating the trace. It represents the accumulation of possible deviations across all spectral directions, reflecting the "curse of dimensionality" in high-dimensional spaces.
+
+
+****
+??? success "Solution"
+     The speed decreases. Larger variance implies more violent random fluctuations, requiring more terms in the sum to achieve tight concentration.
+
+
+****
+??? success "Solution"
+     The probability decays as a Gaussian (quadratic exponential), meaning large deviations are extremely unlikely.
+
+
+****
+??? success "Solution"
+     Classic versions (Chernoff/Bernstein) require independence. For dependent terms, one typically uses the Matrix Azuma Inequality based on martingale difference sequences.
+
+
+****
+??? success "Solution"
+     If $X_i = I_{100}$, then $\sum X_i = n I_{100}$. The eigenvalues are deterministically $n$.
+
+
+****
+??? success "Solution"
+     Edges in a random graph are generated stochastically, so the Laplacian is a random matrix variable. Concentration ensures that for large graphs, the spectrum of the random graph is extremely close to that of the expected graph (e.g., Erdős-Rényi).
+
+
+****
+??? success "Solution"
+     $\|A\|_2 = \max(|\lambda_{\max}|, |\lambda_{\min}|)$. Tail probabilities are usually estimated for both directions separately.
+
+
+****
+??? success "Solution"
+     Hoeffding depends only on the bounded range $R$ of the random variables, while Bernstein utilizes refined variance information $\sigma^2$, providing tighter bounds when the variance is small.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix concentration inequalities are the "anchor of certainty" in high-dimensional worlds:
 
-1.  **Countering Non-commutativity**: Via the Golden-Thompson inequality, the theory ingeniously avoids the non-commutativity of matrix products, reducing complex operator analysis to tractable scalar estimations.
-2.  **The Cost of Dimension**: Revealed the logarithmic impact of the dimension $d$ on the speed of concentration, establishing criteria for balancing sample size and model complexity in high-dimensional data analysis.
-3.  **Algorithmic Guarantees**: As the mathematical foundation for the robustness of numerical algorithms, it proves that even randomized approximate computations can achieve reliable results close to exact solutions in the context of massive datasets.
+
+****: Via the Golden-Thompson inequality, the theory ingeniously avoids the non-commutativity of matrix products, reducing complex operator analysis to tractable scalar estimations.
+
+****: Revealed the logarithmic impact of the dimension $d$ on the speed of concentration, establishing criteria for balancing sample size and model complexity in high-dimensional data analysis.
+
+****: As the mathematical foundation for the robustness of numerical algorithms, it proves that even randomized approximate computations can achieve reliable results close to exact solutions in the context of massive datasets.

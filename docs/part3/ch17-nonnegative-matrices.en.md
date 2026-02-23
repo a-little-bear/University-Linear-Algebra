@@ -50,59 +50,32 @@ In the real world, most physical quantities (e.g., probability, population, mone
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Non-negative matrix theory establishes a harmonic resonance between physical laws and algebraic structures:
 
-1.  **Preservation of Positivity**: Perron-Frobenius theory establishes the positivity of the principal eigenvector, providing unique and valid steady-state solutions for problems in probability and resource allocation.
-2.  **Structural Connectivity**: Irreducibility links matrix algebra to graph topology, proving that "global circulation" is a prerequisite for a system to converge to a unique stable state.
-3.  **Computational Convergence**: Stochastic matrix theory lays the foundation for all equilibrium evolution processes (e.g., Markov chains), revealing the final destination of information flow in complex networks.
+
+****: Perron-Frobenius theory establishes the positivity of the principal eigenvector, providing unique and valid steady-state solutions for problems in probability and resource allocation.
+
+****: Irreducibility links matrix algebra to graph topology, proving that "global circulation" is a prerequisite for a system to converge to a unique stable state.
+
+****: Stochastic matrix theory lays the foundation for all equilibrium evolution processes (e.g., Markov chains), revealing the final destination of information flow in complex networks.

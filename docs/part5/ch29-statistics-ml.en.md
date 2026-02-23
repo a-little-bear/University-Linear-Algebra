@@ -70,52 +70,62 @@ Machine learning is essentially large-scale, high-dimensional geometry. Every da
 
 ## Exercises
 
-1.  **[Covariance] Why is a covariance matrix always positive semi-definite?**
-    ??? success "Solution"
-        Because $\Sigma = \frac{1}{n-1} X_c^T X_c$. For any $v$, $v^T \Sigma v = \frac{1}{n-1} \|X_c v\|^2 \ge 0$.
-
-2.  **[PCA] What is the geometric interpretation of the first principal component?**
-    ??? success "Solution"
-        It is the direction of the major axis of the hyper-ellipsoid formed by the data distribution.
-
-3.  **[OLS] If $X$ has linearly dependent columns, what happens to the Normal Equation?**
-    ??? success "Solution"
-        $X^T X$ becomes singular (not invertible). One must use the Moore-Penrose pseudoinverse $X^+$ or add regularization (Ridge).
-
-4.  **[Kernel] Prove the linear kernel $K(x, y) = x^T y$ is a valid kernel.**
-   ??? success "Solution"
-       Its Gram matrix is $X X^T$ (for data matrix $X$), which is always PSD.
-
-5.  **[Neural Net] In a network with 100 hidden units and 10 output units, what is the dimension of the weight matrix $W$ connecting them?**
-    ??? success "Solution"
-        $10 \times 100$.
-
-6.  **[Vanishing Gradient] Relate the vanishing gradient problem to singular values.**
-    ??? success "Solution"
-        If the singular values of the weight matrices are all significantly less than 1, the product of Jacobians in backpropagation will shrink exponentially, causing the gradient to vanish.
-
-7.  **[Recommendation] In matrix factorization $R \approx UV^T$, if $R$ is $10^6 \times 10^5$ and we use $k=100$ latent factors, how much compression is achieved?**
-    ??? success "Solution"
-        Original: $10^{11}$ entries. Factorized: $(10^6 + 10^5) \times 100 \approx 1.1 \times 10^8$. Compression is roughly 1000x.
-
-8.  **[LDA] What matrix problem does Linear Discriminant Analysis solve?**
-    ??? success "Solution"
-        It solves a generalized eigenvalue problem $S_B w = \lambda S_W w$, where $S_B$ is the between-class scatter and $S_W$ is the within-class scatter.
-
-9.  **[Mahalanobis] Define the Mahalanobis distance between $x$ and $\mu$ relative to covariance $\Sigma$.**
-    ??? success "Solution"
-        $d = \sqrt{(x-\mu)^T \Sigma^{-1} (x-\mu)}$. It scales distances by the inverse of the data's variance.
 
 ****
-
 ??? success "Solution"
-    
+     Because $\Sigma = \frac{1}{n-1} X_c^T X_c$. For any $v$, $v^T \Sigma v = \frac{1}{n-1} \|X_c v\|^2 \ge 0$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     It is the direction of the major axis of the hyper-ellipsoid formed by the data distribution.
+
+
+****
+??? success "Solution"
+     $X^T X$ becomes singular (not invertible). One must use the Moore-Penrose pseudoinverse $X^+$ or add regularization (Ridge).
+
+
+****
+??? success "Solution"
+    Its Gram matrix is $X X^T$ (for data matrix $X$), which is always PSD.
+
+
+****
+??? success "Solution"
+     $10 \times 100$.
+
+
+****
+??? success "Solution"
+     If the singular values of the weight matrices are all significantly less than 1, the product of Jacobians in backpropagation will shrink exponentially, causing the gradient to vanish.
+
+
+****
+??? success "Solution"
+     Original: $10^{11}$ entries. Factorized: $(10^6 + 10^5) \times 100 \approx 1.1 \times 10^8$. Compression is roughly 1000x.
+
+
+****
+??? success "Solution"
+     It solves a generalized eigenvalue problem $S_B w = \lambda S_W w$, where $S_B$ is the between-class scatter and $S_W$ is the within-class scatter.
+
+
+****
+??? success "Solution"
+     $d = \sqrt{(x-\mu)^T \Sigma^{-1} (x-\mu)}$. It scales distances by the inverse of the data's variance.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Statistics and Machine Learning are the practical realizations of high-dimensional matrix analysis:
 
-1.  **Geometric Reduction**: PCA and SVD show that high-dimensional data often live on lower-dimensional "manifolds," and linear algebra is the tool to find them.
-2.  **Algebraic Learning**: Identified OLS and SVM as specific linear systems or quadratic programs, proving that training AI is a form of matrix optimization.
-3.  **Algorithmic Flow**: Explained Neural Networks as matrix chains, linking the stability of deep learning to the spectral properties of weight matrices.
-4.  **Implicit Spaces**: Used Kernel methods to prove that linear algebra can solve non-linear problems by working in the right feature space.
+
+****: PCA and SVD show that high-dimensional data often live on lower-dimensional "manifolds," and linear algebra is the tool to find them.
+
+****: Identified OLS and SVM as specific linear systems or quadratic programs, proving that training AI is a form of matrix optimization.
+
+****: Explained Neural Networks as matrix chains, linking the stability of deep learning to the spectral properties of weight matrices.
+
+****: Used Kernel methods to prove that linear algebra can solve non-linear problems by working in the right feature space.

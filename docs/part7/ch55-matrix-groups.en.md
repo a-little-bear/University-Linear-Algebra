@@ -46,51 +46,60 @@ In previous chapters, we focused on the properties of individual matrices. Now, 
 
 ## Exercises
 
-1.  **[Basics] Prove: If $A, B \in SL(n)$, then $AB \in SL(n)$.**
-    ??? success "Solution"
-        $\det(AB) = \det(A)\det(B) = 1 \cdot 1 = 1$. Thus it satisfies the definition.
-
-2.  **[Determinant] Prove that the determinant of any element in $O(n)$ is $\pm 1$.**
-    ??? success "Solution"
-        $Q^T Q = I \implies \det(Q)^2 = 1 \implies \det(Q) = \pm 1$.
-
-3.  **[Inverse] Prove that if $A$ is an orthogonal matrix, its inverse $A^{-1}$ is also orthogonal.**
-    ??? success "Solution"
-        $A^{-1} = A^T$. Since $(A^T)^T A^T = A A^T = I$, $A^T$ is orthogonal.
-
-4.  **[Unitary] How many real parameters are needed to describe $SU(2)$?**
-    ??? success "Solution"
-        3 parameters. It is isomorphic to the unit 3-sphere $S^3$, often represented using 3 Euler angles or Pauli matrices.
-
-5.  **[Symplectic] What is the relationship between $Sp(2, \mathbb{R})$ and $SL(2, \mathbb{R})$?**
-    ??? success "Solution"
-        In 2 dimensions, the symplectic condition is equivalent to having a determinant of 1, so the groups are identical.
-
-6.  **[Physics] Why is $U(n)$ critical in quantum mechanics?**
-    ??? success "Solution"
-        Because it preserves the norm (probability) of complex state vectors.
-
-7.  **[Robotics] Which two parts comprise the Special Euclidean group $SE(3)$ for rigid body transforms?**
-    ??? success "Solution"
-        A rotation matrix from $SO(3)$ and a translation vector in $\mathbb{R}^3$.
-
-8.  **[Topology] Is $GL(n, \mathbb{R})$ connected?**
-    ??? success "Solution"
-        No. it is partitioned into two components by the sign of the determinant ($\det A > 0$ and $\det A < 0$).
-
-9.  **[Lie Algebra] Prove: If $X$ is a skew-symmetric matrix, then $e^X$ is an orthogonal matrix.**
-    ??? success "Solution"
-        $(e^X)^T = e^{X^T} = e^{-X} = (e^X)^{-1}$. Thus $(e^X)^T e^X = I$.
 
 ****
-
 ??? success "Solution"
-    
+     $\det(AB) = \det(A)\det(B) = 1 \cdot 1 = 1$. Thus it satisfies the definition.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $Q^T Q = I \implies \det(Q)^2 = 1 \implies \det(Q) = \pm 1$.
+
+
+****
+??? success "Solution"
+     $A^{-1} = A^T$. Since $(A^T)^T A^T = A A^T = I$, $A^T$ is orthogonal.
+
+
+****
+??? success "Solution"
+     3 parameters. It is isomorphic to the unit 3-sphere $S^3$, often represented using 3 Euler angles or Pauli matrices.
+
+
+****
+??? success "Solution"
+     In 2 dimensions, the symplectic condition is equivalent to having a determinant of 1, so the groups are identical.
+
+
+****
+??? success "Solution"
+     Because it preserves the norm (probability) of complex state vectors.
+
+
+****
+??? success "Solution"
+     A rotation matrix from $SO(3)$ and a translation vector in $\mathbb{R}^3$.
+
+
+****
+??? success "Solution"
+     No. it is partitioned into two components by the sign of the determinant ($\det A > 0$ and $\det A < 0$).
+
+
+****
+??? success "Solution"
+     $(e^X)^T = e^{X^T} = e^{-X} = (e^X)^{-1}$. Thus $(e^X)^T e^X = I$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix groups establish the global geometric structure of linear transformations:
 
-1.  **Systematization of Symmetry**: Matrix groups integrate isolated properties (length/volume preservation) into rigorous structures, providing standard algebraic language for physical laws.
-2.  **Intertwining Algebra and Topology**: Studying compactness and connectedness reveals the large-scale geometry of operator space, essential for understanding gimbal lock, singularities, and stability.
-3.  **Bridging Local and Global**: The exponential map demonstrates how infinitesimal transformations (Lie algebras) generate finite transformations (matrix groups), establishing the computational paradigm for continuous evolution.
+
+****: Matrix groups integrate isolated properties (length/volume preservation) into rigorous structures, providing standard algebraic language for physical laws.
+
+****: Studying compactness and connectedness reveals the large-scale geometry of operator space, essential for understanding gimbal lock, singularities, and stability.
+
+****: The exponential map demonstrates how infinitesimal transformations (Lie algebras) generate finite transformations (matrix groups), establishing the computational paradigm for continuous evolution.

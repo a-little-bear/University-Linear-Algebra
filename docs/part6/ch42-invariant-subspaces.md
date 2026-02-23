@@ -235,8 +235,7 @@ $$AX = XB.$$
     特征值 $\lambda = 0$ 的根子空间升链：
 
     - $\ker(A) = \operatorname{span}\{e_1, e_4, e_6\}$（注意 $e_6$ 不在 $\ker(A)$ 中，因为 $Ae_6 = e_6 \neq 0$）。
-
-      更准确地：$\ker(A) = \operatorname{span}\{e_1, e_4\}$（只看 $\lambda = 0$ 的部分），$\dim = 2$。
+    更准确地：$\ker(A) = \operatorname{span}\{e_1, e_4\}$（只看 $\lambda = 0$ 的部分），$\dim = 2$。
 
     - $\ker(A^2)|_{\mathcal{V}_0} = \operatorname{span}\{e_1, e_2, e_4, e_5\}$，$\dim = 4$。
 
@@ -703,53 +702,42 @@ Rosenblum 定理给出了不变子空间扰动理论中的核心代数工具。D
 ## 练习题
 
 ****
-
 ??? success "参考答案"
-    
-       - 若 $v \in \operatorname{Im}(T)$，则 $Tv$ 显然属于 $T$ 的像集，即 $Tv \in \operatorname{Im}(T)$。
+         - 若 $v \in \operatorname{Im}(T)$，则 $Tv$ 显然属于 $T$ 的像集，即 $Tv \in \operatorname{Im}(T)$。
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
 ****
-
 ??? success "参考答案"
     
 
@@ -757,8 +745,12 @@ Rosenblum 定理给出了不变子空间扰动理论中的核心代数工具。D
 
 本章探讨了线性算子的稳定性与结构：
 
-1. **子空间动力学**：定义了不变、超不变和约化子空间，作为算子分解的代数单元。
-2. **几何度量**：引入了典则角度，定量化了线性子空间之间的“距离”。
-3. **扰动稳健性**：解读了 Davis-Kahan 和 Wedin 定理，将谱间隙与特征向量及奇异向量的稳定性相联系。
-4. **分析工具**：利用谱投影和 Rosenblum 定理，为子空间分析提供了严谨的数学框架。
+
+****：定义了不变、超不变和约化子空间，作为算子分解的代数单元。
+
+****：引入了典则角度，定量化了线性子空间之间的“距离”。
+
+****：解读了 Davis-Kahan 和 Wedin 定理，将谱间隙与特征向量及奇异向量的稳定性相联系。
+
+****：利用谱投影和 Rosenblum 定理，为子空间分析提供了严谨的数学框架。
 

@@ -84,52 +84,62 @@ Graphs are discrete structures consisting of vertices and edges, yet they can be
 
 ## Exercises
 
-1.  **[Adjacency] If the diagonal of $A^2$ consists of all ones, what does this say about the graph?**
-    ??? success "Solution"
-        It means each vertex has exactly one neighbor, so the graph is a collection of disjoint edges (a perfect matching).
-
-2.  **[Triangles] A graph has adjacency eigenvalues $2, 0, -2$. How many triangles does it have?**
-    ??? success "Solution"
-        $\operatorname{tr}(A^3) = 2^3 + 0^3 + (-2)^3 = 8 - 8 = 0$. The graph has zero triangles (it is a bipartite graph).
-
-3.  **[Laplacian] Calculate the Laplacian of a complete graph $K_3$.**
-    ??? success "Solution"
-        $D = \operatorname{diag}(2, 2, 2)$, $A = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} \implies L = \begin{pmatrix} 2 & -1 & -1 \\ -1 & 2 & -1 \\ -1 & -1 & 2 \end{pmatrix}$.
-
-4.  **[Eigenvalue 0] Why is $\mathbf{1} = (1, \ldots, 1)^T$ always an eigenvector of $L$ with eigenvalue 0?**
-    ??? success "Solution"
-        Because each row of $L$ sums to $d_i - \sum A_{ij} = d_i - d_i = 0$. Thus $L\mathbf{1} = \mathbf{0}$.
-
-5.  **[Connectivity] If a graph has Laplacian eigenvalues $0, 0, 2, 3$, how many connected components does it have?**
-    ??? success "Solution"
-        The multiplicity of 0 is 2, so the graph has 2 connected components.
-
-6.  **[PageRank] Why is the damping factor $\alpha < 1$ used in PageRank?**
-    ??? success "Solution"
-        To ensure the transition matrix is primitive and irreducible (it makes the graph strongly connected), allowing the power method to converge to a unique solution.
-
-7.  **[Matrix-Tree] How many spanning trees does $K_3$ have?**
-    ??? success "Solution"
-        $L$ eigenvalues are $0, 3, 3$. Number of trees $= \frac{1}{3}(3 \cdot 3) = 3$.
-
-8.  **[Bipartite] If the adjacency spectrum is $\{3, 1, -1, -3\}$, is the graph bipartite?**
-    ??? success "Solution"
-        Yes, the spectrum is perfectly symmetric about 0.
-
-9.  **[Network Flow] Relate the Incidence Matrix $B$ to flow conservation.**
-    ??? success "Solution"
-        If $f$ is a vector of flows on edges, then $Bf$ is a vector of net flows at each vertex. Flow conservation (Kirchhoff's Current Law) is expressed as $Bf = 0$ for all internal nodes.
 
 ****
-
 ??? success "Solution"
-    
+     It means each vertex has exactly one neighbor, so the graph is a collection of disjoint edges (a perfect matching).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\operatorname{tr}(A^3) = 2^3 + 0^3 + (-2)^3 = 8 - 8 = 0$. The graph has zero triangles (it is a bipartite graph).
+
+
+****
+??? success "Solution"
+     $D = \operatorname{diag}(2, 2, 2)$, $A = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} \implies L = \begin{pmatrix} 2 & -1 & -1 \\ -1 & 2 & -1 \\ -1 & -1 & 2 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     Because each row of $L$ sums to $d_i - \sum A_{ij} = d_i - d_i = 0$. Thus $L\mathbf{1} = \mathbf{0}$.
+
+
+****
+??? success "Solution"
+     The multiplicity of 0 is 2, so the graph has 2 connected components.
+
+
+****
+??? success "Solution"
+     To ensure the transition matrix is primitive and irreducible (it makes the graph strongly connected), allowing the power method to converge to a unique solution.
+
+
+****
+??? success "Solution"
+     $L$ eigenvalues are $0, 3, 3$. Number of trees $= \frac{1}{3}(3 \cdot 3) = 3$.
+
+
+****
+??? success "Solution"
+     Yes, the spectrum is perfectly symmetric about 0.
+
+
+****
+??? success "Solution"
+     If $f$ is a vector of flows on edges, then $Bf$ is a vector of net flows at each vertex. Flow conservation (Kirchhoff's Current Law) is expressed as $Bf = 0$ for all internal nodes.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra provides the "X-ray" for complex networks:
 
-1.  **Algebraic Encoding**: Transformed combinatorial objects (nodes/edges) into analytic objects (matrices), enabling the use of spectral tools.
-2.  **Structural Fingerprint**: Established that the eigenvalues of a graph are not just numbers but descriptors of connectivity, bipartite structure, and density.
-3.  **Flow Dynamics**: Linked random walks and diffuse processes to the steady-state properties of stochastic matrices.
-4.  **Optimal Partitioning**: Used the Cheeger inequality to prove that the "physics" of the graph (eigenvalues) can solve the "logic" of the graph (min-cut problems).
+
+****: Transformed combinatorial objects (nodes/edges) into analytic objects (matrices), enabling the use of spectral tools.
+
+****: Established that the eigenvalues of a graph are not just numbers but descriptors of connectivity, bipartite structure, and density.
+
+****: Linked random walks and diffuse processes to the steady-state properties of stochastic matrices.
+
+****: Used the Cheeger inequality to prove that the "physics" of the graph (eigenvalues) can solve the "logic" of the graph (min-cut problems).

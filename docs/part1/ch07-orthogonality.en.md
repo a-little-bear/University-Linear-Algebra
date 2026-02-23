@@ -59,59 +59,32 @@ If linear independence is the "skeleton" of a space, then orthogonality is its "
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Orthogonality establishes the metric geometry of linear spaces:
 
-1.  **Coordinate Purification**: The Gram-Schmidt process shows how to extract independent, standardized "pure" dimensions from a cluttered basis.
-2.  **Optimal Error Handling**: Through orthogonal projection, the method of least squares finds the most reasonable "compromise" for inconsistent observation data caused by noise.
-3.  **Stability Assurance**: Orthogonal matrices $Q$, due to their energy-preserving (norm-preserving) nature, form the underlying core of modern numerical linear algebra algorithms (e.g., Householder transforms, QR algorithm).
+
+****: The Gram-Schmidt process shows how to extract independent, standardized "pure" dimensions from a cluttered basis.
+
+****: Through orthogonal projection, the method of least squares finds the most reasonable "compromise" for inconsistent observation data caused by noise.
+
+****: Orthogonal matrices $Q$, due to their energy-preserving (norm-preserving) nature, form the underlying core of modern numerical linear algebra algorithms (e.g., Householder transforms, QR algorithm).

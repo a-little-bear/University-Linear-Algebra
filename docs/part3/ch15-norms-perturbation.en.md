@@ -56,59 +56,32 @@ In pure mathematics, we speak of exact solutions, but in numerical computation, 
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Norms and perturbation theory are the "lifeline" of computational mathematics:
 
-1.  **Relative Magnitude**: Norms transform abstract matrices into comparable numerical values, establishing a metric for error assessment.
-2.  **Stability Indicator**: The condition number is the ultimate barometer of algorithmic reliability, marking the boundaries of numerical simulation—not every mathematically correct problem is solvable on a computer.
-3.  **Cost of Diagonalization**: The Bauer-Fike theorem reveals that the stability of the diagonalization process itself is limited by the degree of orthogonality of the basis vectors, emphasizing the central role of orthonormal bases in numerical linear algebra.
+
+****: Norms transform abstract matrices into comparable numerical values, establishing a metric for error assessment.
+
+****: The condition number is the ultimate barometer of algorithmic reliability, marking the boundaries of numerical simulation—not every mathematically correct problem is solvable on a computer.
+
+****: The Bauer-Fike theorem reveals that the stability of the diagonalization process itself is limited by the degree of orthogonality of the basis vectors, emphasizing the central role of orthonormal bases in numerical linear algebra.

@@ -57,51 +57,60 @@ If a physical system returns to its equilibrium state after a small perturbation
 
 ## Exercises
 
-1.  **[Hurwitz] Determine if $A = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix}$ is Hurwitz stable.**
-    ??? success "Solution"
-        Yes. The eigenvalues are -1 and -2, both of which have negative real parts.
-
-2.  **[Schur] Determine if $\begin{pmatrix} 0.5 & 0.5 \\ 0 & 0.5 \end{pmatrix}$ is Schur stable.**
-    ??? success "Solution"
-        Yes. The eigenvalues are 0.5, both of which have moduli less than 1.
-
-3.  **[Lyapunov] If the solution to $A^T P + PA = -I$ is $P = \operatorname{diag}(1, 2)$, is $A$ stable?**
-    ??? success "Solution"
-        Yes. Since $Q=I \succ 0$ and $P \succ 0$, by the Lyapunov theorem, $A$ is Hurwitz stable.
-
-4.  **[Inertia] What is the inertia of the identity matrix $I_n$?**
-    ??? success "Solution"
-        $\operatorname{In}(I_n) = (n, 0, 0)$. All eigenvalues are 1.
-
-5.  **[Trace] Prove: If $A$ is Hurwitz stable, then $\operatorname{tr}(A) < 0$.**
-    ??? success "Solution"
-        $\operatorname{tr}(A) = \sum \lambda_i$. Since each $\operatorname{Re}(\lambda_i) < 0$, the real part of their sum must also be negative. For a real matrix, the trace is real, so it must be less than 0.
-
-6.  **[Skew-symmetric] Prove that a purely skew-symmetric matrix ($A^T = -A$) cannot be Hurwitz stable.**
-    ??? success "Solution"
-        The eigenvalues of a skew-symmetric matrix are purely imaginary (real part is 0), which does not satisfy the condition that the real part must be strictly less than 0. Its inertia is $(0, 0, n)$.
-
-7.  **[Determinant] Prove: If an $n \times n$ real matrix $A$ is Hurwitz stable, then $(-1)^n \det(A) > 0$.**
-    ??? success "Solution"
-        $\det(A) = \prod \lambda_i$. Each real eigenvalue is negative, and complex eigenvalues appear in pairs with a positive product. Thus the sign is determined by the number of real negative roots, which is $(-1)^n$.
-
-8.  **[D-Stability] What is D-stability?**
-    ??? success "Solution"
-        A matrix $A$ is D-stable if $DA$ is Hurwitz stable for every positive diagonal matrix $D$. This is crucial in the stability analysis of ecology and neural networks.
-
-9.  **[Jury] What type of stability is the Jury criterion used to determine?**
-    ??? success "Solution"
-        It is used to determine the Schur stability of discrete-time systems (eigenvalues within the unit circle).
 
 ****
-
 ??? success "Solution"
-    
+     Yes. The eigenvalues are -1 and -2, both of which have negative real parts.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Yes. The eigenvalues are 0.5, both of which have moduli less than 1.
+
+
+****
+??? success "Solution"
+     Yes. Since $Q=I \succ 0$ and $P \succ 0$, by the Lyapunov theorem, $A$ is Hurwitz stable.
+
+
+****
+??? success "Solution"
+     $\operatorname{In}(I_n) = (n, 0, 0)$. All eigenvalues are 1.
+
+
+****
+??? success "Solution"
+     $\operatorname{tr}(A) = \sum \lambda_i$. Since each $\operatorname{Re}(\lambda_i) < 0$, the real part of their sum must also be negative. For a real matrix, the trace is real, so it must be less than 0.
+
+
+****
+??? success "Solution"
+     The eigenvalues of a skew-symmetric matrix are purely imaginary (real part is 0), which does not satisfy the condition that the real part must be strictly less than 0. Its inertia is $(0, 0, n)$.
+
+
+****
+??? success "Solution"
+     $\det(A) = \prod \lambda_i$. Each real eigenvalue is negative, and complex eigenvalues appear in pairs with a positive product. Thus the sign is determined by the number of real negative roots, which is $(-1)^n$.
+
+
+****
+??? success "Solution"
+     A matrix $A$ is D-stable if $DA$ is Hurwitz stable for every positive diagonal matrix $D$. This is crucial in the stability analysis of ecology and neural networks.
+
+
+****
+??? success "Solution"
+     It is used to determine the Schur stability of discrete-time systems (eigenvalues within the unit circle).
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix stability is the core criterion for analyzing dynamical systems:
 
-1.  **Topological Classification of Spectra**: Hurwitz and Schur stability define the algebraic boundaries where "order" triumphs over "chaos" under continuous and discrete evolution, respectively.
-2.  **Monotonicity of Energy**: Lyapunov's theorem proves that stability is essentially the monotonic decrease of a generalized energy (quadratic form) over time, transforming problems of analysis into problems of positive definite matrix algebra.
-3.  **Structural Robustness**: Through tools like inertia and Routh tables, we can predict a system's survival space under parameter fluctuations without solving for exact eigenvalues, establishing a benchmark for robustness in control design.
+
+****: Hurwitz and Schur stability define the algebraic boundaries where "order" triumphs over "chaos" under continuous and discrete evolution, respectively.
+
+****: Lyapunov's theorem proves that stability is essentially the monotonic decrease of a generalized energy (quadratic form) over time, transforming problems of analysis into problems of positive definite matrix algebra.
+
+****: Through tools like inertia and Routh tables, we can predict a system's survival space under parameter fluctuations without solving for exact eigenvalues, establishing a benchmark for robustness in control design.

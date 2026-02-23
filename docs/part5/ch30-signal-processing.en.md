@@ -81,52 +81,62 @@ Almost everything in modern telecommunications, audio processing, and image comp
 
 ## Exercises
 
-1.  **[DFT] Calculate $F_2$.**
-    ??? success "Solution"
-        $\omega = e^{-i\pi} = -1$. $F_2 = \begin{pmatrix} \omega^0 & \omega^0 \\ \omega^0 & \omega^1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$.
-
-2.  **[Eigenvalues] What are the eigenvalues of a circulant matrix?**
-    ??? success "Solution"
-        The eigenvalues are the DFT coefficients of its first row.
-
-3.  **[Filtering] Why is filtering in the frequency domain $O(n \log n)$?**
-    ??? success "Solution"
-        Two FFTs ($O(n \log n)$), one element-wise multiplication ($O(n)$), and one inverse FFT ($O(n \log n)$). Total: $O(n \log n)$.
-
-4.  **[Toeplitz] What kind of system does a Toeplitz matrix represent?**
-    ??? success "Solution"
-        A Linear Time-Invariant (LTI) system with finite-length signals.
-
-5.  **[Sparsity] If a signal has only 5 non-zero values in its Fourier transform, how sparse is it?**
-    ??? success "Solution"
-        Its sparsity level is $s = 5$.
-
-6.  **[Hamming] In coding theory, what is the Hamming weight of a vector?**
-    ??? success "Solution"
-        The number of non-zero entries. For linear codes, the minimum Hamming distance of the code equals the minimum Hamming weight of any non-zero codeword.
-
-7.  **[Wavelets] How does the Wavelet transform differ from the Fourier transform?**
-    ??? success "Solution"
-        Fourier uses global sinusoids (frequency info only); Wavelets use localized pulses (time and frequency info). DWT matrix is typically sparse and orthogonal.
-
-8.  **[RIP] Why is the Restricted Isometry Property important?**
-    ??? success "Solution"
-        It guarantees that the measurement matrix $A$ preserves the distances between sparse vectors, making reconstruction robust.
-
-9.  **[Generator] If $G$ is a $k \times n$ generator matrix, what is the dimension of the code?**
-    ??? success "Solution"
-        $k$.
 
 ****
-
 ??? success "Solution"
-    
+     $\omega = e^{-i\pi} = -1$. $F_2 = \begin{pmatrix} \omega^0 & \omega^0 \\ \omega^0 & \omega^1 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     The eigenvalues are the DFT coefficients of its first row.
+
+
+****
+??? success "Solution"
+     Two FFTs ($O(n \log n)$), one element-wise multiplication ($O(n)$), and one inverse FFT ($O(n \log n)$). Total: $O(n \log n)$.
+
+
+****
+??? success "Solution"
+     A Linear Time-Invariant (LTI) system with finite-length signals.
+
+
+****
+??? success "Solution"
+     Its sparsity level is $s = 5$.
+
+
+****
+??? success "Solution"
+     The number of non-zero entries. For linear codes, the minimum Hamming distance of the code equals the minimum Hamming weight of any non-zero codeword.
+
+
+****
+??? success "Solution"
+     Fourier uses global sinusoids (frequency info only); Wavelets use localized pulses (time and frequency info). DWT matrix is typically sparse and orthogonal.
+
+
+****
+??? success "Solution"
+     It guarantees that the measurement matrix $A$ preserves the distances between sparse vectors, making reconstruction robust.
+
+
+****
+??? success "Solution"
+     $k$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra is the "mother tongue" of signal processing:
 
-1.  **Unitary Rotation**: Recognized the DFT as a rotation into a spectral basis, where signals are decomposed into fundamental frequencies.
-2.  **Structural Acceleration**: Showed how circulant and Toeplitz structures allow for FFT-based algorithms that are exponentially faster than naive methods.
-3.  **Sparsity & Recovery**: Developed the theory of compressed sensing, proving that linear algebra can reconstruct information from sub-Nyquist data streams.
-4.  **Redundancy Logic**: Framed error correction as a subspace problem over finite fields, where parity checks are linear constraints.
+
+****: Recognized the DFT as a rotation into a spectral basis, where signals are decomposed into fundamental frequencies.
+
+****: Showed how circulant and Toeplitz structures allow for FFT-based algorithms that are exponentially faster than naive methods.
+
+****: Developed the theory of compressed sensing, proving that linear algebra can reconstruct information from sub-Nyquist data streams.
+
+****: Framed error correction as a subspace problem over finite fields, where parity checks are linear constraints.

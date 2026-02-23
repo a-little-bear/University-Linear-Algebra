@@ -54,52 +54,61 @@ In much of linear algebra, our task is to compute the eigenvalues of a given mat
 
 ## Exercises
 
-1.  **[Basics] A $2 \times 2$ symmetric matrix has eigenvalues 1 and 3, and its diagonal entries are both 2. Find the matrix.**
-    ??? success "Solution"
-        $\operatorname{tr}(A) = 2+2=4 = 1+3$. $\det(A) = 4 - a_{12}^2 = 1 \cdot 3 = 3 \implies a_{12}^2 = 1 \implies a_{12} = \pm 1$.
-        The matrix is $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ or $\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.
-
-2.  **[Schur-Horn] If target eigenvalues are $(10, 0)$, can the diagonal entries be set to $(6, 4)$?**
-    ??? success "Solution"
-        Yes, because $(6, 4) \prec (10, 0)$, satisfying the majorization requirement for symmetric matrices.
-
-3.  **[NIEP] Determine if $\{2, -1, -1\}$ can be the spectrum of a non-negative matrix.**
-    ??? success "Solution"
-        Yes. This set is trace-zero. A $3 \times 3$ circulant matrix like $\begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}$ has eigenvalues $2, -1, -1$.
-
-4.  **[Uniqueness] Why are IEPs typically non-unique?**
-    ??? success "Solution"
-        Because eigenvalues do not contain information about eigenvectors (rotation). Unless strict structural constraints are applied (like Jacobi matrices), many similar matrices share the same spectrum.
-
-5.  **[Structure] Can an $n \times n$ Toeplitz matrix be uniquely determined by its eigenvalues?**
-    ??? success "Solution"
-        Generally no. Eigenvalues provide only $n$ pieces of information, while a Toeplitz matrix has $2n-1$ parameters.
-
-6.  **[Vibration] Briefly describe the application of IEP in bridge monitoring.**
-    ??? success "Solution"
-        By measuring the vibration frequencies (eigenvalues) of a bridge under excitation, one can back-calculate changes in the stiffness matrix to locate structural damage.
-
-7.  **[Polynomial] How do you write the target characteristic polynomial for a target spectrum $\{\lambda_1, \lambda_2\}$?**
-    ??? success "Solution"
-        $p(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) = \lambda^2 - (\lambda_1+\lambda_2)\lambda + \lambda_1\lambda_2$.
-
-8.  **[Companion] Is the companion matrix a trivial construction for an IEP?**
-    ??? success "Solution"
-        Yes. It fills in the coefficients of the target polynomial directly, providing the simplest non-symmetric construction for any given spectrum.
-
-9.  **[Sensitivity] Why do repeated eigenvalues make IEPs numerically difficult?**
-    ??? success "Solution"
-        Eigenvalues are not Fréchet differentiable at points of multiplicity (see Ch47B), making gradient-based methods fail or become extremely unstable.
 
 ****
-
 ??? success "Solution"
-    
+     $\operatorname{tr}(A) = 2+2=4 = 1+3$. $\det(A) = 4 - a_{12}^2 = 1 \cdot 3 = 3 \implies a_{12}^2 = 1 \implies a_{12} = \pm 1$.
+     The matrix is $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ or $\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Yes, because $(6, 4) \prec (10, 0)$, satisfying the majorization requirement for symmetric matrices.
+
+
+****
+??? success "Solution"
+     Yes. This set is trace-zero. A $3 \times 3$ circulant matrix like $\begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}$ has eigenvalues $2, -1, -1$.
+
+
+****
+??? success "Solution"
+     Because eigenvalues do not contain information about eigenvectors (rotation). Unless strict structural constraints are applied (like Jacobi matrices), many similar matrices share the same spectrum.
+
+
+****
+??? success "Solution"
+     Generally no. Eigenvalues provide only $n$ pieces of information, while a Toeplitz matrix has $2n-1$ parameters.
+
+
+****
+??? success "Solution"
+     By measuring the vibration frequencies (eigenvalues) of a bridge under excitation, one can back-calculate changes in the stiffness matrix to locate structural damage.
+
+
+****
+??? success "Solution"
+     $p(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) = \lambda^2 - (\lambda_1+\lambda_2)\lambda + \lambda_1\lambda_2$.
+
+
+****
+??? success "Solution"
+     Yes. It fills in the coefficients of the target polynomial directly, providing the simplest non-symmetric construction for any given spectrum.
+
+
+****
+??? success "Solution"
+     Eigenvalues are not Fréchet differentiable at points of multiplicity (see Ch47B), making gradient-based methods fail or become extremely unstable.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Inverse eigenvalue problems are the "blueprints" of mathematical modeling:
 
-1.  **From Abstract to Real**: IEP establishes the path from abstract spectral targets back to concrete physical parameters, bridging theoretical physics and engineering.
-2.  **Art of Constraint**: The core of IEP lies in the balance between "structural constraints" and "spectral data"; an unconstrained problem is trivial (companion matrix), while an over-constrained one is unsolvable.
-3.  **Return to Stability**: Through numerical IEP algorithms, we can finely adjust local elements of an operator to achieve global stability, demonstrating linear algebra's agency in complex system optimization.
+
+****: IEP establishes the path from abstract spectral targets back to concrete physical parameters, bridging theoretical physics and engineering.
+
+****: The core of IEP lies in the balance between "structural constraints" and "spectral data"; an unconstrained problem is trivial (companion matrix), while an over-constrained one is unsolvable.
+
+****: Through numerical IEP algorithms, we can finely adjust local elements of an operator to achieve global stability, demonstrating linear algebra's agency in complex system optimization.

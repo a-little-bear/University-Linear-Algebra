@@ -56,51 +56,60 @@ In classical analysis, a convex function satisfies $f(\lambda x + (1-\lambda)y) 
 
 ## Exercises
 
-1.  **[Basics] Prove that $f(x) = ax+b$ is both operator convex and operator concave.**
-    ??? success "Solution"
-        Since $f(\lambda A + (1-\lambda)B) = a(\lambda A + (1-\lambda)B) + bI = \lambda f(A) + (1-\lambda)f(B)$, the equality holds identically.
-
-2.  **[Counter-example] Is $f(x) = x^3$ operator convex on the set of positive definite matrices?**
-    ??? success "Solution"
-        No. While it is scalar convex on $\mathbb{R}^+$, it fails the operator convexity condition for matrices of order $n \ge 2$.
-
-3.  **[Property] Prove: If $f$ is operator convex, then $g(x) = f(x) + c$ is also operator convex.**
-    ??? success "Solution"
-        The constant terms cancel out on both sides of the inequality, leaving the Löwner relationship unchanged.
-
-4.  **[Inverse] Explain why $A \preceq B \implies B^{-1} \preceq A^{-1}$ for positive definite matrices.**
-    ??? success "Solution"
-        This follows from the fact that $f(x) = 1/x$ is an operator monotone decreasing function.
-
-5.  **[Sum] Is the sum of two operator convex functions necessarily operator convex?**
-    ??? success "Solution"
-        Yes. The Löwner order is closed under addition.
-
-6.  **[Entropy] In quantum mechanics, why is the von Neumann entropy $S(\rho) = -\operatorname{tr}(\rho \log \rho)$ concave?**
-    ??? success "Solution"
-        Because $f(x) = x \log x$ is operator convex, so its negative is operator concave. The trace operator preserves this concavity.
-
-7.  **[Monotonicity] Is an operator convex function always operator monotone?**
-    ??? success "Solution"
-        No. For example, $x^2$ is operator convex but is not operator monotone on $(0, \infty)$ (unless restricted to a specific domain).
-
-8.  **[Calculation] Let $A = \operatorname{diag}(1, 2)$ and $B = \operatorname{diag}(2, 1)$. Verify operator convexity for $f(x)=x^2$.**
-    ??? success "Solution"
-        $(\frac{A+B}{2})^2 = (1.5 I)^2 = 2.25 I$. $\frac{A^2+B^2}{2} = \frac{\operatorname{diag}(1, 4) + \operatorname{diag}(4, 1)}{2} = 2.5 I$. Since $2.25 I \preceq 2.5 I$, convexity holds.
-
-9.  **[SSA] What is Strong Subadditivity (SSA) of quantum entropy?**
-    ??? success "Solution"
-        $S(\rho_{ABC}) + S(\rho_B) \le S(\rho_{AB}) + S(\rho_{BC})$. Its algebraic proof relies heavily on the operator convexity of $x \log x$ and the resulting trace inequalities.
 
 ****
-
 ??? success "Solution"
-    
+     Since $f(\lambda A + (1-\lambda)B) = a(\lambda A + (1-\lambda)B) + bI = \lambda f(A) + (1-\lambda)f(B)$, the equality holds identically.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     No. While it is scalar convex on $\mathbb{R}^+$, it fails the operator convexity condition for matrices of order $n \ge 2$.
+
+
+****
+??? success "Solution"
+     The constant terms cancel out on both sides of the inequality, leaving the Löwner relationship unchanged.
+
+
+****
+??? success "Solution"
+     This follows from the fact that $f(x) = 1/x$ is an operator monotone decreasing function.
+
+
+****
+??? success "Solution"
+     Yes. The Löwner order is closed under addition.
+
+
+****
+??? success "Solution"
+     Because $f(x) = x \log x$ is operator convex, so its negative is operator concave. The trace operator preserves this concavity.
+
+
+****
+??? success "Solution"
+     No. For example, $x^2$ is operator convex but is not operator monotone on $(0, \infty)$ (unless restricted to a specific domain).
+
+
+****
+??? success "Solution"
+     $(\frac{A+B}{2})^2 = (1.5 I)^2 = 2.25 I$. $\frac{A^2+B^2}{2} = \frac{\operatorname{diag}(1, 4) + \operatorname{diag}(4, 1)}{2} = 2.5 I$. Since $2.25 I \preceq 2.5 I$, convexity holds.
+
+
+****
+??? success "Solution"
+     $S(\rho_{ABC}) + S(\rho_B) \le S(\rho_{AB}) + S(\rho_{BC})$. Its algebraic proof relies heavily on the operator convexity of $x \log x$ and the resulting trace inequalities.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix convex functions establish stability criteria under non-linear operator actions:
 
-1.  **Rigidity of Order**: Operator convexity proves that in non-commutative environments, non-linear transformations that preserve partial ordering are extremely rare, setting strict mathematical boundaries for energy evolution in physical systems.
-2.  **Analytic Link**: Theorems by Kraus and Löwner link purely algebraic inequalities to analytic properties in the complex plane, revealing that operator convexity is essentially a projection of certain holomorphic structures.
-3.  **Bedrock of Information**: Operator convex functions, epitomized by $x \log x$, support the entirety of entropy principles and stability analysis in quantum information theory, proving that algebraic convexity is the fundamental logic of cosmic information conservation.
+
+****: Operator convexity proves that in non-commutative environments, non-linear transformations that preserve partial ordering are extremely rare, setting strict mathematical boundaries for energy evolution in physical systems.
+
+****: Theorems by Kraus and Löwner link purely algebraic inequalities to analytic properties in the complex plane, revealing that operator convexity is essentially a projection of certain holomorphic structures.
+
+****: Operator convex functions, epitomized by $x \log x$, support the entirety of entropy principles and stability analysis in quantum information theory, proving that algebraic convexity is the fundamental logic of cosmic information conservation.

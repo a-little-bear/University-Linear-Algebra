@@ -53,51 +53,60 @@ In many real-world systems, such as ecological networks or macroeconomic models,
 
 ## Exercises
 
-1.  **[Basics] Is the sign pattern $S = \begin{pmatrix} + & + \\ + & + \end{pmatrix}$ Sign-Nonsingular?**
-    ??? success "Solution"
-        No. The qualitative class contains $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ (singular) and $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ (non-singular).
-
-2.  **[SNS Criterion] Determine if $S = \begin{pmatrix} + & + \\ - & + \end{pmatrix}$ is SNS.**
-    ??? success "Solution"
-        Yes. The determinant is $a_{11}a_{22} - a_{12}a_{21}$. Since $a_{11}a_{22} > 0$ and $-a_{12}a_{21} > 0$, the sum is always strictly positive.
-
-3.  **[Graph Theory] How is the SNS property related to the graph of the matrix?**
-    ??? success "Solution"
-        It relates to the parity of directed cycles. If all cycles have a negative sign-product, it often suggests SNS potential.
-
-4.  **[Max Rank] What is the maximum rank of $\begin{pmatrix} + & 0 \\ + & - \end{pmatrix}$?**
-    ??? success "Solution"
-        2. Since there is a non-singular sub-pattern, the maximum rank is full.
-
-5.  **[Stability] Prove that an all-positive matrix cannot be sign-stable.**
-    ??? success "Solution"
-        According to Perron-Frobenius theory, an all-positive matrix must have a positive eigenvalue, which violates the requirement for eigenvalues to have negative real parts.
-
-6.  **[Allowed] What is an "Allowed Diagonalizable" sign pattern?**
-    ??? success "Solution"
-        A pattern $S$ such that at least one matrix in $\mathcal{Q}(S)$ is diagonalizable.
-
-7.  **[Ecology] Why do systems with negative self-loops tend toward sign-stability?**
-    ??? success "Solution"
-        Negative self-loops represent internal self-inhibition (e.g., resource competition), which algebraically shifts the real parts of eigenvalues in the negative direction.
-
-8.  **[Calculation] Provide a sign-stable pattern in $M_2$.**
-    ??? success "Solution"
-        $S = \begin{pmatrix} - & + \\ - & 0 \end{pmatrix}$. The characteristic equation is $\lambda^2 - a_{11}\lambda - a_{12}a_{21} = 0$. Since $a_{11} < 0$ and $-a_{12}a_{21} > 0$, the roots must have negative real parts.
-
-9.  **[Qualitative Economics] What is the Samuelson Problem?**
-    ??? success "Solution"
-        It investigates whether the stability of market equilibrium or the direction of comparative static changes can be determined knowing only the signs of the interactions between economic variables.
 
 ****
-
 ??? success "Solution"
-    
+     No. The qualitative class contains $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$ (singular) and $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ (non-singular).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Yes. The determinant is $a_{11}a_{22} - a_{12}a_{21}$. Since $a_{11}a_{22} > 0$ and $-a_{12}a_{21} > 0$, the sum is always strictly positive.
+
+
+****
+??? success "Solution"
+     It relates to the parity of directed cycles. If all cycles have a negative sign-product, it often suggests SNS potential.
+
+
+****
+??? success "Solution"
+     2. Since there is a non-singular sub-pattern, the maximum rank is full.
+
+
+****
+??? success "Solution"
+     According to Perron-Frobenius theory, an all-positive matrix must have a positive eigenvalue, which violates the requirement for eigenvalues to have negative real parts.
+
+
+****
+??? success "Solution"
+     A pattern $S$ such that at least one matrix in $\mathcal{Q}(S)$ is diagonalizable.
+
+
+****
+??? success "Solution"
+     Negative self-loops represent internal self-inhibition (e.g., resource competition), which algebraically shifts the real parts of eigenvalues in the negative direction.
+
+
+****
+??? success "Solution"
+     $S = \begin{pmatrix} - & + \\ - & 0 \end{pmatrix}$. The characteristic equation is $\lambda^2 - a_{11}\lambda - a_{12}a_{21} = 0$. Since $a_{11} < 0$ and $-a_{12}a_{21} > 0$, the roots must have negative real parts.
+
+
+****
+??? success "Solution"
+     It investigates whether the stability of market equilibrium or the direction of comparative static changes can be determined knowing only the signs of the interactions between economic variables.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Sign pattern theory defines the limits of structured information:
 
-1.  **Form Over Value**: It proves that certain core traits of linear systems (invariants, stability) are hard-coded into the "polarity" of interactions rather than precise parameters.
-2.  **Qualitative Robustness**: SNS and sign-stability provide the most robust evaluation standards, defining systems that maintain function even under extreme data fluctuations.
-3.  **Combinatorial Constraints**: By combining graph theory and algebra, sign pattern theory provides a "low-resolution" but "high-reliability" analytic tool for complex networks, from neural circuits to global supply chains.
+
+****: It proves that certain core traits of linear systems (invariants, stability) are hard-coded into the "polarity" of interactions rather than precise parameters.
+
+****: SNS and sign-stability provide the most robust evaluation standards, defining systems that maintain function even under extreme data fluctuations.
+
+****: By combining graph theory and algebra, sign pattern theory provides a "low-resolution" but "high-reliability" analytic tool for complex networks, from neural circuits to global supply chains.

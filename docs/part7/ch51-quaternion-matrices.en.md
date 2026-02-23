@@ -54,51 +54,60 @@ Complex numbers brought linear algebra into the realm of 2D rotations, but **Qua
 
 ## Exercises
 
-1.  **[Basics] Calculate the value of $ij + ji$.**
-    ??? success "Solution"
-        $k + (-k) = 0$. This reflects the anti-commutativity of the imaginary units.
-
-2.  **[Conjugate] Prove $\overline{q_1 q_2} = \bar{q}_2 \bar{q}_1$.**
-    ??? success "Solution"
-        Expand using the definition. Note that due to non-commutativity, the order of multiplication must be reversed under conjugation.
-
-3.  **[Representation] Write the $2 \times 2$ complex representation matrix for the unit $j$.**
-    ??? success "Solution"
-        $j = 0 + 1j \implies \alpha=0, \beta=1$. Thus $\chi(j) = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$.
-
-4.  **[Rotation] What rotation does a unit quaternion $q = \cos(\theta/2) + \mathbf{u} \sin(\theta/2)$ represent?**
-    ??? success "Solution"
-        It represents a rotation by angle $\theta$ around the unit axis $\mathbf{u}$.
-
-5.  **[Eigenvalue] Prove: If $\lambda$ is a right eigenvalue of $A$, then its conjugate $\bar{\lambda}$ must belong to an eigenvalue orbit of $A$.**
-    ??? success "Solution"
-        Utilizing the complex adjoint matrix $\chi(A)$. The eigenvalues of $\chi(A)$ appear in conjugate pairs, which correspond to the right eigenvalue orbits of the original quaternion matrix.
-
-6.  **[Unitary] What is a unitary quaternion matrix (or Symplectic matrix)?**
-    ??? success "Solution"
-        A quaternion matrix satisfying $A^* A = I$. The group of such matrices is known as the compact symplectic group $Sp(n)$.
-
-7.  **[Determinant] Why is there no simple determinant definition for quaternion matrices?**
-    ??? success "Solution"
-        Because multiplication is non-commutative, the order of terms in an expansion cannot be uniquely determined. Typically, the determinant of the real representation or the Dieudonné determinant is used.
-
-8.  **[Inverse] Find the inverse of $q = 1 + i$.**
-    ??? success "Solution"
-        $|q|^2 = 1^2 + 1^2 = 2$. Thus $q^{-1} = (1-i)/2 = 0.5 - 0.5i$.
-
-9.  **[Application] Why are quaternions preferred over Euler angles in satellite attitude control?**
-    ??? success "Solution"
-        Because quaternions provide a continuous coverage of the sphere, avoiding the singularities (Gimbal lock) associated with Euler angles at specific orientations.
 
 ****
-
 ??? success "Solution"
-    
+     $k + (-k) = 0$. This reflects the anti-commutativity of the imaginary units.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Expand using the definition. Note that due to non-commutativity, the order of multiplication must be reversed under conjugation.
+
+
+****
+??? success "Solution"
+     $j = 0 + 1j \implies \alpha=0, \beta=1$. Thus $\chi(j) = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     It represents a rotation by angle $\theta$ around the unit axis $\mathbf{u}$.
+
+
+****
+??? success "Solution"
+     Utilizing the complex adjoint matrix $\chi(A)$. The eigenvalues of $\chi(A)$ appear in conjugate pairs, which correspond to the right eigenvalue orbits of the original quaternion matrix.
+
+
+****
+??? success "Solution"
+     A quaternion matrix satisfying $A^* A = I$. The group of such matrices is known as the compact symplectic group $Sp(n)$.
+
+
+****
+??? success "Solution"
+     Because multiplication is non-commutative, the order of terms in an expansion cannot be uniquely determined. Typically, the determinant of the real representation or the Dieudonné determinant is used.
+
+
+****
+??? success "Solution"
+     $|q|^2 = 1^2 + 1^2 = 2$. Thus $q^{-1} = (1-i)/2 = 0.5 - 0.5i$.
+
+
+****
+??? success "Solution"
+     Because quaternions provide a continuous coverage of the sphere, avoiding the singularities (Gimbal lock) associated with Euler angles at specific orientations.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Quaternion matrices are powerful tools for handling high-dimensional rotation and symmetry:
 
-1.  **Dimensional Leap**: By sacrificing the commutative law, quaternions gain the ability to perform compact rotation arithmetic in 3D and 4D spaces, serving as the logical extension of complex numbers in geometric descriptive power.
-2.  **Bridging via Adjoints**: Complex adjoint matrices transform difficult non-commutative computations into established linear algebra algorithms, ensuring numerical stability for quaternion calculus.
-3.  **Group Foundations**: The theory of quaternion matrices is the natural gateway to Symplectic Geometry and Lie groups (e.g., $SU(2) \cong Sp(1)$), revealing deep connections between operator algebra and physical spatial symmetries.
+
+****: By sacrificing the commutative law, quaternions gain the ability to perform compact rotation arithmetic in 3D and 4D spaces, serving as the logical extension of complex numbers in geometric descriptive power.
+
+****: Complex adjoint matrices transform difficult non-commutative computations into established linear algebra algorithms, ensuring numerical stability for quaternion calculus.
+
+****: The theory of quaternion matrices is the natural gateway to Symplectic Geometry and Lie groups (e.g., $SU(2) \cong Sp(1)$), revealing deep connections between operator algebra and physical spatial symmetries.

@@ -93,56 +93,66 @@ The study of change is the domain of differential equations, and the study of st
 
 ## Exercises
 
-1.  **[System Solve] Solve $\mathbf{x}' = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix} \mathbf{x}$ with $\mathbf{x}(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        Eigenvalues: $\lambda^2 + 3\lambda + 2 = 0 \implies \lambda_1 = -1, \lambda_2 = -2$.
-        Eigenvectors: $\mathbf{v}_1 = (1, -1)^T, \mathbf{v}_2 = (1, -2)^T$.
-        $\mathbf{x}(t) = c_1 e^{-t} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + c_2 e^{-2t} \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.
-        $\mathbf{x}(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \implies c_1 = 2, c_2 = -1$.
-        $\mathbf{x}(t) = \begin{pmatrix} 2e^{-t} - e^{-2t} \\ -2e^{-t} + 2e^{-2t} \end{pmatrix}$.
-
-2.  **[Stability] Is the system $\mathbf{x}' = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix} \mathbf{x}$ stable?**
-    ??? success "Solution"
-        Yes, asymptotically stable. The eigenvalues are -1 and -2 (diagonal entries of a triangular matrix), both of which have negative real parts.
-
-3.  **[Phase Plane] Describe the origin for $\mathbf{x}' = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \mathbf{x}$.**
-    ??? success "Solution"
-        Eigenvalues: $\lambda^2 + 1 = 0 \implies \lambda = \pm i$. The origin is a **Center**, representing periodic oscillatory motion (closed orbits).
-
-4.  **[Duhamel] Write the solution formula for $\mathbf{x}' = A\mathbf{x} + \mathbf{b}$ where $\mathbf{b}$ is constant.**
-    ??? success "Solution"
-        $\mathbf{x}(t) = e^{At} \mathbf{x}_0 + (e^{At} - I)A^{-1} \mathbf{b}$ (if $A$ is invertible).
-
-5.  **[Companion] Write the companion matrix for $y'' + 5y' + 6y = 0$.**
-    ??? success "Solution"
-        $\begin{pmatrix} 0 & 1 \\ -6 & -5 \end{pmatrix}$.
-
-6.  **[Matrix Exp] Find $e^{At}$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        $A^2 = O$, so $e^{At} = I + At = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$.
-
-7.  **[Lyapunov] How does the Lyapunov equation $A^T P + PA = -Q$ relate to stability?**
-    ??? success "Solution"
-        If there exists a positive definite $P$ for a given $Q \succ 0$, then $A$ is Hurwitz (asymptotically stable). $V(x) = x^T P x$ acts as an energy function that strictly decreases over time.
-
-8.  **[Defective] What happens to the solution when $A$ has a Jordan block of size 2?**
-    ??? success "Solution"
-        The solution will contain terms like $t e^{\lambda t}$ in addition to $e^{\lambda t}$, representing slower-than-exponential decay or growth (or linear growth at resonance).
-
-9.  **[Orthogonality] In Sturm-Liouville theory, why are eigenfunctions orthogonal?**
-    ??? success "Solution"
-        Because the Sturm-Liouville operator is **self-adjoint** under a specific inner product, and the spectral theorem for self-adjoint operators guarantees orthogonal eigenspaces.
 
 ****
-
 ??? success "Solution"
-    
+     Eigenvalues: $\lambda^2 + 3\lambda + 2 = 0 \implies \lambda_1 = -1, \lambda_2 = -2$.
+     Eigenvectors: $\mathbf{v}_1 = (1, -1)^T, \mathbf{v}_2 = (1, -2)^T$.
+     $\mathbf{x}(t) = c_1 e^{-t} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + c_2 e^{-2t} \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.
+     $\mathbf{x}(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \implies c_1 = 2, c_2 = -1$.
+     $\mathbf{x}(t) = \begin{pmatrix} 2e^{-t} - e^{-2t} \\ -2e^{-t} + 2e^{-2t} \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Yes, asymptotically stable. The eigenvalues are -1 and -2 (diagonal entries of a triangular matrix), both of which have negative real parts.
+
+
+****
+??? success "Solution"
+     Eigenvalues: $\lambda^2 + 1 = 0 \implies \lambda = \pm i$. The origin is a **Center**, representing periodic oscillatory motion (closed orbits).
+
+
+****
+??? success "Solution"
+     $\mathbf{x}(t) = e^{At} \mathbf{x}_0 + (e^{At} - I)A^{-1} \mathbf{b}$ (if $A$ is invertible).
+
+
+****
+??? success "Solution"
+     $\begin{pmatrix} 0 & 1 \\ -6 & -5 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     $A^2 = O$, so $e^{At} = I + At = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     If there exists a positive definite $P$ for a given $Q \succ 0$, then $A$ is Hurwitz (asymptotically stable). $V(x) = x^T P x$ acts as an energy function that strictly decreases over time.
+
+
+****
+??? success "Solution"
+     The solution will contain terms like $t e^{\lambda t}$ in addition to $e^{\lambda t}$, representing slower-than-exponential decay or growth (or linear growth at resonance).
+
+
+****
+??? success "Solution"
+     Because the Sturm-Liouville operator is **self-adjoint** under a specific inner product, and the spectral theorem for self-adjoint operators guarantees orthogonal eigenspaces.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra provides the universal solution template for continuous change:
 
-1.  **Unified Solution Operator**: Identified $e^{At}$ as the fundamental operator that maps initial states to future states, unifying all linear ODE systems.
-2.  **Spectral Stability**: Linked the geometric position of eigenvalues in the complex plane to the qualitative physical behavior of systems (convergence vs. explosion).
-3.  **Dimensional Reduction**: Showed how high-order physical laws (like Newton's second law) can be linearized into first-order matrix systems.
-4.  **Spectral Decomposition**: Extended the theory to PDEs via Sturm-Liouville eigenfunctions, demonstrating that complex waves are just linear combinations of independent modal vibrations.
+
+****: Identified $e^{At}$ as the fundamental operator that maps initial states to future states, unifying all linear ODE systems.
+
+****: Linked the geometric position of eigenvalues in the complex plane to the qualitative physical behavior of systems (convergence vs. explosion).
+
+****: Showed how high-order physical laws (like Newton's second law) can be linearized into first-order matrix systems.
+
+****: Extended the theory to PDEs via Sturm-Liouville eigenfunctions, demonstrating that complex waves are just linear combinations of independent modal vibrations.

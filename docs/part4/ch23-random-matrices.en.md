@@ -80,55 +80,65 @@ In traditional linear algebra, matrices are deterministic. However, in modern bi
 
 ## Exercises
 
-1.  **[Semicircle] Calculate the support of the semicircle distribution for $A/\sqrt{n}$ if the entries have variance $\sigma^2 = 1$.**
-    ??? success "Solution"
-        The support is $[-2\sigma, 2\sigma] = [-2, 2]$.
-
-2.  **[M-P Law] If we have 1000 samples ($n=1000$) and 500 features ($p=500$), what is the aspect ratio $\gamma$ and the range of eigenvalues for the sample covariance matrix (assuming $\sigma=1$)?**
-    ??? success "Solution"
-        $\gamma = p/n = 0.5$.
-        $a = (1 - \sqrt{0.5})^2 \approx (1 - 0.707)^2 \approx 0.086$.
-        $b = (1 + \sqrt{0.5})^2 \approx (1 + 0.707)^2 \approx 2.91$.
-        The spectrum is spread across $[0.086, 2.91]$.
-
-3.  **[Spikes] What happens to the M-P law if the true covariance matrix is not $I$ but has one very large eigenvalue (a "spike")?**
-    ??? success "Solution"
-        If the spike is large enough (above the BBP threshold), one eigenvalue will "pop out" of the bulk distribution $[a, b]$ and become visible. This is the basis for signal detection in noise.
-
-4.  **[Universality] Does the Semicircle Law hold if the entries are not Gaussian (e.g., Uniform or Bernoulli)?**
-    ??? success "Solution"
-        Yes. As long as the entries are independent and have finite second moments, the semicircle law holds. This is the **Universality** of RMT.
-
-5.  **[Trace] Use the Semicircle Law to estimate $\frac{1}{n} \operatorname{tr}(A^2)$ for large $n$ (assuming $\sigma=1$).**
-    ??? success "Solution"
-        The average of $\lambda^2$ is $\int_{-2}^2 x^2 \rho(x) dx$. For the semicircle distribution, the second moment is $\sigma^2 = 1$. Thus, $\operatorname{tr}(A^2) \approx n$.
-
-6.  **[Invariance] Why is the GUE called "Unitary"?**
-    ??? success "Solution"
-        Because its probability density $P(A) \propto \exp(-\operatorname{tr}(A^2))$ is invariant under the change of basis $A \mapsto UAU^*$, where $U$ is a unitary matrix.
-
-7.  **[RMT in AI] How is RMT used in deep learning?**
-    ??? success "Solution"
-        It is used to analyze the initialization of weights. If the eigenvalues of the weight matrices are outside the "safe" range, gradients will either explode or vanish. RMT helps design "Orthogonal Initialization" to keep the spectrum stable.
-
-8.  **[Wishart] Is a Wishart matrix always positive semi-definite?**
-    ??? success "Solution"
-        Yes. Since $S = \frac{1}{n} XX^T$, the quadratic form $v^T S v = \frac{1}{n} \|X^T v\|^2 \ge 0$.
-
-9.  **[Compressed Sensing] How does RMT relate to the Restricted Isometry Property (RIP)?**
-    ??? success "Solution"
-        RMT proves that random Gaussian or Bernoulli matrices satisfy RIP with high probability, meaning they act like an isometry on sparse vectors.
 
 ****
-
 ??? success "Solution"
-    
+     The support is $[-2\sigma, 2\sigma] = [-2, 2]$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\gamma = p/n = 0.5$.
+     $a = (1 - \sqrt{0.5})^2 \approx (1 - 0.707)^2 \approx 0.086$.
+     $b = (1 + \sqrt{0.5})^2 \approx (1 + 0.707)^2 \approx 2.91$.
+     The spectrum is spread across $[0.086, 2.91]$.
+
+
+****
+??? success "Solution"
+     If the spike is large enough (above the BBP threshold), one eigenvalue will "pop out" of the bulk distribution $[a, b]$ and become visible. This is the basis for signal detection in noise.
+
+
+****
+??? success "Solution"
+     Yes. As long as the entries are independent and have finite second moments, the semicircle law holds. This is the **Universality** of RMT.
+
+
+****
+??? success "Solution"
+     The average of $\lambda^2$ is $\int_{-2}^2 x^2 \rho(x) dx$. For the semicircle distribution, the second moment is $\sigma^2 = 1$. Thus, $\operatorname{tr}(A^2) \approx n$.
+
+
+****
+??? success "Solution"
+     Because its probability density $P(A) \propto \exp(-\operatorname{tr}(A^2))$ is invariant under the change of basis $A \mapsto UAU^*$, where $U$ is a unitary matrix.
+
+
+****
+??? success "Solution"
+     It is used to analyze the initialization of weights. If the eigenvalues of the weight matrices are outside the "safe" range, gradients will either explode or vanish. RMT helps design "Orthogonal Initialization" to keep the spectrum stable.
+
+
+****
+??? success "Solution"
+     Yes. Since $S = \frac{1}{n} XX^T$, the quadratic form $v^T S v = \frac{1}{n} \|X^T v\|^2 \ge 0$.
+
+
+****
+??? success "Solution"
+     RMT proves that random Gaussian or Bernoulli matrices satisfy RIP with high probability, meaning they act like an isometry on sparse vectors.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Random Matrix Theory reveals the order hidden within high-dimensional chaos:
 
-1.  **Emergent Shapes**: Demonstrated that while individual eigenvalues are random, their collective density follows rigid, predictable shapes like the Semicircle or Marchenko-Pastur laws.
-2.  **Universal Laws**: Highlighted that spectral properties of large systems are often independent of the fine details of their components, depending only on their symmetry.
-3.  **Interaction Dynamics**: Identified level repulsion as the key difference between random matrices and simple random sequences, linking linear algebra to quantum physics.
-4.  **Practical Diagnostic**: Established RMT as a tool for distinguishing between true signals and random noise in high-dimensional data analysis.
+
+****: Demonstrated that while individual eigenvalues are random, their collective density follows rigid, predictable shapes like the Semicircle or Marchenko-Pastur laws.
+
+****: Highlighted that spectral properties of large systems are often independent of the fine details of their components, depending only on their symmetry.
+
+****: Identified level repulsion as the key difference between random matrices and simple random sequences, linking linear algebra to quantum physics.
+
+****: Established RMT as a tool for distinguishing between true signals and random noise in high-dimensional data analysis.

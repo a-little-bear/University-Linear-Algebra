@@ -31,9 +31,9 @@ The determinant is a function that maps a square matrix to a scalar value. Altho
     1.  **Transpose Invariance**: $\det(A^T) = \det(A)$.
     2.  **Multiplicative Property**: $\det(AB) = \det(A) \det(B)$.
     3.  **Row Operation Effects**:
-        - Swapping two rows flips the sign.
-        - Scaling a row by $k$ scales the determinant by $k$.
-        - Adding a multiple of one row to another **does not change** the determinant.
+     - Swapping two rows flips the sign.
+     - Scaling a row by $k$ scales the determinant by $k$.
+     - Adding a multiple of one row to another **does not change** the determinant.
     4.  **Invertibility**: $A$ is invertible $\iff \det(A) \neq 0$.
 
 ---
@@ -65,59 +65,32 @@ The determinant is a function that maps a square matrix to a scalar value. Altho
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 The determinant is the "volume tag" of a square matrix:
 
-1.  **Classification**: Whether the determinant is zero is the ultimate divide between invertible and singular matrices, and between systems with or without unique solutions.
-2.  **Structural Properties**: Laplace expansion recursion connects high-order determinants to lower-order submatrices, while the multiplicative property demonstrates the accumulation of volume after the composition of linear operators.
-3.  **Adjoint Tools**: The adjoint matrix not only provides an explicit formula for inversion but also deeply reveals the algebraic relationship between a matrix and its internal sub-blocks.
+
+****: Whether the determinant is zero is the ultimate divide between invertible and singular matrices, and between systems with or without unique solutions.
+
+****: Laplace expansion recursion connects high-order determinants to lower-order submatrices, while the multiplicative property demonstrates the accumulation of volume after the composition of linear operators.
+
+****: The adjoint matrix not only provides an explicit formula for inversion but also deeply reveals the algebraic relationship between a matrix and its internal sub-blocks.

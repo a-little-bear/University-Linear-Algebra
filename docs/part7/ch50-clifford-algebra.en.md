@@ -54,51 +54,60 @@ Traditional vector algebra (dot and cross products) often becomes cumbersome whe
 
 ## Exercises
 
-1.  **[Basics] In $Cl_2(\mathbb{R})$, with $e_1^2 = 1, e_2^2 = 1, e_1 e_2 = -e_2 e_1$, calculate $(e_1 + e_2)^2$.**
-    ??? success "Solution"
-        $(e_1 + e_2)^2 = e_1^2 + e_1 e_2 + e_2 e_1 + e_2^2 = 1 + 0 + 1 = 2$. This matches the $Q(v)$ definition.
-
-2.  **[Imaginary Unit] Prove that in $Cl_2(\mathbb{R})$, $I = e_1 e_2$ satisfies $I^2 = -1$.**
-    ??? success "Solution"
-        $(e_1 e_2)(e_1 e_2) = e_1 (e_2 e_1) e_2 = e_1 (-e_1 e_2) e_2 = -e_1^2 e_2^2 = -1$. This explains the essence of complex numbers in geometric algebra (as bivectors).
-
-3.  **[Rotation] Let $R = \cos(\theta/2) + e_{12}\sin(\theta/2)$. Find $R e_1 R^{-1}$.**
-    ??? success "Solution"
-        This represents a rotation by $\theta$ in the $e_1 e_2$ plane. The result is $e_1 \cos\theta + e_2 \sin\theta$.
-
-4.  **[Dimension] What is the dimension of $Cl_n$?**
-    ??? success "Solution"
-        $2^n$. It contains scalars, vectors, bivectors, ..., up to $n$-vectors.
-
-5.  **[Quaternions] Prove $Cl_{0,2}(\mathbb{R})$ is isomorphic to the quaternions $\mathbb{H}$.**
-    ??? success "Solution"
-        Take the basis $\{1, e_1, e_2, e_1 e_2\}$. Since $e_1^2 = -1, e_2^2 = -1, (e_1 e_2)^2 = -1$ and they satisfy the appropriate multiplication laws, it corresponds perfectly to $\{1, i, j, k\}$.
-
-6.  **[Physics] What do Dirac matrices $\gamma^\mu$ correspond to in Clifford algebra?**
-    ??? success "Solution"
-        They correspond to the orthonormal basis vectors of Minkowski space $Cl_{1,3}$.
-
-7.  **[Property] What is the center of a Clifford algebra?**
-    ??? success "Solution"
-        When $n$ is even, the center is $\{1\}$; when $n$ is odd, the center contains $1$ and the pseudoscalar $I = e_1 \cdots e_n$.
-
-8.  **[Adjoint] Define Clifford conjugation.**
-    ??? success "Solution"
-        Reversing the order of all vector products and applying a sign change. This is vital for constructing inverses in Pin/Spin groups.
-
-9.  **[Graphics] Why is geometric algebra useful in collision detection?**
-    ??? success "Solution"
-        Because it allows for a unified representation of lines, planes, and spheres using the same operators, turning intersection tests into simple algebraic products.
 
 ****
-
 ??? success "Solution"
-    
+     $(e_1 + e_2)^2 = e_1^2 + e_1 e_2 + e_2 e_1 + e_2^2 = 1 + 0 + 1 = 2$. This matches the $Q(v)$ definition.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $(e_1 e_2)(e_1 e_2) = e_1 (e_2 e_1) e_2 = e_1 (-e_1 e_2) e_2 = -e_1^2 e_2^2 = -1$. This explains the essence of complex numbers in geometric algebra (as bivectors).
+
+
+****
+??? success "Solution"
+     This represents a rotation by $\theta$ in the $e_1 e_2$ plane. The result is $e_1 \cos\theta + e_2 \sin\theta$.
+
+
+****
+??? success "Solution"
+     $2^n$. It contains scalars, vectors, bivectors, ..., up to $n$-vectors.
+
+
+****
+??? success "Solution"
+     Take the basis $\{1, e_1, e_2, e_1 e_2\}$. Since $e_1^2 = -1, e_2^2 = -1, (e_1 e_2)^2 = -1$ and they satisfy the appropriate multiplication laws, it corresponds perfectly to $\{1, i, j, k\}$.
+
+
+****
+??? success "Solution"
+     They correspond to the orthonormal basis vectors of Minkowski space $Cl_{1,3}$.
+
+
+****
+??? success "Solution"
+     When $n$ is even, the center is $\{1\}$; when $n$ is odd, the center contains $1$ and the pseudoscalar $I = e_1 \cdots e_n$.
+
+
+****
+??? success "Solution"
+     Reversing the order of all vector products and applying a sign change. This is vital for constructing inverses in Pin/Spin groups.
+
+
+****
+??? success "Solution"
+     Because it allows for a unified representation of lines, planes, and spheres using the same operators, turning intersection tests into simple algebraic products.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Clifford algebra is the ultimate fusion of geometry and algebra:
 
-1.  **Unification of Operations**: Via the geometric product, it merges traditional inner (metric) and outer (topological) products, removing arbitrary dimensional restrictions (like the uniqueness of the 3D cross product).
-2.  **Carrier of Symmetry**: Spinor theory proves that rotations are essentially adjoint actions within the algebra, providing the most efficient tools for describing symmetries from computer animation to particle physics.
-3.  **Periodicity of Structure**: Bott periodicity reveals a grand melody deep within mathematics, proving that complex geometric spaces eventually return to several fundamental matrix forms at the algebraic level.
+
+****: Via the geometric product, it merges traditional inner (metric) and outer (topological) products, removing arbitrary dimensional restrictions (like the uniqueness of the 3D cross product).
+
+****: Spinor theory proves that rotations are essentially adjoint actions within the algebra, providing the most efficient tools for describing symmetries from computer animation to particle physics.
+
+****: Bott periodicity reveals a grand melody deep within mathematics, proving that complex geometric spaces eventually return to several fundamental matrix forms at the algebraic level.

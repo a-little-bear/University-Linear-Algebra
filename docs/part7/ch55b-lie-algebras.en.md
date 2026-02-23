@@ -50,51 +50,60 @@ If matrix groups describe "global transformations," then **Lie Algebras** descri
 
 ## Exercises
 
-1.  **[Calculation] Calculate the Lie bracket of $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ and $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        $AB - BA = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ -2 & 0 \end{pmatrix}$.
-
-2.  **[Jacobi] Verify that $[x, [y, y]] = 0$ is consistent with the Jacobi Identity.**
-    ??? success "Solution"
-        Since $[y, y] = 0$, the left side is 0. The Jacobi Identity trivially holds whenever one of the nested brackets is zero.
-
-3.  **[Trace] Prove: if $A, B \in \mathfrak{sl}(n)$, then $[A, B] \in \mathfrak{sl}(n)$.**
-    ??? success "Solution"
-        $\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = 0$. Thus, the commutator is trace-zero.
-
-4.  **[Dimension] Prove that the dimension of $\mathfrak{so}(3)$ is 3.**
-    ??? success "Solution"
-        A $3 \times 3$ skew-symmetric matrix has the form $\begin{pmatrix} 0 & a & b \\ -a & 0 & c \\ -b & -c & 0 \end{pmatrix}$, which is determined by the 3 independent parameters $a, b, c$.
-
-5.  **[Quantum] Which Lie algebra corresponds to the commutation relations of the Pauli matrices?**
-    ??? success "Solution"
-        They correspond to $\mathfrak{su}(2)$ (which is isomorphic to $\mathfrak{so}(3)$). They represent the infinitesimal generators of angular momentum.
-
-6.  **[Exponential] Describe the geometric meaning of the map $\exp: \mathfrak{so}(n) \to SO(n)$.**
-    ??? success "Solution"
-        It maps a rotation velocity (a skew-symmetric matrix) to a finite rotation matrix.
-
-7.  **[Center] What is the center of a Lie algebra?**
-    ??? success "Solution"
-        The set of elements that commute with everything: $Z(\mathfrak{g}) = \{x \in \mathfrak{g} : [x, y]=0, \forall y \in \mathfrak{g}\}$.
-
-8.  **[Adjoint] Prove $\operatorname{ad}_{[X, Y]} = [\operatorname{ad}_X, \operatorname{ad}_Y]$.**
-    ??? success "Solution"
-        This is equivalent to the Jacobi Identity: $[[X, Y], Z] = [X, [Y, Z]] - [Y, [X, Z]]$.
-
-9.  **[Abelian] What type of Lie algebra has all structure constants equal to 0?**
-    ??? success "Solution"
-        An **Abelian Lie algebra**. In this case, the Lie bracket is always zero, corresponding to a commutative group.
 
 ****
-
 ??? success "Solution"
-    
+     $AB - BA = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ -2 & 0 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Since $[y, y] = 0$, the left side is 0. The Jacobi Identity trivially holds whenever one of the nested brackets is zero.
+
+
+****
+??? success "Solution"
+     $\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = 0$. Thus, the commutator is trace-zero.
+
+
+****
+??? success "Solution"
+     A $3 \times 3$ skew-symmetric matrix has the form $\begin{pmatrix} 0 & a & b \\ -a & 0 & c \\ -b & -c & 0 \end{pmatrix}$, which is determined by the 3 independent parameters $a, b, c$.
+
+
+****
+??? success "Solution"
+     They correspond to $\mathfrak{su}(2)$ (which is isomorphic to $\mathfrak{so}(3)$). They represent the infinitesimal generators of angular momentum.
+
+
+****
+??? success "Solution"
+     It maps a rotation velocity (a skew-symmetric matrix) to a finite rotation matrix.
+
+
+****
+??? success "Solution"
+     The set of elements that commute with everything: $Z(\mathfrak{g}) = \{x \in \mathfrak{g} : [x, y]=0, \forall y \in \mathfrak{g}\}$.
+
+
+****
+??? success "Solution"
+     This is equivalent to the Jacobi Identity: $[[X, Y], Z] = [X, [Y, Z]] - [Y, [X, Z]]$.
+
+
+****
+??? success "Solution"
+     An **Abelian Lie algebra**. In this case, the Lie bracket is always zero, corresponding to a commutative group.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Lie algebras are the highest form of linear algebra in the study of symmetry:
 
-1.  **Analytic Power of the Infinitesimal**: Through tangent space techniques, they reduce complex non-linear group manifolds to linear vector spaces, making the classification of symmetries computable.
-2.  **Unity of Operation**: The Lie bracket abstracts the essence of the matrix commutator, establishing algebraic rules for the interference between physical operators (such as momentum and spin).
-3.  **Structural Mapping**: Through the exponential map and adjoint representation, Lie algebras establish a "dynamic-replaces-static" analysis mode, proving that local infinitesimal changes are sufficient to determine global transformation laws.
+
+****: Through tangent space techniques, they reduce complex non-linear group manifolds to linear vector spaces, making the classification of symmetries computable.
+
+****: The Lie bracket abstracts the essence of the matrix commutator, establishing algebraic rules for the interference between physical operators (such as momentum and spin).
+
+****: Through the exponential map and adjoint representation, Lie algebras establish a "dynamic-replaces-static" analysis mode, proving that local infinitesimal changes are sufficient to determine global transformation laws.

@@ -44,6 +44,60 @@
 }
 
 /* ============================
+   导航栏滚动条修复 (绝对覆盖模式)
+   ============================ */
+
+/* 强制 Header 不截断内容 */
+.md-header {
+  overflow: visible !important;
+}
+
+/* 导航容器强制滚动 */
+.md-tabs {
+  background-color: var(--md-primary-fg-color) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  display: block !important;
+  white-space: nowrap !important;
+  -webkit-overflow-scrolling: touch !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 内部列表禁止换行，强制水平排列 */
+.md-tabs__list {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  height: 48px !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+  width: max-content !important; 
+  list-style: none !important;
+}
+
+/* 每个导航项保持原样，不压缩 */
+.md-tabs__item {
+  display: inline-block !important;
+  flex: 0 0 auto !important;
+  margin-right: 24px !important;
+}
+
+/* 滚动条样式定制 - 确保可见 */
+.md-tabs::-webkit-scrollbar {
+  height: 6px !important;
+  display: block !important;
+}
+
+.md-tabs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 10px !important;
+}
+
+.md-tabs::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ============================
    自定义 Admonition 类型
    ============================ */
 
@@ -113,107 +167,6 @@
   mask-image: var(--md-admonition-icon--lemma);
 }
 
-/* 推论 - 浅绿色 */
-:root {
-  --md-admonition-icon--corollary: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>');
-}
-
-.md-typeset .admonition.corollary,
-.md-typeset details.corollary {
-  border-color: #69f0ae;
-}
-
-.md-typeset .corollary > .admonition-title,
-.md-typeset .corollary > summary {
-  background-color: rgba(105, 240, 174, 0.1);
-}
-
-.md-typeset .corollary > .admonition-title::before,
-.md-typeset .corollary > summary::before {
-  background-color: #69f0ae;
-  -webkit-mask-image: var(--md-admonition-icon--corollary);
-  mask-image: var(--md-admonition-icon--corollary);
-}
-
-/* 命题 - 橙色 */
-:root {
-  --md-admonition-icon--proposition: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>');
-}
-
-.md-typeset .admonition.proposition,
-.md-typeset details.proposition {
-  border-color: #ff9100;
-}
-
-.md-typeset .proposition > .admonition-title,
-.md-typeset .proposition > summary {
-  background-color: rgba(255, 145, 0, 0.1);
-}
-
-.md-typeset .proposition > .admonition-title::before,
-.md-typeset .proposition > summary::before {
-  background-color: #ff9100;
-  -webkit-mask-image: var(--md-admonition-icon--proposition);
-  mask-image: var(--md-admonition-icon--proposition);
-}
-
-/* 证明 - 灰色 */
-:root {
-  --md-admonition-icon--proof: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>');
-}
-
-.md-typeset .admonition.proof,
-.md-typeset details.proof {
-  border-color: #9e9e9e;
-}
-
-.md-typeset .proof > .admonition-title,
-.md-typeset .proof > summary {
-  background-color: rgba(158, 158, 158, 0.1);
-}
-
-.md-typeset .proof > .admonition-title::before,
-.md-typeset .proof > summary::before {
-  background-color: #9e9e9e;
-  -webkit-mask-image: var(--md-admonition-icon--proof);
-  mask-image: var(--md-admonition-icon--proof);
-}
-
-/* 证明末尾 QED 符号 */
-.md-typeset .proof .admonition-content p:last-child::after,
-.md-typeset details.proof > p:last-child::after {
-  content: " ∎";
-  float: right;
-  font-size: 1.2em;
-}
-
-/* ============================
-   模式切换按钮
-   ============================ */
-
-.mode-toggle-btn {
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: currentColor;
-  padding: 0.2em;
-  margin: 0 0.2em;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  vertical-align: middle;
-  display: inline-flex;
-  align-items: center;
-}
-
-.mode-toggle-btn:hover {
-  opacity: 1;
-}
-
-.mode-toggle-btn svg {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
 /* ============================
    深度连接内容（context-flow）
    ============================ */
@@ -241,24 +194,6 @@
 
 .context-flow strong {
   color: var(--md-primary-fg-color);
-}
-
-/* ============================
-   定义速查模式
-   ============================ */
-
-body.definition-sheet .context-flow {
-  display: none !important;
-}
-
-body.definition-sheet .md-typeset h2 {
-  margin-top: 1.2em;
-  margin-bottom: 0.3em;
-}
-
-body.definition-sheet .md-typeset h3 {
-  margin-top: 0.8em;
-  margin-bottom: 0.2em;
 }
 
 /* ============================
@@ -293,87 +228,6 @@ body.definition-sheet .md-typeset h3 {
 .difficulty-tag.research {
   background-color: #ede7f6;
   color: #4a148c;
-}
-
-/* ============================
-   表格样式
-   ============================ */
-
-.md-typeset table:not([class]) {
-  font-size: 0.78rem;
-  border: 1px solid var(--md-default-fg-color--lightest);
-}
-
-.md-typeset table:not([class]) th {
-  background-color: var(--md-primary-fg-color);
-  color: var(--md-primary-bg-color);
-  font-weight: 600;
-}
-
-/* ============================
-   搜索增强
-   ============================ */
-
-.md-search__output {
-  max-height: 80vh;
-}
-
-/* ============================
-   响应式调整
-   ============================ */
-
-@media screen and (max-width: 76.1875em) {
-  .md-typeset .arithmatex {
-    font-size: 0.9em;
-  }
-}
-
-/* ============================
-   导航栏滚动条修复 (强力模式)
-   ============================ */
-
-.md-header__inner {
-  overflow: visible !important; /* 允许内部溢出 */
-}
-
-.md-tabs {
-  display: block !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  background-color: var(--md-primary-fg-color);
-  -webkit-overflow-scrolling: touch;
-  position: sticky;
-  top: 48px;
-  z-index: 1;
-}
-
-.md-tabs__list {
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  padding: 0 10px;
-  list-style: none;
-  margin: 0;
-  height: 48px;
-  align-items: center;
-}
-
-.md-tabs__item {
-  flex: 0 0 auto !important;
-  margin-right: 20px;
-}
-
-.md-tabs::-webkit-scrollbar {
-  height: 5px !important;
-  display: block !important;
-}
-
-.md-tabs::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.5) !important;
-  border-radius: 10px;
-}
-
-.md-tabs::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
 }
 
 /* ============================

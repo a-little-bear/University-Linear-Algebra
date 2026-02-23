@@ -31,64 +31,40 @@ What is the "middle point" between two positive definite matrices $A$ and $B$? U
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+         $2(A^{-1} + B^{-1})^{-1} \preceq A \# B \preceq \frac{A+B}{2}$.
 
 ****
-
 ??? success "Solution"
-    
+    ****
+??? success "Solution"
+         Multiply by $C^*$ on the left and $C$ on the right: $C^* X A^{-1} X C = C^* B C$.
+    Inserting $C^{-1}(C^*)^{-1}$: $(C^* X C) (C^* A C)^{-1} (C^* X C) = C^* B C$.
+    Thus $C^* X C$ is the geometric mean of $C^* A C$ and $C^* B C$.
 
 ****
-
 ??? success "Solution"
-    
-       $2(A^{-1} + B^{-1})^{-1} \preceq A \# B \preceq \frac{A+B}{2}$.
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-       Multiply by $C^*$ on the left and $C$ on the right: $C^* X A^{-1} X C = C^* B C$.
-       Inserting $C^{-1}(C^*)^{-1}$: $(C^* X C) (C^* A C)^{-1} (C^* X C) = C^* B C$.
-       Thus $C^* X C$ is the geometric mean of $C^* A C$ and $C^* B C$.
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter explores the synthesis of algebraic means and differential geometry:
 
-1. **Axiomatic Foundation**: Identified the Kubo-Ando framework as the rigorous path to define matrix means.
-2. **Spectral Interplay**: Linked matrix geometric means to Riccati equations and the theory of operator monotone functions.
-3. **Geometric Synthesis**: Developed the Riemannian geometry of the PSD manifold, identifying the geometric mean as the geodesic midpoint.
-4. **Multivariate Generalization**: Extended the two-variable mean to $k$ variables via Karcher's variational approach.
+
+****: Identified the Kubo-Ando framework as the rigorous path to define matrix means.
+
+****: Linked matrix geometric means to Riccati equations and the theory of operator monotone functions.
+
+****: Developed the Riemannian geometry of the PSD manifold, identifying the geometric mean as the geodesic midpoint.
+
+****: Extended the two-variable mean to $k$ variables via Karcher's variational approach.

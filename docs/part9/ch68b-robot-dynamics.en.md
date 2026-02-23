@@ -54,51 +54,60 @@ Kinematics tells us *where* a robot is, but **Robot Dynamics** tells us *how muc
 
 ## Exercises
 
-1.  **[Basics] For a simple pendulum with mass $m$ and length $l$, what is $M(q)$? (where $q$ is the angle).**
-    ??? success "Solution"
-        Kinetic energy $K = \frac{1}{2} m (l\dot{q})^2 = \frac{1}{2} (ml^2) \dot{q}^2$. Thus $M(q) = ml^2$ (a scalar inertia matrix).
-
-2.  **[Positive Definite] Why must $M(q)$ be positive definite?**
-    ??? success "Solution"
-        Because kinetic energy is a positive definite quadratic form. If $M$ had non-positive eigenvalues, it would mean that moving in certain directions would result in zero or negative kinetic energy, which contradicts physical laws of mass distribution.
-
-3.  **[Skew-Symmetry] How is the identity $\dot{M}-2C$ used in adaptive control?**
-    ??? success "Solution"
-        In a Lyapunov stability proof, the derivative of the kinetic energy term $\frac{1}{2} \frac{d}{dt}(\dot{q}^T M \dot{q})$ generates a $\frac{1}{2} \dot{q}^T \dot{M} \dot{q}$ term. By combining this with the $C$ matrix term, parts of the expression cancel out, simplifying the stability analysis.
-
-4.  **[Calculation] If $M(q) = \begin{pmatrix} a+b\cos q_2 & c \\ c & d \end{pmatrix}$, find $\dot{M}$.**
-    ??? success "Solution"
-        $\dot{M} = \begin{pmatrix} -b\sin(q_2)\dot{q}_2 & 0 \\ 0 & 0 \end{pmatrix}$. Note the use of the chain rule.
-
-5.  **[Operational Space] What is the Operational Space Inertia Matrix $\Lambda(x)$?**
-    ??? success "Solution"
-        $\Lambda(x) = (J M^{-1} J^T)^{-1}$. It describes the effective mass perceived at the end-effector in Cartesian space.
-
-6.  **[Application] Briefly explain the algebraic essence of "Computed Torque Control."**
-    ??? success "Solution"
-        It utilizes the inverse of the dynamic equations to algebraically cancel the non-linear terms $C\dot{q}$ and $G$, forcing the system to behave as a linear double integrator: $\ddot{q} = u$.
-
-7.  **[Gravity] Prove $G(q) = \nabla_q P(q)$, where $P$ is the potential energy.**
-    ??? success "Solution"
-        This follows directly from the definition of the conservative force term in the Euler-Lagrange equations.
-
-8.  **[Linearlity] If joint acceleration doubles, does torque $\tau$ double?**
-    ??? success "Solution"
-        No, because of the non-linear velocity-squared terms $\dot{q}$ (Coriolis forces) and the constant gravity term $G$. It is only approximately linear in quasi-static conditions or when velocity is negligible.
-
-9.  **[Complexity] How many Christoffel symbols are in the $C$ matrix of an $n$-DOF robot?**
-    ??? success "Solution"
-        $n^3$ symbols. Each $C_{ij} = \sum c_{ijk} \dot{q}_k$.
 
 ****
-
 ??? success "Solution"
-    
+     Kinetic energy $K = \frac{1}{2} m (l\dot{q})^2 = \frac{1}{2} (ml^2) \dot{q}^2$. Thus $M(q) = ml^2$ (a scalar inertia matrix).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Because kinetic energy is a positive definite quadratic form. If $M$ had non-positive eigenvalues, it would mean that moving in certain directions would result in zero or negative kinetic energy, which contradicts physical laws of mass distribution.
+
+
+****
+??? success "Solution"
+     In a Lyapunov stability proof, the derivative of the kinetic energy term $\frac{1}{2} \frac{d}{dt}(\dot{q}^T M \dot{q})$ generates a $\frac{1}{2} \dot{q}^T \dot{M} \dot{q}$ term. By combining this with the $C$ matrix term, parts of the expression cancel out, simplifying the stability analysis.
+
+
+****
+??? success "Solution"
+     $\dot{M} = \begin{pmatrix} -b\sin(q_2)\dot{q}_2 & 0 \\ 0 & 0 \end{pmatrix}$. Note the use of the chain rule.
+
+
+****
+??? success "Solution"
+     $\Lambda(x) = (J M^{-1} J^T)^{-1}$. It describes the effective mass perceived at the end-effector in Cartesian space.
+
+
+****
+??? success "Solution"
+     It utilizes the inverse of the dynamic equations to algebraically cancel the non-linear terms $C\dot{q}$ and $G$, forcing the system to behave as a linear double integrator: $\ddot{q} = u$.
+
+
+****
+??? success "Solution"
+     This follows directly from the definition of the conservative force term in the Euler-Lagrange equations.
+
+
+****
+??? success "Solution"
+     No, because of the non-linear velocity-squared terms $\dot{q}$ (Coriolis forces) and the constant gravity term $G$. It is only approximately linear in quasi-static conditions or when velocity is negligible.
+
+
+****
+??? success "Solution"
+     $n^3$ symbols. Each $C_{ij} = \sum c_{ijk} \dot{q}_k$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Robot dynamics demonstrates the depth of linear algebra in handling non-linear physical laws:
 
-1.  **Algebraization of Physics**: Through the three operators $M, C$, and $G$, dynamics condenses complex Newtonian derivations into standard matrix equations, establishing a universal format for multi-body simulation.
-2.  **Protection by Symmetry**: The positive definiteness of the mass matrix and the skew-symmetry of $\dot{M}-2C$ are not just mathematical tricks but projections of the Law of Conservation of Energy, providing a theoretical moat for robust control design.
-3.  **Determinism in Prediction**: The parameter-linearization property proves that even extremely complex motions are governed by underlying physical constants that can be isolated via linear regression, showcasing linear algebra as a powerful tool for scientific analysis.
+
+****: Through the three operators $M, C$, and $G$, dynamics condenses complex Newtonian derivations into standard matrix equations, establishing a universal format for multi-body simulation.
+
+****: The positive definiteness of the mass matrix and the skew-symmetry of $\dot{M}-2C$ are not just mathematical tricks but projections of the Law of Conservation of Energy, providing a theoretical moat for robust control design.
+
+****: The parameter-linearization property proves that even extremely complex motions are governed by underlying physical constants that can be isolated via linear regression, showcasing linear algebra as a powerful tool for scientific analysis.

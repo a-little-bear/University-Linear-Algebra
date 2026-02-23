@@ -46,51 +46,60 @@ If the determinant represents the "volume" of linear algebra, then the **Permane
 
 ## Exercises
 
-1.  **[Basic] Calculate the permanent of $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
-    ??? success "Solution"
-        $1(4) + 2(3) = 4 + 6 = 10$. (Note: the determinant is -2).
-
-2.  **[Diagonal] What is the permanent of a diagonal matrix?**
-    ??? success "Solution"
-        It is the product of the diagonal entries. In this case, the permanent equals the determinant.
-
-3.  **[Bipartite] If $A$ is the adjacency matrix of a bipartite graph (a (0,1)-matrix), what does $\operatorname{perm}(A)$ represent?**
-    ??? success "Solution"
-        It represents the total number of **perfect matchings** in that bipartite graph.
-
-4.  **[van der Waerden] Verify the lower bound for the $2 \times 2$ matrix $J_2/2 = \begin{pmatrix} 0.5 & 0.5 \\ 0.5 & 0.5 \end{pmatrix}$.**
-    ??? success "Solution"
-        $\operatorname{perm} = 0.5 \cdot 0.5 + 0.5 \cdot 0.5 = 0.5$. The bound is $2!/2^2 = 2/4 = 0.5$. Equality holds.
-
-5.  **[Multi-linearity] Prove that the permanent is linear with respect to the rows of the matrix.**
-    ??? success "Solution"
-        Each term in the sum contains exactly one entry from each row. Thus, the sum maintains linearity relative to any single row vector.
-
-6.  **[Upper Bound] If $A$ is a (0,1)-matrix with $r_i$ ones in each row, what is the upper bound for its permanent (Minc's Conjecture)?**
-    ??? success "Solution"
-        $\operatorname{perm}(A) \le \prod (r_i !)^{1/r_i}$.
-
-7.  **[Matrix Product] Does the product of two permanents equal the permanent of the product matrix?**
-    ??? success "Solution"
-        Generally no. This is the most significant algebraic deficiency of the permanent compared to the determinant.
-
-8.  **[Skew-symmetric] If $A$ is a skew-symmetric matrix of odd order, $\det A = 0$. Must its permanent be 0?**
-    ??? success "Solution"
-        No. For example, $\operatorname{perm} \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = -1$.
-
-9.  **[Invariance] How does the permanent behave under row/column permutations?**
-    ??? success "Solution"
-        $\operatorname{perm}(PAQ) = \operatorname{perm}(A)$ for any permutation matrices $P, Q$.
 
 ****
-
 ??? success "Solution"
-    
+     $1(4) + 2(3) = 4 + 6 = 10$. (Note: the determinant is -2).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     It is the product of the diagonal entries. In this case, the permanent equals the determinant.
+
+
+****
+??? success "Solution"
+     It represents the total number of **perfect matchings** in that bipartite graph.
+
+
+****
+??? success "Solution"
+     $\operatorname{perm} = 0.5 \cdot 0.5 + 0.5 \cdot 0.5 = 0.5$. The bound is $2!/2^2 = 2/4 = 0.5$. Equality holds.
+
+
+****
+??? success "Solution"
+     Each term in the sum contains exactly one entry from each row. Thus, the sum maintains linearity relative to any single row vector.
+
+
+****
+??? success "Solution"
+     $\operatorname{perm}(A) \le \prod (r_i !)^{1/r_i}$.
+
+
+****
+??? success "Solution"
+     Generally no. This is the most significant algebraic deficiency of the permanent compared to the determinant.
+
+
+****
+??? success "Solution"
+     No. For example, $\operatorname{perm} \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} = -1$.
+
+
+****
+??? success "Solution"
+     $\operatorname{perm}(PAQ) = \operatorname{perm}(A)$ for any permutation matrices $P, Q$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The permanent serves as the bridge between algebra and combinatorial hardness:
 
-1.  **The Cost of Symmetry**: By removing the alternating signs of the determinant, the permanent loses most of its elegant algebraic properties (like the multiplicative rule), directly resulting in its "catastrophic" computational complexity.
-2.  **Combinatorial Counter**: By encoding combinatorial constraints into (0,1)-matrices, the permanent becomes the master key for solving counting problems involving permutations, matchings, and colorings.
-3.  **Distributional Bounds**: The van der Waerden theorem demonstrates how the "evenness" of matrix entries (doubly stochasticity) strictly limits the richness of its topological structures (the size of the permanent).
+
+****: By removing the alternating signs of the determinant, the permanent loses most of its elegant algebraic properties (like the multiplicative rule), directly resulting in its "catastrophic" computational complexity.
+
+****: By encoding combinatorial constraints into (0,1)-matrices, the permanent becomes the master key for solving counting problems involving permutations, matchings, and colorings.
+
+****: The van der Waerden theorem demonstrates how the "evenness" of matrix entries (doubly stochasticity) strictly limits the richness of its topological structures (the size of the permanent).

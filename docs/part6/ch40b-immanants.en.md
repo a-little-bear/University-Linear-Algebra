@@ -37,62 +37,39 @@ Determinants and permanents correspond to the two "extreme" characters of the sy
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       $d_{(2,1)}(A) = 2 a_{11}a_{22}a_{33} - (a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32})$.
+         $d_{(2,1)}(A) = 2 a_{11}a_{22}a_{33} - (a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32})$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
     
 eq NP$.
 
 ****
-
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter explores matrix invariants through the lens of group theory:
 
-1. **Representation Framework**: Unified determinants and permanents as specific instances of immanants.
-2. **Spectral Bounds**: Established the hierarchy of matrix functions for positive definite operators (Schur and Lieb theorems).
-3. **Combinatorial Counting**: Linked immanants to Latin squares and planar matching theory.
-4. **Complexity Barrier**: Introduced the VP vs VNP problem, highlighting the computational gap between different immanants.
+
+****: Unified determinants and permanents as specific instances of immanants.
+
+****: Established the hierarchy of matrix functions for positive definite operators (Schur and Lieb theorems).
+
+****: Linked immanants to Latin squares and planar matching theory.
+
+****: Introduced the VP vs VNP problem, highlighting the computational gap between different immanants.

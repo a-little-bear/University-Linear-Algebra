@@ -47,53 +47,62 @@ The future depends only on the present, not on the past. This simple physical in
 
 ## Exercises
 
-1.  **[Basics] Determine if $P = \begin{pmatrix} 0.5 & 0.5 \\ 0.2 & 0.8 \end{pmatrix}$ is a stochastic matrix.**
-    ??? success "Solution"
-        Yes. Each entry is non-negative and each row sums to 1.
-
-2.  **[Stationary] Find the stationary distribution for the matrix $P$ above.**
-    ??? success "Solution"
-        Solve $(\pi_1, \pi_2) \begin{pmatrix} 0.5 & 0.5 \\ 0.2 & 0.8 \end{pmatrix} = (\pi_1, \pi_2)$.
-        This gives $0.5\pi_1 + 0.2\pi_2 = \pi_1 \implies 0.2\pi_2 = 0.5\pi_1 \implies \pi_2 = 2.5\pi_1$.
-        With $\pi_1 + \pi_2 = 1$, we get $\pi = (2/7, 5/7)$.
-
-3.  **[Spectrum] Prove that the spectral radius of any row-stochastic matrix is exactly 1.**
-    ??? success "Solution"
-        Since $P \mathbf{1} = \mathbf{1}$, 1 is an eigenvalue. Since $\|P\|_\infty = 1$, the spectral radius $\rho(P) \le \|P\|_\infty = 1$. Thus, $\rho(P) = 1$.
-
-4.  **[Periodicity] Does the system with $P = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ converge?**
-    ??? success "Solution"
-        No. It is a periodic matrix (cycle of length 2). While it has a stationary distribution $(0.5, 0.5)$, the state will oscillate between $(1, 0)$ and $(0, 1)$ indefinitely.
-
-5.  **[Fundamental] In an absorbing chain with $Q = (0.5)$, find the fundamental matrix $N$.**
-    ??? success "Solution"
-        $N = (1 - 0.5)^{-1} = 2$. This means the system stays in the transient state twice on average before absorption.
-
-6.  **[Application] Why is PageRank a Markov chain?**
-    ??? success "Solution"
-        Web pages are states and links are transitions. A random surfer's behavior defines the transition matrix, and the rankings are the components of its stationary distribution.
-
-7.  **[Uniqueness] Prove: If $P$ is a strictly positive matrix, the stationary distribution is unique.**
-    ??? success "Solution"
-        By the Perron-Frobenius theorem, a positive matrix has a unique dominant eigenvalue 1 with a strictly positive eigenvector.
-
-8.  **[Limit] Find $P^k$ as $k \to \infty$ for $P = \begin{pmatrix} 1 & 0 \\ 0.5 & 0.5 \end{pmatrix}$.**
-    ??? success "Solution"
-        State 1 is absorbing. $Q=(0.5), R=(0.5)$. $P^\infty = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$. All units are eventually absorbed into state 1.
-
-9.  **[Convergence] Does a larger spectral gap $1 - |\lambda_2|$ imply faster or slower convergence?**
-    ??? success "Solution"
-        Faster convergence. The error terms decay as $|\lambda_2|^k$.
 
 ****
-
 ??? success "Solution"
-    
+     Yes. Each entry is non-negative and each row sums to 1.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Solve $(\pi_1, \pi_2) \begin{pmatrix} 0.5 & 0.5 \\ 0.2 & 0.8 \end{pmatrix} = (\pi_1, \pi_2)$.
+     This gives $0.5\pi_1 + 0.2\pi_2 = \pi_1 \implies 0.2\pi_2 = 0.5\pi_1 \implies \pi_2 = 2.5\pi_1$.
+     With $\pi_1 + \pi_2 = 1$, we get $\pi = (2/7, 5/7)$.
+
+
+****
+??? success "Solution"
+     Since $P \mathbf{1} = \mathbf{1}$, 1 is an eigenvalue. Since $\|P\|_\infty = 1$, the spectral radius $\rho(P) \le \|P\|_\infty = 1$. Thus, $\rho(P) = 1$.
+
+
+****
+??? success "Solution"
+     No. It is a periodic matrix (cycle of length 2). While it has a stationary distribution $(0.5, 0.5)$, the state will oscillate between $(1, 0)$ and $(0, 1)$ indefinitely.
+
+
+****
+??? success "Solution"
+     $N = (1 - 0.5)^{-1} = 2$. This means the system stays in the transient state twice on average before absorption.
+
+
+****
+??? success "Solution"
+     Web pages are states and links are transitions. A random surfer's behavior defines the transition matrix, and the rankings are the components of its stationary distribution.
+
+
+****
+??? success "Solution"
+     By the Perron-Frobenius theorem, a positive matrix has a unique dominant eigenvalue 1 with a strictly positive eigenvector.
+
+
+****
+??? success "Solution"
+     State 1 is absorbing. $Q=(0.5), R=(0.5)$. $P^\infty = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$. All units are eventually absorbed into state 1.
+
+
+****
+??? success "Solution"
+     Faster convergence. The error terms decay as $|\lambda_2|^k$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Markov chains represent the ultimate resonance of probability and algebra:
 
-1.  **Limits of Determinism**: They prove that the long-term behavior of a random process is not random, but a deterministic result pre-encoded in the transition matrix's Perron vector.
-2.  **Structural Stability**: Through state classification and irreducibility analysis, the theory links the rate of "memory loss" in a system to its network topology (spectral gap).
-3.  **Engineering of Computation**: From inverting absorbing states to PageRank's power iteration, Markov chains transform profound statistical philosophy into efficient linear algebra algorithms, establishing standard protocols for handling uncertain systems.
+
+****: They prove that the long-term behavior of a random process is not random, but a deterministic result pre-encoded in the transition matrix's Perron vector.
+
+****: Through state classification and irreducibility analysis, the theory links the rate of "memory loss" in a system to its network topology (spectral gap).
+
+****: From inverting absorbing states to PageRank's power iteration, Markov chains transform profound statistical philosophy into efficient linear algebra algorithms, establishing standard protocols for handling uncertain systems.

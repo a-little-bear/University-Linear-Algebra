@@ -50,51 +50,60 @@ In handling large-scale systems, we frequently partition matrices into sub-block
 
 ## Exercises
 
-1.  **[Calculation] Find the Schur complement of $\begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$.**
-    ??? success "Solution"
-        Take $A=(1)$. $S = 5 - 2(1)^{-1}2 = 1$.
-
-2.  **[Determinant] Use the Schur complement to calculate the determinant of the matrix from the previous exercise.**
-    ??? success "Solution"
-        $\det(M) = \det(A)\det(S) = 1 \cdot 1 = 1$.
-
-3.  **[Property] If $B=0$, what is the Schur complement of $A$ in $M$?**
-    ??? success "Solution"
-        $S = D - C A^{-1} 0 = D$. When blocks are decoupled, the Schur complement is simply the original diagonal block.
-
-4.  **[Symmetry] Prove that if $M$ is symmetric, its Schur complement is also symmetric.**
-    ??? success "Solution"
-        $S^T = (D - C A^{-1} B)^T = D^T - B^T (A^{-1})^T C^T = D - C A^{-1} B = S$ (for symmetric $M$, $C = B^T$ and $D^T = D$).
-
-5.  **[Rank] Prove $\operatorname{rank}(M) = \operatorname{rank}(A) + \operatorname{rank}(S)$.**
-    ??? success "Solution"
-        Using block elimination: $\begin{pmatrix} I & 0 \\ -CA^{-1} & I \end{pmatrix} \begin{pmatrix} A & B \\ C & D \end{pmatrix} \begin{pmatrix} I & -A^{-1}B \\ 0 & I \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & S \end{pmatrix}$. Since the matrices on the left and right are non-singular, the rank is preserved.
-
-6.  **[Application] In statistics, if $M$ is a covariance matrix, what does $S$ represent?**
-    ??? success "Solution"
-        $S$ represents the **conditional covariance** of the set of variables $D$ given the set of variables $A$.
-
-7.  **[Dual] Write the Schur complement of $D$ in $M$.**
-    ??? success "Solution"
-        $S_D = A - B D^{-1} C$ (assuming $D$ is invertible).
-
-8.  **[Singular Values] Is there a simple additive relationship between the singular values of $M$ and those of $A$ and $S$?**
-    ??? success "Solution"
-        No. Singular values do not possess the simple block-additivity properties that eigenvalues or inertia indices do.
-
-9.  **[Inverse] If $M$ is a block lower triangular matrix ($B=0$), find its inverse.**
-    ??? success "Solution"
-        $\begin{pmatrix} A^{-1} & 0 \\ -D^{-1} C A^{-1} & D^{-1} \end{pmatrix}$.
 
 ****
-
 ??? success "Solution"
-    
+     Take $A=(1)$. $S = 5 - 2(1)^{-1}2 = 1$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\det(M) = \det(A)\det(S) = 1 \cdot 1 = 1$.
+
+
+****
+??? success "Solution"
+     $S = D - C A^{-1} 0 = D$. When blocks are decoupled, the Schur complement is simply the original diagonal block.
+
+
+****
+??? success "Solution"
+     $S^T = (D - C A^{-1} B)^T = D^T - B^T (A^{-1})^T C^T = D - C A^{-1} B = S$ (for symmetric $M$, $C = B^T$ and $D^T = D$).
+
+
+****
+??? success "Solution"
+     Using block elimination: $\begin{pmatrix} I & 0 \\ -CA^{-1} & I \end{pmatrix} \begin{pmatrix} A & B \\ C & D \end{pmatrix} \begin{pmatrix} I & -A^{-1}B \\ 0 & I \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & S \end{pmatrix}$. Since the matrices on the left and right are non-singular, the rank is preserved.
+
+
+****
+??? success "Solution"
+     $S$ represents the **conditional covariance** of the set of variables $D$ given the set of variables $A$.
+
+
+****
+??? success "Solution"
+     $S_D = A - B D^{-1} C$ (assuming $D$ is invertible).
+
+
+****
+??? success "Solution"
+     No. Singular values do not possess the simple block-additivity properties that eigenvalues or inertia indices do.
+
+
+****
+??? success "Solution"
+     $\begin{pmatrix} A^{-1} & 0 \\ -D^{-1} C A^{-1} & D^{-1} \end{pmatrix}$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The Schur complement is the core syntax of block algebra:
 
-1.  **Dimensional Folding**: It demonstrates how to compress the complexity of a high-dimensional system into a low-dimensional remainder using local invertibility—the mathematical prerequisite for distributed algorithms.
-2.  **Transmission of Positivity**: The Schur complement formula establishes quantitative links between the global stability of a block matrix and the local stability of its subsystems and interaction terms.
-3.  **Statistical Bridge**: In probability theory, the Schur complement reveals the algebraic essence of the conditioning process in Gaussian distributions, serving as the ultimate tool for handling "remaining correlation" between variables.
+
+****: It demonstrates how to compress the complexity of a high-dimensional system into a low-dimensional remainder using local invertibility—the mathematical prerequisite for distributed algorithms.
+
+****: The Schur complement formula establishes quantitative links between the global stability of a block matrix and the local stability of its subsystems and interaction terms.
+
+****: In probability theory, the Schur complement reveals the algebraic essence of the conditioning process in Gaussian distributions, serving as the ultimate tool for handling "remaining correlation" between variables.

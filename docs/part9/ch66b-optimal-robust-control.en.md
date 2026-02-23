@@ -61,52 +61,61 @@ After achieving basic stabilization, the next engineering goal is often "optimal
 
 ## Exercises
 
-1.  **[Basics] In the LQR cost function, does increasing the weight of matrix $R$ increase or decrease control energy?**
-    ??? success "Solution"
-        It decreases control energy. A larger $R$ penalizes the control input $u$ more heavily, causing the system to favor gentler actions.
-
-2.  **[Riccati] Write the Riccati equation for the scalar system $\dot{x} = x + u$ with $Q=3, R=1$.**
-    ??? success "Solution"
-        $1P + P1 - P(1)(1)^{-1}(1)P + 3 = 0 \implies 2P - P^2 + 3 = 0$.
-        Solving gives $P = 3$ (taking the positive root).
-
-3.  **[Gain] Using the result from the previous problem, find the optimal feedback gain $K$.**
-    ??? success "Solution"
-        $K = R^{-1} B^T P = 1^{-1} \cdot 1 \cdot 3 = 3$. The optimal closed-loop system is $\dot{x} = (1-3)x = -2x$.
-
-4.  **[LQG] In an LQG system, what determines the observer gain $L$?**
-    ??? success "Solution"
-        It is determined by the process noise covariance $W$ and the measurement noise covariance $V$ (by solving a dual Riccati equation, yielding the Kalman gain).
-
-5.  **[Norm] Calculate the $H_\infty$ norm of the scalar system $G(s) = \frac{1}{s+1}$.**
-    ??? success "Solution"
-        $|G(i\omega)| = 1/\sqrt{\omega^2+1}$. The maximum occurs at $\omega=0$, so $\|G\|_\infty = 1$.
-
-6.  **[Robustness] If a system has 20% parameter uncertainty, the Small Gain Theorem requires the $H_\infty$ norm of the nominal system to be less than what value?**
-    ??? success "Solution"
-        Less than $1/0.2 = 5$.
-
-7.  **[Stability] Prove: if $Q$ is positive definite, the LQR closed-loop system is always asymptotically stable.**
-    ??? success "Solution"
-        The boundedness of $J$ and $Q \succ 0$ ensures that energy dissipates over time. Using the Lyapunov function $V(x) = x^T P x$, one can show $\dot{V} = -(x^T Q x + u^T R u) < 0$.
-
-8.  **[Separation] In what scenarios does the separation principle fail?**
-    ??? success "Solution"
-        It often fails for non-linear systems or robust control systems with specific types of structured uncertainty where estimation and control become coupled.
-
-9.  **[Implementation] Why prefer LMIs over Riccati equations in numerical implementation?**
-    ??? success "Solution"
-        LMIs can handle more flexible constraints (e.g., bounds on control gains, pole region restrictions) and benefit from the universality of convex optimization solvers.
 
 ****
-
 ??? success "Solution"
-    
+     It decreases control energy. A larger $R$ penalizes the control input $u$ more heavily, causing the system to favor gentler actions.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $1P + P1 - P(1)(1)^{-1}(1)P + 3 = 0 \implies 2P - P^2 + 3 = 0$.
+     Solving gives $P = 3$ (taking the positive root).
+
+
+****
+??? success "Solution"
+     $K = R^{-1} B^T P = 1^{-1} \cdot 1 \cdot 3 = 3$. The optimal closed-loop system is $\dot{x} = (1-3)x = -2x$.
+
+
+****
+??? success "Solution"
+     It is determined by the process noise covariance $W$ and the measurement noise covariance $V$ (by solving a dual Riccati equation, yielding the Kalman gain).
+
+
+****
+??? success "Solution"
+     $|G(i\omega)| = 1/\sqrt{\omega^2+1}$. The maximum occurs at $\omega=0$, so $\|G\|_\infty = 1$.
+
+
+****
+??? success "Solution"
+     Less than $1/0.2 = 5$.
+
+
+****
+??? success "Solution"
+     The boundedness of $J$ and $Q \succ 0$ ensures that energy dissipates over time. Using the Lyapunov function $V(x) = x^T P x$, one can show $\dot{V} = -(x^T Q x + u^T R u) < 0$.
+
+
+****
+??? success "Solution"
+     It often fails for non-linear systems or robust control systems with specific types of structured uncertainty where estimation and control become coupled.
+
+
+****
+??? success "Solution"
+     LMIs can handle more flexible constraints (e.g., bounds on control gains, pole region restrictions) and benefit from the universality of convex optimization solvers.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Optimal and robust control theories define the performance limits of engineering control:
 
-1.  **Algebraicized Trade-offs**: LQR transforms subjective human preferences for "performance" and "cost" into rigorous quadratic optimization problems through the configuration of $Q$ and $R$ matrices.
-2.  **Rationality Under Noise**: LQG and the separation principle prove that optimal information extraction and optimal execution strategies are perfectly compatible under statistical uncertainty, establishing the logical pillars of feedback control.
-3.  **Metrics of Uncertainty**: The $H_\infty$ norm and the small gain theorem provide quantitative geometric measures for system "safety," proving that the operator norm theory of linear algebra is the mathematical floodgate preventing real-world catastrophes.
+
+****: LQR transforms subjective human preferences for "performance" and "cost" into rigorous quadratic optimization problems through the configuration of $Q$ and $R$ matrices.
+
+****: LQG and the separation principle prove that optimal information extraction and optimal execution strategies are perfectly compatible under statistical uncertainty, establishing the logical pillars of feedback control.
+
+****: The $H_\infty$ norm and the small gain theorem provide quantitative geometric measures for system "safety," proving that the operator norm theory of linear algebra is the mathematical floodgate preventing real-world catastrophes.

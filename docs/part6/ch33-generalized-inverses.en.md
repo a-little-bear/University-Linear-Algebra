@@ -53,51 +53,60 @@ In classical matrix algebra, only non-singular square matrices have inverses. Ho
 
 ## Exercises
 
-1.  **[Calculation] Find the Moore-Penrose inverse of $A = \begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        $A^+ = \begin{pmatrix} 0.5 & 0 \\ 0 & 0 \end{pmatrix}$. Verify: $AA^+ = \operatorname{diag}(1, 0)$, which is Hermitian and satisfies the conditions.
-
-2.  **[Full Rank] If $A$ has full column rank, prove $A^+ = (A^* A)^{-1} A^*$.**
-    ??? success "Solution"
-        Substitute into the four Penrose conditions. For example, $A^+ A = (A^* A)^{-1} A^* A = I$, which is clearly Hermitian and satisfies the other requirements.
-
-3.  **[Identity] Prove $(A^+)^+ = A$.**
-    ??? success "Solution"
-        Since $A$ satisfies the four Penrose conditions for $A^+$ (with roles swapped), and $A^{++}$ is unique, they must be equal.
-
-4.  **[Rank] Prove $\operatorname{rank}(A^+) = \operatorname{rank}(A)$.**
-    ??? success "Solution"
-        From $AA^+A=A$, $\operatorname{rank}(A) \le \operatorname{rank}(A^+)$. From $A^+AA^+=A^+$, $\operatorname{rank}(A^+) \le \operatorname{rank}(A)$. Thus the ranks are equal.
-
-5.  **[Projection] What does $AA^+$ represent geometrically?**
-    ??? success "Solution"
-        It represents the orthogonal projection matrix onto the column space $C(A)$.
-
-6.  **[Least Squares] If $Ax=b$ is consistent, prove $x = A^+ b$ is a solution.**
-    ??? success "Solution"
-        If consistent, $b \in C(A)$. Then $A(A^+ b) = (AA^+)b = b$, as the projection of a vector already in the space is the vector itself.
-
-7.  **[Group Inverse] What is a Group Inverse?**
-    ??? success "Solution"
-        A Group Inverse is the Drazin inverse when the index $k=1$. It satisfies $AA^{\#}A = A, A^{\#}AA^{\#} = A^{\#}$, and $AA^{\#} = A^{\#}A$.
-
-8.  **[Singular Values] A matrix $A$ has singular values $2, 1, 0$. What are the singular values of $A^+$?**
-    ??? success "Solution"
-        $1/2, 1, 0$.
-
-9.  **[Invariance] Prove $(A^*)^+ = (A^+)^*$.**
-    ??? success "Solution"
-        Verify the Penrose conditions for $A^*$ and $(A^+)^*$; the symmetry of the conditions ensures the result.
 
 ****
-
 ??? success "Solution"
-    
+     $A^+ = \begin{pmatrix} 0.5 & 0 \\ 0 & 0 \end{pmatrix}$. Verify: $AA^+ = \operatorname{diag}(1, 0)$, which is Hermitian and satisfies the conditions.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Substitute into the four Penrose conditions. For example, $A^+ A = (A^* A)^{-1} A^* A = I$, which is clearly Hermitian and satisfies the other requirements.
+
+
+****
+??? success "Solution"
+     Since $A$ satisfies the four Penrose conditions for $A^+$ (with roles swapped), and $A^{++}$ is unique, they must be equal.
+
+
+****
+??? success "Solution"
+     From $AA^+A=A$, $\operatorname{rank}(A) \le \operatorname{rank}(A^+)$. From $A^+AA^+=A^+$, $\operatorname{rank}(A^+) \le \operatorname{rank}(A)$. Thus the ranks are equal.
+
+
+****
+??? success "Solution"
+     It represents the orthogonal projection matrix onto the column space $C(A)$.
+
+
+****
+??? success "Solution"
+     If consistent, $b \in C(A)$. Then $A(A^+ b) = (AA^+)b = b$, as the projection of a vector already in the space is the vector itself.
+
+
+****
+??? success "Solution"
+     A Group Inverse is the Drazin inverse when the index $k=1$. It satisfies $AA^{\#}A = A, A^{\#}AA^{\#} = A^{\#}$, and $AA^{\#} = A^{\#}A$.
+
+
+****
+??? success "Solution"
+     $1/2, 1, 0$.
+
+
+****
+??? success "Solution"
+     Verify the Penrose conditions for $A^*$ and $(A^+)^*$; the symmetry of the conditions ensures the result.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The generalized inverse is the ultimate cure for linear pathology:
 
-1.  **Generalization of Inversion**: The Moore-Penrose inverse, through four symmetric consistency axioms, finds a unique and optimally behaving "pseudo-inverse" for every linear operator, unifying the theories of invertible and singular matrices.
-2.  **Optimality Standards**: Its dual optimization properties regarding least squares and minimum norms make it the standard mathematical tool for solving inconsistent and underdetermined systems.
-3.  **Structural Depth**: The introduction of Drazin and Group inverses demonstrates how to use generalized inverses to handle the nilpotent parts and complex index structures of matrices, providing algebraic leverage for analyzing singular dynamical systems.
+
+****: The Moore-Penrose inverse, through four symmetric consistency axioms, finds a unique and optimally behaving "pseudo-inverse" for every linear operator, unifying the theories of invertible and singular matrices.
+
+****: Its dual optimization properties regarding least squares and minimum norms make it the standard mathematical tool for solving inconsistent and underdetermined systems.
+
+****: The introduction of Drazin and Group inverses demonstrates how to use generalized inverses to handle the nilpotent parts and complex index structures of matrices, providing algebraic leverage for analyzing singular dynamical systems.

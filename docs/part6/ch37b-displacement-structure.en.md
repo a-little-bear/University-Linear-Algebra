@@ -28,60 +28,35 @@ abla_{F,F'}(A) = FA - AF'$. The **displacement rank** is the rank of this result
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
     
 eq 1$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Displacement structure is the unifying theory of fast linear algebra:
 
-1. **Low-rank Shadow**: Structured matrices are characterized by having a low-rank image under displacement operators.
-2. **Inheritance**: This structure is preserved under inversion and Schur complementation.
-3. **Algorithmic Efficiency**: By operating on generators, we break the $O(n^3)$ barrier for wide classes of engineering problems.
+
+****: Structured matrices are characterized by having a low-rank image under displacement operators.
+
+****: This structure is preserved under inversion and Schur complementation.
+
+****: By operating on generators, we break the $O(n^3)$ barrier for wide classes of engineering problems.

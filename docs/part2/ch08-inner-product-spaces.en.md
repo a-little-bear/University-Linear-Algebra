@@ -54,59 +54,32 @@ Inner product spaces are a reinforcement of vector spaces. By defining an abstra
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Inner product spaces establish the metrics of linear algebra:
 
-1.  **Geometrization**: The introduction of norms, angles, and projections gives abstract spaces physical intuition and approximation power.
-2.  **Operator Symmetry**: The classification of self-adjoint, normal, and unitary operators forms the core of spectral theory, revealing the most stable structures of linear operators.
-3.  **Approximation Essence**: Orthogonal projection is the mathematical endpoint for solving all linear approximation and error-minimization problems.
+
+****: The introduction of norms, angles, and projections gives abstract spaces physical intuition and approximation power.
+
+****: The classification of self-adjoint, normal, and unitary operators forms the core of spectral theory, revealing the most stable structures of linear operators.
+
+****: Orthogonal projection is the mathematical endpoint for solving all linear approximation and error-minimization problems.

@@ -24,8 +24,8 @@ When dealing with complex equations involving the interaction of multiple matric
     1.  **Mixed-product Property**: $(A \otimes B)(C \otimes D) = (AC) \otimes (BD)$.
     2.  **Spectral Property**: If $A$ has eigenvalues $\{\lambda_i\}$ and $B$ has eigenvalues $\{\mu_j\}$, then $A \otimes B$ has eigenvalues $\{\lambda_i \mu_j\}$.
     3.  **Trace and Determinant**:
-        - $\operatorname{tr}(A \otimes B) = \operatorname{tr}(A)\operatorname{tr}(B)$.
-        - $\det(A \otimes B) = (\det A)^p (\det B)^m$.
+     - $\operatorname{tr}(A \otimes B) = \operatorname{tr}(A)\operatorname{tr}(B)$.
+     - $\det(A \otimes B) = (\det A)^p (\det B)^m$.
 
 ---
 
@@ -54,59 +54,32 @@ When dealing with complex equations involving the interaction of multiple matric
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 The Kronecker product and Vec operator provide a scheme for "dimension elevation and reduction" in matrix algebra:
 
-1.  **Dimension Multiplication**: The Kronecker product integrates the actions of two independent operators into a single massive composite operator via a tiling-and-nesting approach—the only language for multi-body interactions.
-2.  **Operator Deconstruction**: The Vec operator eliminates the two-dimensional topology of a matrix, reducing it to its most basic vector form in linear space, thereby unleashing the full power of classical linear solvers.
-3.  **Equation Unification**: The vectorization identity bridges matrix equation theory and numerical linear algebra, proving that all linear matrix equations are essentially the same linear system viewed under different bases.
+
+****: The Kronecker product integrates the actions of two independent operators into a single massive composite operator via a tiling-and-nesting approach—the only language for multi-body interactions.
+
+****: The Vec operator eliminates the two-dimensional topology of a matrix, reducing it to its most basic vector form in linear space, thereby unleashing the full power of classical linear solvers.
+
+****: The vectorization identity bridges matrix equation theory and numerical linear algebra, proving that all linear matrix equations are essentially the same linear system viewed under different bases.

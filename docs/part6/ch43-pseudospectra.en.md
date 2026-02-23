@@ -49,51 +49,60 @@ For normal matrices, eigenvalues completely determine dynamical behavior. Howeve
 
 ## Exercises
 
-1.  **[Calculation] Find the approximate range of the $\epsilon=0.1$ pseudospectrum for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        This is a Jordan block. $(zI-A)^{-1} = \begin{pmatrix} 1/z & 1/z^2 \\ 0 & 1/z \end{pmatrix}$. Due to the $1/z^2$ term, the resolvent norm is very large when $z$ is small. The pseudospectrum is roughly a disk centered at the origin with radius $\sqrt{0.1} \approx 0.31$, much larger than the $\epsilon=0.1$ neighborhood.
-
-2.  **[Normal] If $A = \operatorname{diag}(1, 2)$, describe its $\epsilon=0.1$ pseudospectrum.**
-    ??? success "Solution"
-        It consists of two disjoint disks of radius 0.1 centered at 1 and 2.
-
-3.  **[Property] Prove $\sigma(A) \subset \sigma_\epsilon(A)$.**
-    ??? success "Solution"
-        By the resolvent definition, if $z \in \sigma(A)$, then $\|(zI-A)^{-1}\| = \infty$, which is clearly greater than $\epsilon^{-1}$.
-
-4.  **[Contraction] What happens to the pseudospectrum as $\epsilon \to 0$?**
-    ??? success "Solution"
-        It shrinks to the spectrum $\sigma(A)$.
-
-5.  **[Radius] What is the pseudospectral radius?**
-    ??? success "Solution"
-        $r_\epsilon(A) = \sup \{ |z| : z \in \sigma_\epsilon(A) \}$.
-
-6.  **[Conditioning] Prove: if $A$ is diagonalizable as $A=V\Lambda V^{-1}$, then $\sigma_\epsilon(A) \subseteq \{ z : \operatorname{dist}(z, \sigma(A)) < \epsilon \kappa(V) \}$.**
-    ??? success "Solution"
-        $\|(zI-A)^{-1}\| = \|V(zI-\Lambda)^{-1}V^{-1}\| \le \kappa(V) \max |z-\lambda_i|^{-1}$. The bound follows.
-
-7.  **[Visual] What do the boundary curves of a pseudospectrum represent?**
-    ??? success "Solution"
-        They are the level sets (contours) of the resolvent norm, defined by $\sigma_{\min}(zI-A) = \epsilon$.
-
-8.  **[Application] Why is pseudospectra needed when studying wing flutter in aircraft?**
-    ??? success "Solution"
-        Aerodynamic operators are highly non-normal. Traditional eigenvalue analysis might predict stability, but pseudospectra reveals that tiny perturbations can cause massive energy growth, leading to structural failure.
-
-9.  **[Relationship] How is the numerical range $W(A)$ related to pseudospectra?**
-    ??? success "Solution"
-        For sufficiently small $\epsilon$, the pseudospectrum is contained within a small neighborhood of the numerical range.
 
 ****
-
 ??? success "Solution"
-    
+     This is a Jordan block. $(zI-A)^{-1} = \begin{pmatrix} 1/z & 1/z^2 \\ 0 & 1/z \end{pmatrix}$. Due to the $1/z^2$ term, the resolvent norm is very large when $z$ is small. The pseudospectrum is roughly a disk centered at the origin with radius $\sqrt{0.1} \approx 0.31$, much larger than the $\epsilon=0.1$ neighborhood.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     It consists of two disjoint disks of radius 0.1 centered at 1 and 2.
+
+
+****
+??? success "Solution"
+     By the resolvent definition, if $z \in \sigma(A)$, then $\|(zI-A)^{-1}\| = \infty$, which is clearly greater than $\epsilon^{-1}$.
+
+
+****
+??? success "Solution"
+     It shrinks to the spectrum $\sigma(A)$.
+
+
+****
+??? success "Solution"
+     $r_\epsilon(A) = \sup \{ |z| : z \in \sigma_\epsilon(A) \}$.
+
+
+****
+??? success "Solution"
+     $\|(zI-A)^{-1}\| = \|V(zI-\Lambda)^{-1}V^{-1}\| \le \kappa(V) \max |z-\lambda_i|^{-1}$. The bound follows.
+
+
+****
+??? success "Solution"
+     They are the level sets (contours) of the resolvent norm, defined by $\sigma_{\min}(zI-A) = \epsilon$.
+
+
+****
+??? success "Solution"
+     Aerodynamic operators are highly non-normal. Traditional eigenvalue analysis might predict stability, but pseudospectra reveals that tiny perturbations can cause massive energy growth, leading to structural failure.
+
+
+****
+??? success "Solution"
+     For sufficiently small $\epsilon$, the pseudospectrum is contained within a small neighborhood of the numerical range.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Pseudospectra theory redefines matrix stability:
 
-1.  **Quantifying Non-normality**: It reveals the "fragility" of eigenvalues under non-normal operators, proving that the spectral radius alone is insufficient to describe the safety of complex dynamical systems.
-2.  **Transient Early-Warning**: The Kreiss theorem establishes a quantitative link between pseudospectral geometry and short-term behavior, explaining why "theoretically stable" systems collapse in practice.
-3.  **The Scale of Robustness**: By introducing the $\epsilon$ perturbation parameter, pseudospectra moves linear algebra into the era of "uncertainty," providing the most robust evaluation metrics for high-precision numerical algorithms and complex engineering designs.
+
+****: It reveals the "fragility" of eigenvalues under non-normal operators, proving that the spectral radius alone is insufficient to describe the safety of complex dynamical systems.
+
+****: The Kreiss theorem establishes a quantitative link between pseudospectral geometry and short-term behavior, explaining why "theoretically stable" systems collapse in practice.
+
+****: By introducing the $\epsilon$ perturbation parameter, pseudospectra moves linear algebra into the era of "uncertainty," providing the most robust evaluation metrics for high-precision numerical algorithms and complex engineering designs.

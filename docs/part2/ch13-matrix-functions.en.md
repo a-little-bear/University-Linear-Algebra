@@ -50,59 +50,32 @@ Matrix functions study how to apply scalar functions (such as $e^x, \sin x, \log
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix functions are the analytic continuation of operator theory:
 
-1.  **Consistency Principle**: Definitions via series, Jordan forms, or interpolation are equivalent within the domain of convergence, ensuring logical unity between algebra and analysis.
-2.  **Exponential Core**: The matrix exponential $e^A$ is the most fundamental function, transforming linear differential evolution into pure matrix multiplication—the ultimate key to time-evolution problems.
-3.  **Computational Versatility**: Interpolation and Jordan decomposition provide two complementary perspectives—the former focusing on local spectral analysis and the latter on global structural deconstruction.
+
+****: Definitions via series, Jordan forms, or interpolation are equivalent within the domain of convergence, ensuring logical unity between algebra and analysis.
+
+****: The matrix exponential $e^A$ is the most fundamental function, transforming linear differential evolution into pure matrix multiplication—the ultimate key to time-evolution problems.
+
+****: Interpolation and Jordan decomposition provide two complementary perspectives—the former focusing on local spectral analysis and the latter on global structural deconstruction.

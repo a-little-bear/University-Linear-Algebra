@@ -60,50 +60,63 @@ In linear algebra, we frequently need to compare how "spread out" or "disordered
 
 ## Exercises
 
-1.  **[Fundamentals] Determine if $(2, 2, 2) \prec (3, 2, 1)$ holds.**
-    ??? success "Solution"
-        Yes. Both sum to 6. Partial sums: $2 < 3$ and $2+2=4 \le 3+2=5$. The conditions are met.
 
-2.  **[Birkhoff] Decompose $\begin{pmatrix} 0.5 & 0.5 \\ 0.5 & 0.5 \end{pmatrix}$ into a combination of permutation matrices.**
-    ??? success "Solution"
-        $0.5 \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} + 0.5 \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.
+****
+??? success "Solution"
+     Yes. Both sum to 6. Partial sums: $2 < 3$ and $2+2=4 \le 3+2=5$. The conditions are met.
 
-3.  **[Spectrum] Prove the largest eigenvalue of a doubly stochastic matrix is 1.**
-    ??? success "Solution"
-        Since $P \mathbf{1} = \mathbf{1}$, 1 is an eigenvalue. By Perron-Frobenius theory, the spectral radius of a non-negative matrix with row sums of 1 is 1.
 
-4.  **[Schur-Horn] If a symmetric matrix has diagonal entries $(5, 5)$, can its eigenvalues be $(10, 0)$?**
-    ??? success "Solution"
-        Yes, because $(5, 5) \prec (10, 0)$ (sums match and $5 \le 10$).
+****
+??? success "Solution"
+     $0.5 \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} + 0.5 \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.
 
-5.  **[Entropy] Prove Shannon entropy $H(p) = -\sum p_i \log p_i$ is Schur-concave.**
-    ??? success "Solution"
-        Since $x \log x$ is convex, $\sum p_i \log p_i$ is Schur-convex. Negating it makes it Schur-concave. This implies that more uniform distributions (lower majorization) have higher entropy.
 
-6.  **[Calculation] Find the vector $x$ from $\begin{pmatrix} 1/3 & 2/3 \\ 2/3 & 1/3 \end{pmatrix} \begin{pmatrix} 3 \\ 0 \end{pmatrix}$ and verify $x \prec (3, 0)^T$.**
-    ??? success "Solution"
-        $x = (1, 2)^T$. Sorted: $(2, 1) \prec (3, 0)$ because $2 \le 3$ and sums match.
+****
+??? success "Solution"
+     Since $P \mathbf{1} = \mathbf{1}$, 1 is an eigenvalue. By Perron-Frobenius theory, the spectral radius of a non-negative matrix with row sums of 1 is 1.
 
-7.  **[Extrema] Among all non-negative vectors summing to 1, which is the smallest under the majorization order?**
-    ??? success "Solution"
-        The uniform distribution $(1/n, \ldots, 1/n)$.
 
-8.  **[Trace] Prove: If $A \ge 0$ is doubly stochastic, then $\operatorname{tr}(A) \le n$.**
-    ??? success "Solution"
-        Each diagonal entry $a_{ii} \le 1$ (since row sums are 1 and entries are non-negative), so the sum is $\le n$.
+****
+??? success "Solution"
+     Yes, because $(5, 5) \prec (10, 0)$ (sums match and $5 \le 10$).
 
-9.  **[Convexity] Is $\phi(x) = \max(x_i)$ Schur-convex?**
-    ??? success "Solution"
-        Yes. $x \prec y$ means $x$ is smoother than $y$, so its maximum value cannot exceed the maximum value of $y$.
 
-10.  **[Application] Why is majorization relevant in wealth inequality?**
-    ??? success "Solution"
-        It quantifies the "inequality" between datasets. Using Lorenz curves and majorization, one can rigorously determine if the wealth gap in a population is expanding or shrinking.
+****
+??? success "Solution"
+     Since $x \log x$ is convex, $\sum p_i \log p_i$ is Schur-convex. Negating it makes it Schur-concave. This implies that more uniform distributions (lower majorization) have higher entropy.
+
+
+****
+??? success "Solution"
+     $x = (1, 2)^T$. Sorted: $(2, 1) \prec (3, 0)$ because $2 \le 3$ and sums match.
+
+
+****
+??? success "Solution"
+     The uniform distribution $(1/n, \ldots, 1/n)$.
+
+
+****
+??? success "Solution"
+     Each diagonal entry $a_{ii} \le 1$ (since row sums are 1 and entries are non-negative), so the sum is $\le n$.
+
+
+****
+??? success "Solution"
+     Yes. $x \prec y$ means $x$ is smoother than $y$, so its maximum value cannot exceed the maximum value of $y$.
+
+
+****
+??? success "Solution"
+     It quantifies the "inequality" between datasets. Using Lorenz curves and majorization, one can rigorously determine if the wealth gap in a population is expanding or shrinking.
 
 ## Chapter Summary
 
 Majorization theory establishes the ordering of distributional shapes:
 
-1.  **Metric of Uniformity**: Provided a rigorous mathematical characterization of "disorder" and "averaging," proving that the uniform distribution is the "floor" (minimum element) of all distributions.
-2.  **Bridge between Operators and Geometry**: Theorems by Birkhoff and Schur-Horn showed how discrete structures (permutations) support continuous convex spaces and the essential constraints between a matrix's trace and its spectrum.
-3.  **Information Foundations**: Through Schur-convexity, majorization became the natural language for processing entropy, energy dissipation, and quantum decoherence.
+
+****: Provided a rigorous mathematical characterization of "disorder" and "averaging," proving that the uniform distribution is the "floor" (minimum element) of all distributions.
+
+****: Theorems by Birkhoff and Schur-Horn showed how discrete structures (permutations) support continuous convex spaces and the essential constraints between a matrix's trace and its spectrum.
+
+****: Through Schur-convexity, majorization became the natural language for processing entropy, energy dissipation, and quantum decoherence.

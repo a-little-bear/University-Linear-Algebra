@@ -51,51 +51,60 @@ Unlike standard matrix multiplication (which reflects operator composition), the
 
 ## Exercises
 
-1.  **[Basic] Calculate $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \circ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        $\begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$.
-
-2.  **[Schur] If $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$, find $A \circ A$.**
-    ??? success "Solution"
-        It is still $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
-
-3.  **[Property] Prove $\operatorname{tr}(A \circ B) = \operatorname{tr}(A^T B)$.**
-    ??? success "Solution"
-        $\sum a_{ii} b_{ii} = \sum a_{ij} b_{ij}$ (only for diagonal summation). More generally, $\sum a_{ij} b_{ij} = \operatorname{tr}(A B^T)$. For symmetric matrices, this reduces to the stated trace property.
-
-4.  **[Positivity] Determine if $\begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix} \circ \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$ is positive definite.**
-    ??? success "Solution"
-        Yes. By the Schur Product Theorem, the Hadamard product of two PD matrices is PD.
-
-5.  **[Bound] Does the inequality $\|A \circ B\|_2 \le \|A\|_2 \|B\|_2$ always hold?**
-    ??? success "Solution"
-        Not necessarily for the spectral norm. It holds for the Frobenius norm ($\|A \circ B\|_F \le \|A\|_F \|B\|_F$), but spectral norm bounds usually involve diagonal entries.
-
-6.  **[Application] Why is windowing in signal processing a Hadamard product?**
-    ??? success "Solution"
-        Windowing involves scaling each sample of a signal by a corresponding weight from a window function, which is exactly element-wise multiplication.
-
-7.  **[Kronecker] Is the Hadamard product $A \circ B$ a submatrix of $A \otimes B$?**
-    ??? success "Solution"
-        Yes. It is precisely the principal submatrix of the Kronecker product corresponding to specific row and column indices.
-
-8.  **[Determinant] Verify Oppenheim's inequality for diagonal matrices.**
-    ??? success "Solution"
-        For diagonal matrices, $A \circ B = AB$, so $\det(AB) = \det(A)\det(B)$. The inequality becomes an equality.
-
-9.  **[Rank] Prove $\operatorname{rank}(A \circ B) \le \operatorname{rank}(A) \operatorname{rank}(B)$.**
-    ??? success "Solution"
-        Since $A \circ B$ is a submatrix of $A \otimes B$, its rank cannot exceed $\operatorname{rank}(A \otimes B) = \operatorname{rank}(A) \operatorname{rank}(B)$.
 
 ****
-
 ??? success "Solution"
-    
+     $\begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     It is still $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     $\sum a_{ii} b_{ii} = \sum a_{ij} b_{ij}$ (only for diagonal summation). More generally, $\sum a_{ij} b_{ij} = \operatorname{tr}(A B^T)$. For symmetric matrices, this reduces to the stated trace property.
+
+
+****
+??? success "Solution"
+     Yes. By the Schur Product Theorem, the Hadamard product of two PD matrices is PD.
+
+
+****
+??? success "Solution"
+     Not necessarily for the spectral norm. It holds for the Frobenius norm ($\|A \circ B\|_F \le \|A\|_F \|B\|_F$), but spectral norm bounds usually involve diagonal entries.
+
+
+****
+??? success "Solution"
+     Windowing involves scaling each sample of a signal by a corresponding weight from a window function, which is exactly element-wise multiplication.
+
+
+****
+??? success "Solution"
+     Yes. It is precisely the principal submatrix of the Kronecker product corresponding to specific row and column indices.
+
+
+****
+??? success "Solution"
+     For diagonal matrices, $A \circ B = AB$, so $\det(AB) = \det(A)\det(B)$. The inequality becomes an equality.
+
+
+****
+??? success "Solution"
+     Since $A \circ B$ is a submatrix of $A \otimes B$, its rank cannot exceed $\operatorname{rank}(A \otimes B) = \operatorname{rank}(A) \operatorname{rank}(B)$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The Hadamard product is a refined operator in matrix analysis:
 
-1.  **Pointwise Harmony**: It preserves the simplicity of scalar multiplication in matrix space while revealing profound non-trivial preservation laws at the level of positive semi-definiteness (Schur Product Theorem).
-2.  **Information Compression**: Inequalities like Oppenheim’s demonstrate how element-wise coupling affects the global integrity of a matrix (e.g., determinant), providing algebraic descriptions for feature interactions in information theory.
-3.  **Computational Bridge**: As a projected microcosm of the Kronecker product, the Hadamard product plays an irreplaceable role in dimension reduction when handling high-dimensional sparse data and structured correlation models.
+
+****: It preserves the simplicity of scalar multiplication in matrix space while revealing profound non-trivial preservation laws at the level of positive semi-definiteness (Schur Product Theorem).
+
+****: Inequalities like Oppenheim’s demonstrate how element-wise coupling affects the global integrity of a matrix (e.g., determinant), providing algebraic descriptions for feature interactions in information theory.
+
+****: As a projected microcosm of the Kronecker product, the Hadamard product plays an irreplaceable role in dimension reduction when handling high-dimensional sparse data and structured correlation models.

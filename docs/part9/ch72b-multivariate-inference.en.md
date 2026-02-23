@@ -53,52 +53,61 @@ After establishing the matrix-based description of data (Ch72A), the core task o
 
 ## Exercises
 
-1.  **[Basics] What does Hotelling's $T^2$ reduce to when the number of variables $p=1$?**
-    ??? success "Solution"
-        It reduces to the square of the univariate $t$-statistic: $t^2 = \frac{n(\bar{x}-\mu_0)^2}{s^2}$.
-
-2.  **[Determinant] Why does Wilks' Lambda use the ratio of determinants?**
-    ??? success "Solution"
-        The determinant represents "generalized variance" (volume) in high-dimensional space. The ratio reflects the proportion of residual volume to total fluctuation volume; a smaller ratio indicates more significant differences between groups.
-
-3.  **[Calculation] If $\mathbf{H} = \operatorname{diag}(10, 0)$ and $\mathbf{E} = \operatorname{diag}(1, 1)$, calculate Wilks' Lambda.**
-    ??? success "Solution"
-        $\det(\mathbf{E}) = 1$. $\det(\mathbf{H}+\mathbf{E}) = \det(\operatorname{diag}(11, 1)) = 11$.
-        $\Lambda = 1/11 \approx 0.09$.
-
-4.  **[Eigenvalue] Prove: Wilks' Lambda can be expressed as $\prod \frac{1}{1+\lambda_i}$, where $\lambda_i$ are the eigenvalues of $\mathbf{E}^{-1}\mathbf{H}$.**
-    ??? success "Solution"
-        $\frac{\det(\mathbf{E})}{\det(\mathbf{H}+\mathbf{E})} = \det(\mathbf{E}(\mathbf{H}+\mathbf{E})^{-1}) = \det(I + \mathbf{E}^{-1}\mathbf{H})^{-1}$. The result follows from the property of determinants.
-
-5.  **[Application] In what scenario is Pillai's trace preferred over Wilks' Lambda?**
-    ??? success "Solution"
-        Pillai's trace is generally more robust when the assumption of equal covariance matrices (homoscedasticity) is violated.
-
-6.  **[CCA] The maximum canonical correlation coefficient in CCA is related to which matrix property?**
-    ??? success "Solution"
-        It is related to the singular values of the cross-covariance matrix between the two groups (after variance normalization).
-
-7.  **[Invariance] Prove that the $T^2$ statistic is invariant under linear coordinate transformations.**
-    ??? success "Solution"
-        If $\mathbf{x} \to \mathbf{Ax}$, then the mean becomes $\mathbf{A}\bar{\mathbf{x}}$ and the covariance becomes $\mathbf{ASA}^T$. Substituting these into the formula, the $\mathbf{A}$ matrices cancel out.
-
-8.  **[Detection] What information does Box's M test utilize to check for the equality of two covariance matrices?**
-    ??? success "Solution"
-        It uses the weighted difference between the log-determinants of the sample covariance matrices.
-
-9.  **[Regression] In multivariate regression, what does the trace of the error matrix $\operatorname{tr}(\mathbf{E})$ correspond to?**
-    ??? success "Solution"
-        It corresponds to the total sum of squared residuals (Total SSE) across all dependent variables.
 
 ****
-
 ??? success "Solution"
-    
+     It reduces to the square of the univariate $t$-statistic: $t^2 = \frac{n(\bar{x}-\mu_0)^2}{s^2}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     The determinant represents "generalized variance" (volume) in high-dimensional space. The ratio reflects the proportion of residual volume to total fluctuation volume; a smaller ratio indicates more significant differences between groups.
+
+
+****
+??? success "Solution"
+     $\det(\mathbf{E}) = 1$. $\det(\mathbf{H}+\mathbf{E}) = \det(\operatorname{diag}(11, 1)) = 11$.
+     $\Lambda = 1/11 \approx 0.09$.
+
+
+****
+??? success "Solution"
+     $\frac{\det(\mathbf{E})}{\det(\mathbf{H}+\mathbf{E})} = \det(\mathbf{E}(\mathbf{H}+\mathbf{E})^{-1}) = \det(I + \mathbf{E}^{-1}\mathbf{H})^{-1}$. The result follows from the property of determinants.
+
+
+****
+??? success "Solution"
+     Pillai's trace is generally more robust when the assumption of equal covariance matrices (homoscedasticity) is violated.
+
+
+****
+??? success "Solution"
+     It is related to the singular values of the cross-covariance matrix between the two groups (after variance normalization).
+
+
+****
+??? success "Solution"
+     If $\mathbf{x} \to \mathbf{Ax}$, then the mean becomes $\mathbf{A}\bar{\mathbf{x}}$ and the covariance becomes $\mathbf{ASA}^T$. Substituting these into the formula, the $\mathbf{A}$ matrices cancel out.
+
+
+****
+??? success "Solution"
+     It uses the weighted difference between the log-determinants of the sample covariance matrices.
+
+
+****
+??? success "Solution"
+     It corresponds to the total sum of squared residuals (Total SSE) across all dependent variables.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Multivariate statistical inference is the ultimate algebraic judgment in empirical science:
 
-1.  **Algebraization of Distance**: Hotelling's $T^2$ proves that through matrix inversion, we can correct complex anisotropic fluctuations into standard statistical distances, establishing benchmarks for multi-dimensional difference testing.
-2.  **Competition of Volumes**: Wilks' Lambda reduces complex group comparisons to a "game of determinants" (volumes), revealing the algebraic share of explanatory power within multi-dimensional space.
-3.  **Deconstruction of Correlation**: CCA demonstrates how to utilize generalized eigenvalue problems to extract resonant linear signals from two seemingly chaotic data streams, providing a mathematical scalpel for understanding coupling mechanisms in complex systems.
+
+****: Hotelling's $T^2$ proves that through matrix inversion, we can correct complex anisotropic fluctuations into standard statistical distances, establishing benchmarks for multi-dimensional difference testing.
+
+****: Wilks' Lambda reduces complex group comparisons to a "game of determinants" (volumes), revealing the algebraic share of explanatory power within multi-dimensional space.
+
+****: CCA demonstrates how to utilize generalized eigenvalue problems to extract resonant linear signals from two seemingly chaotic data streams, providing a mathematical scalpel for understanding coupling mechanisms in complex systems.

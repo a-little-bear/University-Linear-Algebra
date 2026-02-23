@@ -53,59 +53,32 @@ Matrix inequalities are among the most sophisticated branches of matrix analysis
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix inequalities define the "energy boundaries" of linear systems:
 
-1.  **Spectral Stability**: Weyl's inequalities and interlacing theorems prove that matrix eigenvalues possess significant geometric inertia; small structural changes can only cause controlled spectral shifts.
-2.  **Informational Extrema**: Hadamard and trace inequalities reveal the patterns of information loss in non-diagonalized (coupled) states, providing algebraic upper bounds for entropy estimation in information theory.
-3.  **Quantification of Distribution**: Majorization theory provides a powerful tool for comparing the "dispersion" of vectors, revealing the deep containment relationship between a matrix's diagonal entries and its spectrum.
+
+****: Weyl's inequalities and interlacing theorems prove that matrix eigenvalues possess significant geometric inertia; small structural changes can only cause controlled spectral shifts.
+
+****: Hadamard and trace inequalities reveal the patterns of information loss in non-diagonalized (coupled) states, providing algebraic upper bounds for entropy estimation in information theory.
+
+****: Majorization theory provides a powerful tool for comparing the "dispersion" of vectors, revealing the deep containment relationship between a matrix's diagonal entries and its spectrum.

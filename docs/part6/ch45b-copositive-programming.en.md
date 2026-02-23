@@ -27,60 +27,34 @@ A symmetric matrix $A$ is **copositive** if the quadratic form $x^T A x$ is non-
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Copositive programming serves as a bridge between continuous and discrete optimization:
 
-1. **Restricted Positivity**: Defined the COP cone as the relaxation of PSD requirements to the non-negative orthant.
-2. **Exact Encoding**: Established that COP/CP programs provide exact (non-relaxed) formulations for the hardest problems in computer science.
-3. **Hierarchical Computation**: Introduced SOS methods to provide computable, monotonic approximations to the intractable COP constraints.
-4. **Duality Anchor**: Leveraged the CP-COP duality to unify the study of non-negative matrix factorization and global optimization.
+
+****: Defined the COP cone as the relaxation of PSD requirements to the non-negative orthant.
+
+****: Established that COP/CP programs provide exact (non-relaxed) formulations for the hardest problems in computer science.
+
+****: Introduced SOS methods to provide computable, monotonic approximations to the intractable COP constraints.
+
+****: Leveraged the CP-COP duality to unify the study of non-negative matrix factorization and global optimization.

@@ -53,51 +53,60 @@ If eigenvalues $\sigma(A)$ are the "discrete fingerprints" of a matrix in the co
 
 ## Exercises
 
-1.  **[Basic] Calculate the numerical range of the identity matrix $I$.**
-    ??? success "Solution"
-        $x^* I x = x^* x = 1$ for all $\|x\|=1$. Thus $W(I) = \{1\}$, a single point in the complex plane.
-
-2.  **[Normal] Find the numerical range of $A = \operatorname{diag}(1, i)$.**
-    ??? success "Solution"
-        Since $A$ is normal, $W(A)$ is the convex hull of eigenvalues 1 and $i$, which is the line segment connecting them.
-
-3.  **[Convexity] Give an example showing that $\sigma(A)$ itself is not necessarily convex.**
-    ??? success "Solution"
-        $A = \operatorname{diag}(1, -1)$. The spectrum is $\{1, -1\}$, which does not contain 0. However, $W(A) = [-1, 1]$ contains 0.
-
-4.  **[Radius] Find the numerical range of $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
-    ??? success "Solution"
-        By the Ellipticity Theorem for 2x2 matrices, its numerical range is a closed disk centered at the origin with radius 0.5.
-
-5.  **[Property] Prove $W(A+cI) = W(A) + c$ for any scalar $c$.**
-    ??? success "Solution"
-        $x^*(A+cI)x = x^*Ax + c(x^*x) = x^*Ax + c$.
-
-6.  **[Self-adjoint] Prove: If $A$ is Hermitian, then $W(A)$ is the real interval $[\lambda_{\min}, \lambda_{\max}]$.**
-    ??? success "Solution"
-        The quadratic form $x^*Ax$ of a Hermitian matrix is always real, and its range is bounded by the minimum and maximum eigenvalues (Rayleigh Quotient property).
-
-7.  **[Norm] If $\|A\|_2 = 10$, what is the minimum possible value for the numerical radius $w(A)$?**
-    ??? success "Solution"
-        From the inequality $w(A) \ge \frac{1}{2}\|A\|_2$, we have $w(A) \ge 5$.
-
-8.  **[Trace] How is the centroid of the numerical range related to the trace?**
-    ??? success "Solution"
-        For an $n \times n$ matrix, the point $\frac{1}{n} \operatorname{tr}(A)$ is always in $W(A)$ (it is the average of the quadratic form values for any orthonormal basis).
-
-9.  **[Unitary] Prove $W(U^* A U) = W(A)$ for any unitary matrix $U$.**
-    ??? success "Solution"
-        $(Ux)^* A (Ux) = y^* A y$ where $y=Ux$. Since $U$ is unitary, it maps the unit sphere onto itself, preserving the set of values.
 
 ****
-
 ??? success "Solution"
-    
+     $x^* I x = x^* x = 1$ for all $\|x\|=1$. Thus $W(I) = \{1\}$, a single point in the complex plane.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Since $A$ is normal, $W(A)$ is the convex hull of eigenvalues 1 and $i$, which is the line segment connecting them.
+
+
+****
+??? success "Solution"
+     $A = \operatorname{diag}(1, -1)$. The spectrum is $\{1, -1\}$, which does not contain 0. However, $W(A) = [-1, 1]$ contains 0.
+
+
+****
+??? success "Solution"
+     By the Ellipticity Theorem for 2x2 matrices, its numerical range is a closed disk centered at the origin with radius 0.5.
+
+
+****
+??? success "Solution"
+     $x^*(A+cI)x = x^*Ax + c(x^*x) = x^*Ax + c$.
+
+
+****
+??? success "Solution"
+     The quadratic form $x^*Ax$ of a Hermitian matrix is always real, and its range is bounded by the minimum and maximum eigenvalues (Rayleigh Quotient property).
+
+
+****
+??? success "Solution"
+     From the inequality $w(A) \ge \frac{1}{2}\|A\|_2$, we have $w(A) \ge 5$.
+
+
+****
+??? success "Solution"
+     For an $n \times n$ matrix, the point $\frac{1}{n} \operatorname{tr}(A)$ is always in $W(A)$ (it is the average of the quadratic form values for any orthonormal basis).
+
+
+****
+??? success "Solution"
+     $(Ux)^* A (Ux) = y^* A y$ where $y=Ux$. Since $U$ is unitary, it maps the unit sphere onto itself, preserving the set of values.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 The numerical range is the geometric extension of matrix spectral theory:
 
-1.  **Convexity of Form**: The Toeplitz-Hausdorff theorem reveals a deep consistency in the action of linear operators—regardless of the operator's complexity, its "projection" is always a convex region.
-2.  **Divide of Normality**: The degree to which the numerical range coincides with the convex hull of eigenvalues is a direct geometric measure of a matrix's "normality" (whether it possesses an orthonormal basis of eigenvectors).
-3.  **Analytic Bounds**: The numerical radius establishes a new measure of operator magnitude, providing tighter upper bounds for transient analysis and iterative convergence rates than the spectral radius.
+
+****: The Toeplitz-Hausdorff theorem reveals a deep consistency in the action of linear operators—regardless of the operator's complexity, its "projection" is always a convex region.
+
+****: The degree to which the numerical range coincides with the convex hull of eigenvalues is a direct geometric measure of a matrix's "normality" (whether it possesses an orthonormal basis of eigenvectors).
+
+****: The numerical radius establishes a new measure of operator magnitude, providing tighter upper bounds for transient analysis and iterative convergence rates than the spectral radius.

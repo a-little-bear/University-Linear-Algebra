@@ -50,51 +50,60 @@ In traditional statistics, we study random variables $X$ or random vectors $\mat
 
 ## Exercises
 
-1.  **[Basics] Write the covariance matrix of $\operatorname{vec}(X)$ for a matrix normal distribution.**
-    ??? success "Solution"
-        $V \otimes U$. This reflects the decoupling of row and column correlations (Kronecker structure).
-
-2.  **[Expectation] If $X \sim MN(M, U, V)$, what is $E[X]$?**
-    ??? success "Solution"
-        $E[X] = M$.
-
-3.  **[Wishart] Prove: If $S \sim W_p(n, \Sigma)$, then $E[S] = n\Sigma$.**
-    ??? success "Solution"
-        $E[S] = E[\sum X_i X_i^T] = \sum E[X_i X_i^T] = \sum \Sigma = n\Sigma$.
-
-4.  **[Singularity] When is a random matrix $S \sim W_p(n, \Sigma)$ singular?**
-    ??? success "Solution"
-        When the sample size $n < p$. Since $S$ is the sum of $n$ rank-1 matrices, its rank is at most $n$, making it singular in a $p$-dimensional space.
-
-5.  **[Invariance] If $X \sim MN(M, U, V)$, prove that the linear transformation $AXB$ also follows a matrix normal distribution.**
-    ??? success "Solution"
-        Since $\operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X)$, linear transformations preserve normality. The new covariance becomes $(B^T V B) \otimes (A U A^T)$.
-
-6.  **[Beta] What is a Matrix Beta distribution?**
-    ??? success "Solution"
-        A distribution defined on the ratio of two Wishart variables (in the form $S_1 (S_1+S_2)^{-1}$), used for hypothesis testing in multivariate analysis (e.g., Wilks' Lambda).
-
-7.  **[Calculation] Let $X \in \mathbb{R}^{2 \times 2}$ with $U=I, V=I, M=0$. What is the distribution of $\|X\|_F^2$?**
-    ??? success "Solution"
-        $\|X\|_F^2 = \sum x_{ij}^2$. Since entries are i.i.d. $\mathcal{N}(0, 1)$, their sum of squares follows a $\chi^2$ distribution with 4 degrees of freedom.
-
-8.  **[Bayesian] Why is the Inverse Wishart called a conjugate prior?**
-    ??? success "Solution"
-        Because if the likelihood is multivariate normal and the prior is Inverse Wishart, the resulting posterior is also an Inverse Wishart distribution, maintaining algebraic consistency.
-
-9.  **[Contrast] Briefly state the difference between matrix distributions and Random Matrix Theory (RMT).**
-    ??? success "Solution"
-        Matrix distributions focus on exact probability density functions for specific parameters (mean, covariance); RMT focuses on asymptotic spectral properties (universal laws) as dimensions $n \to \infty$.
 
 ****
-
 ??? success "Solution"
-    
+     $V \otimes U$. This reflects the decoupling of row and column correlations (Kronecker structure).
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $E[X] = M$.
+
+
+****
+??? success "Solution"
+     $E[S] = E[\sum X_i X_i^T] = \sum E[X_i X_i^T] = \sum \Sigma = n\Sigma$.
+
+
+****
+??? success "Solution"
+     When the sample size $n < p$. Since $S$ is the sum of $n$ rank-1 matrices, its rank is at most $n$, making it singular in a $p$-dimensional space.
+
+
+****
+??? success "Solution"
+     Since $\operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X)$, linear transformations preserve normality. The new covariance becomes $(B^T V B) \otimes (A U A^T)$.
+
+
+****
+??? success "Solution"
+     A distribution defined on the ratio of two Wishart variables (in the form $S_1 (S_1+S_2)^{-1}$), used for hypothesis testing in multivariate analysis (e.g., Wilks' Lambda).
+
+
+****
+??? success "Solution"
+     $\|X\|_F^2 = \sum x_{ij}^2$. Since entries are i.i.d. $\mathcal{N}(0, 1)$, their sum of squares follows a $\chi^2$ distribution with 4 degrees of freedom.
+
+
+****
+??? success "Solution"
+     Because if the likelihood is multivariate normal and the prior is Inverse Wishart, the resulting posterior is also an Inverse Wishart distribution, maintaining algebraic consistency.
+
+
+****
+??? success "Solution"
+     Matrix distributions focus on exact probability density functions for specific parameters (mean, covariance); RMT focuses on asymptotic spectral properties (universal laws) as dimensions $n \to \infty$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Matrix distributions establish the algebraic logic of high-dimensional uncertainty:
 
-1.  **Decomposition of Covariance**: Via the Kronecker product, the matrix normal distribution achieves precise separation of temporal (row) and spatial (column) correlations, greatly compressing the parameter space.
-2.  **Statistical Logic of Quadratic Forms**: The Wishart distribution proves that positive definite matrices are not just algebraic objects but natural probability measures for multivariate fluctuations—the cornerstone of all multivariate inference.
-3.  **Bayesian Consistency**: The algebraic beauty of conjugate priors demonstrates the deep unity of linear algebra and probabilistic reasoning, providing an efficient closed-form framework for dynamic learning from high-dimensional data.
+
+****: Via the Kronecker product, the matrix normal distribution achieves precise separation of temporal (row) and spatial (column) correlations, greatly compressing the parameter space.
+
+****: The Wishart distribution proves that positive definite matrices are not just algebraic objects but natural probability measures for multivariate fluctuations—the cornerstone of all multivariate inference.
+
+****: The algebraic beauty of conjugate priors demonstrates the deep unity of linear algebra and probabilistic reasoning, providing an efficient closed-form framework for dynamic learning from high-dimensional data.

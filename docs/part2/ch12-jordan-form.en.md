@@ -49,59 +49,32 @@ Not all square matrices can be diagonalized. When the geometric multiplicity of 
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 The Jordan Canonical Form is the final verdict on the structure of square matrices:
 
-1.  **Completing the Defective**: It perfectly fills the gap in eigenvectors for non-diagonalizable matrices by introducing the "1" step structure (Jordan block).
-2.  **Polynomial Depth**: The correspondence between the minimal polynomial and JCF block sizes reveals the geometric depth of a matrix as a root of a polynomial.
-3.  **Structural Uniqueness**: JCF establishes the classification standard for matrix similarity classes, providing the most precise theoretical framework for analyzing matrix functions and power series convergence.
+
+****: It perfectly fills the gap in eigenvectors for non-diagonalizable matrices by introducing the "1" step structure (Jordan block).
+
+****: The correspondence between the minimal polynomial and JCF block sizes reveals the geometric depth of a matrix as a root of a polynomial.
+
+****: JCF establishes the classification standard for matrix similarity classes, providing the most precise theoretical framework for analyzing matrix functions and power series convergence.

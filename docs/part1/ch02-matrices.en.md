@@ -62,59 +62,32 @@ If systems of linear equations are the language of linear algebra, then matrices
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Matrix operations construct the computational syntax of linear algebra:
 
-1.  **Non-commutativity**: The most fundamental difference between matrix and scalar multiplication, dictating that the order of operators cannot be arbitrarily swapped.
-2.  **Structure Preservation**: Transpose and inverse operations maintain internal logical consistency, providing the basis for solving operator equations.
-3.  **Computational Simplification**: Special matrices (Identity, Diagonal, Block) greatly simplify the analysis of complex systems and are key entry points for numerical algorithm optimization.
+
+****: The most fundamental difference between matrix and scalar multiplication, dictating that the order of operators cannot be arbitrarily swapped.
+
+****: Transpose and inverse operations maintain internal logical consistency, providing the basis for solving operator equations.
+
+****: Special matrices (Identity, Diagonal, Block) greatly simplify the analysis of complex systems and are key entry points for numerical algorithm optimization.

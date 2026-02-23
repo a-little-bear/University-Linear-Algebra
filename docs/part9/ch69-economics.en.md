@@ -48,54 +48,63 @@ How do various industries in a nation depend on one another? If the price of ste
 
 ## Exercises
 
-1.  **[Basics] A consumption matrix is $A = \begin{pmatrix} 0.5 & 0.2 \\ 0.2 & 0.5 \end{pmatrix}$. If external demand is $d = (10, 10)^T$, find the total output $x$.**
-    ??? success "Solution"
-        $I-A = \begin{pmatrix} 0.5 & -0.2 \\ -0.2 & 0.5 \end{pmatrix}$.
-        $\det(I-A) = 0.25 - 0.04 = 0.21$.
-        $(I-A)^{-1} = \frac{1}{0.21} \begin{pmatrix} 0.5 & 0.2 \\ 0.2 & 0.5 \end{pmatrix}$.
-        $x = (I-A)^{-1} d = \frac{1}{0.21} (7, 7)^T \approx (33.3, 33.3)^T$.
-
-2.  **[Spectral Radius] Why is $\rho(A) < 1$ necessary for a sustainable economic system?**
-    ??? success "Solution"
-        If $\rho(A) \ge 1$, the internal consumption required to produce one unit of product exceeds the output itself. The system would shrink continuously and fail to satisfy any external demand.
-
-3.  **[M-matrix] Prove: If $I-A$ is an M-matrix, increasing demand $d$ necessarily increases output $x$.**
-    ??? success "Solution"
-        Since $x = (I-A)^{-1} d$ and $(I-A)^{-1} \ge 0$, a change $\Delta d \ge 0$ results in $\Delta x = (I-A)^{-1} \Delta d \ge 0$.
-
-4.  **[Game Theory] In a $2 \times 2$ zero-sum game with payoff matrix $I$ (identity), what is the optimal strategy?**
-    ??? success "Solution"
-        Due to symmetry, the optimal strategy for both players is the mixed strategy $(0.5, 0.5)$.
-
-5.  **[Risk] Why must the covariance matrix $\Sigma$ be positive definite?**
-    ??? success "Solution"
-        Because portfolio risk (variance) $w^T \Sigma w$ must physically be positive unless all assets are perfectly linearly dependent (in which case it is semi-definite).
-
-6.  **[PCA] What does the first principal component of a financial covariance matrix usually represent?**
-    ??? success "Solution"
-        It typically represents the "Market Factor," the direction of systematic risk common to all assets.
-
-7.  **[Linear Programming] What do shadow prices represent in economic allocation?**
-    ??? success "Solution"
-        They represent the marginal value of a scarce resource—the maximum increase in profit from adding one unit of that resource.
-
-8.  **[Calculation] Find the game value for the payoff matrix $\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$.**
-    ??? success "Solution"
-        The value is 0 (a fair game).
-
-9.  **[Equilibrium] Briefly describe the relationship between the closed Leontief model and eigenvalues.**
-    ??? success "Solution"
-        In a closed model, $Ax = x$, meaning output is exactly consumed by the system. This corresponds to the eigenvector associated with the eigenvalue 1 (the Perron vector).
 
 ****
-
 ??? success "Solution"
-    
+     $I-A = \begin{pmatrix} 0.5 & -0.2 \\ -0.2 & 0.5 \end{pmatrix}$.
+     $\det(I-A) = 0.25 - 0.04 = 0.21$.
+     $(I-A)^{-1} = \frac{1}{0.21} \begin{pmatrix} 0.5 & 0.2 \\ 0.2 & 0.5 \end{pmatrix}$.
+     $x = (I-A)^{-1} d = \frac{1}{0.21} (7, 7)^T \approx (33.3, 33.3)^T$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     If $\rho(A) \ge 1$, the internal consumption required to produce one unit of product exceeds the output itself. The system would shrink continuously and fail to satisfy any external demand.
+
+
+****
+??? success "Solution"
+     Since $x = (I-A)^{-1} d$ and $(I-A)^{-1} \ge 0$, a change $\Delta d \ge 0$ results in $\Delta x = (I-A)^{-1} \Delta d \ge 0$.
+
+
+****
+??? success "Solution"
+     Due to symmetry, the optimal strategy for both players is the mixed strategy $(0.5, 0.5)$.
+
+
+****
+??? success "Solution"
+     Because portfolio risk (variance) $w^T \Sigma w$ must physically be positive unless all assets are perfectly linearly dependent (in which case it is semi-definite).
+
+
+****
+??? success "Solution"
+     It typically represents the "Market Factor," the direction of systematic risk common to all assets.
+
+
+****
+??? success "Solution"
+     They represent the marginal value of a scarce resource—the maximum increase in profit from adding one unit of that resource.
+
+
+****
+??? success "Solution"
+     The value is 0 (a fair game).
+
+
+****
+??? success "Solution"
+     In a closed model, $Ax = x$, meaning output is exactly consumed by the system. This corresponds to the eigenvector associated with the eigenvalue 1 (the Perron vector).
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra in economics establishes the structural logic of social systems:
 
-1.  **Algebraic Constraints of Cycles**: The Leontief model proves that mutual industry consumption forms the underlying operator of the system, whose spectral radius determines if the economy can generate surplus value.
-2.  **Game-theoretic Equilibrium**: The Minimax theorem and linear programming reveal the dual essence of optimal decision-making in competitive environments, proving the algebraic unity of individual interest and social resource allocation.
-3.  **Geometric Metrics of Volatility**: The mean-variance model quantifies financial risk as the curvature of ellipsoids in high-dimensional space, proving that through matrix diagonalization (diversification), one can effectively find the optimal trade-off between return and risk.
+
+****: The Leontief model proves that mutual industry consumption forms the underlying operator of the system, whose spectral radius determines if the economy can generate surplus value.
+
+****: The Minimax theorem and linear programming reveal the dual essence of optimal decision-making in competitive environments, proving the algebraic unity of individual interest and social resource allocation.
+
+****: The mean-variance model quantifies financial risk as the curvature of ellipsoids in high-dimensional space, proving that through matrix diagonalization (diversification), one can effectively find the optimal trade-off between return and risk.

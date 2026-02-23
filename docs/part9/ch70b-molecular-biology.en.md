@@ -45,51 +45,60 @@ How can we find evidence of species evolution within massive DNA sequences? How 
 
 ## Exercises
 
-1.  **[Basics] Write the stoichiometric column vector for the reaction $A + B \to C$.**
-    ??? success "Solution"
-        Assuming the metabolite order is $(A, B, C)^T$, the vector is $(-1, -1, 1)^T$.
-
-2.  **[Null Space] If $S$ has 10 metabolites and 15 reactions, and $\operatorname{rank}(S)=8$, what is the dimension of the steady-state flux space?**
-    ??? success "Solution"
-        $\dim N(S) = 15 - 8 = 7$.
-
-3.  **[Alignment] In a log-odds scoring matrix, what do positive and negative values represent?**
-    ??? success "Solution"
-        Positive values mean the substitution occurs more frequently in evolution than expected by chance (conserved); negative values mean the substitution is rare and likely disrupts protein function.
-
-4.  **[PCA] Why is PCA commonly used in analyzing microarray gene chip data?**
-    ??? success "Solution"
-        Gene data is extremely high-dimensional (tens of thousands of genes). PCA extracts the principal components that define cell states (e.g., healthy vs. diseased), significantly reducing noise.
-
-5.  **[Evolution] Briefly describe the characteristics of the transition matrix in the Jukes-Cantor model.**
-    ??? success "Solution"
-        It is a symmetric stochastic matrix where the eigenvalues reflect the rate at which nucleotide distributions tend toward uniformity over time.
-
-6.  **[Network] What is an "essential reaction" in a metabolic network?**
-    ??? success "Solution"
-        A reaction such that setting its rate to zero in the $S\mathbf{v}=0$ constraint forces the objective function (e.g., growth rate) to zero.
-
-7.  **[Graph Theory] What does the Fiedler eigenvalue $\lambda_2$ of a protein contact map represents?**
-    ??? success "Solution"
-        It represents the structural compactness or "folding rate" of the protein; a smaller $\lambda_2$ corresponds to more loosely connected, flexible regions.
-
-8.  **[Calculation] Find a basis vector for $S = \begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}$.**
-    ??? success "Solution"
-        $\mathbf{v} = (1, 1)^T$. Physical meaning: This is a reversible reaction ($A \leftrightarrow B$) where rates are equal at steady state.
-
-9.  **[NMF] State the advantage of NMF in gene clustering over PCA.**
-    ??? success "Solution"
-        NMF results are non-negative, allowing the decomposition of gene expression into additive "modules," which is more consistent with biological intuitions of gene co-regulation.
 
 ****
-
 ??? success "Solution"
-    
+     Assuming the metabolite order is $(A, B, C)^T$, the vector is $(-1, -1, 1)^T$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\dim N(S) = 15 - 8 = 7$.
+
+
+****
+??? success "Solution"
+     Positive values mean the substitution occurs more frequently in evolution than expected by chance (conserved); negative values mean the substitution is rare and likely disrupts protein function.
+
+
+****
+??? success "Solution"
+     Gene data is extremely high-dimensional (tens of thousands of genes). PCA extracts the principal components that define cell states (e.g., healthy vs. diseased), significantly reducing noise.
+
+
+****
+??? success "Solution"
+     It is a symmetric stochastic matrix where the eigenvalues reflect the rate at which nucleotide distributions tend toward uniformity over time.
+
+
+****
+??? success "Solution"
+     A reaction such that setting its rate to zero in the $S\mathbf{v}=0$ constraint forces the objective function (e.g., growth rate) to zero.
+
+
+****
+??? success "Solution"
+     It represents the structural compactness or "folding rate" of the protein; a smaller $\lambda_2$ corresponds to more loosely connected, flexible regions.
+
+
+****
+??? success "Solution"
+     $\mathbf{v} = (1, 1)^T$. Physical meaning: This is a reversible reaction ($A \leftrightarrow B$) where rates are equal at steady state.
+
+
+****
+??? success "Solution"
+     NMF results are non-negative, allowing the decomposition of gene expression into additive "modules," which is more consistent with biological intuitions of gene co-regulation.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra in molecular biology establishes the rigorous format of life processes:
 
-1.  **Algebraic Metric of Evolution**: Through scoring matrices and Markov chains, this theory quantifies the passage of time and the accumulation of mutations as spectral properties, providing the mathematical skeleton for reconstructing the Tree of Life.
-2.  **Structural Constraints of Metabolism**: Stoichiometric matrices prove that life is not just a biochemical coincidence but a necessity under mass conservation and flux balance, establishing the computational cornerstone of systems biology.
-3.  **Automated Pattern Extraction**: Matrix decomposition techniques peel away the ordered regulatory modules from chaotic genomic data, proving that high-dimensional life signals follow surprisingly simple linear superposition logic at their core.
+
+****: Through scoring matrices and Markov chains, this theory quantifies the passage of time and the accumulation of mutations as spectral properties, providing the mathematical skeleton for reconstructing the Tree of Life.
+
+****: Stoichiometric matrices prove that life is not just a biochemical coincidence but a necessity under mass conservation and flux balance, establishing the computational cornerstone of systems biology.
+
+****: Matrix decomposition techniques peel away the ordered regulatory modules from chaotic genomic data, proving that high-dimensional life signals follow surprisingly simple linear superposition logic at their core.

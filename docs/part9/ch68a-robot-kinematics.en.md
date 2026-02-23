@@ -55,52 +55,61 @@ How can we make a robotic arm precisely grasp a cup? This is essentially a compl
 
 ## Exercises
 
-1.  **[Basics] For a 2D arm with two revolute joints, find the relation between end-effector coordinates $(x, y)$ and joint angles $(\theta_1, \theta_2)$.**
-    ??? success "Solution"
-        $x = l_1 \cos\theta_1 + l_2 \cos(\theta_1+\theta_2)$
-        $y = l_1 \sin\theta_1 + l_2 \sin(\theta_1+\theta_2)$
-
-2.  **[Jacobian] Calculate the Jacobian matrix for the 2D arm above.**
-    ??? success "Solution"
-        $J = \begin{pmatrix} \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} \\ \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} \end{pmatrix} = \begin{pmatrix} -y & -l_2 \sin(\theta_1+\theta_2) \\ x & l_2 \cos(\theta_1+\theta_2) \end{pmatrix}$.
-
-3.  **[Singularity] For the 2D arm, what happens when $l_2 \sin\theta_2 = 0$?**
-    ??? success "Solution"
-        Then $\det(J) = 0$. The robot is singular (fully extended or folded), and it cannot produce any radial velocity component along the arm.
-
-4.  **[D-H Parameters] Why does the D-H method require only 4 parameters per link instead of 6?**
-    ??? success "Solution"
-        Because D-H frame placement follows specific constraints (the $x$-axis intersects and is perpendicular to the previous $z$-axis), eliminating two degrees of freedom and simplifying the model.
-
-5.  **[IK Challenge] Why is inverse kinematics typically harder than forward kinematics?**
-    ??? success "Solution"
-        FK is a unique matrix product, whereas IK involves solving non-linear equations, which may have multiple solutions (configurations), one solution, or no solution (if the target is outside the workspace).
-
-6.  **[Workspace] What is the "reachable workspace" of a robot?**
-    ??? success "Solution"
-        The set of all points the end-effector can reach. In linear algebra terms, it is the image of the joint space manifold under the operator $f$.
-
-7.  **[Statics] Relate joint torques $\tau$ to end-effector forces $F$.**
-    ??? success "Solution"
-        $\tau = J^T F$. This demonstrates the importance of the Jacobian transpose via the Principle of Virtual Work.
-
-8.  **[Redundancy] If a 7-DOF arm operates in 3D space, what are the dimensions of its Jacobian?**
-    ??? success "Solution"
-        $6 \times 7$ (6 velocity components, 7 joint variables). Since there are more columns than rows, the system is redundant.
-
-9.  **[PoE] What is the Product of Exponentials (PoE) formula?**
-    ??? success "Solution"
-        An FK representation based on Screw Theory: $T = e^{S_1 \theta_1} \cdots e^{S_n \theta_n} M$. It is more geometrically intuitive and easier to differentiate than D-H.
 
 ****
-
 ??? success "Solution"
-    
+     $x = l_1 \cos\theta_1 + l_2 \cos(\theta_1+\theta_2)$
+     $y = l_1 \sin\theta_1 + l_2 \sin(\theta_1+\theta_2)$
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $J = \begin{pmatrix} \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} \\ \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} \end{pmatrix} = \begin{pmatrix} -y & -l_2 \sin(\theta_1+\theta_2) \\ x & l_2 \cos(\theta_1+\theta_2) \end{pmatrix}$.
+
+
+****
+??? success "Solution"
+     Then $\det(J) = 0$. The robot is singular (fully extended or folded), and it cannot produce any radial velocity component along the arm.
+
+
+****
+??? success "Solution"
+     Because D-H frame placement follows specific constraints (the $x$-axis intersects and is perpendicular to the previous $z$-axis), eliminating two degrees of freedom and simplifying the model.
+
+
+****
+??? success "Solution"
+     FK is a unique matrix product, whereas IK involves solving non-linear equations, which may have multiple solutions (configurations), one solution, or no solution (if the target is outside the workspace).
+
+
+****
+??? success "Solution"
+     The set of all points the end-effector can reach. In linear algebra terms, it is the image of the joint space manifold under the operator $f$.
+
+
+****
+??? success "Solution"
+     $\tau = J^T F$. This demonstrates the importance of the Jacobian transpose via the Principle of Virtual Work.
+
+
+****
+??? success "Solution"
+     $6 \times 7$ (6 velocity components, 7 joint variables). Since there are more columns than rows, the system is redundant.
+
+
+****
+??? success "Solution"
+     An FK representation based on Screw Theory: $T = e^{S_1 \theta_1} \cdots e^{S_n \theta_n} M$. It is more geometrically intuitive and easier to differentiate than D-H.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Robot kinematics is the chained integration of linear algebra and rigid body geometry:
 
-1.  **Accumulation of Transforms**: Proved that complex mechanical motion can be deconstructed into a cascade of local 4x4 matrices, establishing standard algebraic protocols for motion modeling.
-2.  **Tangent Space of Velocity**: The Jacobian matrix maps non-linear spatial configurations to linear velocity vectors, providing precise algebraic criteria for analyzing system flexibility and singularity.
-3.  **Freedom under Constraint**: Through null-space and pseudoinverse techniques, kinematics demonstrates how to optimize secondary goals (obstacle avoidance, energy saving) while satisfying the primary task (pose), showcasing linear algebra's superiority in handling redundant constraints.
+
+****: Proved that complex mechanical motion can be deconstructed into a cascade of local 4x4 matrices, establishing standard algebraic protocols for motion modeling.
+
+****: The Jacobian matrix maps non-linear spatial configurations to linear velocity vectors, providing precise algebraic criteria for analyzing system flexibility and singularity.
+
+****: Through null-space and pseudoinverse techniques, kinematics demonstrates how to optimize secondary goals (obstacle avoidance, energy saving) while satisfying the primary task (pose), showcasing linear algebra's superiority in handling redundant constraints.

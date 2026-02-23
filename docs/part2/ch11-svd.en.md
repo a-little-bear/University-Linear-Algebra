@@ -59,59 +59,32 @@ The Singular Value Decomposition (SVD) is often called the "pinnacle" of linear 
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 SVD is the ultimate weapon for solving real-world linear algebra problems:
 
-1.  **Universality**: It bridges the gap between square and rectangular, full-rank and deficient matrices, providing a unified analytic perspective for all linear mappings.
-2.  **Energy Concentration**: By ordering singular values, SVD identifies the "most important" components of data, providing mathematical criteria for compression and dimensionality reduction.
-3.  **Numerical Robustness**: As the basis for pseudoinverses and least squares solutions, SVD exhibits high stability against ill-conditioned matrices, serving as the final line of defense in engineering computations.
+
+****: It bridges the gap between square and rectangular, full-rank and deficient matrices, providing a unified analytic perspective for all linear mappings.
+
+****: By ordering singular values, SVD identifies the "most important" components of data, providing mathematical criteria for compression and dimensionality reduction.
+
+****: As the basis for pseudoinverses and least squares solutions, SVD exhibits high stability against ill-conditioned matrices, serving as the final line of defense in engineering computations.

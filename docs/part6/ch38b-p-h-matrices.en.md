@@ -29,61 +29,37 @@ e \emptyset.$$
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+         $\mathcal{M}(A) = \begin{pmatrix} 4 & -\sqrt{2} \ -\sqrt{5} & 5 \end{pmatrix}$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-       $\mathcal{M}(A) = \begin{pmatrix} 4 & -\sqrt{2} \ -\sqrt{5} & 5 \end{pmatrix}$.
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
     
 eq 0$) such that $Ax > 0$. Every non-singular M-matrix is semipositive.
 
 ****
-
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter classifies matrices based on the positivity of their sub-structures:
 
-1. **Sign Agnostic Positivity**: Defined P-matrices through principal minors, establishing their role in LCP solvability.
-2. **Comparison Theory**: Developed H-matrices as the complex generalization of M-matrices via magnitude-based dominance.
-3. **Hierarchical Convergence**: Linked these classes to the numerical stability of iterative solvers and error bounds in interval arithmetic.
+
+****: Defined P-matrices through principal minors, establishing their role in LCP solvability.
+
+****: Developed H-matrices as the complex generalization of M-matrices via magnitude-based dominance.
+
+****: Linked these classes to the numerical stability of iterative solvers and error bounds in interval arithmetic.

@@ -50,51 +50,60 @@ Linear algebra is typically taught over the fields of real or complex numbers. H
 
 ## Exercises
 
-1.  **[Basics] In $\mathbb{F}_2^3$, how many non-zero vectors are there?**
-    ??? success "Solution"
-        $2^3 - 1 = 7$.
-
-2.  **[Arithmetic] Calculate $\begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} + \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$ over $\mathbb{F}_2$.**
-    ??? success "Solution"
-        $\begin{pmatrix} 0 & 1 \\ 0 & 1 \end{pmatrix}$. Note that $1+1=0$ in characteristic 2.
-
-3.  **[GL Group] Calculate $|GL(2, 2)|$.**
-    ??? success "Solution"
-        $(2^2 - 1)(2^2 - 2) = 3 \times 2 = 6$. These 6 matrices form the symmetric group $S_3$.
-
-4.  **[Counting] How many 1-dimensional subspaces are there in $\mathbb{F}_2^3$?**
-    ??? success "Solution"
-        $\begin{bmatrix} 3 \\ 1 \end{bmatrix}_2 = \frac{2^3-1}{2^1-1} = 7$. This corresponds to the points in the Fano plane $PG(2, 2)$.
-
-5.  **[Dimension] If a linear code has generator matrix $G = [1 \ 1 \ 0]$, what is its dimension $k$?**
-    ??? success "Solution"
-        $k=1$ (the number of rows).
-
-6.  **[Weight] What is the Hamming distance between $(1, 0, 1)$ and $(0, 1, 1)$ over $\mathbb{F}_2$?**
-    ??? success "Solution"
-        The number of positions where they differ is 2.
-
-7.  **[Check Matrix] If an $[n, k]$ code has a $k \times n$ generator matrix, what are the dimensions of its parity check matrix $H$?**
-    ??? success "Solution"
-        $(n-k) \times n$. Its rows correspond to the annihilators of the subspace.
-
-8.  **[Freshman's Dream] Prove $(a+b)^p = a^p + b^p$ in a field of characteristic $p$.**
-    ??? success "Solution"
-        Using the binomial expansion, all intermediate terms $\binom{p}{k}$ are divisible by $p$, which is 0 in the field.
-
-9.  **[Application] Why are finite fields important in Linear Feedback Shift Registers (LFSR)?**
-    ??? success "Solution"
-        The state evolution of an LFSR is equivalent to powers of a companion matrix acting on a vector space over a finite field, determining the period of pseudo-random sequences.
 
 ****
-
 ??? success "Solution"
-    
+     $2^3 - 1 = 7$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $\begin{pmatrix} 0 & 1 \\ 0 & 1 \end{pmatrix}$. Note that $1+1=0$ in characteristic 2.
+
+
+****
+??? success "Solution"
+     $(2^2 - 1)(2^2 - 2) = 3 \times 2 = 6$. These 6 matrices form the symmetric group $S_3$.
+
+
+****
+??? success "Solution"
+     $\begin{bmatrix} 3 \\ 1 \end{bmatrix}_2 = \frac{2^3-1}{2^1-1} = 7$. This corresponds to the points in the Fano plane $PG(2, 2)$.
+
+
+****
+??? success "Solution"
+     $k=1$ (the number of rows).
+
+
+****
+??? success "Solution"
+     The number of positions where they differ is 2.
+
+
+****
+??? success "Solution"
+     $(n-k) \times n$. Its rows correspond to the annihilators of the subspace.
+
+
+****
+??? success "Solution"
+     Using the binomial expansion, all intermediate terms $\binom{p}{k}$ are divisible by $p$, which is 0 in the field.
+
+
+****
+??? success "Solution"
+     The state evolution of an LFSR is equivalent to powers of a companion matrix acting on a vector space over a finite field, determining the period of pseudo-random sequences.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear algebra over finite fields is the universal language of the discrete world:
 
-1.  **Unity of Logic**: It proves that core concepts like basis, rank, and projection do not depend on "continuity" and remain robust on discrete points.
-2.  **Counting Power**: Gaussian binomial coefficients perfectly merge combinatorial counting with linear subspaces, establishing mathematical criteria for describing complex discrete structures like coding spaces.
-3.  **Real-world Foundation**: By transforming algebraic operations into bitwise logic, linear algebra over finite fields achieves the ultimate unity of mathematical beauty and engineering efficiency, forming the technical lifeline of modern information security and reliable transmission.
+
+****: It proves that core concepts like basis, rank, and projection do not depend on "continuity" and remain robust on discrete points.
+
+****: Gaussian binomial coefficients perfectly merge combinatorial counting with linear subspaces, establishing mathematical criteria for describing complex discrete structures like coding spaces.
+
+****: By transforming algebraic operations into bitwise logic, linear algebra over finite fields achieves the ultimate unity of mathematical beauty and engineering efficiency, forming the technical lifeline of modern information security and reliable transmission.

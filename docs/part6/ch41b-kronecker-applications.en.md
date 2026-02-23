@@ -30,61 +30,37 @@ When a pencil $A - \lambda B$ is singular—meaning its determinant is identical
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
     
 ot\equiv 0$).
 
 ****
-
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter provides the final classification for all linear operator pairs:
 
-1. **Singular Calculus**: Defined minimal indices as the structural invariants of polynomial nullspaces.
-2. **Global Decomposition**: Unified regular and singular behaviors in the Kronecker Canonical Form.
-3. **Control Links**: Established the equivalence between matrix structure and the feedback properties of linear systems.
-4. **Dynamical Constraints**: Applied the theory to DAEs, identifying the index as the measure of numerical and analytical complexity.
+
+****: Defined minimal indices as the structural invariants of polynomial nullspaces.
+
+****: Unified regular and singular behaviors in the Kronecker Canonical Form.
+
+****: Established the equivalence between matrix structure and the feedback properties of linear systems.
+
+****: Applied the theory to DAEs, identifying the index as the measure of numerical and analytical complexity.

@@ -56,51 +56,55 @@ abla_X \ln \det(X) = X^{-T}$
 
 1.  **[Calculation] Find $
 abla_x (\|\mathbf{x}\|_2^2)$.**
-    ??? success "Solution"
-        $
+??? success "Solution"
+     $
 abla_x (\mathbf{x}^T \mathbf{x}) = 2\mathbf{x}$.
 
 2.  **[Trace] Find $
 abla_X \operatorname{tr}(X^T A X)$.**
-    ??? success "Solution"
-        $(A + A^T) X$.
+??? success "Solution"
+     $(A + A^T) X$.
 
-3.  **[Inverse] If $X$ is a function of $t$, find $\frac{d}{dt} \operatorname{tr}(X^{-1})$.**
-    ??? success "Solution"
-        $\operatorname{tr}(-X^{-1} \dot{X} X^{-1}) = -\operatorname{tr}(X^{-2} \dot{X})$.
+
+****
+??? success "Solution"
+     $\operatorname{tr}(-X^{-1} \dot{X} X^{-1}) = -\operatorname{tr}(X^{-2} \dot{X})$.
 
 4.  **[Determinant] If $A$ is a constant matrix, find $
 abla_X \det(AX)$.**
-    ??? success "Solution"
-        $\det(A) 
+??? success "Solution"
+     $\det(A) 
 abla_X \det(X) = \det(A)\det(X) X^{-T} = \det(AX) X^{-T}$.
 
-5.  **[Vectorization] Prove $\frac{\partial \operatorname{vec}(AXB)}{\partial \operatorname{vec}(X)} = B^T \otimes A$.**
-    ??? success "Solution"
-        This follows directly from the vectorization identity of the Kronecker product.
 
-6.  **[Symmetry] Differentiate $\operatorname{tr}(AX)$ with respect to a symmetric matrix $X$.**
-    ??? success "Solution"
-        Because $x_{ij}$ and $x_{ji}$ are the same variable, the result is $A + A^T - \operatorname{diag}(A)$.
+****
+??? success "Solution"
+     This follows directly from the vectorization identity of the Kronecker product.
 
-7.  **[Chain Rule] Let $y = f(u)$ and $u = g(x)$. Write the chain rule for the gradient.**
-    ??? success "Solution"
-        $
+
+****
+??? success "Solution"
+     Because $x_{ij}$ and $x_{ji}$ are the same variable, the result is $A + A^T - \operatorname{diag}(A)$.
+
+
+****
+??? success "Solution"
+     $
 abla_x y = \left( \frac{\partial u}{\partial x} ight)^T 
 abla_u f$.
 
 8.  **[Frobenius] Find $
 abla_X (\|X\|_F^2)$.**
-    ??? success "Solution"
-        $
+??? success "Solution"
+     $
 abla_X \operatorname{tr}(X^T X) = 2X$.
 
-9.  **[Jacobian] What is the Jacobian matrix $\frac{\partial y}{\partial x}$ for the linear map $y = Ax$?**
-    ??? success "Solution"
-        It is simply the matrix $A$.
 
 ****
+??? success "Solution"
+     It is simply the matrix $A$.
 
+****
 ??? success "Solution"
     
 abla_x (y-Ax)^T(y-Ax) = -2A^T(y-Ax) = 0 \implies A^T A x = A^T y$ (the Normal Equations).
@@ -109,6 +113,9 @@ abla_x (y-Ax)^T(y-Ax) = -2A^T(y-Ax) = 0 \implies A^T A x = A^T y$ (the Normal Eq
 
 Matrix calculus enables the leap from scalar partial derivatives to operator gradients:
 
-1.  **Compact Notation**: Through gradient matrices and Jacobians, complex multivariate changes are condensed into single algebraic terms, greatly simplifying the derivation of high-dimensional optimization problems.
-2.  **Structural Sensitivity**: Core derivative formulas (such as those for the determinant and inverse) reveal the non-linear sensitivity of global matrix properties to local entries, serving as the bedrock of stability analysis.
-3.  **Algorithmic Standardization**: The introduction of commutation and duplication matrices provides standard algebraic compensation for inherent matrix symmetry and index permutations, ensuring the rigor of the differentiation process.
+
+****: Through gradient matrices and Jacobians, complex multivariate changes are condensed into single algebraic terms, greatly simplifying the derivation of high-dimensional optimization problems.
+
+****: Core derivative formulas (such as those for the determinant and inverse) reveal the non-linear sensitivity of global matrix properties to local entries, serving as the bedrock of stability analysis.
+
+****: The introduction of commutation and duplication matrices provides standard algebraic compensation for inherent matrix symmetry and index permutations, ensuring the rigor of the differentiation process.

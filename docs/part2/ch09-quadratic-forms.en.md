@@ -47,59 +47,32 @@ Quadratic forms study scalar functions that take the form of quadratic homogeneo
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Quadratic forms bridge polynomial algebra and spatial geometry:
 
-1.  **Structural Simplification**: Congruence transformations are the blades that eliminate cross-terms and simplify coordinate systems, revealing the core inertia of symmetric operators.
-2.  **Sign Dynamics**: The Law of Inertia establishes the deepest topological invariants of a quadratic function, which remain unchanged regardless of coordinate rotation or scaling.
-3.  **Core of Definiteness**: As the algebraic criterion for energy, distance, and stability analysis, the theory of definiteness is the vital junction connecting linear algebra with analysis and physics.
+
+****: Congruence transformations are the blades that eliminate cross-terms and simplify coordinate systems, revealing the core inertia of symmetric operators.
+
+****: The Law of Inertia establishes the deepest topological invariants of a quadratic function, which remain unchanged regardless of coordinate rotation or scaling.
+
+****: As the algebraic criterion for energy, distance, and stability analysis, the theory of definiteness is the vital junction connecting linear algebra with analysis and physics.

@@ -89,56 +89,66 @@ Optimization is the science of finding the "best" solution under constraints. Wh
 
 ## Exercises
 
-1.  **[Quadratic] Find the minimum of $f(x, y) = x^2 + 2y^2 - 4x + 4y + 7$.**
-    ??? success "Solution"
-        The Hessian is $H = \begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$, which is PD.
-        The gradient is $\nabla f = (2x-4, 4y+4)^T$.
-        Setting $\nabla f = 0$ gives $x=2, y=-1$.
-        The minimum value is $f(2, -1) = 4 + 2 - 8 - 4 + 7 = 1$.
-
-2.  **[KKT] State the Karush-Kuhn-Tucker (KKT) conditions for equality-constrained optimization.**
-    ??? success "Solution"
-        1. Primal feasibility: $h(x) = 0$.
-        2. Stationarity: $\nabla f(x) + \sum \lambda_i \nabla h_i(x) = 0$.
-
-3.  **[SDP] Express the constraint $\lambda_{\max}(X) \le 1$ as an LMI (Linear Matrix Inequality).**
-    ??? success "Solution"
-        $X \preceq I$, or $I - X \succeq 0$.
-
-4.  **[SVD in Opt] Why is SVD used in low-rank matrix recovery?**
-    ??? success "Solution"
-        The proximal operator of the nuclear norm involves a "singular value thresholding" step: computing the SVD and shrinking all singular values towards zero.
-
-5.  **[Nuclear Norm] Prove $\|X\|_* = \operatorname{tr}(\sqrt{X^T X})$.**
-    ??? success "Solution"
-        $\sqrt{X^T X}$ has eigenvalues equal to the singular values $\sigma_i$ of $X$. Since $\|X\|_* = \sum \sigma_i$ and the trace is the sum of eigenvalues, the equality holds.
-
-6.  **[Convergence] Why does Newton's method converge faster than Gradient Descent?**
-    ??? success "Solution"
-        Gradient Descent only uses the first derivative (linear approximation), while Newton's uses the second derivative (quadratic approximation). Newton's method has quadratic convergence near the optimum, whereas Gradient Descent is linear.
-
-7.  **[Conditioning] How does the condition number $\kappa(H)$ affect Gradient Descent?**
-    ??? success "Solution"
-        High condition numbers result in "elongated" contours (ellipses). Gradient Descent "zig-zags" in these narrow valleys, leading to very slow convergence.
-
-8.  **[Dual] Write the dual of the LP $\min c^T x$ s.t. $Ax \ge b, x \ge 0$.**
-    ??? success "Solution"
-        $\max b^T y$ s.t. $A^T y \le c, y \ge 0$.
-
-9.  **[SVM] Why is the Support Vector Machine (SVM) a Quadratic Program?**
-    ??? success "Solution"
-        Training an SVM involves maximizing the margin $2/\|w\|$, which is equivalent to minimizing $\frac{1}{2} \|w\|^2$ (a quadratic objective) subject to linear constraints $y_i(w^T x_i + b) \ge 1$.
 
 ****
-
 ??? success "Solution"
-    
+     The Hessian is $H = \begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$, which is PD.
+     The gradient is $\nabla f = (2x-4, 4y+4)^T$.
+     Setting $\nabla f = 0$ gives $x=2, y=-1$.
+     The minimum value is $f(2, -1) = 4 + 2 - 8 - 4 + 7 = 1$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     1. Primal feasibility: $h(x) = 0$.
+     2. Stationarity: $\nabla f(x) + \sum \lambda_i \nabla h_i(x) = 0$.
+
+
+****
+??? success "Solution"
+     $X \preceq I$, or $I - X \succeq 0$.
+
+
+****
+??? success "Solution"
+     The proximal operator of the nuclear norm involves a "singular value thresholding" step: computing the SVD and shrinking all singular values towards zero.
+
+
+****
+??? success "Solution"
+     $\sqrt{X^T X}$ has eigenvalues equal to the singular values $\sigma_i$ of $X$. Since $\|X\|_* = \sum \sigma_i$ and the trace is the sum of eigenvalues, the equality holds.
+
+
+****
+??? success "Solution"
+     Gradient Descent only uses the first derivative (linear approximation), while Newton's uses the second derivative (quadratic approximation). Newton's method has quadratic convergence near the optimum, whereas Gradient Descent is linear.
+
+
+****
+??? success "Solution"
+     High condition numbers result in "elongated" contours (ellipses). Gradient Descent "zig-zags" in these narrow valleys, leading to very slow convergence.
+
+
+****
+??? success "Solution"
+     $\max b^T y$ s.t. $A^T y \le c, y \ge 0$.
+
+
+****
+??? success "Solution"
+     Training an SVM involves maximizing the margin $2/\|w\|$, which is equivalent to minimizing $\frac{1}{2} \|w\|^2$ (a quadratic objective) subject to linear constraints $y_i(w^T x_i + b) \ge 1$.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Optimization is the ultimate application of Matrix Analysis:
 
-1.  **Algebraic Search**: Established that solving optimization problems is synonymous with solving linear systems or finding spectral bounds.
-2.  **Cone Geometry**: Generalized linear constraints to the positive definite cone, creating the powerful framework of SDP.
-3.  **Curvature Utilization**: Developed second-order methods that exploit the Hessian matrix to achieve superior convergence rates.
-4.  **Information Exploitation**: Demonstrated how linear algebra tricks like the nuclear norm and L1-minimization can extract low-dimensional signals from high-dimensional noise.
+
+****: Established that solving optimization problems is synonymous with solving linear systems or finding spectral bounds.
+
+****: Generalized linear constraints to the positive definite cone, creating the powerful framework of SDP.
+
+****: Developed second-order methods that exploit the Hessian matrix to achieve superior convergence rates.
+
+****: Demonstrated how linear algebra tricks like the nuclear norm and L1-minimization can extract low-dimensional signals from high-dimensional noise.

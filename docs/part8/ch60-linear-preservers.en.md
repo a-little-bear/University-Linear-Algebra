@@ -51,51 +51,60 @@ In studying linear operators $L: M_n \to M_n$ on matrix spaces, a natural questi
 
 ## Exercises
 
-1.  **[Basics] Prove that the similarity transform $L(A) = P^{-1} A P$ preserves the determinant.**
-    ??? success "Solution"
-        $\det(P^{-1} A P) = \det(P^{-1})\det(A)\det(P) = \det(A)$.
-
-2.  **[Frobenius] Give an example of a linear transformation that preserves the determinant but not the eigenvalues.**
-    ??? success "Solution"
-        $L(A) = MAN$ where $M, N$ are not inverses of each other. For example, $M=2I, N=0.5I$. While $\det(MN)=1$ ensures the determinant is preserved, the individual eigenvalues will change because the transformation is not a similarity transform.
-
-3.  **[Rank] If $L$ preserves rank, does it necessarily preserve the determinant?**
-    ??? success "Solution"
-        Not necessarily. It might scale the determinant by a constant factor.
-
-4.  **[Trace] What is the form of a linear transformation that preserves the trace $\operatorname{tr}(A)$?**
-    ??? success "Solution"
-        The form is very broad and not limited to $MAN$. Any linear transformation satisfying $\operatorname{tr}(L(E_{ij})) = \delta_{ij}$ works.
-
-5.  **[Invertibility] Prove that a linear transformation preserving invertibility must also preserve singularity.**
-    ??? success "Solution"
-        If a linear transformation maps the set of non-singular matrices to itself, by dimensionality and topological continuity, it must also map the boundary (singular matrices) to itself.
-
-6.  **[Calculation] In $M_2$, determine if $L(A) = A^T$ preserves the spectrum.**
-    ??? success "Solution"
-        Yes. Since $\det(A-\lambda I) = \det((A-\lambda I)^T) = \det(A^T - \lambda I)$, the eigenvalues are identical.
-
-7.  **[Unitary] Prove $L(A) = U A V$ (with $U, V$ unitary) preserves the Frobenius norm.**
-    ??? success "Solution"
-        $\|UAV\|_F^2 = \operatorname{tr}((UAV)^*(UAV)) = \operatorname{tr}(V^* A^* U^* U A V) = \operatorname{tr}(V^* A^* A V) = \operatorname{tr}(A^* A) = \|A\|_F^2$.
-
-8.  **[Application] Why study operators preserving Completely Positive (CP) properties in quantum information?**
-    ??? success "Solution"
-        Because a physical quantum channel must map a valid density matrix (positive definite with trace 1) to another valid density matrix.
-
-9.  **[Commutativity] What form do linear transformations that preserve the relation $AB=BA$ usually take?**
-    ??? success "Solution"
-        Usually a combination of scalar multiplication and a similarity transformation.
 
 ****
-
 ??? success "Solution"
-    
+     $\det(P^{-1} A P) = \det(P^{-1})\det(A)\det(P) = \det(A)$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $L(A) = MAN$ where $M, N$ are not inverses of each other. For example, $M=2I, N=0.5I$. While $\det(MN)=1$ ensures the determinant is preserved, the individual eigenvalues will change because the transformation is not a similarity transform.
+
+
+****
+??? success "Solution"
+     Not necessarily. It might scale the determinant by a constant factor.
+
+
+****
+??? success "Solution"
+     The form is very broad and not limited to $MAN$. Any linear transformation satisfying $\operatorname{tr}(L(E_{ij})) = \delta_{ij}$ works.
+
+
+****
+??? success "Solution"
+     If a linear transformation maps the set of non-singular matrices to itself, by dimensionality and topological continuity, it must also map the boundary (singular matrices) to itself.
+
+
+****
+??? success "Solution"
+     Yes. Since $\det(A-\lambda I) = \det((A-\lambda I)^T) = \det(A^T - \lambda I)$, the eigenvalues are identical.
+
+
+****
+??? success "Solution"
+     $\|UAV\|_F^2 = \operatorname{tr}((UAV)^*(UAV)) = \operatorname{tr}(V^* A^* U^* U A V) = \operatorname{tr}(V^* A^* A V) = \operatorname{tr}(A^* A) = \|A\|_F^2$.
+
+
+****
+??? success "Solution"
+     Because a physical quantum channel must map a valid density matrix (positive definite with trace 1) to another valid density matrix.
+
+
+****
+??? success "Solution"
+     Usually a combination of scalar multiplication and a similarity transformation.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Linear preserver problems establish the algebraic boundaries of matrix properties:
 
-1.  **Rigidity of Structure**: Theorems by Frobenius and Dieudonné prove that the core attributes of a matrix (determinant, rank) are extremely "solid," and any linear attempt to preserve them eventually returns to fundamental coordinate rotations and transpositions.
-2.  **Hierarchy of Symmetries**: From preserving the spectrum (strong constraint) to preserving the trace (weak constraint), LPP demonstrates how different mathematical features exert varying degrees of compression on the transformation space.
-3.  **Cornerstone of Operator Algebra**: By investigating preservation properties, we can redefine what constitutes "physically consistent" evolution from a purely algebraic perspective, providing rigorous criteria for modern quantum operator theory and matrix manifold analysis.
+
+****: Theorems by Frobenius and Dieudonné prove that the core attributes of a matrix (determinant, rank) are extremely "solid," and any linear attempt to preserve them eventually returns to fundamental coordinate rotations and transpositions.
+
+****: From preserving the spectrum (strong constraint) to preserving the trace (weak constraint), LPP demonstrates how different mathematical features exert varying degrees of compression on the transformation space.
+
+****: By investigating preservation properties, we can redefine what constitutes "physically consistent" evolution from a purely algebraic perspective, providing rigorous criteria for modern quantum operator theory and matrix manifold analysis.

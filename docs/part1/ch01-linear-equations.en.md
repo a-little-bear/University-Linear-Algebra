@@ -75,59 +75,32 @@ Systems of linear equations are the logical starting point of linear algebra. Fr
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter bridges intuitive equations and algorithmic matrices:
 
-1.  **Algorithmic Engine**: Gaussian elimination is the universal tool for linear problems; its RREF form reveals the intrinsic structure of the system.
-2.  **Structural Insight**: The existence and uniqueness of solutions are entirely determined by the comparison of the ranks of the coefficient and augmented matrices.
-3.  **Spatial Foundation**: The solution set of a homogeneous system forms a subspace, while the solution set of a non-homogeneous system is a translation of that subspace (an affine space).
+
+****: Gaussian elimination is the universal tool for linear problems; its RREF form reveals the intrinsic structure of the system.
+
+****: The existence and uniqueness of solutions are entirely determined by the comparison of the ranks of the coefficient and augmented matrices.
+
+****: The solution set of a homogeneous system forms a subspace, while the solution set of a non-homogeneous system is a translation of that subspace (an affine space).

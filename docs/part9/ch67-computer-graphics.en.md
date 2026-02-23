@@ -54,51 +54,60 @@ Every 3D character or scene you see on a computer screen is the result of millio
 
 ## Exercises
 
-1.  **[Basics] Write the 2D homogeneous transformation matrix for rotation by angle $\theta$ around the origin.**
-    ??? success "Solution"
-        $\begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
-
-2.  **[Translation] Find the homogeneous coordinates of the point $(1, 2, 3)$ translated by $(5, 0, -1)$.**
-    ??? success "Solution"
-        $(1+5, 2+0, 3-1, 1) = (6, 2, 2, 1)$.
-
-3.  **[Projection] Why is the last row of a perspective projection matrix usually $(0, 0, 1, 0)$?**
-    ??? success "Solution"
-        To store the $z$-value in the homogeneous $w$-component. Hardware then performs the normalization $x/w, y/w, z/w$, creating the perspective effect.
-
-4.  **[Barycentric] If a point has barycentric coordinates $(0.5, 0.5, 0)$, where is it located?**
-    ??? success "Solution"
-        It is at the midpoint of the edge connecting the first two vertices ($AB$).
-
-5.  **[Quaternions] Why are quaternions used for 3D rotation in games instead of Euler angles?**
-    ??? success "Solution"
-        To avoid **Gimbal Lock**, and because spherical linear interpolation (SLERP) is smooth and more computationally efficient.
-
-6.  **[Ray Tracing] Calculate the intersection $t$ of a ray $\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}$ and a plane $\mathbf{n} \cdot \mathbf{p} + d = 0$.**
-    ??? success "Solution"
-        Substitute: $\mathbf{n} \cdot (\mathbf{o} + t\mathbf{d}) + d = 0 \implies t = \frac{-(d + \mathbf{n} \cdot \mathbf{o})}{\mathbf{n} \cdot \mathbf{d}}$.
-
-7.  **[Order] Prove that "rotate then translate" is not equivalent to "translate then rotate."**
-    ??? success "Solution"
-        $T \cdot R \neq R \cdot T$. Matrix multiplication is non-commutative; translating and then rotating will cause the translation vector itself to rotate.
-
-8.  **[Normals] Why must we transform normals $\mathbf{N}$ using $(M^{-1})^T$ instead of the model matrix $M$?**
-    ??? success "Solution"
-        To preserve the orthogonality between the normal and the tangent plane. Under non-uniform scaling, $M$ would distort the normal's direction.
-
-9.  **[SLERP] What is Spherical Linear Interpolation?**
-    ??? success "Solution"
-        Constant angular velocity interpolation between two unit quaternions (points on a 4D sphere) along a great-circle path.
 
 ****
-
 ??? success "Solution"
-    
+     $\begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     $(1+5, 2+0, 3-1, 1) = (6, 2, 2, 1)$.
+
+
+****
+??? success "Solution"
+     To store the $z$-value in the homogeneous $w$-component. Hardware then performs the normalization $x/w, y/w, z/w$, creating the perspective effect.
+
+
+****
+??? success "Solution"
+     It is at the midpoint of the edge connecting the first two vertices ($AB$).
+
+
+****
+??? success "Solution"
+     To avoid **Gimbal Lock**, and because spherical linear interpolation (SLERP) is smooth and more computationally efficient.
+
+
+****
+??? success "Solution"
+     Substitute: $\mathbf{n} \cdot (\mathbf{o} + t\mathbf{d}) + d = 0 \implies t = \frac{-(d + \mathbf{n} \cdot \mathbf{o})}{\mathbf{n} \cdot \mathbf{d}}$.
+
+
+****
+??? success "Solution"
+     $T \cdot R \neq R \cdot T$. Matrix multiplication is non-commutative; translating and then rotating will cause the translation vector itself to rotate.
+
+
+****
+??? success "Solution"
+     To preserve the orthogonality between the normal and the tangent plane. Under non-uniform scaling, $M$ would distort the normal's direction.
+
+
+****
+??? success "Solution"
+     Constant angular velocity interpolation between two unit quaternions (points on a 4D sphere) along a great-circle path.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Computer graphics is the most spectacular stage for linear algebra:
 
-1.  **Elevation of Dimension**: Through homogeneous coordinates, graphics unifies non-linear rigid body motion into linear matrix arithmetic, establishing the algebraic basis for pipelined rendering.
-2.  **Mystery of Projection**: The perspective matrix demonstrates how to utilize the rank-deficiency tendencies of linear algebra (via $w$-division) to simulate the collapse of high-dimensional space into low-dimensional vision, constructing the sense of depth in digital worlds.
-3.  **Logic of Geometry**: From barycentric interpolation to dot-product lighting, graphics proves that all real-world sensory experiences (color, shape, light) can be reduced to elegant vector operations at the underlying level.
+
+****: Through homogeneous coordinates, graphics unifies non-linear rigid body motion into linear matrix arithmetic, establishing the algebraic basis for pipelined rendering.
+
+****: The perspective matrix demonstrates how to utilize the rank-deficiency tendencies of linear algebra (via $w$-division) to simulate the collapse of high-dimensional space into low-dimensional vision, constructing the sense of depth in digital worlds.
+
+****: From barycentric interpolation to dot-product lighting, graphics proves that all real-world sensory experiences (color, shape, light) can be reduced to elegant vector operations at the underlying level.

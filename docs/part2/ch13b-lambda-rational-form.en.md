@@ -50,60 +50,34 @@ While the Jordan Canonical Form is theoretically perfect, its construction depen
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-       Thus $d_1 = D_1 = 1$ and $d_2 = D_2/D_1 = \lambda^2$. The invariant factors are $1, \lambda^2$.
+         Thus $d_1 = D_1 = 1$ and $d_2 = D_2/D_1 = \lambda^2$. The invariant factors are $1, \lambda^2$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 The Rational Canonical Form provides a universal characterization of matrix similarity classes over any field:
 
-1.  **Field Independence**: By utilizing companion blocks of irreducible polynomials, RCF eliminates the dependency on the complex field, becoming the core of operator theory in abstract algebra.
-2.  **Polynomial Logic**: The theory of invariant factors reveals the deep module structure behind the characteristic matrix $\lambda I - A$, establishing the ultimate algebraic criterion for similarity.
-3.  **Computational Precision**: Compared to the instability of eigenvalue calculation, the construction of Smith forms based on elementary operations provides a robust algorithmic foundation for exact algebra software.
+
+****: By utilizing companion blocks of irreducible polynomials, RCF eliminates the dependency on the complex field, becoming the core of operator theory in abstract algebra.
+
+****: The theory of invariant factors reveals the deep module structure behind the characteristic matrix $\lambda I - A$, establishing the ultimate algebraic criterion for similarity.
+
+****: Compared to the instability of eigenvalue calculation, the construction of Smith forms based on elementary operations provides a robust algorithmic foundation for exact algebra software.

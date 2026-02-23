@@ -30,60 +30,34 @@ ot\equiv 0$. Otherwise, it is **singular**.
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 This chapter extends eigenvalue theory to matrix pairs:
 
-1. **Regularity Framework**: Established the criteria for well-posed generalized eigenvalue problems.
-2. **Canonical Decomposition**: Developed the Weierstrass form to classify pencils under strict equivalence.
-3. **Unitary Algorithms**: Introduced the QZ decomposition and algorithm as the numerically stable path for spectral computation.
-4. **Polynomial Mapping**: Formulated linearizations to bridge high-degree matrix polynomials and linear pencils.
+
+****: Established the criteria for well-posed generalized eigenvalue problems.
+
+****: Developed the Weierstrass form to classify pencils under strict equivalence.
+
+****: Introduced the QZ decomposition and algorithm as the numerically stable path for spectral computation.
+
+****: Formulated linearizations to bridge high-degree matrix polynomials and linear pencils.

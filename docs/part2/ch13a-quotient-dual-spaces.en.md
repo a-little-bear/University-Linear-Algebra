@@ -60,61 +60,35 @@ Linear algebra studies not only the internal construction of spaces but also the
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
+    ****
+??? success "Solution"
+    ****
+??? success "Solution"
+         $f_1(1, 1)=1, f_1(1, 0)=0 \implies f_1(x, y) = y$.
+    $f_2(1, 1)=0, f_2(1, 0)=1 \implies f_2(x, y) = x-y$.
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-       $f_1(1, 1)=1, f_1(1, 0)=0 \implies f_1(x, y) = y$.
-       $f_2(1, 1)=0, f_2(1, 0)=1 \implies f_2(x, y) = x-y$.
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-****
-
-??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Quotient and dual spaces elevate the abstract dimension of linear algebra:
 
-1.  **Information Compression**: Quotient spaces modularize complex structures through equivalence classes, serving as the key to induced transformations and fundamental homomorphism theorems.
-2.  **Algebra of Observation**: Dual spaces formalize the act of "measurement," establishing functionals as independent objects of study and laying the groundwork for index juggling and tensor calculus in physics.
-3.  **Return to Naturality**: The natural isomorphism of the double dual reveals the deepest symmetry between mathematical objects and their observers, marking the transition from pure computation to categorical thinking.
+
+****: Quotient spaces modularize complex structures through equivalence classes, serving as the key to induced transformations and fundamental homomorphism theorems.
+
+****: Dual spaces formalize the act of "measurement," establishing functionals as independent objects of study and laying the groundwork for index juggling and tensor calculus in physics.
+
+****: The natural isomorphism of the double dual reveals the deepest symmetry between mathematical objects and their observers, marking the transition from pure computation to categorical thinking.

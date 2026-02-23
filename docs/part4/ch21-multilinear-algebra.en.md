@@ -114,53 +114,63 @@ Linear algebra primarily deals with mappings between two spaces (matrices). **Mu
 
 ## Exercises
 
-1.  **[Dual] Find the dual basis for $\{(1, 1), (0, 1)\}$ in $\mathbb{R}^2$.**
-    ??? success "Solution"
-        Let $\{f^1, f^2\}$ be the dual basis. $f^1(1, 1)=1, f^1(0, 1)=0 \implies f^1(x, y) = x$.
-        $f^2(1, 1)=0, f^2(0, 1)=1 \implies f^2(x, y) = y - x$.
-
-2.  **[Dimension] If $\dim V = 3$ and $\dim W = 4$, what is the dimension of the space of bilinear forms on $V \times W$?**
-    ??? success "Solution"
-        The space of bilinear forms is isomorphic to $V^* \otimes W^*$. The dimension is $3 \times 4 = 12$.
-
-3.  **[Simple Tensors] Is every element in $V \otimes W$ a "simple tensor" $v \otimes w$?**
-    ??? success "Solution"
-        No. Most elements are linear combinations of simple tensors. In quantum mechanics, non-simple tensors represent **entangled states**.
-
-4.  **[Operators] Explain the isomorphism $\operatorname{End}(V) \cong V \otimes V^*$.**
-    ??? success "Solution"
-        A simple tensor $v \otimes f$ acts as an operator: $(v \otimes f)(u) = f(u)v$. This is a rank-1 operator. Sums of these represent all linear operators.
-
-5.  **[Einstein] Expand the expression $A^i_j B^j_k$ using standard summation.**
-    ??? success "Solution"
-        $\sum_{j=1}^n A_{ij} B_{jk}$. This is the standard definition of matrix multiplication $(AB)_{ik}$.
-
-6.  **[Wedge] Prove that $v \wedge v = 0$ for any vector $v$.**
-    ??? success "Solution"
-        By antisymmetry, $v \wedge v = - (v \wedge v)$. Thus $2(v \wedge v) = 0 \implies v \wedge v = 0$. Geometrically, a vector spans zero area with itself.
-
-7.  **[Exterior Dim] What is the dimension of $\Lambda^k(V)$ if $\dim V = n$?**
-    ??? success "Solution"
-        The dimension is the binomial coefficient $\binom{n}{k}$.
-
-8.  **[Rank] How does tensor rank differ from matrix rank?**
-    ??? success "Solution"
-        Matrix rank is easy to compute (SVD/Gaussian). Tensor rank is NP-hard to compute, can change over different fields (Real vs. Complex), and can exceed the dimensions of the tensor.
-
-9.  **[Contraction] Define the contraction of a $(1, 1)$ tensor $T^i_j$.**
-    ??? success "Solution"
-        The contraction is the scalar $T^i_i$ (summing over $i=j$), which is exactly the **trace** of the corresponding matrix.
 
 ****
-
 ??? success "Solution"
-    
+     Let $\{f^1, f^2\}$ be the dual basis. $f^1(1, 1)=1, f^1(0, 1)=0 \implies f^1(x, y) = x$.
+     $f^2(1, 1)=0, f^2(0, 1)=1 \implies f^2(x, y) = y - x$.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     The space of bilinear forms is isomorphic to $V^* \otimes W^*$. The dimension is $3 \times 4 = 12$.
+
+
+****
+??? success "Solution"
+     No. Most elements are linear combinations of simple tensors. In quantum mechanics, non-simple tensors represent **entangled states**.
+
+
+****
+??? success "Solution"
+     A simple tensor $v \otimes f$ acts as an operator: $(v \otimes f)(u) = f(u)v$. This is a rank-1 operator. Sums of these represent all linear operators.
+
+
+****
+??? success "Solution"
+     $\sum_{j=1}^n A_{ij} B_{jk}$. This is the standard definition of matrix multiplication $(AB)_{ik}$.
+
+
+****
+??? success "Solution"
+     By antisymmetry, $v \wedge v = - (v \wedge v)$. Thus $2(v \wedge v) = 0 \implies v \wedge v = 0$. Geometrically, a vector spans zero area with itself.
+
+
+****
+??? success "Solution"
+     The dimension is the binomial coefficient $\binom{n}{k}$.
+
+
+****
+??? success "Solution"
+     Matrix rank is easy to compute (SVD/Gaussian). Tensor rank is NP-hard to compute, can change over different fields (Real vs. Complex), and can exceed the dimensions of the tensor.
+
+
+****
+??? success "Solution"
+     The contraction is the scalar $T^i_i$ (summing over $i=j$), which is exactly the **trace** of the corresponding matrix.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 This chapter elevates linear mapping to the universal language of tensors:
 
-1.  **Measurement Duality**: Dual spaces formalize the distinction between vectors ("arrows") and functionals ("measurements"), enabling rigorous index calculus.
-2.  **Linearization of Products**: The tensor product provides the mathematical machinery to treat non-linear interactions as linear objects in a higher-dimensional space.
-3.  **Geometric Exterior**: Exterior algebra captures the concept of oriented volume and antisymmetry, providing the coordinate-free foundation for determinants and differential forms.
-4.  **High-order Complexity**: Tensor decompositions extend SVD to multi-way data, revealing the profound computational challenges inherent in high-dimensional structures.
+
+****: Dual spaces formalize the distinction between vectors ("arrows") and functionals ("measurements"), enabling rigorous index calculus.
+
+****: The tensor product provides the mathematical machinery to treat non-linear interactions as linear objects in a higher-dimensional space.
+
+****: Exterior algebra captures the concept of oriented volume and antisymmetry, providing the coordinate-free foundation for determinants and differential forms.
+
+****: Tensor decompositions extend SVD to multi-way data, revealing the profound computational challenges inherent in high-dimensional structures.

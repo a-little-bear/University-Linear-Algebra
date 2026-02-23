@@ -51,51 +51,60 @@ If positive definite matrices require the quadratic form to be positive, then **
 
 ## Exercises
 
-1.  **[Criteria] Determine if $\begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}$ is totally positive.**
-    ??? success "Solution"
-        Minors: $1, 1, 1, 2$ (all positive); $\det = 1 > 0$. Since all minors are positive, it is TP.
-
-2.  **[Counter-example] Is $\begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ TP?**
-    ??? success "Solution"
-        Yes. All entries are positive and the determinant is 1. All minors are positive.
-
-3.  **[Minors] How many minors does a $3 \times 3$ matrix have in total?**
-    ??? success "Solution"
-        9 minors of size $1 \times 1$, 9 minors of size $2 \times 2$, and 1 minor of size $3 \times 3$. Total = 19.
-
-4.  **[Property] Prove: If $A$ is TP, then $A^T$ is also TP.**
-    ??? success "Solution"
-        The determinant of a submatrix is invariant under transposition, so the positivity of all minors is preserved.
-
-5.  **[Eigenvalues] If $A$ is a $4 \times 4$ TP matrix, can its eigenvalues be $5, 5, 2, 1$?**
-    ??? success "Solution"
-        No. The eigenvalues of a TP matrix must be strictly distinct.
-
-6.  **[Pascal] Write the $2 \times 2$ Pascal matrix and verify it is TN.**
-    ??? success "Solution"
-        $\begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}$. All minors $\ge 0$.
-
-7.  **[VDP] What is the number of sign changes in the vector $(1, -1, 1)$?**
-    ??? success "Solution"
-        2 changes (from 1 to -1, then from -1 to 1).
-
-8.  **[Oscillatory] What is an oscillatory matrix?**
-    ??? success "Solution"
-        A TN matrix $A$ such that some power $A^k$ is TP.
-
-9.  **[Product] Is the product of two TN matrices always TN?**
-    ??? success "Solution"
-        Yes. By the Cauchy-Binet formula, the minors of the product are weighted sums of the minors of the factors, so positivity is maintained.
 
 ****
-
 ??? success "Solution"
-    
+     Minors: $1, 1, 1, 2$ (all positive); $\det = 1 > 0$. Since all minors are positive, it is TP.
 
-## Chapter Summary
+
+****
+??? success "Solution"
+     Yes. All entries are positive and the determinant is 1. All minors are positive.
+
+
+****
+??? success "Solution"
+     9 minors of size $1 \times 1$, 9 minors of size $2 \times 2$, and 1 minor of size $3 \times 3$. Total = 19.
+
+
+****
+??? success "Solution"
+     The determinant of a submatrix is invariant under transposition, so the positivity of all minors is preserved.
+
+
+****
+??? success "Solution"
+     No. The eigenvalues of a TP matrix must be strictly distinct.
+
+
+****
+??? success "Solution"
+     $\begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}$. All minors $\ge 0$.
+
+
+****
+??? success "Solution"
+     2 changes (from 1 to -1, then from -1 to 1).
+
+
+****
+??? success "Solution"
+     A TN matrix $A$ such that some power $A^k$ is TP.
+
+
+****
+??? success "Solution"
+     Yes. By the Cauchy-Binet formula, the minors of the product are weighted sums of the minors of the factors, so positivity is maintained.
+
+****
+??? success "Solution"
+    ## Chapter Summary
 
 Totally positive matrices represent the ultimate "order" among linear operators:
 
-1.  **Global Positivity**: Every local determinant detail is positive, leading to extreme stability in the global spectral structure (distinct, positive real eigenvalues).
-2.  **Guardian of Smoothness**: The variation-diminishing property proves that TN matrices are essentially "anti-oscillatory," suppressing noise and fluctuations during signal propagation—the cornerstone of spline theory.
-3.  **Combinatorial Aesthetics**: Through bidiagonal factorization, total positivity simplifies complex determinant relations into adjacent element interactions, bridging continuous analysis and discrete combinatorics.
+
+****: Every local determinant detail is positive, leading to extreme stability in the global spectral structure (distinct, positive real eigenvalues).
+
+****: The variation-diminishing property proves that TN matrices are essentially "anti-oscillatory," suppressing noise and fluctuations during signal propagation—the cornerstone of spline theory.
+
+****: Through bidiagonal factorization, total positivity simplifies complex determinant relations into adjacent element interactions, bridging continuous analysis and discrete combinatorics.

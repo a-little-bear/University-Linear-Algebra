@@ -53,59 +53,32 @@ Positive definite matrices are among the most celebrated classes of matrices in 
 ## Exercises
 
 ****
-
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-****
-
+    ****
 ??? success "Solution"
-    
-
-## Chapter Summary
+    ## Chapter Summary
 
 Positive definite matrices construct the convex geometry of high-dimensional space:
 
-1.  **Multi-dimensional Positivity**: PD-ness is the perfect extension of "greater than zero" to operators, establishing the legitimacy of energy, probability, and distance.
-2.  **Diverse Characterization**: From micro-level entry patterns (minors) to macro-level energy behavior (quadratic forms), and internal structural decomposition (Cholesky), these equivalent perspectives provide flexible tools for different fields.
-3.  **Computational Supremacy**: PD matrices possess natural "monotonic stability" in numerical computing. The Löwner order allows us to treat matrix functions like scalar inequalities, forming the core of operator analysis.
+
+****: PD-ness is the perfect extension of "greater than zero" to operators, establishing the legitimacy of energy, probability, and distance.
+
+****: From micro-level entry patterns (minors) to macro-level energy behavior (quadratic forms), and internal structural decomposition (Cholesky), these equivalent perspectives provide flexible tools for different fields.
+
+****: PD matrices possess natural "monotonic stability" in numerical computing. The Löwner order allows us to treat matrix functions like scalar inequalities, forming the core of operator analysis.
