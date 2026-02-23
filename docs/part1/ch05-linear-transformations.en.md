@@ -56,55 +56,55 @@ Vector spaces provide the stage, and linear transformations are the primary acto
 
 ## Exercises
 
-1. **[Criteria] Determine if $T(x, y) = (x+1, y)$ is a linear transformation.**
+****
 
-   ??? success "Solution"
-       No. $T(0, 0) = (1, 0) \neq (0, 0)$. A linear transformation must preserve the zero vector.
+??? success "Solution"
+    
 
-2. **[Matrix] Let the matrix of $T$ in the standard basis of $\mathbb{R}^2$ be $\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$. Describe its geometry.**
+****
 
-   ??? success "Solution"
-       It is a counter-clockwise rotation of 90 degrees about the origin.
+??? success "Solution"
+    
 
-3. **[Kernel] Find the kernel of the differentiation operator $D: P_2 \to P_1$ where $D(p) = p'$.**
+****
 
-   ??? success "Solution"
-       $\ker(D)$ is the set of polynomials with zero derivative, which is the space of constant polynomials $\operatorname{span}\{1\}$. Its dimension is 1.
+??? success "Solution"
+    
 
-4. **[Range] Find the range of $D$ from the previous exercise.**
+****
 
-   ??? success "Solution"
-       The basis $\{1, x, x^2\}$ is mapped to $\{0, 1, 2x\}$. Thus the range is $\operatorname{span}\{1, x\} = P_1$.
+??? success "Solution"
+    
 
-5. **[Composition] Prove the composition of two linear transformations is linear.**
+****
 
-   ??? success "Solution"
-       $S(T(\mathbf{u}+\mathbf{v})) = S(T\mathbf{u} + T\mathbf{v}) = S(T\mathbf{u}) + S(T\mathbf{v})$. Homogeneity follows similarly.
+??? success "Solution"
+    
 
-6. **[Inversion] If the matrix of $T$ is $A$, what is the condition for $T^{-1}$ to exist?**
+****
 
-   ??? success "Solution"
-       $A$ must be an invertible matrix (i.e., $\det A \neq 0$).
+??? success "Solution"
+    
 
-7. **[Projection] Write the matrix for the orthogonal projection onto the $x$-axis in $\mathbb{R}^2$.**
+****
 
-   ??? success "Solution"
-       $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
+??? success "Solution"
+    
 
-8. **[Isomorphism] Are $\mathbb{R}^n$ and $P_{n-1}$ isomorphic?**
+****
 
-   ??? success "Solution"
-       Yes, because they both have dimension $n$.
+??? success "Solution"
+    
 
-9. **[Similarity] If $A$ and $B$ represent the same transformation in different bases, how are they related?**
+****
 
-   ??? success "Solution"
-       $B = P^{-1}AP$; they are similar matrices.
+??? success "Solution"
+    
 
-10. **[Trace] Prove the trace of a linear transformation is independent of the basis.**
+****
 
-   ??? success "Solution"
-        Trace is a similarity invariant. Since matrices in different bases are similar, their traces must be equal.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -49,56 +49,56 @@ While the Jordan Canonical Form is theoretically perfect, its construction depen
 
 ## Exercises
 
-1. **[Smith] Calculate the invariant factors of $\begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       The determinant is $\lambda^2$. The GCD of all $1 \times 1$ minors is $D_1(\lambda) = \gcd(\lambda, 1, 0, \lambda) = 1$.
+??? success "Solution"
+    
        Thus $d_1 = D_1 = 1$ and $d_2 = D_2/D_1 = \lambda^2$. The invariant factors are $1, \lambda^2$.
 
-2. **[Similarity] If $A$ and $B$ have the same characteristic polynomial $\lambda^2$, are they necessarily similar?**
+****
 
-   ??? success "Solution"
-       No. Consider $\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ and $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$. The first has invariant factors $1, \lambda^2$, while the second has $\lambda, \lambda$.
+??? success "Solution"
+    
 
-3. **[Companion] Write the companion matrix for $\lambda^2 - 3\lambda + 2$.**
+****
 
-   ??? success "Solution"
-       $C(p) = \begin{pmatrix} 0 & -2 \\ 1 & 3 \end{pmatrix}$.
+??? success "Solution"
+    
 
-4. **[Minimal] In the Rational Canonical Form, which block corresponds to the minimal polynomial?**
+****
 
-   ??? success "Solution"
-       The block corresponding to the last non-trivial invariant factor $d_k(\lambda)$.
+??? success "Solution"
+    
 
-5. **[Divisibility] Prove $d_i(\lambda) \mid d_{i+1}(\lambda)$.**
+****
 
-   ??? success "Solution"
-       This is a structural property of the Smith Normal Form, derived from the definition of the GCD of $k$-th order minors.
+??? success "Solution"
+    
 
-6. **[Comparison] What is the main difference between JCF and RCF?**
+****
 
-   ??? success "Solution"
-       JCF decomposes polynomials into powers of linear factors (elementary divisors), requiring an algebraically closed field. RCF uses invariant factors directly and works over any field.
+??? success "Solution"
+    
 
-7. **[Elementary Divisors] If the invariant factors are $1, (\lambda-1)(\lambda-2)$, what are the elementary divisors?**
+****
 
-   ??? success "Solution"
-       $\lambda-1$ and $\lambda-2$.
+??? success "Solution"
+    
 
-8. **[Rank] In the Smith form of $\lambda I - A$, why is the number of non-zero diagonal entries always $n$?**
+****
 
-   ??? success "Solution"
-       Because $\lambda I - A$ is always non-singular (its determinant is a degree $n$ polynomial).
+??? success "Solution"
+    
 
-9. **[Calculation] Find the invariant factors of $J_2(\lambda_0)$.**
+****
 
-   ??? success "Solution"
-       $1, (\lambda-\lambda_0)^2$.
+??? success "Solution"
+    
 
-10. **[Application] Why is RCF important in computational algebra?**
+****
 
-   ??? success "Solution"
-        It avoids the process of finding roots (which usually involves numerical approximation) and only requires elementary operations on matrices (exact algebraic computation).
+??? success "Solution"
+    
 
 ## Chapter Summary
 

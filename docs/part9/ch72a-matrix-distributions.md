@@ -50,55 +50,55 @@
 
 ## 练习题
 
-1. **[基础] 写出矩阵正态分布 $\operatorname{vec}(X)$ 的协方差矩阵。**
+**1. [基础] 写出矩阵正态分布 $\operatorname{vec}(X)$ 的协方差矩阵。**
 
-   ??? success "参考答案"
-       $V \otimes U$。这反映了行与列相关性的解耦（Kronecker 结构）。
+??? success "参考答案"
+    $V \otimes U$。这反映了行与列相关性的解耦（Kronecker 结构）。
 
-2. **[期望] 若 $X \sim MN(M, U, V)$，求 $E[X]$。**
+**2. [期望] 若 $X \sim MN(M, U, V)$，求 $E[X]$。**
 
-   ??? success "参考答案"
-       $E[X] = M$。
+??? success "参考答案"
+    $E[X] = M$。
 
-3. **[Wishart] 证明：若 $S \sim W_p(n, \Sigma)$，则 $E[S] = n\Sigma$。**
+**3. [Wishart] 证明：若 $S \sim W_p(n, \Sigma)$，则 $E[S] = n\Sigma$。**
 
-   ??? success "参考答案"
-       $E[S] = E[\sum X_i X_i^T] = \sum E[X_i X_i^T] = \sum \Sigma = n\Sigma$。
+??? success "参考答案"
+    $E[S] = E[\sum X_i X_i^T] = \sum E[X_i X_i^T] = \sum \Sigma = n\Sigma$。
 
-4. **[性质] 随机矩阵 $S \sim W_p(n, \Sigma)$ 什么时候是奇异的？**
+**4. [性质] 随机矩阵 $S \sim W_p(n, \Sigma)$ 什么时候是奇异的？**
 
-   ??? success "参考答案"
-       当样本量 $n < p$ 时，由于 $S$ 是 $n$ 个秩为 1 的矩阵之和，其秩最大为 $n$，故在 $p$ 维空间中必奇异。
+??? success "参考答案"
+    当样本量 $n < p$ 时，由于 $S$ 是 $n$ 个秩为 1 的矩阵之和，其秩最大为 $n$，故在 $p$ 维空间中必奇异。
 
-5. **[不变性] 若 $X \sim MN(M, U, V)$，证明线性变换 $AXB$ 仍满足矩阵正态分布。**
+**5. [不变性] 若 $X \sim MN(M, U, V)$，证明线性变换 $AXB$ 仍满足矩阵正态分布。**
 
-   ??? success "参考答案"
-       由于 $\operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X)$，线性变换保持正态性，协方差矩阵变为 $(B^T V B) \otimes (A U A^T)$。
+??? success "参考答案"
+    由于 $\operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X)$，线性变换保持正态性，协方差矩阵变为 $(B^T V B) \otimes (A U A^T)$。
 
-6. **[Beta] 什么是矩阵值 Beta 分布？**
+**6. [Beta] 什么是矩阵值 Beta 分布？**
 
-   ??? success "参考答案"
-       定义在两个 Wishart 变量的比例（通过 $S_1 (S_1+S_2)^{-1}$ 形式）上的分布，用于多元分析中的假设检验（如 Wilk's Lambda）。
+??? success "参考答案"
+    定义在两个 Wishart 变量的比例（通过 $S_1 (S_1+S_2)^{-1}$ 形式）上的分布，用于多元分析中的假设检验（如 Wilk's Lambda）。
 
-7. **[计算] 若 $X \in \mathbb{R}^{2 \times 2}$，且 $U=I, V=I, M=0$，求 $P(\|X\|_F^2 > t)$ 的分布类型。**
+**7. [计算] 若 $X \in \mathbb{R}^{2 \times 2}$，且 $U=I, V=I, M=0$，求 $P(\|X\|_F^2 > t)$ 的分布类型。**
 
-   ??? success "参考答案"
-       $\|X\|_F^2 = \sum x_{ij}^2$。由于各分量独立同分布 $\mathcal{N}(0, 1)$，其平方和满足自由度为 4 的 $\chi^2$ 分布。
+??? success "参考答案"
+    $\|X\|_F^2 = \sum x_{ij}^2$。由于各分量独立同分布 $\mathcal{N}(0, 1)$，其平方和满足自由度为 4 的 $\chi^2$ 分布。
 
-8. **[贝叶斯] 为什么称逆 Wishart 是共轭先验？**
+**8. [贝叶斯] 为什么称逆 Wishart 是共轭先验？**
 
-   ??? success "参考答案"
-       因为如果似然函数是多元正态的且先验是逆 Wishart，那么计算出的后验分布仍然是逆 Wishart 分布，维持了代数形式的一致性。
+??? success "参考答案"
+    因为如果似然函数是多元正态的且先验是逆 Wishart，那么计算出的后验分布仍然是逆 Wishart 分布，维持了代数形式的一致性。
 
-9. **[关系] 简述矩阵分布与随机矩阵理论 (RMT) 的区别。**
+**9. [关系] 简述矩阵分布与随机矩阵理论 (RMT) 的区别。**
 
-   ??? success "参考答案"
-       矩阵分布关注特定参数（均值、协方差）下的精确概率密度函数；RMT 关注维数 $n \to \infty$ 时的渐近谱性质（普适律）。
+??? success "参考答案"
+    矩阵分布关注特定参数（均值、协方差）下的精确概率密度函数；RMT 关注维数 $n \to \infty$ 时的渐近谱性质（普适律）。
 
-10. **[应用] 在信号处理中，如何利用 Wishart 分布检测信号？**
+**10. [应用] 在信号处理中，如何利用 Wishart 分布检测信号？**
 
-   ??? success "参考答案"
-        通过比较观测到的样本协方差矩阵与噪声模型（Wishart）的谱偏差，若最大特征值显著超出 Wishart 预测的范围，则判定存在信号。
+??? success "参考答案"
+    通过比较观测到的样本协方差矩阵与噪声模型（Wishart）的谱偏差，若最大特征值显著超出 Wishart 预测的范围，则判定存在信号。
 
 ## 本章小结
 

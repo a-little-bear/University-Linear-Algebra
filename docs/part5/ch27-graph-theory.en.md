@@ -120,10 +120,10 @@ Graphs are discrete structures consisting of vertices and edges, yet they can be
     ??? success "Solution"
         If $f$ is a vector of flows on edges, then $Bf$ is a vector of net flows at each vertex. Flow conservation (Kirchhoff's Current Law) is expressed as $Bf = 0$ for all internal nodes.
 
-10. **[Spectral Clustering] How is the Fiedler vector used to cut a graph?**
+****
 
-   ??? success "Solution"
-        One typically splits the graph based on the sign of the entries in the Fiedler vector: vertices with positive entries go to one set, and negative entries to the other.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

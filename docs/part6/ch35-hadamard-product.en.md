@@ -87,10 +87,10 @@ Unlike standard matrix multiplication (which reflects operator composition), the
     ??? success "Solution"
         Since $A \circ B$ is a submatrix of $A \otimes B$, its rank cannot exceed $\operatorname{rank}(A \otimes B) = \operatorname{rank}(A) \operatorname{rank}(B)$.
 
-10. **[Correlation] Is the Hadamard product of two correlation matrices still a correlation matrix?**
+****
 
-   ??? success "Solution"
-        Yes. It preserves symmetry, the property of having ones on the diagonal, and positive semi-definiteness.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

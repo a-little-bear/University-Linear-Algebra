@@ -36,56 +36,56 @@
 
 ## 练习题
 
-1. **[基础] 利用特征标表计算 $3 \times 3$ 矩阵的 $d_{(2,1)}$ immanant。**
+****
 
-   ??? success "参考答案"
-       对于 $S_3$，$\chi^{(2,1)}$ 的取值为：$\chi(\text{id})=2, \chi(对换)=0, \chi(3\text{-轮换})=-1$。
+??? success "参考答案"
+    
        故 $d_{(2,1)}(A) = 2 a_{11}a_{22}a_{33} - (a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32})$。
 
-2. **[对角阵] 求对角矩阵 $D = \operatorname{diag}(x_1, \dots, x_n)$ 的 $d_\lambda(D)$。**
+****
 
-   ??? success "参考答案"
-       $d_\lambda(D) = \chi^\lambda(\text{id}) \prod x_i = f^\lambda \prod x_i$。由于只有恒等置换项非零，故结果为维数乘以对角元乘积。
+??? success "参考答案"
+    
 
-3. **[Schur不等式] 证明对于 $A \succeq 0$，有 $d_\lambda(A) \ge f^\lambda \det(A)$。**
+****
 
-   ??? success "参考答案"
-       这是 Schur 定理 (1918)。它源于 immanant 可以表示为对称化子空间上正算子的迹，而行列式对应于该算子特征值的最小值。
+??? success "参考答案"
+    
 
-4. **[积和式支配] 叙述关于 immanant 的 Lieb 定理。**
+****
 
-   ??? success "参考答案"
-       对于 $A \succeq 0$，满足 $|d_\chi(A)| \le \chi(\text{id}) \operatorname{perm}(A)$。这证明了在所有 immanant 中，积和式在半正定矩阵上是取值最大的。
+??? success "参考答案"
+    
 
-5. **[Stembridge] 什么是 Stembridge 猜想？**
+****
 
-   ??? success "参考答案"
-       该猜想指出某些 Jacobi-Trudi 矩阵的 immanant 在展开为对称函数时，其 Schur 函数的系数均为非负。
+??? success "参考答案"
+    
 
-6. **[拉丁方] 积和式如何用于拉丁方的计数？**
+****
 
-   ??? success "参考答案"
-       在 $r \times n$ 拉丁矩形中增加一行的方式数，等于一个描述允许填入数字的 (0,1)-矩阵的积和式。
+??? success "参考答案"
+    
 
-7. **[Kasteleyn] 为什么平面图的完美匹配数可以在 $O(n^3)$ 时间内计算？**
+****
 
-   ??? success "参考答案"
-       Kasteleyn 定理证明可以为平面图定向，使得匹配数等于邻接矩阵的 Pfaffian，而 Pfaffian 是行列式的平方根，可在多项式时间内求解。
+??? success "参考答案"
+    
 
-8. **[复杂度] 定义类 VP 与 VNP。**
+****
 
-   ??? success "参考答案"
-       VP 是可由多项式大小的电路计算的多项式类（如行列式）。VNP 是系数易于计算的多项式类（如积和式）。
+??? success "参考答案"
+    
 
-9. **[Valiant] 计算积和式是 VNP-完全的吗？**
+****
 
-   ??? success "参考答案"
-       是的。Valiant (1979) 证明了积和式是 VNP 中最难的问题。证明它不属于 VP 相当于证明代数版的 $P \neq NP$。
+??? success "参考答案"
+    
 
-10. **[对称性] 证明对于实特征标，有 $d_\chi(A^T) = d_\chi(A)$。**
+****
 
-   ??? success "参考答案"
-        $d_\chi(A^T) = \sum \chi(\sigma) \prod a_{\sigma(i),i} = \sum \chi(\sigma) \prod a_{i,\sigma^{-1}(i)}$。由于 $S_n$ 的特征标满足 $\chi(\sigma) = \chi(\sigma^{-1})$，命题得证。
+??? success "参考答案"
+    
 
 ## 本章小结
 

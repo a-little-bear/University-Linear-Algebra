@@ -85,10 +85,10 @@ The future depends only on the present, not on the past. This simple physical in
     ??? success "Solution"
         Faster convergence. The error terms decay as $|\lambda_2|^k$.
 
-10. **[Doubly Stochastic] What is the stationary distribution of a doubly stochastic matrix?**
+****
 
-   ??? success "Solution"
-        The uniform distribution $\pi = (1/n, \ldots, 1/n)$ because $\mathbf{1} P = \mathbf{1}$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

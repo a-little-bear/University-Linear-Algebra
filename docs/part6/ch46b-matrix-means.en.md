@@ -30,59 +30,59 @@ What is the "middle point" between two positive definite matrices $A$ and $B$? U
 
 ## Exercises
 
-1. **[Fundamentals] Compute the geometric mean $A \# B$ for $A = \operatorname{diag}(4, 1)$ and $B = \operatorname{diag}(1, 9)$.**
+****
 
-   ??? success "Solution"
-       Since the matrices are diagonal, they commute. $A \# B = (AB)^{1/2} = \operatorname{diag}(\sqrt{4 \cdot 1}, \sqrt{1 \cdot 9}) = \operatorname{diag}(2, 3)$.
+??? success "Solution"
+    
 
-2. **[Riccati] Verify that $X = A \# B$ satisfies the Riccati equation $X A^{-1} X = B$.**
+****
 
-   ??? success "Solution"
-       $A^{1/2}(A^{-1/2} B A^{-1/2})^{1/2} A^{1/2} \cdot A^{-1} \cdot A^{1/2} (A^{-1/2} B A^{-1/2})^{1/2} A^{1/2} = A^{1/2} (A^{-1/2} B A^{-1/2}) A^{1/2} = B$.
+??? success "Solution"
+    
 
-3. **[AM-GM-HM] Arrange the three classical means in increasing order under the Löwner partial order.**
+****
 
-   ??? success "Solution"
-       Harmonic Mean $\preceq$ Geometric Mean $\preceq$ Arithmetic Mean.
+??? success "Solution"
+    
        $2(A^{-1} + B^{-1})^{-1} \preceq A \# B \preceq \frac{A+B}{2}$.
 
-4. **[Determinant] Prove that $\det(A \# B) = \sqrt{\det A \cdot \det B}$.**
+****
 
-   ??? success "Solution"
-       $\det(A \# B) = \det(A^{1/2}) \det((A^{-1/2} B A^{-1/2})^{1/2}) \det(A^{1/2}) = \det(A) \sqrt{\det(A^{-1}B)} = \det(A) \sqrt{\det(A)^{-1} \det B} = \sqrt{\det A \det B}$.
+??? success "Solution"
+    
 
-5. **[Transformer] Show that if $C$ is invertible, $C^*(A \# B)C = (C^*AC) \# (C^*BC)$.**
+****
 
-   ??? success "Solution"
-       This is the transformer equality axiom. Let $X = A \# B$. Then $X A^{-1} X = B$.
+??? success "Solution"
+    
        Multiply by $C^*$ on the left and $C$ on the right: $C^* X A^{-1} X C = C^* B C$.
        Inserting $C^{-1}(C^*)^{-1}$: $(C^* X C) (C^* A C)^{-1} (C^* X C) = C^* B C$.
        Thus $C^* X C$ is the geometric mean of $C^* A C$ and $C^* B C$.
 
-6. **[Multivariate] Define the Karcher mean for $k$ matrices $A_1, \dots, A_k$.**
+****
 
-   ??? success "Solution"
-       The Karcher mean is the unique positive definite minimizer of the sum of squared Riemannian distances: $G = \arg\min_X \sum w_i \|\log(X^{-1/2} A_i X^{-1/2})\|_F^2$.
+??? success "Solution"
+    
 
-7. **[Riemannian Metric] What is the Riemannian metric on the manifold of positive definite matrices?**
+****
 
-   ??? success "Solution"
-       At a point $X$, the inner product of two tangent vectors (Hermitian matrices) $H, K$ is $\langle H, K angle_X = \operatorname{tr}(X^{-1} H X^{-1} K)$.
+??? success "Solution"
+    
 
-8. **[Geodesic] What is the geodesic path connecting $A$ and $B$?**
+****
 
-   ??? success "Solution"
-       The geodesic is the weighted geometric mean $\gamma(t) = A \#_t B = A^{1/2}(A^{-1/2} B A^{-1/2})^t A^{1/2}$.
+??? success "Solution"
+    
 
-9. **[Commutativity] If $A$ and $B$ commute, how does $A \# B$ simplify?**
+****
 
-   ??? success "Solution"
-       $A \# B = A^{1/2} B^{1/2} = (AB)^{1/2}$.
+??? success "Solution"
+    
 
-10. **[Singular Case] Calculate $A \# B$ for $A = \operatorname{diag}(1, 0)$ and $B = \operatorname{diag}(0, 1)$.**
+****
 
-   ??? success "Solution"
-        Using the limit $\epsilon 	o 0$: $(A+\epsilon I) \# (B+\epsilon I) = \operatorname{diag}(\sqrt{\epsilon(1+\epsilon)}, \sqrt{\epsilon(1+\epsilon)})$. As $\epsilon 	o 0$, the mean becomes the zero matrix.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -28,56 +28,56 @@
 
 ## 练习题
 
-1. **[基础] 判定 $A = \begin{pmatrix} 1 & -2 \\ 1 & 1 \end{pmatrix}$ 是否为 P-矩阵。**
+****
 
-   ??? success "参考答案"
-       主子式：$a_{11}=1 > 0$，$a_{22}=1 > 0$，且 $\det A = 1 - (-2) = 3 > 0$。由于所有主子式均为正，故 $A$ 是 P-矩阵。注意它不是 Z-矩阵。
+??? success "参考答案"
+    
 
-2. **[转置] 证明：若 $A$ 是 P-矩阵，则 $A^T$ 也是 P-矩阵。**
+****
 
-   ??? success "参考答案"
-       $A^T$ 的主子式是 $(A[\alpha, \alpha])^T$ 的行列式，根据行列式转置不变性，它等于 $A[\alpha, \alpha]$ 的行列式。由于后者为正，故 $A^T$ 的所有主子式也为正。
+??? success "参考答案"
+    
 
-3. **[实特征值] 证明 P-矩阵的所有实特征值均为正。**
+****
 
-   ??? success "参考答案"
-       设 $\lambda$ 为实特征值，$v$ 为对应特征向量。根据 P-矩阵性质 P2，存在指标 $i$ 使得 $v_i(Av)_i = \lambda v_i^2 > 0$。由于 $v_i^2 \ge 0$ 且 $v$ 非零，必有 $\lambda > 0$。
+??? success "参考答案"
+    
 
-4. **[M-矩阵] P-矩阵类与 Z-矩阵类的交集是什么？**
+****
 
-   ??? success "参考答案"
-       交集恰好是非奇异 M-矩阵类。
+??? success "参考答案"
+    
 
-5. **[比较矩阵] 计算 $A = \begin{pmatrix} 4 & 1-i \\ -1+2i & 5 \end{pmatrix}$ 的比较矩阵 $\mathcal{M}(A)$。**
+****
 
-   ??? success "参考答案"
-       $\mathcal{M}(A)_{ii} = |a_{ii}|$，$\mathcal{M}(A)_{ij} = -|a_{ij}|$。
+??? success "参考答案"
+    
        $\mathcal{M}(A) = \begin{pmatrix} 4 & -\sqrt{2} \\ -\sqrt{5} & 5 \end{pmatrix}$。
 
-6. **[H-矩阵判据] 判定上题中的 $A$ 是否为 H-矩阵。**
+****
 
-   ??? success "参考答案"
-       $A$ 是 H-矩阵当且仅当 $\mathcal{M}(A)$ 是 M-矩阵。计算 $\det \mathcal{M}(A) = 20 - \sqrt{10} > 0$。对角元为正且行列式为正，故其为非奇异 M-矩阵。因此 $A$ 是 H-矩阵。
+??? success "参考答案"
+    
 
-7. **[稳定性] 叙述关于 SOR 迭代的 Ostrowski-Reich 定理。**
+****
 
-   ??? success "参考答案"
-       对于对称矩阵，当且仅当 $A$ 正定时，SOR 迭代对 $\omega \in (0, 2)$ 收敛。对于 H-矩阵，SOR 迭代对 $\omega \in (0, 1]$ 保证收敛。
+??? success "参考答案"
+    
 
-8. **[N-矩阵] 定义 N-矩阵。**
+****
 
-   ??? success "参考答案"
-       所有主子式均为负的矩阵。例如 $A = \begin{pmatrix} -1 & 2 \\ 3 & -2 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-9. **[半正矩阵] 什么是半正矩阵（Semipositive Matrix）？**
+****
 
-   ??? success "参考答案"
-       存在向量 $x \ge 0$ 且 $x \ne 0$，使得 $Ax > 0$。每一个非奇异 M-矩阵都是半正矩阵。
+??? success "参考答案"
+    
 
-10. **[LCP示例] 求解 $A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$ 且 $q = \begin{pmatrix} -1 \\ -1 \end{pmatrix}$ 的 $\operatorname{LCP}(q, A)$。**
+****
 
-   ??? success "参考答案"
-        设 $z > 0$，解 $Az = -q \implies z = A^{-1} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = \begin{pmatrix} 1 & 1/2 \\ 1/2 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} \frac{2}{3} = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$。解为 $z = (1, 1)^T, w = (0, 0)^T$。
+??? success "参考答案"
+    
 
 ## 本章小结
 

@@ -89,10 +89,10 @@ In classical matrix algebra, only non-singular square matrices have inverses. Ho
     ??? success "Solution"
         Verify the Penrose conditions for $A^*$ and $(A^+)^*$; the symmetry of the conditions ensures the result.
 
-10. **[Logic] Why does the formula for $A^+$ involve transposes?**
+****
 
-   ??? success "Solution"
-        The transpose (or conjugate transpose) is responsible for projecting the residuals from the output space back into the input space, which is the key mechanism for achieving the "minimum norm" and "orthogonality" properties.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

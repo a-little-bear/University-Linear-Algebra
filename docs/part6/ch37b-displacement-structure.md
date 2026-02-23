@@ -26,55 +26,55 @@
 
 ## 练习题
 
-1. **[Vandermonde] 计算 $V(1, 2, 3)$ 的行列式。**
+****
 
-   ??? success "参考答案"
-       $\det V = (2-1)(3-1)(3-2) = 1 \cdot 2 \cdot 1 = 2$。
+??? success "参考答案"
+    
 
-2. **[条件数] 为什么在 $[0, 1]$ 上取等距节点的 Vandermonde 矩阵是病态的？**
+****
 
-   ??? success "参考答案"
-       其条件数随 $n$ 指数级增长。等距节点上的高次多项式插值会引发 Runge 现象，导致插值系数对数据扰动极度敏感。
+??? success "参考答案"
+    
 
-3. **[Cauchy] 证明 Cauchy 矩阵 $C = (1/(x_i - y_j))$ 关于对角算子的位移秩为 1。**
+****
 
-   ??? success "参考答案"
-       设 $D_x = \operatorname{diag}(x_i), D_y = \operatorname{diag}(y_j)$。则 $(D_x C - C D_y)_{ij} = x_i \frac{1}{x_i - y_j} - \frac{1}{x_i - y_j} y_j = \frac{x_i - y_j}{x_i - y_j} = 1$。结果是全 1 矩阵，秩为 1。
+??? success "参考答案"
+    
 
-4. **[Toeplitz] 证明 Toeplitz 矩阵的逆不一定是 Toeplitz 的，但它是“类 Toeplitz”的。**
+****
 
-   ??? success "参考答案"
-       虽然条目的对称性消失，但位移秩得以保持。若 $T$ 的位移秩为 2，则 $T^{-1}$ 相对位移算子的位移秩也为 2，这允许通过 FFT 实现 $O(n \log n)$ 的矩阵-向量乘法。
+??? success "参考答案"
+    
 
-5. **[Krylov] 当 $A$ 是对角阵时，Krylov 矩阵 $K(A, b)$ 与 Vandermonde 矩阵有什么关系？**
+****
 
-   ??? success "参考答案"
-       若 $A = \operatorname{diag}(x_i)$，则 $(A^k b)_i = x_i^k b_i$。因此 $K(A, b) = \operatorname{diag}(b) V(x)$，即行缩放的 Vandermonde 矩阵。
+??? success "参考答案"
+    
 
-6. **[复杂度] 对比求解一般 $n$ 阶系统与 Toeplitz 系统的复杂度。**
+****
 
-   ??? success "参考答案"
-       一般系统：$O(n^3)$（Gauss 消元）。Toeplitz 系统：$O(n^2)$（Levinson-Durbin）或 $O(n \log^2 n)$（超快求解器）。
+??? success "参考答案"
+    
 
-7. **[Gohberg-Semencul] Gohberg-Semencul 公式的意义是什么？**
+****
 
-   ??? success "参考答案"
-       它将 Toeplitz 矩阵的逆表示为三角 Toeplitz 矩阵乘积之差。这允许我们在不显式写出逆矩阵的情况下，利用 FFT 在 $O(n \log n)$ 内计算 $T^{-1}v$。
+??? success "参考答案"
+    
 
-8. **[结式] Sylvester 结式矩阵 $\operatorname{Syl}(f, g)$ 何时是奇异的？**
+****
 
-   ??? success "参考答案"
-       当且仅当多项式 $f(x)$ 和 $g(x)$ 有公共根时，即 $\gcd(f, g) \neq 1$。
+??? success "参考答案"
+    
 
-9. **[H-矩阵] 简述层次矩阵 ($\mathcal{H}$-matrix) 的核心思想。**
+****
 
-   ??? success "参考答案"
-       虽然整个矩阵可能满秩，但其代表“远场”相互作用的非对角块具有低秩结构。通过递归分块，可以实现 $O(n \log n)$ 的算术运算。
+??? success "参考答案"
+    
 
-10. **[Schur算法] 广义 Schur 算法如何利用位移生成元？**
+****
 
-   ??? success "参考答案"
-        它直接在低秩生成元 $(G, H)$ 上进行消元，而不是在 $n^2$ 个条目上操作，从而将计算量减少到 $O(rn^2)$，其中 $r$ 是位移秩。
+??? success "参考答案"
+    
 
 ## 本章小结
 

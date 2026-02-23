@@ -84,10 +84,10 @@ In classical control theory, the Laplace transform is used to handle Single-Inpu
     ??? success "Solution"
         A state-space realization of minimum dimension. A realization is minimal iff it is both controllable and observable.
 
-10. **[Application] Why are state-space methods mandatory in aerospace?**
+****
 
-   ??? success "Solution"
-        Because aircraft have multiple highly coupled control surfaces (MIMO) and involve numerous internal sensors (states). State-space methods provide a unified framework for optimal control and filtering (e.g., Kalman filtering).
+??? success "Solution"
+    
 
 ## Chapter Summary
 

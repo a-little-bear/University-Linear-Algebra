@@ -81,10 +81,10 @@ In classical geometry, we study convex sets in $\mathbb{R}^n$. In modern control
     ??? success "Solution"
         Because the Lyapunov stability condition ($A^T P + PA \prec 0$) is itself a linear matrix inequality in the variable $P$, defining a convex region of stable parameters.
 
-10. **[Quantum] Prove the set of all $n \times n$ density matrices is convex.**
+****
 
-   ??? success "Solution"
-        Density matrices satisfy $\rho \succeq 0$ and $\operatorname{tr}(\rho)=1$. Both semi-definiteness and the trace operator are preserved under convex combinations.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

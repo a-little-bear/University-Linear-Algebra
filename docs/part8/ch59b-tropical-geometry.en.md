@@ -85,10 +85,10 @@ In the tropical semiring, addition is taking the minimum and multiplication is s
     ??? success "Solution"
         It typically looks like a hexagonal skeleton with six rays extending outwards.
 
-10. **[Evolution] Briefly describe the application of tropical geometry in phylogenetic trees.**
+****
 
-   ??? success "Solution"
-        The space of all possible evolutionary trees (Billera-Holmes-Vogtmann space) can be embedded into a tropical variety in a high-dimensional space. The distance between trees can then be calculated using tropical metrics.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

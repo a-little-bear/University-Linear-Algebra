@@ -89,10 +89,10 @@ In many real-world systems, such as ecological networks or macroeconomic models,
     ??? success "Solution"
         It investigates whether the stability of market equilibrium or the direction of comparative static changes can be determined knowing only the signs of the interactions between economic variables.
 
-10. **[Spectrally Arbitrary] Define a Spectrally Arbitrary sign pattern.**
+****
 
-   ??? success "Solution"
-        A sign pattern $S$ is spectrally arbitrary if its qualitative class can realize any real polynomial as a characteristic polynomial.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -603,66 +603,66 @@ Löwner 在 1934 年的开创性工作中完全回答了这个问题：一个定
 
 ## 练习题
 
-1. **[基础] 证明逆函数 $f(t) = t^{-1}$ 在 $(0, \infty)$ 上是算子反单调的。**
+****
 
-   ??? success "参考答案"
-       我们需要证明 $A \succeq B \succ 0 \Rightarrow B^{-1} \succeq A^{-1}$。
+??? success "参考答案"
+    
        注意到 $B^{-1} - A^{-1} = B^{-1}(A - B)A^{-1}$。令 $C = A-B \succeq 0$。
        由 $B \preceq A$ 可得 $A^{-1/2} B A^{-1/2} \preceq I$，即最大特征值 $\le 1$。
        其逆矩阵 $A^{1/2} B^{-1} A^{1/2}$ 的特征值均 $\ge 1$，故 $A^{1/2} B^{-1} A^{1/2} \succeq I$。
        两边同时乘 $A^{-1/2}$ 即得 $B^{-1} \succeq A^{-1}$。
 
-2. **[Pick函数] $f(t) = t^2$ 是 Pick 函数吗？为什么？**
+****
 
-   ??? success "参考答案"
-       不是。Pick 函数要求在上半平面 $\operatorname{Im} z > 0$ 内满足 $\operatorname{Im} f(z) > 0$。
+??? success "参考答案"
+    
        取 $z = -1 + i$（在上半平面），则 $z^2 = (-1+i)^2 = 1 - 1 - 2i = -2i$。
        其虚部为 $-2 < 0$，故 $t^2$ 不是 Pick 函数。
 
-3. **[Löwner矩阵] 计算 $f(t) = \sqrt{t}$ 在 $t_1 = 1, t_2 = 4$ 处的 $2 \times 2$ Löwner 矩阵。**
+****
 
-   ??? success "参考答案"
-       $L_{11} = f'(1) = \frac{1}{2\sqrt{1}} = 0.5$。
+??? success "参考答案"
+    
        $L_{22} = f'(4) = \frac{1}{2\sqrt{4}} = 0.25$。
        $L_{12} = L_{21} = \frac{\sqrt{4}-\sqrt{1}}{4-1} = \frac{2-1}{3} = 1/3$。
        故 $L_2 = \begin{pmatrix} 0.5 & 1/3 \\ 1/3 & 0.25 \end{pmatrix}$。计算行列式 $\det L_2 = 0.125 - 1/9 > 0$，是正定的。
 
-4. **[算子凸性] 证明 $f(t) = t^2$ 是算子凸函数。**
+****
 
-   ??? success "参考答案"
-       检查定义 $f(\lambda A + (1-\lambda)B) \preceq \lambda f(A) + (1-\lambda)f(B)$。
+??? success "参考答案"
+    
        展开左式：$(\lambda A + (1-\lambda)B)^2 = \lambda^2 A^2 + (1-\lambda)^2 B^2 + \lambda(1-\lambda)(AB + BA)$。
        不等式等价于检查 $\lambda(1-\lambda)(A-B)^2 \succeq 0$，由于对于任何 Hermite 矩阵，平方项 $(A-B)^2$ 总是半正定的，故成立。
 
-5. **[对数函数] 证明 $\log t$ 是算子凹函数。**
+****
 
-   ??? success "参考答案"
-       由于 $\log t$ 是算子单调的且值域为 $\mathbb{R}$，根据其积分表示可以证明其为算子凹的。另一种方法是观察其导数 $1/t$ 是算子单调递减的，这是算子凹性的一个特征。
+??? success "参考答案"
+    
 
-6. **[Jensen不等式] 叙述关于等距算子 $V$ 的 Jensen 算子不等式。**
+****
 
-   ??? success "参考答案"
-       对于算子凸函数 $f$ 和等距算子 $V$（$V^*V=I$），有 $f(V^* A V) \preceq V^* f(A) V$。
+??? success "参考答案"
+    
 
-7. **[Furuta] 当 $r=0$ 时，Furuta 不等式退化为什么？**
+****
 
-   ??? success "参考答案"
-       退化为 $B^{p/q} \preceq A^{p/q}$，其中 $p \ge 0, q \ge 1, q \ge p$。这正是 Löwner-Heinz 不等式。
+??? success "参考答案"
+    
 
-8. **[Choi定理] 算子凸性与完全正（CP）映射有何联系？**
+****
 
-   ??? success "参考答案"
-       Choi 定理指出，$f$ 是算子凸的，当且仅当对于每个单位完全正映射 $\Phi$，都有 $f(\Phi(A)) \preceq \Phi(f(A))$。
+??? success "参考答案"
+    
 
-9. **[Lieb凹性] 叙述迹函数的联合凹性。**
+****
 
-   ??? success "参考答案"
-       映射 $(A, B) \mapsto \operatorname{tr}(K^* A^p K B^{1-p})$ 对于 $0 < p < 1$ 是联合凹的。
+??? success "参考答案"
+    
 
-10. **[量子SSA] Lieb 凹性定理与熵的强次可加性（SSA）有何关系？**
+****
 
-   ??? success "参考答案"
-        Lieb 凹性定理是证明 von Neumann 熵强次可加性的关键数学工具（由 Lieb 和 Ruskai 证明），SSA 是量子信息论中最基本的不等式。
+??? success "参考答案"
+    
 
 ## 本章小结
 

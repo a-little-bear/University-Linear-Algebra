@@ -94,10 +94,10 @@ While orthogonal transformations preserve Euclidean distance, there is a class o
     ??? success "Solution"
         The intersection is a subgroup isomorphic to $U(n)$.
 
-10. **[Quantum] In quantum optics, what physical process do symplectic transformations correspond to?**
+****
 
-   ??? success "Solution"
-        They correspond to linear canonical transformations of Gaussian states (e.g., squeezing, displacement, and beam splitting), preserving canonical commutation relations.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

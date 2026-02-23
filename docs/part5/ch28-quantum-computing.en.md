@@ -125,10 +125,10 @@ Quantum information science is arguably the most direct and profound application
     ??? success "Solution"
         $\sum_{i,j} (A \otimes B)_{ii,jj} = \sum_i A_{ii} \sum_j B_{jj} = \operatorname{tr}(A)\operatorname{tr}(B)$.
 
-10. **[Philosophy] Why can't we use entanglement to transmit information faster than light?**
+****
 
-   ??? success "Solution"
-        Because the local density matrix $\rho_A$ of one qubit is completely independent of the measurement performed on the other qubit $B$ (the No-Communication Theorem). Linear algebra (partial trace) ensures that causality is preserved.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

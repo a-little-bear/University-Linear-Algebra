@@ -59,55 +59,55 @@ When the unknown itself is a matrix, we call it a matrix equation. Matrix equati
 
 ## Exercises
 
-1. **[Sylvester] Determine if $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} X + X \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = C$ has a unique solution.**
+****
 
-   ??? success "Solution"
-       $\sigma(A) = \{1\}, \sigma(-B) = \{-1\}$. The intersection is empty, so there is a unique solution.
+??? success "Solution"
+    
 
-2. **[Uniqueness] If $A$ and $B$ share an eigenvalue, is the Sylvester equation necessarily unsolvable?**
+****
 
-   ??? success "Solution"
-       No. The solution might not be unique (infinitely many solutions), or it may be unsolvable only for specific $C$.
+??? success "Solution"
+    
 
-3. **[Lyapunov] Why is the Lyapunov equation used for stability analysis?**
+****
 
-   ??? success "Solution"
-       The solution $X$ forms the weighting matrix for the system's energy function $V(x) = x^T X x$. If $X \succ 0$ and $\dot{V} < 0$, the system is asymptotically stable.
+??? success "Solution"
+    
 
-4. **[Vectorization] Transform $AXB + CXD = F$ into vectorized form.**
+****
 
-   ??? success "Solution"
-       $(B^T \otimes A + D^T \otimes C) \operatorname{vec}(X) = \operatorname{vec}(F)$.
+??? success "Solution"
+    
 
-5. **[Riccati] Prove: If $X$ is a solution to the Riccati equation, then $X^T$ is also a solution (assuming $Q, R$ are symmetric).**
+****
 
-   ??? success "Solution"
-       Transpose both sides of the equation; the form remains identical, so the result holds.
+??? success "Solution"
+    
 
-6. **[Calculation] Solve $(1)X + X(2) = (6)$ (the scalar case).**
+****
 
-   ??? success "Solution"
-       $3X = 6 \implies X = 2$.
+??? success "Solution"
+    
 
-7. **[Property] If $A$ and $B$ are upper triangular, is the solution $X$ to $AX+XB=C$ necessarily upper triangular?**
+****
 
-   ??? success "Solution"
-       Generally no. The structure of $X$ depends on the form of $C$.
+??? success "Solution"
+    
 
-8. **[Discrete] Write the form of the Discrete Lyapunov Equation.**
+****
 
-   ??? success "Solution"
-       $A X A^T - X + Q = 0$.
+??? success "Solution"
+    
 
-9. **[Schur] Why perform Schur decomposition first in the algorithm?**
+****
 
-   ??? success "Solution"
-       To transform general matrix coupling into triangular coupling, allowing for recursive solving of entries of $X$ similar to back-substitution.
+??? success "Solution"
+    
 
-10. **[Control] In an LQR problem, what does the solution $X$ to the Riccati equation represent?**
+****
 
-   ??? success "Solution"
-        It represents the minimum cumulative cost (cost function) from the current state to the infinite future.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

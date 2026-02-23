@@ -27,57 +27,57 @@ Invariant subspaces are fundamental to understanding linear operators. By findin
 
 ## Exercises
 
-1. **[Fundamentals] Prove that the kernel $\ker(T)$ and the image $\operatorname{Im}(T)$ are always $T$-invariant subspaces.**
+****
 
-   ??? success "Solution"
-       - If $v \in \ker(T)$, then $Tv = 0 \in \ker(T)$. Thus $\ker(T)$ is invariant.
+??? success "Solution"
+    
        - If $v \in \operatorname{Im}(T)$, then $Tv \in \operatorname{Im}(T)$ by the definition of the image. Thus $\operatorname{Im}(T)$ is invariant.
 
-2. **[Eigenvectors] Show that every one-dimensional invariant subspace of $T$ is spanned by an eigenvector.**
+****
 
-   ??? success "Solution"
-       Let $\mathcal{M} = \operatorname{span}\{v\}$ with $v 
+??? success "Solution"
+    
 e 0$. For $\mathcal{M}$ to be $T$-invariant, $Tv$ must be in $\mathcal{M}$. Thus $Tv = \lambda v$ for some scalar $\lambda$, which is the definition of an eigenvector.
 
-3. **[Block Form] If $A$ has an invariant subspace $\mathcal{V}$ of dimension $k$, show that $A$ is similar to a block upper triangular matrix.**
+****
 
-   ??? success "Solution"
-       Choose a basis $\{v_1, \dots, v_k\}$ for $\mathcal{V}$ and extend it to a basis for the whole space. In this basis, the first $k$ columns of the matrix representation will have zeros below the $k$-th row, resulting in a block upper triangular form $\begin{pmatrix} B & C \ 0 & D \end{pmatrix}$.
+??? success "Solution"
+    
 
-4. **[Hyperinvariant] Define a hyperinvariant subspace. Is every invariant subspace hyperinvariant?**
+****
 
-   ??? success "Solution"
-       A subspace is hyperinvariant if it is invariant under every operator that commutes with $T$. Not every invariant subspace is hyperinvariant. For $T=I$, every subspace is invariant, but only $\{0\}$ and $V$ are hyperinvariant.
+??? success "Solution"
+    
 
-5. **[Reducing Subspaces] Prove: $\mathcal{M}$ reduces $T$ if and only if both $\mathcal{M}$ and $\mathcal{M}^\perp$ are $T$-invariant.**
+****
 
-   ??? success "Solution"
-       This is the definition of a reducing subspace. In terms of projections, it is equivalent to $T$ commuting with the orthogonal projection onto $\mathcal{M}$.
+??? success "Solution"
+    
 
-6. **[Canonical Angles] Find the canonical angle between $\mathcal{F} = \operatorname{span}\{e_1\}$ and $\mathcal{G} = \operatorname{span}\{(1, 1)^T\}$ in $\mathbb{R}^2$.**
+****
 
-   ??? success "Solution"
-       The cosine of the angle is the singular value of $P_{\mathcal{F}} P_{\mathcal{G}}$. $\cos 	heta = \frac{|(1,0) \cdot (1,1)|}{1 \cdot \sqrt{2}} = \frac{1}{\sqrt{2}}$. Thus $	heta = \pi/4$.
+??? success "Solution"
+    
 
-7. **[sin Θ Bound] Using Davis-Kahan, estimate the deviation of the principal eigenvector of $A = \operatorname{diag}(10, 1)$ if it is perturbed by $E = \begin{pmatrix} 0 & 0.1 \ 0.1 & 0 \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       Spectral gap $\delta = 10 - 1 = 9$. $\|E\|_2 = 0.1$. $\sin 	heta \le 0.1 / 9 \approx 0.011$.
+??? success "Solution"
+    
 
-8. **[Spectral Projection] Describe the spectral projection associated with an isolated eigenvalue $\lambda$.**
+****
 
-   ??? success "Solution"
-       It is given by the contour integral $P = \frac{1}{2\pi i} \oint_\Gamma (zI - A)^{-1} dz$ where $\Gamma$ encloses only $\lambda$. For diagonalizable matrices, this is the sum of projections onto the eigenspaces of $\lambda$.
+??? success "Solution"
+    
 
-9. **[Wedin's Theorem] When do we use Wedin's sin Θ theorem instead of Davis-Kahan?**
+****
 
-   ??? success "Solution"
-       Wedin's theorem is used for the perturbation of **singular subspaces** (SVD), whereas Davis-Kahan is for **eigenspaces** of Hermitian matrices.
+??? success "Solution"
+    
 
-10. **[Rosenblum's Theorem] Under what condition does the Sylvester equation $AX - XB = C$ have a unique solution?**
+****
 
-   ??? success "Solution"
-        It has a unique solution if and only if $A$ and $B$ have no common eigenvalues: $\sigma(A) \cap \sigma(B) = \emptyset$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

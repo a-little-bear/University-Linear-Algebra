@@ -82,10 +82,10 @@ In studying individual matrices, Schur's theorem guarantees that every matrix ca
     ??? success "Solution"
         If the state transition matrices can be simultaneously triangularized, a unified coordinate transform can turn a multivariable system into a sequence of unidirectionally coupled subsystems, simplifying controller design.
 
-10. **[Rank] Is the existence of a common eigenvector related to the rank of the matrices?**
+****
 
-   ??? success "Solution"
-        Not directly. It depends on the commutation structure of the operators and the stability of their actions on the space.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

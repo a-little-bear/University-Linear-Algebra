@@ -53,56 +53,56 @@
 
 ## 练习题
 
-1. **[基础] 当变量数 $p=1$ 时，Hotelling's $T^2$ 退化为什么统计量？**
+****
 
-   ??? success "参考答案"
-       退化为单变量 $t$-统计量的平方：$t^2 = \frac{n(\bar{x}-\mu_0)^2}{s^2}$。
+??? success "参考答案"
+    
 
-2. **[行列式] 为什么 Wilks' Lambda 使用行列式的比值？**
+****
 
-   ??? success "参考答案"
-       行列式代表了高维空间的“广义方差”（体积）。比值反映了残差体积占总波动体积的比例，比值越小，组间差异越显著。
+??? success "参考答案"
+    
 
-3. **[计算] 若 $\mathbf{H} = \operatorname{diag}(10, 0), \mathbf{E} = \operatorname{diag}(1, 1)$，计算 Wilks' Lambda。**
+****
 
-   ??? success "参考答案"
-       $\det(\mathbf{E}) = 1$。$\det(\mathbf{H}+\mathbf{E}) = \det(\operatorname{diag}(11, 1)) = 11$。
+??? success "参考答案"
+    
        $\Lambda = 1/11 \approx 0.09$。
 
-4. **[特征值] 证明：Wilks' Lambda 可以表示为 $\prod \frac{1}{1+\lambda_i}$，其中 $\lambda_i$ 是 $\mathbf{E}^{-1}\mathbf{H}$ 的特征值。**
+****
 
-   ??? success "参考答案"
-       $\frac{\det(\mathbf{E})}{\det(\mathbf{H}+\mathbf{E})} = \det(\mathbf{E}(\mathbf{H}+\mathbf{E})^{-1}) = \det(I + \mathbf{E}^{-1}\mathbf{H})^{-1}$。由行列式与特征值关系即得。
+??? success "参考答案"
+    
 
-5. **[应用] 在什么场景下会优先使用 Pillai 迹而非 Wilks' Lambda？**
+****
 
-   ??? success "参考答案"
-       当协方差矩阵相等性假设（各向同性）受损时，Pillai 迹通常表现出更好的鲁棒性。
+??? success "参考答案"
+    
 
-6. **[CCA] CCA 的最大典型相关系数与矩阵的什么性质有关？**
+****
 
-   ??? success "参考答案"
-       与两个变量组之间互协方差矩阵的奇异值（经过方差归一化后）有关。
+??? success "参考答案"
+    
 
-7. **[性质] 证明 $T^2$ 统计量在坐标线性变换下是不变的。**
+****
 
-   ??? success "参考答案"
-       若 $\mathbf{x} \to \mathbf{Ax}$，则均值变为 $\mathbf{A}\bar{\mathbf{x}}$，协方差变为 $\mathbf{ASA}^T$。代入公式后 $\mathbf{A}$ 抵消。
+??? success "参考答案"
+    
 
-8. **[判定] 判定两个协方差矩阵相等的 Box's M 检验主要利用了什么信息？**
+****
 
-   ??? success "参考答案"
-       利用了样本协方差矩阵对数行列式的加权差异。
+??? success "参考答案"
+    
 
-9. **[回归] 多元回归中，误差矩阵的迹 $\operatorname{tr}(\mathbf{E})$ 对应什么？**
+****
 
-   ??? success "参考答案"
-       对应所有因变量的残差平方和的总计（Total SSE）。
+??? success "参考答案"
+    
 
-10. **[极限] 在大样本下，$T^2$ 分布趋于什么分布？**
+****
 
-   ??? success "参考答案"
-        趋于自由度为 $p$ 的 $\chi^2$ 分布。
+??? success "参考答案"
+    
 
 ## 本章小结
 

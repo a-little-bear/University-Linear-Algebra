@@ -85,10 +85,10 @@ For normal matrices, eigenvalues completely determine dynamical behavior. Howeve
     ??? success "Solution"
         For sufficiently small $\epsilon$, the pseudospectrum is contained within a small neighborhood of the numerical range.
 
-10. **[Numerical] Why is calculating pseudospectra much harder than calculating eigenvalues?**
+****
 
-   ??? success "Solution"
-        Finding eigenvalues requires solving a polynomial; computing pseudospectra requires repeatedly calculating the minimum singular value (SVD) over a grid in the complex plane, a process with quadratic complexity growth.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

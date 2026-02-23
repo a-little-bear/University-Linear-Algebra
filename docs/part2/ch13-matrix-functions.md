@@ -50,55 +50,55 @@
 
 ## 练习题
 
-1. **[计算] 求 $e^A$，其中 $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$。**
+****
 
-   ??? success "参考答案"
-       $A^2 = O$，故 $e^A = I + A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-2. **[性质] 证明 $f(P A P^{-1}) = P f(A) P^{-1}$。**
+****
 
-   ??? success "参考答案"
-       利用幂级数定义：$(P A P^{-1})^k = P A^k P^{-1}$。代入级数求和式，提取 $P$ 和 $P^{-1}$ 即得。
+??? success "参考答案"
+    
 
-3. **[对角阵] 若 $A = \operatorname{diag}(\lambda_1, \lambda_2)$，求 $\sin A$。**
+****
 
-   ??? success "参考答案"
-       $\sin A = \operatorname{diag}(\sin \lambda_1, \sin \lambda_2)$。
+??? success "参考答案"
+    
 
-4. **[交换性] 证明 $A f(A) = f(A) A$。**
+****
 
-   ??? success "参考答案"
-       由于 $A$ 与自身的任何幂 $A^k$ 都交换，且级数收敛，故与级数和也交换。
+??? success "参考答案"
+    
 
-5. **[行列式] 若 $\operatorname{tr}(A) = 0$，求 $\det(e^A)$。**
+****
 
-   ??? success "参考答案"
-       $\det(e^A) = e^{\operatorname{tr}(A)} = e^0 = 1$。
+??? success "参考答案"
+    
 
-6. **[对数] 若 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$，求 $\log A$。**
+****
 
-   ??? success "参考答案"
-       令 $A = I + N$，其中 $N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$。由于 $N^2=0$，$\log(I+N) = N - N^2/2 + \cdots = N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-7. **[插值] 使用插值法求 $f(A)$，已知 $A$ 的唯一特征值为 2，代数重数为 2。**
+****
 
-   ??? success "参考答案"
-       寻找 $q(\lambda) = a\lambda + b$ 满足 $q(2)=f(2)$ 且 $q'(2)=f'(2)$。解出 $a, b$ 后，$f(A) = aA + bI$。
+??? success "参考答案"
+    
 
-8. **[ODE] 方程 $\mathbf{x}' = A\mathbf{x}, \mathbf{x}(0) = \mathbf{x}_0$ 的解是什么？**
+****
 
-   ??? success "参考答案"
-       $\mathbf{x}(t) = e^{At} \mathbf{x}_0$。
+??? success "参考答案"
+    
 
-9. **[三角函数] 证明 $\cos^2 A + \sin^2 A = I$。**
+****
 
-   ??? success "参考答案"
-       利用 $\cos A = \frac{e^{iA}+e^{-iA}}{2}$ 和 $\sin A = \frac{e^{iA}-e^{-iA}}{2i}$ 展开验证即可。
+??? success "参考答案"
+    
 
-10. **[应用] 为什么在处理非对角化矩阵时，函数值中会出现导数项？**
+****
 
-   ??? success "参考答案"
-        这反映了矩阵作用的“耦合”效应。在 Jordan 块结构中，偏离对角线的 1 导致了函数展开时高阶无穷小的积累，数学上表现为 Taylor 展开的导数项。
+??? success "参考答案"
+    
 
 ## 本章小结
 

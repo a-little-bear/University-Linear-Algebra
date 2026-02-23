@@ -51,55 +51,55 @@
 
 ## 练习题
 
-1. **[基础] 计算 $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \circ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。**
+****
 
-   ??? success "参考答案"
-       $\begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-2. **[Schur积] 若 $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，求 $A \circ A$。**
+****
 
-   ??? success "参考答案"
-       仍然是 $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-3. **[性质] 证明 $\operatorname{tr}(A \circ B) = \operatorname{tr}(A^T B)$。**
+****
 
-   ??? success "参考答案"
-       $\sum a_{ii} b_{ii} = \sum a_{ji} b_{ij}$ (对于对称阵) = $\sum (A^T)_{ij} b_{ij}$。
+??? success "参考答案"
+    
 
-4. **[正定性] 判定 $\begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix} \circ \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$ 是否正定。**
+****
 
-   ??? success "参考答案"
-       由 Schur 积定理，两个正定阵的 Hadamard 积必正定。
+??? success "参考答案"
+    
 
-5. **[奇异值] 证明 $\|A \circ B\|_2 \le \|A\|_2 \|B\|_2$ 是否成立？**
+****
 
-   ??? success "参考答案"
-       不一定。通常成立的是关于 Frobenius 范数的不等式或特定的谱界限。
+??? success "参考答案"
+    
 
-6. **[应用] 为什么在信号处理中用窗函数作用于信号是 Hadamard 积？**
+****
 
-   ??? success "参考答案"
-       窗函数是对信号在时域进行逐点的加权削减，这完全符合逐元素相乘的定义。
+??? success "参考答案"
+    
 
-7. **[Kronecker] Hadamard 积 $A \circ B$ 是 $A \otimes B$ 的子矩阵吗？**
+****
 
-   ??? success "参考答案"
-       是的。它恰好是 $A \otimes B$ 中对应于特定行和列索引的选取（主子阵）。
+??? success "参考答案"
+    
 
-8. **[行列式] 若 $A, B$ 是对角阵，验证 Oppenheim 不等式。**
+****
 
-   ??? success "参考答案"
-       此时 $A \circ B = AB$，$\det(AB) = \det(A)\det(B)$，等号成立。
+??? success "参考答案"
+    
 
-9. **[rank] 证明 $\operatorname{rank}(A \circ B) \le \operatorname{rank}(A) \operatorname{rank}(B)$。**
+****
 
-   ??? success "参考答案"
-       利用 Hadamard 积作为 Kronecker 积子阵的性质，其秩不超过母矩阵的秩。
+??? success "参考答案"
+    
 
-10. **[相关矩阵] 两个相关系数矩阵的 Hadamard 积还是相关系数矩阵吗？**
+****
 
-   ??? success "参考答案"
-        是的。它保持了对称性、主对角线全为 1 以及正半定性（由 Schur 积定理）。
+??? success "参考答案"
+    
 
 ## 本章小结
 

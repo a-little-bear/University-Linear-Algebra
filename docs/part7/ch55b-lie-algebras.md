@@ -50,55 +50,55 @@
 
 ## 练习题
 
-1. **[基础] 计算 $\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$ 与 $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ 的李括号。**
+****
 
-   ??? success "参考答案"
-       $AB - BA = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} - \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ -2 & 0 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-2. **[Jacobi] 验证 $[x, [y, y]] = 0$ 是否符合 Jacobi 恒等式。**
+****
 
-   ??? success "参考答案"
-       由于 $[y, y]=0$，左边为 0。Jacobi 恒等式在其中一个项为 0 时显然成立。
+??? success "参考答案"
+    
 
-3. **[迹性质] 证明：若 $A, B \in \mathfrak{sl}(n)$，则 $[A, B] \in \mathfrak{sl}(n)$。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{tr}(AB - BA) = \operatorname{tr}(AB) - \operatorname{tr}(BA) = 0$。满足迹为 0 的条件。
+??? success "参考答案"
+    
 
-4. **[反对称] 证明 $\mathfrak{so}(3)$ 的维数是 3。**
+****
 
-   ??? success "参考答案"
-       $3 \times 3$ 反对称阵的形式为 $\begin{pmatrix} 0 & a & b \\ -a & 0 & c \\ -b & -c & 0 \end{pmatrix}$，由 3 个独立参数 $a, b, c$ 确定。
+??? success "参考答案"
+    
 
-5. **[量子力学] Pauli 矩阵的对易关系 $[i\sigma_x, i\pi_y]$ 对应哪个李代数？**
+****
 
-   ??? success "参考答案"
-       对应 $\mathfrak{su}(2)$（或同构的 $\mathfrak{so}(3)$）。它们代表了角动量的无穷小生成元。
+??? success "参考答案"
+    
 
-6. **[指数映射] 描述 $\exp: \mathfrak{so}(n) \to SO(n)$ 的几何意义。**
+****
 
-   ??? success "参考答案"
-       它将一个旋转速度向量（反对称阵）映射为一个有限旋转矩阵。
+??? success "参考答案"
+    
 
-7. **[中心] 什么是李代数的中心？**
+****
 
-   ??? success "参考答案"
-       与所有元素括号运算均为 0 的元素集合 $Z(\mathfrak{g}) = \{x \in \mathfrak{g} : [x, y]=0, \forall y\}$。
+??? success "参考答案"
+    
 
-8. **[伴随] 证明 $\operatorname{ad}_{[X, Y]} = [\operatorname{ad}_X, \operatorname{ad}_Y]$。**
+****
 
-   ??? success "参考答案"
-       这等价于 Jacobi 恒等式：$[ [X, Y], Z ] = [X, [Y, Z]] - [Y, [X, Z]]$。
+??? success "参考答案"
+    
 
-9. **[结构常数] 若结构常数全为 0，该李代数是什么类型？**
+****
 
-   ??? success "参考答案"
-       **阿贝尔李代数**（Abelian）。此时李括号恒为 0，对应于交换群。
+??? success "参考答案"
+    
 
-10. **[控制理论] 在机器人路径规划中，为什么需要计算 Lie 括号？**
+****
 
-   ??? success "参考答案"
-        两个向量场（控制方向）的 Lie 括号代表了通过切换控制方向可以到达的新维度（非完整约束产生的侧向移动），是判定系统是否完全可控的关键。
+??? success "参考答案"
+    
 
 ## 本章小结
 

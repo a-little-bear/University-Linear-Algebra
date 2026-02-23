@@ -87,10 +87,10 @@ How do various industries in a nation depend on one another? If the price of ste
     ??? success "Solution"
         In a closed model, $Ax = x$, meaning output is exactly consumed by the system. This corresponds to the eigenvector associated with the eigenvalue 1 (the Perron vector).
 
-10. **[CAPM] Why is the $\beta$ coefficient used in asset pricing models?**
+****
 
-   ??? success "Solution"
-        The $\beta$ coefficient is essentially the regression coefficient of an individual asset's return against the market portfolio's return, reflecting its sensitivity to the market operator.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

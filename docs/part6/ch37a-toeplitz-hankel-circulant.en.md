@@ -86,10 +86,10 @@ In general matrix theory, storing an $n \times n$ matrix requires $n^2$ elements
     ??? success "Solution"
         They are extremely ill-conditioned; their singular values decay exponentially with the size of the matrix, leading to a massive condition number.
 
-10. **[Application] In Autoregressive (AR) models, parameter estimation often reduces to inverting which type of matrix?**
+****
 
-   ??? success "Solution"
-        An autocorrelation matrix, which is a Toeplitz matrix (the Yule-Walker equations).
+??? success "Solution"
+    
 
 ## Chapter Summary
 

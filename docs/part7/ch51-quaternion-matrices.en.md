@@ -90,10 +90,10 @@ Complex numbers brought linear algebra into the realm of 2D rotations, but **Qua
     ??? success "Solution"
         Because quaternions provide a continuous coverage of the sphere, avoiding the singularities (Gimbal lock) associated with Euler angles at specific orientations.
 
-10. **[SVD] Does every quaternion matrix possess an SVD?**
+****
 
-   ??? success "Solution"
-        Yes. Existence can be proven via the SVD of the complex adjoint matrix $\chi(A)$ while exploiting the symmetry of the quaternion structure. Singular values remain real and non-negative.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -49,55 +49,55 @@
 
 ## 练习题
 
-1. **[收敛判定] 设 $A = \begin{pmatrix} 0.5 & 1 \\ 0 & 0.5 \end{pmatrix}$。序列 $A^k$ 是否收敛于零矩阵？**
+****
 
-   ??? success "参考答案"
-       是的。特征值为 0.5，谱半径 $\rho(A) = 0.5 < 1$。
+??? success "参考答案"
+    
 
-2. **[级数] 给定 $A = \begin{pmatrix} 0.1 & 0 \\ 0 & 0.2 \end{pmatrix}$。计算级数 $\sum_{k=0}^\infty A^k$。**
+****
 
-   ??? success "参考答案"
-       由于 $\rho(A) < 1$，级数收敛于 $(I-A)^{-1} = \begin{pmatrix} 1/0.9 & 0 \\ 0 & 1/0.8 \end{pmatrix} = \operatorname{diag}(1.11, 1.25)$。
+??? success "参考答案"
+    
 
-3. **[谱半径] 举出一个矩阵 $A$，使得对某种范数有 $\|A\| > 1$ 但 $\rho(A) < 1$。**
+****
 
-   ??? success "参考答案"
-       例如 $A = \begin{pmatrix} 0 & 10 \\ 0 & 0 \end{pmatrix}$。其特征值为 0，故 $\rho(A)=0 < 1$。但其 2-范数为 10。
+??? success "参考答案"
+    
 
-4. **[圆盘定理] 对 $A = \begin{pmatrix} 4 & 1 \\ 1 & 3 \end{pmatrix}$ 使用圆盘定理估计特征值范围。**
+****
 
-   ??? success "参考答案"
-       特征值位于以 4 为圆心半径 1 的圆和以 3 为圆心半径 1 的圆的并集中，即区域 $[2, 5]$。
+??? success "参考答案"
+    
 
-5. **[导数初步] 计算矩阵 $A(t) = \begin{pmatrix} t & t^2 \\ 1 & e^t \end{pmatrix}$ 的导数 $A'(t)$。**
+****
 
-   ??? success "参考答案"
-       $A'(t) = \begin{pmatrix} 1 & 2t \\ 0 & e^t \end{pmatrix}$。
+??? success "参考答案"
+    
 
-6. **[积分] 计算 $\int_0^1 \begin{pmatrix} x & 1 \\ 0 & 3x^2 \end{pmatrix} dx$。**
+****
 
-   ??? success "参考答案"
-       $\begin{pmatrix} 1/2 & 1 \\ 0 & 1 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-7. **[Gelfand应用] 证明对于任何诱导范数，都有 $\rho(A) \le \|A\|$。**
+****
 
-   ??? success "参考答案"
-       设 $Ax = \lambda x$，则 $\|\lambda x\| = | \lambda | \|x\| = \|Ax\| \le \|A\|\|x\|$。由于 $x \neq 0$，得 $|\lambda| \le \|A\|$。
+??? success "参考答案"
+    
 
-8. **[逆矩阵导数] 利用 $A(t)A^{-1}(t) = I$ 证明：$(A^{-1})' = -A^{-1} A' A^{-1}$。**
+****
 
-   ??? success "参考答案"
-       对两边求导：$A' A^{-1} + A (A^{-1})' = 0 \implies A (A^{-1})' = -A' A^{-1}$。左乘 $A^{-1}$ 即得。
+??? success "参考答案"
+    
 
-9. **[迹导数] 证明 $\frac{d}{dt} \operatorname{tr}(A(t)) = \operatorname{tr}(A'(t))$。**
+****
 
-   ??? success "参考答案"
-       迹是线性组合，求导与求和可以交换。
+??? success "参考答案"
+    
 
-10. **[迭代] 为什么在研究迭代法 $x_{k+1} = Bx_k + f$ 时，矩阵 $B$ 的谱半径至关重要？**
+****
 
-   ??? success "参考答案"
-        误差演化遵循 $e_{k+1} = B e_k$。误差消失（收敛）的充要条件是 $B^k \to 0$，由矩阵分析可知这等价于 $\rho(B) < 1$。
+??? success "参考答案"
+    
 
 ## 本章小结
 

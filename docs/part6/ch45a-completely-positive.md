@@ -500,58 +500,58 @@ $$\mathcal{CP}_n \subseteq \mathcal{DNN}_n.$$
 
 ## 练习题
 
-1. **[基础] 证明每个完全正矩阵（CP）都是双非负（DNN）矩阵。**
+****
 
-   ??? success "参考答案"
-       设 $A = BB^T$ 且 $B \ge 0$：
+??? success "参考答案"
+    
        1. 对任何向量 $x$，$x^T A x = \|B^T x\|^2 \ge 0$，故 $A \succeq 0$。
        2. $a_{ij} = \sum_l b_{il} b_{jl} \ge 0$，因为 $b_{il}, b_{jl} \ge 0$。
        故 $A$ 同时满足半正定和元素非负，即为双非负矩阵。
 
-2. **[cp-秩] 求单位矩阵 $I_n$ 的 cp-秩。**
+****
 
-   ??? success "参考答案"
-       $I_n = \sum_{i=1}^n e_i e_i^T$。由于标准基向量 $e_i$ 是非负的，且该分解项数为 $n$，同时 $\operatorname{rank}(I_n)=n$，故其 cp-秩为 $n$。
+??? success "参考答案"
+    
 
-3. **[维度] 在哪些维度 $n$ 下，$\mathcal{CP}_n = \mathcal{DNN}_n$ 成立？**
+****
 
-   ??? success "参考答案"
-       根据 Maxfield-Minc 定理，该等式当且仅当 $n \le 4$ 时成立。从 $n \ge 5$ 开始，存在双非负但不完全正的矩阵。
+??? success "参考答案"
+    
 
-4. **[Caratheodory] 叙述 cp-秩的 Caratheodory 上界。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{cp-rank}(A) \le \frac{n(n+1)}{2}$。这对应于对称矩阵空间的维数。
+??? success "参考答案"
+    
 
-5. **[DJL猜想] 什么是关于 cp-秩的 DJL 猜想？**
+****
 
-   ??? success "参考答案"
-       该猜想认为对于 $n \ge 4$ 的矩阵，$A \in \mathcal{CP}_n$ 的 cp-秩不超过 $\lfloor n^2/4 \rfloor$。
+??? success "参考答案"
+    
 
-6. **[极端射线] 完全正锥 $\mathcal{CP}_n$ 的极端射线是什么？**
+****
 
-   ??? success "参考答案"
-       极端射线恰好是形如 $bb^T$ 的秩 1 矩阵，其中 $b$ 是非负向量。
+??? success "参考答案"
+    
 
-7. **[图论] 比较图 $G(A)$ 与矩阵的完全正性有何联系？**
+****
 
-   ??? success "参考答案"
-       根据 Berman-Xu 定理，一个双非负矩阵是完全正的，当且仅当它的比较图中不包含长度 $\ge 5$ 的奇圈（奇空洞）。
+??? success "参考答案"
+    
 
-8. **[Horn矩阵] 为什么 Horn 矩阵在完全正理论中很重要？**
+****
 
-   ??? success "参考答案"
-       Horn 矩阵是一个 $5 \times 5$ 的共正矩阵，它不在 CP 锥的对偶锥中，从而有力地证明了 $\mathcal{CP}_5 \neq \mathcal{DNN}_5$。
+??? success "参考答案"
+    
 
-9. **[Hadamard积] 两个完全正矩阵的 Hadamard 积是否仍为完全正矩阵？**
+****
 
-   ??? success "参考答案"
-       是的。若 $A = \sum a_i a_i^T$ 且 $B = \sum b_j b_j^T$，则 $A \circ B = \sum_{i,j} (a_i \circ b_j)(a_i \circ b_j)^T$，由于 $a_i, b_j \ge 0$，故乘积仍是秩 1 非负矩阵之和。
+??? success "参考答案"
+    
 
-10. **[子矩阵] 证明：完全正矩阵的每个主子矩阵也是完全正的。**
+****
 
-   ??? success "参考答案"
-        若 $A = BB^T$，则主子矩阵 $A_S = B_S B_S^T$，其中 $B_S$ 是截取 $B$ 的对应行得到的。由于 $B \ge 0$ 蕴含 $B_S \ge 0$，故 $A_S$ 是完全正的。
+??? success "参考答案"
+    
 
 ## 本章小结
 

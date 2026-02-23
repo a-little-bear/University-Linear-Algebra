@@ -49,55 +49,55 @@ Matrix analysis studies the analytical properties of matrices when treated as va
 
 ## Exercises
 
-1. **[Convergence] Let $A = \begin{pmatrix} 0.5 & 1 \\ 0 & 0.5 \end{pmatrix}$. Does the sequence $A^k$ converge to the zero matrix?**
+****
 
-   ??? success "Solution"
-       Yes. The eigenvalues are 0.5, so the spectral radius $\rho(A) = 0.5 < 1$.
+??? success "Solution"
+    
 
-2. **[Series] Given $A = \begin{pmatrix} 0.1 & 0 \\ 0 & 0.2 \end{pmatrix}$, compute the series $\sum_{k=0}^\infty A^k$.**
+****
 
-   ??? success "Solution"
-       Since $\rho(A) < 1$, the series converges to $(I-A)^{-1} = \begin{pmatrix} 1/0.9 & 0 \\ 0 & 1/0.8 \end{pmatrix} = \operatorname{diag}(1.11, 1.25)$.
+??? success "Solution"
+    
 
-3. **[Spectral Radius] Provide an example of a matrix $A$ such that $\|A\| > 1$ for some norm but $\rho(A) < 1$.**
+****
 
-   ??? success "Solution"
-       For instance, $A = \begin{pmatrix} 0 & 10 \\ 0 & 0 \end{pmatrix}$. Its eigenvalues are 0, so $\rho(A)=0 < 1$. However, its spectral norm (2-norm) is 10.
+??? success "Solution"
+    
 
-4. **[Circle Theorem] Estimate the range of eigenvalues for $A = \begin{pmatrix} 4 & 1 \\ 1 & 3 \end{pmatrix}$ using Gershgorin's theorem.**
+****
 
-   ??? success "Solution"
-       The eigenvalues lie in the union of a disk centered at 4 with radius 1 and a disk centered at 3 with radius 1, which corresponds to the real interval $[2, 5]$.
+??? success "Solution"
+    
 
-5. **[Derivative] Compute the derivative $A'(t)$ for $A(t) = \begin{pmatrix} t & t^2 \\ 1 & e^t \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       $A'(t) = \begin{pmatrix} 1 & 2t \\ 0 & e^t \end{pmatrix}$.
+??? success "Solution"
+    
 
-6. **[Integral] Evaluate $\int_0^1 \begin{pmatrix} x & 1 \\ 0 & 3x^2 \end{pmatrix} dx$.**
+****
 
-   ??? success "Solution"
-       $\begin{pmatrix} 1/2 & 1 \\ 0 & 1 \end{pmatrix}$.
+??? success "Solution"
+    
 
-7. **[Gelfand] Prove that for any induced norm, $\rho(A) \le \|A\|$.**
+****
 
-   ??? success "Solution"
-       Let $Ax = \lambda x$. Then $\|\lambda x\| = | \lambda | \|x\| = \|Ax\| \le \|A\|\|x\|$. Since $x \neq 0$, we have $|\lambda| \le \|A\|$.
+??? success "Solution"
+    
 
-8. **[Inverse Derivative] Using $A(t)A^{-1}(t) = I$, prove $(A^{-1})' = -A^{-1} A' A^{-1}$.**
+****
 
-   ??? success "Solution"
-       Differentiate both sides: $A' A^{-1} + A (A^{-1})' = 0 \implies A (A^{-1})' = -A' A^{-1}$. Multiplying by $A^{-1}$ on the left gives the result.
+??? success "Solution"
+    
 
-9. **[Trace Derivative] Prove $\frac{d}{dt} \operatorname{tr}(A(t)) = \operatorname{tr}(A'(t))$.**
+****
 
-   ??? success "Solution"
-       The trace is a linear combination of entries; differentiation and summation commute.
+??? success "Solution"
+    
 
-10. **[Iterative] Why is the spectral radius of $B$ crucial when studying the iteration $x_{k+1} = Bx_k + f$?**
+****
 
-   ??? success "Solution"
-        Error evolution follows $e_{k+1} = B e_k$. The error vanishes (convergence) if and only if $B^k \to 0$, which is equivalent to $\rho(B) < 1$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

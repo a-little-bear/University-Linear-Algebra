@@ -90,10 +90,10 @@ Every 3D character or scene you see on a computer screen is the result of millio
     ??? success "Solution"
         Constant angular velocity interpolation between two unit quaternions (points on a 4D sphere) along a great-circle path.
 
-10. **[Hardware] Briefly describe why GPUs are suitable for linear algebra.**
+****
 
-   ??? success "Solution"
-        GPUs have thousands of parallel cores designed to execute the same 4x4 matrix multiplication on thousands of vertices simultaneously (SIMD architecture), perfectly matching graphics needs.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

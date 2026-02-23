@@ -46,55 +46,55 @@ Quadratic forms study scalar functions that take the form of quadratic homogeneo
 
 ## Exercises
 
-1. **[Fundamentals] Write the symmetric matrix representation for $f(x, y) = x^2 + 4xy + 3y^2$.**
+****
 
-   ??? success "Solution"
-       $A = \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}$. Note the cross-term coefficient 4 is split between $a_{12}$ and $a_{21}$.
+??? success "Solution"
+    
 
-2. **[Completion] Use the method of completing the square to find the canonical form of $Q(x, y) = x^2 + 4xy$.**
+****
 
-   ??? success "Solution"
-       $Q = (x+2y)^2 - 4y^2$. Let $u = x+2y, v = y$, the form is $u^2 - 4v^2$.
+??? success "Solution"
+    
 
-3. **[Congruence] If $A$ and $B$ are congruent, do they have the same eigenvalues?**
+****
 
-   ??? success "Solution"
-       Not necessarily. Congruence $P^T AP$ is different from similarity $P^{-1} AP$. Congruence preserves inertia, not eigenvalues.
+??? success "Solution"
+    
 
-4. **[Definiteness] Use principal minors to determine if $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ is positive definite.**
+****
 
-   ??? success "Solution"
-       $D_1 = 2 > 0, D_2 = 4 - 1 = 3 > 0$. All leading principal minors are positive, so it is positive definite.
+??? success "Solution"
+    
 
-5. **[Inertia] Find the inertia and signature of $Q = x^2 - y^2$.**
+****
 
-   ??? success "Solution"
-       Positive inertia $p=1$, negative inertia $q=1$. The signature is $p-q = 0$.
+??? success "Solution"
+    
 
-6. **[Geometry] What curves do $x^2 + y^2 = 1$ and $x^2 - y^2 = 1$ represent?**
+****
 
-   ??? success "Solution"
-       The first represents an ellipse (circle), the second represents a hyperbola.
+??? success "Solution"
+    
 
-7. **[Rayleigh Quotient] What is the maximum value of $R(\mathbf{x}) = \frac{\mathbf{x}^T A \mathbf{x}}{\mathbf{x}^T \mathbf{x}}$?**
+****
 
-   ??? success "Solution"
-       The largest eigenvalue $\lambda_{\max}$.
+??? success "Solution"
+    
 
-8. **[Skew-symmetric] Prove: for any skew-symmetric matrix $A$, $\mathbf{x}^T A \mathbf{x}$ is always 0.**
+****
 
-   ??? success "Solution"
-       $\mathbf{x}^T A \mathbf{x} = (\mathbf{x}^T A \mathbf{x})^T = \mathbf{x}^T A^T \mathbf{x} = \mathbf{x}^T (-A) \mathbf{x} \implies 2\mathbf{x}^T A \mathbf{x} = 0$.
+??? success "Solution"
+    
 
-9. **[Normal Form] Transform $Q = 2x^2 + 2y^2$ into normal form.**
+****
 
-   ??? success "Solution"
-       Let $u = \sqrt{2}x, v = \sqrt{2}y$, the normal form is $u^2 + v^2$.
+??? success "Solution"
+    
 
-10. **[Application] How is a quadratic form used to identify a minimum in optimization?**
+****
 
-   ??? success "Solution"
-        If the Hessian matrix at a critical point is positive definite, the point is a local minimum.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

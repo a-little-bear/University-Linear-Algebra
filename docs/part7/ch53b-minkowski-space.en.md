@@ -90,10 +90,10 @@ eq 0$, it follows that $\det(L)^2 = 1 \implies \det(L) = \pm 1$.
     ??? success "Solution"
         It is the Minkowski inner product $\Delta s^2 = -\Delta t^2 + \Delta x^2 + \Delta y^2 + \Delta z^2$. It is an objective quantity upon which all observers agree.
 
-10. **[Geometry] What surface is formed by the set of all time-like unit vectors in Minkowski space?**
+****
 
-   ??? success "Solution"
-        The set of points satisfying $-t^2 + x^2 + y^2 + z^2 = -1$. This is a **hyperboloid of two sheets**, explaining the intrinsic link between relativity and hyperbolic geometry.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

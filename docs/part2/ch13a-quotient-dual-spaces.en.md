@@ -59,57 +59,57 @@ Linear algebra studies not only the internal construction of spaces but also the
 
 ## Exercises
 
-1. **[Quotient] In $\mathbb{R}^3$, if $W = \operatorname{span}\{e_1, e_2\}$, describe $V/W$ geometrically.**
+****
 
-   ??? success "Solution"
-       $V/W$ can be viewed as the set of lines perpendicular to the $xy$-plane (each coset is a vertical line). Its dimension is $3-2=1$.
+??? success "Solution"
+    
 
-2. **[Coset] Prove that $u+W = v+W$ if and only if $u-v \in W$.**
+****
 
-   ??? success "Solution"
-       If $u+W = v+W$, then $u \in v+W$, so $u = v+w$ for some $w \in W$, meaning $u-v = w \in W$.
+??? success "Solution"
+    
 
-3. **[Dual Basis] Find the dual basis for $B = \{(1, 1), (1, 0)\}$ in $\mathbb{R}^2$.**
+****
 
-   ??? success "Solution"
-       Let the dual basis be $\{f_1, f_2\}$.
+??? success "Solution"
+    
        $f_1(1, 1)=1, f_1(1, 0)=0 \implies f_1(x, y) = y$.
        $f_2(1, 1)=0, f_2(1, 0)=1 \implies f_2(x, y) = x-y$.
 
-4. **[Annihilator] Prove that $W^0$ is a subspace of $V^*$.**
+****
 
-   ??? success "Solution"
-       If $f, g \in W^0$, then $(f+g)(w) = f(w)+g(w) = 0+0=0$, showing closure under addition. Scalar multiplication follows similarly.
+??? success "Solution"
+    
 
-5. **[Transpose] How is the transpose $T^*: U^* \to V^*$ of a linear map $T: V \to U$ defined?**
+****
 
-   ??? success "Solution"
-       $T^*(f) = f \circ T$.
+??? success "Solution"
+    
 
-6. **[Dimension] Prove $\dim(V/W) = \dim W^0$.**
+****
 
-   ??? success "Solution"
-       Both sides are equal to $\dim V - \dim W$.
+??? success "Solution"
+    
 
-7. **[Naturality] Why is $V \cong V^{**}$ natural, while $V \cong V^*$ is not?**
+****
 
-   ??? success "Solution"
-       Constructing $V \to V^*$ requires an explicit choice of basis to define the mapping; the definition of $V \to V^{**}$ (evaluating a functional at a vector) is entirely basis-independent.
+??? success "Solution"
+    
 
-8. **[Functional] In $P_n$, is the map $f(p) = \int_0^1 p(x) dx$ a linear functional?**
+****
 
-   ??? success "Solution"
-       Yes. Integration is a linear operation and the result is a scalar.
+??? success "Solution"
+    
 
-9. **[Projection] Define the natural projection $\pi: V \to V/W$. What is its kernel?**
+****
 
-   ??? success "Solution"
-       $\pi(v) = v + W$. Its kernel $\ker(\pi) = W$.
+??? success "Solution"
+    
 
-10. **[Physics] In physics, which space typically corresponds to covariant vectors?**
+****
 
-   ??? success "Solution"
-        The dual space $V^*$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

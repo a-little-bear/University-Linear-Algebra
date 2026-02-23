@@ -53,55 +53,55 @@ Inner product spaces are a reinforcement of vector spaces. By defining an abstra
 
 ## Exercises
 
-1. **[Axioms] Verify if $\langle u, v \rangle = u_1 v_1 + 2u_2 v_2$ on $\mathbb{R}^2$ is an inner product.**
+****
 
-   ??? success "Solution"
-       Yes. It is a weighted dot product. Since the weights are positive, it satisfies positivity; linearity and symmetry are trivial.
+??? success "Solution"
+    
 
-2. **[Cauchy-Schwarz] Prove: $|\langle u, v \rangle| \le \|u\| \|v\|$.**
+****
 
-   ??? success "Solution"
-       Consider $\|u - tv\|^2 \ge 0$. Expanding and choosing $t = \langle u, v \rangle / \|v\|^2$ yields the result.
+??? success "Solution"
+    
 
-3. **[Adjoint] Let $T$ have matrix $A$ in an orthonormal basis. Prove the matrix of $T^*$ is $A^*$.**
+****
 
-   ??? success "Solution"
-       $\langle Au, v \rangle = (Au)^* v = u^* A^* v = \langle u, A^* v \rangle$. This matches the definition of the adjoint.
+??? success "Solution"
+    
 
-4. **[Unitary] Prove unitary operators preserve the inner product.**
+****
 
-   ??? success "Solution"
-       $\langle Uu, Uv \rangle = \langle u, U^* U v \rangle = \langle u, Iv \rangle = \langle u, v \rangle$.
+??? success "Solution"
+    
 
-5. **[Normal] Determine if $A = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}$ is normal.**
+****
 
-   ??? success "Solution"
-       $AA^* = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$, $A^*A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$. They are equal, so the matrix is normal.
+??? success "Solution"
+    
 
-6. **[Calculation] In the polynomial space with $\langle f, g \rangle = \int_0^1 f(x)g(x) dx$, find $\langle 1, x \rangle$.**
+****
 
-   ??? success "Solution"
-       $\int_0^1 x dx = 1/2$.
+??? success "Solution"
+    
 
-7. **[Polarization] Write the formula for the inner product using only norms in a real space.**
+****
 
-   ??? success "Solution"
-       $\langle u, v \rangle = \frac{1}{4}(\|u+v\|^2 - \|u-v\|^2)$.
+??? success "Solution"
+    
 
-8. **[Orthogonal Decomposition] Prove $V = W \oplus W^\perp$.**
+****
 
-   ??? success "Solution"
-       For any $v$, let $p = \operatorname{proj}_W v$. Then $v = p + (v-p)$. One can easily check $(v-p) \in W^\perp$.
+??? success "Solution"
+    
 
-9. **[Schur's Theorem] Every complex square matrix is unitarily similar to which type of matrix?**
+****
 
-   ??? success "Solution"
-       An upper triangular matrix.
+??? success "Solution"
+    
 
-10. **[Self-adjoint] Prove eigenvalues of a self-adjoint operator are real.**
+****
 
-   ??? success "Solution"
-        $\lambda \|v\|^2 = \langle Tv, v \rangle = \langle v, Tv \rangle = \bar{\lambda} \|v\|^2 \implies \lambda = \bar{\lambda}$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

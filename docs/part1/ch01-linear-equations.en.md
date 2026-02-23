@@ -74,55 +74,55 @@ Systems of linear equations are the logical starting point of linear algebra. Fr
 
 ## Exercises
 
-1. **[Consistency] Determine if the system $x+y=1, x+y=2$ has a solution.**
+****
 
-   ??? success "Solution"
-       No solution (Inconsistent). The augmented matrix is $\begin{pmatrix} 1 & 1 & | & 1 \\ 1 & 1 & | & 2 \end{pmatrix}$. Row reduction gives $\begin{pmatrix} 1 & 1 & | & 1 \\ 0 & 0 & | & 1 \end{pmatrix}$. Since $\operatorname{rank}(A)=1 \neq \operatorname{rank}(\tilde{A})=2$, there is no solution.
+??? success "Solution"
+    
 
-2. **[Elimination] Use Gaussian elimination to solve: $x+y=3, x-y=1$.**
+****
 
-   ??? success "Solution"
-       Adding the equations gives $2x=4 \implies x=2$. Substitution gives $2+y=3 \implies y=1$. The solution is $(2, 1)$.
+??? success "Solution"
+    
 
-3. **[RREF] Transform $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ into RREF.**
+****
 
-   ??? success "Solution"
-       $R_2 - 2R_1 \to R_2$ gives $\begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}$.
+??? success "Solution"
+    
 
-4. **[Free Variables] If a system with 3 equations and 5 variables is full rank, how many free variables are there?**
+****
 
-   ??? success "Solution"
-       Number of free variables $= n - \operatorname{rank}(A) = 5 - 3 = 2$.
+??? success "Solution"
+    
 
-5. **[Homogeneous] Describe the solution space of $x_1 + x_2 + x_3 = 0$.**
+****
 
-   ??? success "Solution"
-       This is a plane through the origin in $\mathbb{R}^3$. Let $x_2=s, x_3=t$, then $x_1 = -s-t$. The solution is $s(-1, 1, 0)^T + t(-1, 0, 1)^T$.
+??? success "Solution"
+    
 
-6. **[Rank] Prove: If $Ax=b$ has a solution for every $b$, $A$ must have full row rank.**
+****
 
-   ??? success "Solution"
-       A solution existing for every $b$ means $\operatorname{Im}(A) = \mathbb{R}^m$. Thus $\operatorname{rank}(A) = m$.
+??? success "Solution"
+    
 
-7. **[Geometry] What does a contradictory row $[0, 0 | 1]$ represent geometrically?**
+****
 
-   ??? success "Solution"
-       It represents parallel hyperplanes that do not intersect.
+??? success "Solution"
+    
 
-8. **[Parametric] Find the general solution to $x+y+z=1$.**
+****
 
-   ??? success "Solution"
-       Let $y=s, z=t$, then $x = 1-s-t$. The general solution is $(1, 0, 0)^T + s(-1, 1, 0)^T + t(-1, 0, 1)^T$.
+??? success "Solution"
+    
 
-9. **[Structure] What is the structure of the general solution to a non-homogeneous system?**
+****
 
-   ??? success "Solution"
-       General Solution = Particular Solution + Homogeneous Solution.
+??? success "Solution"
+    
 
-10. **[Numerical] Why is "pivoting" used in Gaussian elimination for large-scale computing?**
+****
 
-   ??? success "Solution"
-        To minimize the magnification of rounding errors caused by dividing by very small numbers, thereby improving numerical stability.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -81,10 +81,10 @@ How can we find evidence of species evolution within massive DNA sequences? How 
     ??? success "Solution"
         NMF results are non-negative, allowing the decomposition of gene expression into additive "modules," which is more consistent with biological intuitions of gene co-regulation.
 
-10. **[Limits] As $t \to \infty$, what effect does a Markov evolution matrix have on a DNA sequence?**
+****
 
-   ??? success "Solution"
-        The sequence loses all its original information, and the nucleotide distribution converges to the Perron vector (steady-state distribution) of the transition matrix.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

@@ -93,10 +93,10 @@ If a physical system returns to its equilibrium state after a small perturbation
     ??? success "Solution"
         It is used to determine the Schur stability of discrete-time systems (eigenvalues within the unit circle).
 
-10. **[Application] In financial modeling, why does an eigenvalue near the imaginary axis signify risk?**
+****
 
-   ??? success "Solution"
-        An eigenvalue with a real part near 0 means the system lacks damping power; perturbations will persist for a long time or even trigger resonance (Hopf bifurcation), causing the system to lose control.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

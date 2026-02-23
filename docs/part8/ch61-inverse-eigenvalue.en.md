@@ -91,10 +91,10 @@ In much of linear algebra, our task is to compute the eigenvalues of a given mat
     ??? success "Solution"
         Eigenvalues are not Fréchet differentiable at points of multiplicity (see Ch47B), making gradient-based methods fail or become extremely unstable.
 
-10. **[Control] If system $(A, B)$ is not controllable, can arbitrary pole placement be achieved?**
+****
 
-   ??? success "Solution"
-        No. Only the poles of the controllable part can be moved; uncontrollable poles remain fixed.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

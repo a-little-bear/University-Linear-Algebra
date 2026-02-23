@@ -49,55 +49,55 @@
 
 ## 练习题
 
-1. **[计算] 求 $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ 关于 $\epsilon=0.1$ 的伪谱大致范围。**
+****
 
-   ??? success "参考答案"
-       这是一个 Jordan 块。$(zI-A)^{-1} = \begin{pmatrix} 1/z & 1/z^2 \\ 0 & 1/z \end{pmatrix}$。由于含有 $1/z^2$ 项，当 $z$ 很小时预解式极大。伪谱大约是以原点为中心、半径约为 $\sqrt{0.1} \approx 0.31$ 的圆盘（比特征值邻域 $\epsilon=0.1$ 大得多）。
+??? success "参考答案"
+    
 
-2. **[正常阵] 若 $A = \operatorname{diag}(1, 2)$，描述其 $\epsilon=0.1$ 的伪谱。**
+****
 
-   ??? success "参考答案"
-       是以 1 和 2 为圆心、半径为 0.1 的两个不相交圆盘。
+??? success "参考答案"
+    
 
-3. **[性质] 证明 $\sigma(A) \subset \sigma_\epsilon(A)$。**
+****
 
-   ??? success "参考答案"
-       由预解式定义，当 $z \in \sigma(A)$ 时，$\|(zI-A)^{-1}\| = \infty > \epsilon^{-1}$。
+??? success "参考答案"
+    
 
-4. **[收缩] 当 $\epsilon \to 0$ 时，伪谱趋于什么？**
+****
 
-   ??? success "参考答案"
-       趋于矩阵的谱 $\sigma(A)$。
+??? success "参考答案"
+    
 
-5. **[谱半径] 什么是伪谱半径？**
+****
 
-   ??? success "参考答案"
-       $r_\epsilon(A) = \sup \{ |z| : z \in \sigma_\epsilon(A) \}$。
+??? success "参考答案"
+    
 
-6. **[条件数] 证明：若 $A$ 可对角化 $A=V\Lambda V^{-1}$，则 $\sigma_\epsilon(A) \subseteq \{ z : \operatorname{dist}(z, \sigma(A)) < \epsilon \kappa(V) \}$。**
+****
 
-   ??? success "参考答案"
-       $\|(zI-A)^{-1}\| = \|V(zI-\Lambda)^{-1}V^{-1}\| \le \kappa(V) \max |z-\lambda_i|^{-1}$。由此可得界限。
+??? success "参考答案"
+    
 
-7. **[可视化] 伪谱的边界曲线对应于什么？**
+****
 
-   ??? success "参考答案"
-       对应于预解式范数的等值线 $\sigma_{\min}(zI-A) = \epsilon$。
+??? success "参考答案"
+    
 
-8. **[应用] 为什么在研究飞机机翼颤振时需要伪谱？**
+****
 
-   ??? success "参考答案"
-       因为空气动力学算子是高度非正规的。传统的特征值分析可能预测系统稳定，但伪谱揭示了微小扰动会导致巨大的能量增长，从而引发结构失效。
+??? success "参考答案"
+    
 
-9. **[关系] 数值域 $W(A)$ 与伪谱有什么关系？**
+****
 
-   ??? success "参考答案"
-       对于足够小的 $\epsilon$，伪谱被包含在数值域的邻域内。
+??? success "参考答案"
+    
 
-10. **[数值] 为什么计算伪谱比计算特征值难得多？**
+****
 
-   ??? success "参考答案"
-        计算特征值只需解一个多项式；计算伪谱需要在复平面的网格上重复计算最小奇异值（SVD），计算量呈平方级增长。
+??? success "参考答案"
+    
 
 ## 本章小结
 

@@ -89,10 +89,10 @@ If eigenvalues $\sigma(A)$ are the "discrete fingerprints" of a matrix in the co
     ??? success "Solution"
         $(Ux)^* A (Ux) = y^* A y$ where $y=Ux$. Since $U$ is unitary, it maps the unit sphere onto itself, preserving the set of values.
 
-10. **[Application] Why is the numerical range more reliable than eigenvalues for the stability analysis of non-normal operators?**
+****
 
-   ??? success "Solution"
-        Eigenvalues only determine long-term (asymptotic) stability, while the size of the numerical range limits the short-term (transient) growth of the norm of the solution. Even if all eigenvalues are in the left half-plane, if $W(A)$ extends into the right half-plane, the system may experience violent transient oscillations.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

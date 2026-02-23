@@ -52,55 +52,55 @@
 
 ## 练习题
 
-1. **[Weyl] 已知 $\|E\|_2 = 0.1$，若 $A$ 的特征值为 5，则 $A+E$ 的特征值在什么区间？**
+****
 
-   ??? success "参考答案"
-       由 Weyl 不等式 $|\lambda_i(A+E) - \lambda_i(A)| \le \|E\|_2$，故特征值位于 $[4.9, 5.1]$。
+??? success "参考答案"
+    
 
-2. **[Hadamard] 计算 $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ 的行列式并验证 Hadamard 不等式。**
+****
 
-   ??? success "参考答案"
-       $\det = 3$。对角元乘积 $2 \cdot 2 = 4$。验证 $3 \le 4$。
+??? success "参考答案"
+    
 
-3. **[交错] 若 $3 \times 3$ 阵特征值为 10, 5, 1，其 $2 \times 2$ 主子阵的最大特征值可能为 12 吗？**
+****
 
-   ??? success "参考答案"
-       不可能。由交错定理 $\lambda_1(B) \le \lambda_1(A) = 10$。
+??? success "参考答案"
+    
 
-4. **[迹] 证明对于正定阵 $A, B$，$\operatorname{tr}(AB) \le \operatorname{tr}(A)\operatorname{tr}(B)$。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{tr}(AB) = \sum \lambda_i(AB) \le \sum \sigma_i(A)\sigma_i(B) \le (\sum \sigma_i(A))(\sum \sigma_i(B)) = \operatorname{tr}(A)\operatorname{tr}(B)$。
+??? success "参考答案"
+    
 
-5. **[优序] 判定向量 $(1, 1)$ 与 $(2, 0)$ 的优序关系。**
+****
 
-   ??? success "参考答案"
-       $(1, 1) \prec (2, 0)$。因为 $1 < 2$ 且 $1+1 = 2+0$。
+??? success "参考答案"
+    
 
-6. **[Fischer] 叙述 Fischer 不等式。**
+****
 
-   ??? success "参考答案"
-       对于分块正定阵 $\begin{pmatrix} A & B \\ B^T & C \end{pmatrix}$，$\det \begin{pmatrix} A & B \\ B^T & C \end{pmatrix} \le \det(A)\det(C)$。
+??? success "参考答案"
+    
 
-7. **[Ky Fan] 什么是 Ky Fan $k$-范数？**
+****
 
-   ??? success "参考答案"
-       前 $k$ 个最大奇异值之和：$\|A\|_{(k)} = \sum_{i=1}^k \sigma_i(A)$。
+??? success "参考答案"
+    
 
-8. **[算术几何] 证明 $\det(A)^{1/n} \le \frac{1}{n} \operatorname{tr}(A)$ 对 $A \succ 0$ 成立。**
+****
 
-   ??? success "参考答案"
-       这是特征值的算术-几何平均不等式：$(\prod \lambda_i)^{1/n} \le \frac{1}{n} \sum \lambda_i$。
+??? success "参考答案"
+    
 
-9. **[凸性] 证明映射 $A \mapsto \log \det A$ 在正定锥上是凹的。**
+****
 
-   ??? success "参考答案"
-       这等价于对 $\det(\lambda A + (1-\lambda)B) \ge (\det A)^\lambda (\det B)^{1-\lambda}$ 的验证，是 Brunn-Minkowski 不等式的矩阵版。
+??? success "参考答案"
+    
 
-10. **[应用] 矩阵不等式在量子信息中有什么用？**
+****
 
-   ??? success "参考答案"
-        用于证明量子熵的强次可加性，确立量子通信容量的上限。
+??? success "参考答案"
+    
 
 ## 本章小结
 

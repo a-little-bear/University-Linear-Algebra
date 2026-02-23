@@ -49,55 +49,55 @@
 
 ## 练习题
 
-1. **[计算] 求 $\nabla_x (\|\mathbf{x}\|_2^2)$。**
+****
 
-   ??? success "参考答案"
-       $\nabla_x (\mathbf{x}^T \mathbf{x}) = 2\mathbf{x}$。
+??? success "参考答案"
+    
 
-2. **[迹] 求 $\nabla_X \operatorname{tr}(X^T A X)$。**
+****
 
-   ??? success "参考答案"
-       利用 $\operatorname{tr}(X^T A X) = \sum \sum a_{ik} x_{ki} x_{ki} \cdots$。公式为 $(A + A^T) X$。
+??? success "参考答案"
+    
 
-3. **[逆矩阵] 若 $X$ 是 $t$ 的函数，求 $\frac{d}{dt} \operatorname{tr}(X^{-1})$。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{tr}(-X^{-1} \dot{X} X^{-1}) = -\operatorname{tr}(X^{-2} \dot{X})$。
+??? success "参考答案"
+    
 
-4. **[行列式] 若 $A$ 是常数阵，求 $\nabla_X \det(AX)$。**
+****
 
-   ??? success "参考答案"
-       $\det(A) \nabla_X \det(X) = \det(A)\det(X) X^{-T} = \det(AX) X^{-T}$。
+??? success "参考答案"
+    
 
-5. **[向量化] 证明 $\frac{\partial \operatorname{vec}(AXB)}{\partial \operatorname{vec}(X)} = B^T \otimes A$。**
+****
 
-   ??? success "参考答案"
-       直接由 Kronecker 积的向量化性质恒等式得出。
+??? success "参考答案"
+    
 
-6. **[对称约束] 对对称阵 $X$ 求 $\nabla_X \operatorname{tr}(AX)$。**
+****
 
-   ??? success "参考答案"
-       注意 $x_{ij}$ 和 $x_{ji}$ 是同一个变量。结果为 $A + A^T - \operatorname{diag}(A)$。
+??? success "参考答案"
+    
 
-7. **[链式法则] 设 $y = f(u)$ 且 $u = g(x)$，写出标量对向量的链式法则。**
+****
 
-   ??? success "参考答案"
-       $\nabla_x y = \left( \frac{\partial u}{\partial x} \right)^T \nabla_u f$。
+??? success "参考答案"
+    
 
-8. **[Frobenius] 求 $\nabla_X (\|X\|_F^2)$。**
+****
 
-   ??? success "参考答案"
-       $\nabla_X \operatorname{tr}(X^T X) = 2X$。
+??? success "参考答案"
+    
 
-9. **[Jacobian] 线性映射 $y = Ax$ 的 Jacobian 矩阵 $\frac{\partial y}{\partial x}$ 是什么？**
+****
 
-   ??? success "参考答案"
-       就是矩阵 $A$。
+??? success "参考答案"
+    
 
-10. **[应用] 在线性回归 $\min \|y-Ax\|^2$ 中，梯度为零的条件给出了什么方程？**
+****
 
-   ??? success "参考答案"
-        $\nabla_x (y-Ax)^T(y-Ax) = -2A^T(y-Ax) = 0 \implies A^T A x = A^T y$（正规方程）。
+??? success "参考答案"
+    
 
 ## 本章小结
 

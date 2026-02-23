@@ -84,10 +84,10 @@ In numerical analysis and economic modeling, a special class of matrices arises:
     ??? success "Solution"
         Using $\rho(A) \le \|A\|_\infty$, for $J = D^{-1}(L+U)$, the row sums are $\sum_{j \neq i} |a_{ij}|/a_{ii} < 1$ due to dominance.
 
-10. **[PDEs] Is the matrix obtained from numerically solving the Laplace equation $\Delta u = f$ an M-matrix?**
+****
 
-   ??? success "Solution"
-        Yes. The five-point stencil matrix obtained via finite differences is a typical strictly diagonally dominant M-matrix, ensuring the numerical solution satisfies the Maximum Principle (no spurious oscillations).
+??? success "Solution"
+    
 
 ## Chapter Summary
 

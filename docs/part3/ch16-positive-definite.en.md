@@ -52,55 +52,55 @@ Positive definite matrices are among the most celebrated classes of matrices in 
 
 ## Exercises
 
-1. **[Criteria] Determine if $A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$ is positive definite.**
+****
 
-   ??? success "Solution"
-       Leading principal minors: $D_1 = 2 > 0, D_2 = 4 - 1 = 3 > 0$. Thus, it is PD.
+??? success "Solution"
+    
 
-2. **[Determinant] If $A \succ 0$, must its determinant be positive?**
+****
 
-   ??? success "Solution"
-       Yes. $\det(A) = \prod \lambda_i$, and since all $\lambda_i > 0$, the product is positive.
+??? success "Solution"
+    
 
-3. **[Property] Prove: If $A \succ 0$ and $B \succ 0$, then $A + B \succ 0$.**
+****
 
-   ??? success "Solution"
-       $\mathbf{x}^T (A+B) \mathbf{x} = \mathbf{x}^T A \mathbf{x} + \mathbf{x}^T B \mathbf{x} > 0 + 0 = 0$ for $\mathbf{x} \neq \mathbf{0}$.
+??? success "Solution"
+    
 
-4. **[Inverse] If $A \succ 0$, prove $A^{-1} \succ 0$.**
+****
 
-   ??? success "Solution"
-       If eigenvalues of $A$ are $\lambda_i > 0$, then eigenvalues of $A^{-1}$ are $1/\lambda_i > 0$.
+??? success "Solution"
+    
 
-5. **[Gram] If $A = B^T B$ but $B$ is not full column rank, what kind of matrix is $A$?**
+****
 
-   ??? success "Solution"
-       Positive semi-definite (PSD). There exists non-zero $x$ such that $Bx = 0 \implies x^T A x = \|Bx\|^2 = 0$.
+??? success "Solution"
+    
 
-6. **[Diagonal] Prove: Diagonal entries of a PD matrix must be positive.**
+****
 
-   ??? success "Solution"
-       Let $\mathbf{x} = \mathbf{e}_i$, then $\mathbf{e}_i^T A \mathbf{e}_i = a_{ii} > 0$.
+??? success "Solution"
+    
 
-7. **[Schur] Determine if $\begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$ is PD using Schur complement.**
+****
 
-   ??? success "Solution"
-       $A = (1) \succ 0$. Schur complement $S = 5 - 2(1)^{-1}2 = 1 > 0$. Thus, the matrix is PD.
+??? success "Solution"
+    
 
-8. **[Root] If $A \succeq 0$, prove there exists a unique $B \succeq 0$ such that $B^2 = A$.**
+****
 
-   ??? success "Solution"
-       Using diagonalization $A = Q \Lambda Q^T$, take $B = Q \Lambda^{1/2} Q^T$.
+??? success "Solution"
+    
 
-9. **[Order] If $A \succeq B \succ 0$, prove $\operatorname{tr}(A) \ge \operatorname{tr}(B)$.**
+****
 
-   ??? success "Solution"
-       $A - B \succeq 0 \implies \operatorname{tr}(A - B) = \sum \lambda_i(A-B) \ge 0 \implies \operatorname{tr}(A) \ge \operatorname{tr}(B)$.
+??? success "Solution"
+    
 
-10. **[Statistics] Why is a covariance matrix always semi-definite?**
+****
 
-   ??? success "Solution"
-        It is $E[(\mathbf{x}-\mu)(\mathbf{x}-\mu)^T]$. For any $v$, $v^T \Sigma v = E[(v^T(\mathbf{x}-\mu))^2] \ge 0$, representing non-negative variance.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

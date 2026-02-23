@@ -58,55 +58,55 @@ If linear independence is the "skeleton" of a space, then orthogonality is its "
 
 ## Exercises
 
-1. **[Dot Product] Determine if $(1, 2, 3)$ and $(1, 0, -1)$ are orthogonal.**
+****
 
-   ??? success "Solution"
-       $1(1) + 2(0) + 3(-1) = -2 \neq 0$. Thus, they are not orthogonal.
+??? success "Solution"
+    
 
-2. **[Unit] Normalize the vector $(3, 4)$.**
+****
 
-   ??? success "Solution"
-       Length is $\sqrt{3^2+4^2}=5$. The normalized vector is $(0.6, 0.8)$.
+??? success "Solution"
+    
 
-3. **[Projection] Find the projection of $(1, 2)$ onto the direction of $(1, 0)$.**
+****
 
-   ??? success "Solution"
-       $\hat{y} = \frac{(1,2)\cdot(1,0)}{(1,0)\cdot(1,0)}(1,0) = (1, 0)$.
+??? success "Solution"
+    
 
-4. **[Orthogonal Matrix] Prove that an orthogonal matrix $Q$ preserves length: $\|Q\mathbf{x}\| = \|\mathbf{x}\|$.**
+****
 
-   ??? success "Solution"
-       $\|Q\mathbf{x}\|^2 = (Q\mathbf{x})^T(Q\mathbf{x}) = \mathbf{x}^T Q^T Q \mathbf{x} = \mathbf{x}^T I \mathbf{x} = \|\mathbf{x}\|^2$.
+??? success "Solution"
+    
 
-5. **[Gram-Schmidt] Orthogonalize $(1, 1)$ and $(0, 1)$.**
+****
 
-   ??? success "Solution"
-       $v_1 = (1, 1)$. $v_2 = (0, 1) - \frac{1}{2}(1, 1) = (-0.5, 0.5)$. Normalizing gives $(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})$ and $(-\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}})$.
+??? success "Solution"
+    
 
-6. **[Least Squares] Why is $A^T A$ invertible when $A$ has full column rank?**
+****
 
-   ??? success "Solution"
-       If $A^T A x = 0 \implies x^T A^T A x = 0 \implies \|Ax\|^2 = 0 \implies Ax=0$. Since $A$ has full column rank, $x=0$. Thus $A^T A$ is non-singular.
+??? success "Solution"
+    
 
-7. **[QR] If $A=QR$, what is $A^T A$?**
+****
 
-   ??? success "Solution"
-       $(QR)^T(QR) = R^T Q^T Q R = R^T R$.
+??? success "Solution"
+    
 
-8. **[Determinant] Prove the determinant of an orthogonal matrix must be $\pm 1$.**
+****
 
-   ??? success "Solution"
-       $\det(Q^T Q) = \det(I) = 1 \implies \det(Q)^2 = 1 \implies \det(Q) = \pm 1$.
+??? success "Solution"
+    
 
-9. **[Geometry] What is the relationship between the residual $\mathbf{b} - A\hat{x}$ and $C(A)$?**
+****
 
-   ??? success "Solution"
-       The residual vector is orthogonal to the column space of $A$ (it lies in the left nullspace).
+??? success "Solution"
+    
 
-10. **[Numerical] Why is QR decomposition more stable than the normal equations for least squares?**
+****
 
-   ??? success "Solution"
-        The condition number of $A^T A$ is the square of the condition number of $A$, which amplifies errors; whereas $Q$ is an isometry, maintaining numerical stability.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

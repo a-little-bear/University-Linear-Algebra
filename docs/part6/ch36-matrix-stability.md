@@ -57,55 +57,55 @@
 
 ## 练习题
 
-1. **[Hurwitz] 判定 $A = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix}$ 是否 Hurwitz 稳定。**
+****
 
-   ??? success "参考答案"
-       是的。特征值为 -1, -2，实部全为负。
+??? success "参考答案"
+    
 
-2. **[Schur] 判定 $\begin{pmatrix} 0.5 & 0.5 \\ 0 & 0.5 \end{pmatrix}$ 是否 Schur 稳定。**
+****
 
-   ??? success "参考答案"
-       是的。特征值为 0.5，模均小于 1。
+??? success "参考答案"
+    
 
-3. **[Lyapunov] 若 $A^T P + PA = -I$ 的解为 $P = \operatorname{diag}(1, 2)$，则 $A$ 是否稳定？**
+****
 
-   ??? success "参考答案"
-       是的。由于 $Q=I \succ 0$ 且 $P \succ 0$，由 Lyapunov 定理知 $A$ 是 Hurwitz 稳定的。
+??? success "参考答案"
+    
 
-4. **[惯性] 判定单位矩阵 $I_n$ 的惯性。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{In}(I_n) = (n, 0, 0)$。所有特征值为 1。
+??? success "参考答案"
+    
 
-5. **[迹] 证明：若 $A$ 是 Hurwitz 稳定的，则 $\operatorname{tr}(A) < 0$。**
+****
 
-   ??? success "参考答案"
-       $\operatorname{tr}(A) = \sum \lambda_i$。由于每个 $\operatorname{Re}(\lambda_i) < 0$，其和的实部也必为负。对于实矩阵，迹为实数，故必小于 0。
+??? success "参考答案"
+    
 
-6. **[反对称] 证明纯反对称矩阵（$A^T = -A$）不可能是 Hurwitz 稳定的。**
+****
 
-   ??? success "参考答案"
-       反对称阵的特征值均为纯虚数（实部为 0），不满足实部严格小于 0 的条件。其惯性为 $(0, 0, n)$。
+??? success "参考答案"
+    
 
-7. **[行列式] 证明：若 $n$ 阶实矩阵 $A$ 是 Hurwitz 稳定的，则 $(-1)^n \det(A) > 0$。**
+****
 
-   ??? success "参考答案"
-       $\det(A) = \prod \lambda_i$。每个实特征值为负，复特征值成对出现且积为正。故符号由实负根个数决定，即 $(-1)^n$。
+??? success "参考答案"
+    
 
-8. **[D-稳定] 什么是 D-稳定性？**
+****
 
-   ??? success "参考答案"
-       若对任何正对角阵 $D$，$DA$ 都是 Hurwitz 稳定的，则称 $A$ 是 D-稳定的。这在生态学和神经网络稳定性分析中至关重要。
+??? success "参考答案"
+    
 
-9. **[Jury准则] Jury 准则用于判定哪种稳定性？**
+****
 
-   ??? success "参考答案"
-       用于判定离散系统的 Schur 稳定性（特征值在单位圆内）。
+??? success "参考答案"
+    
 
-10. **[应用] 在金融模型中，为什么特征值靠近虚轴意味着风险？**
+****
 
-   ??? success "参考答案"
-        特征值实部接近 0 意味着系统缺乏衰减动力，扰动将长期存在甚至引发共振（Hopf 分叉），导致系统失去控制。
+??? success "参考答案"
+    
 
 ## 本章小结
 

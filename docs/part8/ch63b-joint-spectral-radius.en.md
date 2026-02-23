@@ -88,10 +88,10 @@ When we study a time-varying linear system $\mathbf{x}_{k+1} = A_k \mathbf{x}_k$
     ??? success "Solution"
         In the commutative case, $\rho(\mathcal{A}) = \max \rho(A_i)$. Commutativity eliminates the transient growth caused by basis mismatch.
 
-10. **[Entropy] How does JSR differ from the Lyapunov Exponent?**
+****
 
-   ??? success "Solution"
-        JSR focuses on the **worst-case** growth, while the Lyapunov exponent usually refers to the **average** growth rate under some probability distribution of the matrices.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

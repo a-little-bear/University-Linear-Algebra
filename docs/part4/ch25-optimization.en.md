@@ -129,10 +129,10 @@ Optimization is the science of finding the "best" solution under constraints. Wh
     ??? success "Solution"
         Training an SVM involves maximizing the margin $2/\|w\|$, which is equivalent to minimizing $\frac{1}{2} \|w\|^2$ (a quadratic objective) subject to linear constraints $y_i(w^T x_i + b) \ge 1$.
 
-10. **[StQP] What is a Standard Quadratic Program?**
+****
 
-   ??? success "Solution"
-        Minimizing a quadratic form $x^T Q x$ over the standard simplex $\{x \ge 0, \sum x_i = 1\}$. This is NP-hard if $Q$ is indefinite but can be solved via copositive programming.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

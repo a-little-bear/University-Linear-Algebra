@@ -85,10 +85,10 @@ For symmetric matrices, we have theories of positive definiteness and eigenvalue
     ??? success "Solution"
         Because general graphs do not possess a uniform Pfaffian orientation (it is impossible to assign signs to edges such that all cycles contribute consistently), reflecting the algebraic uniqueness of planarity.
 
-10. **[Application] Briefly describe the role of the Pfaffian in the Ising model of statistical mechanics.**
+****
 
-   ??? success "Solution"
-        By expressing the partition function as the Pfaffian of a lattice correlation matrix, the statistical sum is transformed into a determinant-like calculation, allowing for an exact solution.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

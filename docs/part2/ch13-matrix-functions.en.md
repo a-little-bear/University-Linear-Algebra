@@ -49,55 +49,55 @@ Matrix functions study how to apply scalar functions (such as $e^x, \sin x, \log
 
 ## Exercises
 
-1. **[Calculation] Find $e^A$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       $A^2 = O$, so $e^A = I + A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.
+??? success "Solution"
+    
 
-2. **[Identity] Prove $f(P A P^{-1}) = P f(A) P^{-1}$.**
+****
 
-   ??? success "Solution"
-       Using the power series definition: $(P A P^{-1})^k = P A^k P^{-1}$. Substituting this into the summation and factoring out $P$ and $P^{-1}$ yields the result.
+??? success "Solution"
+    
 
-3. **[Diagonal] If $A = \operatorname{diag}(\lambda_1, \lambda_2)$, find $\sin A$.**
+****
 
-   ??? success "Solution"
-       $\sin A = \operatorname{diag}(\sin \lambda_1, \sin \lambda_2)$.
+??? success "Solution"
+    
 
-4. **[Commutativity] Prove $A f(A) = f(A) A$.**
+****
 
-   ??? success "Solution"
-       Since $A$ commutes with all its powers $A^k$, and the series converges, it must commute with the sum of the series.
+??? success "Solution"
+    
 
-5. **[Determinant] If $\operatorname{tr}(A) = 0$, find $\det(e^A)$.**
+****
 
-   ??? success "Solution"
-       $\det(e^A) = e^{\operatorname{tr}(A)} = e^0 = 1$.
+??? success "Solution"
+    
 
-6. **[Logarithm] For $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, find $\log A$.**
+****
 
-   ??? success "Solution"
-       Let $A = I + N$, where $N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$. Since $N^2=0$, the series $\log(I+N) = N - N^2/2 + \cdots$ simplifies to $N$.
+??? success "Solution"
+    
 
-7. **[Interpolation] Use interpolation to find $f(A)$ if the only eigenvalue of $A$ is 2 with algebraic multiplicity 2.**
+****
 
-   ??? success "Solution"
-       Find $q(\lambda) = a\lambda + b$ such that $q(2)=f(2)$ and $q'(2)=f'(2)$. Once $a, b$ are found, $f(A) = aA + bI$.
+??? success "Solution"
+    
 
-8. **[ODE] What is the solution to $\mathbf{x}' = A\mathbf{x}$ with $\mathbf{x}(0) = \mathbf{x}_0$?**
+****
 
-   ??? success "Solution"
-       $\mathbf{x}(t) = e^{At} \mathbf{x}_0$.
+??? success "Solution"
+    
 
-9. **[Trig] Prove $\cos^2 A + \sin^2 A = I$.**
+****
 
-   ??? success "Solution"
-       This can be verified by expanding the exponential forms: $\cos A = \frac{e^{iA}+e^{-iA}}{2}$ and $\sin A = \frac{e^{iA}-e^{-iA}}{2i}$.
+??? success "Solution"
+    
 
-10. **[Derivative] Why do derivatives appear in the function values for defective matrices?**
+****
 
-   ??? success "Solution"
-        This reflects the "coupling" effect of matrix action. In a Jordan block, the off-diagonal 1s cause an accumulation of higher-order infinitesimals when the function is expanded, manifesting mathematically as Taylor derivative terms.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

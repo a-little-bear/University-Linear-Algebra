@@ -51,58 +51,58 @@
 
 ## 练习题
 
-1. **[计算] 在热带半环下，计算 $3 \oplus 5$ 和 $3 \otimes 5$。**
+****
 
-   ??? success "参考答案"
-       $3 \oplus 5 = \min(3, 5) = 3$。
+??? success "参考答案"
+    
        $3 \otimes 5 = 3 + 5 = 8$。
 
-2. **[单位元] 验证 $x \oplus \infty = x$。**
+****
 
-   ??? success "参考答案"
-       $\min(x, \infty) = x$（对任何实数 $x$）。
+??? success "参考答案"
+    
 
-3. **[矩阵乘法] 计算 $\begin{pmatrix} 0 & 2 \\ 5 & 1 \end{pmatrix} \otimes \begin{pmatrix} 1 \\ 3 \end{pmatrix}$。**
+****
 
-   ??? success "参考答案"
-       第一项：$\min(0+1, 2+3) = 1$。
+??? success "参考答案"
+    
        第二项：$\min(5+1, 1+3) = 4$。
        结果为 $(1, 4)^T$。
 
-4. **[分配律] 验证 $a \otimes (b \oplus c) = (a \otimes b) \oplus (a \otimes c)$。**
+****
 
-   ??? success "参考答案"
-       左边：$a + \min(b, c)$。右边：$\min(a+b, a+c)$。由于加法对 $\min$ 具有单调性，二者相等。
+??? success "参考答案"
+    
 
-5. **[最短路径] 证明 $A^k$ 的 $(i,j)$ 元素代表从 $i$ 到 $j$ 经过恰好 $k$ 条边的最短路径长。**
+****
 
-   ??? success "参考答案"
-       这是由热带矩阵乘法的递归定义直接得出的，每一级 $\otimes$ 运算都对应于 Bellman-Ford 算法的一步松弛。
+??? success "参考答案"
+    
 
-6. **[逆元] 热带半环下，非单位元实数有加法逆元吗？**
+****
 
-   ??? success "参考答案"
-       没有。若存在 $x \oplus y = \infty$，即 $\min(x, y) = \infty$，这要求 $x=\infty$ 且 $y=\infty$。故除 $\infty$ 外无加法逆元。
+??? success "参考答案"
+    
 
-7. **[特征向量] 若 $A = \begin{pmatrix} 1 & 2 \\ 2 & 1 \end{pmatrix}$，验证 $\lambda=1$ 是否为热带特征值。**
+****
 
-   ??? success "参考答案"
-       $A \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} \min(1+0, 2+0) \\ \min(2+0, 1+0) \end{pmatrix} = \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 1 \otimes \begin{pmatrix} 0 \\ 0 \end{pmatrix}$。成立。
+??? success "参考答案"
+    
 
-8. **[多项式] 写出热带多项式 $f(x) = (0 \otimes x^2) \oplus (3 \otimes x) \oplus 5$ 的函数形式。**
+****
 
-   ??? success "参考答案"
-       $f(x) = \min(2x, x+3, 5)$。这是一个分段线性下凸函数。
+??? success "参考答案"
+    
 
-9. **[幂等性] 证明热带加法是幂等的：$x \oplus x = x$。**
+****
 
-   ??? success "参考答案"
-       $\min(x, x) = x$。
+??? success "参考答案"
+    
 
-10. **[应用] 为什么在排程理论中使用热带代数？**
+****
 
-   ??? success "参考答案"
-        因为任务的最早完成时间等于前置任务完成时间与持续时间之和的**最大值**（$\max$ 代数），这与热带半环的结构完全契合。
+??? success "参考答案"
+    
 
 ## 本章小结
 

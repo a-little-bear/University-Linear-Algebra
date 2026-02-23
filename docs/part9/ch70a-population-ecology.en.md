@@ -85,10 +85,10 @@ Will a species go extinct or grow infinitely? **Population Ecology Linear Algebr
     ??? success "Solution"
         This ensures that every age class reproduces back to the first class, and because there is a 1-cycle ($f_1 > 0$), the lengths of cycles are coprime. By the Perron-Frobenius theorem, it is primitive.
 
-10. **[Oscillation] If $L = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$, will the population converge to a stable distribution?**
+****
 
-   ??? success "Solution"
-        No. It is a cyclic matrix (non-primitive). The population counts will oscillate indefinitely between the two classes.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

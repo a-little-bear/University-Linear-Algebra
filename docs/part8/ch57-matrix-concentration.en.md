@@ -86,10 +86,10 @@ In statistics and computer science, we frequently deal with matrices formed by t
     ??? success "Solution"
         Hoeffding depends only on the bounded range $R$ of the random variables, while Bernstein utilizes refined variance information $\sigma^2$, providing tighter bounds when the variance is small.
 
-10. **[Limit] What happens to the Matrix Bernstein inequality when $d=1$?**
+****
 
-   ??? success "Solution"
-        It reduces to the classical scalar Bernstein inequality.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

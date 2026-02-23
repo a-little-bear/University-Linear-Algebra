@@ -90,10 +90,10 @@ Traditional vector algebra (dot and cross products) often becomes cumbersome whe
     ??? success "Solution"
         Because it allows for a unified representation of lines, planes, and spheres using the same operators, turning intersection tests into simple algebraic products.
 
-10. **[Periodicity] Briefly state the significance of $Cl_8$.**
+****
 
-   ??? success "Solution"
-        $Cl_8 \cong M_{16}(\mathbb{R})$. According to Bott periodicity, $Cl_{n+8} \cong Cl_n \otimes M_{16}(\mathbb{R})$, revealing the repeating nature of high-dimensional geometric structures.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

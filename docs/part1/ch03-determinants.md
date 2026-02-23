@@ -64,55 +64,55 @@
 
 ## 练习题
 
-1. **[计算] 计算 $2 \times 2$ 行列式 $\begin{vmatrix} a & b \\ c & d \end{vmatrix}$。**
+****
 
-   ??? success "参考答案"
-       $\det = ad - bc$。
+??? success "参考答案"
+    
 
-2. **[性质] 若 $\det(A) = 5$，且 $A$ 是 $3 \times 3$ 矩阵，计算 $\det(2A)$。**
+****
 
-   ??? success "参考答案"
-       对于 $n \times n$ 矩阵，$\det(kA) = k^n \det(A)$。故 $\det(2A) = 2^3 \cdot 5 = 40$。
+??? success "参考答案"
+    
 
-3. **[特殊阵] 计算上三角矩阵 $\begin{pmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{pmatrix}$ 的行列式。**
+****
 
-   ??? success "参考答案"
-       三角阵行列式等于主对角线元素的乘积：$1 \cdot 4 \cdot 6 = 24$。
+??? success "参考答案"
+    
 
-4. **[Laplace] 利用第一列展开计算 $\begin{vmatrix} 1 & 0 & 2 \\ 0 & 3 & 0 \\ 4 & 0 & 5 \end{vmatrix}$。**
+****
 
-   ??? success "参考答案"
-       $\det = 1 \cdot \begin{vmatrix} 3 & 0 \\ 0 & 5 \end{vmatrix} + 4 \cdot \begin{vmatrix} 0 & 2 \\ 3 & 0 \end{vmatrix} = 15 + 4(-6) = -9$。
+??? success "参考答案"
+    
 
-5. **[可逆性] 若 $\det(A^2) = 9$，求 $\det(A)$ 的可能值。**
+****
 
-   ??? success "参考答案"
-       $\det(A)^2 = 9 \implies \det(A) = \pm 3$。
+??? success "参考答案"
+    
 
-6. **[伴随阵] 证明 $\det(A^*) = (\det A)^{n-1}$。**
+****
 
-   ??? success "参考答案"
-       利用 $AA^* = (\det A)I$，取行列式得 $(\det A)\det(A^*) = (\det A)^n$。若 $\det A \neq 0$，则结论成立。由连续性，对奇异阵也成立。
+??? success "参考答案"
+    
 
-7. **[乘积] 证明 $\det(A^{-1}) = 1/\det(A)$。**
+****
 
-   ??? success "参考答案"
-       $\det(A A^{-1}) = \det(I) = 1$。利用乘法性质，$\det(A)\det(A^{-1}) = 1$。
+??? success "参考答案"
+    
 
-8. **[逆序] 排列 $(3, 1, 2)$ 的逆序数是多少？**
+****
 
-   ??? success "参考答案"
-       逆序对有 (3,1), (3,2)。逆序数为 2。
+??? success "参考答案"
+    
 
-9. **[Cramer] 使用 Cramer 法则判断 $x+y=1, x+y=2$ 的解。**
+****
 
-   ??? success "参考答案"
-       系数行列式 $D = \begin{vmatrix} 1 & 1 \\ 1 & 1 \end{vmatrix} = 0$。Cramer 法则不适用（系统无唯一解）。
+??? success "参考答案"
+    
 
-10. **[几何] $\det \begin{pmatrix} a & 0 \\ 0 & b \end{pmatrix}$ 代表什么几何图形的面积？**
+****
 
-   ??? success "参考答案"
-        代表一个长为 $a$ 宽为 $b$ 的长方形的面积。
+??? success "参考答案"
+    
 
 ## 本章小结
 

@@ -82,10 +82,10 @@ If the determinant represents the "volume" of linear algebra, then the **Permane
     ??? success "Solution"
         $\operatorname{perm}(PAQ) = \operatorname{perm}(A)$ for any permutation matrices $P, Q$.
 
-10. **[Application] Why are permanents important in quantum optics?**
+****
 
-   ??? success "Solution"
-        The coincidence probability in Boson Sampling is directly given by the permanent of the corresponding transition matrix.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

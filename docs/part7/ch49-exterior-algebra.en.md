@@ -90,10 +90,10 @@ What is the algebraic essence of the determinant? Why is it alternating? **Exter
     ??? success "Solution"
         Differential forms are sections of the exterior power of the cotangent bundle. The wedge product corresponds to the multiplication of these forms.
 
-10. **[Application] What are the Plücker relations?**
+****
 
-   ??? success "Solution"
-        They are a set of quadratic homogeneous equations that define which tensors correspond to subspaces. For $Gr(2, 4)$, the relation is $p_{12}p_{34} - p_{13}p_{24} + p_{14}p_{23} = 0$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

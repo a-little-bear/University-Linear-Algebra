@@ -329,38 +329,51 @@ body.definition-sheet .md-typeset h3 {
 }
 
 /* ============================
-   导航栏滚动条修复
+   导航栏滚动条修复 (强力模式)
    ============================ */
 
+.md-header__inner {
+  overflow: visible !important; /* 允许内部溢出 */
+}
+
 .md-tabs {
-  overflow-x: auto;
-  scrollbar-width: thin; /* Firefox */
+  display: block !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  background-color: var(--md-primary-fg-color);
   -webkit-overflow-scrolling: touch;
-}
-
-/* 隐藏滚动条但保留功能 (可选) */
-/* .md-tabs::-webkit-scrollbar {
-  display: none;
-} */
-
-/* 自定义滚动条样式 */
-.md-tabs::-webkit-scrollbar {
-  height: 4px;
-}
-
-.md-tabs::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
+  position: sticky;
+  top: 48px;
+  z-index: 1;
 }
 
 .md-tabs__list {
-  display: flex;
-  flex-wrap: nowrap; /* 强制不换行 */
-  white-space: nowrap;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  padding: 0 10px;
+  list-style: none;
+  margin: 0;
+  height: 48px;
+  align-items: center;
 }
 
 .md-tabs__item {
-  flex-shrink: 0; /* 防止项目被压缩 */
+  flex: 0 0 auto !important;
+  margin-right: 20px;
+}
+
+.md-tabs::-webkit-scrollbar {
+  height: 5px !important;
+  display: block !important;
+}
+
+.md-tabs::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5) !important;
+  border-radius: 10px;
+}
+
+.md-tabs::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
 
 /* ============================

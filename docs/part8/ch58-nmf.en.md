@@ -88,10 +88,10 @@ In traditional matrix decompositions like SVD, basis vectors and coefficients ca
     ??? success "Solution"
         Zeros are stationary points for the gradient; the iteration will never move and no features will be extracted. Randomized positive values or SVD-based initializations (like NNDSVD) are used instead.
 
-10. **[Sparsity] Prove: If a row of $V$ is all zeros, the corresponding row of $W$ must also be all zeros.**
+****
 
-   ??? success "Solution"
-        $V_{ij} = \sum W_{ik} H_{kj}$. Since all terms are non-negative, if their sum is 0, each term $W_{ik} H_{kj}$ must be 0. Assuming $H$ is not zero, $W_{ik}$ must be 0 for all $k$.
+??? success "Solution"
+    
 
 ## Chapter Summary
 

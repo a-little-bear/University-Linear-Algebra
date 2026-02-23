@@ -54,55 +54,55 @@ Matrix decomposition (also known as matrix factorization) is the process of expr
 
 ## Exercises
 
-1. **[LU] Find the LU decomposition of $A = \begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}, U = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$.
+??? success "Solution"
+    
 
-2. **[Cholesky] Find the Cholesky decomposition for the same matrix $A$.**
+****
 
-   ??? success "Solution"
-       Since $U = L^T$ in the previous problem, $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$ and $A = LL^T$.
+??? success "Solution"
+    
 
-3. **[QR] What is the QR decomposition of $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$?**
+****
 
-   ??? success "Solution"
-       Since it is already upper triangular and its columns are orthogonal (though not normalized), $Q=I$ and $R=A$ (if we don't require normalization) or $Q=I, R=A$ is fine.
+??? success "Solution"
+    
 
-4. **[Schur] Prove that the trace of $T$ in a Schur decomposition equals the trace of $A$.**
+****
 
-   ??? success "Solution"
-       Trace is a similarity invariant: $\operatorname{tr}(T) = \operatorname{tr}(U^* A U) = \operatorname{tr}(A U U^*) = \operatorname{tr}(A)$.
+??? success "Solution"
+    
 
-5. **[Existence] Give an example of a non-singular matrix that has no LU decomposition.**
+****
 
-   ??? success "Solution"
-       $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. The first leading principal minor is 0, making initial elimination impossible.
+??? success "Solution"
+    
 
-6. **[Pivoting] What is PLU decomposition?**
+****
 
-   ??? success "Solution"
-       It uses a permutation matrix $P$ to swap rows such that $PA = LU$. This handles zero minors and improves numerical stability.
+??? success "Solution"
+    
 
-7. **[Polar] In the polar decomposition $A = UP$, what property does $P$ satisfy?**
+****
 
-   ??? success "Solution"
-       $P$ is a positive semi-definite matrix (geometrically representing scaling), and $U$ is orthogonal (representing rotation).
+??? success "Solution"
+    
 
-8. **[Rank] If $\operatorname{rank}(A) = r$, what is the benefit of factoring it as $A = FG$ ($F$ is $m \times r, G$ is $r \times n$)?**
+****
 
-   ??? success "Solution"
-       It compresses a large matrix into two skinny matrices, saving storage and simplifying operations.
+??? success "Solution"
+    
 
-9. **[Stability] Why is Householder preferred over Gram-Schmidt?**
+****
 
-   ??? success "Solution"
-       Householder uses orthogonal reflections, avoiding the loss of orthogonality that occurs in Gram-Schmidt due to rounding errors.
+??? success "Solution"
+    
 
-10. **[Application] How do decompositions speed up solving $Ax=b$?**
+****
 
-   ??? success "Solution"
-        By performing a one-time high-cost decomposition (like LU at $O(n^3)$), subsequent solves are reduced to low-cost triangular substitutions ($O(n^2)$).
+??? success "Solution"
+    
 
 ## Chapter Summary
 

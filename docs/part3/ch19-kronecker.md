@@ -53,55 +53,55 @@
 
 ## 练习题
 
-1. **[计算] 计算 $\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \otimes \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。**
+****
 
-   ??? success "参考答案"
-       $\begin{pmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 2 \\ 0 & 0 & 2 & 0 \end{pmatrix}$。
+??? success "参考答案"
+    
 
-2. **[特征值] 若 $A$ 特征值为 1, 2，$B$ 特征值为 3, 4，求 $A \otimes B$ 的特征值。**
+****
 
-   ??? success "参考答案"
-       $\{1\cdot 3, 1\cdot 4, 2\cdot 3, 2\cdot 4\} = \{3, 4, 6, 8\}$。
+??? success "参考答案"
+    
 
-3. **[Kronecker和] 求上题中 $A \oplus B$ 的特征值。**
+****
 
-   ??? success "参考答案"
-       $\{1+3, 1+4, 2+3, 2+4\} = \{4, 5, 5, 6\}$。
+??? success "参考答案"
+    
 
-4. **[向量化] 将 $AX=B$ 转化为向量化形式。**
+****
 
-   ??? success "参考答案"
-       $(I \otimes A) \operatorname{vec}(X) = \operatorname{vec}(B)$。
+??? success "参考答案"
+    
 
-5. **[迹] 证明 $\operatorname{tr}(A \otimes B) = \operatorname{tr}(B \otimes A)$。**
+****
 
-   ??? success "参考答案"
-       两者都等于 $\operatorname{tr}(A)\operatorname{tr}(B)$。
+??? success "参考答案"
+    
 
-6. **[逆矩阵] 若 $A, B$ 可逆，求 $(A \otimes B)^{-1}$。**
+****
 
-   ??? success "参考答案"
-       $(A \otimes B)^{-1} = A^{-1} \otimes B^{-1}$。
+??? success "参考答案"
+    
 
-7. **[秩] 证明 $\operatorname{rank}(A \otimes B) = \operatorname{rank}(A)\operatorname{rank}(B)$。**
+****
 
-   ??? success "参考答案"
-       通过奇异值分解或特征值重数分析可得。非零奇异值的个数为两者的乘积。
+??? success "参考答案"
+    
 
-8. **[Vec] 对于 $2 \times 2$ 阵 $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$，写出 $\operatorname{vec}(X)$。**
+****
 
-   ??? success "参考答案"
-       $(a, c, b, d)^T$。
+??? success "参考答案"
+    
 
-9. **[Lyapunov] 将 $AX + XA^T = Q$ 向量化。**
+****
 
-   ??? success "参考答案"
-       $(I \otimes A + A \otimes I) \operatorname{vec}(X) = \operatorname{vec}(Q)$。
+??? success "参考答案"
+    
 
-10. **[应用] 为什么在量子力学中两个粒子的联合态要用张量积（Kronecker 积）表示？**
+****
 
-   ??? success "参考答案"
-        因为复合系统的维数是子系统维数的乘积，Kronecker 积完美刻画了这种自由度的组合以及量子纠缠的可能性。
+??? success "参考答案"
+    
 
 ## 本章小结
 

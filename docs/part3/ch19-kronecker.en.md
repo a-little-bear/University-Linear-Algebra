@@ -53,55 +53,55 @@ When dealing with complex equations involving the interaction of multiple matric
 
 ## Exercises
 
-1. **[Calculation] Compute $\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} \otimes \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.**
+****
 
-   ??? success "Solution"
-       $\begin{pmatrix} 0 & 1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 2 \\ 0 & 0 & 2 & 0 \end{pmatrix}$.
+??? success "Solution"
+    
 
-2. **[Eigenvalues] If $A$ has eigenvalues 1, 2 and $B$ has eigenvalues 3, 4, find the eigenvalues of $A \otimes B$.**
+****
 
-   ??? success "Solution"
-       $\{1\cdot 3, 1\cdot 4, 2\cdot 3, 2\cdot 4\} = \{3, 4, 6, 8\}$.
+??? success "Solution"
+    
 
-3. **[Kronecker Sum] Find the eigenvalues of $A \oplus B$ for the matrices above.**
+****
 
-   ??? success "Solution"
-       $\{1+3, 1+4, 2+3, 2+4\} = \{4, 5, 5, 6\}$.
+??? success "Solution"
+    
 
-4. **[Vectorization] Transform $AX=B$ into vectorized form.**
+****
 
-   ??? success "Solution"
-       $(I \otimes A) \operatorname{vec}(X) = \operatorname{vec}(B)$.
+??? success "Solution"
+    
 
-5. **[Trace] Prove $\operatorname{tr}(A \otimes B) = \operatorname{tr}(B \otimes A)$.**
+****
 
-   ??? success "Solution"
-       Both equal $\operatorname{tr}(A)\operatorname{tr}(B)$.
+??? success "Solution"
+    
 
-6. **[Inverse] If $A$ and $B$ are invertible, find $(A \otimes B)^{-1}$.**
+****
 
-   ??? success "Solution"
-       $(A \otimes B)^{-1} = A^{-1} \otimes B^{-1}$.
+??? success "Solution"
+    
 
-7. **[Rank] Prove $\operatorname{rank}(A \otimes B) = \operatorname{rank}(A)\operatorname{rank}(B)$.**
+****
 
-   ??? success "Solution"
-       Can be derived via SVD or eigenvalue multiplicity. The number of non-zero singular values is the product of the individual counts.
+??? success "Solution"
+    
 
-8. **[Vec] For $X = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$, write $\operatorname{vec}(X)$.**
+****
 
-   ??? success "Solution"
-       $(a, c, b, d)^T$.
+??? success "Solution"
+    
 
-9. **[Lyapunov] Vectorize the Lyapunov equation $AX + XA^T = Q$.**
+****
 
-   ??? success "Solution"
-       $(I \otimes A + A \otimes I) \operatorname{vec}(X) = \operatorname{vec}(Q)$.
+??? success "Solution"
+    
 
-10. **[Quantum] Why are joint states of two particles represented by a tensor product (Kronecker product)?**
+****
 
-   ??? success "Solution"
-        Because the dimension of a composite system is the product of the dimensions of its subsystems. The Kronecker product perfectly characterizes the combination of degrees of freedom and the possibility of quantum entanglement.
+??? success "Solution"
+    
 
 ## Chapter Summary
 
