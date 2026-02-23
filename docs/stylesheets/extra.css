@@ -329,6 +329,41 @@ body.definition-sheet .md-typeset h3 {
 }
 
 /* ============================
+   导航栏滚动条修复
+   ============================ */
+
+.md-tabs {
+  overflow-x: auto;
+  scrollbar-width: thin; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 隐藏滚动条但保留功能 (可选) */
+/* .md-tabs::-webkit-scrollbar {
+  display: none;
+} */
+
+/* 自定义滚动条样式 */
+.md-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.md-tabs::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+.md-tabs__list {
+  display: flex;
+  flex-wrap: nowrap; /* 强制不换行 */
+  white-space: nowrap;
+}
+
+.md-tabs__item {
+  flex-shrink: 0; /* 防止项目被压缩 */
+}
+
+/* ============================
    打印样式
    ============================ */
 
