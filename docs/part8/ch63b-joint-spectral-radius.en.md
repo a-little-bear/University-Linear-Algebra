@@ -10,7 +10,7 @@
 
 </div>
 
-For a set of matrices $\Sigma = \{A_1, \ldots, A_m\}$, the **joint spectral radius** $ho(\Sigma)$ characterizes the maximum growth rate of all possible product sequences $A_{i_1} A_{i_2} \cdots A_{i_k}$ as $k 	o \infty$. This concept generalizes the spectral radius of a single matrix to matrix families, quantifying the "worst-case" instability.
+For a set of matrices $\Sigma = \{A_1, \ldots, A_m\}$, the **joint spectral radius** $\rho(\Sigma)$ characterizes the maximum growth rate of all possible product sequences $A_{i_1} A_{i_2} \cdots A_{i_k}$ as $k \to \infty$. This concept generalizes the spectral radius of a single matrix to matrix families, quantifying the "worst-case" growth rate.
 
 ---
 
@@ -18,12 +18,12 @@ For a set of matrices $\Sigma = \{A_1, \ldots, A_m\}$, the **joint spectral radi
 
 !!! definition "Definition 63B.1 (Joint Spectral Radius)"
     The joint spectral radius of a finite set of matrices $\Sigma$ is defined as:
-    $$ho(\Sigma) = \lim_{k 	o \infty} \max_{A \in \Sigma^k} \|A\|^{1/k}$$
-    where $\Sigma^k$ is the set of all products of length $k$. This limit exists and is independent of the choice of norm $\|\cdot\|$.
+    $$\rho(\Sigma) = \lim_{k \to \infty} \max_{A \in \Sigma^k} \|A\|^{1/k}$$
+    where $\Sigma^k$ is the set of all products of length $k$. This limit exists and is independent of the choice of matrix norm $\|\cdot\|$.
 
 !!! theorem "Theorem 63B.3 (Berger-Wang Theorem, 1992)"
     For finite sets of matrices, the joint spectral radius equals the supremum of the spectral radii of all finite products:
-    $$ho(\Sigma) = \sup_{k \ge 1} \max_{A \in \Sigma^k} ho(A)^{1/k}$$
+    $$\rho(\Sigma) = \sup_{k \ge 1} \max_{A \in \Sigma^k} \rho(A)^{1/k}$$
 
 ---
 
@@ -31,49 +31,49 @@ For a set of matrices $\Sigma = \{A_1, \ldots, A_m\}$, the **joint spectral radi
 
 1. **[Concept] Contrast the joint spectral radius (JSR) with the standard spectral radius.**
    ??? success "Solution"
-       The standard radius $ho(A)$ describes the growth of a single matrix power $A^k$. JSR describes the growth of the *largest* product sequence in a family. JSR is a measure of the aggregate instability of a collection of possible evolution rules.
+       The standard spectral radius $\rho(A)$ describes the growth of a single matrix power $A^k$. JSR describes the maximum possible growth rate across all sequences in a family $\Sigma$. JSR captures the aggregate instability of a collection of possible evolution rules.
 
-2. **[Norm Bound] Prove: For any matrix norm $\|\cdot\|$, $ho(\Sigma) \le \max_{A \in \Sigma} \|A\|$.**
+2. **[Norm Bound] Prove: For any matrix norm $\|\cdot\|$, $\rho(\Sigma) \le \max_{A \in \Sigma} \|A\|$.**
    ??? success "Solution"
-       By definition, $\|A_{i_1} \dots A_{i_k}\| \le \prod \|A_{i_j}\| \le (\max \|A\|)^k$. Taking the $k$-th root and the limit as $k 	o \infty$ yields the result.
+       By submultiplicativity, $\|A_{i_1} \dots A_{i_k}\| \le \prod \|A_{i_j}\| \le (\max \|A\|)^k$. Taking the $k$-th root and the limit as $k \to \infty$ yields $\rho(\Sigma) \le \max \|A\|$.
 
-3. **[Calculation] Compute the JSR of $\Sigma = \left\{ \begin{pmatrix} 1 & 1 \ 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 0 \ 1 & 1 \end{pmatrix} ight\}$.**
+3. **[Calculation] Compute the JSR of $\Sigma = \left\{ \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}, \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix} \right\}$.**
    ??? success "Solution"
-       While both matrices have $ho(A_i) = 1$, their product $A_1 A_2 = \begin{pmatrix} 2 & 1 \ 1 & 1 \end{pmatrix}$ has $ho(A_1 A_2) = \frac{3+\sqrt{5}}{2} \approx 2.618$. By Berger-Wang, $ho(\Sigma) \ge ho(A_1 A_2)^{1/2} = \phi \approx 1.618$. One can prove that for this set, $ho(\Sigma) = \phi$ (the golden ratio).
+       Both matrices have $\rho(A_i) = 1$. However, their product $A_1 A_2 = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}$ has eigenvalues $\frac{3\pm\sqrt{5}}{2}$, so $\rho(A_1 A_2) = \frac{3+\sqrt{5}}{2} \approx 2.618$. By Berger-Wang, $\rho(\Sigma) \ge \rho(A_1 A_2)^{1/2} = \frac{1+\sqrt{5}}{2} \approx 1.618$.
 
-4. **[Berger-Wang Significance] Explain the importance of the Berger-Wang Theorem.**
+4. **[Berger-Wang Significance] Explain why the Berger-Wang Theorem is fundamental for JSR estimation.**
    ??? success "Solution"
-       It proves that the external estimate (based on norms) and the internal estimate (based on eigenvalues of products) converge to the same value. This allows for approximating the JSR by inspecting eigenvalues of finite-length products.
+       It proves that the external estimate (based on norms) and the internal estimate (based on eigenvalues of products) coincide in the limit. This allows for approximating the JSR by inspecting the spectra of a finite number of matrix products.
 
-5. **[Stability] Why is the stability of a switched linear system $x_{k+1} = A_{\sigma(k)} x_k$ equivalent to $ho(\Sigma) < 1$?**
+5. **[Stability] Why is the absolute stability of a switched linear system $x_{k+1} = A_{\sigma(k)} x_k$ equivalent to $\rho(\Sigma) < 1$?**
    ??? success "Solution"
-       If $ho(\Sigma) \ge 1$, there exists a switching sequence $\sigma$ such that the state norm does not decay to zero (and may explode). $ho(\Sigma) < 1$ ensures that for *any* switching rule, the energy of the system strictly decreases in the limit.
+       If $\rho(\Sigma) \ge 1$, there exists at least one switching sequence $\sigma$ such that the state does not converge to zero. Only when the worst-case growth rate is strictly less than 1 can the system be guaranteed to be safe under arbitrary switching.
 
-6. **[CQLF] What is the implication of having a Common Quadratic Lyapunov Function (CQLF) for a matrix set?**
+6. **[CQLF] Describe the implication of a Common Quadratic Lyapunov Function (CQLF) for the JSR.**
    ??? success "Solution"
-       A CQLF implies $ho(\Sigma) < 1$. It defines an ellipsoidal energy surface that all matrices in the set "contract," providing a geometric certificate of absolute stability.
+       A CQLF exists if there is a $P \succ 0$ such that $A_i^T P A_i \prec P$ for all $i$. This implies $\rho(\Sigma) < 1$. CQLF provides a sufficient (but not necessary) condition for stability that is computationally verifiable via SDP.
 
-7. **[Undecidability] Explain why calculating the JSR is considered "undecidable."**
+7. **[Undecidability] Explain why calculating the JSR is an "undecidable" problem.**
    ??? success "Solution"
-       Determining whether $ho(\Sigma) \le 1$ for a set of integer matrices is equivalent to the Halting Problem. This means no general algorithm can produce an exact "yes/no" answer for every input in finite time.
+       Determining whether $\rho(\Sigma) \le 1$ for integer matrices is equivalent to the Halting Problem. No universal algorithm can decide this property for all inputs in finite time, meaning we must rely on approximation schemes.
 
-8. **[Finiteness] Define the "Finiteness Conjecture" and its current status.**
+8. **[Finiteness] What is the "Finiteness Conjecture"?**
    ??? success "Solution"
-       The conjecture stated that the JSR is always achieved by the spectral radius of some finite-length product. While true for many practical cases (e.g., nonnegative matrices), it has been proven false in general by counterexamples in $M_2(\mathbb{R})$.
+       The conjecture proposed that $\rho(\Sigma)$ is always realized by the spectral radius of some finite product in $\Sigma^k$. While true for many classes (e.g., nonnegative matrices), it has been disproven for general matrix sets.
 
-9. **[Wavelets] How does the JSR relate to wavelet regularity?**
+9. **[Wavelet Smoothness] How does the JSR relate to the differentiability of a wavelet?**
    ??? success "Solution"
-       The Hölder regularity of a scaling function $\phi$ is determined by the JSR of the transition matrices associated with the subdivision scheme. A smaller JSR corresponds to a smoother (more differentiable) wavelet.
+       The regularity (Hölder exponent) of a scaling function $\phi$ is determined by the JSR of the matrices governing its subdivision scheme. A smaller JSR implies a faster decay of coefficients and a smoother limit function.
 
-10. **[Spectral Gap] Describe the relationship between the JSR and the "Spectral Gap" in Markov chains.**
+10. **[Spectral Gap] Relate the JSR to information spreading in random walks.**
     ??? success "Solution"
-        In the context of stochastic matrices, the JSR of the matrices restricted to the zero-sum subspace relates to the rate of convergence to equilibrium (mixing time). The gap $1 - ho(\Sigma)$ determines the speed of "information spreading."
+        For stochastic matrices, the JSR of the matrices restricted to the mean-zero subspace determines the mixing time. The spectral gap $1 - \rho(\Sigma)$ quantifies how quickly the probability distribution converges to the stationary state.
 
 ## Chapter Summary
 
 This chapter examines the aggregate growth rates of matrix families:
 
 1. **Analytical Grounding**: Defined the JSR via Rota-Strang limits and established its norm-independence.
-2. **Spectral Equivalence**: Decoded the Berger-Wang theorem, linking norm-based growth to product eigenvalues.
-3. **Stability Applications**: Demonstrated the central role of JSR in the absolute stability of switched dynamical systems.
-4. **Computational Limits**: Addressed the undecidability and the finiteness properties, highlighting the complexity inherent in joint spectral analysis.
+2. **Spectral Equivalence**: Decoded the Berger-Wang theorem, linking norm-based growth to the product eigenvalues.
+3. **Stability Power**: Demonstrated the central role of JSR in the absolute stability of switched dynamical systems.
+4. **Computational Bounds**: Discussed the undecidability and finiteness properties, highlighting the intrinsic complexity of joint spectral analysis.

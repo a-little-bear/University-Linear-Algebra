@@ -15,11 +15,11 @@ The **permanent** of a matrix is a polynomial in its entries that resembles the 
 ## 40A.1 Definition and Combinatorial Role
 
 !!! definition "Definition 40A.1 (Permanent)"
-    For an $n 	imes n$ matrix $A$, the permanent is defined as:
+    For an $n \times n$ matrix $A$, the permanent is defined as:
     $$\operatorname{perm}(A) = \sum_{\sigma \in S_n} \prod_{i=1}^n a_{i, \sigma(i)}$$
 
 !!! theorem "Theorem 40A.1 (Egorychev-Falikman Theorem, 1981)"
-    For any $n 	imes n$ doubly stochastic matrix $A$:
+    For any $n \times n$ doubly stochastic matrix $A$:
     $$\operatorname{perm}(A) \ge \frac{n!}{n^n}$$
     Equality holds if and only if $A = \frac{1}{n} J_n$ (the all-ones matrix scaled). This resolved the long-standing **van der Waerden conjecture**.
 
@@ -27,13 +27,13 @@ The **permanent** of a matrix is a polynomial in its entries that resembles the 
 
 ## Exercises
 
-1. **[Fundamentals] Compute the permanent of $A = \begin{pmatrix} 1 & 1 \ 1 & 1 \end{pmatrix}$.**
+1. **[Fundamentals] Compute the permanent of $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
        $\operatorname{perm}(A) = 1 \cdot 1 + 1 \cdot 1 = 2$. Note $\det A = 0$.
 
 2. **[Matchings] Show that for a (0,1)-matrix $A$, $\operatorname{perm}(A)$ counts the number of perfect matchings in the associated bipartite graph.**
    ??? success "Solution"
-       Each permutation $\sigma$ represents a potential matching. The product $\prod a_{i, \sigma(i)}$ is 1 if the matching exists in the graph and 0 otherwise. Summing over all permutations yields the total count of perfect matchings.
+       Each permutation $\sigma$ represents a potential matching. The product $\prod a_{i, \sigma(i)}$ is 1 if all selected edges exist in the graph and 0 otherwise. Summing over all permutations yields the total count of perfect matchings.
 
 3. **[Complexity] Why is computing the permanent harder than the determinant?**
    ??? success "Solution"
@@ -43,7 +43,7 @@ The **permanent** of a matrix is a polynomial in its entries that resembles the 
    ??? success "Solution"
        Yes. Like the determinant, the permanent is multilinear. However, it is **symmetric** rather than alternating: swapping two rows does not change the value of the permanent.
 
-5. **[Van der Waerden] Use the Egorychev-Falikman theorem to bound the permanent of a $3 	imes 3$ doubly stochastic matrix.**
+5. **[Van der Waerden] Use the Egorychev-Falikman theorem to bound the permanent of a $3 \times 3$ doubly stochastic matrix.**
    ??? success "Solution"
        $\operatorname{perm}(A) \ge \frac{3!}{3^3} = \frac{6}{27} \approx 0.222$.
 
@@ -57,15 +57,15 @@ The **permanent** of a matrix is a polynomial in its entries that resembles the 
 
 8. **[Invariance] What group of matrices $M$ satisfies $\operatorname{perm}(MAN) = \operatorname{perm}(A)$?**
    ??? success "Solution"
-       Only the products of permutation matrices and diagonal matrices (monomial matrices) with $\det(MN)=1$. This shows the permanent has far fewer symmetries than the determinant.
+       Only the products of permutation matrices and diagonal matrices (monomial matrices) with appropriate scaling. This shows the permanent has far fewer symmetries than the determinant.
 
 9. **[Glynn's Formula] Briefly describe a method to estimate the permanent.**
    ??? success "Solution"
-       Since exact computation is hard, we use randomized algorithms. Glynn's formula uses a sum over random vectors to provide an unbiased estimator, or Markov Chain Monte Carlo (MCMC) methods for approximate counting.
+       Since exact computation is hard, randomized algorithms are used. Glynn's formula provides an unbiased estimator based on sums over random vectors, while MCMC methods provide approximate counting.
 
 10. **[Identity] Relate $\operatorname{perm}(J_n)$ to the number of permutations.**
     ??? success "Solution"
-        $\operatorname{perm}(J_n) = n!$. This is the sum of 1 for every permutation in $S_n$.
+        $\operatorname{perm}(J_n) = n!$, as there are $n!$ permutations each contributing exactly 1 to the sum.
 
 ## Chapter Summary
 
@@ -73,5 +73,5 @@ This chapter explores the combinatorial analogue of the determinant:
 
 1. **Matching Calculus**: Established the permanent as the counting function for bipartite matchings.
 2. **Minimum Entropy**: Detailed the resolution of the van der Waerden conjecture, identifying the uniform distribution as the global minimizer.
-3. **Hardness vs. Volume**: Analyzed the computational gap between permanents and determinants, highlighting the role of symmetry.
+3. **Hardness vs. Volume**: Analyzed the computational gap between permanents and determinants, highlighting the lack of elimination invariance.
 4. **Spectral Constraints**: Investigated inequalities for PSD matrices, linking permanental bounds to spectral invariants.

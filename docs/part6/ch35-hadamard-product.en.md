@@ -21,15 +21,15 @@ The **Hadamard product** (also known as the Schur product) is the element-wise m
     $$(A \circ B)_{ij} = a_{ij} b_{ij}$$
 
 !!! theorem "Theorem 35.1 (Schur Product Theorem)"
-    If $A \succeq 0$ and $B \succeq 0$ are $n 	imes n$ matrices, then $A \circ B \succeq 0$.
+    If $A \succeq 0$ and $B \succeq 0$ are $n \times n$ matrices, then $A \circ B \succeq 0$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute $A \circ B$ for $A = \begin{pmatrix} 1 & 2 \ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 0 & 1 \ 1 & 0 \end{pmatrix}$.**
+1. **[Fundamentals] Compute $A \circ B$ for $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       $A \circ B = \begin{pmatrix} 1 \cdot 0 & 2 \cdot 1 \ 3 \cdot 1 & 4 \cdot 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \ 3 & 0 \end{pmatrix}$.
+       $A \circ B = \begin{pmatrix} 1 \cdot 0 & 2 \cdot 1 \\ 3 \cdot 1 & 4 \cdot 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$.
 
 2. **[Schur Theorem] Prove the Schur Product Theorem using the property that $A \succeq 0$ can be written as a sum of rank-1 matrices $v_k v_k^*$.**
    ??? success "Solution"
@@ -41,7 +41,7 @@ The **Hadamard product** (also known as the Schur product) is the element-wise m
 
 4. **[Eigenvalues] How do the eigenvalues of $A \circ B$ relate to those of $A$ and $B$?**
    ??? success "Solution"
-       $\lambda(A \circ B) \prec \lambda(A) \circ \lambda(B)$ is false. However, it is true that $\lambda_{\max}(A \circ B) \le \lambda_{\max}(A) \cdot \max b_{ii}$.
+       The spectral radius satisfies $\rho(A \circ B) \le \rho(A) \rho(B)$ is false. However, it is true that $\lambda_{\max}(A \circ B) \le \lambda_{\max}(A) \cdot \max b_{ii}$.
 
 5. **[Spectral Norm] Prove that $\|A \circ B\| \le \|A\| \cdot \|B\|$.**
    ??? success "Solution"
@@ -63,9 +63,9 @@ The **Hadamard product** (also known as the Schur product) is the element-wise m
    ??? success "Solution"
        The all-ones matrix $J$, where $J_{ij} = 1$ for all $i, j$.
 
-10. **[Trace] Prove the Schur-Hadamard trace inequality $\operatorname{tr}((A \circ B)C) = \operatorname{tr}(A(B \circ C))$ for symmetric $B$.**
+10. **[Trace] Prove the Schur-Hadamard trace identity $\operatorname{tr}((A \circ B)C) = \operatorname{tr}(A(B \circ C))$ for symmetric $B$.**
     ??? success "Solution"
-        $\sum_{i,j} a_{ij} b_{ij} c_{ji} = \sum_{i,j} a_{ij} (b_{ij} c_{ij})$ assuming symmetry. Both sides equal $\sum_{i,j} a_{ij} b_{ij} c_{ij}$.
+        $\sum_{i,j} a_{ij} b_{ij} c_{ji} = \sum_{i,j} a_{ij} (b_{ij} c_{ij})$ assuming symmetry of $B$ and $C$. Both sides expand to the same sum of element-wise products.
 
 ## Chapter Summary
 

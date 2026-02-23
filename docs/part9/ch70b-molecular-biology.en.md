@@ -1,78 +1,76 @@
-# Chapter 70B: Matrix Applications in Molecular Biology
+# Chapter 70B: Linear Algebra in Molecular Biology and Genomics
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Inner Product (Ch8) · Distance Metrics · Spectral Decomposition (Ch6) · Probability Matrices
+**Prerequisites**: SVD (Ch11) · Matrix Factorization (Ch10) · Graph Theory (Ch27) · Statistics (Ch29)
 
-**Chapter Outline**: Sequence Alignment Matrices (PAM/BLOSUM) → Evolutionary Distance Metrics → Jukes-Cantor Model → Kimura Model → Algebraic Reconstruction of Phylogenetic Trees → Microarray Data Analysis (PCA Application) → Contact Matrices in Protein Folding
+**Chapter Outline**: Sequence Alignment via Dynamic Programming (Matrix Trace) → Phylogeny and Distance Matrices → Substitution Matrices ($PAM, BLOSUM$) → Gene Expression Analysis (PCA/SVD) → Gene Regulatory Networks (Adjacency Matrices) → Protein-Protein Interaction (PPI) Networks → Structural Biology and Distance Geometry
 
-**Extension**: Bioinformatics is a discipline built on the processing and pattern matching of large-scale sparse matrices; evolution matrices define the metric evolution within the genomic sequence space.
+**Extension**: SVD is the core of bio-informatics dimensionality reduction; substitution matrices derive from Markov models of amino acid evolution.
 
 </div>
 
-At the molecular scale, life is modeled as a stochastic replacement process of nucleotide or amino acid sequences in a state space. By introducing probability transition matrices and distance metrics, linear algebra provides rigorous computational means for reconstructing phylogenetic trees and identifying protein folding patterns.
+Life's microscopic code is essentially high-dimensional data. Linear algebra provides the tools to extract patterns from gene expression and reconstruct the history of evolution from sequence distances.
 
 ---
 
-## 70B.1 Substitution Matrices and Evolutionary Stochastic Processes
+## 70B.1 Sequence Evolution and Invariant Forms
 
-!!! definition "Definition 70B.1 (PAM Substitution Model)"
-    The PAM (Point Accepted Mutation) matrix family is based on Markov chain properties. The PAM-1 matrix describes amino acid substitution probabilities over a unit of evolutionary time. Long-term evolution matrices are obtained via matrix power operations $M_k = (M_1)^k$.
+!!! definition "Definition 70B.1 (Substitution Matrix)"
+    A substitution matrix $S$ (like PAM or BLOSUM) describes the probability or log-odds of one amino acid being replaced by another over evolutionary time. These matrices are derived from Markov chains on the space of 20 amino acids.
 
-!!! theorem "Theorem 70B.1 (Jukes-Cantor Distance Formula)"
-    Under a four-state Markov model, the physical distance (average number of mutations per site) $d$ between two DNA sequences and the observed difference frequency $p$ satisfy a logarithmic mapping:
-    $$d = -\frac{3}{4} \ln(1 - \frac{4}{3}p)$$
-    This formula eliminates biases caused by "overlapping mutations" in random substitution processes via matrix logarithm operations.
+!!! theorem "Theorem 70B.3 (Phylogenetic Distance Consistency)"
+    A distance matrix $D$ derived from DNA sequences represents a tree structure if and only if it satisfies the **four-point condition**: for any four taxa $i, j, k, l$, the two largest of $\{D_{ij}+D_{kl}, D_{ik}+D_{jl}, D_{il}+D_{jk}\}$ are equal.
 
 ---
 
 ## Exercises
 
-1. **[Markov Powers] Explain why the PAM-250 matrix can be obtained through the 250th power operation of the PAM-1 matrix.**
+1. **[Substitution Entropy] In a PAM-1 matrix, how does the trace $\operatorname{tr}(P)$ relate to the rate of sequence conservation?**
    ??? success "Solution"
-       This model assumes that sequence evolution is a time-homogeneous first-order Markov process. According to the Chapman-Kolmogorov equations, the transition probability matrix across multiple time steps equals the cumulative product of single-step transition matrices.
+       The trace $\operatorname{tr}(P) = \sum p_{ii}$ is the sum of the probabilities that each amino acid remains unchanged. A larger trace indicates higher sequence conservation over the given evolutionary distance (1 PAM unit).
 
-2. **[Score Matrix Symmetry] Analyze the algebraic prerequisites for amino acid substitution score matrices (e.g., BLOSUM) to typically possess symmetry.**
+2. **[PCA in Genomics] Explain why PCA is used to identify population stratification in genomic studies.**
    ??? success "Solution"
-       This is based on the Detailed Balance hypothesis, assuming the evolution process is reversible at equilibrium. The mutation flow $i 	o j$ and $j 	o i$ have equal probabilities, resulting in a symmetric log-likelihood ratio matrix.
+       Genotypes are represented as a large matrix $X$. The first few principal components often capture geographical or ethnic variations. By projecting individuals onto the PC subspace, researchers can detect clusters that correspond to ancestral lineages.
 
-3. **[Calculation] Given an observed difference frequency $p=0.3$ between two sequences, calculate their true evolutionary distance $d$ according to the Jukes-Cantor model.**
+3. **[SVD Interpretation] If $A$ is a gene expression matrix (genes $\times$ samples), what is the biological meaning of the left and right singular vectors?**
    ??? success "Solution"
-       $d = -0.75 \ln(1 - 1.333 	imes 0.3) = -0.75 \ln(0.6) \approx 0.383$. Note that the true distance is greater than the observed difference, reflecting that multiple mutations have masked original differences.
+       The left singular vectors $u_i$ (eigen-genes) represent fundamental expression patterns. The right singular vectors $v_i$ (eigen-samples) represent the prevalence of these patterns across different biological conditions or tissues.
 
-4. **[Spectral Analysis] Analyze the spectral structure of the Jukes-Cantor transition matrix and state the physical state corresponding to the eigenvalue 1.**
+4. **[Calculation] Given a Jukes-Cantor distance matrix $D$, why must its entries satisfy $D_{ii} = 0$ and $D_{ij} = D_{ji}$?**
    ??? success "Solution"
-       The transition matrix has the form $M = (1-p)I + (p/3)(J-I)$. The eigenvalues are 1 (corresponding to the steady state $\pi = [0.25, \dots, 0.25]$) and $1-4p/3$ (triple, corresponding to the decay of differences). The eigenvalue 1 guarantees the balance of nucleotide frequencies after long-term evolution.
+       $D$ represents a metric on the sequence space. $D_{ii}=0$ reflects the identity axiom (distance to self is zero), and $D_{ij}=D_{ji}$ reflects the symmetry of the evolutionary distance between sequences $i$ and $j$.
 
-5. **[PCA Clustering] Describe how to utilize Principal Component Analysis (PCA) for dimensionality reduction and phylogenetic classification of large-scale genomic frequency matrices.**
+5. **[Regulatory Networks] Represent a 3-gene feedback loop as an adjacency matrix and find its eigenvalues.**
    ??? success "Solution"
-       Construct an $m 	imes n$ species-gene frequency matrix $X$. Perform spectral decomposition on the covariance matrix $X^T X$ to project species into a principal component subspace. Euclidean distances on this plane reflect similarities in genetic features among species.
+       $A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{pmatrix}$. The eigenvalues are the cube roots of unity $\{1, \omega, \omega^2\}$. The imaginary components reflect the oscillatory nature of the feedback system.
 
-6. **[Contact Matrix] Explain the definition of a protein Contact Matrix and its role in predicting protein tertiary structure.**
+6. **[Distance Geometry] How is the SVD used to reconstruct 3D protein structures from nuclear magnetic resonance (NMR) distance constraints?**
    ??? success "Solution"
-       A contact matrix is a 0-1 adjacency matrix defined between residues. It captures the spatial topological constraints of a folded protein. Using matrix rank properties and Distance Geometry, one can partially reconstruct the 3D coordinates of residues from the contact matrix.
+       The distance matrix $D$ is converted into a Gram matrix $G$ using $G_{ij} = \frac{1}{2}(D_{i0}^2 + D_{j0}^2 - D_{ij}^2)$. The 3D coordinates are obtained from the first 3 eigenvectors of $G$ scaled by the square root of their eigenvalues.
 
-7. **[Sparse Reconstruction] Analyze how the low-rank sparse characteristics of gene expression matrices allow for the use of SVD to extract "eigen-genes".**
+7. **[Network Robustness] In a Protein-Protein Interaction (PPI) network, how does the spectral gap of the Laplacian relate to network connectivity?**
    ??? success "Solution"
-       Gene expression is coordinated, leading to matrices with significant low-rank structures. Through truncated SVD (Ch11), the first few singular vectors define the eigen-genes that dominate changes in cell states, achieving massive information compression.
+       The second smallest eigenvalue $\lambda_2$ (algebraic connectivity) measures how easily the network can be partitioned. A small $\lambda_2$ suggests the existence of weakly connected functional modules.
 
-8. **[Kimura Model] Contrast the differences in transition matrix structure between the Kimura two-parameter model and the Jukes-Cantor model.**
+8. **[Phylogenetic Trees] Verify if the distance matrix $D = \begin{pmatrix} 0 & 3 & 7 \\ 3 & 0 & 6 \\ 7 & 6 & 0 \end{pmatrix}$ can be exactly represented by a rooted tree.**
    ??? success "Solution"
-       The Kimura model distinguishes between transitions and transversions, giving the transition matrix a more complex block-cyclic structure. Its eigenvalues reflect the independent evolution rates of two different biochemical processes.
+       For a tree, the distances must satisfy specific ultrametric or additive properties. Here, $D_{13} = 7$ and $D_{12}+D_{23} = 3+6=9$. Since $7 \neq 9$ and other additive checks must be performed, one evaluates the three-point or four-point conditions to determine consistency.
 
-9. **[Phylogenetic Algebra] Briefly describe how to reconstruct a phylogenetic tree by minimizing the Frobenius norm error of matrices in the Neighbor-Joining (NJ) method.**
+9. **[Mutational Equilibrium] For an amino acid substitution Markov chain with transition matrix $Q$, what does the stationary distribution $\pi$ represent?**
    ??? success "Solution"
-       Given a distance matrix $D$ between species, find a path distance matrix $T$ induced by a tree topology such that $\|D - T\|_F$ is minimized. This is equivalent to finding the optimal approximation within a subspace satisfying Ultrametric constraints.
+       $\pi$ represents the equilibrium frequencies of the 20 amino acids across all proteins in the limit of infinite evolutionary time, assuming the selective pressures remain constant.
 
-10. **[Information Entropy] Explain how the spectral entropy of an evolution matrix quantifies the randomization of genomic information sequences over time.**
+10. **[Complexity] Why is matrix factorization often preferred over direct graph algorithms for large-scale gene regulatory network analysis?**
     ??? success "Solution"
-        As the matrix power increases, the transition matrix tends towards a rank-1 stationary matrix. The exponential decay of eigenvalues quantifies the growth of sequence entropy, reflecting the irreversible loss of original genetic information under mutation noise interference.
+        Biological networks are often noisy and partially observed. Matrix factorization (like NMF or SVD) can extract robust latent factors and patterns while naturally handling missing data, whereas direct graph traversal is sensitive to every individual edge error.
 
 ## Chapter Summary
 
-This chapter discusses the quantitative role of linear algebra in parsing molecular information of life:
+This chapter explores the linear algebraic framework of molecular life:
 
-1. **Probability Transition Framework**: Established Markov transition matrices as the universal mathematical language for molecular evolution modeling.
-2. **Distance Metrics**: Derived evolutionary distance correction models based on matrix logarithmic mapping, restoring true mutational history.
-3. **Structural Parsing**: Established an algebraic bridge from topological connectivity to physical conformation via contact matrices and distance geometry.
-4. **Population Inference**: Demonstrated feature clustering analysis of high-dimensional biological data on low-dimensional manifolds using PCA and SVD.
+1. **Evolutionary Calculus**: Established substitution matrices as Markov transition operators for amino acid sequences.
+2. **Spectral Genomics**: Utilized PCA and SVD to reduce the dimensionality of high-throughput gene expression data.
+3. **Biological Networks**: Formulated the connectivity and robustness of regulatory and interaction systems using adjacency and Laplacian matrices.
+4. **Distance Geometry**: Linked sequence metrics to phylogenetic trees and 3D structural reconstruction.

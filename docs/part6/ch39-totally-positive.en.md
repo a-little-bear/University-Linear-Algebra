@@ -21,7 +21,7 @@ A matrix is **totally positive** (TP) if *every* one of its minors (not just pri
     A matrix $A$ is **totally nonnegative** (TN) if all its minors are non-negative.
 
 !!! theorem "Theorem 39.1 (Eigenvalue Rigidity)"
-    If $A$ is an $n 	imes n$ totally positive matrix, then its eigenvalues are real, positive, and simple (distinct):
+    If $A$ is an $n \times n$ totally positive matrix, then its eigenvalues are real, positive, and simple (distinct):
     $$\lambda_1 > \lambda_2 > \dots > \lambda_n > 0$$
 
 ---
@@ -30,9 +30,9 @@ A matrix is **totally positive** (TP) if *every* one of its minors (not just pri
 
 1. **[Fundamentals] Is the Vandermonde matrix $V(x_1, \dots, x_n)$ totally positive for $0 < x_1 < \dots < x_n$?**
    ??? success "Solution"
-       Yes. Every minor of a Vandermonde matrix with positive increasing nodes is a Schur polynomial times a product of differences, which is strictly positive.
+       Yes. Every minor of a Vandermonde matrix with positive increasing nodes is a product of differences $(x_j - x_i)$ and Schur polynomials, all of which are strictly positive.
 
-2. **[Criteria] How many minors do you need to check to verify if an $n 	imes n$ matrix is TP?**
+2. **[Criteria] How many minors do you need to check to verify if an $n \times n$ matrix is TP?**
    ??? success "Solution"
        While there are $\binom{2n}{n}-1$ total minors, checking only the $n^2$ **contiguous** minors (minors formed by adjacent rows and columns) is sufficient to prove total positivity.
 
@@ -66,7 +66,7 @@ A matrix is **totally positive** (TP) if *every* one of its minors (not just pri
 
 10. **[Compound Matrices] Relate TP matrices to the eigenvalues of compound matrices.**
     ??? success "Solution"
-        A matrix $A$ is TP iff all its $k$-th order compound matrices $C_k(A)$ (matrices of $k 	imes k$ minors) are positive matrices. This allows the use of Perron-Frobenius theory on the compound matrices to prove that the eigenvalues of $A$ are distinct.
+        A matrix $A$ is TP iff all its $k$-th order compound matrices $C_k(A)$ (matrices of $k \times k$ minors) are positive matrices. This allows the use of Perron-Frobenius theory on the compound matrices to prove properties of $A$.
 
 ## Chapter Summary
 

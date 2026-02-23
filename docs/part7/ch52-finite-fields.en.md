@@ -29,43 +29,43 @@ Linear algebra can be defined over any field, including **finite fields** (Galoi
 
 1. **[Counting] How many vectors are there in the space $\mathbb{F}_2^3$?**
    ??? success "Solution"
-       The size is $q^n = 2^3 = 8$. These are all 3-bit binary strings.
+       The number of vectors is $q^n = 2^3 = 8$. These are all possible 3-bit binary strings.
 
-2. **[Subspaces] Calculate the number of 1-dimensional subspaces (lines) in $\mathbb{F}_3^2$.**
+2. **[Subspaces] Calculate the number of 1-dimensional subspaces (lines through the origin) in $\mathbb{F}_3^2$.**
    ??? success "Solution"
-       $\binom{2}{1}_3 = \frac{3^2 - 1}{3^1 - 1} = \frac{8}{2} = 4$. Geometrically, this corresponds to the 4 possible slopes in the affine plane over $\mathbb{F}_3$.
+       Using the q-binomial coefficient: $\binom{2}{1}_3 = \frac{3^2 - 1}{3^1 - 1} = \frac{8}{2} = 4$. Geometrically, these correspond to the 4 possible slopes in the affine plane over $\mathbb{F}_3$.
 
 3. **[Linear Codes] Define the generator matrix $G$ and parity-check matrix $H$ of a linear code.**
    ??? success "Solution"
-       $G$ is a $k 	imes n$ matrix whose rows span the code $C$. $H$ is an $(n-k) 	imes n$ matrix such that $v \in C \iff Hv^T = 0$. $H$ defines the parity-check constraints of the subspace.
+       $G$ is a $k \times n$ matrix whose rows form a basis for the code $C$. $H$ is an $(n-k) \times n$ matrix such that $v \in C \iff Hv^T = 0$. $H$ defines the subspace as the intersection of several hyperplanes.
 
-4. **[Minimum Distance] Show that the minimum distance $d$ of a code is equal to the minimum number of linearly dependent columns of the parity-check matrix $H$.**
+4. **[Minimum Distance] Show that the minimum distance $d$ of a linear code is equal to the minimum number of linearly dependent columns of its parity-check matrix $H$.**
    ??? success "Solution"
-       $Hv^T = 0$ is a linear combination of the columns of $H$. If a codeword $v$ has weight $w$, then $w$ columns of $H$ are dependent. The smallest such $w$ is the minimum distance $d$.
+       The equation $Hv^T = 0$ is a linear combination of the columns of $H$. If a codeword $v$ has Hamming weight $w$, then $w$ columns of $H$ must be linearly dependent. The smallest such $w$ for a non-zero $v$ is the minimum distance $d$.
 
 5. **[Hamming Code] Analyze the $(7, 4)$ Hamming code parity-check matrix $H$. What is its minimum distance?**
    ??? success "Solution"
-       The columns of $H$ are all $2^3 - 1 = 7$ non-zero binary vectors of length 3. Since no two columns are identical (linearly dependent in $\mathbb{F}_2$) but there exist sets of three dependent columns, $d = 3$. It can correct 1 error.
+       The columns of $H$ are all $2^3 - 1 = 7$ non-zero binary vectors of length 3. Since no two columns are identical (they would be dependent in $\mathbb{F}_2$) but there exist sets of three columns that sum to zero, the minimum distance is $d = 3$. This code can correct any single error.
 
-6. **[Characteristic] What happens to the identity $v + v = 0$ in $\mathbb{F}_2^n$?**
+6. **[Characteristic] Explain why subtraction is identical to addition in $\mathbb{F}_2^n$.**
    ??? success "Solution"
-       In characteristic 2, $1 + 1 = 0$, so $v + v = 0$ for all $v$. This means a vector is its own additive inverse, and there is no distinction between addition and subtraction.
+       In a field of characteristic 2, $1 + 1 = 0 \pmod 2$, which implies $1 = -1$. Thus $v + v = 0$ for any vector $v$, making addition and subtraction the same operation.
 
 7. **[LFSR] Describe how a Linear Feedback Shift Register implements a linear recurrence over $\mathbb{F}_2$.**
    ??? success "Solution"
-       An LFSR uses a state vector $x_k$. The next state is $x_{k+1} = A x_k$, where $A$ is a companion matrix of the feedback polynomial. If the polynomial is primitive, the LFSR generates a sequence of maximum period $2^n - 1$.
+       An LFSR uses a state vector $x_k$ and a transition matrix $A$ (often a companion matrix). The next state is $x_{k+1} = A x_k \pmod 2$. If the feedback polynomial is primitive, the sequence of states has the maximum possible period of $2^n - 1$.
 
 8. **[MDS Codes] Why are Reed-Solomon codes considered MDS?**
    ??? success "Solution"
-       Reed-Solomon codes are based on evaluating polynomials. Since a polynomial of degree $k-1$ has at most $k-1$ roots, any $k$ evaluation points uniquely determine the polynomial. This ensures the minimum distance $d = n - k + 1$, attaining the Singleton bound.
+       Reed-Solomon codes are constructed by evaluating polynomials of degree $< k$. Since a non-zero polynomial of degree $k-1$ has at most $k-1$ roots, any $k$ evaluation points uniquely determine the polynomial. This property ensures $d = n - k + 1$, attaining the Singleton bound.
 
-9. **[Orthogonality] Define the dual code $C^\perp$. Can a code be its own dual?**
+9. **[Orthogonality] Define the dual code $C^\perp$ and the concept of a self-dual code.**
    ??? success "Solution"
-       $C^\perp = \{u : u \cdot v = 0, \forall v \in C\}$. A code is **self-dual** if $C = C^\perp$. For example, the $(8, 4)$ extended Hamming code is self-dual.
+       The dual code $C^\perp = \{u : u \cdot v = 0, \forall v \in C\}$. A code is **self-dual** if $C = C^\perp$. Self-dual codes are fundamental in the study of lattices and sphere packings.
 
-10. **[Cryptography] How does the AES (Advanced Encryption Standard) use matrix inversion over $\mathbb{F}_{2^8}$?**
+10. **[Cryptography] How is matrix inversion over finite fields utilized in the AES (Advanced Encryption Standard)?**
     ??? success "Solution"
-        In the SubBytes step, AES performs a multiplicative inversion in the Galois field $\mathbb{F}_{2^8}$, followed by an affine transformation. The algebraic complexity of inversion over finite fields provides resistance against linear cryptanalysis.
+        In the SubBytes transformation, AES computes the multiplicative inverse of each byte in the Galois field $\mathbb{F}_{2^8}$. The non-linearity of the inversion operation over a finite field provides strong resistance against linear and differential cryptanalysis.
 
 ## Chapter Summary
 

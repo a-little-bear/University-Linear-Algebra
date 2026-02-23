@@ -17,7 +17,7 @@ This chapter examines the combinatorial properties of matrices, specifically how
 ## 65B.1 Spectral Parameters of Graphs
 
 !!! definition "Definition 65B.1 (Minimum Rank of a Graph)"
-    $\operatorname{mr}(G) = \min\{\operatorname{rank}(A) : A^T=A, \operatorname{sgn}(A) 	ext{ matches } G\}$. This parameter measures the limit of information compression while maintaining a specific connectivity structure.
+    The minimum rank $\operatorname{mr}(G)$ is the smallest possible rank of a real symmetric matrix whose off-diagonal zero-nonzero pattern matches the adjacency of $G$. This parameter measures the limit of information compression while maintaining a specific connectivity structure.
 
 !!! theorem "Theorem 65B.2 ($Z(G) \ge M(G)$)"
     The zero forcing number $Z(G)$ is a pure combinatorial upper bound on the maximum nullity $M(G)$ of a graph. This provides a method to estimate the rank of a matrix via a simple graph-coloring game.
@@ -27,10 +27,10 @@ This chapter examines the combinatorial properties of matrices, specifically how
 ## 65B.2 Discrete Matrix Structures
 
 !!! theorem "Theorem 65B.7 (Hadamard Determinant Bound)"
-    For a real $n 	imes n$ matrix with entries $|a_{ij}| \le 1$, $|\det A| \le n^{n/2}$. Equality is attained if and only if $A$ is a Hadamard matrix.
+    For a real $n \times n$ matrix with entries $|a_{ij}| \le 1$, $|\det A| \le n^{n/2}$. Equality is attained if and only if $A$ is a Hadamard matrix.
 
 !!! theorem "Theorem 65B.12 (Sinkhorn-Knopp Theorem)"
-    A nonnegative matrix has total support if and only if it can be scaled by diagonal matrices to be doubly stochastic.
+    A nonnegative matrix can be scaled to a doubly stochastic matrix if and only if it has total support.
 
 ---
 
@@ -38,43 +38,43 @@ This chapter examines the combinatorial properties of matrices, specifically how
 
 1. **[Fundamentals] Compute the minimum rank $\operatorname{mr}(P_3)$ of the path graph on 3 vertices.**
    ??? success "Solution"
-       $P_3$ corresponds to $3 	imes 3$ symmetric tridiagonal matrices. By eigenvalue interlacing, if the off-diagonal entries are non-zero, the rank is at least $n-1 = 2$. Thus $\operatorname{mr}(P_3) = 2$.
+       $P_3$ corresponds to $3 \times 3$ symmetric tridiagonal matrices. Since the off-diagonal entries must be non-zero, the eigenvalues must be distinct, and the rank is at least $n-1 = 2$. Thus $\operatorname{mr}(P_3) = 2$.
 
 2. **[Zero Forcing] Show that the zero forcing number of the cycle graph $C_4$ is 2.**
    ??? success "Solution"
-       Let the vertices be $\{1, 2, 3, 4\}$. Color $\{1, 2\}$ black. Since 1 has only 2 and 4 as neighbors and 2 is already black, 1 forces 4 to be black. Similarly, 4 then forces 3 to be black. Total blackening requires 2 initial points.
+       Let the vertices be $\{1, 2, 3, 4\}$ in order. Start with $\{1, 2\}$ black. Since 1 has only one white neighbor (4), 1 forces 4 black. Similarly, 2 (now having only one white neighbor 3) forces 3 black. Total blackening requires 2 initial points.
 
 3. **[Colin de Verdière] Why does $\mu(G) \le 3$ characterize planar graphs?**
    ??? success "Solution"
-       This was Colin de Verdière's deep discovery. He constructed spectral parameters such that topological properties like planarity were mapped to the maximum multiplicity of the second-smallest eigenvalue. For $K_5$ (non-planar), this multiplicity is 4.
+       This was Colin de Verdière's profound discovery. He constructed spectral parameters such that topological properties like planarity were mapped to the maximum multiplicity of the second-smallest eigenvalue. For $K_5$ (a non-planar minor), this multiplicity is 4.
 
-4. **[Hadamard] Prove that a $3 	imes 3$ Hadamard matrix does not exist.**
+4. **[Hadamard] Prove that a $3 \times 3$ Hadamard matrix does not exist.**
    ??? success "Solution"
-       For $n > 2$, a Hadamard matrix must have order $n \equiv 0 \pmod 4$. Since 3 is not a multiple of 4, no such matrix exists.
+       For $n > 2$, a Hadamard matrix must have order $n \equiv 0 \pmod 4$. Since 3 is not a multiple of 4, no such matrix exists. This reflects the impossibility of forming three mutually orthogonal vectors of $\pm 1$ in 3D.
 
-5. **[Permanent] Compute the permanent $\operatorname{perm}(J_2)$ of the $2 	imes 2$ all-ones matrix.**
+5. **[Permanent] Compute the permanent $\operatorname{perm}(J_2)$ of the $2 \times 2$ all-ones matrix.**
    ??? success "Solution"
        $\operatorname{perm}(J_2) = 1 \cdot 1 + 1 \cdot 1 = 2$.
 
 6. **[Tournaments] What is a Tournament Matrix? What is unique about its diagonal?**
    ??? success "Solution"
-       A tournament matrix is an orientation of a complete graph. $t_{ij}=1$ means $i$ beats $j$. Since no player can beat themselves, the diagonal is always zero.
+       A tournament matrix is the adjacency matrix of an orientation of a complete graph. It satisfies $T + T^T = J - I$. Since no player can beat themselves, the diagonal consists strictly of zeros.
 
 7. **[Score Sequences] Determine if the sequence $(1, 1, 1)$ is a score sequence for a tournament of order 3.**
    ??? success "Solution"
-       Check Landau's conditions: $1 \ge \binom{1}{2}=0$; $1+1=2 \ge \binom{2}{2}=1$; $1+1+1=3 = \binom{3}{2}=3$. All conditions are met. This is the score sequence of a 3-cycle tournament.
+       Check Landau's conditions: $1 \ge \binom{1}{2}=0$; $1+1=2 \ge \binom{2}{2}=1$; $1+1+1=3 = \binom{3}{2}=3$. All conditions are satisfied. This corresponds to a directed cycle $1 \to 2 \to 3 \to 1$.
 
 8. **[Wielandt] For an $n=3$ primitive matrix, what is the maximum possible exponent $\gamma(A)$?**
    ??? success "Solution"
-       According to the Wielandt bound: $(n-1)^2 + 1 = (3-1)^2 + 1 = 5$. This ensures $A^5$ is strictly positive.
+       According to the Wielandt bound: $(n-1)^2 + 1 = (3-1)^2 + 1 = 5$. This ensures that $A^5$ is guaranteed to be strictly positive regardless of the initial non-zero distribution.
 
-9. **[Sinkhorn] What is the purpose of the Sinkhorn-Knopp algorithm?**
+9. **[Sinkhorn] What is the algorithmic purpose of Sinkhorn-Knopp scaling?**
    ??? success "Solution"
-       It balances a nonnegative matrix into a doubly stochastic matrix by iteratively normalizing rows and columns. It is used in optimization, economics, and attention mechanisms in deep learning.
+       It balances a nonnegative matrix into a doubly stochastic matrix by alternatingly normalizing rows and columns. It is used in optimal transport, economics, and as a structural regularizer in neural network attention mechanisms.
 
-10. **[Quotient Matrices] How do equitable partitions relate to the spectrum of a graph?**
+10. **[Quotient Matrices] How do equitable partitions relate to graph spectra?**
     ??? success "Solution"
-        If a graph has an equitable partition, the spectrum of the associated quotient matrix is a subset of the spectrum of the graph's adjacency matrix. This allows for reducing high-dimensional spectral problems to smaller, more manageable matrices.
+        If a graph has an equitable partition, the spectrum of the associated quotient matrix is a subset of the spectrum of the graph's adjacency matrix. This allows for reducing the complexity of spectral analysis for graphs with high symmetry.
 
 ## Chapter Summary
 

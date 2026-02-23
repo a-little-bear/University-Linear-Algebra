@@ -1,79 +1,82 @@
-# Chapter 72B: Matrix Methods in Multivariate Statistical Inference
+# Chapter 72B: Multivariate Statistical Inference
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Singular Value Decomposition (Ch11) · Eigenvalues (Ch6) · Covariance (Ch72A) · Projections (Ch5)
+**Prerequisites**: Matrix Calculus (Ch47) · Wishart Distribution (Ch72A) · QR Decomposition (Ch10) · SVD (Ch11)
 
-**Chapter Outline**: Matrix Derivative Forms of Maximum Likelihood Estimation → Geometric Projection Perspective of Linear Regression → Generalized Least Squares (GLS) → Discriminant Analysis (LDA) → Canonical Correlation Analysis (CCA) → Factor Analysis → Foundations of Structural Equation Modeling (SEM)
+**Chapter Outline**: Parameter Estimation (MLE) → Hotelling’s $T^2$ Test → Multivariate Analysis of Variance (MANOVA) → Canonical Correlation Analysis (CCA) → Structural Equation Modeling (SEM) → High-dimensional Covariance Matrix Estimation → Shrinkage Estimators (Ledoit-Wolf)
 
-**Extension**: Multivariate statistical inference is the theoretical root of modern machine learning (from parametric regression to deep learning weight optimization).
+**Extension**: Multivariate statistical inference applies the spectral theory of random matrices to decision-making under uncertainty; CCA is the algebraic bridge for finding correlations between two sets of multidimensional variables.
 
 </div>
 
-Statistical inference aims to estimate true operator parameters from finite samples. Linear algebra solves the geometric uniqueness problem of least squares estimation through orthogonal projection theory and establishes optimal criteria for multidimensional data classification and correlation analysis using generalized eigenvalue theory.
+Multivariate statistical inference utilizes matrix algebra to perform hypothesis testing and parameter estimation on high-dimensional data. This field converts the comparison of group differences into the comparison of matrix spectra (eigenvalues) and the dependencies between variables into the geometry of subspace angles.
 
 ---
 
-## 72B.1 Orthogonal Projections and Estimation Theory
+## 72B.1 Core Estimators and Testing Theory
 
-!!! definition "Definition 72B.1 (Least Squares Operator)"
-    Given an observation vector $\mathbf{y} \in \mathbb{R}^n$ and a design matrix $X \in \mathbb{R}^{n 	imes p}$. The least squares estimate of linear regression coefficients is $\hat{\beta} = (X^T X)^{-1} X^T \mathbf{y}$. Geometrically, $\hat{\mathbf{y}} = X\hat{\beta}$ is the orthogonal projection of $\mathbf{y}$ onto the column space of $X$.
+!!! definition "Definition 72B.1 (MLE of Mean and Covariance)"
+    For $\mathcal{N}_p(\mu, \Sigma)$, given $n$ samples, the Maximum Likelihood Estimates are:
+    $$\hat{\mu} = \bar{x}, \quad \hat{\Sigma} = \frac{1}{n} \sum (x_i - \bar{x})(x_i - \bar{x})^T$$
+    These are the orthogonal projections of the sample cloud onto the parameter space.
 
-!!! theorem "Theorem 72B.1 (Generalized Eigenvalue Problem in Discriminant Analysis)"
-    In Fisher Linear Discriminant Analysis (LDA), the optimal projection direction $\mathbf{w}$ is determined by the following generalized eigenvalue problem:
-    $$S_b \mathbf{w} = \lambda S_w \mathbf{w}$$
-    where $S_b$ is the between-class scatter matrix and $S_w$ is the within-class scatter matrix. The eigenvector corresponding to the largest eigenvalue maximizes the ratio of between-class separation to within-class dispersion (Rayleigh quotient).
+!!! theorem "Theorem 72B.3 (Wilks' Lambda and MANOVA)"
+    In MANOVA, the test statistic for comparing group means is Wilks' Lambda:
+    $$\Lambda = \frac{\det(E)}{\det(E + H)}$$
+    where $E$ is the error (within-group) sum of squares matrix and $H$ is the hypothesis (between-group) sum of squares matrix. This is a function of the eigenvalues of $E^{-1}H$.
 
 ---
 
 ## Exercises
 
-1. **[Normal Equations] From the geometric condition that the residual vector $\mathbf{e} = \mathbf{y} - X\beta$ is orthogonal to the column space of $X$, derive the normal equations $X^T X \beta = X^T \mathbf{y}$ for the least squares method.**
+1. **[Group Comparison] Why does MANOVA use matrix determinants instead of just summing variances?**
    ??? success "Solution"
-       Orthogonality requires $X^T \mathbf{e} = 0$. Substituting $\mathbf{e}$ yields $X^T (\mathbf{y} - X\beta) = 0 \implies X^T \mathbf{y} - X^T X \beta = 0$. Rearranging gives the normal equations.
+       The determinant $\det(E)$ represents the "generalized variance" or volume of the sample cluster. MANOVA accounts for the correlation between variables; summing variances would ignore the covariance structure and lead to incorrect inference when variables are non-orthogonal.
 
-2. **[Projection Matrix] Prove that the projection matrix $H = X(X^T X)^{-1} X^T$ is symmetric and idempotent ($H^2 = H$), and state why its eigenvalues can only be 0 or 1.**
+2. **[Hotelling's T-squared] Show that Hotelling’s $T^2$ is the multivariate generalization of the squared t-statistic.**
    ??? success "Solution"
-       $H^T = (X(X^T X)^{-1} X^T)^T = X((X^T X)^{-1})^T X^T = H$. $H^2 = X(X^T X)^{-1} X^T X(X^T X)^{-1} X^T = X I (X^T X)^{-1} X^T = H$. The eigenvalues $\lambda$ of an idempotent operator satisfy $\lambda^2 = \lambda$, hence $\lambda \in \{0, 1\}$.
+       $T^2 = n(\bar{x}-\mu)^T S^{-1}(\bar{x}-\mu)$. In the scalar case ($p=1$), this reduces to $n(\bar{x}-\mu)^2 / s^2 = t^2$. The use of the matrix inverse $S^{-1}$ (Mahalanobis distance) standardizes the distance across all correlated dimensions.
 
-3. **[Calculation] Given a design matrix $X = \begin{pmatrix} 1 & 1 \ 1 & 2 \end{pmatrix}$ and observation $\mathbf{y} = \begin{pmatrix} 2 \ 3 \end{pmatrix}$. Solve for $\hat{\beta}$ and verify if the predicted value $\hat{\mathbf{y}}$ lies in the column space of $X$.**
+3. **[CCA Geometry] In Canonical Correlation Analysis (CCA), how do the canonical correlations relate to the angles between two subspaces?**
    ??? success "Solution"
-       $X^T X = \begin{pmatrix} 2 & 3 \ 3 & 5 \end{pmatrix}$, its inverse is $\begin{pmatrix} 5 & -3 \ -3 & 2 \end{pmatrix}$. $X^T \mathbf{y} = \begin{pmatrix} 5 \ 8 \end{pmatrix}$.
-       $\hat{\beta} = \begin{pmatrix} 5 & -3 \ -3 & 2 \end{pmatrix} \begin{pmatrix} 5 \ 8 \end{pmatrix} = \begin{pmatrix} 1 \ 1 \end{pmatrix}$. $\hat{\mathbf{y}} = X \hat{\beta} = [2, 3]^T = \mathbf{y}$ (here, since $X$ is full rank and $n=p$, the projection is the identity operator).
+       The canonical correlations are the cosines of the **principal angles** between the subspace spanned by variables $X$ and the subspace spanned by variables $Y$. Maximizing the correlation is equivalent to finding the vectors in each subspace that are closest in an angular sense.
 
-4. **[CCA Analysis] Describe how Canonical Correlation Analysis (CCA) transforms the problem of maximizing the correlation between two sets of random variables into an SVD problem of the product of two covariance matrix inverse roots.**
+4. **[Calculation] Given $E = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ and $H = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Calculate Wilks' $\Lambda$.**
    ??? success "Solution"
-       The goal is to maximize $\operatorname{corr}(\mathbf{a}^T \mathbf{X}, \mathbf{b}^T \mathbf{Y})$. This is algebraically equivalent to analyzing the singular values of the operator $\Sigma_{XX}^{-1/2} \Sigma_{XY} \Sigma_{YY}^{-1/2}$. The singular vector pairs are the linear combination coefficients that achieve maximum correlation.
+       $E+H = \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}$.
+       $\det(E) = 4-1 = 3$; $\det(E+H) = 6-1 = 5$.
+       $\Lambda = 3/5 = 0.6$. A smaller $\Lambda$ would indicate more evidence against the null hypothesis.
 
-5. **[Factor Analysis] Analyze the algebraic division of labor between the low-rank matrix $\Lambda \Lambda^T$ and the residual diagonal matrix $\Psi$ in capturing information in the factor analysis model $\Sigma = \Lambda \Lambda^T + \Psi$.**
+5. **[Discriminant Analysis] Relate Fisher’s Linear Discriminant to the generalized eigenvalue problem.**
    ??? success "Solution"
-       $\Lambda \Lambda^T$ captures the shared variance among variables (common factors) via a rank-$k$ ($k \ll p$) approximation, corresponding to the correlation structure; $\Psi$ characterizes the unique variance (noise) independent to each variable. This is a stochastic form of structured low-rank decomposition.
+       Fisher seeks a projection vector $w$ that maximizes $J(w) = \frac{w^T H w}{w^T E w}$. Differentiating leads to the generalized eigenvalue equation $Hw = \lambda Ew$. The optimal projection is the eigenvector corresponding to the largest eigenvalue of $E^{-1}H$.
 
-6. **[Gauss-Markov] Explain the relationship between the "minimum variance" property of the least-squares estimator in the Gauss-Markov theorem and the eigenvalues of the $(X^T X)$ inverse matrix.**
+6. **[Shrinkage Estimation] Why is the MLE estimator $\hat{\Sigma}$ poorly conditioned in high dimensions ($p \approx n$)?**
    ??? success "Solution"
-       The covariance of the estimator $\hat{\beta}$ is $\sigma^2 (X^T X)^{-1}$. Minimum variance means that in specific directions, the estimation uncertainty is bounded by the spectral distribution of $(X^T X)$. Orthogonality of the design matrix ($X^T X = I$) achieves optimal balance in variance distribution.
+       As $p/n$ increases, the sample eigenvalues become more dispersed (Marchenko-Pastur law). The smallest eigenvalues are biased towards zero, making $S^{-1}$ unstable. Shrinkage estimators like Ledoit-Wolf use a convex combination $S(\lambda) = (1-\lambda)S + \lambda I$ to pull eigenvalues away from the boundaries.
 
-7. **[Ridge Regression] Prove that the ridge regression estimator $\hat{\beta}_{ridge} = (X^T X + \lambda I)^{-1} X^T \mathbf{y}$ is a singular value shrinkage of the original least squares solution.**
+7. **[SVD and Regression] Describe the role of SVD in Principal Component Regression (PCR).**
    ??? success "Solution"
-       Using SVD expansion $X = U \Sigma V^T$. The original solution contains $1/\sigma_i$, which ridge regression replaces with $\sigma_i / (\sigma_i^2 + \lambda)$. As $\sigma_i 	o 0$, this term approaches 0 instead of infinity, thus achieving regularization suppression of numerical instability.
+       PCR first performs SVD on the design matrix $X = U\Sigma V^T$, then regresses the response $y$ on the first $k$ columns of $U$. This eliminates collinearity by using the orthogonal principal components as predictors.
 
-8. **[Generalized Least Squares] Derive the algebraic form of the Generalized Least Squares (GLS) solution $\hat{\beta} = (X^T V^{-1} X)^{-1} X^T V^{-1} \mathbf{y}$ when the error covariance matrix is $V$.**
+8. **[Invariance] Is Hotelling’s $T^2$ statistic invariant under non-singular linear transformations $x \mapsto Ax + b$?**
    ??? success "Solution"
-       Pre-process the original observations (Whitening) via a linear transformation $L^{-1}$ (where $LL^T = V$), turning errors into white noise. Apply standard least squares in the new space and transform back to the original space to obtain the GLS expression.
+       Yes. Substituting the transformed mean and covariance into the $T^2$ formula results in the cancellation of the matrices $A$ and $A^{-1}$, proving that the test result is independent of the choice of coordinate system.
 
-9. **[LDA Eigenvectors] Explain why in LDA, we typically only focus on the first $C-1$ characteristic directions (where $C$ is the number of classes).**
+9. **[Partial Correlation] Explain the relationship between the precision matrix $\Omega = \Sigma^{-1}$ and partial correlations.**
    ??? success "Solution"
-       The between-class scatter matrix $S_b$ is defined as the weighted sum of outer products of $C$ mean vectors. Since these $C$ vectors are constrained by the total mean, their linearly independent rank is at most $C-1$. Thus, $S_b$ has only $C-1$ non-zero eigenvalues.
+       The $(i,j)$ entry of the inverse covariance matrix, after normalization, is equal to the negative of the partial correlation between variables $i$ and $j$ given all other variables. Zero entries in $\Omega$ indicate conditional independence (Gaussian graphical models).
 
-10. **[Statistical Coherence] Analyze the explosion behavior of $(X^T X)^{-1}$ elements when strong linear correlation (multicollinearity) exists among the column vectors of the design matrix $X$.**
+10. **[Spectral Hypothesis] How does the distribution of the largest eigenvalue $\lambda_{\max}(E^{-1}H)$ relate to the Roy’s Largest Root test?**
     ??? success "Solution"
-        Multicollinearity causes $X^T X$ to approach singularity, with its smallest eigenvalue $\lambda_{min} 	o 0$. The inverse matrix terms contain $1/\lambda_{min}$, leading to maximized estimation variance. Algebraically, this manifests as the estimator parameters exhibiting extreme sensitivity to observational perturbations.
+        Roy’s test uses only the largest eigenvalue as the test statistic. It is the most powerful test when the group differences are concentrated along a single dimension (rank-1 alternative), reflecting the sensitivity of the spectral radius to structured perturbations.
 
 ## Chapter Summary
 
-This chapter discusses the algebraic implementations of core algorithms in multivariate statistical inference:
+This chapter applies matrix theory to the logic of statistical decision-making:
 
-1. **Geometric Estimation**: Established the optimal criteria and computational paradigms for linear regression through orthogonal projections.
-2. **Dimension Compression**: Demonstrated the application of SVD and eigenvalue decomposition in extracting core data structures (Factor Analysis, CCA).
-3. **Classification and Discrimination**: Utilized generalized eigenvalue theory to establish optimal hyperplane criteria for linear space partitioning.
-4. **Regularization Control**: Explored stability compensation mechanisms for matrix inversion, establishing robust links from theoretical estimation to numerical computation.
+1. **Spectral Comparison**: Established group difference testing as the analysis of relative matrix spectra ($E^{-1}H$).
+2. **Subspace Alignment**: Formulated CCA as the problem of minimizing angles between variable subspaces via SVD.
+3. **Regularized Estimation**: Introduced shrinkage methods to solve the numerical instability of sample matrices in high-dimensional settings.
+4. **Distance Geometry**: Utilized Mahalanobis metrics and quadratic forms to define robust multivariate hypothesis tests.

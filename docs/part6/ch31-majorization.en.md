@@ -18,7 +18,7 @@ Majorization provides a precise mathematical way to say that one vector is "more
 
 !!! definition "Definition 31.1 (Majorization)"
     Let $x, y \in \mathbb{R}^n$. We say $x$ is **majorized** by $y$ (denoted $x \prec y$) if:
-    $$\sum_{i=1}^k x_i^\downarrow \le \sum_{i=1}^k y_i^\downarrow, \quad k=1, \dots, n-1, \quad 	ext{and } \sum_{i=1}^n x_i = \sum_{i=1}^n y_i$$
+    $$\sum_{i=1}^k x_i^\downarrow \le \sum_{i=1}^k y_i^\downarrow, \quad k=1, \dots, n-1, \quad \text{and } \sum_{i=1}^n x_i = \sum_{i=1}^n y_i$$
     where $x_i^\downarrow$ are the components of $x$ sorted in non-increasing order.
 
 !!! theorem "Theorem 31.1 (Hardy-Littlewood-Pólya)"
@@ -66,7 +66,7 @@ Majorization provides a precise mathematical way to say that one vector is "more
 
 10. **[Quantum] Explain the significance of majorization in quantum state transformation.**
     ??? success "Solution"
-        A quantum state $ho$ can be transformed into $\sigma$ using local operations and classical communication (LOCC) if and only if the vector of eigenvalues of $ho$ is majorized by that of $\sigma$ ($spec(ho) \prec spec(\sigma)$).
+        A quantum state $\rho$ can be transformed into $\sigma$ using local operations and classical communication (LOCC) if and only if the vector of eigenvalues of $\rho$ is majorized by that of $\sigma$ ($spec(\rho) \prec spec(\sigma)$).
 
 ## Chapter Summary
 

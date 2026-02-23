@@ -1,76 +1,78 @@
-# Chapter 72A: Matrix Probability Distributions
+# Chapter 72A: Matrix-valued Distributions
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Inner Product (Ch8) · Eigenvalues (Ch6) · Matrix Exponential (Ch13) · Random Matrices (Ch23)
+**Prerequisites**: Matrix Calculus (Ch47) · Kronecker Product (Ch19) · Random Matrices (Ch23) · Probability Theory
 
-**Chapter Outline**: Random Vectors and Covariance Matrices → Multivariate Normal Distribution (Application of Positive Definite Matrices) → Wishart Distribution (Foundation of Random Matrices) → Matrix Normal Distribution → Role of Kronecker Product in Probability → Matrix Form of Characteristic Functions
+**Chapter Outline**: Multivariate Normal Distribution → Matrix Normal Distribution → Wishart Distribution (Sample Covariance) → Matrix Beta and Gamma Distributions → Jacobian of Matrix Transformations → Matrix Variate T-distribution → Characteristic Functions of Matrix Distributions
 
-**Extension**: Matrix distribution theory is the mathematical floor for financial portfolio analysis, wireless communication channel modeling, and large-scale Gaussian process regression.
+**Extension**: The Wishart distribution is the algebraic foundation of Multivariate Statistical Analysis (MANOVA, PCA); matrix distributions characterize the uncertainty of high-dimensional estimators.
 
 </div>
 
-Matrix probability theory studies the second-moment structures between multidimensional random variables and their distribution characteristics in matrix spaces. By expressing probability density functions as functionals of matrix invariants (trace, determinant, quadratic forms), linear algebra provides rigorous parametric means for describing high-dimensional stochastic associations.
+Matrix-valued distributions extend random variables from scalars and vectors to matrices. This field utilizes the Kronecker product to describe the internal correlation structure of matrices, mapping the statistical properties of multi-dimensional data to the properties of random linear operators.
 
 ---
 
-## 72A.1 Covariance Structure and Multivariate Normal Distribution
+## 72A.1 Matrix Normal and Wishart Distributions
 
-!!! definition "Definition 72A.1 (Covariance Operator)"
-    Let $\mathbf{X} \in \mathbb{R}^p$ be a random vector. Its covariance matrix $\Sigma = \mathbb{E}[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]$ is a symmetric semi-positive definite matrix. $\Sigma$ encodes the linear correlations between dimensions and the distribution of variance.
+!!! definition "Definition 72A.1 (Matrix Normal Distribution)"
+    A random matrix $X \in \mathbb{R}^{n \times p}$ follows a **Matrix Normal Distribution** $\mathcal{MN}_{n,p}(M, U, V)$ if:
+    $$\operatorname{vec}(X) \sim \mathcal{N}_{np}(\operatorname{vec}(M), V \otimes U)$$
+    where $U$ captures correlations between rows and $V$ captures correlations between columns.
 
-!!! theorem "Theorem 72A.1 (Wishart Random Matrix)"
-    Let $\mathbf{X}_1, \dots, \mathbf{X}_n$ be independent random vectors following $N_p(0, \Sigma)$. Then the scatter matrix $S = \sum \mathbf{X}_i \mathbf{X}_i^T$ follows a Wishart distribution with parameters $(n, \Sigma)$. It is the algebraic foundation for sample covariance matrix analysis.
+!!! theorem "Theorem 72A.3 (Wishart Distribution and Sample Covariance)"
+    Let $X_1, \dots, X_n$ be i.i.d. samples from $\mathcal{N}_p(0, \Sigma)$. Then the matrix $S = \sum_{i=1}^n X_i X_i^T$ follows a **Wishart Distribution** $W_p(n, \Sigma)$.
 
 ---
 
 ## Exercises
 
-1. **[Positive Semi-definiteness] Prove: For any random vector, its covariance matrix $\Sigma$ must be positive semi-definite.**
+1. **[Matrix Normal] Explain why the covariance of a Matrix Normal distribution is represented by a Kronecker product $V \otimes U$.**
    ??? success "Solution"
-       For any constant vector $\mathbf{a} \in \mathbb{R}^p$, the variance of the scalar random variable $\mathbf{a}^T \mathbf{X}$ is $\operatorname{Var}(\mathbf{a}^T \mathbf{X}) = \mathbf{a}^T \Sigma \mathbf{a}$. Since the variance of a real random variable must be non-negative, this quadratic form is non-negative for all $\mathbf{a}$, thus $\Sigma \succeq 0$.
+       The Kronecker product $V \otimes U$ encodes a separable correlation structure: $U$ represents the covariance between the $n$ rows (e.g., temporal correlation), and $V$ represents the covariance between the $p$ columns (e.g., spatial or variable correlation). This drastically reduces the number of parameters compared to a general $np \times np$ covariance matrix.
 
-2. **[Linear Transformation] Let $\mathbf{Y} = A \mathbf{X} + \mathbf{b}$, where $\mathbf{X} \sim (\mu, \Sigma)$. Derive the expression for the covariance matrix of $\mathbf{Y}$.**
+2. **[Wishart] Prove: If $S \sim W_p(n, \Sigma)$, then its trace $\operatorname{tr}(S)$ is a sum of squared independent normal variables when $\Sigma=I$.**
    ??? success "Solution"
-       $\Sigma_Y = \mathbb{E}[A(\mathbf{X}-\mu)(A(\mathbf{X}-\mu))^T] = A \mathbb{E}[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T] A^T = A \Sigma A^T$. This demonstrates the evolution rules of covariance under affine transformations.
+       $\operatorname{tr}(S) = \operatorname{tr}(\sum X_i X_i^T) = \sum X_i^T X_i = \sum_{i,j} X_{ij}^2$. If $\Sigma=I$, the $X_{ij}$ are i.i.d. standard normals, so $\operatorname{tr}(S)$ follows a Chi-squared distribution with $np$ degrees of freedom.
 
-3. **[Independence Determination] Prove: In a multivariate normal distribution, the components are independent if and only if the covariance matrix $\Sigma$ is diagonal.**
+3. **[Jacobian] Calculate the Jacobian of the matrix transformation $Y = AXB$.**
    ??? success "Solution"
-       The density function of a multivariate normal distribution contains the term $\exp(-\frac{1}{2}(\mathbf{x}-\mu)^T \Sigma^{-1} (\mathbf{x}-\mu))$. If $\Sigma$ is diagonal, the quadratic form decomposes into a sum of squares of individual components, and the density function degenerates into a product of univariate normal densities, satisfying the definition of independence.
+       Using the differential $dY = A(dX)B \implies \operatorname{vec}(dY) = (B^T \otimes A) \operatorname{vec}(dX)$. The Jacobian is the determinant of the representation matrix: $|B^T \otimes A| = (\det B)^n (\det A)^p$.
 
-4. **[Mahalanobis Distance] Calculate the inverse of the matrix $A = \begin{pmatrix} 1 & 0.5 \ 0.5 & 1 \end{pmatrix}$ and explain its metric role in the Mahalanobis distance $\sqrt{\mathbf{x}^T \Sigma^{-1} \mathbf{x}}$.**
+4. **[Determinant Expectation] Find the expected value of $\det(S)$ for $S \sim W_p(n, I)$.**
    ??? success "Solution"
-       $\Sigma^{-1} = \frac{4}{3} \begin{pmatrix} 1 & -0.5 \ -0.5 & 1 \end{pmatrix}$. The inverse matrix acts as a weighting adjuster: in directions with strong correlation (corresponding to large eigenvalues of $\Sigma$), the inverse matrix shrinks the Euclidean distance in that direction, achieving normalization of data scale and correlation.
+       The determinant of a Wishart matrix relates to the product of independent Chi-squared variables. $\mathbb{E}[\det S] = \prod_{i=0}^{p-1} (n-i)$. This reflects the volume evolution of the sample cluster in $p$-dimensional space.
 
-5. **[Wishart Expectation] Prove that the expectation of the sample scatter matrix $S$ is $\mathbb{E}[S] = n \Sigma$.**
+5. **[Inversion] Define the Inverse Wishart distribution and its role in Bayesian statistics.**
    ??? success "Solution"
-       $\mathbb{E}[\sum \mathbf{X}_i \mathbf{X}_i^T] = \sum \mathbb{E}[\mathbf{X}_i \mathbf{X}_i^T]$. Since $\mathbb{E}[\mathbf{X}_i]=0$, we have $\mathbb{E}[\mathbf{X}_i \mathbf{X}_i^T] = \Sigma$. Summing $n$ times yields $n \Sigma$.
+       If $S \sim W_p(n, \Sigma)$, then $S^{-1}$ follows an Inverse Wishart distribution. It is the conjugate prior for the covariance matrix of a multivariate normal distribution, enabling efficient posterior updates in Bayesian inference.
 
-6. **[Precision Matrix] Define the precision matrix $\Omega = \Sigma^{-1}$ and explain its components $\omega_{ij}$'s relationship with partial correlation coefficients.**
+6. **[Beta Distribution] Describe the Matrix Beta distribution in terms of two independent Wishart matrices.**
    ??? success "Solution"
-       $\Omega$ reflects conditional correlations. In a Gaussian graphical model, $\omega_{ij} = 0$ implies that variables $i$ and $j$ are conditionally independent given all other variables. Its standardized components are the partial correlation coefficients.
+       Let $S_1 \sim W_p(n_1, \Sigma)$ and $S_2 \sim W_p(n_2, \Sigma)$. The matrix $U = (S_1+S_2)^{-1/2} S_1 (S_1+S_2)^{-1/2}$ follows a Matrix Beta distribution. It generalizes the ratio of Chi-squared variables to the matrix domain.
 
-7. **[Eigenstructure] Analyze the equivalence between the eigenvalue decomposition of a covariance matrix and the direction of maximum variance in Principal Component Analysis (PCA).**
+7. **[Bartlett Decomposition] Explain the Bartlett decomposition of a Wishart matrix.**
    ??? success "Solution"
-       The eigenvector corresponding to the largest eigenvalue is the solution to $\max_{\mathbf{v}^T \mathbf{v}=1} \mathbf{v}^T \Sigma \mathbf{v}$. Geometrically, this corresponds to the principal axis direction where the random point cloud is most dispersed.
+       A Wishart matrix $S \sim W_p(n, I)$ can be factored as $S = T T^T$, where $T$ is a lower triangular matrix with $T_{ii}^2 \sim \chi_{n-i+1}^2$ and $T_{ij} \sim \mathcal{N}(0, 1)$ for $i > j$. This provides an efficient way to simulate Wishart samples.
 
-8. **[Information Entropy] Prove: The differential entropy $H$ of a multivariate normal distribution is linearly related to the logarithm of $\det(\Sigma)$.**
+8. **[Characteristic Function] Write the form of the characteristic function for the Matrix Normal distribution.**
    ??? success "Solution"
-       $H(\mathbf{X}) = \frac{p}{2}(1 + \ln(2\pi)) + \frac{1}{2} \ln \det(\Sigma)$. The determinant quantifies the volume occupied by the random variable in space, thereby reflecting the information uncertainty of the system.
+       $\phi_X(Z) = \exp(i \operatorname{tr}(Z^T M) - \frac{1}{2} \operatorname{tr}(Z^T U Z V))$. The quadratic form in the trace captures the aggregated variance structure across all matrix entries.
 
-9. **[Matrix Normality] Explain the parameter compression significance of the Kronecker product $V \otimes U$ for the covariance structure in the matrix normal distribution $\mathcal{MN}_{n 	imes p}(M, U, V)$.**
+9. **[Singular Wishart] When does a Wishart matrix become singular?**
    ??? success "Solution"
-       It assumes that the row-wise correlation $U$ and column-wise correlation $V$ are decoupled. This simplifies a full covariance matrix with $n^2 p^2$ elements to only $(n^2+p^2)$ parameters, greatly mitigating the curse of dimensionality in estimation.
+       A Wishart matrix $W_p(n, \Sigma)$ is singular with probability 1 if the number of samples $n$ is less than the dimension $p$. In this case, the sample covariance matrix is rank-deficient and does not possess a density with respect to the Lebesgue measure on the PSD cone.
 
-10. **[Characteristic Function] Write the matrix form of the characteristic function $\phi(\mathbf{t}) = \mathbb{E}[e^{j \mathbf{t}^T \mathbf{X}}]$ for a multivariate normal distribution and analyze the quadratic form in its exponent.**
+10. **[Entropy] How does the entropy of a Matrix Normal distribution relate to the determinants of $U$ and $V$?**
     ??? success "Solution"
-        $\phi(\mathbf{t}) = \exp(j \mathbf{t}^T \mu - \frac{1}{2} \mathbf{t}^T \Sigma \mathbf{t})$. The quadratic form $\mathbf{t}^T \Sigma \mathbf{t}$ in the exponent determines the convergence properties of the probability density in the frequency domain and is the mapping of the covariance structure under the Fourier transform.
+        The entropy is proportional to $\log \det(V \otimes U) = n \log \det V + p \log \det U$. This shows that the information content (uncertainty) of the matrix is the sum of the uncertainties in its row and column structures.
 
 ## Chapter Summary
 
-This chapter discusses matrix parameterization modeling in stochastic analysis:
+This chapter explores the statistical distribution theory of matrix variables:
 
-1. **Second-Moment Representation**: Established symmetric semi-positive definite matrices as a universal tool for describing spatial associations of random vectors.
-2. **Generative Distributions**: Established the Wishart distribution as the matrix algebraic standard for sample statistic analysis.
-3. **Structured Covariance**: Revealed conditional dependence and independence laws among high-dimensional data using Kronecker products and inverse matrices (precision matrices).
-4. **Invariant Metrics**: Quantified entropy increase and energy distribution characteristics of stochastic processes through determinants and traces.
+1. **Structured Uncertainty**: Defined Matrix Normal distributions using Kronecker products to capture row and column correlations.
+2. **Covariance Dynamics**: Established the Wishart distribution as the fundamental model for sample covariance matrices.
+3. **Algebraic Geometry of Randomness**: Utilized matrix Jacobians to derive the densities of transformed random matrices.
+4. **Bayesian Conjugacy**: Linked Inverse Wishart and Matrix Beta distributions to the estimation of high-dimensional uncertainty.

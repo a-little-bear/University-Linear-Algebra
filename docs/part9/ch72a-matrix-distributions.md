@@ -1,76 +1,78 @@
-# 第 72A 章 矩阵概率分布
+# 第 72A 章 矩阵值分布
 
 <div class="context-flow" markdown>
 
-**前置**：内积(Ch8) · 特征值(Ch6) · 指数矩阵(Ch13) · 随机矩阵(Ch23)
+**前置**：矩阵微积分(Ch47) · Kronecker 积(Ch19) · 随机矩阵(Ch23) · 概率论基础
 
-**本章脉络**：随机向量与协方差矩阵 → 多元正态分布(正定矩阵应用) → Wishart 分布(随机矩阵基础) → 矩阵正态分布 → Kronecker 积在概率中的作用 → 特征函数的矩阵形式
+**本章脉络**：多元正态分布回顾 → 矩阵正态分布 → Wishart 分布（样本协方差阵） → 矩阵 Beta 与 Gamma 分布 → 矩阵变换的 Jacobian → 矩阵 T 分布 → 矩阵分布的特征函数
 
-**延伸**：矩阵分布理论是金融组合分析、无线通信信道建模以及大规模高斯过程回归的数学地基
+**延伸**：Wishart 分布是多元统计分析（MANOVA, PCA）的代数基石；矩阵分布刻画了高维估计量的不确定性
 
 </div>
 
-矩阵概率理论研究多维随机变量之间的二阶矩结构及其在矩阵空间上的分布特性。通过将概率密度函数表示为关于矩阵不变量（迹、行列式、二次型）的泛函，线性代数为描述高维随机关联提供了严谨的参数化手段。
+矩阵值分布将随机变量从标量和向量扩展到了矩阵。该领域利用 Kronecker 积描述矩阵内部的相关性结构，将多维数据的统计特性映射为随机线性算子的性质。
 
 ---
 
-## 72A.1 协方差结构与多元正态分布
+## 72A.1 矩阵正态与 Wishart 分布
 
-!!! definition "定义 72A.1 (协方差算子)"
-    设随机向量 $\mathbf{X} \in \mathbb{R}^p$。其协方差矩阵 $\Sigma = \mathbb{E}[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T]$ 是对称半正定阵。$\Sigma$ 编码了各维度间的线性相关性及方差分布。
+!!! definition "定义 72A.1 (矩阵正态分布)"
+    若随机矩阵 $X \in \mathbb{R}^{n \times p}$ 满足其向量化形式遵循：
+    $$\operatorname{vec}(X) \sim \mathcal{N}_{np}(\operatorname{vec}(M), V \otimes U)$$
+    其中 $U$ 刻画行间相关性，$V$ 刻画列间相关性，则称 $X$ 服从**矩阵正态分布** $\mathcal{MN}_{n,p}(M, U, V)$。
 
-!!! theorem "定理 72A.1 (Wishart 随机矩阵)"
-    设 $\mathbf{X}_1, \dots, \mathbf{X}_n$ 是独立服从 $N_p(0, \Sigma)$ 的随机向量。则散度矩阵 $S = \sum \mathbf{X}_i \mathbf{X}_i^T$ 服从参数为 $(n, \Sigma)$ 的 Wishart 分布。它是样本协方差矩阵的代数基础。
+!!! theorem "定理 72A.3 (Wishart 分布与样本协方差)"
+    设 $X_1, \dots, X_n$ 为来自 $\mathcal{N}_p(0, \Sigma)$ 的独立同分布样本。则矩阵 $S = \sum_{i=1}^n X_i X_i^T$ 服从参数为 $(n, \Sigma)$ 的 **Wishart 分布** $W_p(n, \Sigma)$。
 
 ---
 
 ## 练习题
 
-1. **[半正定性] 证明：对任意随机向量，其协方差矩阵 $\Sigma$ 必然是半正定的。**
+1. **[矩阵正态] 解释为什么矩阵正态分布的协方差用 Kronecker 积 $V \otimes U$ 表示。**
    ??? success "参考答案"
-       对于任意常向量 $\mathbf{a} \in \mathbb{R}^p$，标量随机变量 $\mathbf{a}^T \mathbf{X}$ 的方差为 $\operatorname{Var}(\mathbf{a}^T \mathbf{X}) = \mathbf{a}^T \Sigma \mathbf{a}$。由于实随机变量的方差物理上非负，该二次型对所有 $\mathbf{a}$ 均非负，故 $\Sigma \succeq 0$。
+       Kronecker 积 $V \otimes U$ 编码了一种可分离的相关结构：$U$ 代表 $n$ 个观测（行）之间的相关性（如时间相关性），而 $V$ 代表 $p$ 个变量（列）之间的相关性。相比一般的 $np \times np$ 协方差矩阵，这极大减少了参数量。
 
-2. **[线性变换] 设 $\mathbf{Y} = A \mathbf{X} + \mathbf{b}$，其中 $\mathbf{X} \sim (\mu, \Sigma)$。推导 $\mathbf{Y}$ 的协方差矩阵表达式。**
+2. **[Wishart] 证明：若 $S \sim W_p(n, \Sigma)$，当 $\Sigma=I$ 时，其迹 $\operatorname{tr}(S)$ 是独立正态变量的平方和。**
    ??? success "参考答案"
-       $\Sigma_Y = \mathbb{E}[A(\mathbf{X}-\mu)(A(\mathbf{X}-\mu))^T] = A \mathbb{E}[(\mathbf{X}-\mu)(\mathbf{X}-\mu)^T] A^T = A \Sigma A^T$。这展示了协方差在仿射变换下的演化规则。
+       $\operatorname{tr}(S) = \operatorname{tr}(\sum X_i X_i^T) = \sum X_i^T X_i = \sum_{i,j} X_{ij}^2$。若 $\Sigma=I$，则 $X_{ij}$ 为独立标准正态变量，故 $\operatorname{tr}(S)$ 服从自由度为 $np$ 的卡方分布。
 
-3. **[独立性判定] 证明：在多元正态分布中，各分量相互独立的充要条件是协方差矩阵 $\Sigma$ 为对角阵。**
+3. **[Jacobian] 计算矩阵线性变换 $Y = AXB$ 的 Jacobian。**
    ??? success "参考答案"
-       多元正态分布的密度函数包含项 $\exp(-\frac{1}{2}(\mathbf{x}-\mu)^T \Sigma^{-1} (\mathbf{x}-\mu))$。若 $\Sigma$ 为对角阵，则指数项可分解为各分量的平方和，密度函数退化为一元正态密度之积，满足独立性定义。
+       利用微分 $dY = A(dX)B \implies \operatorname{vec}(dY) = (B^T \otimes A) \operatorname{vec}(dX)$。Jacobian 即为表示矩阵的行列式：$|B^T \otimes A| = (\det B)^n (\det A)^p$。
 
-4. **[Mahalanobis距离] 计算矩阵 $A = \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$ 的逆，并解释其在 Mahalanobis 距离 $\sqrt{\mathbf{x}^T \Sigma^{-1} \mathbf{x}}$ 中的测度作用。**
+4. **[行列式期望] 求 $S \sim W_p(n, I)$ 时，$\det(S)$ 的期望值。**
    ??? success "参考答案"
-       $\Sigma^{-1} = \frac{4}{3} \begin{pmatrix} 1 & -0.5 \\ -0.5 & 1 \end{pmatrix}$。逆矩阵起到权重调节作用：在相关性强的方向上（对应 $\Sigma$ 的大特征值），逆矩阵会缩减该方向的欧氏距离，实现对数据尺度与相关性的归一化。
+       Wishart 矩阵的行列式与独立卡方变量的乘积有关。$\mathbb{E}[\det S] = \prod_{i=0}^{p-1} (n-i)$。这反映了样本点集在 $p$ 维空间中构成的平行多面体体积的演变。
 
-5. **[Wishart期望] 证明样本散度矩阵 $S$ 的期望为 $\mathbb{E}[S] = n \Sigma$。**
+5. **[逆Wishart] 定义逆 Wishart 分布及其在贝叶斯统计中的作用。**
    ??? success "参考答案"
-       $\mathbb{E}[\sum \mathbf{X}_i \mathbf{X}_i^T] = \sum \mathbb{E}[\mathbf{X}_i \mathbf{X}_i^T]$。由于 $\mathbb{E}[\mathbf{X}_i]=0$，有 $\mathbb{E}[\mathbf{X}_i \mathbf{X}_i^T] = \Sigma$。累加 $n$ 次得 $n \Sigma$。
+       若 $S \sim W_p(n, \Sigma)$，则 $S^{-1}$ 服从逆 Wishart 分布。它是多元正态分布协方差矩阵的共轭先验，允许在贝叶斯推断中进行高效的后验参数更新。
 
-6. **[精度矩阵] 定义精度矩阵 $\Omega = \Sigma^{-1}$，并说明其分量 $\omega_{ij}$ 与偏相关系数的关系。**
+6. **[Beta分布] 描述如何通过两个独立的 Wishart 矩阵构造矩阵 Beta 分布。**
    ??? success "参考答案"
-       $\Omega$ 反映了条件相关性。在高斯图形模型中，$\omega_{ij} = 0$ 意味着在给定其余变量的情况下，变量 $i$ 与 $j$ 条件独立。其分量标准化后即为偏相关系数。
+       设 $S_1 \sim W_p(n_1, \Sigma)$ 且 $S_2 \sim W_p(n_2, \Sigma)$。则矩阵 $U = (S_1+S_2)^{-1/2} S_1 (S_1+S_2)^{-1/2}$ 服从矩阵 Beta 分布。它将标量卡方变量的比例推广到了矩阵域。
 
-7. **[特征结构] 分析协方差矩阵的特征值分解与主成分分析（PCA）中方差最大化方向的等价性。**
+7. **[Bartlett分解] 解释 Wishart 矩阵的 Bartlett 分解。**
    ??? success "参考答案"
-       最大特征值对应的特征向量是 $\max_{\mathbf{v}^T \mathbf{v}=1} \mathbf{v}^T \Sigma \mathbf{v}$ 的解。这在几何上对应了随机点云散布最广的主轴方向。
+       $S \sim W_p(n, I)$ 可以分解为 $S = T T^T$，其中 $T$ 为下三角阵，其对角元 $T_{ii}^2 \sim \chi_{n-i+1}^2$，非对角元 $T_{ij} \sim \mathcal{N}(0, 1)$。这提供了模拟 Wishart 样本的高效算法。
 
-8. **[信息熵] 证明：多元正态分布的微分熵 $H$ 与 $\det(\Sigma)$ 的对数成线性关系。**
+8. **[特征函数] 写出矩阵正态分布特征函数的迹形式。**
    ??? success "参考答案"
-       $H(\mathbf{X}) = \frac{p}{2}(1 + \ln(2\pi)) + \frac{1}{2} \ln \det(\Sigma)$。行列式量化了随机变量在空间中占据的体积，从而反映了系统的信息不确定度。
+       $\phi_X(Z) = \exp(i \operatorname{tr}(Z^T M) - \frac{1}{2} \operatorname{tr}(Z^T U Z V))$。迹中的二次项捕捉了矩阵各元素间聚合的方差结构。
 
-9. **[矩阵正态性] 解释矩阵正态分布 $\mathcal{MN}_{n \times p}(M, U, V)$ 中 Kronecker 积 $V \otimes U$ 对协方差结构的参数压缩意义。**
+9. **[奇异Wishart] 什么时候 Wishart 矩阵是奇异的？**
    ??? success "参考答案"
-       它假设行间相关性 $U$ 与列间相关性 $V$ 是解耦的。这使得具有 $n^2 p^2$ 个元素的完整协方差矩阵被简化为仅需 $(n^2+p^2)$ 个参数，极大降低了估计的维度灾难。
+       当样本数 $n < p$ 时，Wishart 矩阵 $W_p(n, \Sigma)$ 以概率 1 为奇异矩阵。此时样本协方差矩阵不满秩，在正定锥上不具有相对于 Lebesgue 测度的密度函数。
 
-10. **[特征函数] 写出多元正态分布的特征函数 $\phi(\mathbf{t}) = \mathbb{E}[e^{j \mathbf{t}^T \mathbf{X}}]$ 的矩阵形式，并分析其指数项中的二次型。**
+10. **[熵] 矩阵正态分布的熵如何与 $U$ 和 $V$ 的行列式关联？**
     ??? success "参考答案"
-        $\phi(\mathbf{t}) = \exp(j \mathbf{t}^T \mu - \frac{1}{2} \mathbf{t}^T \Sigma \mathbf{t})$。指数中的二次型 $\mathbf{t}^T \Sigma \mathbf{t}$ 确定了频率域内概率密度的收敛特性，是协方差结构在 Fourier 变换下的映射。
+        熵正比于 $\log \det(V \otimes U) = n \log \det V + p \log \det U$。这表明矩阵的信息量（不确定性）是行结构与列结构不确定性的线性叠加。
 
 ## 本章小结
 
-本章论述了随机分析中的矩阵参数化建模：
+本章探讨了矩阵变量的统计分布理论：
 
-1. **二阶矩表达**：确立了对称半正定矩阵作为描述随机向量空间关联的通用工具。
-2. **生成分布**：建立了 Wishart 分布作为样本统计量分析的矩阵代数标准。
-3. **结构化协方差**：利用 Kronecker 积与逆矩阵（精度矩阵）揭示了高维数据间的条件依赖与独立性规律。
-4. **不变量度量**：通过行列式与迹量化了随机过程的熵增与能量分布特性。
+1. **结构化不确定性**：利用 Kronecker 积定义了矩阵正态分布，区分了行间与列间相关性。
+2. **协方差动力学**：确立了 Wishart 分布作为样本协方差阵的基础模型。
+3. **随机几何**：利用矩阵 Jacobian 推导了矩阵变换后的密度函数演变。
+4. **贝叶斯共轭**：建立了逆 Wishart 与矩阵 Beta 分布在高维不确定性估算中的纽带。

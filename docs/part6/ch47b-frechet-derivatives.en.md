@@ -25,8 +25,7 @@ While matrix calculus (Ch47A) often deals with scalar functions of matrices, **F
     If $A = Q \Lambda Q^*$ is diagonalizable, the entries of the Fréchet derivative in the eigenvector basis are:
     $$(Q^* L_f(A, E) Q)_{ij} = f[\lambda_i, \lambda_j] (Q^* E Q)_{ij}$$
     where $f[\lambda_i, \lambda_j]$ is the **divided difference**:
-    $$f[\lambda_i, \lambda_j] = \begin{cases} \frac{f(\lambda_i) - f(\lambda_j)}{\lambda_i - \lambda_j} & 	ext{if } \lambda_i 
-eq \lambda_j \ f'(\lambda_i) & 	ext{if } \lambda_i = \lambda_j \end{cases}$$
+    $$f[\lambda_i, \lambda_j] = \begin{cases} \frac{f(\lambda_i) - f(\lambda_j)}{\lambda_i - \lambda_j} & \text{if } \lambda_i \neq \lambda_j \\ f'(\lambda_i) & \text{if } \lambda_i = \lambda_j \end{cases}$$
 
 ---
 
@@ -34,43 +33,43 @@ eq \lambda_j \ f'(\lambda_i) & 	ext{if } \lambda_i = \lambda_j \end{cases}$$
 
 1. **[Fundamentals] Compute the Fréchet derivative of $f(A) = A^2$.**
    ??? success "Solution"
-       $(A+E)^2 = A^2 + AE + EA + E^2$. The linear part in $E$ is $L_f(A, E) = AE + EA$.
+       Expand $(A+E)^2 = A^2 + AE + EA + E^2$. The part linear in $E$ is $L_f(A, E) = AE + EA$. This operator acts on $E$ by adding $A$ from both sides.
 
 2. **[Inverse] Compute the Fréchet derivative of $f(A) = A^{-1}$.**
    ??? success "Solution"
-       From $d(A^{-1}) = -A^{-1}(dA)A^{-1}$, we have $L_f(A, E) = -A^{-1} E A^{-1}$.
+       Using $d(A^{-1}) = -A^{-1}(dA)A^{-1}$, the Fréchet derivative is the operator $L_f(A, E) = -A^{-1} E A^{-1}$. This captures how the inverse shifts when the matrix is perturbed.
 
 3. **[Condition Number] Define the relative condition number $\kappa_f(A)$ of a matrix function.**
    ??? success "Solution"
-       $\kappa_f(A) = \frac{\|L_f(A)\| \|A\|}{\|f(A)\|}$, where $\|L_f(A)\|$ is the operator norm of the Fréchet derivative. This measures how much a small relative change in $A$ is magnified in $f(A)$.
+       $\kappa_f(A) = \frac{\|L_f(A)\| \|A\|}{\|f(A)\|}$, where $\|L_f(A)\|$ is the induced operator norm. It measures the sensitivity of the output function value to relative errors in the input matrix.
 
-4. **[Commutativity] Does $L_f(A, E) = f'(A) E$?**
+4. **[Commutativity] Under what condition does $L_f(A, E) = f'(A) E$?**
    ??? success "Solution"
-       Only if $A$ and $E$ commute. In general, because $A$ and $E$ do not commute, the derivative is a more complex operator (like $AE + EA$ for $A^2$) rather than a simple multiplication.
+       This holds if and only if $A$ and $E$ commute ($AE = EA$). Non-commutativity is the primary reason why matrix derivatives are operators rather than simple multipliers.
 
-5. **[Daleckii-Krein] Use the Daleckii-Krein theorem to find the Fréchet derivative of $f(A) = e^A$ for a diagonal matrix $A = \operatorname{diag}(\lambda_1, \lambda_2)$.**
+5. **[Daleckii-Krein] Use the Daleckii-Krein theorem to find $L_f(A, E)$ for $f(A) = e^A$ when $A = \operatorname{diag}(\lambda_1, \lambda_2)$.**
    ??? success "Solution"
-       $L_f(A, E) = \begin{pmatrix} e^{\lambda_1} E_{11} & \frac{e^{\lambda_1} - e^{\lambda_2}}{\lambda_1 - \lambda_2} E_{12} \ \frac{e^{\lambda_2} - e^{\lambda_1}}{\lambda_2 - \lambda_1} E_{21} & e^{\lambda_2} E_{22} \end{pmatrix}$.
+       The entries of $L_f(A, E)$ are $L_{ij} = \frac{e^{\lambda_i} - e^{\lambda_j}}{\lambda_i - \lambda_j} E_{ij}$ for $i \neq j$, and $L_{ii} = e^{\lambda_i} E_{ii}$ for $i=j$. This formula links the sensitivity of the exponential to the spread of the eigenvalues.
 
-6. **[Kronecker Form] Express $L_f(A, E)$ in the form $K_f(A) \operatorname{vec}(E)$.**
+6. **[Kronecker Form] Express the operator $L_f(A, E) = AE + EA$ in its $n^2 \times n^2$ Kronecker matrix form.**
    ??? success "Solution"
-       The operator $L_f(A, \cdot)$ can be represented by an $n^2 	imes n^2$ matrix $K_f(A)$. For $f(A) = A^2$, $K_f(A) = I \otimes A + A^T \otimes I$.
+       The matrix representation is $K_f(A) = I \otimes A + A^T \otimes I$. Acting on $\operatorname{vec}(E)$ with this matrix yields $\operatorname{vec}(L_f(A, E))$.
 
-7. **[Exponential] What is the Fréchet derivative of the matrix exponential at the origin $A=0$?**
+7. **[Exponential Identity] What is the Fréchet derivative of the matrix exponential at the origin $A=0$?**
    ??? success "Solution"
-       $L_{\exp}(0, E) = E$. Near the origin, the exponential map is the identity to first order.
+       $L_{\exp}(0, E) = E$. To first order, the exponential map is the identity near zero.
 
-8. **[Complex Step] Describe the complex step method for approximating $L_f(A, E)$.**
+8. **[Complex Step] Describe the advantage of the complex step method for estimating $L_f(A, E)$.**
    ??? success "Solution"
-       $L_f(A, E) \approx \operatorname{Im}(f(A + i h E) / h)$ for very small $h$. This method avoids the subtractive cancellation errors of standard finite differences.
+       $L_f(A, E) \approx \operatorname{Im}(f(A + i h E) / h)$. Because it doesn't involve subtracting two close numbers, it is immune to the subtractive cancellation that plagues standard finite difference methods.
 
-9. **[Composition] State the chain rule for Fréchet derivatives.**
+9. **[Composition] State the chain rule for matrix Fréchet derivatives.**
    ??? success "Solution"
-       $L_{g \circ f}(A, E) = L_g(f(A), L_f(A, E))$. The derivative of the composition is the composition of the derivatives.
+       For $h(A) = g(f(A))$, the derivative is the composition of the linear operators: $L_h(A, E) = L_g(f(A), L_f(A, E))$.
 
-10. **[Symmetry] If $A$ and $E$ are Hermitian, is $L_f(A, E)$ always Hermitian?**
+10. **[Symmetry] Prove that if $A$ and $E$ are Hermitian, then $L_f(A, E)$ is also Hermitian (assuming $f$ is real-valued on $\mathbb{R}$).**
     ??? success "Solution"
-        Yes, provided $f$ maps the real line to the real line. This is a consequence of the Daleckii-Krein formula and the symmetry of divided differences.
+        From Daleckii-Krein, $(Q^* L Q)_{ij} = f[\lambda_i, \lambda_j] (Q^* E Q)_{ij}$. Since $f[\lambda_i, \lambda_j] = f[\lambda_j, \lambda_i]$ and $Q^*EQ$ is Hermitian, their product is Hermitian. Thus $L$ is Hermitian.
 
 ## Chapter Summary
 

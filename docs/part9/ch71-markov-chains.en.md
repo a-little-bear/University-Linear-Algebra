@@ -1,77 +1,79 @@
-# Chapter 71: Markov Chains and Stochastic Processes
+# Chapter 71: Markov Chains
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Non-negative Matrices (Ch17) · Eigenvalues (Ch6) · Basic Probability
+**Prerequisites**: Matrix Multiplication (Ch2) · Eigenvalues (Ch6) · Non-negative Matrices (Ch17) · Stochastic Matrices
 
-**Chapter Outline**: State Space and Transition Matrices → Probability Distribution Vectors → Chapman-Kolmogorov Equations → Steady-state Distribution → Ergodicity → Periodicity and Classification → Absorbing Markov Chains → Fundamental Matrix → PageRank Algorithm
+**Chapter Outline**: Definition of Markov Chains → Transition Probability Matrix → Chapman-Kolmogorov Equations → Classification of States (Irreducible, Aperiodic) → Stationary Distribution → Convergence to Equilibrium → Spectral Gap and Mixing Time → Absorbing Markov Chains → Application in PageRank
 
-**Extension**: Markov chains are the core algorithmic models for PageRank search engines, financial series modeling, and modern Natural Language Processing (HMM).
+**Extension**: Markov chains are the mathematical engine for Google Search (PageRank) and the foundation for MCMC sampling in modern statistical computation.
 
 </div>
 
-Markov chains utilize non-negative matrices to describe stochastic evolution on discrete state spaces. Their core feature is that the future state of the system depends only on the current operator's action and is independent of its historical trajectory. This property allows the spectral theory of linear algebra to fully characterize the long-term equilibrium behavior of stochastic systems.
+Markov chains describe the evolution of stochastic systems where the "future is independent of the past, given the present." This memoryless property is perfectly captured by the linear mapping of probability vectors through **Stochastic Matrices**.
 
 ---
 
-## 71.1 Transition Probability Matrix and Spectral Structure
+## 71.1 Stochastic Matrices and Equilibrium
 
-!!! definition "Definition 71.1 (Row Stochastic Matrix)"
-    The element $p_{ij}$ of a transition matrix $P$ represents the probability of transitioning from state $i$ to state $j$. It satisfies $p_{ij} \ge 0$ and $\sum_j p_{ij} = 1$. The evolution of the probability distribution row vector $\pi_k^T$ follows the linear mapping $\pi_{k+1}^T = \pi_k^T P$.
+!!! definition "Definition 71.1 (Stochastic Matrix)"
+    A square matrix $P$ is **row-stochastic** if all $p_{ij} \ge 0$ and $\sum_j p_{ij} = 1$ for all $i$. It maps probability vectors to probability vectors.
 
-!!! theorem "Theorem 71.1 (Ergodic Theorem and Unique Equilibrium)"
-    If the transition matrix $P$ is irreducible and aperiodic, then according to the Perron-Frobenius theorem, its spectral radius $ho(P) = 1$ is a simple eigenvalue. There exists a unique steady-state distribution $\pi^*$ satisfying $\pi^T P = \pi^T$, and the system converges to this steady state from any initial distribution.
+!!! theorem "Theorem 71.1 (Convergence to Stationary Distribution)"
+    If a Markov chain is irreducible and aperiodic (primitive matrix), there exists a unique stationary distribution $\pi$ such that $\pi P = \pi$. Furthermore, for any initial distribution $x_0$, $\lim_{k \to \infty} x_0 P^k = \pi$.
 
 ---
 
 ## Exercises
 
-1. **[Unity Eigenvalue] Prove: For any row stochastic matrix $P$, 1 is necessarily an eigenvalue.**
+1. **[Stochasticity] Prove: If $P$ is a stochastic matrix, then $\lambda=1$ is always an eigenvalue of $P$.**
    ??? success "Solution"
-       Let $\mathbf{1}$ be the all-ones vector. From the definition $\sum_j p_{ij} = 1$, we have $P \mathbf{1} = \mathbf{1} \cdot 1$. This shows that $\mathbf{1}$ is a right eigenvector of $P$ corresponding to the eigenvalue 1.
+       Let $\mathbf{1}$ be the all-ones column vector. The row-sum condition $\sum_j p_{ij} = 1$ is equivalent to $P \mathbf{1} = 1 \cdot \mathbf{1}$. Thus, $\mathbf{1}$ is a right eigenvector of $P$ for $\lambda=1$. Since $P$ and $P^T$ share the same spectrum, $1 \in \sigma(P)$.
 
-2. **[Convergence Rate] Prove: The rate at which a Markov chain converges to its steady-state distribution is determined by the second largest eigenvalue $|\lambda_2|$. Define the spectral gap of the system.**
+2. **[Stationary Distribution] Find the stationary distribution for $P = \begin{pmatrix} 0.7 & 0.3 \\ 0.4 & 0.6 \end{pmatrix}$.**
    ??? success "Solution"
-       From the spectral decomposition $\pi_k^T = \pi^* + \sum_{i=2}^n c_i \lambda_i^k v_i^T$. As $k 	o \infty$, the error term is dominated by $|\lambda_2|^k$. The spectral gap $1 - |\lambda_2|$ measures how quickly the system approaches equilibrium.
+       Solve $\pi P = \pi$ with $\pi_1 + \pi_2 = 1$.
+       $0.7\pi_1 + 0.4\pi_2 = \pi_1 \implies 0.4\pi_2 = 0.3\pi_1 \implies \pi_1 = \frac{4}{3}\pi_2$.
+       $\frac{4}{3}\pi_2 + \pi_2 = 1 \implies \frac{7}{3}\pi_2 = 1 \implies \pi_2 = 3/7, \pi_1 = 4/7$.
+       $\pi = [4/7, 3/7]$.
 
-3. **[Calculation] Given the transition matrix $P = \begin{pmatrix} 0.7 & 0.3 \ 0.2 & 0.8 \end{pmatrix}$. Solve for the stationary probability distribution vector.**
+3. **[Mixing Time] Explain how the spectral gap $1 - |\lambda_2|$ determines the convergence speed of a Markov chain.**
    ??? success "Solution"
-       Solve the system $\begin{pmatrix} \pi_1 & \pi_2 \end{pmatrix} \begin{pmatrix} -0.3 & 0.3 \ 0.2 & -0.2 \end{pmatrix} = 0$ and $\pi_1 + \pi_2 = 1$.
-       From $-0.3\pi_1 + 0.2\pi_2 = 0$, we have $3\pi_1 = 2\pi_2$. The solution is $\pi^* = [0.4, 0.6]^T$.
+       The error after $k$ steps is roughly $\|x_k - \pi\| \approx C |\lambda_2|^k$. A larger spectral gap implies a smaller $|\lambda_2|$, resulting in faster geometric convergence to the equilibrium state.
 
-4. **[Periodicity Determination] Given $P = \begin{pmatrix} 0 & 1 \ 1 & 0 \end{pmatrix}$. Analyze the eigenvalues of this matrix and the asymptotic behavior of the distribution vector.**
+4. **[Irreducibility] What is the graph-theoretic condition for a Markov chain to be irreducible?**
    ??? success "Solution"
-       The eigenvalues are $\pm 1$. The matrix is periodic (with period 2). The distribution vector will oscillate between two states indefinitely and will not converge to a fixed value, even though a solution to the stationary equation exists.
+       The directed graph associated with the transition matrix $P$ must be strongly connected, meaning there is a path of non-zero probability between any two states $i$ and $j$.
 
-5. **[PageRank Analysis] Explain how the "damping factor" in Google's PageRank algorithm converts a web link matrix into a primitive matrix.**
+5. **[PageRank] Why is the Google PageRank matrix $G = \alpha P + (1-\alpha) \frac{1}{n} J$ guaranteed to have a unique stationary distribution?**
    ??? success "Solution"
-       The original link matrix may have dangling nodes (zero rows) or cycles. The convex combination $G = d P + (1-d) \frac{1}{n} J$ ensures all elements of $G$ are strictly positive. This eliminates periodicity and guarantees irreducibility, thereby ensuring the unique convergence of the power iteration method.
+       The addition of the term $(1-\alpha)\frac{1}{n}J$ (teleportation) makes the matrix $G$ strictly positive ($G \gg 0$). According to the Perron-Frobenius theorem, a strictly positive matrix is primitive, ensuring a unique strictly positive eigenvector for $\lambda=1$.
 
-6. **[Absorbing Chains] Prove: In an absorbing Markov chain, the probability of being absorbed from any state is 1. Define its fundamental matrix $N = (I-Q)^{-1}$.**
+6. **[Absorbing States] Define an absorbing state and the structure of an absorbing Markov chain matrix.**
    ??? success "Solution"
-       Since $Q$ describes transitions between non-absorbing states, its spectral radius $ho(Q) < 1$. The series $I+Q+Q^2+\dots$ converges to $(I-Q)^{-1}$. This represents that the probability of staying in non-absorbing states decays exponentially to zero over time.
+       A state $i$ is absorbing if $p_{ii} = 1$. The matrix has the block form $P = \begin{pmatrix} Q & R \\ 0 & I \end{pmatrix}$, where $Q$ corresponds to the transitions between transient states.
 
-7. **[Detailed Balance] Define the reversibility of a Markov chain and explain its relationship to the symmetry of the matrix $\Delta P$ (where $\Delta$ is the steady-state diagonal matrix).**
+7. **[Fundamental Matrix] How is the matrix $(I-Q)^{-1}$ used in absorbing Markov chains?**
    ??? success "Solution"
-       The detailed balance condition is $\pi_i p_{ij} = \pi_j p_{ji}$. This is equivalent to the diagonal matrix $\Delta_\pi$ satisfying $\Delta_\pi P = P^T \Delta_\pi$, meaning $P$ is a self-adjoint operator under the $\pi$-weighted inner product.
+       $(I-Q)^{-1} = I + Q + Q^2 + \dots$ is the fundamental matrix. The entry $n_{ij}$ represents the expected number of times the chain is in transient state $j$ given it started in state $i$ before absorption.
 
-8. **[Mixing Time] Briefly describe the relationship between mixing time and eigenvalues other than the spectral radius.**
+8. **[Double Stochasticity] Show that if $P$ is doubly stochastic, the uniform distribution $\pi = [\frac{1}{n}, \dots, \frac{1}{n}]$ is a stationary distribution.**
    ??? success "Solution"
-       Mixing time is the number of steps required for the distribution to reach within $\epsilon$ total variation distance from the steady state. It is inversely proportional to the spectral gap $\gamma = 1 - \lambda_2$. A smaller $\lambda_2$ implies that the random walk can traverse the state space more rapidly.
+       If $P$ is doubly stochastic, then $\mathbf{1}^T P = \mathbf{1}^T$. Dividing by $n$ gives $[\frac{1}{n} \dots \frac{1}{n}] P = [\frac{1}{n} \dots \frac{1}{n}]$. Thus, the uniform distribution is invariant.
 
-9. **[Graph Theory Link] Prove: The transition matrix $P$ is irreducible if and only if its associated directed graph is strongly connected.**
+9. **[Reversibility] State the detailed balance equation and its implication.**
    ??? success "Solution"
-       Irreducibility means $(I+P)^{n-1} > 0$. This is equivalent to the existence of at least one path of finite length between any two nodes in the graph, which satisfies the definition of strong connectivity.
+       $\pi_i p_{ij} = \pi_j p_{ji}$. If this holds, the chain is reversible. Reversibility implies that the transition matrix is similar to a symmetric matrix, and thus all its eigenvalues are real.
 
-10. **[Ergodicity] Explain how ergodicity is reflected in matrix language through the projection onto the principal eigenspace.**
+10. **[Aperiodicity] Provide an example of an irreducible but periodic Markov chain.**
     ??? success "Solution"
-        Ergodicity implies $P^k 	o \mathbf{1} \pi^T$. This indicates that the matrix power operator, in the long-run evolution, degenerates into a rank-1 projection operator that maps any initial distribution onto the one-dimensional invariant subspace belonging to the eigenvalue 1.
+        $P = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. The chain toggles between states 1 and 2. It is irreducible (can reach any state), but periodic with period 2 (can only return to state 1 in an even number of steps).
 
 ## Chapter Summary
 
-This chapter discusses the linear operator theory describing stochastic evolutionary behavior:
+This chapter explores the linear algebraic properties of stochastic processes:
 
-1. **Probability Transition Framework**: Established transition matrices as the core operator model for stochastic state updates.
-2. **Equilibrium Theory**: Utilized the Perron-Frobenius theorem to establish the existence, uniqueness, and convergence of steady-state distributions.
-3. **Structural Classification**: Distinguished between different Markov systems such as irreducible, aperiodic, and absorbing chains.
-4. **Algorithmic Mapping**: Demonstrated how modern algorithms like PageRank transform combinatorial structure analysis into large-scale matrix eigenvector problems.
+1. **State Transitions**: Formulated the evolution of probability distributions as matrix-vector multiplications.
+2. **Equilibrium Theory**: Utilized the Perron-Frobenius theorem to establish the existence and uniqueness of stationary distributions.
+3. **Spectral Dynamics**: Linked the convergence rate (mixing time) to the spectral gap of the transition operator.
+4. **Network Ranking**: Demonstrated the power of Markov chains in large-scale information retrieval (PageRank) and transient state analysis.

@@ -17,7 +17,7 @@ The **Schur complement** arises naturally when performing Gaussian elimination o
 ## 34.1 Definitions and Block Factorization
 
 !!! definition "Definition 34.1 (Schur Complement)"
-    Let $M = \begin{pmatrix} A & B \ C & D \end{pmatrix}$ be a block matrix. If $A$ is invertible, the Schur complement of $A$ in $M$ is:
+    Let $M = \begin{pmatrix} A & B \\ C & D \end{pmatrix}$ be a block matrix. If $A$ is invertible, the Schur complement of $A$ in $M$ is:
     $$M/A = D - C A^{-1} B$$
 
 !!! theorem "Theorem 34.1 (Determinant Formula)"
@@ -28,17 +28,17 @@ The **Schur complement** arises naturally when performing Gaussian elimination o
 
 ## Exercises
 
-1. **[Fundamentals] Compute the Schur complement of $A = (2)$ in $M = \begin{pmatrix} 2 & 1 \ 1 & 2 \end{pmatrix}$.**
+1. **[Fundamentals] Compute the Schur complement of $A = (2)$ in $M = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$.**
    ??? success "Solution"
        $M/A = 2 - (1)(2)^{-1}(1) = 2 - 0.5 = 1.5$. Note $\det M = 2(1.5) = 3$.
 
 2. **[Block Inversion] State the formula for $M^{-1}$ using the Schur complement.**
    ??? success "Solution"
-       $M^{-1} = \begin{pmatrix} A^{-1} + A^{-1}B(M/A)^{-1}CA^{-1} & -A^{-1}B(M/A)^{-1} \ -(M/A)^{-1}CA^{-1} & (M/A)^{-1} \end{pmatrix}$. This allows inverting a large matrix by inverting smaller sub-blocks.
+       $M^{-1} = \begin{pmatrix} A^{-1} + A^{-1}B(M/A)^{-1}CA^{-1} & -A^{-1}B(M/A)^{-1} \\ -(M/A)^{-1}CA^{-1} & (M/A)^{-1} \end{pmatrix}$. This allows inverting a large matrix by inverting smaller sub-blocks.
 
-3. **[Positive Definiteness] Show that $M = \begin{pmatrix} A & B \ B^* & D \end{pmatrix} \succ 0$ iff $A \succ 0$ and $M/A \succ 0$.**
+3. **[Positive Definiteness] Show that $M = \begin{pmatrix} A & B \\ B^* & D \end{pmatrix} \succ 0$ iff $A \succ 0$ and $M/A \succ 0$.**
    ??? success "Solution"
-       Using the congruence $M = \begin{pmatrix} I & 0 \ B^* A^{-1} & I \end{pmatrix} \begin{pmatrix} A & 0 \ 0 & M/A \end{pmatrix} \begin{pmatrix} I & A^{-1}B \ 0 & I \end{pmatrix}$. Sylvester's Law of Inertia implies $M$ has the same number of positive eigenvalues as the block-diagonal matrix. Thus $M \succ 0 \iff A \succ 0$ and $M/A \succ 0$.
+       Using the congruence $M = \begin{pmatrix} I & 0 \\ B^* A^{-1} & I \end{pmatrix} \begin{pmatrix} A & 0 \\ 0 & M/A \end{pmatrix} \begin{pmatrix} I & A^{-1}B \\ 0 & I \end{pmatrix}$. Sylvester's Law of Inertia implies $M$ has the same number of positive eigenvalues as the block-diagonal matrix. Thus $M \succ 0 \iff A \succ 0$ and $M/A \succ 0$.
 
 4. **[Woodbury Identity] State the Woodbury matrix identity (Matrix Inversion Lemma).**
    ??? success "Solution"
@@ -46,7 +46,7 @@ The **Schur complement** arises naturally when performing Gaussian elimination o
 
 5. **[Variational] Express the Schur complement as a result of a minimization problem.**
    ??? success "Solution"
-       For $M \succ 0$, the Schur complement $M/A$ appears in the minimization of the quadratic form: $\min_x \begin{pmatrix} x \ y \end{pmatrix}^T \begin{pmatrix} A & B \ B^T & D \end{pmatrix} \begin{pmatrix} x \ y \end{pmatrix} = y^T (M/A) y$. The optimal $x = -A^{-1}By$ eliminates the cross-term.
+       For $M \succ 0$, the Schur complement $M/A$ appears in the minimization of the quadratic form: $\min_x \begin{pmatrix} x \\ y \end{pmatrix}^T \begin{pmatrix} A & B \\ B^T & D \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = y^T (M/A) y$. The optimal $x = -A^{-1}By$ eliminates the cross-term.
 
 6. **[Haynsworth's Law] How does the inertia of $M$ relate to the inertia of $A$ and $M/A$?**
    ??? success "Solution"
@@ -56,7 +56,7 @@ The **Schur complement** arises naturally when performing Gaussian elimination o
    ??? success "Solution"
        The Schur complement $D - C A^{-1} B$ represents the portion of $D$ that is orthogonal to the subspace spanned by the columns of $B$ (in a weighted inner product sense).
 
-8. **[Probability] In a Gaussian distribution $\begin{pmatrix} X_1 \ X_2 \end{pmatrix} \sim N(\mu, \Sigma)$, what is the conditional covariance of $X_2$ given $X_1$?**
+8. **[Probability] In a Gaussian distribution $\begin{pmatrix} X_1 \\ X_2 \end{pmatrix} \sim N(\mu, \Sigma)$, what is the conditional covariance of $X_2$ given $X_1$?**
    ??? success "Solution"
        The conditional covariance is exactly the Schur complement $\Sigma_{22} - \Sigma_{21} \Sigma_{11}^{-1} \Sigma_{12}$. This capture the "remaining uncertainty" in $X_2$ after $X_1$ is observed.
 

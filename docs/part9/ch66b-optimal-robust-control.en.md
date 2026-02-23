@@ -42,13 +42,13 @@ Optimal and robust control study optimization problems of operators under constr
    ??? success "Solution"
        This term represents energy dissipation introduced by the control input. In Lyapunov stability analysis, it provides a negative definite term that counteracts the energy growth brought by an unstable matrix $A$, ensuring closed-loop eigenvalues lie in the open left-half complex plane.
 
-2. **[Hamiltonian Operator] Prove the relationship between the solution to the ARE and the spectral structure of the Hamiltonian matrix $H = \begin{pmatrix} A & -BR^{-1}B^T \ -Q & -A^T \end{pmatrix}$.**
+2. **[Hamiltonian Operator] Prove the relationship between the solution to the ARE and the spectral structure of the Hamiltonian matrix $H = \begin{pmatrix} A & -BR^{-1}B^T \\ -Q & -A^T \end{pmatrix}$.**
    ??? success "Solution"
        The eigenvalues of a Hamiltonian matrix are symmetric with respect to the imaginary axis. The positive definite solution $P$ to the ARE is determined by the stable subspace of $H$ corresponding to the left-half complex plane. $P = X_2 X_1^{-1}$, where $[X_1; X_2]$ is the matrix formed by the stable eigenvectors of $H$.
 
 3. **[Separation Principle] Prove that the transfer function matrix and pole distribution of an LQG control system satisfy the separation principle.**
    ??? success "Solution"
-       The closed-loop eigenvalues are the union of $A-BK$ (controller poles) and $A-LC$ (observer poles). This is because the dynamics of the state estimation error $	ilde{x} = x - \hat{x}$ and the state evolution exhibit a block-triangular structure in the augmented space.
+       The closed-loop eigenvalues are the union of $A-BK$ (controller poles) and $A-LC$ (observer poles). This is because the dynamics of the state estimation error $\tilde{x} = x - \hat{x}$ and the state evolution exhibit a block-triangular structure in the augmented space.
 
 4. **[Calculation] Given a scalar system $\dot{x} = x + u$ with $Q=3, R=1$. Solve the ARE and determine the optimal feedback gain $K$.**
    ??? success "Solution"

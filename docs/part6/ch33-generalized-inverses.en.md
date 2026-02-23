@@ -17,7 +17,7 @@ Generalized inverses extend the concept of a matrix inverse to rectangular and s
 ## 33.1 The Moore-Penrose Conditions
 
 !!! definition "Definition 33.1 (Moore-Penrose Inverse)"
-    For any $m 	imes n$ matrix $A$, the Moore-Penrose inverse $A^\dagger$ is the unique $n 	imes m$ matrix satisfying the following four conditions:
+    For any $m \times n$ matrix $A$, the Moore-Penrose inverse $A^\dagger$ is the unique $n \times m$ matrix satisfying the following four conditions:
     1. $A A^\dagger A = A$
     2. $A^\dagger A A^\dagger = A^\dagger$
     3. $(A A^\dagger)^* = A A^\dagger$ (Hermitian)
@@ -30,9 +30,9 @@ Generalized inverses extend the concept of a matrix inverse to rectangular and s
 
 ## Exercises
 
-1. **[Fundamentals] Compute the Moore-Penrose inverse of $A = \begin{pmatrix} 2 & 0 \ 0 & 0 \end{pmatrix}$.**
+1. **[Fundamentals] Does every matrix (including non-square and singular ones) have a Moore-Penrose inverse? Is it unique?**
    ??? success "Solution"
-       $A^\dagger = \begin{pmatrix} 1/2 & 0 \ 0 & 0 \end{pmatrix}$. This satisfies all four Penrose conditions.
+       Yes, every matrix $A$ over $\mathbb{C}$ has a unique Moore-Penrose inverse $A^\dagger$. While other generalized inverses (like $\{1\}$-inverses satisfying $AGA=A$) may exist and not be unique, $A^\dagger$ is uniquely determined by the four Penrose conditions.
 
 2. **[Projections] Show that $P = A A^\dagger$ is the orthogonal projection onto the column space $\operatorname{Im}(A)$.**
    ??? success "Solution"
@@ -58,7 +58,7 @@ Generalized inverses extend the concept of a matrix inverse to rectangular and s
    ??? success "Solution"
        The conditions for $A^\dagger$ being the pseudoinverse of $A$ are symmetric to those for $A$ being the pseudoinverse of $A^\dagger$.
 
-8. **[Calculation] Compute $A^\dagger$ for $A = \begin{pmatrix} 1 \ 1 \end{pmatrix}$.**
+8. **[Calculation] Compute $A^\dagger$ for $A = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.**
    ??? success "Solution"
        $A$ has full column rank. $A^* A = (2)$. $(A^* A)^{-1} = (1/2)$. $A^\dagger = (1/2) \begin{pmatrix} 1 & 1 \end{pmatrix} = \begin{pmatrix} 0.5 & 0.5 \end{pmatrix}$.
 

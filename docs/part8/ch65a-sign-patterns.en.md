@@ -33,48 +33,45 @@ Combinatorial matrix theory investigates how the combinatorial structure of a ma
 
 ## Exercises
 
-1. **[Fundamentals] Find the determinant of all matrices in the pattern $\mathcal{P} = \begin{pmatrix} * & * \ 0 & * \end{pmatrix}$. Is it SNS?**
+1. **[Fundamentals] Find the determinant form of all matrices in the pattern $\mathcal{P} = \begin{pmatrix} * & * \\ 0 & * \end{pmatrix}$. Is it always non-singular?**
    ??? success "Solution"
-       $\det(A) = a_{11}a_{22}$. Since the pattern specifies $a_{11} 
-eq 0$ and $a_{22} 
-eq 0$, the determinant is always non-zero. The pattern is sign non-singular.
+       The determinant is $\det(A) = a_{11}a_{22}$. Since the pattern specifies $a_{11} \neq 0$ and $a_{22} \neq 0$, the determinant is necessarily non-zero for all matrices in the class. The pattern is sign non-singular.
 
-2. **[SNS Determination] Determine if the sign pattern $\mathcal{S} = \begin{pmatrix} + & + \ + & + \end{pmatrix}$ is SNS.**
+2. **[SNS Determination] Determine if the sign pattern $\mathcal{S} = \begin{pmatrix} + & + \\ + & + \end{pmatrix}$ is SNS.**
    ??? success "Solution"
-       $\det(A) = a_{11}a_{22} - a_{12}a_{21}$. The first term is $(+)(+)=+$, and the second term is $-(+)(+)=-$. Since the terms have opposite signs, the determinant can be zero. Thus, $\mathcal{S}$ is not SNS.
+       $\det(A) = a_{11}a_{22} - a_{12}a_{21}$. The first term $(a_{11}a_{22})$ is $(+)(+)=+$, and the second term $(-a_{12}a_{21})$ is $-(+)(+)=-$. Since the terms have opposite signs, their sum can be zero. Thus, $\mathcal{S}$ is not SNS.
 
 3. **[Stability] Why can a qualitatively stable matrix not have any positive entries on its diagonal?**
    ??? success "Solution"
-       A positive diagonal entry $a_{ii} > 0$ represents a positive feedback loop in self-regulation. If this entry is large enough, it can make the trace positive or move an eigenvalue into the right-half plane, destroying stability.
+       If $a_{ii} > 0$, it represents a positive feedback loop in self-regulation. If this entry is large enough, it can make the trace positive (as $\operatorname{tr}(A) = \sum a_{ii} = \sum \operatorname{Re}(\lambda_i)$), forcing at least one eigenvalue to have a non-negative real part, which destroys stability.
 
-4. **[Indecomposability] Define a "Fully Indecomposable" matrix and its graph-theoretic characterization.**
+4. **[Indecomposability] What is a "Fully Indecomposable" matrix and its graph-theoretic characterization?**
    ??? success "Solution"
-       A matrix is fully indecomposable if it cannot be transformed into a block upper triangular form by row and column permutations. Graphically, its bipartite graph must have a perfect matching, and every edge must be part of some perfect matching.
+       A matrix is fully indecomposable if it cannot be transformed into a block upper triangular form by row and column permutations. In terms of its bipartite graph, it must possess a perfect matching, and every edge in the graph must belong to at least one perfect matching.
 
 5. **[Potential Nilpotency] Prove: If all diagonal entries of a sign pattern are non-zero and share the same sign, it cannot be potentially nilpotent.**
    ??? success "Solution"
-       A nilpotent matrix must have a trace of zero. If all diagonal entries are non-zero and share the same sign (e.g., all positive), then $\operatorname{tr}(A) = \sum a_{ii} 
-eq 0$. Thus, no matrix in this class can be nilpotent.
+       A nilpotent matrix must have a trace of zero. If all diagonal entries share the same non-zero sign (e.g., all are positive), then $\operatorname{tr}(A) = \sum a_{ii} \neq 0$. Consequently, no matrix in the qualitative class can be nilpotent.
 
 6. **[Spectrally Arbitrary] What is a "Spectrally Arbitrary Pattern"?**
    ??? success "Solution"
-       A pattern is spectrally arbitrary if, for any given real characteristic polynomial, there exists a matrix in the pattern's qualitative class that possesses that polynomial. This implies the structure has enough degrees of freedom to realize any spectrum.
+       A pattern is spectrally arbitrary if, for any given real characteristic polynomial of degree $n$, there exists a matrix in the pattern's qualitative class that realizes that polynomial. This indicates the pattern has enough algebraic freedom to cover the entire spectral space.
 
-7. **[Ecology] Describe the typical sign pattern of a predator-prey system.**
+7. **[Ecology] Describe the typical sign pattern of a predator-prey model.**
    ??? success "Solution"
-       It typically exhibits an anti-symmetric off-diagonal structure, such as $\begin{pmatrix} - & - \ + & - \end{pmatrix}$. The prey (1) has a positive effect on the predator (2), while the predator has a negative effect on the prey. Both usually have negative self-regulation to ensure stability.
+       It typically exhibits an anti-symmetric off-diagonal structure, e.g., $\begin{pmatrix} - & - \\ + & - \end{pmatrix}$. The prey (1) provides a positive effect on the predator (2), while the predator has a negative effect on the prey. Both components usually have negative self-regulation to maintain system stability.
 
-8. **[Calculation] Check the non-singularity of the $3 	imes 3$ cyclic pattern $\begin{pmatrix} 0 & + & 0 \ 0 & 0 & + \ + & 0 & 0 \end{pmatrix}$.**
+8. **[Calculation] Check the non-singularity of the $3 \times 3$ cyclic sign pattern $\begin{pmatrix} 0 & + & 0 \\ 0 & 0 & + \\ + & 0 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       The determinant is $a_{12}a_{23}a_{31}$. Since only this one term is non-zero, its sign is uniquely determined. The pattern is SNS.
+       The determinant is exactly $a_{12}a_{23}a_{31}$. Since there is only one non-zero term in the expansion, its sign is uniquely determined. Thus, the pattern is SNS.
 
-9. **[Nearly Reducible] What is a nearly reducible matrix?**
+9. **[Nearly Reducible] What is a nearly reducible matrix and what is its associated directed graph?**
    ??? success "Solution"
-       A matrix is nearly reducible if it is irreducible but becomes reducible if any of its non-zero entries is changed to zero. Its directed graph is a single Hamiltonian cycle.
+       A matrix is nearly reducible if it is irreducible but becomes reducible if any of its non-zero entries is set to zero. Its directed graph is a single Hamiltonian cycle.
 
-10. **[L-matrices] Contrast SNS matrices with L-matrices.**
+10. **[Structure] In qualitative analysis, how does the "structure" precede the "magnitude" in physical systems?**
     ??? success "Solution"
-        An L-matrix is a sign pattern where every matrix in its class has linearly independent rows. For square matrices, the class of L-matrices is identical to the class of SNS matrices.
+        Qualitative analysis shows that the stability or solvability of a system can be guaranteed solely by the topology of interactions (the sign pattern) regardless of exact parameters. This implies that the logical arrangement of feedback loops (structural stability) is more fundamental to the system's endurance than precise numerical values.
 
 ## Chapter Summary
 

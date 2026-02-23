@@ -33,9 +33,8 @@ The theory of matrix-valued functions involves two distinct levels: scalar conve
 
 2. **[Calculation] Is $f(t) = t^2$ operator convex on $[0, \infty)$? Is it operator monotone?**
    ??? success "Solution"
-       - **Operator Convex**: Yes.
-       - **Operator Monotone**: No. Counterexample: $A = \begin{pmatrix} 1 & 0 \ 0 & 0 \end{pmatrix} \preceq \begin{pmatrix} 1 & 1 \ 1 & 2 \end{pmatrix} = B$, but $A^2 
-preceq B^2$ (checked via determinant or eigenvalues).
+       - **Operator Convex**: Yes, the square of a matrix is operator convex.
+       - **Operator Monotone**: No. Counterexample: $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \preceq \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix} = B$, but $A^2 \npreceq B^2$ (as $\det(B^2 - A^2) = -4 < 0$).
 
 3. **[Concavity] Show that the log-determinant $f(A) = \log \det A$ is a (scalar) concave function on $S_n^{++}$.**
    ??? success "Solution"
@@ -43,31 +42,31 @@ preceq B^2$ (checked via determinant or eigenvalues).
 
 4. **[Ky Fan] Define the Ky Fan $k$-norm and explain why it is a convex function.**
    ??? success "Solution"
-       The Ky Fan $k$-norm is the sum of the $k$ largest singular values. It can be characterized as the maximum of $\operatorname{tr}(U^T AV)$ over the Stiefel manifold. As the supremum of a family of linear functions, it is convex.
+       The Ky Fan $k$-norm is the sum of the $k$ largest singular values. It can be characterized as the maximum of $\operatorname{tr}(U^T AV)$ over the Stiefel manifold ($U^T U = V^T V = I_k$). As the supremum of a family of linear functions, it is convex.
 
 5. **[Hansen-Pedersen] State the operator version of Jensen's Inequality.**
    ??? success "Solution"
-       For an operator convex function $f$, $f(C^* AC) \preceq C^* f(A) C$ holds for all contractions $C$ ($C^* C \preceq I$).
+       For an operator convex function $f$, $f(C^* AC) \preceq C^* f(A) C$ holds for all matrices $A$ with spectrum in the domain and all contractions $C$ ($C^* C \preceq I$).
 
 6. **[Lieb's Theorem] What is the core application of Lieb's Concavity Theorem in quantum information?**
    ??? success "Solution"
-       It is the fundamental tool used to prove the **Strong Subadditivity** of quantum entropy, ensuring the physical consistency of information processing in quantum systems.
+       It is the fundamental tool used to prove the **Strong Subadditivity** of von Neumann entropy, ensuring the physical consistency of information flow in quantum systems.
 
 7. **[Matrix Means] Prove that the matrix geometric mean $A \# B$ is jointly concave in $(A, B)$.**
    ??? success "Solution"
-       Using the variational characterization $A \# B = \max \{ X : \begin{pmatrix} A & X \ X & B \end{pmatrix} \succeq 0 \}$, the concavity follows because the feasible set defined by the LMI is convex in the parameters $(A, B)$.
+       Using the characterization $A \# B = \max \{ X : \begin{pmatrix} A & X \\ X & B \end{pmatrix} \succeq 0 \}$, the joint concavity follows because the feasible set of the LMI is convex in the block parameters $(A, B)$.
 
 8. **[Schur Convexity] Determine the Schur convexity of $\phi(x) = \sum x_i^2$.**
    ??? success "Solution"
-       Since $\phi$ is symmetric and the component function $t^2$ is convex, $\phi$ is Schur convex. This implies that the more "spread out" the eigenvalues are, the larger the trace of the square.
+       Since $\phi$ is symmetric and the component function $t^2$ is convex, $\phi$ is Schur convex. This implies that for a fixed trace, the sum of squares is maximized when the eigenvalues are most "spread out."
 
-9. **[Perspective] If $f(x) = 1/x$, is its perspective function $g(A, t) = t(A/t)^{-1} = t^2 A^{-1}$ jointly convex?**
+9. **[Perspective] If $f(x) = 1/x$, is its perspective function $g(A, t) = t(A/t)^{-1} = t^2 A^{-1}$ jointly convex in $(A, t)$?**
    ??? success "Solution"
-       Yes. Since $1/x$ is an operator convex function, its perspective $t f(A/t)$ is jointly convex in the Löwner order on the appropriate domain.
+       Yes. Since $1/x$ is an operator convex function, its perspective $t f(A/t)$ is jointly convex in the Löwner order on $S_n^{++} \times (0, \infty)$.
 
 10. **[Trace Functions] Contrast the convexity of $\operatorname{tr}(f(A))$ with the operator convexity of $f(A)$.**
     ??? success "Solution"
-        If $f$ is a convex scalar function, then $\operatorname{tr}(f(A))$ is always a convex scalar function of $A$. However, $f$ must satisfy much stricter analytical properties (Pick functions) to be operator convex. Every operator convex function induces a convex trace function, but not vice versa.
+        If $f$ is a convex scalar function, then $\operatorname{tr}(f(A))$ is always a convex scalar function of $A$. However, operator convexity of $f(A)$ requires much stricter conditions (analytic Pick functions). Every operator convex function induces a convex trace function, but not vice versa (e.g., $t^3$ on $[0, \infty)$).
 
 ## Chapter Summary
 
@@ -76,4 +75,4 @@ This chapter details the analytical and ordering properties of matrix-valued fun
 1. **Hierarchy of Convexity**: Distinguished between scalar convexity and the much more rigid operator convexity.
 2. **Analytical Extensions**: Explored Löwner's theorem, linking operator monotonicity to the theory of Pick functions in complex analysis.
 3. **Operator Jensen Inequalities**: Extended classical inequalities to the operator domain via the Hansen-Pedersen framework.
-4. **Information Metrics**: Analyzed Lieb's concavity and matrix perspectives, establishing the mathematical floor for quantum entropy and information geometry.
+4. **Information Metrics**: Analyzed Lieb's concavity and matrix perspectives, establishing the mathematical foundation for quantum entropy and information geometry.

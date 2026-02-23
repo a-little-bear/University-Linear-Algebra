@@ -20,33 +20,33 @@ The study of matrices over fields generalizes naturally to matrices over rings. 
     A square matrix $U$ over a ring $R$ is **unimodular** if its determinant is a unit in $R$. This is equivalent to saying $U^{-1}$ exists and has entries in $R$.
 
 !!! theorem "Theorem 48.1 (Existence of SNF)"
-    Let $A$ be an $m 	imes n$ matrix over a PID $R$. Then there exist unimodular matrices $P \in M_m(R)$ and $Q \in M_n(R)$ such that $PAQ = D$, where $D$ is a diagonal-like matrix:
-    $$D = \begin{pmatrix} d_1 & & & 0 \ & d_2 & & \ & & \ddots & \ 0 & & & d_r \end{pmatrix}, \quad d_i \mid d_{i+1}$$
+    Let $A$ be an $m \times n$ matrix over a PID $R$. Then there exist unimodular matrices $P \in M_m(R)$ and $Q \in M_n(R)$ such that $PAQ = D$, where $D$ is a diagonal-like matrix:
+    $$D = \begin{pmatrix} d_1 & & & 0 \\ & d_2 & & \\ & & \ddots & \\ 0 & & & d_r \end{pmatrix}, \quad d_i \mid d_{i+1}$$
     The elements $d_1, \dots, d_r$ are unique up to multiplication by units and are called the **invariant factors** of $A$.
 
 ---
 
 ## Exercises
 
-1. **[Invariant Factors] Compute the Smith Normal Form of the integer matrix $A = \begin{pmatrix} 2 & 4 \ 4 & 8 \end{pmatrix}$ over $\mathbb{Z}$.**
+1. **[Invariant Factors] Compute the Smith Normal Form of the integer matrix $A = \begin{pmatrix} 2 & 4 \\ 4 & 8 \end{pmatrix}$ over $\mathbb{Z}$.**
    ??? success "Solution"
-       The greatest common divisor of all entries is $d_1 = \gcd(2, 4, 4, 8) = 2$. The determinant is 0, so the rank is 1. The SNF is $\begin{pmatrix} 2 & 0 \ 0 & 0 \end{pmatrix}$.
+       The greatest common divisor of all entries is $d_1 = \gcd(2, 4, 4, 8) = 2$. The determinant is 0, so the rank is 1. The SNF is $\begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix}$.
 
 2. **[Determinantal Divisors] Define the $k$-th determinantal divisor $\delta_k(A)$ and its relation to the invariant factors $d_i$.**
    ??? success "Solution"
-       $\delta_k(A)$ is the GCD of all $k 	imes k$ minors of $A$. The invariant factors are given by $d_k = \delta_k(A) / \delta_{k-1}(A)$ (with $\delta_0 = 1$).
+       $\delta_k(A)$ is the GCD of all $k \times k$ minors of $A$. The invariant factors are given by $d_k = \delta_k(A) / \delta_{k-1}(A)$ (with $\delta_0 = 1$).
 
-3. **[Polynomial Ring] Find the SNF of $A(x) = \begin{pmatrix} x-1 & 0 \ 0 & (x-1)^2 \end{pmatrix}$ over $\mathbb{C}[x]$.**
+3. **[Polynomial Ring] Find the SNF of $A(x) = \begin{pmatrix} x-1 & 0 \\ 0 & (x-1)^2 \end{pmatrix}$ over $\mathbb{C}[x]$.**
    ??? success "Solution"
        The matrix is already in SNF since $(x-1)$ divides $(x-1)^2$. The invariant factors are $d_1(x) = x-1$ and $d_2(x) = (x-1)^2$.
 
-4. **[Abelian Groups] Use SNF to find the structure of the Abelian group $G = \mathbb{Z}^2 / \operatorname{Im}(A)$ where $A = \begin{pmatrix} 2 & 0 \ 0 & 3 \end{pmatrix}$.**
+4. **[Abelian Groups] Use SNF to find the structure of the Abelian group $G = \mathbb{Z}^2 / \operatorname{Im}(A)$ where $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$.**
    ??? success "Solution"
-       The SNF of $A$ is $\begin{pmatrix} 1 & 0 \ 0 & 6 \end{pmatrix}$ (since $\gcd(2,3)=1$ and $\det=6$). Thus $G \cong \mathbb{Z}/1\mathbb{Z} \oplus \mathbb{Z}/6\mathbb{Z} \cong \mathbb{Z}_6$.
+       The SNF of $A$ is $\begin{pmatrix} 1 & 0 \\ 0 & 6 \end{pmatrix}$ (since $\gcd(2,3)=1$ and $\det=6$). Thus $G \cong \mathbb{Z}/1\mathbb{Z} \oplus \mathbb{Z}/6\mathbb{Z} \cong \mathbb{Z}_6$.
 
 5. **[Rational Form] Explain how the SNF of the characteristic matrix $xI - A$ determines the Rational Canonical Form of $A$.**
    ??? success "Solution"
-       The invariant factors $d_i(x)$ of $xI - A$ are precisely the invariant factors of the matrix $A$. The Rational Canonical Form is the block diagonal matrix of the companion matrices of these $d_i(x)$.
+       The invariant factors $d_i(x)$ of $xI - A$ are precisely the invariant factors of the matrix $A$ over $F[x]$. The Rational Canonical Form is the block diagonal matrix of the companion matrices of these $d_i(x)$.
 
 6. **[Unimodular Equivalence] Prove that two matrices $A, B$ are unimodularly equivalent iff they have the same invariant factors.**
    ??? success "Solution"

@@ -35,9 +35,9 @@ When moving from a single matrix to a **set of matrices**, the central question 
 
 2. **[Diagonalization] Prove: If a set of matrices is simultaneously diagonalizable, they must pairwise commute.**
    ??? success "Solution"
-       Let $P^{-1}A_i P = D_i$. Since diagonal matrices commute ($D_i D_j = D_j D_i$), we have $A_i A_j = (P D_i P^{-1})(P D_j P^{-1}) = P D_i D_j P^{-1} = P D_j D_i P^{-1} = A_j A_i$. Commutativity is a necessary condition.
+       Let $P^{-1}A_i P = D_i$. Since diagonal matrices commute ($D_i D_j = D_j D_i$), we have $A_i A_j = (P D_i P^{-1})(P D_j P^{-1}) = P D_i D_j P^{-1} = P D_j D_i P^{-1} = A_j A_i$. Commutativity is a necessary condition for a shared basis of eigenvectors.
 
-3. **[McCoy's Theorem] State the core criterion of McCoy's Theorem.**
+3. **[McCoy's Theorem] State the core criterion of McCoy's Theorem in terms of matrix families.**
    ??? success "Solution"
        A set of matrices is simultaneously triangularizable iff all commutators of the form $[A_i, p(A_1, \dots, A_m)]$ are nilpotent. This essentially requires that the non-commutativity of the family is "weak enough" to be compressed into a single triangular framework.
 
@@ -45,29 +45,29 @@ When moving from a single matrix to a **set of matrices**, the central question 
    ??? success "Solution"
        A solvable Lie algebra is one whose derived series terminates at zero. Lie's Theorem states that all matrices in a solvable Lie algebra over $\mathbb{C}$ can be simultaneously triangularized, generalizing the result for commuting matrices (Abelian algebras).
 
-5. **[Quantum Mechanics] Explain why "commuting observables can be measured simultaneously" using matrix language.**
+5. **[Quantum Mechanics] Explain why "commuting observables can be measured simultaneously" using matrix representation.**
    ??? success "Solution"
        Commuting Hermitian matrices (observables) can be simultaneously diagonalized. This means there exists a common basis of eigenvectors (states) in which all physical quantities have definite, non-interfering values (eigenvalues).
 
-6. **[Calculation] Determine if $A = \begin{pmatrix} 1 & 1 \ 0 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 2 & 3 \ 0 & 2 \end{pmatrix}$ are simultaneously diagonalizable.**
+6. **[Calculation] Determine if $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ and $B = \begin{pmatrix} 2 & 3 \\ 0 & 2 \end{pmatrix}$ are simultaneously diagonalizable.**
    ??? success "Solution"
-       They are both already upper triangular, so they are simultaneously triangularizable. They also commute ($AB = BA$). However, since they both have non-trivial Jordan blocks, they are not diagonalizable individually, let alone simultaneously.
+       They are both already upper triangular, so they are simultaneously triangularizable. They also commute ($AB = BA$). However, since they both have non-trivial Jordan blocks, they are not diagonalizable individually, making simultaneous diagonalization impossible.
 
 7. **[Normal Matrices] Prove: A family of pairwise commuting normal matrices can be simultaneously unitarily diagonalized.**
    ??? success "Solution"
-       This is the Spectral Theorem for commuting families. Since normal matrices are diagonalizable and commute, they share common eigenvectors. One can recursively decompose common eigenspaces using the unitary invariance of the normal property.
+       This is the Spectral Theorem for commuting families. Since normal matrices are diagonalizable and commute, they share common eigenvectors. One can recursively decompose common eigenspaces using the unitary invariance of the normal property to find a shared orthonormal basis.
 
 8. **[Invariant Subspaces] Let $AB=BA$. Prove that the eigenspaces of $A$ are invariant under $B$.**
    ??? success "Solution"
-       Let $Av = \lambda v$. Then $A(Bv) = B(Av) = B(\lambda v) = \lambda (Bv)$, so $Bv$ is also an eigenvector of $A$ for eigenvalue $\lambda$.
+       Let $Av = \lambda v$. Then $A(Bv) = B(Av) = B(\lambda v) = \lambda (Bv)$, so $Bv$ is also an eigenvector of $A$ for eigenvalue $\lambda$. This is the starting point for proving simultaneous diagonalization.
 
 9. **[Burnside] What is an "Irreducible" set of matrices? Can such a set be simultaneously triangularized?**
    ??? success "Solution"
-       An irreducible set has no common non-trivial invariant subspaces. Since simultaneous triangularization requires a full chain of common invariant subspaces, an irreducible set (for $n>1$) can never be simultaneously triangularized.
+       An irreducible set has no common non-trivial invariant subspaces. Since simultaneous triangularization requires a full chain of common invariant subspaces (a flag), an irreducible set (for $n>1$) can never be simultaneously triangularized.
 
-10. **[Pole Placement] How does simultaneous triangularization relate to the stability of switched linear systems?**
+10. **[Spectral Properties] How does simultaneous triangularization relate to the stability of switched linear systems?**
     ??? success "Solution"
-        If a set of system matrices $\{A_i\}$ is simultaneously triangularizable, then the stability of the switched system depends only on the eigenvalues of the matrices, significantly simplifying the analysis of the joint spectral radius (Ch63B).
+        If a set of matrices $\{A_i\}$ is simultaneously triangularizable, then the stability of the switched system depends only on the eigenvalues of the matrices individually, as the joint spectral radius $\rho(\Sigma)$ equals $\max \rho(A_i)$ in this case.
 
 ## Chapter Summary
 

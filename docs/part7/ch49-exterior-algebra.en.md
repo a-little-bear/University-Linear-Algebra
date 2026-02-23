@@ -23,8 +23,7 @@ Exterior algebra, also known as **Grassmann algebra**, generalizes the concept o
 
 !!! theorem "Theorem 49.1 (Linear Independence and $\wedge$)"
     A set of vectors $\{v_1, \dots, v_k\}$ is linearly independent if and only if their exterior product is non-zero:
-    $$v_1 \wedge v_2 \wedge \dots \wedge v_k 
-eq 0$$
+    $$v_1 \wedge v_2 \wedge \dots \wedge v_k \neq 0$$
 
 ---
 
@@ -58,18 +57,17 @@ eq 0$$
    ??? success "Solution"
        $i_v$ is an antiderivation of degree -1 that "inserts" a vector into an alternating form. Geometrically, it represents the reduction of a volume form to a lower-dimensional area form by fixing one direction.
 
-8. **[Hodge Star] Describe the Hodge star operator $*: \Lambda^k(V) 	o \Lambda^{n-k}(V)$ in an oriented inner product space.**
+8. **[Hodge Star] Describe the Hodge star operator $*: \Lambda^k(V) \to \Lambda^{n-k}(V)$ in an oriented inner product space.**
    ??? success "Solution"
-       The Hodge star maps a $k$-vector to its orthogonal $(n-k)$-complement. It satisfies $\alpha \wedge *\beta = \langle \alpha, \beta angle \omega$, where $\omega$ is the volume form.
+       The Hodge star maps a $k$-vector to its orthogonal $(n-k)$-complement. It satisfies $\alpha \wedge *\beta = \langle \alpha, \beta \rangle \omega$, where $\omega$ is the volume form.
 
-9. **[Composition] If $T: V 	o V$ has eigenvalues $\lambda_1, \dots, \lambda_n$, what are the eigenvalues of the induced operator $\Lambda^k(T)$?**
+9. **[Composition] If $T: V \to V$ has eigenvalues $\lambda_1, \dots, \lambda_n$, what are the eigenvalues of the induced operator $\Lambda^k(T)$?**
    ??? success "Solution"
        The eigenvalues are all possible products of $k$ distinct eigenvalues of $T$: $\{\lambda_{i_1} \dots \lambda_{i_k} : 1 \le i_1 < \dots < i_k \le n\}$.
 
 10. **[Decomposability] Define a "decomposable" $k$-vector and provide a non-decomposable example in $\Lambda^2(\mathbb{R}^4)$.**
     ??? success "Solution"
-        A $k$-vector is decomposable if it can be written as $v_1 \wedge \dots \wedge v_k$. In $\mathbb{R}^4$, $\omega = e_1 \wedge e_2 + e_3 \wedge e_4$ is non-decomposable because $\omega \wedge \omega = 2 e_1 \wedge e_2 \wedge e_3 \wedge e_4 
-eq 0$ (Plücker relation violation).
+        A $k$-vector is decomposable if it can be written as $v_1 \wedge \dots \wedge v_k$. In $\mathbb{R}^4$, $\omega = e_1 \wedge e_2 + e_3 \wedge e_4$ is non-decomposable because $\omega \wedge \omega = 2 e_1 \wedge e_2 \wedge e_3 \wedge e_4 \neq 0$ (Plücker relation violation).
 
 ## Chapter Summary
 

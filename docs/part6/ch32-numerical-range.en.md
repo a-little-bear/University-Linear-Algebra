@@ -17,7 +17,7 @@ The **numerical range** (also known as the field of values) of a matrix $A$ is t
 ## 32.1 Definitions and Convexity
 
 !!! definition "Definition 32.1 (Numerical Range)"
-    The numerical range of an $n 	imes n$ complex matrix $A$ is the set:
+    The numerical range of an $n \times n$ complex matrix $A$ is the set:
     $$W(A) = \{ x^* A x : x \in \mathbb{C}^n, \|x\| = 1 \}$$
 
 !!! theorem "Theorem 32.1 (Toeplitz-Hausdorff Theorem)"
@@ -37,15 +37,15 @@ The **numerical range** (also known as the field of values) of a matrix $A$ is t
 
 3. **[Numerical Radius] Define the numerical radius $r(A)$ and its relationship to the spectral norm.**
    ??? success "Solution"
-       $r(A) = \max \{ |z| : z \in W(A) \}$. It satisfies $\frac{1}{2}\|A\| \le r(A) \le \|A\|$. For normal matrices, $r(A) = \|A\| = ho(A)$.
+       $r(A) = \max \{ |z| : z \in W(A) \}$. It satisfies $\frac{1}{2}\|A\| \le r(A) \le \|A\|$. For normal matrices, $r(A) = \|A\| = \rho(A)$.
 
 4. **[Normal Matrices] For a normal matrix $A$, show that $W(A)$ is the convex hull of its eigenvalues.**
    ??? success "Solution"
        If $A$ is normal, it is unitarily diagonalizable. $x^* A x = \sum \lambda_i |y_i|^2$ where $y = U^* x$. Since $\sum |y_i|^2 = 1$, $x^* A x$ is a convex combination of the eigenvalues.
 
-5. **[Ellipse Theorem] Compute $W(A)$ for $A = \begin{pmatrix} 0 & 1 \ 0 & 0 \end{pmatrix}$.**
+5. **[Ellipse Theorem] Compute $W(A)$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       For this $2 	imes 2$ matrix, $W(A)$ is a circular disk centered at the origin with radius $1/2$. More generally, for $2 	imes 2$ matrices, $W(A)$ is always an ellipse with the eigenvalues as foci.
+       For this $2 \times 2$ matrix, $W(A)$ is a circular disk centered at the origin with radius $1/2$. More generally, for $2 \times 2$ matrices, $W(A)$ is always an ellipse with the eigenvalues as foci.
 
 6. **[Shift and Scale] How do $W(A+cI)$ and $W(cA)$ relate to $W(A)$?**
    ??? success "Solution"
@@ -65,7 +65,7 @@ The **numerical range** (also known as the field of values) of a matrix $A$ is t
 
 10. **[Boundary] Describe the significance of the "sharp points" on the boundary of $W(A)$.**
     ??? success "Solution"
-        Any sharp point (corner) of the boundary of $W(A)$ must be an eigenvalue of $A$. This is because the numerical range of a $2 	imes 2$ sub-block is an ellipse, which is smooth; corners can only occur when multiple eigenspaces intersect at the boundary.
+        Any sharp point (corner) of the boundary of $W(A)$ must be an eigenvalue of $A$. This is because the numerical range of a $2 \times 2$ sub-block is an ellipse, which is smooth; corners can only occur when multiple eigenspaces intersect at the boundary.
 
 ## Chapter Summary
 

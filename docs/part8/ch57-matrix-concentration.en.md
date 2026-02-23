@@ -20,16 +20,16 @@ When generalizing concentration inequalities from scalar to matrix-valued random
     Let $H$ be a fixed Hermitian matrix. The map $A \mapsto \operatorname{tr} \exp(H + \log A)$ is concave on the cone of positive definite matrices.
 
 !!! theorem "Theorem 57.10 (Matrix Bernstein Inequality)"
-    Let $X_1, \dots, X_n$ be independent, $d 	imes d$ Hermitian random matrices such that $\mathbb{E}[X_i] = 0$ and $\|X_i\| \le R$ almost surely. Let $\sigma^2 = \|\sum \mathbb{E}[X_i^2]\|$. For all $t \ge 0$:
-    $$\mathbb{P}\left( \left\| \sum_{i=1}^n X_i ight\| \ge t ight) \le 2d \exp\left( -\frac{t^2/2}{\sigma^2 + Rt/3} ight)$$
+    Let $X_1, \dots, X_n$ be independent, $d \times d$ Hermitian random matrices such that $\mathbb{E}[X_i] = 0$ and $\|X_i\| \le R$ almost surely. Let $\sigma^2 = \|\sum \mathbb{E}[X_i^2]\|$. For all $t \ge 0$:
+    $$\mathbb{P}\left( \left\| \sum_{i=1}^n X_i \right\| \ge t \right) \le 2d \exp\left( -\frac{t^2/2}{\sigma^2 + Rt/3} \right)$$
 
 ---
 
 ## Exercises
 
-1. **[Non-commutativity] Explain why $e^{A+B} = e^A e^B$ fails for general matrices and provide a $2 	imes 2$ counterexample.**
+1. **[Non-commutativity] Explain why $e^{A+B} = e^A e^B$ fails for general matrices and provide a $2 \times 2$ counterexample.**
    ??? success "Solution"
-       The identity holds if and only if $A$ and $B$ commute. Counterexample: $A = \begin{pmatrix} 0 & 1 \ 0 & 0 \end{pmatrix}, B = \begin{pmatrix} 0 & 0 \ 1 & 0 \end{pmatrix}$. Here $e^A = I+A, e^B = I+B$, but $e^{A+B} = \begin{pmatrix} \cosh 1 & \sinh 1 \ \sinh 1 & \cosh 1 ight)$. Non-commutativity prevents the simple decomposition of the moment generating function $\mathbb{E}[\operatorname{tr} \exp(	heta \sum X_i)]$.
+       The identity holds if and only if $A$ and $B$ commute. Counterexample: $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, B = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$. Here $e^A = I+A, e^B = I+B$, but $e^{A+B} = \begin{pmatrix} \cosh 1 & \sinh 1 \\ \sinh 1 & \cosh 1 \end{pmatrix} \neq e^A e^B$. Non-commutativity prevents the simple decomposition of the moment generating function $\mathbb{E}[\operatorname{tr} \exp(\theta \sum X_i)]$.
 
 2. **[Lieb's Theorem] Describe the role of Lieb's Concavity Theorem in the proof of matrix concentration inequalities.**
    ??? success "Solution"
@@ -45,27 +45,27 @@ When generalizing concentration inequalities from scalar to matrix-valued random
 
 5. **[Calculation] Given $X$ is a random Hermitian matrix with $\mathbb{E}[X]=0$ and $X^2 \le \sigma^2 I$, derive a tail bound for $\|X\|$ using the Matrix Hoeffding Inequality.**
    ??? success "Solution"
-       $\mathbb{P}(\|X\| \ge t) \le 2d \exp(-t^2 / (8\sigma^2))$.
+       $\mathbb{P}(\|X\| \ge t) \le 2d \exp(-t^2 / (8\sigma^2))$. This provides an exponential decay for the spectral norm of large deviations.
 
 6. **[Covariance Estimation] Estimate the sample complexity $n$ required to estimate a $d$-dimensional covariance matrix $\Sigma$ such that $\|\hat{\Sigma} - \Sigma\| \le \epsilon \|\Sigma\|$.**
    ??? success "Solution"
-       Matrix concentration inequalities suggest $n = O(d \log d / \epsilon^2)$. This indicates that the number of samples must scale linearly with the dimension (up to a log factor) to ensure spectral convergence.
+       Matrix concentration inequalities suggest $n = O(d \log d / \epsilon^2)$. This indicates that the number of samples must scale linearly with the dimension (up to a log factor) to ensure spectral convergence in high dimensions.
 
 7. **[Khintchine] Why does the Noncommutative Khintchine Inequality consider both row and column variances for non-Hermitian sums $\sum \epsilon_i A_i$?**
    ??? success "Solution"
-       For rectangular or non-Hermitian matrices, the spectral norm depends on the maximum of the row-sum and column-sum variances: $\max(\|\sum A_i A_i^*\|^{1/2}, \|\sum A_i^* A_i\|^{1/2})$. This captures the structural asymmetry of the fluctuations.
+       For rectangular or non-Hermitian matrices, the spectral norm depends on the maximum of the row-sum and column-sum variances: $\max(\|\sum A_i A_i^*\|^{1/2}, \|\sum A_i^* A_i\|^{1/2})$. This captures the structural asymmetry of the fluctuations across different directions.
 
 8. **[Random Projection] Explain how the Johnson-Lindenstrauss Lemma utilizes matrix concentration to preserve pairwise distances.**
    ??? success "Solution"
-       A random projection matrix $P$ acts as a near-isometry on a finite set of points. Matrix concentration ensures that the operator $P^T P$ behaves like the identity on the relevant subspace with high probability, restricting the distortion of lengths.
+       A random projection matrix $P$ acts as a near-isometry on a finite set of points. Matrix concentration ensures that the operator $P^T P$ behaves like the identity on the relevant subspace with high probability, restricting the distortion of lengths during dimensionality reduction.
 
 9. **[Freedman's Inequality] Contrast Matrix Freedman's Inequality with the Matrix Azuma Inequality.**
    ??? success "Solution"
-       Azuma's inequality uses deterministic bounds on martingale differences, while Freedman's uses the "predictable quadratic variation" (conditional variance). Freedman's bound is sharper and adaptive when the system remains quiet for most of the time.
+       Azuma's inequality uses deterministic bounds on martingale differences, while Freedman's uses the "predictable quadratic variation" (conditional variance). Freedman's bound is sharper and adaptive, responding to the actual variance path of the process.
 
 10. **[Universal Behavior] Discuss the "universality" of matrix concentration bounds.**
     ??? success "Solution"
-        Concentration bounds typically depend only on the first two moments and a uniform bound on the norm of the random matrices. This implies that the macroscopic behavior (spectral concentration) is robust to the specific distribution of the entries, provided the variance structure is identical.
+        Concentration bounds typically depend only on the first two moments and a uniform bound on the norm of the random matrices. This implies that the macroscopic behavior (spectral concentration) is robust to the specific distribution of the entries, provided the covariance structure is identical.
 
 ## Chapter Summary
 

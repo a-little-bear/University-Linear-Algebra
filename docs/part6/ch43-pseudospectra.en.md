@@ -10,8 +10,7 @@
 
 </div>
 
-For **non-normal matrices** ($AA^* 
-eq A^*A$), the spectrum $\sigma(A)$ can be extremely sensitive to perturbations. A small error in the entries can move the eigenvalues by a large amount. **Pseudospectra** provide a more robust description of an operator's behavior by identifying the regions of the complex plane where $(zI - A)$ is "nearly singular." This theory is essential for understanding transient phenomena in fluid dynamics, numerical analysis, and the behavior of iterative solvers.
+For **non-normal matrices** ($AA^* \neq A^*A$), the spectrum $\sigma(A)$ can be extremely sensitive to perturbations. A small error in the entries can move the eigenvalues by a large amount. **Pseudospectra** provide a more robust description of an operator's behavior by identifying the regions of the complex plane where $(zI - A)$ is "nearly singular." This theory is essential for understanding transient phenomena in fluid dynamics, numerical analysis, and the behavior of iterative solvers.
 
 ---
 
@@ -33,7 +32,7 @@ eq A^*A$), the spectrum $\sigma(A)$ can be extremely sensitive to perturbations.
 
 1. **[Fundamentals] Compute $\sigma_\epsilon(A)$ for a normal matrix $A$.**
    ??? success "Solution"
-       For a normal matrix, the pseudospectrum is simply the union of open disks of radius $\epsilon$ centered at the eigenvalues: $\sigma_\epsilon(A) = \{z : \operatorname{dist}(z, \sigma(A)) < \epsilon\}$. Non-normality makes these sets much larger and non-spherical.
+       For a normal matrix, the pseudospectrum is simply the union of open disks of radius $\epsilon$ centered at the eigenvalues: $\sigma_\epsilon(A) = \{z \in \mathbb{C} : \operatorname{dist}(z, \sigma(A)) < \epsilon\}$. Non-normality makes these sets much larger and non-spherical.
 
 2. **[Resolvent] Relate the pseudospectrum to the resolvent operator $R(z, A) = (zI - A)^{-1}$.**
    ??? success "Solution"
@@ -43,9 +42,9 @@ eq A^*A$), the spectrum $\sigma(A)$ can be extremely sensitive to perturbations.
    ??? success "Solution"
        Yes, if the matrix is non-normal. Even if all eigenvalues satisfy $\operatorname{Re}(\lambda) < 0$, the non-orthogonal eigenvectors can interfere to produce massive transient growth before the asymptotic decay takes over. Pseudospectra quantify this risk.
 
-4. **[Calculation] Let $A = \begin{pmatrix} -1 & 100 \ 0 & -1 \end{pmatrix}$. Where does $\sigma_{0.1}(A)$ lie?**
+4. **[Calculation] Let $A = \begin{pmatrix} -1 & 100 \\ 0 & -1 \end{pmatrix}$. Where does $\sigma_{0.1}(A)$ lie?**
    ??? success "Solution"
-       $A$ is highly non-normal. While $\sigma(A) = \{-1\}$, the pseudospectrum $\sigma_{0.1}(A)$ is a large region that extends into the right-half plane because $\|(zI-A)^{-1}\|$ is large for $z$ near $-1$ due to the large off-diagonal element.
+       $A$ is highly non-normal. While $\sigma(A) = \{-1\}$, the pseudospectrum $\sigma_{0.1}(A)$ is a large region that extends significantly into the right-half plane because $\|(zI-A)^{-1}\|$ is large for $z$ near $-1$ due to the large off-diagonal element.
 
 5. **[Kreiss] State the Kreiss Matrix Theorem.**
    ??? success "Solution"

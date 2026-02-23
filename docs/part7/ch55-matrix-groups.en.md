@@ -4,7 +4,7 @@
 
 **Prerequisites**: Matrix Algebra (Ch2) · Groups and Symmetry · Matrix Exponential (Ch13) · Differential Calculus
 
-**Chapter Outline**: Matrix Lie Groups ($GL, SL, O, SO, U, SU, Sp$) → The Exponential Map $\exp: \mathfrak{g} 	o G$ → Lie Algebras as Tangent Spaces → Commutators and the Lie Bracket → Adjoint Representation → Baker-Campbell-Hausdorff Formula → Relation between Group Topologies and Algebraic Structures
+**Chapter Outline**: Matrix Lie Groups ($GL, SL, O, SO, U, SU, Sp$) → The Exponential Map $\exp: \mathfrak{g} \to G$ → Lie Algebras as Tangent Spaces → Commutators and the Lie Bracket → Adjoint Representation → Baker-Campbell-Hausdorff Formula → Relation between Group Topologies and Algebraic Structures
 
 **Extension**: Matrix groups are the fundamental language of symmetry in physics (Standard Model) and geometry (Riemannian manifolds).
 
@@ -44,27 +44,27 @@ Matrix Lie groups are groups of matrices that also possess the structure of a sm
 
 5. **[Adjoint] Define the adjoint representation $\operatorname{Ad}_g(X)$.**
    ??? success "Solution"
-       $\operatorname{Ad}_g(X) = g X g^{-1}$. This maps an element of the Lie algebra to another element of the same algebra via the group action, preserving the Lie bracket.
+       $\operatorname{Ad}_g(X) = g X g^{-1}$. This operator maps an element of the Lie algebra to another element of the same algebra via the group action, preserving the Lie bracket.
 
 6. **[Commutator] Prove the Jacobi Identity for the Lie bracket: $[X, [Y, Z]] + [Y, [Z, X]] + [Z, [X, Y]] = 0$.**
    ??? success "Solution"
        Expand using $[X, Y] = XY - YX$ and verify that all 12 terms cancel out in pairs. This identity is the fundamental axiom of Lie algebras.
 
-7. **[Center] What is the center of the Lie algebra $\mathfrak{gl}(n)$?**
+7. **[Center] What is the center of the Lie algebra $\mathfrak{gl}(n, \mathbb{C})$?**
    ??? success "Solution"
-       The center consists of matrices that commute with all other matrices. For $\mathfrak{gl}(n)$, these are the scalar matrices $cI$.
+       The center consists of matrices that commute with all other matrices in the algebra. For $\mathfrak{gl}(n)$, these are exactly the scalar matrices $cI$.
 
-8. **[Spin Groups] Relate $SU(2)$ to $SO(3)$.**
+8. **[Spin Groups] Relate $SU(2)$ to $SO(3)$ via a homomorphism.**
    ??? success "Solution"
-       There is a $2$-to-$1$ surjective homomorphism from $SU(2)$ to $SO(3)$. This shows that $SU(2)$ is the universal cover of $SO(3)$, a fact crucial for describing electron spin in physics.
+       There is a $2$-to-$1$ surjective homomorphism from $SU(2)$ to $SO(3)$. This implies that $SU(2)$ is the universal cover of $SO(3)$, a fact crucial for describing electron spin in quantum mechanics.
 
 9. **[Exponential Map] Is the exponential map always surjective for $GL(n, \mathbb{C})$?**
    ??? success "Solution"
-       Yes, for $GL(n, \mathbb{C})$, every invertible matrix has a logarithm. However, for $SL(2, \mathbb{R})$, it is not surjective (e.g., matrices with negative eigenvalues and non-trivial Jordan blocks lack real logarithms).
+       Yes, for $GL(n, \mathbb{C})$, every invertible matrix has a matrix logarithm. However, for $SL(2, \mathbb{R})$, it is not surjective (e.g., matrices with negative eigenvalues and non-trivial Jordan blocks lack real logarithms).
 
 10. **[Physics] Why are Lie groups central to the Standard Model of particle physics?**
     ??? success "Solution"
-        The symmetries of the fundamental interactions are described by the gauge groups $U(1)$ (electromagnetism), $SU(2)$ (weak force), and $SU(3)$ (strong force). The particles correspond to representations of these matrix groups.
+        The symmetries of the fundamental interactions are described by the gauge groups $U(1)$ (electromagnetism), $SU(2)$ (weak force), and $SU(3)$ (strong force). Particles correspond to irreducible representations of these matrix groups.
 
 ## Chapter Summary
 

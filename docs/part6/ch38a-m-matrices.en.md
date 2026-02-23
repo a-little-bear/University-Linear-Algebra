@@ -17,8 +17,7 @@
 ## 38A.1 Z-Matrices and M-Matrices
 
 !!! definition "Definition 38A.1 (Z-Matrix)"
-    A square matrix $A$ is a **Z-matrix** if $a_{ij} \le 0$ for all $i 
-eq j$.
+    A square matrix $A$ is a **Z-matrix** if $a_{ij} \le 0$ for all $i \neq j$.
 
 !!! definition "Definition 38A.2 (M-Matrix)"
     A Z-matrix $A$ is an **M-matrix** if it satisfies any of the following equivalent conditions:
@@ -31,13 +30,13 @@ eq j$.
 
 ## Exercises
 
-1. **[Fundamentals] Is $A = \begin{pmatrix} 2 & -1 \ -1 & 2 \end{pmatrix}$ an M-matrix?**
+1. **[Fundamentals] Is $A = \begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$ an M-matrix?**
    ??? success "Solution"
-       Yes. It is a Z-matrix (off-diagonals $\le 0$). Principal minors: $2 > 0$ and $\det A = 3 > 0$. Since all principal minors are positive, it is an M-matrix. Note $A^{-1} = \frac{1}{3} \begin{pmatrix} 2 & 1 \ 1 & 2 \end{pmatrix} \ge 0$.
+       Yes. It is a Z-matrix (off-diagonals $\le 0$). Principal minors: $2 > 0$ and $\det A = 3 > 0$. Since all principal minors are positive, it is an M-matrix. Note $A^{-1} = \frac{1}{3} \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix} \ge 0$.
 
-2. **[Inverse Positivity] Prove that if $A = sI - B$ with $B \ge 0$ and $s > ho(B)$, then $A$ is an M-matrix.**
+2. **[Inverse Positivity] Prove that if $A = sI - B$ with $B \ge 0$ and $s > \rho(B)$, then $A$ is an M-matrix.**
    ??? success "Solution"
-       Using the Neumann series: $A^{-1} = (sI - B)^{-1} = \frac{1}{s}(I - B/s)^{-1} = \frac{1}{s} \sum_{k=0}^\infty (B/s)^k$. Since $B \ge 0$ and $s > 0$, every term in the sum is nonnegative. The series converges because $ho(B/s) < 1$. Thus $A^{-1} \ge 0$.
+       Using the Neumann series: $A^{-1} = (sI - B)^{-1} = \frac{1}{s}(I - B/s)^{-1} = \frac{1}{s} \sum_{k=0}^\infty (B/s)^k$. Since $B \ge 0$ and $s > 0$, every term in the sum is nonnegative. The series converges because $\rho(B/s) < 1$. Thus $A^{-1} \ge 0$.
 
 3. **[Stability] Relate M-matrices to Hurwitz stability.**
    ??? success "Solution"
@@ -53,16 +52,15 @@ eq j$.
 
 6. **[Diagonal Dominance] Prove that a Z-matrix with strictly positive diagonal dominance is an M-matrix.**
    ??? success "Solution"
-       If $a_{ii} > \sum_{j 
-eq i} |a_{ij}|$, then by Gershgorin's Circle Theorem, all eigenvalues have positive real parts. A Z-matrix with eigenvalues in the right half-plane is an M-matrix.
+       If $a_{ii} > \sum_{j \neq i} |a_{ij}|$, then by Gershgorin's Circle Theorem, all eigenvalues have positive real parts. A Z-matrix with eigenvalues in the right half-plane is an M-matrix.
 
 7. **[Monotonicity] Prove the Comparison Theorem: If $A$ is an M-matrix and $B \ge A$ is a Z-matrix, then $B$ is an M-matrix.**
    ??? success "Solution"
-       $B \ge A \implies I - B \le I - A$ (roughly). More rigorously, since $A$ is an M-matrix, there exists $x > 0$ such that $Ax > 0$. Then $Bx \ge Ax > 0$. By the $Ax > 0$ characterization, $B$ is an M-matrix.
+       $B \ge A \implies I - B \le I - A$. Since $A$ is an M-matrix, there exists $x > 0$ such that $Ax > 0$. Then $Bx \ge Ax > 0$. By the $Ax > 0$ characterization, $B$ is an M-matrix.
 
 8. **[Singular M-matrices] Define a singular M-matrix and its property.**
    ??? success "Solution"
-       A singular M-matrix $A$ is a Z-matrix where $\operatorname{Re}(\lambda_i) \ge 0$ and $ho(B) = s$. It arises in Markov chains where $I-P$ is a singular M-matrix (each column/row sum is zero).
+       A singular M-matrix $A$ is a Z-matrix where $\operatorname{Re}(\lambda_i) \ge 0$ and the spectral radius condition is satisfied exactly. It arises in Markov chains where $I-P$ is a singular M-matrix (with zero row/column sums).
 
 9. **[Hadamard] Show that the Hadamard product of two M-matrices is not necessarily an M-matrix.**
    ??? success "Solution"
@@ -70,7 +68,7 @@ eq i} |a_{ij}|$, then by Gershgorin's Circle Theorem, all eigenvalues have posit
 
 10. **[Markov Chains] Why is $L = I - P$ (where $P$ is a transition matrix) related to M-matrices?**
     ??? success "Solution"
-        $L$ is a Z-matrix with zero row sums. It is a singular M-matrix. Its properties (like the existence of a positive null-vector) are fundamental to the theory of stationary distributions.
+        $L$ is a Z-matrix with zero row sums. It is a singular M-matrix. Its properties (like the existence of a positive null-vector) are fundamental to the theory of stationary distributions and random walks.
 
 ## Chapter Summary
 
