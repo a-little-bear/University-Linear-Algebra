@@ -61,33 +61,109 @@
 
 ## 练习题
 
-****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ## 本章小结
+**1. [基础] 已知 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。计算 $AB$ 和 $BA$。**
 
-矩阵运算构建了线性代数的计算语法：
+??? success "参考答案"
+    **计算 $AB$：**
+    $AB = \begin{pmatrix} 1\cdot 0 + 2\cdot 1 & 1\cdot 1 + 2\cdot 0 \\ 3\cdot 0 + 4\cdot 1 & 3\cdot 1 + 4\cdot 0 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$。
+    
+    **计算 $BA$：**
+    $BA = \begin{pmatrix} 0\cdot 1 + 1\cdot 3 & 0\cdot 2 + 1\cdot 4 \\ 1\cdot 1 + 0\cdot 3 & 1\cdot 2 + 0\cdot 4 \end{pmatrix} = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$。
+    
+    **结论：**
+    $AB \neq BA$，这验证了矩阵乘法的非交换性。
 
+**2. [单位矩阵] 证明对于任何 $n \times n$ 矩阵 $A$，都有 $AI = IA = A$。**
 
-****：这是矩阵乘法与标量乘法最本质的区别，决定了算子作用的顺序不可随意调换。
+??? success "参考答案"
+    **证明：**
+    1. 考虑 $AI$ 的分量 $(AI)_{ij} = \sum_{k=1}^n a_{ik} \delta_{kj}$。
+    2. 其中 $\delta_{kj}$ 是 Kronecker 符号，仅当 $k=j$ 时为 1，其余为 0。
+    3. 因此求和式中只有 $k=j$ 的项保留，即 $(AI)_{ij} = a_{ij} \cdot 1 = a_{ij}$。
+    4. 同理可证 $(IA)_{ij} = a_{ij}$。
+    5. 故 $AI = IA = A$。
 
-****：转置和求逆操作保持了矩阵内部的逻辑一致性，是解决算子方程的基础。
+**3. [转置] 已知 $(AB)^T = B^T A^T$。利用此性质求 $(A^T B)^T$。**
 
-****：特殊矩阵（单位、对角、分块）极大简化了复杂系统的分析，是数值算法优化的核心切入点。
+??? success "参考答案"
+    **推导：**
+    1. 根据转置的分配律，积的转置等于转置之积的倒序。
+    2. 令 $M = A^T, N = B$。则 $(MN)^T = N^T M^T$。
+    3. 代入：$(A^T B)^T = B^T (A^T)^T$。
+    4. 由于转置的转置是其自身：$(A^T)^T = A$。
+    5. **结论：** $(A^T B)^T = B^T A$。
+
+**4. [对称性] 若 $A$ 是对称矩阵，证明 $A^2$ 也是对称矩阵。**
+
+??? success "参考答案"
+    **证明：**
+    1. 对称矩阵满足 $A^T = A$。
+    2. 我们需要证明 $(A^2)^T = A^2$。
+    3. 利用性质 $(AB)^T = B^T A^T$：$(AA)^T = A^T A^T$。
+    4. 代入 $A^T = A$ 得：$(AA)^T = AA = A^2$。
+    5. 因此 $A^2$ 是对称矩阵。
+
+**5. [逆矩阵] 求 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ 的逆矩阵。**
+
+??? success "参考答案"
+    **步骤 1：计算行列式。**
+    $\det(A) = 1\cdot 4 - 2\cdot 3 = 4 - 6 = -2$。
+    由于 $\det(A) \neq 0$，逆矩阵存在。
+    
+    **步骤 2：利用 $2 \times 2$ 求逆公式。**
+    对于 $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$，逆为 $\frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$。
+    $A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$。
+
+**6. [幂运算] 计算 $A^k$ 其中 $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$。**
+
+??? success "参考答案"
+    **观察前几次幂：**
+    $A^2 = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$。
+    $A^3 = A^2 A = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$。
+    
+    **归纳规律：**
+    可以推测 $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$。
+    该矩阵常用于描述线性系统中的平移累积。
+
+**7. [迹] 证明 $\operatorname{tr}(AB) = \operatorname{tr}(BA)$。**
+
+??? success "参考答案"
+    **证明：**
+    1. 根据迹的定义：$\operatorname{tr}(M) = \sum M_{ii}$。
+    2. $(AB)_{ii} = \sum_j a_{ij} b_{ji}$。
+    3. 故 $\operatorname{tr}(AB) = \sum_i \sum_j a_{ij} b_{ji}$。
+    4. $(BA)_{jj} = \sum_i b_{ji} a_{ij}$。
+    5. 故 $\operatorname{tr}(BA) = \sum_j \sum_i b_{ji} a_{ij}$。
+    6. 由于标量乘法满足交换律且有限项求和顺序可交换，二者相等。
+
+**8. [初等矩阵] 左乘一个初等矩阵 $E$ 相当于对 $A$ 执行什么操作？**
+
+??? success "参考答案"
+    **结论：**
+    左乘 $E$ 相当于对 $A$ 执行**一次对应的初等行变换**。
+    - 若 $E$ 是交换两行的单位阵，则 $EA$ 交换 $A$ 的对应行。
+    - 若 $E$ 是某行乘 $k$ 的单位阵，则 $EA$ 使 $A$ 的对应行乘 $k$。
+    这一性质是高斯消元法能够被“矩阵化”的核心原因。
+
+**9. [分块] 计算 $\begin{pmatrix} I & A \\ 0 & I \end{pmatrix} \begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}$。**
+
+??? success "参考答案"
+    **分块乘法步骤：**
+    结果矩阵的分块元素为：
+    - 左上：$I\cdot I + A\cdot 0 = I$
+    - 右上：$I\cdot(-A) + A\cdot I = -A + A = 0$
+    - 左下：$0\cdot I + I\cdot 0 = 0$
+    - 右下：$0\cdot(-A) + I\cdot I = I$
+    
+    **结论：**
+    结果为单位阵 $\begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}$。这说明该矩阵的逆就是将其右上角变号。
+
+**10. [秩初步] 矩阵 $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$ 的秩是多少？**
+
+??? success "参考答案"
+    **分析：**
+    1. 矩阵的秩定义为最大线性无关行（或列）的个数。
+    2. 第一行为 $(1, 0)$，非零。
+    3. 第二行为 $(0, 0)$，零行。
+    4. 显然只有第一行是独立贡献的。
+    **结论：** 秩为 1。该矩阵将整个平面投影到了 $x$ 轴上。
