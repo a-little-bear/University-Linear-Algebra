@@ -1,79 +1,98 @@
-# Chapter 17: Nonnegative Matrices and Perron-Frobenius Theory
+# Chapter 17: Non-negative Matrices and Perron-Frobenius Theory
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · Matrix Analysis (Ch14) · Graph Theory Basics (Ch27)
+**Prerequisites**: Eigenvalues (Ch06) · Matrix Analysis (Ch14) · Graph Theory Basics (Ch27)
 
-**Chapter Outline**: Definitions of Nonnegative and Positive Matrices → Irreducibility → Perron-Frobenius Theorem → Properties of the Perron Root $\rho(A)$ → Stochastic Matrices → Exponent of a Matrix → Power Method → Applications (PageRank, Population Models, Markov Chains)
+**Chapter Outline**: Definition of Non-negative Matrices → Positive vs. Non-negative → Irreducibility (Graph Criteria) → Perron's Theorem (Positive Matrices) → Frobenius Extension (Irreducible Matrices) → Uniqueness of Perron Eigenvalues and Vectors → Stochastic Matrices and Markov Chains → Collatz-Wielandt Formula → Application: Google's PageRank Algorithm
 
-**Extension**: Perron-Frobenius theory reveals the "dominant growth mode" of a system, serving as the link between algebraic structure and long-term behavior.
+**Extension**: Perron-Frobenius theory is the ultimate tool for analyzing steady states in discrete-time systems (e.g., population models, economic input-output, web ranking); it reveals how the physical constraint of "non-negativity" leads to exceptionally strong algebraic laws.
 
 </div>
 
-Nonnegative matrices are ubiquitous in probability, economics, and biology. Perron-Frobenius theory is the crown of nonnegative matrix analysis, ensuring that under certain connectivity conditions, a unique, positive principal eigenvector exists.
+In the real world, most physical quantities (e.g., probability, population, money, pixels) are non-negative. Non-negative matrices provide the mathematical models for the evolution of these quantities. Perron-Frobenius theory not only guarantees the existence of a dominant eigenvalue but also establishes a "physically meaningful" positive eigenvector associated with it.
 
 ---
 
-## 17.1 Perron-Frobenius Theorem
+## 17.1 Positive Matrices and Perron's Theorem
 
-!!! definition "Definition 17.1 (Irreducible Matrix)"
-    A nonnegative matrix $A$ is **irreducible** if its associated directed graph is strongly connected (a path exists between any two vertices).
+!!! definition "Definition 17.1 (Positive and Non-negative Matrices)"
+    1.  **Non-negative Matrix $A \ge 0$**: All entries $a_{ij} \ge 0$.
+    2.  **Positive Matrix $A > 0$**: All entries $a_{ij} > 0$.
 
-!!! theorem "Theorem 17.3 (Perron-Frobenius Theorem)"
-    If $A$ is an irreducible nonnegative matrix, then:
-    1. The spectral radius $\lambda = \rho(A)$ is an eigenvalue of $A$ (the Perron root).
-    2. There exists a unique (normalized) positive eigenvector $v > 0$ such that $Av = \lambda v$.
-    3. $\lambda$ is a simple eigenvalue.
+!!! theorem "Theorem 17.1 (Perron's Theorem)"
+    If $A > 0$, then:
+    1.  **Dominant Eigenvalue**: The spectral radius $r = \rho(A)$ is an eigenvalue of $A$ and $r > 0$.
+    2.  **Simplicity**: $r$ is a simple root of the characteristic equation (algebraic multiplicity 1).
+    3.  **Positive Vector**: The eigenvector $\mathbf{v}$ associated with $r$ can be chosen strictly positive ($v_i > 0$).
+    4.  **Dominance**: For any other eigenvalue $\lambda$, $|\lambda| < r$.
+
+---
+
+## 17.2 Irreducibility and the Frobenius Extension
+
+!!! definition "Definition 17.2 (Irreducible Matrix)"
+    A matrix $A$ is **irreducible** if it cannot be transformed into a block upper triangular form via permutation. In graph theory, this is equivalent to its associated directed graph being strongly connected.
+
+!!! theorem "Theorem 17.2 (Frobenius Theorem)"
+    For an irreducible non-negative matrix $A \ge 0$, most of Perron's conclusions hold, but "dominance" is weakened to $|\lambda| \le r$ (there may be multiple eigenvalues with modulus $r$, as seen in cyclic matrices).
+
+---
+
+## 17.3 Stochastic Matrices and Markov Chains
+
+!!! definition "Definition 17.3 (Stochastic Matrix)"
+    A non-negative matrix $A$ is **row-stochastic** if the sum of elements in each row is 1.
+    **Properties**: A stochastic matrix has $\rho(A) = 1$, and the all-ones vector $\mathbf{1}$ is the eigenvector associated with the eigenvalue 1.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Is $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ irreducible? Is it primitive?**
+1. **[Criteria] Determine if $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ is a positive matrix.**
    ??? success "Solution"
-       - It is irreducible because there are paths $1 \to 2$ and $2 \to 1$.
-       - It is not primitive because it is periodic. $A^2 = I, A^3 = A, \dots$ never becomes a strictly positive matrix. Its eigenvalues are $1, -1$, both with modulus 1.
+       No. It is a non-negative matrix but contains zero entries.
 
-2. **[Perron Root] If each row sum of a nonnegative matrix $A$ is $s$, prove $\rho(A) = s$.**
+2. **[Irreducibility] Is the matrix $A$ from the previous exercise irreducible?**
    ??? success "Solution"
-       Let $\mathbf{1} = (1, \dots, 1)^T$. The row-sum condition implies $A \mathbf{1} = s \mathbf{1}$. Thus $s$ is an eigenvalue. Since $A \ge 0$ and all eigenvalues are bounded by the maximum row sum (Gershgorin), $\rho(A) = s$.
+       Yes. Its associated graph $1 \leftrightarrow 2$ is strongly connected.
 
-3. **[Monotonicity] If $0 \le A \le B$, prove $\rho(A) \le \rho(B)$.**
+3. **[Eigenvalue] Find the Perron eigenvalue of $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       Since $A, B$ are nonnegative, $A^k \le B^k$ for all $k$. By Gelfand's formula $\rho(A) = \lim \|A^k\|^{1/k} \le \lim \|B^k\|^{1/k} = \rho(B)$. This reflects the monotonicity of the spectral radius for nonnegative matrices.
+       The eigenvalues are 2 and 0. Thus $r = \rho(A) = 2$.
 
-4. **[Primitivity] Determine if $A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$ is primitive.**
+4. **[Eigenvector] Find the positive eigenvector for $r=2$ from the matrix above.**
    ??? success "Solution"
-       Calculate $A^2 = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix} > 0$. Since a power of the matrix is strictly positive, $A$ is primitive.
+       $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} = 2 \begin{pmatrix} 1 \\ 1 \end{pmatrix}$. Thus $\mathbf{v} = (1, 1)^T$.
 
-5. **[Collatz-Wielandt] Use row sums to estimate the spectral radius of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
+5. **[Stochastic] Prove a stochastic matrix always has an eigenvalue of 1.**
    ??? success "Solution"
-       Row sums are 3 and 7. Thus $3 \le \rho(A) \le 7$. The exact value is $\frac{5+\sqrt{13}}{2} \approx 5.30$.
+       The $i$-th component of $A \mathbf{1}$ is the sum of the $i$-th row. By definition, this sum is 1, so $A \mathbf{1} = 1 \cdot \mathbf{1}$.
 
-6. **[Application] In PageRank, why is a damping factor (adding a multiple of an all-ones matrix) used?**
+6. **[Graph] Why is $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ reducible?**
    ??? success "Solution"
-       To make the matrix **primitive**. This ensures the power method converges to a unique positive stationary distribution (the rank vector), eliminating convergence issues caused by isolated nodes or dead loops in the original graph.
+       It is already upper triangular (or observe the graph: vertex 2 cannot reach vertex 1).
 
-7. **[Spectral Distribution] If $A > 0$, what condition do the other eigenvalues' moduli satisfy relative to the Perron root?**
+7. **[Frobenius] Give an example of an irreducible non-negative matrix with $|\lambda| = r$ but $\lambda \neq r$.**
    ??? success "Solution"
-       For a primitive matrix (especially $A>0$), all other eigenvalues satisfy $|\lambda_i| < \rho(A)$ ($i \ge 2$).
+       $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Eigenvalues are 1 and -1. $|-1| = 1$.
 
-8. **[Stochastic Matrix] Prove that the spectral radius of a stochastic matrix (row sums = 1) is 1.**
+8. **[PageRank] Why is a small positive perturbation added to the link matrix in PageRank?**
    ??? success "Solution"
-       $A \mathbf{1} = 1 \mathbf{1}$ shows 1 is an eigenvalue. By Gershgorin, all eigenvalues have modulus $\le 1$. Thus $\rho(A) = 1$.
+       To make the matrix strictly positive, ensuring the uniqueness of the Perron eigenvalue 1 and the convergence of the power method.
 
-9. **[Irreducibility Test] Determine the irreducibility of $\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$.**
+9. **[Monotonicity] If $A \ge 0$, prove $\rho(A)$ is a non-decreasing function of the entries of $A$.**
    ??? success "Solution"
-       Reducible. Node 1 cannot reach node 2 (only $2 \to 1$ exists). The matrix is lower triangular, reflecting its reducibility.
+       From the Collatz-Wielandt formula $\rho(A) = \sup_{x>0} \min_i \frac{(Ax)_i}{x_i}$, increasing an entry of $A$ clearly increases the supremum.
 
-10. **[Limit Behavior] If $A$ is primitive and $\rho(A)=1$, prove $\lim_{k \to \infty} A^k = v w^T$, where $v, w$ are the Perron eigenvectors.**
+10. **[Limit] If $A$ is primitive, what is $\lim_{k \to \infty} (A/r)^k$?**
     ??? success "Solution"
-        Since all other eigenvalues have modulus $< 1$, in the spectral decomposition, only the term corresponding to $\lambda=1$ (the rank-1 projection) survives in the limit.
+        It equals $\mathbf{v}\mathbf{w}^T$, where $\mathbf{v}$ and $\mathbf{w}$ are the normalized left and right Perron eigenvectors.
 
 ## Chapter Summary
 
-Nonnegative matrix theory interweaves analysis and combinatorics:
+Non-negative matrix theory establishes a harmonic resonance between physical laws and algebraic structures:
 
-1. **Growth Dominance**: Spectral radius is no longer just an abstract value but the actual expansion rate of the system.
-2. **Positivity Guarantee**: Irreducibility is the structural prerequisite for ensuring every component in the system can evolve positively.
-3. **Inevitability of Convergence**: Primitivity establishes the unique endpoint for the evolution of discrete dynamical systems toward a steady state.
+1.  **Preservation of Positivity**: Perron-Frobenius theory establishes the positivity of the principal eigenvector, providing unique and valid steady-state solutions for problems in probability and resource allocation.
+2.  **Structural Connectivity**: Irreducibility links matrix algebra to graph topology, proving that "global circulation" is a prerequisite for a system to converge to a unique stable state.
+3.  **Computational Convergence**: Stochastic matrix theory lays the foundation for all equilibrium evolution processes (e.g., Markov chains), revealing the final destination of information flow in complex networks.

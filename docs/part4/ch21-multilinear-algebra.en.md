@@ -2,75 +2,164 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Vector Spaces (Ch4) · Dual Spaces (Ch13a) · Kronecker Product (Ch19) · Exterior Algebra (Ch49)
+**Prerequisites**: Vector Spaces (Ch04) · Linear Transformations (Ch05) · Inner Product Spaces (Ch08)
 
-**Chapter Outline**: Dual Spaces and Multilinear Forms → Tensor Product of Vector Spaces $V \otimes W$ → General Tensors $T_{q}^p$ → Covariant and Contravariant Indices → Tensor Contraction → Inner Products on Tensor Spaces → Symmetric and Antisymmetric Tensors → Tensor Rank and Decomposition (CP/Tucker) → Applications in Physics and Data Science
+**Chapter Outline**: Dual Spaces & Linear Functionals → Multilinear Maps → Tensor Product of Vector Spaces → Universality → Tensor Product of Linear Maps → Tensors of Type $(r, s)$ → Einstein Summation Convention → Symmetric and Antisymmetric Tensors → Exterior Algebra (Wedge Product) → Determinants as Exterior Products → Tensor Rank → CP and Tucker Decompositions → Applications in Physics and Data Science
 
-**Extension**: Multilinear algebra is the mathematical language of general relativity (curvature tensors) and modern high-dimensional data analysis (tensor networks).
+**Extension**: Multilinear algebra is the mathematical language of General Relativity (Riemann Curvature), Quantum Information (Entanglement), and modern High-order Data Analysis; Exterior algebra provides the foundation for Differential Forms and modern Geometry.
 
 </div>
 
-Linear algebra typically deals with mappings between two spaces (matrices). **Multilinear algebra** extends this to relationships involving multiple spaces simultaneously. A **tensor** is the universal object that represents multilinear maps. By introducing the **tensor product** $\otimes$, we can describe interactions that cannot be captured by simple vectors, such as the coupling between particles or the multi-way correlations in big data. This chapter formalizes the "index calculus" of tensors and introduces the concept of **tensor rank**, which is significantly more complex than matrix rank.
+Linear algebra primarily deals with mappings between two spaces (matrices). **Multilinear Algebra** extends these concepts to relationships involving multiple spaces simultaneously. The central object of this field is the **Tensor**, a universal construction that generalizes vectors and matrices. Tensors allow for the description of complex interactions—such as the coupling of particles in quantum mechanics or multi-way correlations in big data—that cannot be captured by simple linear arrays. This chapter systematically constructs the theory of tensors from dual spaces to high-order decompositions.
 
 ---
 
-## 21.1 Dual Spaces and Tensors
+## 21.1 Dual Spaces and Linear Functionals
 
-!!! definition "Definition 21.1 (Multilinear Map)"
-    A map $f: V_1 \times \dots \times V_k \to W$ is **multilinear** if it is linear in each argument separately when the others are fixed.
+<div class="context-flow" markdown>
 
-!!! definition "Definition 21.2 (Tensor Product)"
-    The tensor product $V \otimes W$ is the unique vector space (up to isomorphism) that converts every multilinear map $V \times W \to U$ into a unique linear map $V \otimes W \to U$.
+**Motivation**: A vector space $V$ is a set of "arrows." Its dual $V^*$ is the set of "measurement devices" that act on these arrows to produce scalars.
+
+</div>
+
+!!! definition "Definition 21.1 (Linear Functional)"
+    Let $V$ be a vector space over $F$. A **linear functional** is a linear mapping $f: V \to F$.
+    The set of all such functionals forms the **dual space** $V^* = \operatorname{Hom}(V, F)$.
+
+!!! theorem "Theorem 21.1 (Dual Basis)"
+    If $V$ has a basis $\{e_1, \ldots, e_n\}$, then $V^*$ has a unique **dual basis** $\{e^1, \ldots, e^n\}$ defined by the property:
+    $$e^i(e_j) = \delta^i_j = \begin{cases} 1 & i=j \\ 0 & i \neq j \end{cases}$$
+    Consequently, $\dim V^* = \dim V$ for finite-dimensional spaces.
+
+!!! theorem "Theorem 21.2 (Natural Isomorphism to Double Dual)"
+    There is a **canonical isomorphism** $\Phi: V \to V^{**}$ defined by $\Phi(v)(f) = f(v)$. This map is independent of the choice of basis, meaning we can view vectors as operators acting on measurements.
+
+---
+
+## 21.2 Multilinear Mappings
+
+!!! definition "Definition 21.2 (Multilinear Map)"
+    A map $f: V_1 \times V_2 \times \cdots \times V_k \to W$ is **$k$-linear** (or multilinear) if it is linear in each argument separately.
+    - If $k=2$, it is a **bilinear map**.
+    - Examples include the dot product, cross product (trilinear in $\mathbb{R}^3$), and the determinant (multilinear in the rows of a matrix).
+
+---
+
+## 21.3 The Tensor Product
+
+<div class="context-flow" markdown>
+
+**The Core Idea**: The tensor product $V \otimes W$ is the "largest" space that linearizes all bilinear maps from $V \times W$. It is the universal solution to the problem of turning products of vectors into linear combinations.
+
+</div>
+
+!!! definition "Definition 21.3 (Universal Property of Tensor Products)"
+    The **tensor product** of vector spaces $V$ and $W$ is a vector space $V \otimes W$ together with a bilinear map $\otimes: V \times W \to V \otimes W$ such that for any bilinear map $B: V \times W \to U$, there exists a unique linear map $\tilde{B}: V \otimes W \to U$ making the diagram commute:
+    $$B(v, w) = \tilde{B}(v \otimes w)$$
+
+!!! theorem "Theorem 21.3 (Basis and Dimension)"
+    If $\{e_i\}$ is a basis for $V$ and $\{f_j\}$ is a basis for $W$, then $\{e_i \otimes f_j\}$ is a basis for $V \otimes W$.
+    Thus, $\dim(V \otimes W) = \dim V \cdot \dim W$.
+
+---
+
+## 21.4 Tensors of Type $(r, s)$
+
+!!! definition "Definition 21.4 (General Tensors)"
+    A tensor of type $(r, s)$ is a multilinear functional:
+    $$T: \underbrace{V^* \times \cdots \times V^*}_{r} \times \underbrace{V \times \cdots \times V}_{s} \to F$$
+    - Type (1, 0) tensors are **vectors** in $V$.
+    - Type (0, 1) tensors are **covectors** in $V^*$.
+    - Type (1, 1) tensors are **linear operators** in $\operatorname{End}(V) \cong V \otimes V^*$.
+
+!!! notation "Einstein Summation Convention"
+    In tensor calculus, summation is implied over repeated upper and lower indices:
+    $$T^i_j v^j \equiv \sum_{j=1}^n T^i_j v^j$$
+    Upper indices denote **contravariance** (vectors), and lower indices denote **covariance** (functionals).
+
+---
+
+## 21.5 Exterior Algebra and Wedge Products
+
+!!! definition "Definition 21.5 (Wedge Product)"
+    The **wedge product** $\mathbf{u} \wedge \mathbf{v}$ is an antisymmetric tensor product:
+    $$\mathbf{u} \wedge \mathbf{v} = \mathbf{u} \otimes \mathbf{v} - \mathbf{v} \otimes \mathbf{u}$$
+    It represents the oriented area element spanned by $\mathbf{u}$ and $\mathbf{v}$.
+
+!!! theorem "Theorem 21.4 (Determinants and Exterior Products)"
+    The determinant of an $n \times n$ matrix $A$ with columns $\mathbf{a}_1, \ldots, \mathbf{a}_n$ is the unique scalar such that:
+    $$\mathbf{a}_1 \wedge \mathbf{a}_2 \wedge \cdots \wedge \mathbf{a}_n = \det(A) (\mathbf{e}_1 \wedge \mathbf{e}_2 \wedge \cdots \wedge \mathbf{e}_n)$$
+    This provides the geometric definition of the determinant as a volume scaling factor.
+
+---
+
+## 21.6 Tensor Decompositions
+
+<div class="context-flow" markdown>
+
+**Challenge**: Unlike matrices (rank-2 tensors), high-order tensors do not have a unique "best" rank decomposition. Tensor rank calculation is NP-hard.
+
+</div>
+
+!!! definition "Definition 21.6 (CP Decomposition)"
+    The **Canonical Polyadic (CP)** decomposition expresses a tensor as a sum of a minimum number of rank-1 tensors:
+    $$\mathcal{T} = \sum_{r=1}^R \mathbf{a}_r \otimes \mathbf{b}_r \otimes \mathbf{c}_r$$
+    The smallest $R$ is the **tensor rank**.
+
+!!! definition "Definition 21.7 (Tucker Decomposition)"
+    The **Tucker decomposition** generalizes SVD to tensors by extracting a "core tensor" and factor matrices for each dimension:
+    $$\mathcal{T} \approx \mathcal{G} \times_1 U \times_2 V \times_3 W$$
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute the dimension of $V \otimes W$ if $\dim V = m$ and $\dim W = n$.**
-   ??? success "Solution"
-       $\dim(V \otimes W) = mn$. A basis is given by $\{v_i \otimes w_j\}$ where $\{v_i\}$ and $\{w_j\}$ are bases for $V$ and $W$ respectively.
-
-2. **[Contraction] Define the contraction of a $(1, 1)$-tensor $T \in V \otimes V^*$.**
-   ??? success "Solution"
-       The contraction is the linear map that sends $v \otimes \phi$ to the scalar $\phi(v)$. For a matrix (representing a $(1,1)$-tensor), the contraction is exactly the **trace**.
-
-3. **[Dual Space] Show that $(V \otimes W)^* \cong V^* \otimes W^*$.**
-   ??? success "Solution"
-       This isomorphism identifies a multilinear form on $V \times W$ with a tensor in the product of the dual spaces.
-
-4. **[Tensor Rank] Define the rank of a tensor $T \in V \otimes W \otimes U$.**
-   ??? success "Solution"
-       The smallest $r$ such that $T = \sum_{i=1}^r v_i \otimes w_i \otimes u_i$. Unlike matrices, the rank of a 3-way tensor can exceed its dimensions and is NP-hard to compute.
-
-5. **[Symmetry] Distinguish between the symmetric space $S^k(V)$ and the alternating space $\Lambda^k(V)$.**
-   ??? success "Solution"
-       $S^k(V)$ consists of tensors invariant under index permutations (e.g., $u \otimes v + v \otimes u$). $\Lambda^k(V)$ consists of tensors that change sign under swaps (e.g., $u \otimes v - v \otimes u$).
-
-6. **[Bilinear Forms] Relate $V^* \otimes V^*$ to the space of bilinear forms on $V$.**
-   ??? success "Solution"
-       Every bilinear form $B(u, v)$ can be uniquely written as a tensor $\sum b_{ij} \epsilon^i \otimes \epsilon^j$ where $\epsilon^i$ are dual basis elements.
-
-7. **[Universal Property] Explain the importance of the universal property of the tensor product.**
-   ??? success "Solution"
-       It allows for the systematic "linearization" of multilinear problems. Any operation involving products of variables can be handled by standard linear algebra in the larger tensor space.
-
-8. **[Physics] In physics, what is a contravariant vs. a covariant tensor?**
-   ??? success "Solution"
-       Contravariant tensors (vectors) transform like the basis change matrix $P$. Covariant tensors (dual vectors/forms) transform like $(P^{-1})^T$. Tensors of type $(p, q)$ have $p$ contravariant and $q$ covariant indices.
-
-9. **[Decomposition] What is the CP decomposition (CANDECOMP/PARAFAC)?**
-   ??? success "Solution"
-       A generalization of SVD to tensors where a tensor is approximated by a sum of rank-1 tensors. It is used for blind source separation and data mining.
-
-10. **[Inner Product] Define the induced inner product on $V \otimes W$.**
+1.  **[Dual] Find the dual basis for $\{(1, 1), (0, 1)\}$ in $\mathbb{R}^2$.**
     ??? success "Solution"
-        $\langle v_1 \otimes w_1, v_2 \otimes w_2 \rangle = \langle v_1, v_2 \rangle_V \langle w_1, w_2 \rangle_W$. This makes the tensor product of Hilbert spaces a Hilbert space.
+        Let $\{f^1, f^2\}$ be the dual basis. $f^1(1, 1)=1, f^1(0, 1)=0 \implies f^1(x, y) = x$.
+        $f^2(1, 1)=0, f^2(0, 1)=1 \implies f^2(x, y) = y - x$.
+
+2.  **[Dimension] If $\dim V = 3$ and $\dim W = 4$, what is the dimension of the space of bilinear forms on $V \times W$?**
+    ??? success "Solution"
+        The space of bilinear forms is isomorphic to $V^* \otimes W^*$. The dimension is $3 \times 4 = 12$.
+
+3.  **[Simple Tensors] Is every element in $V \otimes W$ a "simple tensor" $v \otimes w$?**
+    ??? success "Solution"
+        No. Most elements are linear combinations of simple tensors. In quantum mechanics, non-simple tensors represent **entangled states**.
+
+4.  **[Operators] Explain the isomorphism $\operatorname{End}(V) \cong V \otimes V^*$.**
+    ??? success "Solution"
+        A simple tensor $v \otimes f$ acts as an operator: $(v \otimes f)(u) = f(u)v$. This is a rank-1 operator. Sums of these represent all linear operators.
+
+5.  **[Einstein] Expand the expression $A^i_j B^j_k$ using standard summation.**
+    ??? success "Solution"
+        $\sum_{j=1}^n A_{ij} B_{jk}$. This is the standard definition of matrix multiplication $(AB)_{ik}$.
+
+6.  **[Wedge] Prove that $v \wedge v = 0$ for any vector $v$.**
+    ??? success "Solution"
+        By antisymmetry, $v \wedge v = - (v \wedge v)$. Thus $2(v \wedge v) = 0 \implies v \wedge v = 0$. Geometrically, a vector spans zero area with itself.
+
+7.  **[Exterior Dim] What is the dimension of $\Lambda^k(V)$ if $\dim V = n$?**
+    ??? success "Solution"
+        The dimension is the binomial coefficient $\binom{n}{k}$.
+
+8.  **[Rank] How does tensor rank differ from matrix rank?**
+    ??? success "Solution"
+        Matrix rank is easy to compute (SVD/Gaussian). Tensor rank is NP-hard to compute, can change over different fields (Real vs. Complex), and can exceed the dimensions of the tensor.
+
+9.  **[Contraction] Define the contraction of a $(1, 1)$ tensor $T^i_j$.**
+    ??? success "Solution"
+        The contraction is the scalar $T^i_i$ (summing over $i=j$), which is exactly the **trace** of the corresponding matrix.
+
+10. **[Physics] Why is the Stress Tensor in mechanics a type (0, 2) tensor?**
+    ??? success "Solution"
+        Stress measures force (a covector/functional) acting on an area element (another vector/functional property). It maps two vectors to a scalar energy density.
 
 ## Chapter Summary
 
-This chapter establishes the calculus of high-dimensional interactions:
+This chapter elevates linear mapping to the universal language of tensors:
 
-1. **Multilinear Grounding**: Defined tensors as the universal objects representing linear interactions across multiple spaces.
-2. **Structural Composition**: Developed the tensor product as the mechanism for expanding the state space of linear systems.
-3. **Index Calculus**: Formulated contractions and trace operators as the fundamental reductions of multilinear forms.
-4. **Rank and Complexity**: Analyzed tensor decomposition, highlighting the transition from the simple rank of matrices to the complex landscapes of high-order tensors.
+1.  **Measurement Duality**: Dual spaces formalize the distinction between vectors ("arrows") and functionals ("measurements"), enabling rigorous index calculus.
+2.  **Linearization of Products**: The tensor product provides the mathematical machinery to treat non-linear interactions as linear objects in a higher-dimensional space.
+3.  **Geometric Exterior**: Exterior algebra captures the concept of oriented volume and antisymmetry, providing the coordinate-free foundation for determinants and differential forms.
+4.  **High-order Complexity**: Tensor decompositions extend SVD to multi-way data, revealing the profound computational challenges inherent in high-dimensional structures.

@@ -2,78 +2,107 @@
 
 <div class="context-flow" markdown>
 
-**前置**：Kronecker 积(Ch19) · 特征值(Ch6) · 矩阵分析(Ch14) · 矩阵稳定性(Ch36)
+**前置**：Kronecker 积 (Ch19) · 矩阵分析 (Ch14) · 特征值 (Ch06)
 
-**本章脉络**：Sylvester 方程 $AX - XB = C$ → 解的存在性条件 → Lyapunov 方程 $AX + XA^* = Q$ → 稳定性判定与惯性定理 → 代数 Riccati 方程 (ARE) → 迭代解法 → 应用（现代控制理论中的能控性与能观性）
+**本章脉络**：线性矩阵方程概览 $\to$ 基础方程 $AX=B$ 与 $AXB=C$ $\to$ Sylvester 方程 ($AX+XB=C$) $\to$ Lyapunov 方程 ($AX+XA^T=Q$) $\to$ 解的存在性与唯一性准则（谱分离条件） $\to$ 代数 Riccati 方程 (ARE) $\to$ 连续与离散情形对比 $\to$ 数值算法初步（Bartels-Stewart 算法） $\to$ 控制理论应用（LQR, 稳定性判定）
 
-**延伸**：矩阵方程是将静态代数转化为动态特性的语言，Lyapunov 方程的解直接映射了动力系统的“能量”分布
+**延伸**：矩阵方程是连接现代控制理论与数值线性代数的纽带；它是分析线性系统可观性、可控性以及求解最优控制策略的核心数学工具
 
 </div>
 
-矩阵方程研究的是以矩阵为未知量的代数方程。它们通常出现在控制系统设计、平衡态分析和数值分析中。最著名的 Sylvester 方程和 Lyapunov 方程为我们理解算子之间的相互作用提供了数学框架。
+当未知数本身是一个矩阵时，我们称其为矩阵方程。矩阵方程不仅是线性算子理论的延伸，更是动力系统平衡点分析、控制增益计算以及数值模拟的直接产物。本章将从最简单的线性耦合方程出发，逐步深入到复杂的非线性 Riccati 方程。
 
 ---
 
-## 20.1 Sylvester 与 Lyapunov 方程
+## 20.1 线性矩阵方程
 
-!!! definition "定义 20.1 (Sylvester 方程)"
-    矩阵方程 $AX - XB = C$ 称为 Sylvester 方程。
+!!! definition "定义 20.1 (基础方程)"
+    1.  **左乘方程 $AX = B$**：有解当且仅当 $B$ 的列属于 $A$ 的列空间。
+    2.  **双边方程 $AXB = C$**：可利用 Kronecker 积化为 $(B^T \otimes A) \operatorname{vec}(X) = \operatorname{vec}(C)$。
 
-!!! theorem "定理 20.3 (解的存在唯一性)"
-    Sylvester 方程 $AX - XB = C$ 有唯一解，当且仅当 $A$ 与 $B$ 没有公共的特征值：$\sigma(A) \cap \sigma(B) = \emptyset$。
+---
+
+## 20.2 Sylvester 与 Lyapunov 方程
+
+!!! definition "定义 20.2 (Sylvester 方程)"
+    $$AX + XB = C$$
+    其中 $A, B, C$ 为给定方阵。
+
+!!! theorem "定理 20.1 (唯一可解性准则)"
+    Sylvester 方程 $AX + XB = C$ 对任意 $C$ 有唯一解 $\iff$ $\sigma(A) \cap \sigma(-B) = \emptyset$（即 $A$ 与 $-B$ 无公共特征值）。
+
+!!! definition "定义 20.3 (Lyapunov 方程)"
+    $$AX + XA^T = Q$$
+    这是 Sylvester 方程的特殊对称形式，用于判定动力系统的稳定性。若 $A$ 是稳定阵（谱在左半平面），则对任何 $Q \prec 0$，方程有唯一正定解 $X \succ 0$。
+
+---
+
+## 20.3 代数 Riccati 方程 (ARE)
+
+!!! definition "定义 20.4 (连续时间 ARE)"
+    $$A^T X + XA - X B R^{-1} B^T X + Q = 0$$
+    这是一个二次非线性矩阵方程。
+    **应用**：求解线性二次调节器 (LQR) 问题的最优反馈增益 $K = R^{-1} B^T X$。
+
+---
+
+## 20.4 数值算法
+
+!!! algorithm "算法 20.1 (Bartels-Stewart 算法)"
+    用于高效求解线性矩阵方程：
+    1.  对 $A$ 和 $B$ 进行 Schur 分解（三角化）。
+    2.  对变换后的方程进行前代/回代求解。
+    3.  反变换得到原方程的解。
+    **复杂度**：$O(n^3)$，比直接向量化求解（$O(n^6)$）快得多。
 
 ---
 
 ## 练习题
 
-1. **[基础判定] 方程 $AX - XA = 0$ 总是存在非零解吗？**
+1. **[Sylvester] 判定 $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} X + X \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = C$ 是否有唯一解。**
    ??? success "参考答案"
-       是的。任何与 $A$ 对易的矩阵都是该方程的解。特别地，$X=I$ 和 $X=A$ 总是解。由于 $\sigma(A) \cap \sigma(A) \neq \emptyset$（除非为空集），由定理 20.3 可知该方程没有唯一解。
+       $\sigma(A) = \{1\}, \sigma(-B) = \{-1\}$。交集为空，故有唯一解。
 
-2. **[Lyapunov方程] 设 $A$ 是 Hurwitz 稳定的。证明对于任何 $Q$，Lyapunov 方程 $AX + XA^* = Q$ 的解可以表示为积分形式。**
+2. **[唯一性] 若 $A$ 与 $B$ 有公共特征值，Sylvester 方程一定无解吗？**
    ??? success "参考答案"
-       解为 $X = -\int_0^\infty e^{At} Q e^{A^*t} dt$。由于 $A$ 是稳定的，指数项随时间衰减，保证了积分的收敛性。
+       不是。解可能不唯一（有无穷多解），或者对于特定的 $C$ 无解。
 
-3. **[计算] 求解 $\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} X - X \begin{pmatrix} 0 & 0 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。**
+3. **[Lyapunov] 为什么 Lyapunov 方程常用于稳定性分析？**
    ??? success "参考答案"
-       设 $X = \begin{pmatrix} x_{11} & x_{12} \\ x_{21} & x_{22} \end{pmatrix}$。
-       代入得：$\begin{pmatrix} 1x_{11} & 1x_{12} \\ 2x_{21} & 2x_{22} \end{pmatrix} - \begin{pmatrix} 0 & 3x_{12} \\ 0 & 3x_{22} \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。
-       解方程组：$x_{11}=1, -2x_{12}=1, 2x_{21}=1, -x_{22}=1$。
-       故 $X = \begin{pmatrix} 1 & -0.5 \\ 0.5 & -1 \end{pmatrix}$。
+       解 $X$ 构成了系统的能量函数 $V(x) = x^T X x$ 的权重矩阵。若 $X \succ 0$ 且 $\dot{V} < 0$，系统渐近稳定。
 
-4. **[稳定性判定] 证明：若存在 $P \succ 0$ 使得 $A^T P + PA \prec 0$，则 $A$ 是稳定的。**
+4. **[向量化] 将 $AXB + CXD = F$ 转化为向量形式。**
    ??? success "参考答案"
-       这是 Lyapunov 稳定性定理。考虑能量函数 $V(x) = x^T P x$。
-       其导数 $\dot{V} = x^T (A^T P + PA) x$。由于 $A^T P + PA$ 是负定的，$\dot{V} < 0$，说明能量随时间减少，系统收敛。
+       $(B^T \otimes A + D^T \otimes C) \operatorname{vec}(X) = \operatorname{vec}(F)$。
 
-5. **[迹的应用] 在 Lyapunov 方程 $AX + XA^T + BB^T = 0$ 中，$X$ 的迹代表什么？**
+5. **[Riccati] 证明：若 $X$ 是 Riccati 方程的解，则其转置 $X^T$ 也是解（假设 $Q, R$ 对称）。**
    ??? success "参考答案"
-       若该方程描述控制系统的能控性 Gramian，$X$ 的迹（ eigenvalues 之和）代表了从各个方向输入控制能量的“平均增益”或总体能控性程度。
+       对方程两边求转置，形式完全相同，故结论成立。
 
-6. **[Riccati方程初步] 什么是代数 Riccati 方程 (ARE)？它与 Sylvester 方程的区别是什么？**
+6. **[计算] 求解 $(1)X + X(2) = (6)$（标量情形）。**
    ??? success "参考答案"
-       ARE 形式如 $A^T P + PA - PBR^{-1}B^T P + Q = 0$。与线性 Sylvester 方程不同，ARE 是**二次**矩阵方程。它在最优控制（LQR）中起核心作用。
+       $3X = 6 \implies X = 2$。
 
-7. **[能控性] 若系统能控性矩阵为 $W_c$，它满足什么矩阵方程？**
+7. **[性质] 证明若 $A, B$ 是上三角阵，$AX+XB=C$ 的解 $X$ 也是上三角阵吗？**
    ??? success "参考答案"
-       满足 Lyapunov 方程 $A W_c + W_c A^T + BB^T = 0$。解 $W_c$ 的正定性直接对应系统的能控性。
+       一般不成立。$X$ 的结构取决于 $C$ 的形式。
 
-8. **[解的对称性] 若 $A$ 稳定且 $Q$ 是对称阵，Lyapunov 方程 $AX + XA^T = Q$ 的解 $X$ 一定是对称阵吗？**
+8. **[离散情形] 写出离散 Lyapunov 方程的形式。**
    ??? success "参考答案"
-       是的。对原方程取转置得 $XA^T + AX^T = Q^T = Q$。由于解是唯一的，且 $X$ 和 $X^T$ 满足同样的方程，故 $X = X^T$。
+       $A X A^T - X + Q = 0$。
 
-9. **[初等算子] Sylvester 方程可以看作什么线性算子的逆问题？**
+9. **[Schur应用] 为什么在算法中要先进行 Schur 分解？**
    ??? success "参考答案"
-       可以看作作用在矩阵空间上的初等算子 $\mathcal{L}(X) = AX - XB$ 的求逆问题。其特征值是 $\lambda_i(A) - \mu_j(B)$。
+       为了将一般矩阵耦合转化为三角矩阵耦合，从而允许使用类似于回代的递推法逐个分量求解 $X$。
 
-10. **[应用] 在图像复原中，矩阵方程如何模拟退化过程？**
+10. **[控制应用] 在 LQR 问题中，Riccati 方程的解 $X$ 代表什么？**
     ??? success "参考答案"
-        模糊过程常建模为 $Y = AXB + N$，其中 $A, B$ 分别代表水平和垂直方向的模糊算子。复原图像即求解该矩阵方程（通常结合正则化项）。
+        代表了系统从当前状态到无限远未来的最小累积成本（代价函数）。
 
 ## 本章小结
 
-矩阵方程是线性代数的动态逻辑：
+矩阵方程是高级线性系统的代数语言：
 
-1. **谱的相互作用**：解的存亡取决于两个算子谱集的隔离程度。
-2. **能量映射**：Lyapunov 方程在代数与动力学稳定性之间架起了直接的桥梁。
-3. **优化核心**：从线性方程到二次方程（Riccati），矩阵方程构成了现代控制理论的计算底座。
+1.  **解的耦合性**：Sylvester 方程刻画了两个不同算子间的线性干涉，其谱分离条件揭示了系统共振与否的本质。
+2.  **能量与稳定**：Lyapunov 方程通过二次型矩阵建立了代数与解析稳定性的桥梁，是控制工程中 Lyapunov 第二方法的算子表达。
+3.  **最优性寻找**：Riccati 方程展示了非线性结构如何自然地出现在变分和最优控制问题中，其求解标志着从线性系统分析到线性系统综合的跨越。

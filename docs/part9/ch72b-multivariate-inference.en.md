@@ -2,81 +2,102 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Calculus (Ch47) · Wishart Distribution (Ch72A) · QR Decomposition (Ch10) · SVD (Ch11)
+**Prerequisites**: Matrix Distributions (Ch72A) · Matrix Analysis (Ch14) · Quadratic Forms (Ch09) · Linear Equations (Ch01)
 
-**Chapter Outline**: Parameter Estimation (MLE) → Hotelling’s $T^2$ Test → Multivariate Analysis of Variance (MANOVA) → Canonical Correlation Analysis (CCA) → Structural Equation Modeling (SEM) → High-dimensional Covariance Matrix Estimation → Shrinkage Estimators (Ledoit-Wolf)
+**Chapter Outline**: From Univariate to Multivariate Inference → Hotelling's $T^2$ Distribution (Matrix Version of Student's t) → Wilks' Lambda Distribution (Ratio of Determinants) → Multivariate Analysis of Variance (MANOVA) → Likelihood Ratio Tests (LRT) → Testing Equality of Covariance Matrices → Canonical Correlation Analysis (CCA) → Multivariate Regression Inference → Challenges of High-dimensional Inference ($p > n$) → Applications: Social Sciences, Psychometrics, and Medical Clinical Trials
 
-**Extension**: Multivariate statistical inference applies the spectral theory of random matrices to decision-making under uncertainty; CCA is the algebraic bridge for finding correlations between two sets of multidimensional variables.
+**Extension**: Multivariate inference is the highest application of linear algebra in decision theory; by investigating the weighted sums or products of eigenvalues, it determines whether observed differences in high-dimensional space stem from true effects or random noise.
 
 </div>
 
-Multivariate statistical inference utilizes matrix algebra to perform hypothesis testing and parameter estimation on high-dimensional data. This field converts the comparison of group differences into the comparison of matrix spectra (eigenvalues) and the dependencies between variables into the geometry of subspace angles.
+After establishing the matrix-based description of data (Ch72A), the core task of statistics becomes: how to make rigorous inferences based on observed matrix samples. **Multivariate Statistical Inference** utilizes the trace, determinant, and eigenvalues of matrices to construct test statistics. It answers questions such as "Do two groups of multidimensional data differ significantly?" or "Is there a latent link between two sets of variables?"
 
 ---
 
-## 72B.1 Core Estimators and Testing Theory
+## 72B.1 Hotelling's $T^2$ Test
 
-!!! definition "Definition 72B.1 (MLE of Mean and Covariance)"
-    For $\mathcal{N}_p(\mu, \Sigma)$, given $n$ samples, the Maximum Likelihood Estimates are:
-    $$\hat{\mu} = \bar{x}, \quad \hat{\Sigma} = \frac{1}{n} \sum (x_i - \bar{x})(x_i - \bar{x})^T$$
-    These are the orthogonal projections of the sample cloud onto the parameter space.
+!!! definition "Definition 72B.1 (Hotelling's $T^2$ Statistic)"
+    To test whether a mean vector $\boldsymbol{\mu}$ equals a hypothesized $\boldsymbol{\mu}_0$, we define the statistic:
+    $$T^2 = n (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)^T \mathbf{S}^{-1} (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)$$
+    where $\mathbf{S}$ is the sample covariance matrix.
+    **Algebraic Essence**: This is the square of the Mahalanobis distance, which utilizes the inverse of the covariance matrix to normalize fluctuations across different dimensions.
 
-!!! theorem "Theorem 72B.3 (Wilks' Lambda and MANOVA)"
-    In MANOVA, the test statistic for comparing group means is Wilks' Lambda:
-    $$\Lambda = \frac{\det(E)}{\det(E + H)}$$
-    where $E$ is the error (within-group) sum of squares matrix and $H$ is the hypothesis (between-group) sum of squares matrix. This is a function of the eigenvalues of $E^{-1}H$.
+---
+
+## 72B.2 Multivariate Analysis of Variance (MANOVA)
+
+!!! technique "Matrix Decomposition Perspective"
+    In MANOVA, we decompose the total sum of squares and cross-products matrix $\mathbf{T}$ into the within-group error matrix $\mathbf{E}$ and the between-group effect matrix $\mathbf{H}$:
+    $$\mathbf{T} = \mathbf{H} + \mathbf{E}$$
+    **Statistics**:
+    - **Wilks' Lambda**: $\Lambda = \frac{\det(\mathbf{E})}{\det(\mathbf{H} + \mathbf{E})}$. Its distribution is determined by the product of eigenvalues.
+    - **Pillai’s Trace**: Based on $\operatorname{tr}(\mathbf{H}(\mathbf{H}+\mathbf{E})^{-1})$.
+
+---
+
+## 72B.3 Canonical Correlation Analysis (CCA)
+
+!!! definition "Definition 72B.2 (CCA)"
+    Given two sets of variables $\mathbf{x}$ and $\mathbf{y}$, find projection vectors $\mathbf{a}, \mathbf{b}$ such that the correlation between the linear combinations $u = \mathbf{a}^T \mathbf{x}$ and $v = \mathbf{b}^T \mathbf{y}$ is maximized.
+    **Solution**: This is equivalent to solving a generalized eigenvalue problem involving the cross-covariance matrices.
+
+---
+
+## 72B.4 Challenges of High-dimensional Inference ($p > n$)
+
+!!! warning "Curse of Dimensionality"
+    When the number of variables $p$ exceeds the sample size $n$, the sample covariance matrix $\mathbf{S}$ is **singular** (not invertible), causing the $T^2$ statistic to fail.
+    **Strategies**: Use ridge regularization (shrinkage estimators) or projection-based non-parametric methods.
 
 ---
 
 ## Exercises
 
-1. **[Group Comparison] Why does MANOVA use matrix determinants instead of just summing variances?**
-   ??? success "Solution"
-       The determinant $\det(E)$ represents the "generalized variance" or volume of the sample cluster. MANOVA accounts for the correlation between variables; summing variances would ignore the covariance structure and lead to incorrect inference when variables are non-orthogonal.
-
-2. **[Hotelling's T-squared] Show that Hotelling’s $T^2$ is the multivariate generalization of the squared t-statistic.**
-   ??? success "Solution"
-       $T^2 = n(\bar{x}-\mu)^T S^{-1}(\bar{x}-\mu)$. In the scalar case ($p=1$), this reduces to $n(\bar{x}-\mu)^2 / s^2 = t^2$. The use of the matrix inverse $S^{-1}$ (Mahalanobis distance) standardizes the distance across all correlated dimensions.
-
-3. **[CCA Geometry] In Canonical Correlation Analysis (CCA), how do the canonical correlations relate to the angles between two subspaces?**
-   ??? success "Solution"
-       The canonical correlations are the cosines of the **principal angles** between the subspace spanned by variables $X$ and the subspace spanned by variables $Y$. Maximizing the correlation is equivalent to finding the vectors in each subspace that are closest in an angular sense.
-
-4. **[Calculation] Given $E = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ and $H = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$. Calculate Wilks' $\Lambda$.**
-   ??? success "Solution"
-       $E+H = \begin{pmatrix} 3 & 1 \\ 1 & 2 \end{pmatrix}$.
-       $\det(E) = 4-1 = 3$; $\det(E+H) = 6-1 = 5$.
-       $\Lambda = 3/5 = 0.6$. A smaller $\Lambda$ would indicate more evidence against the null hypothesis.
-
-5. **[Discriminant Analysis] Relate Fisher’s Linear Discriminant to the generalized eigenvalue problem.**
-   ??? success "Solution"
-       Fisher seeks a projection vector $w$ that maximizes $J(w) = \frac{w^T H w}{w^T E w}$. Differentiating leads to the generalized eigenvalue equation $Hw = \lambda Ew$. The optimal projection is the eigenvector corresponding to the largest eigenvalue of $E^{-1}H$.
-
-6. **[Shrinkage Estimation] Why is the MLE estimator $\hat{\Sigma}$ poorly conditioned in high dimensions ($p \approx n$)?**
-   ??? success "Solution"
-       As $p/n$ increases, the sample eigenvalues become more dispersed (Marchenko-Pastur law). The smallest eigenvalues are biased towards zero, making $S^{-1}$ unstable. Shrinkage estimators like Ledoit-Wolf use a convex combination $S(\lambda) = (1-\lambda)S + \lambda I$ to pull eigenvalues away from the boundaries.
-
-7. **[SVD and Regression] Describe the role of SVD in Principal Component Regression (PCR).**
-   ??? success "Solution"
-       PCR first performs SVD on the design matrix $X = U\Sigma V^T$, then regresses the response $y$ on the first $k$ columns of $U$. This eliminates collinearity by using the orthogonal principal components as predictors.
-
-8. **[Invariance] Is Hotelling’s $T^2$ statistic invariant under non-singular linear transformations $x \mapsto Ax + b$?**
-   ??? success "Solution"
-       Yes. Substituting the transformed mean and covariance into the $T^2$ formula results in the cancellation of the matrices $A$ and $A^{-1}$, proving that the test result is independent of the choice of coordinate system.
-
-9. **[Partial Correlation] Explain the relationship between the precision matrix $\Omega = \Sigma^{-1}$ and partial correlations.**
-   ??? success "Solution"
-       The $(i,j)$ entry of the inverse covariance matrix, after normalization, is equal to the negative of the partial correlation between variables $i$ and $j$ given all other variables. Zero entries in $\Omega$ indicate conditional independence (Gaussian graphical models).
-
-10. **[Spectral Hypothesis] How does the distribution of the largest eigenvalue $\lambda_{\max}(E^{-1}H)$ relate to the Roy’s Largest Root test?**
+1.  **[Basics] What does Hotelling's $T^2$ reduce to when the number of variables $p=1$?**
     ??? success "Solution"
-        Roy’s test uses only the largest eigenvalue as the test statistic. It is the most powerful test when the group differences are concentrated along a single dimension (rank-1 alternative), reflecting the sensitivity of the spectral radius to structured perturbations.
+        It reduces to the square of the univariate $t$-statistic: $t^2 = \frac{n(\bar{x}-\mu_0)^2}{s^2}$.
+
+2.  **[Determinant] Why does Wilks' Lambda use the ratio of determinants?**
+    ??? success "Solution"
+        The determinant represents "generalized variance" (volume) in high-dimensional space. The ratio reflects the proportion of residual volume to total fluctuation volume; a smaller ratio indicates more significant differences between groups.
+
+3.  **[Calculation] If $\mathbf{H} = \operatorname{diag}(10, 0)$ and $\mathbf{E} = \operatorname{diag}(1, 1)$, calculate Wilks' Lambda.**
+    ??? success "Solution"
+        $\det(\mathbf{E}) = 1$. $\det(\mathbf{H}+\mathbf{E}) = \det(\operatorname{diag}(11, 1)) = 11$.
+        $\Lambda = 1/11 \approx 0.09$.
+
+4.  **[Eigenvalue] Prove: Wilks' Lambda can be expressed as $\prod \frac{1}{1+\lambda_i}$, where $\lambda_i$ are the eigenvalues of $\mathbf{E}^{-1}\mathbf{H}$.**
+    ??? success "Solution"
+        $\frac{\det(\mathbf{E})}{\det(\mathbf{H}+\mathbf{E})} = \det(\mathbf{E}(\mathbf{H}+\mathbf{E})^{-1}) = \det(I + \mathbf{E}^{-1}\mathbf{H})^{-1}$. The result follows from the property of determinants.
+
+5.  **[Application] In what scenario is Pillai's trace preferred over Wilks' Lambda?**
+    ??? success "Solution"
+        Pillai's trace is generally more robust when the assumption of equal covariance matrices (homoscedasticity) is violated.
+
+6.  **[CCA] The maximum canonical correlation coefficient in CCA is related to which matrix property?**
+    ??? success "Solution"
+        It is related to the singular values of the cross-covariance matrix between the two groups (after variance normalization).
+
+7.  **[Invariance] Prove that the $T^2$ statistic is invariant under linear coordinate transformations.**
+    ??? success "Solution"
+        If $\mathbf{x} \to \mathbf{Ax}$, then the mean becomes $\mathbf{A}\bar{\mathbf{x}}$ and the covariance becomes $\mathbf{ASA}^T$. Substituting these into the formula, the $\mathbf{A}$ matrices cancel out.
+
+8.  **[Detection] What information does Box's M test utilize to check for the equality of two covariance matrices?**
+    ??? success "Solution"
+        It uses the weighted difference between the log-determinants of the sample covariance matrices.
+
+9.  **[Regression] In multivariate regression, what does the trace of the error matrix $\operatorname{tr}(\mathbf{E})$ correspond to?**
+    ??? success "Solution"
+        It corresponds to the total sum of squared residuals (Total SSE) across all dependent variables.
+
+10. **[Limits] What distribution does the $T^2$ distribution approach in large samples?**
+    ??? success "Solution"
+        It approaches a $\chi^2$ distribution with $p$ degrees of freedom.
 
 ## Chapter Summary
 
-This chapter applies matrix theory to the logic of statistical decision-making:
+Multivariate statistical inference is the ultimate algebraic judgment in empirical science:
 
-1. **Spectral Comparison**: Established group difference testing as the analysis of relative matrix spectra ($E^{-1}H$).
-2. **Subspace Alignment**: Formulated CCA as the problem of minimizing angles between variable subspaces via SVD.
-3. **Regularized Estimation**: Introduced shrinkage methods to solve the numerical instability of sample matrices in high-dimensional settings.
-4. **Distance Geometry**: Utilized Mahalanobis metrics and quadratic forms to define robust multivariate hypothesis tests.
+1.  **Algebraization of Distance**: Hotelling's $T^2$ proves that through matrix inversion, we can correct complex anisotropic fluctuations into standard statistical distances, establishing benchmarks for multi-dimensional difference testing.
+2.  **Competition of Volumes**: Wilks' Lambda reduces complex group comparisons to a "game of determinants" (volumes), revealing the algebraic share of explanatory power within multi-dimensional space.
+3.  **Deconstruction of Correlation**: CCA demonstrates how to utilize generalized eigenvalue problems to extract resonant linear signals from two seemingly chaotic data streams, providing a mathematical scalpel for understanding coupling mechanisms in complex systems.

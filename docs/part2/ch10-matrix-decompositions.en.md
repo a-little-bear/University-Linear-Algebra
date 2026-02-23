@@ -2,79 +2,102 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Operations (Ch2) · Gaussian Elimination (Ch1) · Eigenvalues (Ch6) · Orthogonality (Ch7)
+**Prerequisites**: Linear Equations (Ch01) · Matrix Algebra (Ch02) · Orthogonality (Ch07) · Eigenvalues (Ch06)
 
-**Chapter Outline**: LU Decomposition (Matrix-based Elimination) → Cholesky Decomposition (Positive Definite Matrices) → QR Decomposition (Orthogonalization) → Eigendecomposition → Schur Decomposition (Unitary Similarity) → Polar Decomposition → Numerical Stability of Decompositions
+**Chapter Outline**: Motivation for Decompositions → LU Decomposition (Gaussian Elimination) → Cholesky Decomposition (Symmetric Positive Definite) → QR Decomposition (Orthogonal Projections) → Schur Decomposition (Unitary Similarity) → LDL^T and LDU Decompositions → Polar Decomposition → Rank Factorization → Numerical Algorithms and Stability Analysis
 
-**Extension**: Matrix decomposition is the soul of numerical linear algebra, decomposing a "black box" operator into components with excellent physical or geometric properties.
+**Extension**: Matrix decompositions are the soul of Numerical Linear Algebra (Ch22); almost all industrial-grade linear algebra libraries (LAPACK, BLAS) are built around these decomposition algorithms.
 
 </div>
 
-Matrix decomposition is the engineering art of handling large-scale computational problems. Instead of operating directly on a complex matrix $A$, it is better to break it down into simple triangular, diagonal, or orthogonal matrices. Different decompositions correspond to different application perspectives: LU for solving equations, QR for stability, and eigendecomposition for the fundamental behavior of the operator.
+Matrix decomposition (also known as matrix factorization) is the process of expressing a matrix as a product of several matrices with specific structures (e.g., triangular, orthogonal, diagonal). This not only simplifies theoretical proofs but is also the key to improving numerical efficiency and enhancing stability. This chapter systematically introduces the most commonly used decomposition methods in linear algebra.
 
 ---
 
-## 10.1 Core Decomposition Models
+## 10.1 LU Decomposition
 
 !!! definition "Definition 10.1 (LU Decomposition)"
-    If a square matrix $A$ can be written as $A = LU$, where $L$ is lower triangular and $U$ is upper triangular, it is called LU decomposition. This corresponds to Gaussian elimination without row swaps.
+    Factors a square matrix $A$ into the product of a lower triangular matrix $L$ and an upper triangular matrix $U$: $A = LU$.
+    - **Existence**: If all leading principal minors of $A$ are non-zero, then $A$ has a unique LU decomposition (with $L$ having ones on the diagonal).
+    - **Application**: Solving $Ax = b$ becomes solving $Ly = b$ and $Ux = y$, greatly increasing efficiency for systems with multiple right-hand sides.
 
-!!! theorem "Theorem 10.3 (Cholesky Decomposition)"
-    Every symmetric positive definite matrix $A$ can be uniquely factored as $A = LL^T$, where $L$ is a lower triangular matrix with positive diagonal entries.
+---
+
+## 10.2 Cholesky Decomposition
+
+!!! theorem "Theorem 10.1 (Cholesky Decomposition)"
+    If $A$ is a real symmetric positive definite matrix, there exists a unique lower triangular matrix $L$ with positive diagonal entries such that:
+    $$A = LL^T$$
+    **Significance**: Cholesky decomposition is more stable than LU and requires only half the computational effort.
+
+---
+
+## 10.3 QR Decomposition
+
+!!! theorem "Theorem 10.2 (QR Decomposition)"
+    Every matrix $A$ with linearly independent columns can be factored as $A = QR$.
+    - $Q$ is an orthogonal (or unitary) matrix.
+    - $R$ is an upper triangular invertible matrix.
+    **Implementation**: Beyond the Gram-Schmidt process, it can be realized via Householder reflections or Givens rotations, which offer better numerical stability.
+
+---
+
+## 10.4 Schur Decomposition
+
+!!! theorem "Theorem 10.3 (Schur Decomposition)"
+    Every complex square matrix $A$ is unitarily similar to an upper triangular matrix $T$:
+    $$U^* A U = T$$
+    where $U$ is unitary and the diagonal entries of $T$ are the eigenvalues of $A$.
+    **Extension**: This is a generalization of the Spectral Theorem, proving the universality of unitary transformations in revealing spectral structures.
 
 ---
 
 ## Exercises
 
-1. **[LU Decomposition] Perform LU decomposition on $A = \begin{pmatrix} 2 & 1 \\ 4 & 7 \end{pmatrix}$.**
+1. **[LU] Find the LU decomposition of $A = \begin{pmatrix} 1 & 2 \\ 2 & 5 \end{pmatrix}$.**
    ??? success "Solution"
-       $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$, $U = \begin{pmatrix} 2 & 1 \\ 0 & 5 \end{pmatrix}$.
-       Check: $LU = \begin{pmatrix} 2 & 1 \\ 4 & 2+5 \end{pmatrix} = A$.
+       $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}, U = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$.
 
-2. **[Cholesky] Compute the Cholesky decomposition of $A = \begin{pmatrix} 4 & 12 \\ 12 & 37 \end{pmatrix}$.**
+2. **[Cholesky] Find the Cholesky decomposition for the same matrix $A$.**
    ??? success "Solution"
-       Let $L = \begin{pmatrix} l_{11} & 0 \\ l_{21} & l_{22} \end{pmatrix}$.
-       $l_{11} = \sqrt{4} = 2$.
-       $l_{21} = 12/2 = 6$.
-       $l_{22} = \sqrt{37 - 6^2} = 1$.
-       Thus $L = \begin{pmatrix} 2 & 0 \\ 6 & 1 \end{pmatrix}$.
+       Since $U = L^T$ in the previous problem, $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$ and $A = LL^T$.
 
-3. **[QR Meaning] In the QR decomposition $A=QR$, what geometric property do the columns of $Q$ have?**
+3. **[QR] What is the QR decomposition of $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$?**
    ??? success "Solution"
-       The columns of $Q$ form an orthonormal basis for the column space of $A$. They are obtained by performing Gram-Schmidt orthogonalization on the columns of $A$.
+       Since it is already upper triangular and its columns are orthogonal (though not normalized), $Q=I$ and $R=A$ (if we don't require normalization) or $Q=I, R=A$ is fine.
 
-4. **[Eigendecomposition] If $A$ is diagonalizable, write its eigendecomposition form.**
+4. **[Schur] Prove that the trace of $T$ in a Schur decomposition equals the trace of $A$.**
    ??? success "Solution"
-       $A = PDP^{-1}$, where $D$ is the diagonal matrix of eigenvalues and the columns of $P$ are the corresponding eigenvectors.
+       Trace is a similarity invariant: $\operatorname{tr}(T) = \operatorname{tr}(U^* A U) = \operatorname{tr}(A U U^*) = \operatorname{tr}(A)$.
 
-5. **[Schur Decomposition] Prove that the diagonal entries of the Schur decomposition $A = U T U^*$ are the eigenvalues of $A$.**
+5. **[Existence] Give an example of a non-singular matrix that has no LU decomposition.**
    ??? success "Solution"
-       Since $A$ is similar to the upper triangular matrix $T$, they share the same characteristic polynomial. The eigenvalues of an upper triangular matrix are its diagonal entries.
+       $\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. The first leading principal minor is 0, making initial elimination impossible.
 
-6. **[Polar Decomposition] In the polar decomposition $A = UP$, what do $U$ and $P$ represent?**
+6. **[Pivoting] What is PLU decomposition?**
    ??? success "Solution"
-       $U$ is an isometry (rotation or reflection) and $P$ is a positive semi-definite Hermitian matrix (stretch). This is analogous to the polar form of a complex number $z = re^{i\theta}$.
+       It uses a permutation matrix $P$ to swap rows such that $PA = LU$. This handles zero minors and improves numerical stability.
 
-7. **[Existence] Does every matrix have an LU decomposition?**
+7. **[Polar] In the polar decomposition $A = UP$, what property does $P$ satisfy?**
    ??? success "Solution"
-       No. An LU decomposition exists only if all leading principal minors are non-zero. If row swaps are needed during elimination, a PLU decomposition (with permutation matrix $P$) is required.
+       $P$ is a positive semi-definite matrix (geometrically representing scaling), and $U$ is orthogonal (representing rotation).
 
-8. **[Computational Cost] Is solving $Ax=b$ via LU decomposition faster than direct inversion?**
+8. **[Rank] If $\operatorname{rank}(A) = r$, what is the benefit of factoring it as $A = FG$ ($F$ is $m \times r, G$ is $r \times n$)?**
    ??? success "Solution"
-       Yes. LU decomposition has complexity $O(n^3/3)$, and subsequent back-substitution takes only $O(n^2)$. Direct inversion is generally more computationally expensive and numerically less stable.
+       It compresses a large matrix into two skinny matrices, saving storage and simplifying operations.
 
-9. **[Orthogonal Similarity] What is special about the eigendecomposition if $A$ is symmetric?**
+9. **[Stability] Why is Householder preferred over Gram-Schmidt?**
    ??? success "Solution"
-       It can be written as $A = QDQ^T$, where $Q$ is an orthogonal matrix. This means symmetric matrices are orthogonally diagonalizable.
+       Householder uses orthogonal reflections, avoiding the loss of orthogonality that occurs in Gram-Schmidt due to rounding errors.
 
-10. **[Application] Why is QR decomposition often used for least squares in computer vision?**
+10. **[Application] How do decompositions speed up solving $Ax=b$?**
     ??? success "Solution"
-        QR decomposition is numerically more stable (lower condition number) than directly using the normal equations $A^T A x = A^T b$, significantly reducing rounding errors in floating-point calculations.
+        By performing a one-time high-cost decomposition (like LU at $O(n^3)$), subsequent solves are reduced to low-cost triangular substitutions ($O(n^2)$).
 
 ## Chapter Summary
 
-Matrix decomposition is the "anatomy" of linear algebra:
+Matrix decompositions are the algebraic art of "simplifying the complex":
 
-1. **Structure Revelation**: Reducing complex operators to basic geometric actions (rotation, projection, stretching).
-2. **Computational Optimization**: Lowering $O(n^3)$ complexity to $O(n^2)$ for repeated use through triangulation or diagonalization.
-3. **Theoretical Unity**: Different decomposition theorems (e.g., Schur, Spectral Theorem) delineate the boundaries of matrix theory.
+1.  **Structural Mapping**: Decompositions like LU and QR map general matrices into subgroups with excellent properties (triangular, orthogonal), establishing shortcuts for calculation.
+2.  **Numerical Foundation**: Factorization is not just a tool for theoretical proofs but also the bulwark of numerical stability analysis, distinguishing "robust" from "fragile" algorithms.
+3.  **Information Extraction**: Schur and Rank decompositions demonstrate how to "squeeze" essential information like eigenvalues and rank into the diagonal or a few rows through specific product forms.

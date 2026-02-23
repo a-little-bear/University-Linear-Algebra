@@ -1,74 +1,100 @@
-# Chapter 69: Applications of Linear Algebra in Economics
+# Chapter 69: Linear Algebra in Economics
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Linear Equations (Ch1) · Matrix Operations (Ch2) · Eigenvalues (Ch6) · Non-negative Matrices (Ch17) · M-Matrices (Ch38)
+**Prerequisites**: Non-negative Matrices & Perron-Frobenius (Ch17) · M-matrices (Ch38A) · Optimization (Ch25) · Quadratic Forms (Ch09)
 
-**Chapter Outline**: Leontief Input-Output Model $\to$ Hawkins-Simon Conditions $\to$ Sraffa Model $\to$ Input-Output Structure $\to$ Linear Exchange Model $\to$ Game Theory $\to$ Von Neumann Minimax Theorem $\to$ Linear Programming Duality
+**Chapter Outline**: Leontief Input-Output Model → Consumption Matrix $A$ & Production Equation $x = Ax + d$ → Profitability Conditions & M-matrix Properties → Economic Equilibrium & Eigenvalues (Meaning of the Perron Vector) → Game Theory: Zero-Sum Games & the Minimax Theorem → Role of Linear Programming in Resource Allocation → Financial Engineering: Markowitz Portfolio Optimization & the Efficient Frontier → Risk Metrics: Spectral Decomposition of Covariance Matrices → Applications: National Industry Linkage Analysis, Financial Risk Hedging, and Pricing Models
 
-**Extension**: Input-output analysis (Leontief Nobel Prize) is a standard tool for macroeconomic policy formulation; matrix methods in game theory form the basis for market equilibrium analysis.
+**Extension**: Economics is linear algebra at a societal scale; it abstracts complex transactions among millions of households into large-scale systems of simultaneous equations. Through matrix inversion and spectral analysis, it reveals the fragility of production chains and the laws of capital market volatility.
 
 </div>
 
-A core problem in economics is understanding the interdependence between sectors of an economy. Leontief's input-output model abstracts this dependence as a consumption matrix, revealing the algebraic essence of production activities.
+How do various industries in a nation depend on one another? If the price of steel rises, how will it ripple through the entire economic system? **Economic Linear Algebra** answers these questions through matrix models. From the Nobel-winning Leontief model to modern Wall Street asset allocation algorithms, linear algebra provides the unified language for describing resource flow, risk assessment, and game equilibrium.
 
 ---
 
-## 69.1 Input-Output Theory
+## 69.1 Leontief Input-Output Model
 
-!!! definition "Definition 69.1 (Leontief Model)"
-    Let $C$ be the consumption matrix, $x$ the total output, and $d$ the external demand. The equilibrium equation is:
-    $$x = Cx + d \implies (I-C)x = d$$
-    where $(I-C)^{-1}$ is known as the Leontief inverse matrix, representing the multiplier effect of the economy.
+!!! definition "Definition 69.1 (Input-Output Equation)"
+    Assume an economic system with $n$ sectors. Let $\mathbf{x}$ be the total output vector, $\mathbf{d}$ the final external demand vector, and $A$ the **consumption matrix** ($a_{ij}$ represents the units of product $i$ needed to produce one unit of product $j$). The balance equation is:
+    $$\mathbf{x} = A\mathbf{x} + \mathbf{d} \quad \implies \quad (I - A)\mathbf{x} = \mathbf{d}$$
 
-!!! theorem "Theorem 69.3 (Hawkins-Simon Conditions)"
-    For any non-negative demand $d \ge 0$, a non-negative output $x \ge 0$ exists if and only if all leading principal minors of $I-C$ are positive.
+!!! theorem "Theorem 69.1 (Condition for Productivity)"
+    A system can yield a positive output $\mathbf{x} > 0$ for any non-negative demand $\mathbf{d} \ge 0$ iff:
+    1.  The spectral radius of the consumption matrix satisfies $\rho(A) < 1$.
+    2.  $(I - A)$ is a **non-singular M-matrix** (meaning $(I-A)^{-1} \ge 0$).
+
+---
+
+## 69.2 Game Theory and Linear Programming
+
+!!! technique "Zero-Sum Games and Minimax"
+    In a two-person zero-sum game with payoff matrix $M$, Player 1 seeks a mixed strategy $p$ and Player 2 seeks $q$.
+    **Minimax Theorem**: $\max_p \min_q p^T M q = \min_q \max_p p^T M q$.
+    Solving for this equilibrium value is exactly equivalent to a pair of dual **linear programming** problems.
+
+---
+
+## 69.3 Financial Engineering: Markowitz Portfolio
+
+!!! definition "Definition 69.2 (Mean-Variance Model)"
+    Let the returns of $n$ assets be random variables with covariance matrix $\Sigma \succ 0$. Investment weights are $\mathbf{w}$ (with $\sum w_i = 1$).
+    - **Risk** (Variance): $\sigma^2 = \mathbf{w}^T \Sigma \mathbf{w}$.
+    - **Goal**: Minimize risk given a target expected return $\mu^T \mathbf{w} = E$.
+    This is a **quadratic programming** problem with linear constraints, whose solutions form the "Efficient Frontier."
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Why must the spectral radius of the consumption matrix $C$ in the Leontief model be less than 1?**
-   ??? success "Solution"
-       Only if $\rho(C) < 1$ can the series $(I-C)^{-1} = I + C + C^2 + \dots$ converge and yield a non-negative result. Economically, this represents a "productive" system where the internal resources required to produce 1 unit of output are strictly less than 1 unit.
-
-2. **[Calculation] Given $C = \begin{pmatrix} 0.5 & 0.4 \\ 0.2 & 0.5 \end{pmatrix}$. Verify the Hawkins-Simon conditions.**
-   ??? success "Solution"
-       $I-C = \begin{pmatrix} 0.5 & -0.4 \\ -0.2 & 0.5 \end{pmatrix}$.
-       Leading principal minors: $D_1 = 0.5 > 0$; $D_2 = \det(I-C) = 0.25 - 0.08 = 0.17 > 0$. Both are positive, so the conditions are satisfied.
-
-3. **[Economic Intuition] Explain the meaning of the elements in the $j$-th column of the Leontief inverse matrix $(I-C)^{-1}$.**
-   ??? success "Solution"
-       The $j$-th column describes the necessary increase in total output across all sectors of the economy required to satisfy a 1-unit increase in the final demand for the $j$-th sector's products.
-
-4. **[Game Theory] Prove: In a two-person zero-sum game, if the payoff matrix $A$ is skew-symmetric ($A^T = -A$), the value of the game is 0.**
-   ??? success "Solution"
-       By the minimax theorem, $v = \max_x \min_y x^T A y$. If $A$ is skew-symmetric, then $x^T A x = 0$ for any strategy $x$. Since the game is perfectly symmetric, neither player can have a non-zero expected gain in equilibrium.
-
-5. **[Shadow Prices] In linear programming, what does a positive shadow price for a particular resource constraint imply?**
-   ??? success "Solution"
-       It implies that the resource is a bottleneck. Increasing the capacity of that resource by 1 unit will increase the objective value (e.g., total profit) by the amount of the shadow price.
-
-6. **[Income Mobility] How is "class stagnation" measured using the eigenvalues of an income mobility matrix $P$?**
-   ??? success "Solution"
-       The rate of convergence to the steady-state distribution is determined by $|\lambda_2|^k$. As $\lambda_2 \to 1$, the time required to reshuffle the initial distribution increases, representing higher levels of socioeconomic rigidity.
-
-7. **[Sraffa Model] Why are wage rates and profit rates negatively correlated in the Sraffa price model?**
-   ??? success "Solution"
-       Because the total value produced is fixed by the technology matrix $A$. This value must be split between labor (wages) and capital (profits). The equation $\mathbf{p}^T[I - (1+r)A] = w\mathbf{l}^T$ strictly defines this tradeoff.
-
-8. **[Calculation] Find the mixed strategy equilibrium for $A = \begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$.**
-   ??? success "Solution"
-       Due to symmetry, the optimal strategies are $x^* = [0.5, 0.5]^T$ and $y^* = [0.5, 0.5]^T$. The value of the game is $0.5(1) + 0.5(-1) = 0$.
-
-9. **[Perron-Frobenius] What ensures the uniqueness of the equilibrium output ratio in a closed economic model?**
-   ??? success "Solution"
-       The Perron-Frobenius theorem for irreducible stochastic matrices guarantees that the eigenvector corresponding to the eigenvalue 1 is unique up to scaling and is strictly positive.
-
-10. **[Structural Analysis] In matrix terms, what signifies an economic crisis in an input-output system?**
+1.  **[Basics] A consumption matrix is $A = \begin{pmatrix} 0.5 & 0.2 \\ 0.2 & 0.5 \end{pmatrix}$. If external demand is $d = (10, 10)^T$, find the total output $x$.**
     ??? success "Solution"
-        A crisis is signified by $\rho(C) \ge 1$ or the failure of the Hawkins-Simon conditions. Algebraically, this results in the Leontief inverse having negative entries or diverging, meaning the economy consumes more than it produces.
+        $I-A = \begin{pmatrix} 0.5 & -0.2 \\ -0.2 & 0.5 \end{pmatrix}$.
+        $\det(I-A) = 0.25 - 0.04 = 0.21$.
+        $(I-A)^{-1} = \frac{1}{0.21} \begin{pmatrix} 0.5 & 0.2 \\ 0.2 & 0.5 \end{pmatrix}$.
+        $x = (I-A)^{-1} d = \frac{1}{0.21} (7, 7)^T \approx (33.3, 33.3)^T$.
+
+2.  **[Spectral Radius] Why is $\rho(A) < 1$ necessary for a sustainable economic system?**
+    ??? success "Solution"
+        If $\rho(A) \ge 1$, the internal consumption required to produce one unit of product exceeds the output itself. The system would shrink continuously and fail to satisfy any external demand.
+
+3.  **[M-matrix] Prove: If $I-A$ is an M-matrix, increasing demand $d$ necessarily increases output $x$.**
+    ??? success "Solution"
+        Since $x = (I-A)^{-1} d$ and $(I-A)^{-1} \ge 0$, a change $\Delta d \ge 0$ results in $\Delta x = (I-A)^{-1} \Delta d \ge 0$.
+
+4.  **[Game Theory] In a $2 \times 2$ zero-sum game with payoff matrix $I$ (identity), what is the optimal strategy?**
+    ??? success "Solution"
+        Due to symmetry, the optimal strategy for both players is the mixed strategy $(0.5, 0.5)$.
+
+5.  **[Risk] Why must the covariance matrix $\Sigma$ be positive definite?**
+    ??? success "Solution"
+        Because portfolio risk (variance) $w^T \Sigma w$ must physically be positive unless all assets are perfectly linearly dependent (in which case it is semi-definite).
+
+6.  **[PCA] What does the first principal component of a financial covariance matrix usually represent?**
+    ??? success "Solution"
+        It typically represents the "Market Factor," the direction of systematic risk common to all assets.
+
+7.  **[Linear Programming] What do shadow prices represent in economic allocation?**
+    ??? success "Solution"
+        They represent the marginal value of a scarce resource—the maximum increase in profit from adding one unit of that resource.
+
+8.  **[Calculation] Find the game value for the payoff matrix $\begin{pmatrix} 1 & -1 \\ -1 & 1 \end{pmatrix}$.**
+    ??? success "Solution"
+        The value is 0 (a fair game).
+
+9.  **[Equilibrium] Briefly describe the relationship between the closed Leontief model and eigenvalues.**
+    ??? success "Solution"
+        In a closed model, $Ax = x$, meaning output is exactly consumed by the system. This corresponds to the eigenvector associated with the eigenvalue 1 (the Perron vector).
+
+10. **[CAPM] Why is the $\beta$ coefficient used in asset pricing models?**
+    ??? success "Solution"
+        The $\beta$ coefficient is essentially the regression coefficient of an individual asset's return against the market portfolio's return, reflecting its sensitivity to the market operator.
 
 ## Chapter Summary
 
-This chapter demonstrates the four pillars of linear algebra in economics: the Leontief model establishes the self-consistency of production; the Sraffa model establishes the duality between price and distribution; the minimax theorem governs game equilibrium; and Markov chains characterize the evolution of economic structures.
+Linear algebra in economics establishes the structural logic of social systems:
+
+1.  **Algebraic Constraints of Cycles**: The Leontief model proves that mutual industry consumption forms the underlying operator of the system, whose spectral radius determines if the economy can generate surplus value.
+2.  **Game-theoretic Equilibrium**: The Minimax theorem and linear programming reveal the dual essence of optimal decision-making in competitive environments, proving the algebraic unity of individual interest and social resource allocation.
+3.  **Geometric Metrics of Volatility**: The mean-variance model quantifies financial risk as the curvature of ellipsoids in high-dimensional space, proving that through matrix diagonalization (diversification), one can effectively find the optimal trade-off between return and risk.

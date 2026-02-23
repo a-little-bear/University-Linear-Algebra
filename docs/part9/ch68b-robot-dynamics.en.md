@@ -2,81 +2,102 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Kinematics (Ch68A) · Matrix Differentiation (Ch47) · Eigenvalues (Ch6)
+**Prerequisites**: Robot Kinematics (Ch68A) · Positive Definite Matrices (Ch16) · Matrix Calculus (Ch47A) · Matrix Equations (Ch20)
 
-**Chapter Outline**: Lagrange Equations → Inertia Matrix ($M$) → Coriolis and Centrifugal Matrix ($C$) → Gravity Term ($G$) → Linear Parameterization → Least Squares Identification → Impedance Control → Principle of Virtual Work
+**Chapter Outline**: Matrix Form of the Robot Dynamic Equations → Properties of the Mass Matrix $M(q)$ (Symmetry & Positive Definiteness) → The Coriolis and Centrifugal Matrix $C(q, \dot{q})$ → The Gravity Vector $G(q)$ → The Fundamental Identity: Skew-symmetry of $\dot{M}-2C$ and Energy Conservation → Operational Space Dynamics → Recursive Newton-Euler Algorithm (RNEA) → Applications: Model Predictive Control (MPC), Force/Position Control, and Parameter Identification
 
-**Extension**: The positive definiteness of the inertia matrix is a mathematical prerequisite for control law robustness; the linear parameterization property enables robot self-calibration through data.
+**Extension**: Robot dynamics is "linear algebra with mass"; it extends static geometric transforms into second-order matrix differential equations involving inertia, damping, and potential energy, forming the theoretical basis for high-performance motion control.
 
 </div>
 
-Robot dynamics studies the causal relationship between joint torques and motion trajectories. Through Lagrangian mechanics or Newton-Euler methods, the laws of motion for multi-rigid-body systems are expressed as systems of non-linear differential equations parameterized by joint positions and velocities.
+Kinematics tells us *where* a robot is, but **Robot Dynamics** tells us *how much force* is needed to get there. The dynamic equations link joint accelerations to the torques produced by the motors. in high-dimensional state space, these equations manifest as a highly non-linear matrix system. This chapter exploits the structural properties of linear algebra (e.g., positive definiteness, skew-symmetry) to simplify this complex physical description.
 
 ---
 
-## 68B.1 Dynamic Equations and Algebraic Properties
+## 68B.1 Matrix Form of the Dynamic Equations
 
-!!! definition "Definition 68B.1 (Standard Second-Order Model)"
-    The equations of motion for an $n$-degree-of-freedom robot follow this matrix form:
-    $$M(q) \ddot{q} + C(q, \dot{q}) \dot{q} + G(q) = \tau$$
-    where:
-    - $M(q) \in \mathbb{R}^{n \times n}$ is the **Inertia Matrix**;
-    - $C(q, \dot{q}) \dot{q}$ represents the Coriolis and centrifugal terms;
-    - $G(q)$ is the gravity vector;
-    - $\tau$ is the vector of actuator torques.
+!!! definition "Definition 68B.1 (Standard Dynamic Model)"
+    The dynamic equation for a robot with $n$ joints is written as:
+    $$M(q)\ddot{q} + C(q, \dot{q})\dot{q} + G(q) = \tau$$
+    - $q, \dot{q}, \ddot{q}$: Joint positions, velocities, and accelerations.
+    - $M(q)$: $n \times n$ **Inertia Matrix** (or Mass Matrix).
+    - $C(q, \dot{q})$: $n \times n$ **Coriolis and Centrifugal Matrix**.
+    - $G(q)$: $n \times 1$ **Gravity Vector**.
+    - $\tau$: Vector of joint torques.
 
-!!! theorem "Theorem 68B.1 (Positive Definiteness of the Inertia Matrix)"
-    For any configuration $q$, the inertia matrix $M(q)$ is always **symmetric and positive definite** ($M^T = M, M \succ 0$). This stems from the physical positive definiteness of the system's total kinetic energy $T = \frac{1}{2} \dot{q}^T M(q) \dot{q}$.
+---
+
+## 68B.2 Algebraic Properties of the Inertia Matrix
+
+!!! theorem "Theorem 68B.1 (Positive Definiteness of the Mass Matrix)"
+    The inertia matrix $M(q)$ is always **symmetric and positive definite** ($M \succ 0$).
+    **Physical Meaning**: The kinetic energy $K = \frac{1}{2} \dot{q}^T M(q) \dot{q}$ is always positive for any non-zero velocity, and the matrix is invertible, ensuring a unique acceleration for any given torque: $\ddot{q} = M^{-1}(\tau - C\dot{q} - G)$.
+
+---
+
+## 68B.3 Energy Conservation and Skew-Symmetry
+
+!!! theorem "Theorem 68B.2 (Skew-Symmetry Identity)"
+    The matrix $N = \dot{M}(q) - 2C(q, \dot{q})$ is a **skew-symmetric matrix**, satisfying $x^T N x = 0$ for any vector $x$.
+    **Significance**: This property reflects the cancellation of internal work within the system and is a core technique for proving the stability of controllers, especially in Lyapunov-based adaptive control.
+
+---
+
+## 68B.4 Linear Structure of Parameter Identification
+
+!!! technique "Linear Parameterization"
+    The dynamic equations are **linear** with respect to the physical parameters (mass, center of mass, inertia tensor):
+    $$\tau = Y(q, \dot{q}, \ddot{q}) \boldsymbol{\phi}$$
+    where $Y$ is the **Regressor Matrix** and $\boldsymbol{\phi}$ is the vector of parameters to be identified. This allows for the use of **Least Squares** (Ch07) to accurately reconstruct the robot's dynamic model.
 
 ---
 
 ## Exercises
 
-1. **[Kinetic Energy] Prove: If the total kinetic energy of the system is positive for any non-zero velocity, then the inertia matrix $M(q)$ must have only positive eigenvalues.**
-   ??? success "Solution"
-       Kinetic energy $T = \frac{1}{2}\dot{q}^T M(q) \dot{q}$ is a quadratic form. Since $T > 0$ for all $\dot{q} \neq 0$, the quadratic form is positive definite. According to the properties of real symmetric matrices, this implies all eigenvalues of $M(q)$ are strictly positive.
-
-2. **[Energy Conservation] Prove: The matrix $\dot{M}(q) - 2C(q, \dot{q})$ is skew-symmetric. What is the implication for control design?**
-   ??? success "Solution"
-       From energy conservation $\dot{T} = \dot{q}^T \tau$. Differentiating $T$ and substituting the dynamic equation leads to $\dot{q}^T (\dot{M}-2C) \dot{q} = 0$. This skew-symmetry allows for the cancellation of $M$ derivative terms in Lyapunov-based adaptive control laws.
-
-3. **[Linear Parameterization] Show that the dynamic equation is linear with respect to the physical parameter vector $\Phi$ (e.g., link masses, inertia tensors).**
-   ??? success "Solution"
-       Dynamic terms like $m \ddot{x}$ or $I \dot{\omega}$ are linear in the mass or inertia coefficients. By rearranging the equation into $\tau = Y(q, \dot{q}, \ddot{q}) \Phi$, where $Y$ is the regression matrix, we transform a non-linear state problem into a linear parameter estimation problem.
-
-4. **[System Identification] Describe the algebraic process of identifying robotic physical parameters via least squares.**
-   ??? success "Solution"
-       Given experimental data pairs $(\tau_k, q_k, \dot{q}_k, \ddot{q}_k)$, we stack them into an overdetermined system $\mathcal{T} = \mathcal{Y} \Phi$. The optimal estimate is found using the pseudoinverse: $\hat{\Phi} = (\mathcal{Y}^T \mathcal{Y})^{-1} \mathcal{Y}^T \mathcal{T}$.
-
-5. **[Impedance Control] Analyze the requirement for choosing target matrices $M_d, B_d, K_d$ as positive definite in impedance control.**
-   ??? success "Solution"
-       The target closed-loop system behaves like a virtual mass-spring-damper system. Positive definiteness ensures that the resulting linear system is asymptotically stable and dissipative, preventing energy gain during human-robot interaction.
-
-6. **[Condition Number] What are the effects of a high condition number $\kappa(M)$ on robot servo performance?**
-   ??? success "Solution"
-       A large condition number indicates that the inertia is much larger in some directions than others. This amplifies numerical noise in the control loop and can lead to oscillations in the directions corresponding to small eigenvalues.
-
-7. **[Modal Analysis] How do the natural frequencies of a robot relate to the eigenvalues of $M^{-1}K$ (where $K$ is the joint stiffness matrix)?**
-   ??? success "Solution"
-       The linearized homogeneous equation is $M \ddot{x} + K x = 0$. Assuming $x(t) = v e^{j\omega t}$ leads to the generalized eigenvalue problem $(K - \omega^2 M)v = 0$. The natural frequencies $\omega_i$ are the square roots of the eigenvalues of $M^{-1}K$.
-
-8. **[Projected Dynamics] Explain the use of the projection matrix $P = I - J^\dagger J$ in constrained robotic motion.**
-   ??? success "Solution"
-       The matrix $P$ projects the dynamics onto the nullspace of the Jacobian. This allows for controlling internal forces (which do not cause motion) separately from external task-space motion.
-
-9. **[Virtual Work] Use the Jacobian to derive the mapping from task-space forces $f$ to joint torques $\tau$.**
-   ??? success "Solution"
-       By the principle of virtual work, $f^T \delta x = \tau^T \delta \theta$. Substituting $\delta x = J \delta \theta$ gives $f^T J \delta \theta = \tau^T \delta \theta$. Since $\delta \theta$ is arbitrary, we have $\tau = J^T f$.
-
-10. **[Inverse Dynamics] Why is the Newton-Euler recursive algorithm computationally more efficient than the Lagrangian expansion for large $n$?**
+1.  **[Basics] For a simple pendulum with mass $m$ and length $l$, what is $M(q)$? (where $q$ is the angle).**
     ??? success "Solution"
-        Lagrangian methods often result in $O(n^4)$ complexity if expanded symbolically due to redundant cross-terms. The recursive Newton-Euler algorithm exploits the local connectivity of the chain to achieve $O(n)$ complexity by propagating velocities and forces sequentially.
+        Kinetic energy $K = \frac{1}{2} m (l\dot{q})^2 = \frac{1}{2} (ml^2) \dot{q}^2$. Thus $M(q) = ml^2$ (a scalar inertia matrix).
+
+2.  **[Positive Definite] Why must $M(q)$ be positive definite?**
+    ??? success "Solution"
+        Because kinetic energy is a positive definite quadratic form. If $M$ had non-positive eigenvalues, it would mean that moving in certain directions would result in zero or negative kinetic energy, which contradicts physical laws of mass distribution.
+
+3.  **[Skew-Symmetry] How is the identity $\dot{M}-2C$ used in adaptive control?**
+    ??? success "Solution"
+        In a Lyapunov stability proof, the derivative of the kinetic energy term $\frac{1}{2} \frac{d}{dt}(\dot{q}^T M \dot{q})$ generates a $\frac{1}{2} \dot{q}^T \dot{M} \dot{q}$ term. By combining this with the $C$ matrix term, parts of the expression cancel out, simplifying the stability analysis.
+
+4.  **[Calculation] If $M(q) = \begin{pmatrix} a+b\cos q_2 & c \\ c & d \end{pmatrix}$, find $\dot{M}$.**
+    ??? success "Solution"
+        $\dot{M} = \begin{pmatrix} -b\sin(q_2)\dot{q}_2 & 0 \\ 0 & 0 \end{pmatrix}$. Note the use of the chain rule.
+
+5.  **[Operational Space] What is the Operational Space Inertia Matrix $\Lambda(x)$?**
+    ??? success "Solution"
+        $\Lambda(x) = (J M^{-1} J^T)^{-1}$. It describes the effective mass perceived at the end-effector in Cartesian space.
+
+6.  **[Application] Briefly explain the algebraic essence of "Computed Torque Control."**
+    ??? success "Solution"
+        It utilizes the inverse of the dynamic equations to algebraically cancel the non-linear terms $C\dot{q}$ and $G$, forcing the system to behave as a linear double integrator: $\ddot{q} = u$.
+
+7.  **[Gravity] Prove $G(q) = \nabla_q P(q)$, where $P$ is the potential energy.**
+    ??? success "Solution"
+        This follows directly from the definition of the conservative force term in the Euler-Lagrange equations.
+
+8.  **[Linearlity] If joint acceleration doubles, does torque $\tau$ double?**
+    ??? success "Solution"
+        No, because of the non-linear velocity-squared terms $\dot{q}$ (Coriolis forces) and the constant gravity term $G$. It is only approximately linear in quasi-static conditions or when velocity is negligible.
+
+9.  **[Complexity] How many Christoffel symbols are in the $C$ matrix of an $n$-DOF robot?**
+    ??? success "Solution"
+        $n^3$ symbols. Each $C_{ij} = \sum c_{ijk} \dot{q}_k$.
+
+10. **[Identification] Why must the $Y$ matrix be full column rank in dynamics identification?**
+    ??? success "Solution"
+        Only with full column rank can the least-squares solution $\hat{\boldsymbol{\phi}} = (Y^T Y)^{-1} Y^T \tau$ be unique, thereby uniquely determining the robot's physical parameters.
 
 ## Chapter Summary
 
-This chapter discusses the dynamic framework describing the energy evolution and force characteristics of multi-degree-of-freedom mechanical systems:
+Robot dynamics demonstrates the depth of linear algebra in handling non-linear physical laws:
 
-1. **Matrix Equation Systems**: Established standard matrix expressions composed of inertia, Coriolis, and gravity terms.
-2. **Definiteness Criteria**: Revealed physical constraints on the inertia matrix through quadratic forms, providing the basis for stability analysis.
-3. **Identification Logic**: Demonstrated the linear parameterization of dynamics, establishing a linear algebraic path for parameter estimation.
-4. **Interaction Control**: Utilized virtual work and projection operators to formulate impedance control and constrained motion laws.
+1.  **Algebraization of Physics**: Through the three operators $M, C$, and $G$, dynamics condenses complex Newtonian derivations into standard matrix equations, establishing a universal format for multi-body simulation.
+2.  **Protection by Symmetry**: The positive definiteness of the mass matrix and the skew-symmetry of $\dot{M}-2C$ are not just mathematical tricks but projections of the Law of Conservation of Energy, providing a theoretical moat for robust control design.
+3.  **Determinism in Prediction**: The parameter-linearization property proves that even extremely complex motions are governed by underlying physical constants that can be isolated via linear regression, showcasing linear algebra as a powerful tool for scientific analysis.

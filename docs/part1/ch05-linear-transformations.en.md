@@ -2,84 +2,104 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Vector Spaces (Ch4) · Matrix Operations (Ch2)
+**Prerequisites**: Vector Spaces (Ch04)
 
-**Chapter Outline**: Definition of Linear Transformations → Kernel and Image → Matrix Representation $T \leftrightarrow A$ → Change of Basis and Similarity → Homomorphism and Isomorphism → Operator Forms of Projection, Reflection, and Rotation
+**Chapter Outline**: Definition of Linear Transformations → Linearity Criteria → Matrix Representation (Choice of Bases) → Kernel and Range → Injectivity, Surjectivity, and Isomorphisms → Operations on Transformations (Sum, Scalar Multiple, Composition) → Inverse Transformations → Matrix Representation under Change of Basis (Similarity) → Geometric Operators (Rotation, Reflection, Projection, Shear)
 
-**Extension**: Linear transformations provide an "active" perspective, describing how space is stretched, twisted, or compressed.
+**Extension**: Linear transformations connect static vector spaces and are the concrete manifestation of "morphisms" in the category of vector spaces; they are the core for understanding Diagonalization (Ch06) and SVD (Ch11).
 
 </div>
 
-If vector spaces are the static stage, linear transformations are the movements performed on that stage. Every linear transformation, given a basis, can be uniquely represented by a matrix.
+Vector spaces provide the stage, and linear transformations are the primary actors. A linear transformation is a mapping that preserves the addition and scalar multiplication structures of a vector space, allowing us to study the interconnections between different spaces. This chapter reveals a central fact: once bases are chosen, every linear transformation can be uniquely represented by a matrix.
 
 ---
 
-## 05.1 Definitions and Core Properties
+## 05.1 Definition of Linear Transformations
 
 !!! definition "Definition 05.1 (Linear Transformation)"
-    A mapping $T: V \to W$ is linear if for all $u, v \in V$ and scalar $c$:
-    1. $T(u+v) = T(u) + T(v)$
-    2. $T(cv) = cT(v)$
+    A mapping $T: V \to W$ is called a **linear transformation** if it satisfies:
+    1.  **Additivity**: $T(\mathbf{u} + \mathbf{v}) = T(\mathbf{u}) + T(\mathbf{v})$.
+    2.  **Homogeneity**: $T(c\mathbf{v}) = cT(\mathbf{v})$.
 
-!!! theorem "Theorem 05.3 (Change of Basis Formula)"
-    Let $A$ be the matrix of $T$ in basis $B$, and $A'$ the matrix in $B'$. If $P$ is the transition matrix from $B'$ to $B$, then:
-    $$A' = P^{-1} A P$$
-    Such matrices are called **similar matrices**.
+!!! note "Properties"
+    A linear transformation always maps the zero vector to the zero vector: $T(\mathbf{0}_V) = \mathbf{0}_W$.
+
+---
+
+## 05.2 Matrix Representation
+
+!!! theorem "Theorem 05.1 (Matrix Representation)"
+    Let $B = \{\mathbf{v}_1, \ldots, \mathbf{v}_n\}$ be a basis for $V$ and $C$ be a basis for $W$. $T$ is completely determined by its action on the basis vectors $T(\mathbf{v}_j)$.
+    The **matrix representation** of $T$ is $[T]_{C \leftarrow B} = [ [T(\mathbf{v}_1)]_C \ \cdots \ [T(\mathbf{v}_n)]_C ]$.
+    Then: $[T(\mathbf{x})]_C = [T]_{C \leftarrow B} [\mathbf{x}]_B$.
+
+---
+
+## 05.3 Kernel and Range
+
+!!! definition "Definition 05.2 (Kernel and Range)"
+    1.  **Kernel $\ker(T)$**: The set of all vectors mapped to the zero vector: $\{\mathbf{v} \in V : T(\mathbf{v}) = \mathbf{0}\}$.
+    2.  **Range $\operatorname{im}(T)$**: The set of all images of vectors in $V$: $\{T(\mathbf{v}) : \mathbf{v} \in V\}$.
+
+!!! theorem "Theorem 05.2 (Rank-Nullity Theorem for Transformations)"
+    $\dim \ker(T) + \dim \operatorname{im}(T) = \dim V$. This is essentially identical to the rank-nullity theorem for matrices.
+
+---
+
+## 05.4 Isomorphisms and Inverses
+
+!!! definition "Definition 05.3 (Isomorphism)"
+    If $T: V \to W$ is both injective (one-to-one) and surjective (onto), it is an **isomorphism**. In this case, $V$ and $W$ are algebraically equivalent.
+    **Corollary**: Two finite-dimensional vector spaces are isomorphic if and only if they have the same dimension.
 
 ---
 
 ## Exercises
 
-1. **[Criteria] Is the mapping $T(x, y) = (x+1, y)$ a linear transformation? Explain.**
+1. **[Criteria] Determine if $T(x, y) = (x+1, y)$ is a linear transformation.**
    ??? success "Solution"
-       No. A linear transformation must satisfy $T(0) = 0$. Here $T(0, 0) = (1, 0) \neq (0, 0)$. It also fails the scalar multiplication property.
+       No. $T(0, 0) = (1, 0) \neq (0, 0)$. A linear transformation must preserve the zero vector.
 
-2. **[Matrix Representation] Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be the transformation that projects vectors onto the $x$-axis. Write its matrix in the standard basis.**
+2. **[Matrix] Let the matrix of $T$ in the standard basis of $\mathbb{R}^2$ be $\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$. Describe its geometry.**
    ??? success "Solution"
-       $T(1, 0) = (1, 0)$ and $T(0, 1) = (0, 0)$.
-       Thus the matrix is $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
+       It is a counter-clockwise rotation of 90 degrees about the origin.
 
-3. **[Kernel and Image] Let $T$ have the matrix $A = \begin{pmatrix} 1 & 2 \\ 2 & 2 \end{pmatrix}$. Calculate $\dim(\ker T)$.**
+3. **[Kernel] Find the kernel of the differentiation operator $D: P_2 \to P_1$ where $D(p) = p'$.**
    ??? success "Solution"
-       $\det A = 2-4 = -2 \neq 0$. The matrix has full rank, so the kernel contains only the zero vector.
-       $\dim(\ker T) = 0$.
+       $\ker(D)$ is the set of polynomials with zero derivative, which is the space of constant polynomials $\operatorname{span}\{1\}$. Its dimension is 1.
 
-4. **[Basis Change] Given $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$. If the change of basis matrix is $P = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, find the similar matrix $A'$.**
+4. **[Range] Find the range of $D$ from the previous exercise.**
    ??? success "Solution"
-       $P^{-1} = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}$.
-       $A' = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & -3 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}$.
+       The basis $\{1, x, x^2\}$ is mapped to $\{0, 1, 2x\}$. Thus the range is $\operatorname{span}\{1, x\} = P_1$.
 
-5. **[Differential Operator] Prove that the derivative $D: P_2 \to P_1$ ($D(p) = p'$) is a linear transformation.**
+5. **[Composition] Prove the composition of two linear transformations is linear.**
    ??? success "Solution"
-       By calculus rules: $(f+g)' = f' + g'$ and $(cf)' = cf'$. Since it satisfies additivity and scalar homogeneity, $D$ is linear.
+       $S(T(\mathbf{u}+\mathbf{v})) = S(T\mathbf{u} + T\mathbf{v}) = S(T\mathbf{u}) + S(T\mathbf{v})$. Homogeneity follows similarly.
 
-6. **[Isomorphism] Prove: Vector spaces of the same dimension are isomorphic.**
+6. **[Inversion] If the matrix of $T$ is $A$, what is the condition for $T^{-1}$ to exist?**
    ??? success "Solution"
-       Let $V, W$ have dimension $n$. Choose bases for each and define a linear map mapping one basis to the other. This map is a bijection and preserves operations, so $V \cong W$.
+       $A$ must be an invertible matrix (i.e., $\det A \neq 0$).
 
-7. **[Rotation Matrix] Write the matrix for a $90^\circ$ counter-clockwise rotation in $\mathbb{R}^2$.**
+7. **[Projection] Write the matrix for the orthogonal projection onto the $x$-axis in $\mathbb{R}^2$.**
    ??? success "Solution"
-       $T(1, 0) = (0, 1)$; $T(0, 1) = (-1, 0)$.
-       The matrix is $R = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$.
+       $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
 
-8. **[Idempotency] Prove: If $P$ is a projection operator ($P^2=P$), its eigenvalues can only be 0 or 1.**
+8. **[Isomorphism] Are $\mathbb{R}^n$ and $P_{n-1}$ isomorphic?**
    ??? success "Solution"
-       Let $Pv = \lambda v$, then $P^2 v = \lambda^2 v$.
-       From $P^2=P$, $\lambda^2 v = \lambda v \implies (\lambda^2-\lambda)v = 0$.
-       For a non-zero eigenvector $v$, $\lambda^2-\lambda=0$, so $\lambda=0$ or $1$.
+       Yes, because they both have dimension $n$.
 
-9. **[Similarity] Do similar matrices have the same characteristic polynomial?**
+9. **[Similarity] If $A$ and $B$ represent the same transformation in different bases, how are they related?**
    ??? success "Solution"
-       Yes. $\det(\lambda I - P^{-1}AP) = \det(P^{-1}(\lambda I - A)P) = \det(P^{-1}) \det(\lambda I - A) \det(P) = \det(\lambda I - A)$.
+       $B = P^{-1}AP$; they are similar matrices.
 
-10. **[Rank-Nullity App] What is the condition for $T: \mathbb{R}^n \to \mathbb{R}^m$ to be injective?**
+10. **[Trace] Prove the trace of a linear transformation is independent of the basis.**
     ??? success "Solution"
-        The kernel must be zero, i.e., $\dim(\ker T) = 0$. By the rank-nullity theorem, this is equivalent to $\operatorname{rank}(T) = n$ (full column rank).
+        Trace is a similarity invariant. Since matrices in different bases are similar, their traces must be equal.
 
 ## Chapter Summary
 
-Linear transformations unify operators and matrices:
+Linear transformations build "bridges" between spaces:
 
-1. **Representation**: A matrix is the numerical expression of a linear transformation in a specific coordinate system (basis).
-2. **Internal Logic**: Similarity transformations reflect the description of the same operator from different viewpoints; its characteristic attributes remain invariant.
-3. **Classification**: The dimensional distribution of kernel and image defines how much information is preserved or compressed by the transformation.
+1.  **Structure Preservation**: The essence of a linear transformation is maintaining the harmony of vector addition and scalar multiplication.
+2.  **Matrix Realization**: Choosing a basis translates abstract mappings into matrix arithmetic, enabling the use of numerical algorithms for abstract logic.
+3.  **Dimension Conservation**: The relationship between kernel and range (Rank-Nullity Theorem) reveals the patterns of information retention and loss during transformation.

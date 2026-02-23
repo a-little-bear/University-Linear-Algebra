@@ -1,76 +1,104 @@
-# Chapter 61: Inverse Eigenvalue Problems
+# Chapter 61: Inverse Eigenvalue Problems (IEP)
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · Positive Definite Matrices (Ch16) · Nonnegative Matrices (Ch17) · Jordan Form (Ch12)
+**Prerequisites**: Eigenvalues (Ch06) · Matrix Analysis (Ch14) · Positive Definite Matrices (Ch16) · Numerical Algorithms (Ch22)
 
-**Chapter Outline**: Framework of IEP → Symmetric IEP → Nonnegative IEP (NIEP) → Jacobi IEP → Toeplitz IEP → Stochastic IEP → Numerical Methods → Open Problems
+**Chapter Outline**: Motivation for Inverse Eigenvalue Problems → Challenges of Existence and Construction → Symmetric IEP (Inverse Application of Schur-Horn) → Jacobi Matrix IEP (Construction from Two Spectra) → Non-negative IEP (The NIEP and Suleimanova Conditions) → Structured IEP (Toeplitz and Banded Constraints) → Additive and Multiplicative IEP → Numerical Solutions: Quasi-Newton and Lifting Methods → Applications: Vibration System Design (Spring-Mass Models), Seismic Imaging, and Pole Placement in Control Theory
 
-**Extension**: Inverse eigenvalue problems are critical in structural engineering (mass-spring model refinement), control theory (pole placement), and molecular spectroscopy.
+**Extension**: If eigenvalue computation is "deriving frequencies from physical structures," then IEP is "designing physical structures based on target frequencies"; it is a core algebraic task in engineering design and parameter identification.
 
 </div>
 
-Inverse Eigenvalue Problems (IEP) involve constructing a matrix that satisfies certain structural constraints while possessing a prescribed spectrum. Unlike the direct problem (finding eigenvalues of a given matrix), IEPs deal with existence, uniqueness, and construction from the "effect" back to the "cause."
+In much of linear algebra, our task is to compute the eigenvalues of a given matrix. In engineering design, however, the problem is often reversed: we want a system to have specific resonance frequencies (eigenvalues) and need to determine the system's parameters (matrix entries). This is the **Inverse Eigenvalue Problem** (IEP). This chapter explores how to reconstruct matrices satisfying specific structural constraints from fragmentary spectral data.
 
 ---
 
-## 61.1 General Framework and Symmetry
+## 61.1 What is an Inverse Eigenvalue Problem?
 
-!!! definition "Definition 61.1 (Inverse Eigenvalue Problem)"
-    Given a set of scalars $\Lambda = \{\lambda_1, \dots, \lambda_n\}$ and a class of matrices $\mathcal{S}$, find $A \in \mathcal{S}$ such that $\sigma(A) = \Lambda$.
+!!! definition "Definition 61.1 (IEP)"
+    Given a set of scalars $\{\lambda_1, \ldots, \lambda_n\}$ and a matrix family $\mathcal{M}$, find a matrix $A \in \mathcal{M}$ such that its eigenvalues are precisely these scalars.
+    - **Additive IEP**: Find a diagonal matrix $D$ such that $A+D$ has the given spectrum.
+    - **Multiplicative IEP**: Find a diagonal matrix $D$ such that $DA$ has the given spectrum (a variant of the pole placement problem).
 
-!!! theorem "Theorem 61.2 (Schur-Horn Theorem)"
-    There exists a real symmetric matrix with eigenvalues $\lambda$ and diagonal entries $d$ if and only if $d$ is **majorized** by $\lambda$ ($d \prec \lambda$).
+---
+
+## 61.2 Typical IEP Types
+
+### 61.2.1 Jacobi Matrix IEP
+!!! theorem "Theorem 61.1 (Dual Spectrum Construction)"
+    A symmetric tridiagonal matrix (Jacobi matrix) is uniquely determined by its full spectrum and the spectrum of the submatrix obtained by deleting the last row and column. This is the basis for the reconstruction theory of vibrational chains.
+
+### 61.2.2 Non-negative IEP (NIEP)
+!!! challenge "The NIEP Puzzle"
+    Determining which sets of complex numbers can be the spectrum of some non-negative matrix is a difficult problem involving inverse constraints of Perron-Frobenius theory. It remains a frontier in matrix theory, though the Suleimanova criterion provides some sufficient conditions.
+
+---
+
+## 61.3 Pole Placement: The Control Theory IEP
+
+!!! technique "Pole Placement"
+    In a control system $\dot{x} = Ax + Bu$, we use feedback $u = -Kx$ to place the eigenvalues of the closed-loop system $A-BK$ at specific locations in the left half-plane.
+    **Algebraic Essence**: Find matrix $K$ such that the characteristic polynomial of $A-BK$ matches a target polynomial.
+
+---
+
+## 61.4 Numerical Solution Methods
+
+!!! algorithm "Algorithm 61.1 (Iterative Lifting Method)"
+    1.  Initialize a matrix $A_0 \in \mathcal{M}$.
+    2.  Calculate the deviation between current and target eigenvalues.
+    3.  Utilize the sensitivity matrix of eigenvalues with respect to entries (the Jacobian, see Ch47B) to correct entries via Newton-like iterations.
 
 ---
 
 ## Exercises
 
-1. **[Concept] Contrast the logical direction of IEP with the standard eigenvalue problem.**
-   ??? success "Solution"
-       The standard problem is "Matrix $\to$ Spectrum," which is always solvable and the solution is unique. IEP is "Spectrum $\to$ Matrix (with constraints)," which involves complex existence conditions and often lacks a unique solution, acting as a form of "reverse engineering."
-
-2. **[Construction] Construct a $2 \times 2$ symmetric matrix with eigenvalues 5 and 1.**
-   ??? success "Solution"
-       The simplest solution is the diagonal matrix $\operatorname{diag}(5, 1)$. A non-trivial one can be obtained via rotation: $\begin{pmatrix} 3 & 2 \\ 2 & 3 \end{pmatrix}$, which has characteristic equation $\lambda^2 - 6\lambda + 5 = 0$.
-
-3. **[Schur-Horn] Determine if there exists a symmetric matrix with spectrum $\{4, 2\}$ and diagonal $\{3, 3\}$.**
-   ??? success "Solution"
-       Check majorization: $3 \le 4$ and $3+3=4+2=6$. The conditions are satisfied. Thus, such a matrix exists. An example is $\begin{pmatrix} 3 & 1 \\ 1 & 3 \end{pmatrix}$.
-
-4. **[NIEP] Why is the set $\{3, 1, 1\}$ unlikely to be the spectrum of a non-diagonal nonnegative matrix?**
-   ??? success "Solution"
-       By the Perron-Frobenius theorem, the Perron root must dominate the spectrum. While 3 is the Perron root here, the trace $\operatorname{tr}(A) = 5$ would be large. Usually, non-diagonal nonnegative matrices require some eigenvalues to have negative real parts or complex phases to "balance" the positive trace required for non-negativity.
-
-5. **[Jacobi] State the interlacing property required for the Jacobi IEP.**
-   ??? success "Solution"
-       Given eigenvalues $\{\lambda_i\}$ of $J_n$ and $\{\mu_j\}$ of its $(n-1)$-order principal submatrix, a Jacobi matrix exists if and only if the eigenvalues are strictly interlaced: $\lambda_1 < \mu_1 < \lambda_2 < \mu_2 < \dots < \mu_{n-1} < \lambda_n$.
-
-6. **[Calculation] Write the companion matrix for the spectrum $\{2, -1, -1\}$. Is it nonnegative?**
-   ??? success "Solution"
-       Characteristic polynomial $p(\lambda) = (\lambda-2)(\lambda+1)^2 = \lambda^3 - 3\lambda - 2$. The companion matrix is $\begin{pmatrix} 0 & 0 & 2 \\ 1 & 0 & 3 \\ 0 & 1 & 0 \end{pmatrix}$. All entries are nonnegative, so it is a valid NIEP solution.
-
-7. **[Weyl-Horn] What is the relationship between the product of eigenvalues and the product of singular values?**
-   ??? success "Solution"
-       According to the Weyl product inequalities, $\prod_{i=1}^k |\lambda_i| \le \prod_{i=1}^k \sigma_i$ for all $k = 1, \dots, n$, with equality at $k=n$ (matching the absolute value of the determinant).
-
-8. **[Applications] Describe how IEP is used in mass-spring system design.**
-   ??? success "Solution"
-       Engineers measure the natural frequencies (eigenvalues) of a structure and use IEP algorithms to back-calculate the required stiffness coefficients or mass distributions (entries of the stiffness/mass matrices) to achieve those frequencies.
-
-9. **[Numerical] Describe the "Lift-and-Project" approach for solving structural IEPs.**
-   ??? success "Solution"
-       1. **Lift**: Find a matrix with the correct spectrum (e.g., $Q\Lambda Q^T$). 2. **Project**: Force the matrix into the constraint set $\mathcal{S}$ (e.g., zeroing specific entries). 3. **Iterate**: Repeat these steps until the matrix satisfies both spectral and structural constraints.
-
-10. **[Stochastic IEP] What are the necessary conditions for a set to be the spectrum of a stochastic matrix?**
+1.  **[Basics] A $2 \times 2$ symmetric matrix has eigenvalues 1 and 3, and its diagonal entries are both 2. Find the matrix.**
     ??? success "Solution"
-        The spectrum must satisfy: (1) The Perron root is 1. (2) All eigenvalues satisfy $|\lambda_i| \le 1$. (3) Non-real eigenvalues appear in conjugate pairs. (4) The trace conditions $\sum \lambda_i^k \ge 0$ must hold for all $k$.
+        $\operatorname{tr}(A) = 2+2=4 = 1+3$. $\det(A) = 4 - a_{12}^2 = 1 \cdot 3 = 3 \implies a_{12}^2 = 1 \implies a_{12} = \pm 1$.
+        The matrix is $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ or $\begin{pmatrix} 2 & -1 \\ -1 & 2 \end{pmatrix}$.
+
+2.  **[Schur-Horn] If target eigenvalues are $(10, 0)$, can the diagonal entries be set to $(6, 4)$?**
+    ??? success "Solution"
+        Yes, because $(6, 4) \prec (10, 0)$, satisfying the majorization requirement for symmetric matrices.
+
+3.  **[NIEP] Determine if $\{2, -1, -1\}$ can be the spectrum of a non-negative matrix.**
+    ??? success "Solution"
+        Yes. This set is trace-zero. A $3 \times 3$ circulant matrix like $\begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix}$ has eigenvalues $2, -1, -1$.
+
+4.  **[Uniqueness] Why are IEPs typically non-unique?**
+    ??? success "Solution"
+        Because eigenvalues do not contain information about eigenvectors (rotation). Unless strict structural constraints are applied (like Jacobi matrices), many similar matrices share the same spectrum.
+
+5.  **[Structure] Can an $n \times n$ Toeplitz matrix be uniquely determined by its eigenvalues?**
+    ??? success "Solution"
+        Generally no. Eigenvalues provide only $n$ pieces of information, while a Toeplitz matrix has $2n-1$ parameters.
+
+6.  **[Vibration] Briefly describe the application of IEP in bridge monitoring.**
+    ??? success "Solution"
+        By measuring the vibration frequencies (eigenvalues) of a bridge under excitation, one can back-calculate changes in the stiffness matrix to locate structural damage.
+
+7.  **[Polynomial] How do you write the target characteristic polynomial for a target spectrum $\{\lambda_1, \lambda_2\}$?**
+    ??? success "Solution"
+        $p(\lambda) = (\lambda - \lambda_1)(\lambda - \lambda_2) = \lambda^2 - (\lambda_1+\lambda_2)\lambda + \lambda_1\lambda_2$.
+
+8.  **[Companion] Is the companion matrix a trivial construction for an IEP?**
+    ??? success "Solution"
+        Yes. It fills in the coefficients of the target polynomial directly, providing the simplest non-symmetric construction for any given spectrum.
+
+9.  **[Sensitivity] Why do repeated eigenvalues make IEPs numerically difficult?**
+    ??? success "Solution"
+        Eigenvalues are not Fréchet differentiable at points of multiplicity (see Ch47B), making gradient-based methods fail or become extremely unstable.
+
+10. **[Control] If system $(A, B)$ is not controllable, can arbitrary pole placement be achieved?**
+    ??? success "Solution"
+        No. Only the poles of the controllable part can be moved; uncontrollable poles remain fixed.
 
 ## Chapter Summary
 
-This chapter explores the inverse mapping from spectral data to matrix structure:
+Inverse eigenvalue problems are the "blueprints" of mathematical modeling:
 
-1. **Existence Criteria**: Detailed the majorization conditions for diagonal entries and the Perron-Frobenius requirements for nonnegativity.
-2. **Structural IEPs**: Analyzed Jacobi and Toeplitz structures, highlighting the role of interlacing eigenvalues in parameters reconstruction.
-3. **Invariance Relations**: Established the link between eigenvalues and singular values via Weyl-Horn theory.
-4. **Computational Frameworks**: Introduced numerical methods like homotopy continuation and projection for solving large-scale structured inverse problems.
+1.  **From Abstract to Real**: IEP establishes the path from abstract spectral targets back to concrete physical parameters, bridging theoretical physics and engineering.
+2.  **Art of Constraint**: The core of IEP lies in the balance between "structural constraints" and "spectral data"; an unconstrained problem is trivial (companion matrix), while an over-constrained one is unsolvable.
+3.  **Return to Stability**: Through numerical IEP algorithms, we can finely adjust local elements of an operator to achieve global stability, demonstrating linear algebra's agency in complex system optimization.

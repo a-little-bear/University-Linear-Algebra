@@ -2,77 +2,97 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigendecomposition (Ch10) · Jordan Form (Ch12) · Power Series
+**Prerequisites**: Jordan Canonical Form (Ch12) · Matrix Analysis Basics (Ch14) · Calculus Series Theory
 
-**Chapter Outline**: Definition of Matrix Power Series → Convergence → Matrix Exponential $e^A$ → Matrix Logarithm and Trigonometric Functions → Computation via Diagonalization → Computation via Jordan Form → Extension of Cauchy Integral Formula to Matrices → Applications (Solving Systems of Linear DEs)
+**Chapter Outline**: From Scalar to Matrix Functions → Power Series Definition → Jordan Form Definition Method → Sylvester-Lagrange Interpolation Method → Core Functions: Matrix Exponential ($e^A$), Matrix Logarithm ($\log A$), and Trigonometric Functions → Computation Techniques → Identities and Properties → Applications in Systems of ODEs
 
-**Extension**: Matrix exponential is the core operator in modern control theory and quantum mechanics, mapping algebraic addition to group multiplication.
+**Extension**: Matrix functions elevate arithmetic algebra to analytical algebra; they are the central mathematical language for control theory, evolution operators in quantum mechanics, and continuous dynamical systems.
 
 </div>
 
-Matrix functions extend the domain of a scalar function $f(z)$ to square matrices. This extension is not element-wise but maintains algebraic consistency. The most central tool is the **matrix exponential** $e^A$, which is the key to solving all linear continuous dynamical systems.
+Matrix functions study how to apply scalar functions (such as $e^x, \sin x, \log x$) to matrix variables. This is not a simple element-wise operation but an operator computation that preserves the algebraic structure of the matrix. Matrix functions bridge the gap between discrete matrix algebra and the continuous physical world.
 
 ---
 
-## 13.1 Definitions and Computation
+## 13.1 Methods of Definition
 
-!!! definition "Definition 13.1 (Matrix Power Series)"
-    If a scalar function $f(z) = \sum_{k=0}^\infty a_k z^k$ converges in some disk, the matrix function is defined as:
-    $$f(A) = \sum_{k=0}^\infty a_k A^k$$
+!!! definition "Definition 13.1 (Definition via Jordan Form)"
+    Let $A = P J P^{-1}$, where $J = \operatorname{diag}(J_1, \ldots, J_m)$.
+    For each Jordan block $J_k(\lambda)$:
+    $$f(J_k(\lambda)) = \begin{pmatrix} f(\lambda) & f'(\lambda) & \frac{f''(\lambda)}{2!} & \cdots & \frac{f^{(k-1)}(\lambda)}{(k-1)!} \\ 0 & f(\lambda) & f'(\lambda) & \cdots & \vdots \\ \vdots & \vdots & \ddots & \ddots & \vdots \\ 0 & 0 & \cdots & f(\lambda) & f'(\lambda) \\ 0 & 0 & \cdots & 0 & f(\lambda) \end{pmatrix}$$
+    Then $f(A) = P \operatorname{diag}(f(J_1), \ldots, f(J_m)) P^{-1}$.
 
-!!! theorem "Theorem 13.3 (Diagonalization Method)"
-    If $A = PDP^{-1}$, then $f(A) = P f(D) P^{-1} = P \operatorname{diag}(f(\lambda_i)) P^{-1}$.
+!!! definition "Definition 13.2 (Definition via Power Series)"
+    If a scalar function $f(z)$ has a Taylor series $\sum_{k=0}^\infty c_k z^k$, and its radius of convergence is greater than the magnitudes of all eigenvalues of $A$, then:
+    $$f(A) = \sum_{k=0}^\infty c_k A^k$$
+
+---
+
+## 13.2 The Matrix Exponential $e^A$
+
+!!! theorem "Theorem 13.1 (Properties of the Matrix Exponential)"
+    1.  **Definition**: $e^A = I + A + \frac{A^2}{2!} + \cdots$. This series converges absolutely for every square matrix $A$.
+    2.  **Differentiation**: $\frac{d}{dt} e^{At} = A e^{At}$. This is the key to solving $\mathbf{x}' = A\mathbf{x}$.
+    3.  **Multiplication**: If $AB = BA$, then $e^{A+B} = e^A e^B$.
+    4.  **Determinant**: $\det(e^A) = e^{\operatorname{tr}(A)}$.
+
+---
+
+## 13.3 Computation: Interpolation Method
+
+!!! technique "Technique: Sylvester-Lagrange Interpolation"
+    If the eigenvalues of $A$ are $\lambda_1, \ldots, \lambda_k$ with maximum Jordan block sizes $n_1, \ldots, n_k$, find a polynomial $q(\lambda)$ such that its values and derivatives at $\lambda_i$ match $f(\lambda)$ and its derivatives. Then:
+    $$f(A) = q(A)$$
+    This avoids complex Jordan decompositions and requires only eigenvalues and powers of $A$.
 
 ---
 
 ## Exercises
 
-1. **[Basic Calculation] If $A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}$, calculate $e^A$.**
+1. **[Calculation] Find $e^A$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       $e^A = \begin{pmatrix} e^1 & 0 \\ 0 & e^2 \end{pmatrix}$. For diagonal matrices, simply apply the function to each diagonal element.
+       $A^2 = O$, so $e^A = I + A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.
 
-2. **[Exponential Properties] Prove: If $AB = BA$, then $e^{A+B} = e^A e^B$.**
+2. **[Identity] Prove $f(P A P^{-1}) = P f(A) P^{-1}$.**
    ??? success "Solution"
-       Use the power series expansion and the binomial theorem. Since $A$ and $B$ commute, $(A+B)^k$ can be expanded like scalars. If they don't commute, this is generally false (requiring the BCH formula).
+       Using the power series definition: $(P A P^{-1})^k = P A^k P^{-1}$. Substituting this into the summation and factoring out $P$ and $P^{-1}$ yields the result.
 
-3. **[Nilpotent Matrix] Calculate $e^{At}$ where $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
+3. **[Diagonal] If $A = \operatorname{diag}(\lambda_1, \lambda_2)$, find $\sin A$.**
    ??? success "Solution"
-       Since $A^2 = 0$, the series is $e^{At} = I + At + 0 = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$.
+       $\sin A = \operatorname{diag}(\sin \lambda_1, \sin \lambda_2)$.
 
-4. **[Trace Identity] Prove $\det(e^A) = e^{\operatorname{tr}(A)}$.**
+4. **[Commutativity] Prove $A f(A) = f(A) A$.**
    ??? success "Solution"
-       Let the eigenvalues of $A$ be $\lambda_i$. The eigenvalues of $e^A$ are $e^{\lambda_i}$.
-       $\det(e^A) = \prod e^{\lambda_i} = e^{\sum \lambda_i} = e^{\operatorname{tr}(A)}$.
+       Since $A$ commutes with all its powers $A^k$, and the series converges, it must commute with the sum of the series.
 
-5. **[Trigonometric] If $A$ is a projection matrix ($A^2=A$), calculate $\sin(\pi A)$.**
+5. **[Determinant] If $\operatorname{tr}(A) = 0$, find $\det(e^A)$.**
    ??? success "Solution"
-       $A^k = A$ for all $k \ge 1$.
-       $\sin(\pi A) = \sum \frac{(-1)^k}{(2k+1)!} (\pi A)^{2k+1} = A \sum \frac{(-1)^k \pi^{2k+1}}{(2k+1)!} = A \sin(\pi) = 0$.
+       $\det(e^A) = e^{\operatorname{tr}(A)} = e^0 = 1$.
 
-6. **[Jordan Block Function] Write the formula for $f(J_2(\lambda))$.**
+6. **[Logarithm] For $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, find $\log A$.**
    ??? success "Solution"
-       $f \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix} = \begin{pmatrix} f(\lambda) & f'(\lambda) \\ 0 & f(\lambda) \end{pmatrix}$. This reflects the relationship between the off-diagonal coupling and the derivative.
+       Let $A = I + N$, where $N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$. Since $N^2=0$, the series $\log(I+N) = N - N^2/2 + \cdots$ simplifies to $N$.
 
-7. **[Invertibility] Is $e^A$ always invertible?**
+7. **[Interpolation] Use interpolation to find $f(A)$ if the only eigenvalue of $A$ is 2 with algebraic multiplicity 2.**
    ??? success "Solution"
-       Yes. Because its determinant $\det(e^A) = e^{\operatorname{tr}(A)}$ is never zero. Its inverse is $e^{-A}$.
+       Find $q(\lambda) = a\lambda + b$ such that $q(2)=f(2)$ and $q'(2)=f'(2)$. Once $a, b$ are found, $f(A) = aA + bI$.
 
-8. **[Differentiation] Prove $\frac{d}{dt} e^{At} = A e^{At}$.**
+8. **[ODE] What is the solution to $\mathbf{x}' = A\mathbf{x}$ with $\mathbf{x}(0) = \mathbf{x}_0$?**
    ??? success "Solution"
-       Differentiating the series $\sum \frac{t^k A^k}{k!}$ term-by-term gives $\sum \frac{k t^{k-1} A^k}{k!} = A \sum \frac{t^{k-1} A^{k-1}}{(k-1)!} = A e^{At}$.
+       $\mathbf{x}(t) = e^{At} \mathbf{x}_0$.
 
-9. **[Rotation] Calculate $e^{Jt}$ where $J = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$.**
+9. **[Trig] Prove $\cos^2 A + \sin^2 A = I$.**
    ??? success "Solution"
-       Since $J^2 = -I$, separating the series into even and odd terms gives the rotation matrix: $e^{Jt} = \begin{pmatrix} \cos t & -\sin t \\ \sin t & \cos t \end{pmatrix}$.
+       This can be verified by expanding the exponential forms: $\cos A = \frac{e^{iA}+e^{-iA}}{2}$ and $\sin A = \frac{e^{iA}-e^{-iA}}{2i}$.
 
-10. **[Application] How do you use matrix exponential to solve $\dot{x} = Ax, x(0)=x_0$?**
+10. **[Derivative] Why do derivatives appear in the function values for defective matrices?**
     ??? success "Solution"
-        The solution is $x(t) = e^{At} x_0$. The matrix exponential maps the initial state to the state at any time $t$.
+        This reflects the "coupling" effect of matrix action. In a Jordan block, the off-diagonal 1s cause an accumulation of higher-order infinitesimals when the function is expanded, manifesting mathematically as Taylor derivative terms.
 
 ## Chapter Summary
 
-Matrix functions are the advanced calculus of linear algebra:
+Matrix functions are the analytic continuation of operator theory:
 
-1. **Structural Mapping**: They translate analytical properties of scalars perfectly into the operator space.
-2. **Computational Core**: Diagonalization and Jordan chains are the standard paths for computing any matrix function.
-3. **Dynamical Value**: The matrix exponential is the "time operator" for continuous systems, the ultimate tool for describing evolution.
+1.  **Consistency Principle**: Definitions via series, Jordan forms, or interpolation are equivalent within the domain of convergence, ensuring logical unity between algebra and analysis.
+2.  **Exponential Core**: The matrix exponential $e^A$ is the most fundamental function, transforming linear differential evolution into pure matrix multiplication—the ultimate key to time-evolution problems.
+3.  **Computational Versatility**: Interpolation and Jordan decomposition provide two complementary perspectives—the former focusing on local spectral analysis and the latter on global structural deconstruction.

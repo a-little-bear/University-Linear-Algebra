@@ -2,79 +2,101 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Rank (Ch2) · Orthogonal Projection (Ch5) · SVD (Ch11) · Least Squares (Ch72B)
+**Prerequisites**: Matrix Algebra (Ch02) · Singular Value Decomposition (Ch11) · Linear Equations (Ch01)
 
-**Chapter Outline**: Definition of Generalized Inverses → The Four Penrose Conditions → Moore-Penrose Inverse $A^\dagger$ → Existence and Uniqueness → Calculation via SVD and QR → Properties ($A^\dagger A$ as Projection) → Solving Overdetermined Systems → Minimum Norm Solutions
+**Chapter Outline**: Limitations of the Standard Inverse → Definition of the Moore-Penrose Inverse ($A^+$) via the 4 Penrose Conditions → Existence and Uniqueness → SVD-based Computation → Least Squares and Minimum Norm Solutions → Drazin Inverse & Group Inverse (Handling Nilpotent Structures) → Inverses of Block Matrices → Applications: Singular Differential Equations and Ill-conditioned Systems
 
-**Extension**: Generalized inverses are the engine of numerical linear algebra, providing stable solutions to rank-deficient and overdetermined systems.
+**Extension**: Generalized inverses break the shackles of "square and full rank" for inversion, serving as the final mathematical judgment for handling all linear uncertainties (no solution or infinite solutions); it is the cornerstone of linear model estimation (Gauss-Markov Theorem) in statistics.
 
 </div>
 
-Generalized inverses extend the concept of a matrix inverse to rectangular and singular matrices. While a standard inverse $A^{-1}$ only exists for square, non-singular matrices, the **Moore-Penrose inverse** $A^\dagger$ is unique and exists for *any* matrix. It provides the "best possible" solution to linear systems in the sense of least squares and minimum norm, mapping the column space of $A^T$ to the column space of $A$ bijectively.
+In classical matrix algebra, only non-singular square matrices have inverses. However, in engineering, statistics, and control theory, we frequently encounter rectangular or rank-deficient matrices. **Generalized Inverses** break this restriction, defining a "inverse" in some sense for every matrix. Among them, the Moore-Penrose inverse stands out for its perfect behavior regarding solution minimization.
 
 ---
 
-## 33.1 The Moore-Penrose Conditions
+## 33.1 The Moore-Penrose Inverse $A^+$
 
-!!! definition "Definition 33.1 (Moore-Penrose Inverse)"
-    For any $m \times n$ matrix $A$, the Moore-Penrose inverse $A^\dagger$ is the unique $n \times m$ matrix satisfying the following four conditions:
-    1. $A A^\dagger A = A$
-    2. $A^\dagger A A^\dagger = A^\dagger$
-    3. $(A A^\dagger)^* = A A^\dagger$ (Hermitian)
-    4. $(A^\dagger A)^* = A^\dagger A$ (Hermitian)
+!!! definition "Definition 33.1 (Penrose Conditions)"
+    For a matrix $A \in M_{m \times n}(\mathbb{C})$, the **Moore-Penrose Inverse** is the unique matrix $A^+$ satisfying the following four conditions:
+    1.  $AA^+A = A$ (Inner consistency)
+    2.  $A^+AA^+ = A^+$ (Outer consistency)
+    3.  $(AA^+)^* = AA^+$ (Left hermiticity)
+    4.  $(A^+A)^* = A^+A$ (Right hermiticity)
 
-!!! theorem "Theorem 33.1 (Construction via SVD)"
-    If $A = U \Sigma V^*$ is the SVD of $A$, then $A^\dagger = V \Sigma^\dagger U^*$, where $\Sigma^\dagger$ is obtained by inverting the non-zero singular values and transposing.
+!!! theorem "Theorem 33.1 (Existence and Uniqueness)"
+    For any matrix $A$, a matrix $A^+$ satisfying the four Penrose conditions **exists and is unique**.
+
+---
+
+## 33.2 Computation and Least Squares
+
+!!! technique "Computation: SVD Approach"
+    If $A = U \Sigma V^*$, then $A^+ = V \Sigma^+ U^*$, where $\Sigma^+$ is obtained by taking the reciprocal of the non-zero diagonal entries of $\Sigma$ and transposing.
+
+!!! theorem "Theorem 33.2 (Best Approximation Properties)"
+    For the linear system $Ax = b$:
+    1.  The vector $\hat{x} = A^+ b$ minimizes $\|Ax - b\|_2$ (the Least Squares solution).
+    2.  Among all least squares solutions, $\hat{x} = A^+ b$ has the minimum norm $\|\hat{x}\|_2$ (the Minimum Norm solution).
+
+---
+
+## 33.3 The Drazin Inverse
+
+!!! definition "Definition 33.2 (Drazin Inverse)"
+    For a square matrix $A$, the **Drazin Inverse** $A^D$ satisfies:
+    1.  $A^k A^D A = A^k$ (where $k$ is the index of $A$, the smallest power such that $\operatorname{rank}(A^k)$ stabilizes)
+    2.  $A^D A A^D = A^D$
+    3.  $AA^D = A^D A$
+    **Application**: The Drazin inverse is highly effective in handling singular differential equations and convergence analysis of Markov chains.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Does every matrix (including non-square and singular ones) have a Moore-Penrose inverse? Is it unique?**
-   ??? success "Solution"
-       Yes, every matrix $A$ over $\mathbb{C}$ has a unique Moore-Penrose inverse $A^\dagger$. While other generalized inverses (like $\{1\}$-inverses satisfying $AGA=A$) may exist and not be unique, $A^\dagger$ is uniquely determined by the four Penrose conditions.
-
-2. **[Projections] Show that $P = A A^\dagger$ is the orthogonal projection onto the column space $\operatorname{Im}(A)$.**
-   ??? success "Solution"
-       Conditions 1 and 3 imply $P^2 = (A A^\dagger A) A^\dagger = A A^\dagger = P$ and $P^* = P$. Thus $P$ is an orthogonal projection. Since $P A = A$, its image contains $\operatorname{Im}(A)$, and since $P = A(A^\dagger)$, its image is contained in $\operatorname{Im}(A)$.
-
-3. **[Full Rank] Derive $A^\dagger$ for a matrix $A$ with full column rank.**
-   ??? success "Solution"
-       If $A$ has full column rank, $A^* A$ is invertible. $A^\dagger = (A^* A)^{-1} A^*$. This is the standard "left inverse" used in least squares.
-
-4. **[Linear Systems] Prove that $x = A^\dagger b$ is the minimum norm solution to the least squares problem $\min \|Ax - b\|^2$.**
-   ??? success "Solution"
-       Least squares requires $Ax = P_{\operatorname{Im}(A)} b = A A^\dagger b$. $x = A^\dagger b$ satisfies this. Any other solution $x'$ differs by an element in $\ker(A)$. Since $A^\dagger b \in \operatorname{Im}(A^*) = (\ker A)^\perp$, the Pythagorean theorem ensures $\|A^\dagger b\|$ is the minimum norm.
-
-5. **[Properties] Is $(AB)^\dagger = B^\dagger A^\dagger$ always true?**
-   ??? success "Solution"
-       No. It holds if $A$ has full column rank and $B$ has full row rank, or if $A^* A B B^*$ is Hermitian. Generally, the identity fails due to the interaction of the column and row spaces.
-
-6. **[Rank-1] Find the pseudoinverse of the rank-1 matrix $A = uv^*$.**
-   ??? success "Solution"
-       $A^\dagger = \frac{1}{\|u\|^2 \|v\|^2} v u^*$.
-
-7. **[Inversion] Show that $(A^\dagger)^\dagger = A$.**
-   ??? success "Solution"
-       The conditions for $A^\dagger$ being the pseudoinverse of $A$ are symmetric to those for $A$ being the pseudoinverse of $A^\dagger$.
-
-8. **[Calculation] Compute $A^\dagger$ for $A = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.**
-   ??? success "Solution"
-       $A$ has full column rank. $A^* A = (2)$. $(A^* A)^{-1} = (1/2)$. $A^\dagger = (1/2) \begin{pmatrix} 1 & 1 \end{pmatrix} = \begin{pmatrix} 0.5 & 0.5 \end{pmatrix}$.
-
-9. **[Kernel] Relate the kernel of $A^\dagger$ to the adjoint of $A$.**
-   ??? success "Solution"
-       $\ker(A^\dagger) = \ker(A^*)$. The pseudoinverse maps the image of $A$ back to the row space and sends the noise (orthogonal to the image) to zero.
-
-10. **[Continuity] Is the mapping $A \mapsto A^\dagger$ continuous?**
+1.  **[Calculation] Find the Moore-Penrose inverse of $A = \begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix}$.**
     ??? success "Solution"
-        No. It is discontinuous at any matrix where the rank changes. A small perturbation can create a tiny non-zero singular value, making its inverse $1/\sigma$ explode. This is why truncated SVD is used in practice.
+        $A^+ = \begin{pmatrix} 0.5 & 0 \\ 0 & 0 \end{pmatrix}$. Verify: $AA^+ = \operatorname{diag}(1, 0)$, which is Hermitian and satisfies the conditions.
+
+2.  **[Full Rank] If $A$ has full column rank, prove $A^+ = (A^* A)^{-1} A^*$.**
+    ??? success "Solution"
+        Substitute into the four Penrose conditions. For example, $A^+ A = (A^* A)^{-1} A^* A = I$, which is clearly Hermitian and satisfies the other requirements.
+
+3.  **[Identity] Prove $(A^+)^+ = A$.**
+    ??? success "Solution"
+        Since $A$ satisfies the four Penrose conditions for $A^+$ (with roles swapped), and $A^{++}$ is unique, they must be equal.
+
+4.  **[Rank] Prove $\operatorname{rank}(A^+) = \operatorname{rank}(A)$.**
+    ??? success "Solution"
+        From $AA^+A=A$, $\operatorname{rank}(A) \le \operatorname{rank}(A^+)$. From $A^+AA^+=A^+$, $\operatorname{rank}(A^+) \le \operatorname{rank}(A)$. Thus the ranks are equal.
+
+5.  **[Projection] What does $AA^+$ represent geometrically?**
+    ??? success "Solution"
+        It represents the orthogonal projection matrix onto the column space $C(A)$.
+
+6.  **[Least Squares] If $Ax=b$ is consistent, prove $x = A^+ b$ is a solution.**
+    ??? success "Solution"
+        If consistent, $b \in C(A)$. Then $A(A^+ b) = (AA^+)b = b$, as the projection of a vector already in the space is the vector itself.
+
+7.  **[Group Inverse] What is a Group Inverse?**
+    ??? success "Solution"
+        A Group Inverse is the Drazin inverse when the index $k=1$. It satisfies $AA^{\#}A = A, A^{\#}AA^{\#} = A^{\#}$, and $AA^{\#} = A^{\#}A$.
+
+8.  **[Singular Values] A matrix $A$ has singular values $2, 1, 0$. What are the singular values of $A^+$?**
+    ??? success "Solution"
+        $1/2, 1, 0$.
+
+9.  **[Invariance] Prove $(A^*)^+ = (A^+)^*$.**
+    ??? success "Solution"
+        Verify the Penrose conditions for $A^*$ and $(A^+)^*$; the symmetry of the conditions ensures the result.
+
+10. **[Logic] Why does the formula for $A^+$ involve transposes?**
+    ??? success "Solution"
+        The transpose (or conjugate transpose) is responsible for projecting the residuals from the output space back into the input space, which is the key mechanism for achieving the "minimum norm" and "orthogonality" properties.
 
 ## Chapter Summary
 
-This chapter establishes the Moore-Penrose inverse as the universal generalized inverse:
+The generalized inverse is the ultimate cure for linear pathology:
 
-1. **Analytical Uniqueness**: Defined $A^\dagger$ via the four Penrose conditions, ensuring a unique "best" inverse for any linear operator.
-2. **Geometric Mapping**: Demonstrated that $A^\dagger$ effectively solves the fundamental problem of projecting onto the range and inverting on the row space.
-3. **Optimal Solving**: Positioned the pseudoinverse as the mathematical tool for minimum-norm least-squares solutions.
-4. **Numerical Stability**: Linked the pseudoinverse to the SVD, highlighting the challenges of rank-deficiency and sensitivity.
+1.  **Generalization of Inversion**: The Moore-Penrose inverse, through four symmetric consistency axioms, finds a unique and optimally behaving "pseudo-inverse" for every linear operator, unifying the theories of invertible and singular matrices.
+2.  **Optimality Standards**: Its dual optimization properties regarding least squares and minimum norms make it the standard mathematical tool for solving inconsistent and underdetermined systems.
+3.  **Structural Depth**: The introduction of Drazin and Group inverses demonstrates how to use generalized inverses to handle the nilpotent parts and complex index structures of matrices, providing algebraic leverage for analyzing singular dynamical systems.

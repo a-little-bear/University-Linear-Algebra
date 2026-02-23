@@ -2,78 +2,109 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Basic Algebraic Operations
+**Prerequisites**: Linear Equations (Ch01)
 
-**Chapter Outline**: Matrix Definition and Representation → Addition and Scalar Multiplication → Matrix Multiplication (Non-commutativity) → Transpose → Special Matrices (Identity, Diagonal, Symmetric) → Matrix Inverses $A^{-1}$ → Matrix Powers and Polynomials
+**Chapter Outline**: Definition and Notation → Basic Operations (Addition, Scalar Multiplication, Multiplication) → Non-commutativity of Multiplication → Transpose and its Properties → Special Matrices (Identity, Diagonal, Triangular, Symmetric) → Elementary Matrices & Row Operations → Inverse Matrices: Definition and Properties → Gauss-Jordan Method for Inversion → Block Matrix Operations → Trace of a Matrix
 
-**Extension**: Matrices are not just tables of data, but mapping operators of linear spaces.
+**Extension**: Matrices are not just containers for data but representation of linear operators; the definition of matrix multiplication reflects the composition of linear transformations (Ch05).
 
 </div>
 
-Matrices are the computational core of linear algebra. They condense linear transformations of vectors into rectangular arrays. The introduction of matrix multiplication is more than a stack of rules; it reflects the composition of linear maps.
+If systems of linear equations are the language of linear algebra, then matrices are its notation system. A matrix condenses complex linear relationships into concise rectangular arrays and endows them with a set of sophisticated algebraic rules. This chapter establishes the standard axioms of matrix algebra and explores the essential tool of the inverse matrix.
 
 ---
 
-## 02.1 Matrix Operation Rules
+## 02.1 Basic Definitions and Operations
 
-!!! definition "Definition 02.1 (Matrix Multiplication)"
+!!! definition "Definition 02.1 (Matrix)"
+    An $m \times n$ **matrix** is a rectangular array of $m \cdot n$ elements arranged in $m$ rows and $n$ columns. Usually denoted by uppercase letters $A, B$.
+
+!!! definition "Definition 02.2 (Matrix Multiplication)"
     If $A$ is an $m \times n$ matrix and $B$ is an $n \times p$ matrix, their product $C = AB$ is an $m \times p$ matrix with entries:
     $$c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$$
-    Note: In general, $AB \neq BA$.
+    **WARNING**: Matrix multiplication is generally not commutative, i.e., $AB \neq BA$.
+
+---
+
+## 02.2 Special Matrix Classes
+
+!!! definition "Definition 02.3 (Special Matrices)"
+    1.  **Identity Matrix $I$**: Diagonal entries are 1, all others 0. Satisfies $AI = IA = A$.
+    2.  **Symmetric Matrix**: Satisfies $A^T = A$.
+    3.  **Skew-symmetric Matrix**: Satisfies $A^T = -A$.
+    4.  **Triangular Matrix**: Upper triangular (all entries below the main diagonal are 0) or Lower triangular.
+
+---
+
+## 02.3 Elementary Matrices and Inverses
+
+!!! definition "Definition 02.4 (Inverse Matrix)"
+    For a square matrix $A$, if there exists a matrix $B$ such that $AB = BA = I$, then $A$ is **invertible** (or non-singular). $B$ is called the **inverse** of $A$, denoted $A^{-1}$.
+
+!!! theorem "Theorem 02.1 (Properties of Inverses)"
+    1.  $(A^{-1})^{-1} = A$
+    2.  $(AB)^{-1} = B^{-1} A^{-1}$ (Reversal law)
+    3.  $(A^T)^{-1} = (A^{-1})^T$
+
+!!! algorithm "Algorithm 02.1 (Gauss-Jordan Inversion)"
+    Construct the block matrix $[A | I]$. Apply elementary row operations to transform the left side into $I$. The resulting right side is $A^{-1}$:
+    $$[A | I] \xrightarrow{\text{row operations}} [I | A^{-1}]$$
+
+---
+
+## 02.4 Block Matrices
+
+!!! technique "Technique: Block Operations"
+    For large-scale matrices, it is useful to partition them into smaller sub-blocks. If block sizes are compatible, addition and multiplication rules are identical to those for standard matrices. This is vital for distributed computing and sparse matrix handling.
 
 ---
 
 ## Exercises
 
-1. **[Basic Operations] Given $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Compute $AB$ and $BA$.**
+1. **[Fundamentals] Let $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}, B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Calculate $AB$ and $BA$.**
    ??? success "Solution"
-       $AB = \begin{pmatrix} 1(0)+2(1) & 1(1)+2(0) \\ 3(0)+4(1) & 3(1)+4(0) \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$.
-       $BA = \begin{pmatrix} 0(1)+1(3) & 0(2)+1(4) \\ 1(1)+0(3) & 1(2)+0(4) \end{pmatrix} = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$.
-       Thus $AB \neq BA$.
+       $AB = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}, BA = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$. Note $AB \neq BA$.
 
 2. **[Identity] Prove that for any $n \times n$ matrix $A$, $AI = IA = A$.**
    ??? success "Solution"
-       The entries $\delta_{ij}$ of the identity matrix $I$ are 1 if $i=j$ and 0 otherwise. Substituting into the multiplication formula: $(AI)_{ij} = \sum a_{ik} \delta_{kj} = a_{ij}$.
+       Using the multiplication definition: $(AI)_{ij} = \sum a_{ik} \delta_{kj}$. Since $\delta_{kj}$ is 1 only when $k=j$, the result is $a_{ij}$.
 
-3. **[Transpose] Known that $(AB)^T = B^T A^T$. Use this to find $(A^T B)^T$.**
+3. **[Transpose] Given $(AB)^T = B^T A^T$, find $(A^T B)^T$.**
    ??? success "Solution"
        $(A^T B)^T = B^T (A^T)^T = B^T A$.
 
-4. **[Symmetric] If $A$ is a symmetric matrix, prove that $A^2$ is also symmetric.**
+4. **[Symmetry] If $A$ is symmetric, prove $A^2$ is also symmetric.**
    ??? success "Solution"
-       A symmetric matrix satisfies $A^T = A$. Then $(A^2)^T = (AA)^T = A^T A^T = AA = A^2$. Thus $A^2$ is symmetric.
+       $(A^2)^T = (AA)^T = A^T A^T = AA = A^2$.
 
-5. **[Inverses Intro] Find the inverse of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
+5. **[Inversion] Find the inverse of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
    ??? success "Solution"
-       Using the $2 \times 2$ formula: $A^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$.
-       $\det A = 1(4)-2(3) = -2$.
-       $A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$.
+       $\det(A) = 4-6 = -2$. $A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$.
 
-6. **[Powers] Calculate $A^k$ where $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.**
+6. **[Powers] Calculate $A^k$ for $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       $A^2 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, A^3 = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$.
-       By induction, $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$.
+       $A^2 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, A^3 = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$. By induction, $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$.
 
-7. **[Matrix Equations] If $AX = B$ and $A$ is invertible, solve for $X$.**
+7. **[Trace] Prove $\operatorname{tr}(AB) = \operatorname{tr}(BA)$.**
    ??? success "Solution"
-       Left-multiply by $A^{-1}$: $A^{-1}AX = A^{-1}B \implies X = A^{-1}B$. Note that you cannot right-multiply.
+       $\operatorname{tr}(AB) = \sum_i \sum_k a_{ik}b_{ki} = \sum_k \sum_i b_{ki}a_{ik} = \operatorname{tr}(BA)$.
 
-8. **[Rank Intro] What is the rank of the matrix $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$?**
+8. **[Elementary] What is the effect of left-multiplying $A$ by an elementary matrix $E$?**
    ??? success "Solution"
-       The rank is 1. It has only one non-zero row (or one linearly independent column).
+       It performs the corresponding elementary row operation on $A$.
 
-9. **[Orthogonality Intro] Verify that $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ is orthogonal (i.e., $AA^T = I$).**
+9. **[Block] Calculate $\begin{pmatrix} I & A \\ 0 & I \end{pmatrix} \begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}$.**
    ??? success "Solution"
-       $A^T = \begin{pmatrix} \cos & \sin \\ -\sin & \cos \end{pmatrix}$. Multiplication yields 1 on the diagonal ($\cos^2+\sin^2=1$) and 0 off-diagonal ($\cos\sin-\sin\cos=0$). Thus $AA^T = I$.
+       $\begin{pmatrix} I & -A+A \\ 0 & I \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix}$. This shows the inverse is found by negating the top-right block.
 
-10. **[Diagonal] Is the product of two diagonal matrices still diagonal? What is the rule for its entries?**
+10. **[Rank] What is the rank of $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$?**
     ??? success "Solution"
-        Yes. The result is a diagonal matrix where entries are multiplied term-wise: $\operatorname{diag}(a_i) \operatorname{diag}(b_i) = \operatorname{diag}(a_i b_i)$.
+        The rank is 1. It has only one non-zero row.
 
 ## Chapter Summary
 
-Matrix operations build the computational syntax of linear algebra:
+Matrix operations construct the computational syntax of linear algebra:
 
-1. **Non-commutativity**: This is the most fundamental difference between matrix and scalar multiplication.
-2. **Structural Preservation**: Transpose and inverse operations maintain the internal algebraic logic.
-3. **Operational Simplification**: Special matrices (identity, diagonal) greatly simplify the analysis of complex systems.
+1.  **Non-commutativity**: The most fundamental difference between matrix and scalar multiplication, dictating that the order of operators cannot be arbitrarily swapped.
+2.  **Structure Preservation**: Transpose and inverse operations maintain internal logical consistency, providing the basis for solving operator equations.
+3.  **Computational Simplification**: Special matrices (Identity, Diagonal, Block) greatly simplify the analysis of complex systems and are key entry points for numerical algorithm optimization.

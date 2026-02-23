@@ -1,79 +1,99 @@
-# Chapter 13B: λ-Matrices and Rational Canonical Form
+# Chapter 13B: λ-matrices and Rational Canonical Form
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Polynomial Algebra (Ch0) · Jordan Form (Ch12) · Smith Normal Form (Ch48)
+**Prerequisites**: Polynomial Algebra (Ch00) · Matrix Algebra (Ch02) · Jordan Canonical Form (Ch12)
 
-**Chapter Outline**: Definition of λ-Matrices → Determinantal Divisors → Invariant Factors → Elementary Divisors → Necessary and Sufficient Conditions for Matrix Similarity → Frobenius Rational Canonical Form → Definition and Properties of Minimal Polynomials → Relation to Diagonalization
+**Chapter Outline**: Definition of $\lambda$-matrices → Elementary Operations and Equivalence → Smith Normal Form → Invariant Factors → Elementary Divisors → Necessary and Sufficient Conditions for Similarity → Companion Matrices → Rational Canonical Form (RCF) → Structural Comparison (Jordan vs. Rational)
 
-**Extension**: Rational Canonical Form solves the classification problem of matrix similarity over general fields (not just complex numbers), generalizing the Jordan form.
+**Extension**: The Rational Canonical Form solves the problem of matrix canonical forms over general fields (e.g., $\mathbb{Q}$) without requiring the field to be algebraically closed (e.g., $\mathbb{C}$); it is a concrete application of the structure theorem for modules over a PID.
 
 </div>
 
-In the study of Jordan form, we rely on the algebraic closure of the complex field. However, over the real field or general fields, characteristic polynomials may not split completely. **λ-matrix** theory, by studying the Smith Normal Form of polynomial matrices, reveals invariants of similarity transformations under any field.
+While the Jordan Canonical Form is theoretically perfect, its construction depends on the existence of eigenvalues within the underlying field. Working over the field of rational numbers $\mathbb{Q}$, the characteristic polynomial may not factor into linear terms. The Rational Canonical Form (RCF) overcomes this limitation by providing a universal standard form applicable over any field through the decomposition of polynomial rings.
 
 ---
 
-## 13B.1 Core Concepts
+## 13B.1 λ-matrices and Smith Normal Form
 
-!!! definition "Definition 13B.1 (Invariant Factors)"
-    For the characteristic matrix $\lambda I - A$, the non-zero polynomials $d_1(\lambda), \dots, d_n(\lambda)$ on the diagonal of its Smith Normal Form are called the **invariant factors** of $A$. They satisfy $d_i \mid d_{i+1}$.
+!!! definition "Definition 13B.1 (λ-matrix)"
+    A matrix whose entries are polynomials in $\lambda$ is called a **$\lambda$-matrix** (or a matrix polynomial).
 
-!!! theorem "Theorem 13B.3 (Similarity Criterion)"
-    Two matrices $A, B$ are similar if and only if their characteristic matrices $\lambda I - A$ and $\lambda I - B$ have the same invariant factors (or elementary divisors).
+!!! theorem "Theorem 13B.1 (Smith Normal Form)"
+    Every $n \times n$ $\lambda$-matrix $A(\lambda)$ can be transformed via elementary operations into a unique diagonal form:
+    $$S(\lambda) = \operatorname{diag}(d_1(\lambda), d_2(\lambda), \ldots, d_r(\lambda), 0, \ldots, 0)$$
+    where each $d_i(\lambda)$ is a monic polynomial such that $d_i(\lambda) \mid d_{i+1}(\lambda)$. These polynomials are called the **invariant factors** of $A(\lambda)$.
+
+---
+
+## 13B.2 Conditions for Similarity
+
+!!! theorem "Theorem 13B.2 (Similarity Theorem)"
+    Two $n \times n$ matrices $A$ and $B$ are similar if and only if their characteristic matrices $\lambda I - A$ and $\lambda I - B$ have the same Smith Normal Form (i.e., identical invariant factors).
+
+---
+
+## 13B.3 Companion Matrices and Rational Canonical Form
+
+!!! definition "Definition 13B.2 (Companion Matrix $C(p)$)"
+    For a monic polynomial $p(\lambda) = \lambda^k + a_{k-1}\lambda^{k-1} + \cdots + a_0$, the **companion matrix** is:
+    $$C(p) = \begin{pmatrix} 0 & 0 & \cdots & -a_0 \\ 1 & 0 & \cdots & -a_1 \\ 0 & 1 & \cdots & -a_2 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \cdots & -a_{k-1} \end{pmatrix}$$
+    **Property**: The characteristic and minimal polynomials of $C(p)$ are both $p(\lambda)$.
+
+!!! theorem "Theorem 13B.3 (Rational Canonical Form)"
+    Every square matrix $A$ is similar to a block diagonal matrix whose blocks are the companion matrices of its invariant factors:
+    $$R = \operatorname{diag}(C(d_1), C(d_2), \ldots, C(d_k))$$
+    This is known as the **Rational Canonical Form** of $A$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Write the characteristic matrix $\lambda I - A$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
+1. **[Smith] Calculate the invariant factors of $\begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$.**
    ??? success "Solution"
-       $\lambda I - A = \begin{pmatrix} \lambda & -1 \\ 0 & \lambda \end{pmatrix}$.
+       The determinant is $\lambda^2$. The GCD of all $1 \times 1$ minors is $D_1(\lambda) = \gcd(\lambda, 1, 0, \lambda) = 1$.
+       Thus $d_1 = D_1 = 1$ and $d_2 = D_2/D_1 = \lambda^2$. The invariant factors are $1, \lambda^2$.
 
-2. **[Invariant Factors Calculation] Find the invariant factors of $A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$.**
+2. **[Similarity] If $A$ and $B$ have the same characteristic polynomial $\lambda^2$, are they necessarily similar?**
    ??? success "Solution"
-       Characteristic matrix: $\begin{pmatrix} \lambda-2 & 0 \\ 0 & \lambda-2 \end{pmatrix}$.
-       GCD of 1st-order minors: $D_1 = \lambda-2$.
-       GCD of 2nd-order minors (determinant): $D_2 = (\lambda-2)^2$.
-       Invariant factors: $d_1 = D_1 = \lambda-2$ and $d_2 = D_2/D_1 = \lambda-2$.
+       No. Consider $\begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ and $\begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$. The first has invariant factors $1, \lambda^2$, while the second has $\lambda, \lambda$.
 
-3. **[Minimal Polynomial] How does the minimal polynomial $m(\lambda)$ relate to invariant factors?**
+3. **[Companion] Write the companion matrix for $\lambda^2 - 3\lambda + 2$.**
    ??? success "Solution"
-       The minimal polynomial equals the **last invariant factor** $d_n(\lambda)$ in the Smith form. It contains all eigenvalues as roots, and its power corresponds to the largest Jordan block size.
+       $C(p) = \begin{pmatrix} 0 & -2 \\ 1 & 3 \end{pmatrix}$.
 
-4. **[Diagonalization Criterion] State the condition for diagonalizability using the minimal polynomial.**
+4. **[Minimal] In the Rational Canonical Form, which block corresponds to the minimal polynomial?**
    ??? success "Solution"
-       A matrix is diagonalizable if and only if its minimal polynomial $m(\lambda)$ has no multiple roots (splits into distinct linear factors).
+       The block corresponding to the last non-trivial invariant factor $d_k(\lambda)$.
 
-5. **[Elementary Divisors] Given invariant factors $d_1=1, d_2=(\lambda-1), d_3=(\lambda-1)^2(\lambda-2)$. Find the elementary divisors.**
+5. **[Divisibility] Prove $d_i(\lambda) \mid d_{i+1}(\lambda)$.**
    ??? success "Solution"
-       Elementary divisors are the highest power terms in the irreducible factorization of the invariant factors.
-       In this case: $(\lambda-1), (\lambda-1)^2, (\lambda-2)$.
+       This is a structural property of the Smith Normal Form, derived from the definition of the GCD of $k$-th order minors.
 
-6. **[Calculation] Write the companion matrix $C(p)$ for $p(\lambda) = \lambda^2 + a\lambda + b$.**
+6. **[Comparison] What is the main difference between JCF and RCF?**
    ??? success "Solution"
-       $C(p) = \begin{pmatrix} 0 & -b \\ 1 & -a \end{pmatrix}$. Its characteristic polynomial is exactly $p(\lambda)$.
+       JCF decomposes polynomials into powers of linear factors (elementary divisors), requiring an algebraically closed field. RCF uses invariant factors directly and works over any field.
 
-7. **[Rational Form] What is the main difference between Rational Canonical Form and Jordan Form?**
+7. **[Elementary Divisors] If the invariant factors are $1, (\lambda-1)(\lambda-2)$, what are the elementary divisors?**
    ??? success "Solution"
-       Rational form does not require finding roots over the field and is composed of companion blocks; Jordan form requires the polynomial to split. Rational form exists and is unique over *any* field.
+       $\lambda-1$ and $\lambda-2$.
 
-8. **[Cayley-Hamilton] Use invariant factors to prove the Cayley-Hamilton Theorem.**
+8. **[Rank] In the Smith form of $\lambda I - A$, why is the number of non-zero diagonal entries always $n$?**
    ??? success "Solution"
-       The characteristic poly is $f(\lambda) = d_1 d_2 \dots d_n$, and the minimal poly is $m(\lambda) = d_n$. Clearly $m(\lambda) \mid f(\lambda)$. Since $m(A)=O$, it follows that $f(A)=O$.
+       Because $\lambda I - A$ is always non-singular (its determinant is a degree $n$ polynomial).
 
-9. **[Matrix Rank] If the Smith form of $\lambda I - A$ has $r$ non-zero diagonal entries, what does it mean?**
+9. **[Calculation] Find the invariant factors of $J_2(\lambda_0)$.**
    ??? success "Solution"
-       For the characteristic matrix of an $n \times n$ matrix, the determinant is a non-zero polynomial, so the rank is always $n$ (over the field of fractions). All $n$ diagonal entries are non-zero polynomials.
+       $1, (\lambda-\lambda_0)^2$.
 
-10. **[Application] Why are invariant factors better than eigenvalues for studying the similarity of real matrices?**
+10. **[Application] Why is RCF important in computational algebra?**
     ??? success "Solution"
-        Because invariant factors are polynomials that can be computed via the Euclidean algorithm within $\mathbb{R}$, without dealing with imaginary eigenvalues. Two real matrices are similar over $\mathbb{C}$ iff they are similar over $\mathbb{R}$.
+        It avoids the process of finding roots (which usually involves numerical approximation) and only requires elementary operations on matrices (exact algebraic computation).
 
 ## Chapter Summary
 
-λ-matrix theory is the pinnacle of the structural theory of linear algebra:
+The Rational Canonical Form provides a universal characterization of matrix similarity classes over any field:
 
-1. **Unified View**: Unifies all similarity invariants (rank, eigenvalues, Jordan blocks) via Smith Normal Form.
-2. **Field Independence**: Rational Canonical Form provides a classification scheme independent of field extensions.
-3. **Minimal Polynomial**: Establishes the final link between matrix nilpotency and the algebraic properties of polynomials.
+1.  **Field Independence**: By utilizing companion blocks of irreducible polynomials, RCF eliminates the dependency on the complex field, becoming the core of operator theory in abstract algebra.
+2.  **Polynomial Logic**: The theory of invariant factors reveals the deep module structure behind the characteristic matrix $\lambda I - A$, establishing the ultimate algebraic criterion for similarity.
+3.  **Computational Precision**: Compared to the instability of eigenvalue calculation, the construction of Smith forms based on elementary operations provides a robust algorithmic foundation for exact algebra software.

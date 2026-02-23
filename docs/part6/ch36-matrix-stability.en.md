@@ -1,80 +1,106 @@
-# Chapter 36: Matrix Stability
+# Chapter 36: Matrix Stability and Inertia
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · Matrix Exponential (Ch13) · Differential Equations (Ch26) · Lyapunov Equations (Ch20)
+**Prerequisites**: Eigenvalues (Ch06) · Matrix Analysis (Ch14) · Matrix Equations (Ch20) · Positive Definite Matrices (Ch16)
 
-**Chapter Outline**: Stability of Continuous-time Systems (Hurwitz) → Stability of Discrete-time Systems (Schur) → Lyapunov Stability Theorem → Lyapunov Equation $A^T P + PA = -Q$ → Routh-Hurwitz Criterion → Jury Stability Criterion → Stability Radius → Robust Stability
+**Chapter Outline**: Physical Motivation for Stability → Hurwitz Stability (Continuous Systems) → Schur Stability (Discrete Systems) → Lyapunov Stability Theorem (Positive Definite Criteria) → Definition of Matrix Inertia → Sylvester's Inertia Theorem Extensions → Routh-Hurwitz Criterion → D-Stability and P-Stability → Applications: Control Systems and Population Dynamics
 
-**Extension**: Matrix stability is the mathematical prerequisite for control theory (Ch66) and the analysis of equilibrium points in economic and biological systems.
+**Extension**: Matrix stability is the algebraic criterion for determining whether the equilibrium points of a dynamical system (from weather models to economic cycles) possess "self-recovery" capabilities; it is the soul of Control Theory (Ch66).
 
 </div>
 
-Matrix stability concerns the behavior of trajectories in linear dynamical systems. A matrix is **Hurwitz stable** if all its eigenvalues lie in the open left-half complex plane, ensuring that solutions to $\dot{x} = Ax$ decay to zero. It is **Schur stable** if all eigenvalues lie within the unit circle, ensuring that $x_{k+1} = Ax_k$ is stable. The **Lyapunov equation** provides a way to verify stability using positive definite matrices without explicitly calculating eigenvalues.
+If a physical system returns to its equilibrium state after a small perturbation, we call the system stable. In linear models, this physical property is completely encoded into the spectral distribution of the coefficient matrix. This chapter establishes the algebraic criteria for determining matrix stability and introduces "Inertia," a profound topological invariant that describes the distribution of the spectrum in the complex plane.
 
 ---
 
 ## 36.1 Hurwitz and Schur Stability
 
-!!! definition "Definition 36.1 (Hurwitz Matrix)"
-    A matrix $A \in M_n(\mathbb{C})$ is **Hurwitz** if $\operatorname{Re}(\lambda_i) < 0$ for all eigenvalues $\lambda_i \in \sigma(A)$.
+!!! definition "Definition 36.1 (Hurwitz Stability)"
+    A square matrix $A \in M_n(\mathbb{C})$ is **Hurwitz Stable** (or asymptotically stable) if the real parts of all its eigenvalues are negative:
+    $$\operatorname{Re}(\lambda_i) < 0, \quad \forall i$$
+    **Physical Meaning**: The solution to the continuous system $\dot{\mathbf{x}} = A\mathbf{x}$ tends to zero as $t \to \infty$.
 
-!!! definition "Definition 36.2 (Schur Matrix)"
-    A matrix $A \in M_n(\mathbb{C})$ is **Schur** if $|\lambda_i| < 1$ for all eigenvalues $\lambda_i \in \sigma(A)$.
+!!! definition "Definition 36.2 (Schur Stability)"
+    A square matrix $A$ is **Schur Stable** if the moduli of all its eigenvalues are less than 1:
+    $$|\lambda_i| < 1, \quad \forall i$$
+    **Physical Meaning**: The solution to the discrete system $\mathbf{x}_{k+1} = A\mathbf{x}_k$ tends to zero as $k \to \infty$.
 
-!!! theorem "Theorem 36.1 (Lyapunov Stability Theorem)"
-    $A$ is Hurwitz stable if and only if for any $Q \succ 0$, there exists a unique $P \succ 0$ such that:
+---
+
+## 36.2 Lyapunov Stability Theorem
+
+!!! theorem "Theorem 36.1 (Lyapunov Criterion)"
+    A square matrix $A$ is Hurwitz stable if and only if for every positive definite matrix $Q \succ 0$, the following **Lyapunov Equation** has a unique positive definite solution $P \succ 0$:
     $$A^T P + PA = -Q$$
+    **Significance**: This result transforms the global information of "spectral distribution" into the algebraic computation of a "matrix equation," avoiding the need to explicitly solve for eigenvalues.
+
+---
+
+## 36.3 Matrix Inertia
+
+!!! definition "Definition 36.3 (Matrix Inertia)"
+    The **Inertia** of a matrix $A$ is a triple $\operatorname{In}(A) = (\pi, \nu, \delta)$:
+    - $\pi$: The number of eigenvalues with a positive real part.
+    - $\nu$: The number of eigenvalues with a negative real part.
+    - $\delta$: The number of eigenvalues with a zero real part.
+    **Property**: $A$ is Hurwitz stable $\iff \operatorname{In}(A) = (0, n, 0)$.
+
+---
+
+## 36.4 Routh-Hurwitz Criterion
+
+!!! technique "Technique: Routh Table"
+    For a given characteristic polynomial $p(\lambda) = \sum a_k \lambda^k$, one can determine the number of eigenvalues with positive real parts without solving the equation by constructing a Routh table and checking the number of sign changes in its first column.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Is $A = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix}$ Hurwitz stable?**
-   ??? success "Solution"
-       Yes. The eigenvalues of an upper triangular matrix are its diagonal entries: $\{-1, -2\}$. Since both have negative real parts, $A$ is Hurwitz.
-
-2. **[Schur Stability] Check if $A = \begin{pmatrix} 0.5 & 0.5 \\ 0.5 & 0.5 \end{pmatrix}$ is Schur stable.**
-   ??? success "Solution"
-       The eigenvalues are the solutions to $\lambda^2 - \lambda = 0$, which are $\{1, 0\}$. Since one eigenvalue lies on the unit circle ($|1|=1$), $A$ is not Schur stable (it is marginally stable).
-
-3. **[Lyapunov Equation] Why must $P$ be positive definite in the Lyapunov equation?**
-   ??? success "Solution"
-       The quadratic form $V(x) = x^T P x$ serves as a Lyapunov function (energy). $P \succ 0$ ensures $V(x) > 0$ for all $x \neq 0$. The equation $\dot{V} = -x^T Q x < 0$ guarantees that this "energy" strictly decreases along trajectories until the state reaches the origin.
-
-4. **[Trace and Det] What do $\operatorname{tr}(A)$ and $\det(A)$ tell you about Hurwitz stability?**
-   ??? success "Solution"
-       For a Hurwitz matrix, $\operatorname{tr}(A) = \sum \operatorname{Re}(\lambda_i) < 0$. Also, $(-1)^n \det A > 0$. These are necessary but not sufficient conditions for stability.
-
-5. **[Routh-Hurwitz] For a $2 \times 2$ real matrix, state the necessary and sufficient conditions for Hurwitz stability in terms of its coefficients.**
-   ??? success "Solution"
-       For $p(\lambda) = \lambda^2 + a_1 \lambda + a_0$, stability requires $a_1 > 0$ and $a_0 > 0$. In matrix terms, this corresponds to $\operatorname{tr}(A) < 0$ and $\det(A) > 0$.
-
-6. **[Bilinear Transform] How can you convert a Hurwitz stability problem into a Schur stability problem?**
-   ??? success "Solution"
-       Using the Cayley transform (bilinear transform) $s = \frac{z-1}{z+1}$. This maps the left-half plane in $s$ to the unit disk in $z$.
-
-7. **[Positive Matrices] Prove that a Metzler matrix (off-diagonals $\ge 0$) is Hurwitz iff there exists $d > 0$ such that $Ad < 0$.**
-   ??? success "Solution"
-       This is a fundamental property of M-matrices. For positive systems, stability can be verified using a linear (rather than quadratic) Lyapunov function $V(x) = d^T x$.
-
-8. **[Stability Radius] Define the complex stability radius $r_{\mathbb{C}}(A)$.**
-   ??? success "Solution"
-       $r_{\mathbb{C}}(A) = \min \{ \|\Delta\| : A+\Delta \text{ is unstable} \}$. By the small gain theorem, it is equal to $1 / \sup_{\omega} \|(i\omega I - A)^{-1}\|_2$.
-
-9. **[Commuting Families] If $A$ and $B$ are Hurwitz and $AB=BA$, is $A+B$ Hurwitz?**
-   ??? success "Solution"
-       Yes. Since they commute, they can be simultaneously triangularized. The eigenvalues of $A+B$ are $\lambda_i(A) + \lambda_i(B)$. The sum of two complex numbers with negative real parts always has a negative real part.
-
-10. **[Discrete Lyapunov] State the Lyapunov equation for Schur stability.**
+1.  **[Hurwitz] Determine if $A = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix}$ is Hurwitz stable.**
     ??? success "Solution"
-        $A^T P A - P = -Q$. Here $Q \succ 0$ implies $P \succ 0$ iff $A$ is Schur stable. This captures the energy difference between discrete time steps: $V(x_{k+1}) - V(x_k) = -x_k^T Q x_k$.
+        Yes. The eigenvalues are -1 and -2, both of which have negative real parts.
+
+2.  **[Schur] Determine if $\begin{pmatrix} 0.5 & 0.5 \\ 0 & 0.5 \end{pmatrix}$ is Schur stable.**
+    ??? success "Solution"
+        Yes. The eigenvalues are 0.5, both of which have moduli less than 1.
+
+3.  **[Lyapunov] If the solution to $A^T P + PA = -I$ is $P = \operatorname{diag}(1, 2)$, is $A$ stable?**
+    ??? success "Solution"
+        Yes. Since $Q=I \succ 0$ and $P \succ 0$, by the Lyapunov theorem, $A$ is Hurwitz stable.
+
+4.  **[Inertia] What is the inertia of the identity matrix $I_n$?**
+    ??? success "Solution"
+        $\operatorname{In}(I_n) = (n, 0, 0)$. All eigenvalues are 1.
+
+5.  **[Trace] Prove: If $A$ is Hurwitz stable, then $\operatorname{tr}(A) < 0$.**
+    ??? success "Solution"
+        $\operatorname{tr}(A) = \sum \lambda_i$. Since each $\operatorname{Re}(\lambda_i) < 0$, the real part of their sum must also be negative. For a real matrix, the trace is real, so it must be less than 0.
+
+6.  **[Skew-symmetric] Prove that a purely skew-symmetric matrix ($A^T = -A$) cannot be Hurwitz stable.**
+    ??? success "Solution"
+        The eigenvalues of a skew-symmetric matrix are purely imaginary (real part is 0), which does not satisfy the condition that the real part must be strictly less than 0. Its inertia is $(0, 0, n)$.
+
+7.  **[Determinant] Prove: If an $n \times n$ real matrix $A$ is Hurwitz stable, then $(-1)^n \det(A) > 0$.**
+    ??? success "Solution"
+        $\det(A) = \prod \lambda_i$. Each real eigenvalue is negative, and complex eigenvalues appear in pairs with a positive product. Thus the sign is determined by the number of real negative roots, which is $(-1)^n$.
+
+8.  **[D-Stability] What is D-stability?**
+    ??? success "Solution"
+        A matrix $A$ is D-stable if $DA$ is Hurwitz stable for every positive diagonal matrix $D$. This is crucial in the stability analysis of ecology and neural networks.
+
+9.  **[Jury] What type of stability is the Jury criterion used to determine?**
+    ??? success "Solution"
+        It is used to determine the Schur stability of discrete-time systems (eigenvalues within the unit circle).
+
+10. **[Application] In financial modeling, why does an eigenvalue near the imaginary axis signify risk?**
+    ??? success "Solution"
+        An eigenvalue with a real part near 0 means the system lacks damping power; perturbations will persist for a long time or even trigger resonance (Hopf bifurcation), causing the system to lose control.
 
 ## Chapter Summary
 
-This chapter establishes the criteria for the asymptotic convergence of linear systems:
+Matrix stability is the core criterion for analyzing dynamical systems:
 
-1. **Spectral Domains**: Defined Hurwitz and Schur stability based on the location of eigenvalues relative to the imaginary axis and the unit circle.
-2. **Lyapunov's Method**: Formulated stability as the existence of a positive definite solution to a linear matrix equation, avoiding eigenvalue computation.
-3. **Polynomial Criteria**: Explored the Routh-Hurwitz and Jury tests for assessing stability directly from the characteristic equation.
-4. **Robustness Metrics**: Introduced the stability radius to quantify the distance to the boundary of instability under model perturbations.
+1.  **Topological Classification of Spectra**: Hurwitz and Schur stability define the algebraic boundaries where "order" triumphs over "chaos" under continuous and discrete evolution, respectively.
+2.  **Monotonicity of Energy**: Lyapunov's theorem proves that stability is essentially the monotonic decrease of a generalized energy (quadratic form) over time, transforming problems of analysis into problems of positive definite matrix algebra.
+3.  **Structural Robustness**: Through tools like inertia and Routh tables, we can predict a system's survival space under parameter fluctuations without solving for exact eigenvalues, establishing a benchmark for robustness in control design.

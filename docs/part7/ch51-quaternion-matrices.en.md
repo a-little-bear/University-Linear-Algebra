@@ -2,77 +2,102 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Quaternions (Ch50) · Eigenvalues (Ch6) · SVD (Ch11)
+**Prerequisites**: Matrix Algebra (Ch02) · Eigenvalues (Ch06) · Clifford Algebra (Ch50) · Matrix Groups (Ch55)
 
-**Chapter Outline**: Quaternion Algebra $\mathbb{H}$ → Matrices over $\mathbb{H}$ → Complex Representation of Quaternion Matrices → Left and Right Eigenvalues → Canonical Forms → Quaternion Singular Value Decomposition (QSVD) → Applications in Signal Processing
+**Chapter Outline**: Algebraic Structure of Quaternions $\mathbb{H}$ → Non-commutativity and its Challenges → Complex Representation $\chi(A)$ → Left vs. Right Eigenvalues → Diagonalization & SVD of Quaternion Matrices → Unitary Quaternions & the Symplectic Group $Sp(n)$ → Applications: 3D Rotation (Avoiding Gimbal Lock), Signal Processing, and Quaternion Neural Networks
 
-**Extension**: Quaternion matrices are used in color image processing (representing RGB as a pure quaternion) and attitude control systems.
+**Extension**: Quaternion matrices provide the optimal tool for describing 3D rotations and attitude; they extend complex linear algebra into the non-commutative realm and are key to understanding Symplectic Geometry and Compact Lie Groups.
 
 </div>
 
-Matrices with quaternion entries generalize complex matrices. Due to the non-commutativity of quaternions ($ij = -ji$), the theory of quaternion matrices differs significantly from standard linear algebra. Specifically, one must distinguish between **left** and **right** eigenvalues, and standard determinantal definitions must be modified (e.g., Dieudonné determinant).
+Complex numbers brought linear algebra into the realm of 2D rotations, but **Quaternions** ($\mathbb{H}$) extend this power to 3D space. Because quaternion multiplication is non-commutative ($ij \neq ji$), the theory of quaternion matrices exhibits a landscape starkly different from classical linear algebra. This chapter establishes rigorous methods for handling such non-commutative algebraic structures and demonstrates their immense power in computer graphics and attitude control.
 
 ---
 
-## 51.1 Quaternion Algebra and Matrix Representation
+## 51.1 Foundations of Quaternions $\mathbb{H}$
 
-!!! definition "Definition 51.1 (Complex Representation)"
-    A quaternion matrix $A = A_1 + A_2 j$ (where $A_1, A_2 \in M_n(\mathbb{C})$) can be represented by a $2n \times 2n$ complex matrix:
+!!! definition "Definition 51.1 (Quaternions)"
+    A quaternion $q$ is expressed in the form $q = a + bi + cj + dk$, where $a, b, c, d \in \mathbb{R}$.
+    The fundamental imaginary units satisfy:
+    $$i^2 = j^2 = k^2 = ijk = -1$$
+    **Core Property**: $ij = k, ji = -k$ (Non-commutativity).
+
+!!! definition "Definition 51.2 (Conjugate and Norm)"
+    - **Conjugate**: $\bar{q} = a - bi - cj - dk$.
+    - **Norm**: $|q| = \sqrt{q\bar{q}} = \sqrt{a^2 + b^2 + c^2 + d^2}$.
+    - **Inverse**: $q^{-1} = \bar{q} / |q|^2$ (if $q \neq 0$).
+
+---
+
+## 51.2 Quaternion Matrices and Complex Representation
+
+!!! definition "Definition 51.3 (Complex Representation)"
+    Any quaternion $q = \alpha + \beta j$ ($\alpha, \beta \in \mathbb{C}$) can be represented as a $2 \times 2$ complex matrix:
+    $$\chi(q) = \begin{pmatrix} \alpha & \beta \\ -\bar{\beta} & \bar{\alpha} \end{pmatrix}$$
+    For an $n \times n$ quaternion matrix $A = A_1 + A_2 j$, its **complex adjoint matrix** $\chi(A)$ is a $2n \times 2n$ complex matrix:
     $$\chi(A) = \begin{pmatrix} A_1 & A_2 \\ -\bar{A}_2 & \bar{A}_1 \end{pmatrix}$$
-    This mapping preserves matrix addition and multiplication.
+    **Significance**: This allows us to transform non-commutative quaternion operations into well-established complex matrix operations.
 
-!!! theorem "Theorem 51.1 (Right Eigenvalues)"
-    Every square quaternion matrix $A$ has at least one **right eigenvalue** $\lambda \in \mathbb{H}$ satisfying $Aq = q\lambda$ for some $q \neq 0$.
+---
+
+## 51.3 Eigenvalues: Left and Right
+
+!!! note "Warning: The Cost of Non-commutativity"
+    Since $Aq = \lambda q$ and $Aq = q\lambda$ are not equivalent over $\mathbb{H}$, quaternion matrices have two types of eigenvalues:
+    1.  **Left Eigenvalues**: satisfy $Ax = \lambda x$. These lack good properties and are rarely used.
+    2.  **Right Eigenvalues**: satisfy $Ax = x\lambda$. These are the focus of research and possess clear geometric meaning.
+
+!!! theorem "Theorem 51.1 (Properties of Right Eigenvalues)"
+    An $n \times n$ quaternion matrix $A$ has exactly $n$ right eigenvalues (in the sense of equivalence classes). If $\lambda$ is a right eigenvalue, then for any non-zero quaternion $u$, $u^{-1}\lambda u$ is also a right eigenvalue (forming an eigenvalue orbit).
 
 ---
 
 ## Exercises
 
-1. **[Non-commutativity] Show that if $\lambda$ is a right eigenvalue of $A$, then any $s^{-1}\lambda s$ is also a right eigenvalue.**
-   ??? success "Solution"
-       Let $Aq = q\lambda$. For any $s \neq 0$, $A(qs) = (Aq)s = (q\lambda)s = (qs)(s^{-1}\lambda s)$. Thus $s^{-1}\lambda s$ is an eigenvalue with eigenvector $qs$. This implies right eigenvalues exist in "equivalence classes" (spheres in $\mathbb{H}$).
-
-2. **[Complex Mapping] Map the quaternion $q = (1+i) + (1+i)j$ to its $2 \times 2$ complex representation.**
-   ??? success "Solution"
-       Using the formula $\chi(q) = \begin{pmatrix} A_1 & A_2 \\ -\bar{A}_2 & \bar{A}_1 \end{pmatrix}$ where $A_1 = 1+i$ and $A_2 = 1+i$: $\chi(q) = \begin{pmatrix} 1+i & 1+i \\ -1+i & 1-i \end{pmatrix}$.
-
-3. **[Standard Eigenvalues] Why do we typically focus on the "complex part" of the right eigenvalues?**
-   ??? success "Solution"
-       Each equivalence class of right eigenvalues contains exactly one pair of complex conjugate numbers $\alpha \pm \beta i$ (with $\beta \ge 0$). These are called the **standard eigenvalues** and uniquely represent the similarity orbit of the eigenvalue.
-
-4. **[Determinant] Why is the standard definition of a determinant problematic for quaternion matrices?**
-   ??? success "Solution"
-       The Leibniz formula $\sum \operatorname{sgn}(\sigma) \prod a_{i,\sigma(i)}$ depends on the order of multiplication. Swapping entries changes the value, making it non-invariant. The **Dieudonné determinant** or the determinant of the complex representation $\det(\chi(A))$ are used as alternatives.
-
-5. **[QSVD] State the form of the Quaternion Singular Value Decomposition.**
-   ??? success "Solution"
-       For any $A \in M_{m \times n}(\mathbb{H})$, there exist unitary quaternion matrices $U, V$ such that $U^* A V = \Sigma$, where $\Sigma$ is a real diagonal matrix of non-negative singular values.
-
-6. **[Hermitian] Define a Hermitian quaternion matrix and its spectral properties.**
-   ??? success "Solution"
-       $A^* = A$, where $A^*$ is the conjugate transpose (using quaternion conjugation). Hermitian quaternion matrices have real standard eigenvalues and are unitarily diagonalizable by quaternion matrices.
-
-7. **[Trace] Is the trace identity $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ valid for quaternion matrices?**
-   ??? success "Solution"
-       Generally no, because $q_1 q_2 \neq q_2 q_1$. However, the real part of the trace satisfies $\operatorname{Re}(\operatorname{tr}(AB)) = \operatorname{Re}(\operatorname{tr}(BA))$, which is often sufficient for defining norms.
-
-8. **[Inversion] How can you compute the inverse of a quaternion matrix $A$ using its complex representation $\chi(A)$?**
-   ??? success "Solution"
-       Compute the complex inverse $B = (\chi(A))^{-1}$. The block structure of $B$ will match the complex representation of some quaternion matrix, allowing the recovery of $A^{-1}$ through the inverse mapping.
-
-9. **[Rank] Define the rank of a quaternion matrix.**
-   ??? success "Solution"
-       The rank is the maximum number of left (or right) linearly independent rows (or columns). For quaternion matrices, the row rank and column rank are always equal.
-
-10. **[Signal Processing] Describe the advantage of representing a color pixel (RGB) as a pure quaternion.**
+1.  **[Basics] Calculate the value of $ij + ji$.**
     ??? success "Solution"
-        A pixel is represented as $q = R i + G j + B k$. This allows for processing all color channels as a single mathematical entity, preserving the inter-channel correlations during geometric transformations like rotations or color-space filtering.
+        $k + (-k) = 0$. This reflects the anti-commutativity of the imaginary units.
+
+2.  **[Conjugate] Prove $\overline{q_1 q_2} = \bar{q}_2 \bar{q}_1$.**
+    ??? success "Solution"
+        Expand using the definition. Note that due to non-commutativity, the order of multiplication must be reversed under conjugation.
+
+3.  **[Representation] Write the $2 \times 2$ complex representation matrix for the unit $j$.**
+    ??? success "Solution"
+        $j = 0 + 1j \implies \alpha=0, \beta=1$. Thus $\chi(j) = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$.
+
+4.  **[Rotation] What rotation does a unit quaternion $q = \cos(\theta/2) + \mathbf{u} \sin(\theta/2)$ represent?**
+    ??? success "Solution"
+        It represents a rotation by angle $\theta$ around the unit axis $\mathbf{u}$.
+
+5.  **[Eigenvalue] Prove: If $\lambda$ is a right eigenvalue of $A$, then its conjugate $\bar{\lambda}$ must belong to an eigenvalue orbit of $A$.**
+    ??? success "Solution"
+        Utilizing the complex adjoint matrix $\chi(A)$. The eigenvalues of $\chi(A)$ appear in conjugate pairs, which correspond to the right eigenvalue orbits of the original quaternion matrix.
+
+6.  **[Unitary] What is a unitary quaternion matrix (or Symplectic matrix)?**
+    ??? success "Solution"
+        A quaternion matrix satisfying $A^* A = I$. The group of such matrices is known as the compact symplectic group $Sp(n)$.
+
+7.  **[Determinant] Why is there no simple determinant definition for quaternion matrices?**
+    ??? success "Solution"
+        Because multiplication is non-commutative, the order of terms in an expansion cannot be uniquely determined. Typically, the determinant of the real representation or the Dieudonné determinant is used.
+
+8.  **[Inverse] Find the inverse of $q = 1 + i$.**
+    ??? success "Solution"
+        $|q|^2 = 1^2 + 1^2 = 2$. Thus $q^{-1} = (1-i)/2 = 0.5 - 0.5i$.
+
+9.  **[Application] Why are quaternions preferred over Euler angles in satellite attitude control?**
+    ??? success "Solution"
+        Because quaternions provide a continuous coverage of the sphere, avoiding the singularities (Gimbal lock) associated with Euler angles at specific orientations.
+
+10. **[SVD] Does every quaternion matrix possess an SVD?**
+    ??? success "Solution"
+        Yes. Existence can be proven via the SVD of the complex adjoint matrix $\chi(A)$ while exploiting the symmetry of the quaternion structure. Singular values remain real and non-negative.
 
 ## Chapter Summary
 
-This chapter extends linear algebra to the non-commutative domain of quaternions:
+Quaternion matrices are powerful tools for handling high-dimensional rotation and symmetry:
 
-1. **Algebraic Complexity**: Highlighted the distinctions between left and right linear structures necessitated by non-commutativity.
-2. **Representation Theory**: Utilized complex matrix embeddings to solve quaternion problems using standard numerical tools.
-3. **Spectral Classes**: Defined standard eigenvalues as representatives of similarity orbits in the quaternion spectrum.
-4. **Unitary Geometry**: Established the existence of QSVD and the spectral theorem for Hermitian matrices over $\mathbb{H}$.
+1.  **Dimensional Leap**: By sacrificing the commutative law, quaternions gain the ability to perform compact rotation arithmetic in 3D and 4D spaces, serving as the logical extension of complex numbers in geometric descriptive power.
+2.  **Bridging via Adjoints**: Complex adjoint matrices transform difficult non-commutative computations into established linear algebra algorithms, ensuring numerical stability for quaternion calculus.
+3.  **Group Foundations**: The theory of quaternion matrices is the natural gateway to Symplectic Geometry and Lie groups (e.g., $SU(2) \cong Sp(1)$), revealing deep connections between operator algebra and physical spatial symmetries.

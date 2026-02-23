@@ -1,82 +1,104 @@
-# Chapter 15: Norms and Perturbation Theory
+# Chapter 15: Matrix Norms and Perturbation Theory
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Inner Product Spaces (Ch8) · SVD (Ch11) · Matrix Analysis (Ch14)
+**Prerequisites**: Matrix Analysis (Ch14) · Matrix Decompositions (Ch10) · Singular Value Decomposition (Ch11)
 
-**Chapter Outline**: Vector Norms ($L_1, L_2, L_\infty$) → Induced Matrix Norms → Operator and Spectral Norms → Frobenius Norm → Equivalence of Norms → Condition Number $\kappa(A)$ → Perturbation Theory (Linear Systems and Eigenvalues) → Bauer-Fike Theorem
+**Chapter Outline**: Motivation for Norms (Measuring Magnitude) → Vector Norms ($L_1, L_2, L_\infty$) → Induced Matrix Norms (Operator Norms) → Frobenius Norm → Equivalence of Norms → Condition Number $\kappa(A)$ → Perturbation Analysis of Linear Systems → Eigenvalue Perturbation & Bauer-Fike Theorem → Classic Ill-conditioned Matrices (Hilbert Matrix)
 
-**Extension**: Norms are rulers for measuring the "size" of mathematical objects, while perturbation theory studies how results fluctuate when real-world noise interferes with the input.
+**Extension**: Norms are the "rulers" used to measure the scale of mathematical objects, while perturbation theory is the science of how computational results fluctuate when inputs are disturbed by real-world noise; it is the red line of Numerical Linear Algebra (Ch22).
 
 </div>
 
-In pure mathematics, we talk about exact solutions, but in numerical linear algebra, we talk about error. **Norms** quantify the size of the error, and the **condition number** reveals the system's sensitivity to that error.
+In pure mathematics, we speak of exact solutions, but in numerical computation, every input carries rounding errors or observation noise. **Norms** quantify the size of these errors, while **Condition Numbers** reveal the magnification factor the system applies to those errors. This chapter establishes a rigorous framework for assessing the reliability of numerical computations.
 
 ---
 
-## 15.1 Core Definitions and Inequalities
+## 15.1 Vector and Matrix Norms
 
-!!! definition "Definition 15.1 (Vector $p$-norm)"
-    For a vector $x$, its $p$-norm is defined as:
-    $$\|x\|_p = \left( \sum |x_i|^p \right)^{1/p}$$
-    Common cases are $p=1, 2, \infty$.
+!!! definition "Definition 15.1 (Common Vector Norms)"
+    For $\mathbf{x} \in \mathbb{C}^n$:
+    1.  **1-norm**: $\|\mathbf{x}\|_1 = \sum |x_i|$
+    2.  **2-norm** (Euclidean norm): $\|\mathbf{x}\|_2 = \sqrt{\sum |x_i|^2}$
+    3.  **$\infty$-norm**: $\|\mathbf{x}\|_\infty = \max |x_i|$
 
-!!! theorem "Theorem 15.3 (Bauer-Fike Theorem)"
-    If $A$ is diagonalizable ($A = VDV^{-1}$) and $\mu$ is an eigenvalue of $A+E$, then there exists an eigenvalue $\lambda$ of $A$ such that:
+!!! definition "Definition 15.2 (Induced Matrix Norms)"
+    The matrix norm defined by a vector norm is called an induced norm: $\|A\| = \max_{\mathbf{x} \neq \mathbf{0}} \frac{\|A\mathbf{x}\|}{\|\mathbf{x}\|}$.
+    - **Spectral Norm**: $\|A\|_2 = \sigma_{\max}(A)$ (the largest singular value).
+    - **1-norm**: Maximum absolute column sum.
+    - **$\infty$-norm**: Maximum absolute row sum.
+
+---
+
+## 15.2 Condition Numbers and Stability
+
+!!! definition "Definition 15.3 (Condition Number $\kappa(A)$)"
+    The condition number of a square matrix $A$ is defined as:
+    $$\kappa(A) = \|A\| \|A^{-1}\|$$
+    $\kappa(A) \ge 1$. The larger the condition number, the more **ill-conditioned** the system, meaning small changes in input lead to large fluctuations in output.
+
+!!! theorem "Theorem 15.1 (Perturbation Bound for Linear Systems)"
+    Consider $(A+\Delta A)(x+\Delta x) = b+\Delta b$. The relative error satisfies:
+    $$\frac{\|\Delta x\|}{\|x\|} \le \frac{\kappa(A)}{1 - \kappa(A) \frac{\|\Delta A\|}{\|A\|}} \left( \frac{\|\Delta A\|}{\|A\|} + \frac{\|\Delta b\|}{\|b\|} \right)$$
+    This shows the condition number is the **magnification factor** for error propagation.
+
+---
+
+## 15.3 Eigenvalue Perturbation
+
+!!! theorem "Theorem 15.2 (Bauer-Fike Theorem)"
+    Let $A = V \Lambda V^{-1}$ be diagonalizable. If $\mu$ is an eigenvalue of $A+E$, then there exists an eigenvalue $\lambda$ of $A$ such that:
     $$|\mu - \lambda| \le \kappa_p(V) \|E\|_p$$
+    **Significance**: If the diagonalizing matrix $V$ is ill-conditioned (near a non-normal matrix), eigenvalues are extremely sensitive to perturbations. For normal matrices (e.g., symmetric), $\kappa_2(V)=1$, and eigenvalues are very stable.
 
 ---
 
 ## Exercises
 
-1. **[Vector Norms] Calculate the $L_1, L_2, L_\infty$ norms of $x = (3, -4)^T$.**
+1. **[Calculation] Compute the $L_1, L_2, L_\infty$ norms of $\mathbf{x} = (3, -4)^T$.**
    ??? success "Solution"
-       - $\|x\|_1 = |3| + |-4| = 7$.
-       - $\|x\|_2 = \sqrt{3^2 + (-4)^2} = 5$.
-       - $\|x\|_\infty = \max(|3|, |-4|) = 4$.
+       $\|\mathbf{x}\|_1 = 7, \|\mathbf{x}\|_2 = 5, \|\mathbf{x}\|_\infty = 4$.
 
-2. **[Frobenius] Calculate the Frobenius norm of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
+2. **[Matrix Norm] Find the $\infty$-norm of $A = \begin{pmatrix} 1 & 2 \\ 0 & 3 \end{pmatrix}$.**
    ??? success "Solution"
-       $\|A\|_F = \sqrt{1^2 + 2^2 + 3^2 + 4^2} = \sqrt{30} \approx 4.47$.
+       Maximum row sum: $\max(1+2, 0+3) = 3$.
 
-3. **[Spectral Norm] What is the 2-norm (spectral norm) of $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$?**
+3. **[Condition] If $A = \operatorname{diag}(10, 0.1)$, compute its condition number relative to the 2-norm.**
    ??? success "Solution"
-       For a diagonal matrix, the 2-norm is the maximum absolute value of the diagonal entries. Thus $\|A\|_2 = 3$.
+       $\|A\|_2 = 10, \|A^{-1}\|_2 = 10 \implies \kappa_2(A) = 100$.
 
-4. **[Equivalence] Prove: In finite-dimensional spaces, any two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ are equivalent.**
+4. **[Properties] Prove the induced matrix norm satisfies sub-multiplicativity: $\|AB\| \le \|A\| \|B\|$.**
    ??? success "Solution"
-       Since the unit sphere is compact in one norm, the other norm (as a continuous function) must have a maximum and minimum on this set. This guarantees constants $C_1, C_2$ such that $C_1 \|x\|_a \le \|x\|_b \le C_2 \|x\|_a$.
+       $\|AB\mathbf{x}\| \le \|A\|\|B\mathbf{x}\| \le \|A\|\|B\|\|\mathbf{x}\|$. The definition follows.
 
-5. **[Condition Number] If $A = \begin{pmatrix} 1 & 0 \\ 0 & 0.01 \end{pmatrix}$, calculate its condition number with respect to the 2-norm.**
+5. **[Error] If $\kappa(A)=10^4$ and input error is $10^{-6}$, what is the approximate upper bound for the relative error of the solution?**
    ??? success "Solution"
-       $\kappa_2(A) = \|A\|_2 \|A^{-1}\|_2 = 1 \cdot (1/0.01) = 100$. This indicates that the matrix amplifies errors 100 times during inversion.
+       Approximately $10^4 \cdot 10^{-6} = 10^{-2}$.
 
-6. **[Submultiplicativity] Prove that induced matrix norms satisfy $\|AB\| \le \|A\| \|B\|$.**
+6. **[Unitary] Prove the 2-condition number of an orthogonal matrix is always 1.**
    ??? success "Solution"
-       $\|ABx\| \le \|A\| \|Bx\| \le \|A\| (\|B\| \|x\|)$.
-       By definition, $\|AB\| = \max \frac{\|ABx\|}{\|x\|} \le \|A\| \|B\|$.
+       Since orthogonal matrices preserve length, $\|Q\|_2 = 1$ and $\|Q^{-1}\|_2 = \|Q^T\|_2 = 1$.
 
-7. **[Perturbation Bound] If input $b$ in $Ax=b$ is perturbed by $\Delta b$, what is the relative error upper bound for the solution?**
+7. **[Bauer-Fike] Why are eigenvalues of symmetric matrices more stable than those of non-normal matrices?**
    ??? success "Solution"
-       $\frac{\|\Delta x\|}{\|x\|} \le \kappa(A) \frac{\|\Delta b\|}{\|b\|}$. The condition number is the amplification factor for error propagation.
+       Symmetric matrices are unitarily diagonalizable, meaning $V$ is orthogonal and its condition number is 1, so the error is not magnified.
 
-8. **[Eigenvalue Sensitivity] Why are eigenvalues of normal matrices (like symmetric matrices) more robust than non-normal ones?**
+8. **[Frobenius] Calculate the Frobenius norm of $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       For normal matrices, the diagonalizing matrix $V$ can be chosen as unitary, making $\kappa_2(V) = 1$. The Bauer-Fike Theorem simplifies to $|\mu-\lambda| \le \|E\|_2$, meaning the eigenvalue shift is bounded by the perturbation size.
+       $\sqrt{1^2+1^2+1^2+1^2} = 2$.
 
-9. **[Calculation] Find the 1-norm (max absolute column sum) of $\begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$.**
+9. **[Ill-conditioned] Name a well-known ill-conditioned matrix.**
    ??? success "Solution"
-       Column 1 sum: $1+0=1$. Column 2 sum: $2+1=3$.
-       Thus $\|A\|_1 = \max(1, 3) = 3$.
+       The Hilbert matrix $H_{ij} = \frac{1}{i+j-1}$.
 
-10. **[Application] Why do we prefer unitary transformations (like Householder) in numerical methods?**
+10. **[Application] Why are unitary transformations (like Householder) favored in numerical computation?**
     ??? success "Solution"
-        Because unitary transformations have a spectral norm of 1 and a condition number of 1. They do not amplify rounding errors, ensuring numerical stability of the algorithm.
+        Because their condition number is always 1, they do not magnify rounding errors, preserving the stability of the algorithm.
 
 ## Chapter Summary
 
-Norms and perturbation theory are the red lines of computational mathematics:
+Norms and perturbation theory are the "lifeline" of computational mathematics:
 
-1. **Size Measurement**: Norms translate matrix properties into comparable numerical values.
-2. **Stability Determination**: Condition number is the only barometer for algorithmic reliability.
-3. **Error Control**: Perturbation theory establishes the valid boundaries of linear algebra calculations in a precision-limited real world.
+1.  **Relative Magnitude**: Norms transform abstract matrices into comparable numerical values, establishing a metric for error assessment.
+2.  **Stability Indicator**: The condition number is the ultimate barometer of algorithmic reliability, marking the boundaries of numerical simulation—not every mathematically correct problem is solvable on a computer.
+3.  **Cost of Diagonalization**: The Bauer-Fike theorem reveals that the stability of the diagonalization process itself is limited by the degree of orthogonality of the basis vectors, emphasizing the central role of orthonormal bases in numerical linear algebra.

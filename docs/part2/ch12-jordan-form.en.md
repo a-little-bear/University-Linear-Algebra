@@ -2,78 +2,96 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues and Multiplicity (Ch6) · Similarity (Ch5) · Minimal Polynomials (Ch13b)
+**Prerequisites**: Eigenvalues (Ch06) · Matrix Decompositions (Ch10) · Polynomial Algebra (Ch00)
 
-**Chapter Outline**: Limitations of Diagonalization → Generalized Eigenvectors → Jordan Blocks $J_k(\lambda)$ → Jordan Decomposition Theorem → Calculation Steps (Chain Construction) → Uniqueness (Elementary Divisors) → Applications (Matrix Powers, Stability of DE Solutions)
+**Chapter Outline**: Limitations of Diagonalization (Defective Matrices) → Definition of Jordan Blocks → Generalized Eigenvectors and Jordan Chains → Existence and Uniqueness of Jordan Canonical Form (JCF) → Relationship between Minimal and Characteristic Polynomials → Steps to Determine JCF (Rank Methods, Weyr Characteristic) → Jordan Analysis of Matrix Powers and Series → Numerical Instability
 
-**Extension**: Jordan Canonical Form is the most refined structure under similarity; it reveals the "break-and-repair" mechanism (the 1s on the super-diagonal) when a matrix cannot be diagonalized.
+**Extension**: The Jordan Canonical Form is the ultimate representation under similarity transformations; it is indispensable for the theoretical analysis of linear differential equations (Ch26) and matrix functions (Ch13).
 
 </div>
 
-When geometric multiplicity is less than algebraic multiplicity, diagonalization fails. The **Jordan Canonical Form** is the optimal algebraic compensation for this failure. By introducing 1s above the diagonal (coupling generalized eigenvectors), it establishes a universal endpoint for similarity transformations.
+Not all square matrices can be diagonalized. When the geometric multiplicity of an eigenvalue is less than its algebraic multiplicity, the matrix is called "defective." The Jordan Canonical Form (JCF) provides the structure closest to diagonal for such matrices. It not only reveals the deep structure of linear operators but also serves as the most important theoretical tool in matrix analysis.
 
 ---
 
-## 12.1 Core Structure and Theorem
+## 12.1 Jordan Blocks and Generalized Eigenvectors
 
 !!! definition "Definition 12.1 (Jordan Block)"
-    A Jordan block $J_k(\lambda)$ of order $k$ is a square matrix with $\lambda$ on the diagonal and 1s on the super-diagonal:
-    $$J_k(\lambda) = \begin{pmatrix} \lambda & 1 & & \\ & \lambda & \ddots & \\ & & \ddots & 1 \\ & & & \lambda \end{pmatrix}$$
+    A **Jordan block** $J_k(\lambda)$ of order $k$ is a square matrix with $\lambda$ on the main diagonal, 1s on the super-diagonal, and 0s elsewhere:
+    $$J_k(\lambda) = \begin{pmatrix} \lambda & 1 & 0 & \cdots & 0 \\ 0 & \lambda & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \ddots & \vdots \\ 0 & 0 & 0 & \lambda & 1 \\ 0 & 0 & 0 & 0 & \lambda \end{pmatrix}$$
+
+!!! definition "Definition 12.2 (Generalized Eigenvector)"
+    A vector $\mathbf{v}$ is a **generalized eigenvector of rank $k$** corresponding to $\lambda$ if $(A - \lambda I)^k \mathbf{v} = \mathbf{0}$ but $(A - \lambda I)^{k-1} \mathbf{v} \neq \mathbf{0}$.
+
+---
+
+## 12.2 The Jordan Canonical Form Theorem
 
 !!! theorem "Theorem 12.1 (Jordan Canonical Form Theorem)"
-    Every complex square matrix $A$ is similar to a Jordan form $J$, which is unique up to the ordering of the blocks.
+    Every complex square matrix $A$ is similar to a Jordan Canonical Form $J$, and $J$ is unique up to the permutation of its blocks:
+    $$P^{-1} A P = J = \operatorname{diag}(J_{k_1}(\lambda_1), J_{k_2}(\lambda_2), \ldots, J_{k_m}(\lambda_m))$$
+    - Each Jordan block corresponds to one linearly independent eigenvector (geometric multiplicity).
+    - The sum of the orders of all Jordan blocks for a given eigenvalue equals its algebraic multiplicity.
+
+---
+
+## 12.3 The Minimal Polynomial
+
+!!! definition "Definition 12.3 (Minimal Polynomial)"
+    The **minimal polynomial** $m(\lambda)$ is the monic polynomial of lowest degree such that $m(A) = O$.
+    **Properties**:
+    1.  $m(\lambda)$ divides the characteristic polynomial $p(\lambda)$.
+    2.  $A$ is diagonalizable $\iff$ $m(\lambda)$ has no repeated roots.
+    3.  The multiplicity of $\lambda_i$ in $m(\lambda)$ is equal to the size of the largest Jordan block corresponding to that eigenvalue.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Write the explicit form of $J_2(3)$.**
+1. **[Jordan Block] Write the square of $J_2(5)$.**
    ??? success "Solution"
-       $J_2(3) = \begin{pmatrix} 3 & 1 \\ 0 & 3 \end{pmatrix}$.
+       $\begin{pmatrix} 5 & 1 \\ 0 & 5 \end{pmatrix}^2 = \begin{pmatrix} 25 & 10 \\ 0 & 25 \end{pmatrix}$.
 
-2. **[Diagonalizability] What are the eigenvalues of $\begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$? Can it be diagonalized?**
+2. **[Diagonalization] Determine if $A = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ is diagonalizable.**
    ??? success "Solution"
-       Eigenvalue is 2 (multiplicity 2). It is a Jordan block itself. Since there is only one independent eigenvector (geometric multiplicity 1 < algebraic multiplicity 2), it cannot be diagonalized.
+       No. The eigenvalue 2 has algebraic multiplicity 2, but the dimension of the eigenspace (geometric multiplicity) is 1.
 
-3. **[Block Count] What determines the total number of Jordan blocks for eigenvalue $\lambda$ in the Jordan form?**
+3. **[JCF Search] If a $3 \times 3$ matrix $A$ has all eigenvalues equal to 0 and $\operatorname{rank}(A)=1$, what is its JCF?**
    ??? success "Solution"
-       The number of blocks equals the **geometric multiplicity** of $\lambda$, which is the dimension of the nullspace $\ker(\lambda I - A)$. Each block corresponds to an independent chain of generalized eigenvectors.
+       $\operatorname{rank}(A)=1 \implies \dim \ker(A) = 2$, meaning there are 2 Jordan blocks. Since the total dimension is 3, it must be $\operatorname{diag}(J_2(0), J_1(0))$.
 
-4. **[Calculation] Find the Jordan form of $A = \begin{pmatrix} 5 & 4 \\ -1 & 1 \end{pmatrix}$.**
+4. **[Minimal] Given $J = \operatorname{diag}(J_3(2), J_2(2))$, find its minimal polynomial.**
    ??? success "Solution"
-       Characteristic poly: $(\lambda-5)(\lambda-1)+4 = \lambda^2-6\lambda+9 = (\lambda-3)^2$.
-       Eigenvalue $\lambda=3$ (multiplicity 2).
-       Geometric multiplicity: $3I-A = \begin{pmatrix} -2 & -4 \\ 1 & 2 \end{pmatrix}$, rank is 1, so nullity is 1.
-       The Jordan form is $J_2(3) = \begin{pmatrix} 3 & 1 \\ 0 & 3 \end{pmatrix}$.
+       The size of the largest block for eigenvalue 2 is 3, so $m(\lambda) = (\lambda-2)^3$.
 
-5. **[Generalized Eigenvectors] Define a generalized eigenvector of order 2.**
+5. **[Possibility] If the characteristic polynomial is $(\lambda-1)^4$ and the minimal polynomial is $(\lambda-1)^2$, find possible JCFs.**
    ??? success "Solution"
-       A vector $v$ such that $(A-\lambda I)^2 v = 0$ but $(A-\lambda I) v \neq 0$. It is the end of the chain $[(A-\lambda I)v, v]$.
+       The largest block size is 2. Possible forms are $\operatorname{diag}(J_2(1), J_2(1))$ or $\operatorname{diag}(J_2(1), J_1(1), J_1(1))$.
 
-6. **[Matrix Power] Calculate the $n$-th power of $J = \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$.**
+6. **[Nilpotency] Describe $J_k(0)^n$ for $n \ge k$.**
    ??? success "Solution"
-       $J^n = \begin{pmatrix} \lambda^n & n\lambda^{n-1} \\ 0 & \lambda^n \end{pmatrix}$. The upper-right term is obtained using the binomial expansion or derivative properties.
+       It results in the zero matrix (Nilpotency).
 
-7. **[Uniqueness] Why is the Jordan form unique under similarity?**
+7. **[Rank Method] How do you determine the number of blocks of size $\ge 2$ for eigenvalue $\lambda$?**
    ??? success "Solution"
-       The size and number of blocks are uniquely determined by the sequence of dimensions of kernels $\dim \ker(A-\lambda I)^k$. These dimensions are similarity invariants.
+       It is given by $\operatorname{rank}(A-\lambda I) - \operatorname{rank}(A-\lambda I)^2$.
 
-8. **[Trace and Det] If $A$ has Jordan form composed of $J_2(1)$ and $J_1(2)$, find $\det(A)$.**
+8. **[Spaces] What is the difference between an eigenspace and a generalized eigenspace?**
    ??? success "Solution"
-       Eigenvalues are $\{1, 1, 2\}$. $\det(A) = 1 \cdot 1 \cdot 2 = 2$.
+       The eigenspace is $\ker(A-\lambda I)$, while the generalized eigenspace is $\ker(A-\lambda I)^k$ (where $k$ is the algebraic multiplicity).
 
-9. **[Minimal Polynomial] If the largest block for $\lambda$ has size $k$, what is the power of $(\lambda-x)$ in the minimal polynomial?**
+9. **[Uniqueness] If $A$ and $B$ have the same JCF, are they similar?**
    ??? success "Solution"
-       The power is exactly $k$. The minimal polynomial captures the minimum power needed to annihilate each Jordan block.
+       Yes. The JCF is a complete invariant under similarity.
 
-10. **[Application] How does Jordan form explain the $t e^{\lambda t}$ term in the solution to $\dot{x} = Ax$?**
+10. **[Numerical] Why is JCF rarely computed directly in numerical software?**
     ??? success "Solution"
-        When $A$ is not diagonalizable, the matrix exponential $e^{At} = P e^{Jt} P^{-1}$. The exponential of a Jordan block $J_k(\lambda)$ contains $t^m e^{\lambda t}$ terms ($m < k$), corresponding to resonance or critical damping behavior.
+        The JCF is extremely sensitive to small perturbations in matrix entries (discontinuous), making it unstable under floating-point arithmetic.
 
 ## Chapter Summary
 
-Jordan form is the finale of similarity theory:
+The Jordan Canonical Form is the final verdict on the structure of square matrices:
 
-1. **Structural Completeness**: Solved the classification problem for all matrices under similarity.
-2. **Chain Logic**: Smoothed out degenerate operators via chains of generalized eigenvectors.
-3. **Calculus Basis**: Provided the simplest model for studying matrix functions (especially exponentials) and long-term dynamics.
+1.  **Completing the Defective**: It perfectly fills the gap in eigenvectors for non-diagonalizable matrices by introducing the "1" step structure (Jordan block).
+2.  **Polynomial Depth**: The correspondence between the minimal polynomial and JCF block sizes reveals the geometric depth of a matrix as a root of a polynomial.
+3.  **Structural Uniqueness**: JCF establishes the classification standard for matrix similarity classes, providing the most precise theoretical framework for analyzing matrix functions and power series convergence.

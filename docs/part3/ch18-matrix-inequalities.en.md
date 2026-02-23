@@ -2,80 +2,100 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Positive Definite Matrices (Ch16) · Eigenvalues (Ch6) · Norms (Ch15) · Matrix Analysis (Ch14)
+**Prerequisites**: Positive Definite Matrices (Ch16) · Matrix Norms (Ch15) · Singular Value Decomposition (Ch11)
 
-**Chapter Outline**: Löwner Partial Order $(\succeq)$ → Inequalities for PD Matrices (Weyl, Ky Fan) → Singular Value Inequalities → Norm Inequalities (Hadamard, Cauchy-Schwarz) → Trace Inequalities (Golden-Thompson) → Variational Characterization of Eigenvalue Sums → Operator Monotone and Operator Convex Functions
+**Chapter Outline**: From Scalar to Operator Inequalities → Eigenvalue Inequalities (Weyl's Inequalities, Interlacing Theorems) → Determinant Inequalities (Hadamard, Fischer Inequalities) → Trace Inequalities (von Neumann, Golden-Thompson) → Singular Value Inequalities (Ky Fan Norms) → Majorization Theory ($\prec$) → Introduction to Operator Monotone and Convex Functions (Ch46)
 
-**Extension**: Matrix inequalities are the analytical foundation for convex optimization, information theory, and quantum computing, generalizing scalar order to complex operator manifolds.
+**Extension**: Matrix inequalities are the mathematical pillars of Information Theory (concavity of entropy), Compressed Sensing, and the Uncertainty Principle in Quantum Mechanics; they transform exact "equalities" into restricted "inclusions" or "bounds."
 
 </div>
 
-Matrix inequalities study the partial order relations between square matrices based on semi-definiteness. Compared to scalar inequalities, the existence of off-diagonal entries requires the use of spectral decomposition or variational principles to establish these relations.
+Matrix inequalities are among the most sophisticated branches of matrix analysis. They study the constraints and trade-offs between matrix properties (such as eigenvalues, singular values, and traces) rather than exact values. Just as inequalities on the real line characterize relative magnitudes, matrix inequalities characterize the relative distribution of energy and information within operators.
 
 ---
 
-## 18.1 Löwner Order and Spectral Inequalities
+## 18.1 Eigenvalue Inequalities
 
-!!! definition "Definition 18.1 (Löwner Partial Order)"
-    Let $A, B$ be Hermitian matrices. We say $A$ is greater than or equal to $B$ in the Löwner order (denoted $A \succeq B$) if $A - B$ is a positive semi-definite matrix.
+!!! theorem "Theorem 18.1 (Weyl's Inequalities)"
+    Let $A, B$ be Hermitian matrices, and let $C = A + B$. Arrange their eigenvalues in descending order. For all $j+k-1 \le n$:
+    $$\lambda_{j+k-1}(A+B) \le \lambda_j(A) + \lambda_k(B)$$
+    **Physical Meaning**: The impact of a perturbation on a system's eigenvalues (energy levels) is strictly limited by the scale of the perturbation matrix's spectrum.
 
-!!! theorem "Theorem 18.3 (Weyl's Inequalities)"
-    Let $\lambda_i(A)$ be the eigenvalues in descending order. For Hermitian matrices $A, B$:
-    $$\lambda_{i+j-1}(A+B) \le \lambda_i(A) + \lambda_j(B)$$
+!!! theorem "Theorem 18.2 (Cauchy Interlacing Theorem)"
+    Let $B$ be an $(n-1) \times (n-1)$ principal submatrix of an $n \times n$ Hermitian matrix $A$. Then:
+    $$\lambda_1(A) \ge \lambda_1(B) \ge \lambda_2(A) \ge \lambda_2(B) \ge \cdots \ge \lambda_{n-1}(B) \ge \lambda_n(A)$$
+
+---
+
+## 18.2 Determinant and Trace Inequalities
+
+!!! theorem "Theorem 18.3 (Hadamard's Inequality)"
+    For any positive definite matrix $A \succ 0$:
+    $$\det(A) \le \prod_{i=1}^n a_{ii}$$
+    Equality holds if and only if $A$ is diagonal.
+    **Geometric Interpretation**: The volume of a parallelotope is less than or equal to the product of its side lengths (attaining equality only when sides are orthogonal).
+
+!!! theorem "Theorem 18.4 (Golden-Thompson Inequality)"
+    For Hermitian matrices $A, B$:
+    $$\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$$
+    This is a central inequality in quantum statistical mechanics.
+
+---
+
+## 18.3 Majorization Theory ($\prec$)
+
+!!! definition "Definition 18.1 (Majorization)"
+    Let $x, y \in \mathbb{R}^n$. $y$ **majorizes** $x$ (written $x \prec y$) if $\sum_{i=1}^k x_{(i)} \le \sum_{i=1}^k y_{(i)}$ for $k=1,\ldots,n-1$ and the totals are equal.
+    **Schur-Horn Theorem**: The vector of diagonal entries of a Hermitian matrix is majorized by the vector of its eigenvalues: $\operatorname{diag}(A) \prec \lambda(A)$.
 
 ---
 
 ## Exercises
 
-1. **[Basic Property] Prove: If $A \succeq B \succeq 0$, then for any matrix $C$, $C^* A C \succeq C^* B C$.**
+1. **[Weyl] Given $\|E\|_2 = 0.1$, if an eigenvalue of $A$ is 5, in what interval must the corresponding eigenvalue of $A+E$ lie?**
    ??? success "Solution"
-       Consider the quadratic form: $x^* (C^* A C - C^* B C) x = (Cx)^* (A-B) (Cx)$.
-       Let $y = Cx$. Since $A-B \succeq 0$, then $y^* (A-B) y \ge 0$.
-       Since this holds for all $x$, $C^* A C \succeq C^* B C$.
+       By Weyl's inequality, $|\lambda_i(A+E) - \lambda_i(A)| \le \|E\|_2$. Thus, it lies in $[4.9, 5.1]$.
 
-2. **[Spectral Monotonicity] If $A \succeq B$, prove $\lambda_i(A) \ge \lambda_i(B)$ for all $i$.**
+2. **[Hadamard] Calculate the determinant of $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ and verify Hadamard's inequality.**
    ??? success "Solution"
-       This follows from the Courant-Fischer variational characterization (minimax principle). Since $x^T Ax \ge x^T Bx$ for any subspace, the maximum/minimum values over those subspaces must satisfy the same order.
+       $\det = 3$. Product of diagonals $2 \cdot 2 = 4$. $3 \le 4$ is verified.
 
-3. **[Inversion] Let $A \succeq B \succ 0$. Prove $B^{-1} \succeq A^{-1}$.**
+3. **[Interlacing] If a $3 \times 3$ matrix has eigenvalues 10, 5, 1, can its $2 \times 2$ principal submatrix have a maximum eigenvalue of 12?**
    ??? success "Solution"
-       Use congruence transformation. $A \succeq B \implies B^{-1/2} A B^{-1/2} \succeq I$.
-       Let $X = B^{-1/2} A B^{-1/2}$, then $X \succeq I \implies X^{-1} \preceq I$.
-       Thus $(B^{-1/2} A B^{-1/2})^{-1} \preceq I \implies B^{1/2} A^{-1} B^{1/2} \preceq I$.
-       Multiply by $B^{-1/2}$ on both sides to get $A^{-1} \preceq B^{-1}$.
+       No. By the interlacing theorem, $\lambda_1(B) \le \lambda_1(A) = 10$.
 
-4. **[Hadamard] State Hadamard's Inequality and give its geometric interpretation.**
+4. **[Trace] Prove for positive definite $A, B$ that $\operatorname{tr}(AB) \le \operatorname{tr}(A)\operatorname{tr}(B)$.**
    ??? success "Solution"
-       $\det(A) \le \prod a_{ii}$ (for PD matrices). Geometrically, this means the volume of the parallelotope formed by column vectors is maximized when the vectors are orthogonal (diagonal matrix).
+       $\operatorname{tr}(AB) = \sum \lambda_i(AB) \le \sum \sigma_i(A)\sigma_i(B) \le (\sum \sigma_i(A))(\sum \sigma_i(B)) = \operatorname{tr}(A)\operatorname{tr}(B)$.
 
-5. **[Trace Inequality] Is $\operatorname{tr}(AB) \le \operatorname{tr}(A) \operatorname{tr}(B)$ always true for $A, B \succeq 0$?**
+5. **[Majorization] Determine the majorization relationship between $(1, 1)$ and $(2, 0)$.**
    ??? success "Solution"
-       No. Counterexample: $A = B = I_{2 \times 2}$. $\operatorname{tr}(I^2) = 2$, but $\operatorname{tr}(I)\operatorname{tr}(I) = 4$. While $2 \le 4$ holds, this is not a general rule. A correct upper bound is usually $\operatorname{tr}(AB) \le \lambda_{\max}(A) \operatorname{tr}(B)$.
+       $(1, 1) \prec (2, 0)$ because $1 < 2$ and $1+1 = 2+0$.
 
-6. **[Ky Fan] State the Ky Fan $k$-norm sum inequality.**
+6. **[Fischer] State Fischer's Inequality.**
    ??? success "Solution"
-       $\sum_{i=1}^k \lambda_i(A+B) \le \sum_{i=1}^k \lambda_i(A) + \sum_{i=1}^k \lambda_i(B)$. This reflects the subadditivity of the sum of the largest eigenvalues.
+       For a partitioned positive definite matrix $\begin{pmatrix} A & B \\ B^T & C \end{pmatrix}$, $\det \begin{pmatrix} A & B \\ B^T & C \end{pmatrix} \le \det(A)\det(C)$.
 
-7. **[Golden-Thompson] State the Golden-Thompson Inequality.**
+7. **[Ky Fan] What is the Ky Fan $k$-norm?**
    ??? success "Solution"
-       $\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$ for all Hermitian matrices $A, B$. This measures free energy bounds in statistical mechanics.
+       The sum of the $k$ largest singular values: $\|A\|_{(k)} = \sum_{i=1}^k \sigma_i(A)$.
 
-8. **[Operator Monotone] Give an example of a function that is increasing on scalars but not in the operator order.**
+8. **[Arithmetic-Geometric] Prove $\det(A)^{1/n} \le \frac{1}{n} \operatorname{tr}(A)$ for $A \succ 0$.**
    ??? success "Solution"
-       $f(t) = t^2$. Although $a > b > 0 \implies a^2 > b^2$, there exist $A \succeq B \succeq 0$ such that $A^2 \nsucceq B^2$. Only specific "operator monotone" functions like $\sqrt{t}, \log t, 1/t$ preserve the Löwner order.
+       This is the arithmetic-geometric mean inequality applied to eigenvalues: $(\prod \lambda_i)^{1/n} \le \frac{1}{n} \sum \lambda_i$.
 
-9. **[Fiedler] State Fiedler's inequality regarding eigenvalues of sums of symmetric matrices.**
+9. **[Concavity] Prove the mapping $A \mapsto \log \det A$ is concave on the positive definite cone.**
    ??? success "Solution"
-       $\lambda(A+B)$ is constrained by $\lambda(A) + \lambda(B)$ in the sense of Majorization.
+       This is equivalent to verifying $\det(\lambda A + (1-\lambda)B) \ge (\det A)^\lambda (\det B)^{1-\lambda}$, which is the matrix version of the Brunn-Minkowski inequality.
 
-10. **[Application] How are matrix inequalities used in Compressed Sensing?**
+10. **[Application] How are matrix inequalities used in quantum information?**
     ??? success "Solution"
-        Used to prove the Restricted Isometry Property (RIP). By bounding the fluctuation of singular values of the sensing matrix, it ensures that the energy of sparse signals is preserved after dimensionality reduction, allowing for exact reconstruction.
+        They are used to prove the Strong Subadditivity of quantum entropy, establishing upper limits on quantum communication capacity.
 
 ## Chapter Summary
 
-Matrix inequalities are the "soft constraint" theory of linear algebra:
+Matrix inequalities define the "energy boundaries" of linear systems:
 
-1. **Order Generalization**: Löwner order extends linear comparison from the real line to the PSD cone.
-2. **Variational Essence**: Behind every spectral inequality lies the shadow of an extremum optimization problem.
-3. **Analytical Rigidity**: Inequalities establish structural evolution boundaries for matrices under addition, multiplication, and functional mapping.
+1.  **Spectral Stability**: Weyl's inequalities and interlacing theorems prove that matrix eigenvalues possess significant geometric inertia; small structural changes can only cause controlled spectral shifts.
+2.  **Informational Extrema**: Hadamard and trace inequalities reveal the patterns of information loss in non-diagonalized (coupled) states, providing algebraic upper bounds for entropy estimation in information theory.
+3.  **Quantification of Distribution**: Majorization theory provides a powerful tool for comparing the "dispersion" of vectors, revealing the deep containment relationship between a matrix's diagonal entries and its spectrum.

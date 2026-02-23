@@ -1,76 +1,103 @@
-# Chapter 67: Applications of Linear Algebra in Computer Graphics
+# Chapter 67: Linear Algebra in Computer Graphics
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Operations (Ch2) · Linear Transformations (Ch5) · Orthogonality (Ch7) · Eigenvalues (Ch6)
+**Prerequisites**: Matrix Algebra (Ch02) · Linear Transformations (Ch05) · Quaternion Matrices (Ch51) · Orthogonality (Ch07)
 
-**Chapter Outline**: Homogeneous Coordinates → Affine Transformations → Rotation Representations (Matrix/Quaternion/Euler/SLERP) → Model-View-Projection Matrix → Perspective and Orthographic Projections → Viewport Transformation → Color Space Transformations → Spline Surfaces
+**Chapter Outline**: Introduction of Homogeneous Coordinates → Unified Matrix Representation of Translation, Rotation, and Scaling → 2D and 3D Transformation Matrices → Projection Transforms: Orthographic and Perspective → View and Camera Models → Barycentric Coordinates & Triangle Rasterization → Linear Intersection Equations in Ray Tracing → Shading Models: Dot Products and Lambertian Reflectance → Animation Interpolation: LERP and SLERP
 
-**Extension**: Computer graphics is a high-ground for applied linear algebra; GPU architectures are essentially large-scale Single Instruction Multiple Data (SIMD) matrix-multiplication accelerators.
+**Extension**: Computer graphics is essentially "real-time visualization" of linear algebra; it projects the geometry of a 3D world onto a 2D screen using 4x4 matrices, forming the mathematical heart of modern game engines (Unreal, Unity) and visual effects.
 
 </div>
 
-Computer graphics achieves digital reconstruction of 3D scenes through linear space transformations. By introducing homogeneous coordinates, non-linear affine transformations are embedded into high-dimensional linear mappings, allowing complex geometric pipelines to be handled through unified matrix multiplication chains.
+Every 3D character or scene you see on a computer screen is the result of millions of matrix multiplications. To handle translation (non-linear) and rotation (linear) within a unified framework, graphics utilizes **Homogeneous Coordinates**. This chapter demonstrates how to build the complete geometric path from a virtual world to a pixel plane using 4x4 matrices.
 
 ---
 
-## 67.1 Homogeneous Transformations and Geometric Pipelines
+## 67.1 Homogeneous Coordinates and Basic Transforms
 
-!!! definition "Definition 67.1 (Homogeneous Coordinates and Affine Embedding)"
-    A point $\mathbf{p} \in \mathbb{R}^3$ in 3D Euclidean space is mapped to a quadruple $(x, y, z, 1)^T$ in projective space. This allows translation transformations $T$ to be represented as elements of a subgroup of $GL(4, \mathbb{R})$, alongside rotations and scaling.
+!!! definition "Definition 67.1 (Homogeneous Coordinates)"
+    To represent translation as matrix multiplication, we augment a 3D vector $(x, y, z)$ into a 4D vector $(x, y, z, w)$, typically setting $w=1$.
+    - **Translation Matrix**: $T(\mathbf{t}) = \begin{pmatrix} 1 & 0 & 0 & t_x \\ 0 & 1 & 0 & t_y \\ 0 & 0 & 1 & t_z \\ 0 & 0 & 0 & 1 \end{pmatrix}$.
 
-!!! theorem "Theorem 67.7 (Adjoint Normal Transformation)"
-    If vertices are transformed by a non-singular matrix $M$, then their surface normals $\mathbf{n}$ must follow the transformation rule of $(M^{-1})^T$ to maintain orthogonality between the normal and the tangent plane.
+!!! technique "Composition of Transformations"
+    Using matrix multiplication, we can combine scaling ($S$), rotation ($R$), and translation ($T$) into a single transformation matrix $M = T \cdot R \cdot S$. Note that the order of multiplication determines the relative coordinate frame of each transform.
+
+---
+
+## 67.2 Projection Transformations
+
+!!! definition "Definition 67.2 (Perspective Projection Matrix)"
+    Perspective projection simulates the "smaller when farther" characteristic of human vision. Given frustum parameters, its standard matrix form is:
+    $$P = \begin{pmatrix} \frac{1}{\tan(\alpha/2)} & 0 & 0 & 0 \\ 0 & \frac{1}{\tan(\alpha/2)} & 0 & 0 \\ 0 & 0 & \frac{f+n}{f-n} & \frac{-2fn}{f-n} \\ 0 & 0 & 1 & 0 \end{pmatrix}$$
+    The last row copies the $z$ coordinate into the $w$ component to enable perspective division ($x/w, y/w$).
+
+---
+
+## 67.3 Barycentric Coordinates and Rasterization
+
+!!! technique "Barycentric Coordinates"
+    Any point $P$ inside a triangle can be expressed as a linear combination of its three vertices $A, B, C$:
+    $$P = \alpha A + \beta B + \gamma C, \quad \alpha + \beta + \gamma = 1$$
+    **Application**: This is the core algorithm for attribute interpolation (color, texture coordinates) and for testing whether a point lies inside a triangle.
+
+---
+
+## 67.4 Shading and Lighting
+
+!!! theorem "Theorem 67.1 (Lambertian Reflectance)"
+    The intensity $I$ of light at a point on a surface is proportional to the dot product of the surface normal $\mathbf{N}$ and the light direction $\mathbf{L}$:
+    $$I = I_0 \max(0, \mathbf{N} \cdot \mathbf{L})$$
+    This shows how the **Inner Product** in linear algebra determines shadows and the sense of 3D volume.
 
 ---
 
 ## Exercises
 
-1. **[Matrix Unity] Explain why homogeneous coordinates are the foundation for achieving standardized processing in GPU hardware pipelines.**
-   ??? success "Solution"
-       Homogeneous coordinates convert translation (addition) into matrix multiplication. This allows rotations, scaling, translations, and projections to be concatenated into a single composite matrix $M_{total}$. GPU hardware only needs to implement efficient matrix-vector multipliers to process all geometric operations.
-
-2. **[Homogeneous Division] Derive the logic for generating the $w$ component in a perspective projection matrix and its role in Homogeneous Division.**
-   ??? success "Solution"
-       The perspective projection matrix encodes $z$ information into the $w$ component (usually $w = -z$). After clipping, all coordinates are divided by $w$, achieving the mapping of $x/z, y/z$, which is geometrically equivalent to similar triangle ratios, producing the visual perspective effect.
-
-3. **[Rotational Singularity] Analyze the mathematical essence of "Gimbal Lock" in Euler angle representation when $\theta = \pm 90^\circ$.**
-   ??? success "Solution"
-       When the pitch angle is $\pm 90^\circ$, the axes for roll and yaw rotations become collinear. At this point, the Jacobian of the rotation matrix becomes rank-deficient, and the system loses a degree of freedom, making it impossible to describe small rotations in certain directions in 3D space.
-
-4. **[Quaternions] Prove that a unit quaternion $\mathbf{q}$ and its negative $-\mathbf{q}$ describe the same rotation operator.**
-   ??? success "Solution"
-       The rotation transformation is given by $\mathbf{p}' = \mathbf{q} \mathbf{p} \mathbf{q}^{-1}$. Substituting $-\mathbf{q}$ yields $(-\mathbf{q}) \mathbf{p} (-\mathbf{q})^{-1} = (-1)^2 \mathbf{q} \mathbf{p} \mathbf{q}^{-1} = \mathbf{p}'$. This demonstrates that $SU(2)$ is a double cover of $SO(3)$.
-
-5. **[Interpolation Properties] Prove that the SLERP (Spherical Linear Interpolation) formula has constant angular velocity on the unit sphere.**
-   ??? success "Solution"
-       SLERP interpolation is given by $\frac{\sin((1-t)\theta)}{\sin\theta} q_0 + \frac{\sin(t\theta)}{\sin\theta} q_1$. By calculating the norm of its first derivative with respect to $t$, one can prove that its arc length evolution rate on $S^3$ is constant, i.e., $\frac{d\alpha}{dt} = \text{const}$.
-
-6. **[Normal Correction] Calculate the effect of the non-uniform scaling matrix $S = \operatorname{diag}(2, 1, 1)$ on the normal vector $(1, -1, 0)^T$ of a surface.**
-   ??? success "Solution"
-       The vertex matrix is $M=S$. The correct normal transformation matrix is $(M^{-1})^T = \operatorname{diag}(0.5, 1, 1)$. The transformed normal vector is $(0.5, -1, 0)^T$. The transformed tangent vector (initially $(1, 1, 0)$) is $(2, 1, 0)$. Their inner product is $0.5(2) + (-1)(1) = 0$, confirming orthogonality.
-
-7. **[Depth Nonlinearity] Analyze the reciprocal relationship between the depth value $z_{ndc}$ after perspective transformation and the original depth $z_{eye}$.**
-   ??? success "Solution"
-       $z_{ndc} = A + B/z_{eye}$. This hyperbolic relationship results in an extremely high sampling density near the near plane and very sparse sampling near the far plane. This favors precise occlusion determination for close objects but leads to depth conflicts (Z-fighting) in distant views.
-
-8. **[Barycentric Coordinates] Prove that the perspective-correct interpolation formula $a = \frac{\sum a_i \lambda_i / w_i}{\sum \lambda_i / w_i}$ restores linearity of attributes.**
-   ??? success "Solution"
-       This stems from the fact that the projective transformation from 3D world space to screen space is not affine. Only through $1/w$ weighting can the non-linear screen coordinate system be re-mapped back to the linearly varying clip space parameters.
-
-9. **[Reflection and Involution] Prove that the Householder reflection matrix $H = I - 2\mathbf{n}\mathbf{n}^T$ is symmetric and orthogonal.**
-   ??? success "Solution"
-       $H^T = H$ is obvious. $H^T H = (I-2\mathbf{n}\mathbf{n}^T)(I-2\mathbf{n}\mathbf{n}^T) = I - 4\mathbf{n}\mathbf{n}^T + 4\mathbf{n}(\mathbf{n}^T\mathbf{n})\mathbf{n}^T = I$ since $\|\mathbf{n}\|=1$. Its determinant is always $-1$.
-
-10. **[Color Transformation] Explain the basis for determining the luminance component $Y$ coefficients in the linear transformation matrix from RGB to YCbCr.**
+1.  **[Basics] Write the 2D homogeneous transformation matrix for rotation by angle $\theta$ around the origin.**
     ??? success "Solution"
-        $Y = 0.299R + 0.587G + 0.114B$. The coefficients reflect the weighted sensitivity of the human visual system (CIE observer model) to different wavelengths of light intensity (strongest for green, weakest for blue).
+        $\begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
+
+2.  **[Translation] Find the homogeneous coordinates of the point $(1, 2, 3)$ translated by $(5, 0, -1)$.**
+    ??? success "Solution"
+        $(1+5, 2+0, 3-1, 1) = (6, 2, 2, 1)$.
+
+3.  **[Projection] Why is the last row of a perspective projection matrix usually $(0, 0, 1, 0)$?**
+    ??? success "Solution"
+        To store the $z$-value in the homogeneous $w$-component. Hardware then performs the normalization $x/w, y/w, z/w$, creating the perspective effect.
+
+4.  **[Barycentric] If a point has barycentric coordinates $(0.5, 0.5, 0)$, where is it located?**
+    ??? success "Solution"
+        It is at the midpoint of the edge connecting the first two vertices ($AB$).
+
+5.  **[Quaternions] Why are quaternions used for 3D rotation in games instead of Euler angles?**
+    ??? success "Solution"
+        To avoid **Gimbal Lock**, and because spherical linear interpolation (SLERP) is smooth and more computationally efficient.
+
+6.  **[Ray Tracing] Calculate the intersection $t$ of a ray $\mathbf{r}(t) = \mathbf{o} + t\mathbf{d}$ and a plane $\mathbf{n} \cdot \mathbf{p} + d = 0$.**
+    ??? success "Solution"
+        Substitute: $\mathbf{n} \cdot (\mathbf{o} + t\mathbf{d}) + d = 0 \implies t = \frac{-(d + \mathbf{n} \cdot \mathbf{o})}{\mathbf{n} \cdot \mathbf{d}}$.
+
+7.  **[Order] Prove that "rotate then translate" is not equivalent to "translate then rotate."**
+    ??? success "Solution"
+        $T \cdot R \neq R \cdot T$. Matrix multiplication is non-commutative; translating and then rotating will cause the translation vector itself to rotate.
+
+8.  **[Normals] Why must we transform normals $\mathbf{N}$ using $(M^{-1})^T$ instead of the model matrix $M$?**
+    ??? success "Solution"
+        To preserve the orthogonality between the normal and the tangent plane. Under non-uniform scaling, $M$ would distort the normal's direction.
+
+9.  **[SLERP] What is Spherical Linear Interpolation?**
+    ??? success "Solution"
+        Constant angular velocity interpolation between two unit quaternions (points on a 4D sphere) along a great-circle path.
+
+10. **[Hardware] Briefly describe why GPUs are suitable for linear algebra.**
+    ??? success "Solution"
+        GPUs have thousands of parallel cores designed to execute the same 4x4 matrix multiplication on thousands of vertices simultaneously (SIMD architecture), perfectly matching graphics needs.
 
 ## Chapter Summary
 
-This chapter systematically discusses the foundational role of linear algebra in computer graphics:
+Computer graphics is the most spectacular stage for linear algebra:
 
-1. **Unified Representation**: Homogeneous coordinates unify geometric transformations as $GL(4, \mathbb{R})$ matrix operations, establishing the computational standard for graphics pipelines.
-2. **Rotation Modeling**: Analyzed the algebraic properties of various rotation representations, proving the superiority of quaternions in continuous motion interpolation.
-3. **Spatial Projection**: Revealed the non-linear nature of perspective transformation and its linear implementation under projective geometry.
-4. **Attribute Geometry**: Established criteria for normal vector transformation and perspective-correct interpolation, ensuring physical and geometric consistency in rendering.
+1.  **Elevation of Dimension**: Through homogeneous coordinates, graphics unifies non-linear rigid body motion into linear matrix arithmetic, establishing the algebraic basis for pipelined rendering.
+2.  **Mystery of Projection**: The perspective matrix demonstrates how to utilize the rank-deficiency tendencies of linear algebra (via $w$-division) to simulate the collapse of high-dimensional space into low-dimensional vision, constructing the sense of depth in digital worlds.
+3.  **Logic of Geometry**: From barycentric interpolation to dot-product lighting, graphics proves that all real-world sensory experiences (color, shape, light) can be reduced to elegant vector operations at the underlying level.

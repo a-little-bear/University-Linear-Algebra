@@ -2,78 +2,107 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Kronecker Product (Ch19) · Eigenvalues (Ch6) · Matrix Analysis (Ch14) · Matrix Stability (Ch36)
+**Prerequisites**: Kronecker Product (Ch19) · Matrix Analysis (Ch14) · Eigenvalues (Ch06)
 
-**Chapter Outline**: Sylvester Equation $AX - XB = C$ → Existence and Uniqueness Conditions → Lyapunov Equation $AX + XA^* = Q$ → Stability Determination and Inertia Theorem → Algebraic Riccati Equation (ARE) → Iterative Solution Methods → Applications (Controllability and Observability in Modern Control Theory)
+**Chapter Outline**: Overview of Matrix Equations → Basic Linear Equations $AX=B$ and $AXB=C$ → Sylvester Equation ($AX+XB=C$) → Lyapunov Equation ($AX+XA^T=Q$) → Criteria for Existence and Uniqueness (Spectral Separation) → Algebraic Riccati Equation (ARE) → Continuous vs. Discrete Cases → Numerical Algorithms (Bartels-Stewart Algorithm) → Applications in Control Theory (LQR, Stability)
 
-**Extension**: Matrix equations are the language for transforming static algebra into dynamic characteristics; the solution to the Lyapunov equation directly maps the "energy" distribution of a dynamical system.
+**Extension**: Matrix equations are the link between modern control theory and numerical linear algebra; they are the core mathematical tools for analyzing system observability, controllability, and solving optimal control strategies.
 
 </div>
 
-Matrix equations study algebraic equations where the unknowns are matrices. They typically appear in control system design, equilibrium analysis, and numerical analysis. The most famous, the Sylvester and Lyapunov equations, provide the mathematical framework for understanding the interactions between operators.
+When the unknown itself is a matrix, we call it a matrix equation. Matrix equations are not just an extension of linear operator theory but also the direct product of dynamical system equilibrium analysis, control gain calculation, and numerical simulation. This chapter begins with simple linear coupled equations and progresses into complex non-linear Riccati equations.
 
 ---
 
-## 20.1 Sylvester and Lyapunov Equations
+## 20.1 Linear Matrix Equations
 
-!!! definition "Definition 20.1 (Sylvester Equation)"
-    The matrix equation $AX - XB = C$ is called the Sylvester equation.
+!!! definition "Definition 20.1 (Basic Equations)"
+    1.  **Left-multiplication $AX = B$**: Solvable if and only if the columns of $B$ belong to the column space of $A$.
+    2.  **Two-sided $AXB = C$**: Can be transformed via the Kronecker product into $(B^T \otimes A) \operatorname{vec}(X) = \operatorname{vec}(C)$.
 
-!!! theorem "Theorem 20.3 (Existence and Uniqueness)"
-    The Sylvester equation $AX - XB = C$ has a unique solution if and only if $A$ and $B$ have no common eigenvalues: $\sigma(A) \cap \sigma(B) = \emptyset$.
+---
+
+## 20.2 Sylvester and Lyapunov Equations
+
+!!! definition "Definition 20.2 (Sylvester Equation)"
+    $$AX + XB = C$$
+    where $A, B, C$ are given square matrices.
+
+!!! theorem "Theorem 20.1 (Uniqueness Criterion)"
+    The Sylvester equation $AX + XB = C$ has a unique solution for every $C$ iff $\sigma(A) \cap \sigma(-B) = \emptyset$ (i.e., $A$ and $-B$ have no common eigenvalues).
+
+!!! definition "Definition 20.3 (Lyapunov Equation)"
+    $$AX + XA^T = Q$$
+    This is a special symmetric form of the Sylvester equation used to determine the stability of dynamical systems. If $A$ is stable (spectrum in the left half-plane), then for any $Q \prec 0$, there is a unique positive definite solution $X \succ 0$.
+
+---
+
+## 20.3 Algebraic Riccati Equation (ARE)
+
+!!! definition "Definition 20.4 (Continuous-time ARE)"
+    $$A^T X + XA - X B R^{-1} B^T X + Q = 0$$
+    This is a quadratic non-linear matrix equation.
+    **Application**: Used to solve for the optimal feedback gain $K = R^{-1} B^T X$ in Linear-Quadratic Regulator (LQR) problems.
+
+---
+
+## 20.4 Numerical Algorithms
+
+!!! algorithm "Algorithm 20.1 (Bartels-Stewart Algorithm)"
+    Used for efficient solution of linear matrix equations:
+    1.  Perform Schur decomposition (triangularization) on $A$ and $B$.
+    2.  Solve the transformed equation via forward/backward substitution.
+    3.  Back-transform to obtain the solution to the original equation.
+    **Complexity**: $O(n^3)$, much faster than direct vectorization ($O(n^6)$).
 
 ---
 
 ## Exercises
 
-1. **[Existence] Does the equation $AX - XA = 0$ always have non-zero solutions?**
+1. **[Sylvester] Determine if $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} X + X \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = C$ has a unique solution.**
    ??? success "Solution"
-       Yes. Any matrix that commutes with $A$ is a solution. In particular, $X=I$ and $X=A$ are always solutions. Since $\sigma(A) \cap \sigma(A) \neq \emptyset$ (unless the set is empty), the equation does not have a unique solution by Theorem 20.3.
+       $\sigma(A) = \{1\}, \sigma(-B) = \{-1\}$. The intersection is empty, so there is a unique solution.
 
-2. **[Lyapunov] Assume $A$ is Hurwitz stable. Prove that for any $Q$, the solution to $AX + XA^* = Q$ can be expressed in integral form.**
+2. **[Uniqueness] If $A$ and $B$ share an eigenvalue, is the Sylvester equation necessarily unsolvable?**
    ??? success "Solution"
-       The solution is $X = -\int_0^\infty e^{At} Q e^{A^*t} dt$. Since $A$ is stable, the exponential terms decay over time, guaranteeing the convergence of the integral.
+       No. The solution might not be unique (infinitely many solutions), or it may be unsolvable only for specific $C$.
 
-3. **[Calculation] Solve $\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} X - X \begin{pmatrix} 0 & 0 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
+3. **[Lyapunov] Why is the Lyapunov equation used for stability analysis?**
    ??? success "Solution"
-       Let $X = \begin{pmatrix} x_{11} & x_{12} \\ x_{21} & x_{22} \end{pmatrix}$.
-       Substitute: $\begin{pmatrix} 1x_{11} & 1x_{12} \\ 2x_{21} & 2x_{22} \end{pmatrix} - \begin{pmatrix} 0 & 3x_{12} \\ 0 & 3x_{22} \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
-       Solve the system: $x_{11}=1, -2x_{12}=1, 2x_{21}=1, -x_{22}=1$.
-       Thus $X = \begin{pmatrix} 1 & -0.5 \\ 0.5 & -1 \end{pmatrix}$.
+       The solution $X$ forms the weighting matrix for the system's energy function $V(x) = x^T X x$. If $X \succ 0$ and $\dot{V} < 0$, the system is asymptotically stable.
 
-4. **[Stability] Prove: If there exists $P \succ 0$ such that $A^T P + PA \prec 0$, then $A$ is stable.**
+4. **[Vectorization] Transform $AXB + CXD = F$ into vectorized form.**
    ??? success "Solution"
-       This is the Lyapunov stability theorem. Consider the energy function $V(x) = x^T P x$.
-       Its derivative is $\dot{V} = x^T (A^T P + PA) x$. Since $A^T P + PA$ is negative definite, $\dot{V} < 0$, which means energy decreases over time and the system converges.
+       $(B^T \otimes A + D^T \otimes C) \operatorname{vec}(X) = \operatorname{vec}(F)$.
 
-5. **[Trace Application] In the Lyapunov equation $AX + XA^T + BB^T = 0$, what does the trace of $X$ represent?**
+5. **[Riccati] Prove: If $X$ is a solution to the Riccati equation, then $X^T$ is also a solution (assuming $Q, R$ are symmetric).**
    ??? success "Solution"
-       If the equation describes the controllability Gramian of a control system, the trace of $X$ (sum of eigenvalues) represents the "average gain" or overall degree of controllability for control energy input from all directions.
+       Transpose both sides of the equation; the form remains identical, so the result holds.
 
-6. **[Riccati Intro] What is the Algebraic Riccati Equation (ARE)? How does it differ from the Sylvester equation?**
+6. **[Calculation] Solve $(1)X + X(2) = (6)$ (the scalar case).**
    ??? success "Solution"
-       ARE has the form $A^T P + PA - PBR^{-1}B^T P + Q = 0$. Unlike the linear Sylvester equation, ARE is a **quadratic** matrix equation. It plays a central role in optimal control (LQR).
+       $3X = 6 \implies X = 2$.
 
-7. **[Controllability] If the system controllability matrix is $W_c$, what matrix equation does it satisfy?**
+7. **[Property] If $A$ and $B$ are upper triangular, is the solution $X$ to $AX+XB=C$ necessarily upper triangular?**
    ??? success "Solution"
-       It satisfies the Lyapunov equation $A W_c + W_c A^T + BB^T = 0$. The positive definiteness of the solution $W_c$ directly corresponds to the system's controllability.
+       Generally no. The structure of $X$ depends on the form of $C$.
 
-8. **[Symmetry] If $A$ is stable and $Q$ is symmetric, is the solution $X$ to $AX + XA^T = Q$ always symmetric?**
+8. **[Discrete] Write the form of the Discrete Lyapunov Equation.**
    ??? success "Solution"
-       Yes. Taking the transpose of the original equation gives $XA^T + AX^T = Q^T = Q$. Since the solution is unique and both $X$ and $X^T$ satisfy the same equation, $X = X^T$.
+       $A X A^T - X + Q = 0$.
 
-9. **[Elementary Operator] The Sylvester equation can be viewed as an inverse problem for which linear operator?**
+9. **[Schur] Why perform Schur decomposition first in the algorithm?**
    ??? success "Solution"
-       It can be viewed as inverting the elementary operator $\mathcal{L}(X) = AX - XB$ acting on the space of matrices. Its eigenvalues are $\lambda_i(A) - \mu_j(B)$.
+       To transform general matrix coupling into triangular coupling, allowing for recursive solving of entries of $X$ similar to back-substitution.
 
-10. **[Application] How do matrix equations model degradation in image restoration?**
+10. **[Control] In an LQR problem, what does the solution $X$ to the Riccati equation represent?**
     ??? success "Solution"
-        Blurring is often modeled as $Y = AXB + N$, where $A$ and $B$ represent horizontal and vertical blurring operators. Restoring the image involves solving this matrix equation (usually with a regularization term).
+        It represents the minimum cumulative cost (cost function) from the current state to the infinite future.
 
 ## Chapter Summary
 
-Matrix equations are the dynamic logic of linear algebra:
+Matrix equations are the algebraic language of advanced linear systems:
 
-1. **Spectral Interaction**: The existence of a solution depends on the separation of the spectra of the two operators.
-2. **Energy Mapping**: Lyapunov equations build a direct bridge between algebra and dynamical stability.
-3. **Optimization Core**: From linear to quadratic equations (Riccati), matrix equations form the computational base of modern control theory.
+1.  **Solution Coupling**: The Sylvester equation characterizes the linear interference between two different operators; its spectral separation condition reveals the essence of system resonance.
+2.  **Energy and Stability**: The Lyapunov equation builds a bridge between algebra and analytical stability through quadratic matrices, serving as the operator expression of Lyapunov's second method in control engineering.
+3.  **Seeking Optimality**: The Riccati equation demonstrates how non-linear structures naturally arise in variational and optimal control problems, marking the transition from linear system analysis to linear system synthesis.

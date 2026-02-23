@@ -573,3 +573,58 @@
     （矩阵均值在扩散张量成像中的应用）在 DTI 中，扩散张量 $D_1 = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}$，$D_2 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{pmatrix}$。
 
     计算 $D_1 \nabla D_2$，$D_1 \# D_2$，$D_1 \,!\, D_2$，并比较三者的行列式。验证只有几何均值保持 $\det(D_1 \# D_2) = [\det D_1 \cdot \det D_2]^{1/2}$。
+
+---
+
+## 练习题
+
+1. **[基础] 计算 $A = \operatorname{diag}(4, 1)$ 与 $B = \operatorname{diag}(1, 9)$ 的矩阵几何均值 $A \# B$。**
+   ??? success "参考答案"
+       由于 $A, B$ 都是对角矩阵，它们是可交换的。因此 $A \# B = (AB)^{1/2} = \operatorname{diag}(\sqrt{4 \cdot 1}, \sqrt{1 \cdot 9}) = \operatorname{diag}(2, 3)$。
+
+2. **[Riccati] 验证 $X = A \# B$ 满足 Riccati 方程 $X A^{-1} X = B$。**
+   ??? success "参考答案"
+       代入定义：$A^{1/2}(A^{-1/2} B A^{-1/2})^{1/2} A^{1/2} \cdot A^{-1} \cdot A^{1/2} (A^{-1/2} B A^{-1/2})^{1/2} A^{1/2} = A^{1/2} (A^{-1/2} B A^{-1/2}) A^{1/2} = B$。
+
+3. **[AM-GM-HM] 在 Löwner 偏序下，将三种经典矩阵均值按从小到大排序。**
+   ??? success "参考答案"
+       调和均值 $\preceq$ 几何均值 $\preceq$ 算术均值。
+       即 $2(A^{-1} + B^{-1})^{-1} \preceq A \# B \preceq \frac{A+B}{2}$。
+
+4. **[行列式] 证明 $\det(A \# B) = \sqrt{\det A \cdot \det B}$。**
+   ??? success "参考答案"
+       $\det(A \# B) = \det(A^{1/2}) \det((A^{-1/2} B A^{-1/2})^{1/2}) \det(A^{1/2}) = \det(A) \sqrt{\det(A^{-1}B)} = \det(A) \sqrt{\det(A)^{-1} \det B} = \sqrt{\det A \det B}$。
+
+5. **[变换性] 证明：若 $C$ 可逆，则 $C^*(A \# B)C = (C^*AC) \# (C^*BC)$。**
+   ??? success "参考答案"
+       这是 Kubo-Ando 公理中的变换等式。设 $X = A \# B$，则有 $X A^{-1} X = B$。两边左乘 $C^*$ 右乘 $C$，并在中间插入 $C^{-1}(C^*)^{-1}$ 得：$(C^* X C) (C^* A C)^{-1} (C^* X C) = C^* B C$。由此可见 $C^* X C$ 是 $C^* A C$ 与 $C^* B C$ 的几何均值。
+
+6. **[多变量] 定义 $k$ 个矩阵 $A_1, \dots, A_k$ 的 Karcher 均值。**
+   ??? success "参考答案"
+       Karcher 均值是正定流形上到各点 Riemannian 距离平方和最小的点：$G = \arg\min_X \sum w_i \|\log(X^{-1/2} A_i X^{-1/2})\|_F^2$。
+
+7. **[度量] 正定矩阵流形上的 Riemannian 度量是如何定义的？**
+   ??? success "参考答案"
+       在点 $X$ 处，两个切向量（Hermite 矩阵）$H, K$ 的内积定义为 $\langle H, K \rangle_X = \operatorname{tr}(X^{-1} H X^{-1} K)$。
+
+8. **[测地线] 连接 $A$ 到 $B$ 的测地线路径是什么？**
+   ??? success "参考答案"
+       测地线是加权几何均值路径：$\gamma(t) = A \#_t B = A^{1/2}(A^{-1/2} B A^{-1/2})^t A^{1/2}$。
+
+9. **[交换性] 若 $A$ 与 $B$ 交换，几何均值简化为什么形式？**
+   ??? success "参考答案"
+       $A \# B = A^{1/2} B^{1/2} = (AB)^{1/2}$。
+
+10. **[奇异情形] 计算 $A = \operatorname{diag}(1, 0)$ 与 $B = \operatorname{diag}(0, 1)$ 的几何均值。**
+    ??? success "参考答案"
+        使用极限 $\epsilon \to 0$：$(A+\epsilon I) \# (B+\epsilon I) = \operatorname{diag}(\sqrt{\epsilon(1+\epsilon)}, \sqrt{\epsilon(1+\epsilon)})$。当 $\epsilon \to 0$ 时，均值趋于零矩阵。
+
+## 本章小结
+
+本章探讨了代数均值与微分几何的交叉融合：
+
+1. **公理化基础**：确立了 Kubo-Ando 框架作为定义矩阵均值的严谨路径。
+2. **谱分析关联**：将矩阵几何均值与 Riccati 方程及算子单调函数理论联系起来。
+3. **几何合成**：发展了正定矩阵流形的 Riemannian 几何，识别出几何均值即为测地线的中点。
+4. **多变量推广**：通过 Karcher 变分法将二变量均值推广至 $k$ 变量，为现代信号处理提供了数学工具。
+

@@ -1,76 +1,134 @@
-# Chapter 27: Linear Algebra in Graph Theory
+# Chapter 27: Linear Algebra in Graph Theory and Networks
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Eigenvalues (Ch6) · Combinatorial Structures (Ch65B)
+**Prerequisites**: Eigenvalues (Ch06) · Spectral Theorem (Ch08) · Non-negative Matrices (Ch17)
 
-**Chapter Outline**: Adjacency Matrix $A$ → Paths and Powers of $A$ → Degree Matrix $D$ → Laplacian Matrix $L = D - A$ → Matrix-Tree Theorem → Spectral Clustering → Graph Partitioning → Fiedler Value and Fiedler Vector → Incidence Matrix → Relation to Random Walks
+**Chapter Outline**: Matrix Representations of Graphs (Adjacency, Incidence, Laplacian) → Spectral Graph Theory → Laplacian and Connectivity (Algebraic Connectivity) → Kirchhoff's Matrix-Tree Theorem → Random Walks & PageRank → Cheeger Inequality & Graph Partitioning → Expander Graphs → Graph Coloring & Eigenvalues → Network Flows & Linear Programming
 
-**Extension**: Spectral graph theory uses the eigenvalues of the Laplacian to reveal the connectivity and "bottleneck" structure of a network.
+**Extension**: Graph theory and linear algebra intersect in Spectral Graph Theory, which uses matrix properties to reveal global topological features of a graph; PageRank is the most famous industrial application of this synergy.
 
 </div>
 
-Graph theory and linear algebra are deeply intertwined. A graph can be perfectly represented by its **Adjacency Matrix**, where matrix powers count the number of paths between nodes. Even more profound is the **Laplacian Matrix** $L = D - A$, whose eigenvalues provide information about the graph's connectivity, diameter, and partitioning. The second smallest eigenvalue, the **Fiedler value**, is a definitive measure of how easily a graph can be cut into two pieces. This chapter explores the "spectral" properties of networks, bridging the gap between discrete connections and continuous algebra.
+Graphs are discrete structures consisting of vertices and edges, yet they can be completely encoded into matrices. By translating combinatorial problems into eigenvalue problems, we can "listen" to the shape of a network. This chapter explores how the spectrum of a graph dictates its connectivity, clusterability, and information flow.
 
 ---
 
-## 27.1 Adjacency and Laplacian Matrices
+## 27.1 Matrix Representations of Graphs
+
+<div class="context-flow" markdown>
+
+**Three Pillars**: The Adjacency matrix $A$ (neighbor relations), the Incidence matrix $B$ (vertex-edge relations), and the Laplacian $L = D - A$ (the most vital operator).
+
+</div>
 
 !!! definition "Definition 27.1 (Adjacency Matrix)"
-    For a graph $G$ with $n$ vertices, the adjacency matrix $A$ has $a_{ij} = 1$ if there is an edge between $i$ and $j$, and 0 otherwise.
+    For a graph $G$ with $n$ vertices, the **Adjacency Matrix** $A$ is an $n \times n$ symmetric matrix where $A_{ij} = 1$ if vertices $i$ and $j$ are connected, and 0 otherwise.
 
 !!! definition "Definition 27.2 (Laplacian Matrix)"
-    The Laplacian is $L = D - A$, where $D = \operatorname{diag}(\text{degrees})$. $L$ is always symmetric and positive semi-definite.
+    The **Laplacian Matrix** $L$ is defined as $L = D - A$, where $D = \operatorname{diag}(d_1, \ldots, d_n)$ is the degree matrix. 
+    **Key Property**: $L$ is positive semi-definite, and $L\mathbf{1} = \mathbf{0}$.
+
+---
+
+## 27.2 Spectral Graph Theory
+
+<div class="context-flow" markdown>
+
+**The Spectrum**: The set of eigenvalues of $A$ or $L$ carries information about the graph's regularity, diameter, and bipartite nature.
+
+</div>
+
+!!! theorem "Theorem 27.1 (Spectral Properties)"
+    1.  The number of edges $|E| = \frac{1}{2} \operatorname{tr}(A^2)$.
+    2.  The number of triangles in $G$ is $\frac{1}{6} \operatorname{tr}(A^3)$.
+    3.  $G$ is bipartite iff its adjacency spectrum is symmetric about 0.
+
+---
+
+## 27.3 Laplacian and Connectivity
+
+!!! theorem "Theorem 27.2 (Connectivity)"
+    The multiplicity of the eigenvalue 0 in the Laplacian $L$ equals the number of connected components in the graph.
+    - $G$ is connected iff $\lambda_2(L) > 0$.
+    - $\lambda_2(L)$ is called the **Algebraic Connectivity** or the **Fiedler value**.
+
+!!! theorem "Theorem 27.3 (Kirchhoff's Matrix-Tree Theorem)"
+    The number of spanning trees in a graph $G$ is equal to any cofactor of the Laplacian matrix $L$. For a connected graph, this is $\frac{1}{n} \lambda_2 \lambda_3 \cdots \lambda_n$.
+
+---
+
+## 27.4 Random Walks and PageRank
+
+<div class="context-flow" markdown>
+
+**Markovian Flow**: A random walk on a graph is a Markov chain where the transition matrix is $P = D^{-1}A$.
+
+</div>
+
+!!! algorithm "Algorithm 27.1 (PageRank)"
+    The PageRank of a web page is determined by the dominant eigenvector of the **Google Matrix**:
+    $$G = \alpha P + (1-\alpha) \frac{1}{n} \mathbf{1}\mathbf{1}^T$$
+    where $\alpha$ is the damping factor (usually 0.85). This ensures the matrix is strictly positive, guaranteeing a unique steady-state distribution by the Perron-Frobenius theorem.
+
+---
+
+## 27.5 Graph Partitioning and Cheeger Inequality
+
+!!! theorem "Theorem 27.4 (Cheeger Inequality)"
+    The spectral gap $\lambda_2$ of the normalized Laplacian provides bounds on the **conductance** $h(G)$ (the cost of the best cut):
+    $$\frac{h(G)^2}{2} \le \lambda_2 \le 2h(G)$$
+    This justifies **Spectral Clustering**, where we use the Fiedler vector to partition a network into communities.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] If $A$ is the adjacency matrix, what does $(A^k)_{ij}$ represent?**
-   ??? success "Solution"
-       It represents the number of paths of length exactly $k$ between vertex $i$ and vertex $j$.
-
-2. **[Laplacian] Show that $\mathbf{1} = (1, \dots, 1)^T$ is always an eigenvector of $L$ with eigenvalue 0.**
-   ??? success "Solution"
-       The row sums of $L$ are $\sum_j (d_{ii}\delta_{ij} - a_{ij}) = d_i - d_i = 0$. Thus $L\mathbf{1} = 0$.
-
-3. **[Connectivity] How does the multiplicity of $\lambda=0$ in the Laplacian relate to graph components?**
-   ??? success "Solution"
-       The number of connected components in the graph is exactly equal to the multiplicity of the eigenvalue 0 in $L$.
-
-4. **[Fiedler Value] What is the Fiedler value $\lambda_2$?**
-   ??? success "Solution"
-       It is the second smallest eigenvalue of $L$. It is strictly greater than 0 if and only if the graph is connected. It measures the "algebraic connectivity."
-
-5. **[Matrix-Tree] State the Matrix-Tree Theorem.**
-   ??? success "Solution"
-       The number of spanning trees in a graph is equal to any cofactor of the Laplacian matrix $L$.
-
-6. **[Clustering] Describe Spectral Clustering using the Fiedler vector.**
-   ??? success "Solution"
-       To partition a graph, calculate the eigenvector $v_2$ corresponding to $\lambda_2$. Group vertices into two sets based on the sign of the entries in $v_2$. This minimizes the "cut" while keeping the groups balanced.
-
-7. **[Regular Graphs] If $G$ is a $d$-regular graph, relate the spectra of $A$ and $L$.**
-   ??? success "Solution"
-       $L = dI - A$. Thus $\lambda_i(L) = d - \lambda_{n-i+1}(A)$. The Laplacian spectrum is a shifted and flipped version of the adjacency spectrum.
-
-8. **[Incidence Matrix] Define the incidence matrix $B$ and show $L = B B^T$.**
-   ??? success "Solution"
-       For a directed graph, $B_{ve} = 1$ if vertex $v$ is the head of edge $e$, $-1$ if it is the tail, and 0 otherwise. $B B^T$ results in $D - A$, the Laplacian of the underlying undirected graph.
-
-9. **[Quadratic Form] Express $x^T L x$ in terms of edges.**
-   ??? success "Solution"
-       $x^T L x = \sum_{\{i,j\} \in E} (x_i - x_j)^2$. This confirms that $L \succeq 0$ and shows that the Laplacian measures the "smoothness" of a signal $x$ on the graph.
-
-10. **[Gershgorin] Use Gershgorin's theorem to bound the eigenvalues of $L$.**
+1.  **[Adjacency] If the diagonal of $A^2$ consists of all ones, what does this say about the graph?**
     ??? success "Solution"
-        Each disc is centered at $d_i$ with radius $d_i$. Thus all eigenvalues lie in $[0, 2 \max d_i]$.
+        It means each vertex has exactly one neighbor, so the graph is a collection of disjoint edges (a perfect matching).
+
+2.  **[Triangles] A graph has adjacency eigenvalues $2, 0, -2$. How many triangles does it have?**
+    ??? success "Solution"
+        $\operatorname{tr}(A^3) = 2^3 + 0^3 + (-2)^3 = 8 - 8 = 0$. The graph has zero triangles (it is a bipartite graph).
+
+3.  **[Laplacian] Calculate the Laplacian of a complete graph $K_3$.**
+    ??? success "Solution"
+        $D = \operatorname{diag}(2, 2, 2)$, $A = \begin{pmatrix} 0 & 1 & 1 \\ 1 & 0 & 1 \\ 1 & 1 & 0 \end{pmatrix} \implies L = \begin{pmatrix} 2 & -1 & -1 \\ -1 & 2 & -1 \\ -1 & -1 & 2 \end{pmatrix}$.
+
+4.  **[Eigenvalue 0] Why is $\mathbf{1} = (1, \ldots, 1)^T$ always an eigenvector of $L$ with eigenvalue 0?**
+    ??? success "Solution"
+        Because each row of $L$ sums to $d_i - \sum A_{ij} = d_i - d_i = 0$. Thus $L\mathbf{1} = \mathbf{0}$.
+
+5.  **[Connectivity] If a graph has Laplacian eigenvalues $0, 0, 2, 3$, how many connected components does it have?**
+    ??? success "Solution"
+        The multiplicity of 0 is 2, so the graph has 2 connected components.
+
+6.  **[PageRank] Why is the damping factor $\alpha < 1$ used in PageRank?**
+    ??? success "Solution"
+        To ensure the transition matrix is primitive and irreducible (it makes the graph strongly connected), allowing the power method to converge to a unique solution.
+
+7.  **[Matrix-Tree] How many spanning trees does $K_3$ have?**
+    ??? success "Solution"
+        $L$ eigenvalues are $0, 3, 3$. Number of trees $= \frac{1}{3}(3 \cdot 3) = 3$.
+
+8.  **[Bipartite] If the adjacency spectrum is $\{3, 1, -1, -3\}$, is the graph bipartite?**
+    ??? success "Solution"
+        Yes, the spectrum is perfectly symmetric about 0.
+
+9.  **[Network Flow] Relate the Incidence Matrix $B$ to flow conservation.**
+    ??? success "Solution"
+        If $f$ is a vector of flows on edges, then $Bf$ is a vector of net flows at each vertex. Flow conservation (Kirchhoff's Current Law) is expressed as $Bf = 0$ for all internal nodes.
+
+10. **[Spectral Clustering] How is the Fiedler vector used to cut a graph?**
+    ??? success "Solution"
+        One typically splits the graph based on the sign of the entries in the Fiedler vector: vertices with positive entries go to one set, and negative entries to the other.
 
 ## Chapter Summary
 
-This chapter explores the spectral signature of discrete networks:
+Linear algebra provides the "X-ray" for complex networks:
 
-1. **Algebraic Encoding**: Represented graph topology through adjacency and degree matrices, linking path-counting to matrix power.
-2. **Connectivity Spectrum**: Established the Laplacian as the definitive operator for analyzing graph components and algebraic connectivity.
-3. **Combinatorial Laws**: Leveraged the Matrix-Tree theorem to link determinants to the number of spanning structures.
-4. **Spectral Partitioning**: Positioned the Fiedler vector as the optimal tool for balanced graph cuts and data clustering.
+1.  **Algebraic Encoding**: Transformed combinatorial objects (nodes/edges) into analytic objects (matrices), enabling the use of spectral tools.
+2.  **Structural Fingerprint**: Established that the eigenvalues of a graph are not just numbers but descriptors of connectivity, bipartite structure, and density.
+3.  **Flow Dynamics**: Linked random walks and diffuse processes to the steady-state properties of stochastic matrices.
+4.  **Optimal Partitioning**: Used the Cheeger inequality to prove that the "physics" of the graph (eigenvalues) can solve the "logic" of the graph (min-cut problems).

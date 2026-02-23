@@ -2,80 +2,104 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Homogeneous Coordinates (Ch67) · Rotation Representations (Ch67) · Matrix Differentiation (Ch47)
+**Prerequisites**: Matrix Transformations (Ch67) · Matrix Groups (Ch55) · Generalized Inverses (Ch33) · Matrix Calculus (Ch47A)
 
-**Chapter Outline**: Joint Space and Task Space → Cascaded Transformation Matrices → Denavit-Hartenberg (D-H) Parameterization → Forward Kinematics → Inverse Kinematics → Jacobian Matrix → Velocity Mapping → Singularity Analysis → Manipulability Ellipsoid
+**Chapter Outline**: Algebraic Abstraction of Linkages → Forward Kinematics (FK) & the D-H Parameter Method → Algebraic Challenges of Inverse Kinematics (IK) → The Robot Jacobian Matrix ($J$) → Velocity Transformations and Torque Propagation → Singularity Analysis ($\det(J)=0$) → Product of Exponentials (PoE) Formula → Control of Redundant Robots via Pseudoinverses → Applications: Industrial Manipulators, Humanoid Motion Planning, and Surgical Robotics
 
-**Extension**: The Jacobian matrix is the computational cornerstone for robot force control and visual servoing; manipulability metrics provide algebraic criteria for robot mechanism design optimization.
+**Extension**: Robot kinematics is the chained composition of linear transformations along a physical skeleton; it maps the rotation/extension of joint spaces to the pose of end-effectors in Cartesian space, serving as the geometric heart of modern automation.
 
 </div>
 
-Robot kinematics studies the mapping between the configuration space of multi-rigid-body systems and the Cartesian space. This field utilizes the $SE(3)$ Lie group and its algebra to describe complex chained geometric constraints, converting mechanical motion laws into systems of non-linear algebraic equations of transformation matrices.
+How can we make a robotic arm precisely grasp a cup? This is essentially a complex coordinate transformation problem. **Robot Kinematics** utilizes matrix theory to describe the geometric relationships between links and joints. By representing the transformation of each link as a 4x4 matrix, we can calculate the end-effector's pose through simple matrix concatenation. This chapter explores this algebraic mapping from joint angles to spatial coordinates.
 
 ---
 
-## 68A.1 Kinematic Modeling Theory
+## 68A.1 Forward Kinematics and D-H Parameters
 
-!!! definition "Definition 68A.1 (Forward Kinematics Cascade)"
-    The end-effector pose $T_e$ of a robotic arm is formed by the sequential composition of joint transformation matrices $T_i(\theta_i)$:
-    $$T_e(\theta) = T_1(\theta_1) T_2(\theta_2) \dots T_n(\theta_n) \in SE(3)$$
-    where $\theta$ is a vector in the joint variable space (configuration space).
+!!! definition "Definition 68A.1 (Forward Kinematics - FK)"
+    FK computes the mapping from joint variable vector $\theta$ to the end-effector pose $T$: $T = f(\theta)$.
 
-!!! theorem "Theorem 68A.3 (Geometric Jacobian Operator)"
-    The Jacobian matrix $J(\theta)$ establishes a linear mapping from the joint velocity vector $\dot{\theta}$ to the end-effector spatial velocity (linear and angular) $v = [\omega; v]^T$:
-    $$v = J(\theta) \dot{\theta}$$
-    The nullspace and image of this matrix characterize the local motion constraints of the mechanism.
+!!! technique "The Denavit-Hartenberg (D-H) Method"
+    A standard way to describe transformations between adjacent joints using four parameters: link length $a$, link twist $\alpha$, link offset $d$, and joint angle $\theta$.
+    $$A_i = \operatorname{Rot}_z(\theta_i) \operatorname{Trans}_z(d_i) \operatorname{Trans}_x(a_i) \operatorname{Rot}_x(\alpha_i)$$
+    The total transformation is $T_n^0 = A_1 A_2 \cdots A_n$.
+
+---
+
+## 68A.2 The Robot Jacobian Matrix
+
+!!! definition "Definition 68A.2 (Jacobian Matrix)"
+    The Jacobian matrix $J(\theta)$ describes the linear relationship between joint velocities $\dot{\theta}$ and the linear/angular velocity $v$ of the end-effector:
+    $$\mathbf{v} = J(\theta) \dot{\boldsymbol{\theta}}$$
+    **Significance**: It is the differential form of kinematics, revealing the system's local flexibility in its current pose.
+
+---
+
+## 68A.3 Singularity Analysis
+
+!!! theorem "Theorem 68A.1 (Kinematic Singularity)"
+    When $\det(J(\theta)) = 0$, the robot is in a **singular configuration**.
+    - In this pose, the robot loses the ability to move in certain directions (rank deficiency).
+    - Attempting to move in these directions would result in joint velocities tending to infinity, potentially causing mechanical failure.
+
+---
+
+## 68A.4 Redundancy and Pseudoinverse Control
+
+!!! technique "Algebraic Solution to IK"
+    For a target velocity $v$, the minimum-norm joint velocity is given by the **Moore-Penrose Pseudoinverse**:
+    $$\dot{\theta} = J^+ v + (I - J^+ J)z$$
+    where $(I - J^+ J)z$ represents "null-space motion," which adjusts the joint configuration without affecting the end-effector's pose.
 
 ---
 
 ## Exercises
 
-1. **[Transformation Cascade] Explain why forward kinematics modeling for serial robots can be entirely reduced to a matrix chain multiplication problem.**
-   ??? success "Solution"
-       Each link rotates or translates relative to the previous link through a joint. According to the properties of homogeneous transformation matrices, the composite transformation of the end-effector relative to the base equals the product of all intermediate relative transformation matrices.
-
-2. **[D-H Parameters] Analyze the algebraic structure of each component matrix in the Denavit-Hartenberg parameterization.**
-   ??? success "Solution"
-       A D-H transformation is composed of a rotation/translation about the $z$-axis and a rotation/translation about the $x$-axis. It requires the common normal between adjacent $z$-axes to serve as the $x$-axis, reducing a general 6-parameter transformation to 4 parameters and standardizing kinematic modeling.
-
-3. **[Inverse Kinematics] Explain the non-uniqueness of inverse kinematics (IK) solutions and its algebraic correspondence to multi-solution phenomena.**
-   ??? success "Solution"
-       Solving IK is equivalent to solving the matrix equation $T(\theta) = T_{target}$. Due to the periodic nature of $\sin$ and $\cos$, this non-linear system typically yields multiple isolated solutions (e.g., "elbow-up" vs. "elbow-down" configurations) or no solution if the target is outside the workspace.
-
-4. **[Jacobian Derivation] Prove: For an $n$-axis manipulator, the $i$-th column of its Jacobian matrix corresponds to the velocity component at the end-effector produced by the $i$-th joint.**
-   ??? success "Solution"
-       From the total differential relation $v = \sum \frac{\partial T_e}{\partial \theta_i} \dot{\theta_i}$. For a revolute joint, the $i$-th column is $[z_{i-1}; z_{i-1} \times (p_e - p_{i-1})]$, reflecting the geometric contribution of that specific joint's motion to the overall end-effector velocity.
-
-5. **[Singularity Analysis] Analyze the algebraic significance of $\det(J J^T) = 0$ and its impact on control systems.**
-   ??? success "Solution"
-       A singularity point means $J$ is rank-deficient, and the system loses one or more degrees of freedom in the task space. At this point, the inverse kinematics velocity solution $\dot{\theta} = J^{-1} v$ can produce infinite joint velocities, leading to physical actuator failure.
-
-6. **[Calculation] Given 2-DOF planar linkage (lengths $l_1, l_2$), derive its Jacobian matrix and identify all singular configurations.**
-   ??? success "Solution"
-       $J = \begin{pmatrix} -l_1 s_1 - l_2 s_{12} & -l_2 s_{12} \\ l_1 c_1 + l_2 c_{12} & l_2 c_{12} \end{pmatrix}$.
-       The determinant is $\det(J) = l_1 l_2 s_2$. Singularities occur when $\theta_2 = 0$ or $\pi$ (the linkage is fully extended or folded).
-
-7. **[Manipulability] Define the Yoshikawa manipulability index $w = \sqrt{\det(J J^T)}$ and explain its role.**
-   ??? success "Solution"
-       This index measures the "volume" of motion capability of the end-effector in all directions. In trajectory planning, one should avoid regions where $w \to 0$ to ensure the robot has sufficient motion margin to compensate for disturbances.
-
-8. **[Principle of Virtual Work] Use linear algebra to prove that joint torques $\tau$ and end-effector forces $f$ satisfy the equilibrium equation $\tau = J^T f$.**
-   ??? success "Solution"
-       From power conservation: $f^T v = \tau^T \dot{\theta}$. Substituting $v = J \dot{\theta}$ yields $f^T J \dot{\theta} = \tau^T \dot{\theta}$. Since $\dot{\theta}$ is arbitrary, $\tau^T = f^T J \implies \tau = J^T f$. This defines the dual mapping between force and motion spaces.
-
-9. **[Redundancy Resolution] For redundant robots ($n > 6$), explain how to utilize the generalized inverse of $J$ and nullspace projection.**
-   ??? success "Solution"
-       The general solution is $\dot{\theta} = J^\dagger v + (I - J^\dagger J) z$. Here $z$ is an arbitrary vector, and the term $(I - J^\dagger J) z$ belongs to the nullspace of $J$. This "internal motion" does not change the end-effector pose and can be used for obstacle avoidance.
-
-10. **[Screw Theory] Briefly describe the advantages of the Product of Exponentials (PoE) formula over traditional D-H methods.**
+1.  **[Basics] For a 2D arm with two revolute joints, find the relation between end-effector coordinates $(x, y)$ and joint angles $(\theta_1, \theta_2)$.**
     ??? success "Solution"
-        The PoE formula is based on the exponential mapping $e^{\hat{\xi}\theta}$ of Lie algebras. It treats the entire kinematic chain as a series of screw motions, avoiding ambiguities in local frame definitions and providing more global consistency in differential analysis.
+        $x = l_1 \cos\theta_1 + l_2 \cos(\theta_1+\theta_2)$
+        $y = l_1 \sin\theta_1 + l_2 \sin(\theta_1+\theta_2)$
+
+2.  **[Jacobian] Calculate the Jacobian matrix for the 2D arm above.**
+    ??? success "Solution"
+        $J = \begin{pmatrix} \frac{\partial x}{\partial \theta_1} & \frac{\partial x}{\partial \theta_2} \\ \frac{\partial y}{\partial \theta_1} & \frac{\partial y}{\partial \theta_2} \end{pmatrix} = \begin{pmatrix} -y & -l_2 \sin(\theta_1+\theta_2) \\ x & l_2 \cos(\theta_1+\theta_2) \end{pmatrix}$.
+
+3.  **[Singularity] For the 2D arm, what happens when $l_2 \sin\theta_2 = 0$?**
+    ??? success "Solution"
+        Then $\det(J) = 0$. The robot is singular (fully extended or folded), and it cannot produce any radial velocity component along the arm.
+
+4.  **[D-H Parameters] Why does the D-H method require only 4 parameters per link instead of 6?**
+    ??? success "Solution"
+        Because D-H frame placement follows specific constraints (the $x$-axis intersects and is perpendicular to the previous $z$-axis), eliminating two degrees of freedom and simplifying the model.
+
+5.  **[IK Challenge] Why is inverse kinematics typically harder than forward kinematics?**
+    ??? success "Solution"
+        FK is a unique matrix product, whereas IK involves solving non-linear equations, which may have multiple solutions (configurations), one solution, or no solution (if the target is outside the workspace).
+
+6.  **[Workspace] What is the "reachable workspace" of a robot?**
+    ??? success "Solution"
+        The set of all points the end-effector can reach. In linear algebra terms, it is the image of the joint space manifold under the operator $f$.
+
+7.  **[Statics] Relate joint torques $\tau$ to end-effector forces $F$.**
+    ??? success "Solution"
+        $\tau = J^T F$. This demonstrates the importance of the Jacobian transpose via the Principle of Virtual Work.
+
+8.  **[Redundancy] If a 7-DOF arm operates in 3D space, what are the dimensions of its Jacobian?**
+    ??? success "Solution"
+        $6 \times 7$ (6 velocity components, 7 joint variables). Since there are more columns than rows, the system is redundant.
+
+9.  **[PoE] What is the Product of Exponentials (PoE) formula?**
+    ??? success "Solution"
+        An FK representation based on Screw Theory: $T = e^{S_1 \theta_1} \cdots e^{S_n \theta_n} M$. It is more geometrically intuitive and easier to differentiate than D-H.
+
+10. **[Application] Why are high-precision IK algorithms vital in surgical robots?**
+    ??? success "Solution"
+        Because surgery requires precise control in narrow spaces; small algebraic errors could lead to accidents. Redundant DOFs are used to avoid colliding with delicate tissues.
 
 ## Chapter Summary
 
-This chapter discusses the algebraic systems describing the geometric evolution of multi-rigid-body robots:
+Robot kinematics is the chained integration of linear algebra and rigid body geometry:
 
-1. **Configuration Mapping**: Established an analytical mapping model from joint space to task space through transformation matrix cascades.
-2. **Differential Kinematics**: Introduced the Jacobian matrix as the core operator, revealing the velocity and torque conversion relations between spaces.
-3. **Performance Evaluation**: Formulated algebraic metrics such as singularity and manipulability, providing quantitative criteria for robot configuration optimization.
-4. **Redundancy Handling**: Demonstrated the critical role of linear subspace theory in task planning for systems with redundant degrees of freedom.
+1.  **Accumulation of Transforms**: Proved that complex mechanical motion can be deconstructed into a cascade of local 4x4 matrices, establishing standard algebraic protocols for motion modeling.
+2.  **Tangent Space of Velocity**: The Jacobian matrix maps non-linear spatial configurations to linear velocity vectors, providing precise algebraic criteria for analyzing system flexibility and singularity.
+3.  **Freedom under Constraint**: Through null-space and pseudoinverse techniques, kinematics demonstrates how to optimize secondary goals (obstacle avoidance, energy saving) while satisfying the primary task (pose), showcasing linear algebra's superiority in handling redundant constraints.

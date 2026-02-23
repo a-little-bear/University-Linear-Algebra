@@ -1,77 +1,100 @@
-# 第 35 章 Hadamard 积与 Schur 积定理
+# 第 35 章 Hadamard 积
 
 <div class="context-flow" markdown>
 
-**前置**：矩阵运算(Ch2) · 正定性(Ch16) · 内积(Ch8)
+**前置**：矩阵运算 (Ch02) · 正定矩阵 (Ch16) · 矩阵不等式 (Ch18)
 
-**本章脉络**：Hadamard (Schur) 积定义 → 性质 → Schur 积定理 (保持正定性) → Oppenheim 不等式 → Hadamard 积与秩 → 谱范数界限 → 在核方法与统计学中的应用
+**本章脉络**：Hadamard 积（逐元素乘积）定义 $\to$ 基本代数性质 $\to$ Schur 积定理（正定性的保持） $\to$ Hadamard 积不等式（Oppenheim, Hadamard 不等式） $\to$ 谱性质与奇异值界限 $\to$ 统计学应用（相关矩阵分析） $\to$ 信号处理中的窗函数作用 $\to$ 与 Kronecker 积的关系（选子阵视角）
 
-**延伸**：Hadamard 积是神经网络中逐元素运算的基础，也是机器学习中构造正定核函数的核心
+**延伸**：Hadamard 积将标量的逐点乘法引入矩阵空间；它是理解核方法 (Ch29) 中非线性组合以及现代压缩感知算法中稀疏化操作的关键
 
 </div>
 
-**Hadamard 积**（也称为 Schur 积）是同型矩阵之间的逐元素乘法。虽然标准矩阵乘法代表线性映射的复合，但 Hadamard 积产生于需要特定条目缩放的场景，如图像处理中的掩模操作或统计学中的核函数。该领域最深刻的结果是 **Schur 积定理**，它指出两个半正定矩阵的 Hadamard 积仍然是半正定的。
+与标准的矩阵乘法（反映算子复合）不同，**Hadamard 积**（或称 Schur 积）是逐元素进行的运算。尽管它在代数上看起来较为简单，但其对正定性的保持性质（Schur 积定理）以及由此导出的丰富不等式，使其在统计建模、图像处理和数值预处理中具有极高的理论价值。
 
 ---
 
-## 35.1 定义与 Schur 积定理
+## 35.1 定义与基本性质
 
 !!! definition "定义 35.1 (Hadamard 积)"
-    $A = (a_{ij})$ 与 $B = (b_{ij})$ 的 Hadamard 积记作 $A \circ B$，其定义为：
+    设 $A, B$ 是同阶矩阵。它们的 **Hadamard 积** $A \circ B$ 是一个同阶矩阵，其条目为：
     $$(A \circ B)_{ij} = a_{ij} b_{ij}$$
 
+!!! note "代数性质"
+    1.  **交换律**：$A \circ B = B \circ A$。
+    2.  **分配律**：$A \circ (B + C) = A \circ B + A \circ C$。
+    3.  **单位元**：全 1 矩阵 $J$ 是 Hadamard 积的单位元。
+
+---
+
+## 35.2 Schur 积定理
+
 !!! theorem "定理 35.1 (Schur 积定理)"
-    若 $A \succeq 0$ 且 $B \succeq 0$ 是 $n \times n$ 矩阵，则 $A \circ B \succeq 0$。
+    若 $A \succeq 0$ 且 $B \succeq 0$ 是正半定矩阵，则它们的 Hadamard 积也必为正半定矩阵：
+    $$A \circ B \succeq 0$$
+    **意义**：这一性质保证了在核方法中，两个有效核函数的逐点乘积仍然是一个有效的核函数。
+
+---
+
+## 35.3 Hadamard 积不等式
+
+!!! theorem "定理 35.2 (Oppenheim 不等式)"
+    对于正定矩阵 $A, B \succ 0$：
+    $$\det(A \circ B) \ge \left( \prod_{i=1}^n a_{ii} \right) \det(B) \ge \det(A) \det(B)$$
+
+!!! theorem "定理 35.3 (Hadamard 不等式)"
+    作为 Schur 积的一个特例，对于 $A \succ 0$：
+    $$\det(A) \le \prod_{i=1}^n a_{ii}$$
+    这可以看作 $A$ 与单位阵 $I$ 的某种广义 Hadamard 交互。
 
 ---
 
 ## 练习题
 
-1. **[基础] 计算 $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ 与 $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ 的 Hadamard 积。**
+1. **[基础] 计算 $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \circ \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$。**
    ??? success "参考答案"
-       $A \circ B = \begin{pmatrix} 1 \cdot 0 & 2 \cdot 1 \\ 3 \cdot 1 & 4 \cdot 0 \end{pmatrix} = \begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$。
+       $\begin{pmatrix} 0 & 2 \\ 3 & 0 \end{pmatrix}$。
 
-2. **[Schur定理] 利用 $A \succeq 0$ 可写为秩-1 矩阵 $v_k v_k^*$ 之和的性质证明 Schur 积定理。**
+2. **[Schur积] 若 $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$，求 $A \circ A$。**
    ??? success "参考答案"
-       设 $A = \sum v_k v_k^*$ 且 $B = \sum w_l w_l^*$。则 $A \circ B = \sum_{k,l} (v_k v_k^*) \circ (w_l w_l^*) = \sum_{k,l} (v_k \circ w_l) (v_k \circ w_l)^*$。由于每一项都是秩-1 的半正定阵，其和必然半正定。
+       仍然是 $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$。
 
-3. **[Oppenheim] 叙述关于 $A, B \succeq 0$ 的 Oppenheim 不等式。**
+3. **[性质] 证明 $\operatorname{tr}(A \circ B) = \operatorname{tr}(A^T B)$。**
    ??? success "参考答案"
-       $\det(A \circ B) \ge \det A \cdot \prod b_{ii}$。这为 Hadamard 积的行列式提供了下界估计。
+       $\sum a_{ii} b_{ii} = \sum a_{ji} b_{ij}$ (对于对称阵) = $\sum (A^T)_{ij} b_{ij}$。
 
-4. **[特征值] $A \circ B$ 的特征值与 $A, B$ 的特征值有何关系？**
+4. **[正定性] 判定 $\begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix} \circ \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$ 是否正定。**
    ??? success "参考答案"
-       虽然 $\rho(A \circ B) \le \rho(A) \rho(B)$ 通常不成立，但对于半正定阵，满足 $\lambda_{\max}(A \circ B) \le \lambda_{\max}(A) \cdot \max b_{ii}$。
+       由 Schur 积定理，两个正定阵的 Hadamard 积必正定。
 
-5. **[谱范数] 证明 $\|A \circ B\| \le \|A\| \cdot \|B\|$。**
+5. **[奇异值] 证明 $\|A \circ B\|_2 \le \|A\|_2 \|B\|_2$ 是否成立？**
    ??? success "参考答案"
-       利用 $A \circ B$ 是 Kronecker 积 $A \otimes B$ 的主子阵这一事实。由于 $A \otimes B$ 的谱范数等于 $\|A\| \cdot \|B\|$，且取子阵不会增加谱范数，故不等式成立。
+       不一定。通常成立的是关于 Frobenius 范数的不等式或特定的谱界限。
 
-6. **[秩] $A \circ B$ 的秩最大可能是多少？**
+6. **[应用] 为什么在信号处理中用窗函数作用于信号是 Hadamard 积？**
    ??? success "参考答案"
-       $\operatorname{rank}(A \circ B) \le \operatorname{rank}(A) \cdot \operatorname{rank}(B)$。
+       窗函数是对信号在时域进行逐点的加权削减，这完全符合逐元素相乘的定义。
 
-7. **[核方法] 为什么 Hadamard 积对高斯核函数很重要？**
+7. **[Kronecker] Hadamard 积 $A \circ B$ 是 $A \otimes B$ 的子矩阵吗？**
    ??? success "参考答案"
-       高斯核 $K(x, y) = \exp(- \gamma \|x-y\|^2)$ 可以视为多个简单核函数的 Hadamard 积。Schur 积定理保证了有效核函数的乘积仍然是有效且正定的核函数。
+       是的。它恰好是 $A \otimes B$ 中对应于特定行和列索引的选取（主子阵）。
 
-8. **[对角线] 利用 Hadamard 积表示乘积 $AB$ 的对角线。**
+8. **[行列式] 若 $A, B$ 是对角阵，验证 Oppenheim 不等式。**
    ??? success "参考答案"
-       $\operatorname{diag}(AB) = (A \circ B^T) \mathbf{1}$。
+       此时 $A \circ B = AB$，$\det(AB) = \det(A)\det(B)$，等号成立。
 
-9. **[单位元] Hadamard 积的单位元矩阵是什么？**
+9. **[rank] 证明 $\operatorname{rank}(A \circ B) \le \operatorname{rank}(A) \operatorname{rank}(B)$。**
    ??? success "参考答案"
-       全 1 矩阵 $J$（即所有元素均为 1 的矩阵）。
+       利用 Hadamard 积作为 Kronecker 积子阵的性质，其秩不超过母矩阵的秩。
 
-10. **[迹] 证明 Schur-Hadamard 迹恒等式 $\operatorname{tr}((A \circ B)C) = \operatorname{tr}(A(B \circ C))$。**
+10. **[相关矩阵] 两个相关系数矩阵的 Hadamard 积还是相关系数矩阵吗？**
     ??? success "参考答案"
-        展开左侧：$\sum_{i,j} a_{ij} b_{ij} c_{ji}$。展开右侧：$\sum_{i,j} a_{ij} (b_{ij} c_{ij})$（假设 $B, C$ 对称）。两侧均等于元素对应乘积的总和。
+        是的。它保持了对称性、主对角线全为 1 以及正半定性（由 Schur 积定理）。
 
 ## 本章小结
 
-本章探讨了矩阵的逐元素微积分：
+Hadamard 积是矩阵分析中的精细算子：
 
-1. **分析特性**：确立了 Schur 积定理作为 Hadamard 积定义性的正定保持属性。
-2. **行列式界限**：利用 Oppenheim 不等式约束了 Hadamard 变换后算子的空间体积。
-3. **子空间动力学**：分析了秩与范数关系，将 Hadamard 积定位为 Kronecker 积的一种收缩形式。
-4. **统计关联**：强调了其在协方差建模和正定核函数构造中的基础地位。
+1.  **逐点的和谐**：它在矩阵空间中保留了标量乘法的简单性，却在算子正定性层面揭示了深刻的非平凡保持规律（Schur 积定理）。
+2.  **信息的压缩**：Oppenheim 等不等式展示了逐元素耦合如何影响矩阵的全局整体性（如行列式），为信息论中的特征交互提供了代数描述。
+3.  **计算的桥梁**：作为 Kronecker 积的投影缩影，Hadamard 积在处理高维稀疏数据和结构化相关性模型中起到了不可替代的降维作用。

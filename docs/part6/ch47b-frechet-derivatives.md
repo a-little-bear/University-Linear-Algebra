@@ -1,81 +1,98 @@
-# 第 47B 章 Fréchet 导数与矩阵函数分析
+# 第 47B 章 Fréchet 导数与高阶理论
 
 <div class="context-flow" markdown>
 
-**前置**：矩阵函数(Ch13) · 矩阵微积分(Ch47A) · 范数(Ch15) · 线性算子
+**前置**：矩阵分析 (Ch14) · 矩阵函数 (Ch13) · 矩阵微积分基础 (Ch47A) · 范数基础 (Ch15)
 
-**本章脉络**：Fréchet 导数定义 → 矩阵函数的条件数 → Fréchet 导数的 Kronecker 形式 → Daleckii-Krein 定理（除商差分） → 通过 SVD 估计导数 → 复步法 (Complex Step) → 在稳定性与灵敏度分析中的应用
+**本章脉络**：Fréchet 导数定义（线性逼近） $	o$ 与 Gâteaux 导数的关系 $	o$ 矩阵函数的导数（Daleckii-Krein 定理） $	o$ 积分表示法 $	o$ 特征值与特征向量的导数 $	o$ 奇异值分解 (SVD) 的导数 $	o$ 高阶导数与 Taylor 展开 $	o$ 应用：灵敏度分析、非线性矩阵方程的 Newton 法
 
-**延伸**：Fréchet 导数量化了矩阵函数（如 $\exp(A)$ 或 $\log(A)$）对输入矩阵 $A$ 微扰的敏感程度
+**延伸**：Fréchet 导数将矩阵微积分推向了算子分析的高度；它是研究矩阵流形 (Ch24) 上的切空间以及在数值稳定性分析中量化扰动影响的最严谨工具
 
 </div>
 
-虽然矩阵微积分 (Ch47A) 通常处理矩阵的标量函数，但 **Fréchet 导数** 描述了矩阵函数 $f(A)$ 本身在输入矩阵 $A$ 受到微扰时如何变化。对于非线性函数 $f$，Fréchet 导数 $L_f(A, E)$ 是一个线性算子，它将微扰 $E$ 映射到 $f(A)$ 的一阶变化量。这对于计算矩阵函数的**条件数**以及分析矩阵算法的数值稳定性至关重要。
+在初等矩阵微积分中，我们关注的是数值的排列规律。而在高阶理论中，我们将矩阵函数 $f(A)$ 视为算子空间之间的映射。**Fréchet 导数**提供了一种坐标无关的、纯粹算子意义下的导数定义，它不仅能处理矩阵的微小变化，还能揭示特征值和奇异值等非线性不变量在扰动下的精细演化规律。
 
 ---
 
-## 47B.1 Fréchet 导数
+## 47B.1 Fréchet 导数定义
 
 !!! definition "定义 47B.1 (Fréchet 导数)"
-    函数 $f$ 在 $A$ 处的 Fréchet 导数是一个线性算子 $L_f(A, \cdot)$，满足：
-    $$f(A + E) = f(A) + L_f(A, E) + o(\|E\|)$$
-    值 $L_f(A, E)$ 是 $f$ 在 $A$ 处沿方向 $E$ 的方向导数。
+    设 $f: M_n 	o M_n$ 是矩阵空间上的映射。若存在一个线性算子 $L_f(A, \cdot)$ 满足：
+    $$f(A+E) = f(A) + L_f(A, E) + o(\|E\|)$$
+    则称 $L_f(A, E)$ 为 $f$ 在 $A$ 处沿方向 $E$ 的 **Fréchet 导数**。
 
-!!! theorem "定理 47B.1 (Daleckii-Krein 定理)"
-    若 $A = Q \Lambda Q^*$ 可对角化，则在特征向量基下，Fréchet 导数的条目为：
-    $$(Q^* L_f(A, E) Q)_{ij} = f[\lambda_i, \lambda_j] (Q^* E Q)_{ij}$$
-    其中 $f[\lambda_i, \lambda_j]$ 是**除商差分**：
-    $$f[\lambda_i, \lambda_j] = \begin{cases} \frac{f(\lambda_i) - f(\lambda_j)}{\lambda_i - \lambda_j} & \text{若 } \lambda_i \neq \lambda_j \\ f'(\lambda_i) & \text{若 } \lambda_i = \lambda_j \end{cases}$$
+!!! note "与 Gâteaux 导数的关系"
+    Gâteaux 导数是沿方向 $E$ 的方向导数：$G_f(A, E) = \frac{d}{dt} f(A+tE) |_{t=0}$。
+    若 Fréchet 导数存在，则二者相等。Fréchet 导数要求逼近在方向上具有一致性。
+
+---
+
+## 47B.2 矩阵函数的导数与 Daleckii-Krein
+
+!!! theorem "定理 47B.1 (Daleckii-Krein 公式)"
+    设 $A = V \Lambda V^{-1}$ 可对角化。则矩阵函数 $f(A)$ 的导数 $L = L_f(A, E)$ 在特征向量基下的形式为：
+    $$(V^{-1} L V)_{ij} = \frac{f(\lambda_i) - f(\lambda_j)}{\lambda_i - \lambda_j} (V^{-1} E V)_{ij}$$
+    其中当 $\lambda_i = \lambda_j$ 时，分式取为 $f'(\lambda_i)$。
+    **意义**：该公式揭示了矩阵函数的变化量与原矩阵特征值的差商（Löwner 矩阵，Ch46）密切相关。
+
+---
+
+## 47B.3 特征值与奇异值的导数
+
+!!! theorem "定理 47B.2 (特征值导数)"
+    若 $\lambda$ 是 $A$ 的简单特征值，$x, y$ 分别是其右、左特征向量（已归一化 $y^* x = 1$）。则：
+    $$\frac{d\lambda}{dA}(E) = y^* E x$$
+    **物理意义**：特征值的变化量等于扰动在特征方向上的“投影”。
 
 ---
 
 ## 练习题
 
-1. **[基础] 计算 $f(A) = A^2$ 的 Fréchet 导数。**
+1. **[基础] 计算 $f(A) = A^2$ 的 Fréchet 导数 $L_f(A, E)$。**
    ??? success "参考答案"
-       展开 $(A+E)^2 = A^2 + AE + EA + E^2$。关于 $E$ 的线性部分为 $L_f(A, E) = AE + EA$。该算子通过从两侧乘以 $A$ 来作用于 $E$。
+       $(A+E)^2 - A^2 = AE + EA + E^2 \approx AE + EA$。故 $L = AE + EA$。
 
-2. **[逆矩阵] 计算 $f(A) = A^{-1}$ 的 Fréchet 导数。**
+2. **[逆矩阵] 证明 $f(A) = A^{-1}$ 的导数为 $-A^{-1} E A^{-1}$。**
    ??? success "参考答案"
-       利用 $d(A^{-1}) = -A^{-1}(dA)A^{-1}$，Fréchet 导数即为算子 $L_f(A, E) = -A^{-1} E A^{-1}$。它描述了当矩阵微扰时逆矩阵的移动规律。
+       $(A+E)^{-1} - A^{-1} = (A(I+A^{-1}E))^{-1} - A^{-1} \approx (I - A^{-1}E)A^{-1} - A^{-1} = -A^{-1}EA^{-1}$。
 
-3. **[条件数] 定义矩阵函数的相对条件数 $\kappa_f(A)$。**
+3. **[Daleckii] 若 $A$ 是对角阵 $\operatorname{diag}(1, 2)$，求 $f(A)=A^3$ 沿 $E$ 的导数。**
    ??? success "参考答案"
-       $\kappa_f(A) = \frac{\|L_f(A)\| \|A\|}{\|f(A)\|}$，其中 $\|L_f(A)\|$ 是诱导算子范数。它衡量了输出函数值对输入矩阵相对误差的敏感度。
+       差商矩阵为 $\begin{pmatrix} 3 & 7 \ 7 & 12 \end{pmatrix}$。故 $L = \begin{pmatrix} 3e_{11} & 7e_{12} \ 7e_{21} & 12e_{22} \end{pmatrix}$。
 
-4. **[对易性] 在什么条件下 $L_f(A, E) = f'(A) E$？**
+4. **[简单特征值] 若 $A = \operatorname{diag}(5, 1)$，扰动 $E = \begin{pmatrix} 0.1 & 0.2 \ 0.3 & 0.4 \end{pmatrix}$，估计 $\lambda=5$ 的变化量。**
    ??? success "参考答案"
-       该等式成立当且仅当 $A$ 与 $E$ 对易（$AE = EA$）。非对易性是矩阵导数表现为算子而非简单乘数的主要原因。
+       $x = e_1, y = e_1$。$\Delta \lambda \approx e_1^* E e_1 = E_{11} = 0.1$。
 
-5. **[Daleckii-Krein] 利用 Daleckii-Krein 定理求 $f(A) = e^A$ 在 $A = \operatorname{diag}(\lambda_1, \lambda_2)$ 处的 $L_f(A, E)$。**
+5. **[行列式] 证明 $\det(A)$ 的 Fréchet 导数为 $\det(A) \operatorname{tr}(A^{-1} E)$。**
    ??? success "参考答案"
-       $L_f(A, E)$ 的条目为：当 $i \neq j$ 时，$L_{ij} = \frac{e^{\lambda_i} - e^{\lambda_j}}{\lambda_i - \lambda_j} E_{ij}$；当 $i=j$ 时，$L_{ii} = e^{\lambda_i} E_{ii}$。该公式将指数函数的敏感度与特征值的分散程度联系起来。
+       由 Jacobi 公式，一阶项为 $\operatorname{tr}((
+abla \det) E) = \operatorname{tr}(\det(A) A^{-T} E) = \det(A) \operatorname{tr}(A^{-1}E)$。
 
-6. **[Kronecker形式] 将算子 $L_f(A, E) = AE + EA$ 写为其 $n^2 \times n^2$ 的 Kronecker 矩阵形式。**
+6. **[奇异值] 简单奇异值 $\sigma$ 的导数公式是什么？**
    ??? success "参考答案"
-       其矩阵表示为 $K_f(A) = I \otimes A + A^T \otimes I$。该矩阵作用于 $\operatorname{vec}(E)$ 即产生 $\operatorname{vec}(L_f(A, E))$。
+       若 $A = U\Sigma V^*$，则 $\dot{\sigma} = u^* \dot{A} v$。
 
-7. **[指数恒等式] 矩阵指数函数在原点 $A=0$ 处的 Fréchet 导数是什么？**
+7. **[积分表示] 写出 $f(A)$ 导数的积分表示形式。**
    ??? success "参考答案"
-       $L_{\exp}(0, E) = E$。在一阶近似下，指数映射在零点附近表现为单位算子。
+       $L_f(A, E) = \int_0^1 e^{A(1-s)} E e^{As} ds$（针对 $f(A)=e^A$）。
 
-8. **[复步法] 描述利用复步法估计 $L_f(A, E)$ 的优势。**
+8. **[高阶] 写出 $f(A) = A^2$ 的二阶 Fréchet 导数。**
    ??? success "参考答案"
-       $L_f(A, E) \approx \operatorname{Im}(f(A + i h E) / h)$。由于不涉及两个接近数值的相减，它免疫了困扰标准有限差分法的数值抵消误差。
+       $L^{(2)}(A, E, H) = EH + HE$（即二阶项项）。
 
-9. **[复合函数] 写出矩阵 Fréchet 导数的链式法则。**
+9. **[不变量] 迹 $\operatorname{tr}(A)$ 的导数是否依赖于 $A$？**
    ??? success "参考答案"
-       对于 $h(A) = g(f(A))$，导数是线性算子的复合：$L_h(A, E) = L_g(f(A), L_f(A, E))$。
+       不依赖。因为迹是线性的，其导数始终是 $E \mapsto \operatorname{tr}(E)$。
 
-10. **[对称性] 证明若 $A$ 和 $E$ 均是 Hermitian 的，则 $L_f(A, E)$ 也是 Hermitian 的（假设 $f$ 在 $\mathbb{R}$ 上取实值）。**
+10. **[应用] 为什么在敏感度分析中要关注差商矩阵的范数？**
     ??? success "参考答案"
-        由 Daleckii-Krein 公式，$(Q^* L Q)_{ij} = f[\lambda_i, \lambda_j] (Q^* E Q)_{ij}$。由于 $f[\lambda_i, \lambda_j] = f[\lambda_j, \lambda_i]$ 且 $Q^*EQ$ 是 Hermitian 的，其乘积仍为 Hermitian。故 $L$ 是 Hermitian 的。
+        差商矩阵的无穷范数决定了矩阵函数计算的条件数。若特征值非常接近，差商极大，意味着 $f(A)$ 的计算极度不稳定。
 
 ## 本章小结
 
-本章探讨了矩阵函数的灵敏度与微扰理论：
+Fréchet 导数确立了算子变化的严谨逻辑：
 
-1. **算子微积分**：定义了 Fréchet 导数作为捕捉矩阵函数对微扰的一阶响应的线性算子。
-2. **谱灵敏度**：利用 Daleckii-Krein 定理建立了导数与特征值除商差分之间的联系。
-3. **稳定性量化**：确立了条件数作为评估矩阵函数计算数值可靠性的决定性指标。
-4. **计算工具**：概述了 Kronecker 表示与复步法，用于实际估计矩阵导数。
+1.  **线性逼近的极限**：它将复杂的矩阵函数局部平坦化，使我们能用线性算子的语言描述非线性演化。
+2.  **谱与敏感度**：Daleckii-Krein 定理揭示了特征值的聚集程度如何通过差商效应直接放大计算误差，是数值分析的理论预警。
+3.  **不变量的漂移**：特征值和奇异值导数公式为理解复杂系统（如结构力学、神经网络）在参数微调下的响应提供了精确的解析路径。

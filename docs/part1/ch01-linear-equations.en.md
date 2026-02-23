@@ -1,75 +1,123 @@
-# Chapter 01: Systems of Linear Equations
+# Chapter 01: Linear Equations
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Basic Algebra
+**Prerequisites**: Polynomial Algebra (Ch00)
 
-**Chapter Outline**: Definition of Linear Systems → Augmented Matrix → Elementary Row Operations → Echelon Forms (REF/RREF) → Gaussian Elimination → Consistency and Uniqueness of Solutions
+**Chapter Outline**: Definition of Linear Systems → Matrix Representation (Augmented Matrices) → Elementary Row Operations → Row Echelon Form (REF) & Reduced Row Echelon Form (RREF) → Gaussian & Gauss-Jordan Elimination → Existence and Uniqueness Theorems (Rank-Presence) → Homogeneous & Non-homogeneous Systems → Geometric Interpretation (Intersections of Hyperplanes) → Introduction to Numerical Stability
 
-**Extension**: Gaussian elimination is not just a tool for solving equations, but also the basis for calculating matrix rank and inverses.
+**Extension**: Solving linear systems is the underlying engine of nearly all numerical computing (Finite Elements, Optimization, Machine Learning); the structure of its solution space leads directly to the definition of Vector Spaces (Ch04).
 
 </div>
 
-Systems of linear equations are the starting point of linear algebra. Almost all engineering, physical, and economic models eventually boil down to solving $Ax = b$. Through elementary operations, we can simplify complex systems into echelon forms that reveal their solution structure.
+Systems of linear equations are the logical starting point of linear algebra. From ancient algorithmic texts to modern supercomputers, solving $Ax = b$ remains the most central task in scientific computing. This chapter establishes the standard framework for handling linear systems from two dimensions: algorithmic (elimination methods) and theoretical (the structure of solutions).
 
 ---
 
-## 01.1 Gaussian Elimination
+## 01.1 Linear Systems and Matrix Representation
 
-!!! definition "Definition 01.1 (Elementary Row Operations)"
-    1. Swap two rows;
-    2. Multiply a row by a non-zero constant;
-    3. Add a multiple of one row to another.
-    These operations do not change the solution set of the system.
+!!! definition "Definition 01.1 (System of Linear Equations)"
+    A system of $m$ linear equations in $n$ variables is typically written as:
+    $$\begin{cases} a_{11}x_1 + a_{12}x_2 + \cdots + a_{1n}x_n = b_1 \\ a_{21}x_1 + a_{22}x_2 + \cdots + a_{2n}x_n = b_2 \\ \vdots \\ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n = b_m \end{cases}$$
+    where $a_{ij}$ are coefficients, $b_i$ are constants, and $x_j$ are variables.
+
+!!! definition "Definition 01.2 (Augmented Matrix)"
+    By combining the coefficients and constants into a single matrix, we obtain the $m \times (n+1)$ **augmented matrix**:
+    $$\tilde{A} = [A | \mathbf{b}] = \begin{pmatrix} a_{11} & a_{12} & \cdots & a_{1n} & | & b_1 \\ a_{21} & a_{22} & \cdots & a_{2n} & | & b_2 \\ \vdots & \vdots & \ddots & \vdots & | & \vdots \\ a_{m1} & a_{m2} & \cdots & a_{mn} & | & b_m \end{pmatrix}$$
+
+---
+
+## 01.2 Elementary Row Operations and Echelon Forms
+
+!!! definition "Definition 01.3 (Elementary Row Operations)"
+    1.  **Scaling**: Multiply a row by a non-zero constant $k$.
+    2.  **Swapping**: Interchange two rows.
+    3.  **Replacement**: Add a multiple of one row to another row.
+    These operations **do not change** the solution set of the system.
+
+!!! definition "Definition 01.4 (Reduced Row Echelon Form - RREF)"
+    A matrix is in **Reduced Row Echelon Form** (RREF) if:
+    1.  All non-zero rows are above any rows of all zeros.
+    2.  The leading entry (pivot) of each non-zero row is 1.
+    3.  Each leading 1 is the only non-zero entry in its column.
+    4.  The leading 1 of a row is to the right of the leading 1 of the row above it.
+
+---
+
+## 01.3 Gaussian Elimination
+
+!!! algorithm "Algorithm 01.1 (Gauss-Jordan Elimination Steps)"
+    1.  **Forward Phase**: Use elementary operations to transform the augmented matrix into Row Echelon Form (REF).
+    2.  **Backward Phase**: Scaling pivots to 1 and clearing entries above them to reach RREF.
+    3.  **Read Solution**: Write the general solution directly from the RREF.
+
+---
+
+## 01.4 Existence and Uniqueness
+
+!!! theorem "Theorem 01.1 (Existence and Uniqueness Theorem)"
+    Let $A$ be an $m \times n$ matrix, and let $\operatorname{rank}(A)$ be its rank.
+    1.  **No Solution (Inconsistent)**: $\operatorname{rank}(A) < \operatorname{rank}([A|\mathbf{b}])$. This happens if a row like $[0 \ 0 \ \cdots \ 0 \ | \ d]$ ($d \neq 0$) appears in RREF.
+    2.  **Unique Solution**: $\operatorname{rank}(A) = \operatorname{rank}([A|\mathbf{b}]) = n$ (number of variables).
+    3.  **Infinitely Many Solutions**: $\operatorname{rank}(A) = \operatorname{rank}([A|\mathbf{b}]) < n$. The number of free variables is $n - \operatorname{rank}(A)$.
+
+---
+
+## 01.5 Homogeneous Linear Systems
+
+!!! definition "Definition 01.5 (Homogeneous System)"
+    A system of the form $Ax = 0$ is called a homogeneous system. It always has the **trivial solution** $x = 0$.
+    - A homogeneous system has non-trivial solutions if and only if $\operatorname{rank}(A) < n$.
+    - If $m < n$ (fewer equations than variables), $Ax=0$ always has a non-trivial solution.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Determine if the system $x+y=1, x+y=2$ has a solution. Explain.**
+1. **[Consistency] Determine if the system $x+y=1, x+y=2$ has a solution.**
    ??? success "Solution"
-       No solution (inconsistent). The left sides are identical but the right sides are different, representing two parallel lines that never intersect.
+       No solution (Inconsistent). The augmented matrix is $\begin{pmatrix} 1 & 1 & | & 1 \\ 1 & 1 & | & 2 \end{pmatrix}$. Row reduction gives $\begin{pmatrix} 1 & 1 & | & 1 \\ 0 & 0 & | & 1 \end{pmatrix}$. Since $\operatorname{rank}(A)=1 \neq \operatorname{rank}(\tilde{A})=2$, there is no solution.
 
 2. **[Elimination] Use Gaussian elimination to solve: $x+y=3, x-y=1$.**
    ??? success "Solution"
-       Add them: $2x=4 \implies x=2$. Substitute: $2+y=3 \implies y=1$. The solution is $(2, 1)$.
+       Adding the equations gives $2x=4 \implies x=2$. Substitution gives $2+y=3 \implies y=1$. The solution is $(2, 1)$.
 
-3. **[Matrix Form] Write the augmented matrix for the system $2x-y=5, x+3y=0$.**
+3. **[RREF] Transform $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ into RREF.**
    ??? success "Solution"
-       $\begin{pmatrix} 2 & -1 & | & 5 \\ 1 & 3 & | & 0 \end{pmatrix}$.
+       $R_2 - 2R_1 \to R_2$ gives $\begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}$.
 
-4. **[Consistency] If the echelon form of an augmented matrix contains a row like $[0, 0, 0 | 1]$, what does it mean?**
+4. **[Free Variables] If a system with 3 equations and 5 variables is full rank, how many free variables are there?**
    ??? success "Solution"
-       It means the system is inconsistent (no solution). That row represents $0x + 0y + 0z = 1$, which is logically impossible.
+       Number of free variables $= n - \operatorname{rank}(A) = 5 - 3 = 2$.
 
-5. **[Free Variables] In RREF form, what do columns without pivots correspond to?**
+5. **[Homogeneous] Describe the solution space of $x_1 + x_2 + x_3 = 0$.**
    ??? success "Solution"
-       They correspond to **free variables**. These variables can take any value (usually denoted by parameters $t, s$), leading to infinitely many solutions.
+       This is a plane through the origin in $\mathbb{R}^3$. Let $x_2=s, x_3=t$, then $x_1 = -s-t$. The solution is $s(-1, 1, 0)^T + t(-1, 0, 1)^T$.
 
-6. **[Homogeneous Systems] Prove: A homogeneous system $Ax = 0$ always has at least one solution.**
+6. **[Rank] Prove: If $Ax=b$ has a solution for every $b$, $A$ must have full row rank.**
    ??? success "Solution"
-       Yes, it always has the trivial solution $x=0$. If the number of variables exceeds the number of equations, it must have non-trivial solutions.
+       A solution existing for every $b$ means $\operatorname{Im}(A) = \mathbb{R}^m$. Thus $\operatorname{rank}(A) = m$.
 
-7. **[Calculation] Transform $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ into Reduced Row Echelon Form (RREF).**
+7. **[Geometry] What does a contradictory row $[0, 0 | 1]$ represent geometrically?**
    ??? success "Solution"
-       Subtract 2 times row 1 from row 2 to get $\begin{pmatrix} 1 & 2 \\ 0 & 0 \end{pmatrix}$. This is the RREF.
+       It represents parallel hyperplanes that do not intersect.
 
-8. **[Application] Are the equations derived from Kirchhoff's laws for a circuit typically linear?**
+8. **[Parametric] Find the general solution to $x+y+z=1$.**
    ??? success "Solution"
-       Yes. Kirchhoff's voltage and current laws involve linear superpositions of voltage drops and currents, so the resulting systems are linear.
+       Let $y=s, z=t$, then $x = 1-s-t$. The general solution is $(1, 0, 0)^T + s(-1, 1, 0)^T + t(-1, 0, 1)^T$.
 
-9. **[Parametric Solution] Solve $x+y+z=1$.**
+9. **[Structure] What is the structure of the general solution to a non-homogeneous system?**
    ??? success "Solution"
-       There are two free variables. Let $y=s, z=t$, then $x = 1-s-t$. The general solution is $\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix} + s\begin{pmatrix} -1 \\ 1 \\ 0 \end{pmatrix} + t\begin{pmatrix} -1 \\ 0 \\ 1 \end{pmatrix}$.
+       General Solution = Particular Solution + Homogeneous Solution.
 
-10. **[Uniqueness] What is the condition for a unique solution (in terms of pivots)?**
+10. **[Numerical] Why is "pivoting" used in Gaussian elimination for large-scale computing?**
     ??? success "Solution"
-        In the echelon form, every column (except the last constant column) contains a pivot, and there are no inconsistent rows.
+        To minimize the magnification of rounding errors caused by dividing by very small numbers, thereby improving numerical stability.
 
 ## Chapter Summary
 
-This chapter makes the jump from intuitive equations to abstract matrices:
+This chapter bridges intuitive equations and algorithmic matrices:
 
-1. **Algorithm Core**: Gaussian elimination is the universal algorithm for solving linear problems.
-2. **Structural Insight**: Through echelon forms, we can clearly distinguish between no solution, a unique solution, and infinitely many solutions.
-3. **Parametrization**: Introduced free variables to describe the geometry of high-dimensional solution spaces.
+1.  **Algorithmic Engine**: Gaussian elimination is the universal tool for linear problems; its RREF form reveals the intrinsic structure of the system.
+2.  **Structural Insight**: The existence and uniqueness of solutions are entirely determined by the comparison of the ranks of the coefficient and augmented matrices.
+3.  **Spatial Foundation**: The solution set of a homogeneous system forms a subspace, while the solution set of a non-homogeneous system is a translation of that subspace (an affine space).

@@ -1,76 +1,94 @@
-# Chapter 70B: Linear Algebra in Molecular Biology and Genomics
+# Chapter 70B: Linear Algebra in Molecular Biology
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: SVD (Ch11) · Matrix Factorization (Ch10) · Graph Theory (Ch27) · Statistics (Ch29)
+**Prerequisites**: Graph Theory (Ch27) · Matrix Decompositions (Ch10) · Non-negative Matrices (Ch17) · Probability Theory
 
-**Chapter Outline**: Sequence Alignment via Dynamic Programming (Matrix Trace) → Phylogeny and Distance Matrices → Substitution Matrices ($PAM, BLOSUM$) → Gene Expression Analysis (PCA/SVD) → Gene Regulatory Networks (Adjacency Matrices) → Protein-Protein Interaction (PPI) Networks → Structural Biology and Distance Geometry
+**Chapter Outline**: Scoring Matrices for Sequence Alignment (BLOSUM, PAM) → Markov Models of Evolution (Jukes-Cantor, Kimura) → Phylogenetic Trees & Distance Matrices → Gene Expression Profiling (PCA and NMF) → Metabolic Network Analysis: The Stoichiometric Matrix $S$ → Flux Balance Analysis (FBA) and the Null Space of $S$ → Protein Folding & Graph Laplacians → Applications: Drug Discovery, Cancer Subtyping, and Gene Regulatory Networks
 
-**Extension**: SVD is the core of bio-informatics dimensionality reduction; substitution matrices derive from Markov models of amino acid evolution.
+**Extension**: Molecular biology is the digital encoding of life; it uses linear algebra to link microscopic chemical reactions to macroscopic biological phenotypes, proving that metabolic processes are essentially linear programs under stoichiometric constraints.
 
 </div>
 
-Life's microscopic code is essentially high-dimensional data. Linear algebra provides the tools to extract patterns from gene expression and reconstruct the history of evolution from sequence distances.
+How can we find evidence of species evolution within massive DNA sequences? How can gene chip data predict the occurrence of cancer? **Molecular Biology Linear Algebra** transforms the interactions of biological macromolecules into matrix operations. From scoring matrices describing amino acid substitution probabilities to null-space analysis of metabolic flows, linear algebra provides precise mathematical tools for decoding the blueprint of life.
 
 ---
 
-## 70B.1 Sequence Evolution and Invariant Forms
+## 70B.1 Sequence Alignment and Scoring Matrices
 
 !!! definition "Definition 70B.1 (Substitution Matrix)"
-    A substitution matrix $S$ (like PAM or BLOSUM) describes the probability or log-odds of one amino acid being replaced by another over evolutionary time. These matrices are derived from Markov chains on the space of 20 amino acids.
+    In sequence alignment, a **substitution matrix** (e.g., BLOSUM62 or PAM) is a $20 \times 20$ symmetric matrix whose entries $s_{ij}$ represent the log-likelihood score of amino acid $i$ being replaced by amino acid $j$ through evolution.
+    **Function**: it transforms biological "similarity" into computable algebraic sums.
 
-!!! theorem "Theorem 70B.3 (Phylogenetic Distance Consistency)"
-    A distance matrix $D$ derived from DNA sequences represents a tree structure if and only if it satisfies the **four-point condition**: for any four taxa $i, j, k, l$, the two largest of $\{D_{ij}+D_{kl}, D_{ik}+D_{jl}, D_{il}+D_{jk}\}$ are equal.
+---
+
+## 70B.2 Metabolic Networks and Stoichiometry
+
+!!! definition "Definition 70B.2 (Stoichiometric Matrix $S$)"
+    For a system with $m$ metabolites and $n$ reactions, the **Stoichiometric Matrix** $S$ is an $m \times n$ matrix where $s_{ij}$ is the participating coefficient of metabolite $i$ in reaction $j$ (positive for products, negative for reactants).
+
+!!! theorem "Theorem 70B.1 (Steady-State Flux)"
+    At metabolic steady state, the rate of change of metabolite concentrations is zero:
+    $$S \mathbf{v} = 0$$
+    where $\mathbf{v}$ is the vector of reaction rates (fluxes). This means all possible steady-state fluxes lie in the **null space of $S$**, $N(S)$.
+
+---
+
+## 70B.3 Flux Balance Analysis (FBA)
+
+!!! technique "FBA Optimization"
+    Since the dimension of $N(S)$ is typically large (the system is redundant), organisms choose fluxes to optimize specific objectives, such as maximizing biomass yield.
+    $$\max \mathbf{c}^T \mathbf{v} \quad \text{subject to } S\mathbf{v} = 0, \quad \mathbf{v}_{\min} \le \mathbf{v} \le \mathbf{v}_{\max}$$
+    This is a classic **linear programming** problem.
 
 ---
 
 ## Exercises
 
-1. **[Substitution Entropy] In a PAM-1 matrix, how does the trace $\operatorname{tr}(P)$ relate to the rate of sequence conservation?**
-   ??? success "Solution"
-       The trace $\operatorname{tr}(P) = \sum p_{ii}$ is the sum of the probabilities that each amino acid remains unchanged. A larger trace indicates higher sequence conservation over the given evolutionary distance (1 PAM unit).
-
-2. **[PCA in Genomics] Explain why PCA is used to identify population stratification in genomic studies.**
-   ??? success "Solution"
-       Genotypes are represented as a large matrix $X$. The first few principal components often capture geographical or ethnic variations. By projecting individuals onto the PC subspace, researchers can detect clusters that correspond to ancestral lineages.
-
-3. **[SVD Interpretation] If $A$ is a gene expression matrix (genes $\times$ samples), what is the biological meaning of the left and right singular vectors?**
-   ??? success "Solution"
-       The left singular vectors $u_i$ (eigen-genes) represent fundamental expression patterns. The right singular vectors $v_i$ (eigen-samples) represent the prevalence of these patterns across different biological conditions or tissues.
-
-4. **[Calculation] Given a Jukes-Cantor distance matrix $D$, why must its entries satisfy $D_{ii} = 0$ and $D_{ij} = D_{ji}$?**
-   ??? success "Solution"
-       $D$ represents a metric on the sequence space. $D_{ii}=0$ reflects the identity axiom (distance to self is zero), and $D_{ij}=D_{ji}$ reflects the symmetry of the evolutionary distance between sequences $i$ and $j$.
-
-5. **[Regulatory Networks] Represent a 3-gene feedback loop as an adjacency matrix and find its eigenvalues.**
-   ??? success "Solution"
-       $A = \begin{pmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0 \end{pmatrix}$. The eigenvalues are the cube roots of unity $\{1, \omega, \omega^2\}$. The imaginary components reflect the oscillatory nature of the feedback system.
-
-6. **[Distance Geometry] How is the SVD used to reconstruct 3D protein structures from nuclear magnetic resonance (NMR) distance constraints?**
-   ??? success "Solution"
-       The distance matrix $D$ is converted into a Gram matrix $G$ using $G_{ij} = \frac{1}{2}(D_{i0}^2 + D_{j0}^2 - D_{ij}^2)$. The 3D coordinates are obtained from the first 3 eigenvectors of $G$ scaled by the square root of their eigenvalues.
-
-7. **[Network Robustness] In a Protein-Protein Interaction (PPI) network, how does the spectral gap of the Laplacian relate to network connectivity?**
-   ??? success "Solution"
-       The second smallest eigenvalue $\lambda_2$ (algebraic connectivity) measures how easily the network can be partitioned. A small $\lambda_2$ suggests the existence of weakly connected functional modules.
-
-8. **[Phylogenetic Trees] Verify if the distance matrix $D = \begin{pmatrix} 0 & 3 & 7 \\ 3 & 0 & 6 \\ 7 & 6 & 0 \end{pmatrix}$ can be exactly represented by a rooted tree.**
-   ??? success "Solution"
-       For a tree, the distances must satisfy specific ultrametric or additive properties. Here, $D_{13} = 7$ and $D_{12}+D_{23} = 3+6=9$. Since $7 \neq 9$ and other additive checks must be performed, one evaluates the three-point or four-point conditions to determine consistency.
-
-9. **[Mutational Equilibrium] For an amino acid substitution Markov chain with transition matrix $Q$, what does the stationary distribution $\pi$ represent?**
-   ??? success "Solution"
-       $\pi$ represents the equilibrium frequencies of the 20 amino acids across all proteins in the limit of infinite evolutionary time, assuming the selective pressures remain constant.
-
-10. **[Complexity] Why is matrix factorization often preferred over direct graph algorithms for large-scale gene regulatory network analysis?**
+1.  **[Basics] Write the stoichiometric column vector for the reaction $A + B \to C$.**
     ??? success "Solution"
-        Biological networks are often noisy and partially observed. Matrix factorization (like NMF or SVD) can extract robust latent factors and patterns while naturally handling missing data, whereas direct graph traversal is sensitive to every individual edge error.
+        Assuming the metabolite order is $(A, B, C)^T$, the vector is $(-1, -1, 1)^T$.
+
+2.  **[Null Space] If $S$ has 10 metabolites and 15 reactions, and $\operatorname{rank}(S)=8$, what is the dimension of the steady-state flux space?**
+    ??? success "Solution"
+        $\dim N(S) = 15 - 8 = 7$.
+
+3.  **[Alignment] In a log-odds scoring matrix, what do positive and negative values represent?**
+    ??? success "Solution"
+        Positive values mean the substitution occurs more frequently in evolution than expected by chance (conserved); negative values mean the substitution is rare and likely disrupts protein function.
+
+4.  **[PCA] Why is PCA commonly used in analyzing microarray gene chip data?**
+    ??? success "Solution"
+        Gene data is extremely high-dimensional (tens of thousands of genes). PCA extracts the principal components that define cell states (e.g., healthy vs. diseased), significantly reducing noise.
+
+5.  **[Evolution] Briefly describe the characteristics of the transition matrix in the Jukes-Cantor model.**
+    ??? success "Solution"
+        It is a symmetric stochastic matrix where the eigenvalues reflect the rate at which nucleotide distributions tend toward uniformity over time.
+
+6.  **[Network] What is an "essential reaction" in a metabolic network?**
+    ??? success "Solution"
+        A reaction such that setting its rate to zero in the $S\mathbf{v}=0$ constraint forces the objective function (e.g., growth rate) to zero.
+
+7.  **[Graph Theory] What does the Fiedler eigenvalue $\lambda_2$ of a protein contact map represents?**
+    ??? success "Solution"
+        It represents the structural compactness or "folding rate" of the protein; a smaller $\lambda_2$ corresponds to more loosely connected, flexible regions.
+
+8.  **[Calculation] Find a basis vector for $S = \begin{pmatrix} -1 & 1 \\ 1 & -1 \end{pmatrix}$.**
+    ??? success "Solution"
+        $\mathbf{v} = (1, 1)^T$. Physical meaning: This is a reversible reaction ($A \leftrightarrow B$) where rates are equal at steady state.
+
+9.  **[NMF] State the advantage of NMF in gene clustering over PCA.**
+    ??? success "Solution"
+        NMF results are non-negative, allowing the decomposition of gene expression into additive "modules," which is more consistent with biological intuitions of gene co-regulation.
+
+10. **[Limits] As $t \to \infty$, what effect does a Markov evolution matrix have on a DNA sequence?**
+    ??? success "Solution"
+        The sequence loses all its original information, and the nucleotide distribution converges to the Perron vector (steady-state distribution) of the transition matrix.
 
 ## Chapter Summary
 
-This chapter explores the linear algebraic framework of molecular life:
+Linear algebra in molecular biology establishes the rigorous format of life processes:
 
-1. **Evolutionary Calculus**: Established substitution matrices as Markov transition operators for amino acid sequences.
-2. **Spectral Genomics**: Utilized PCA and SVD to reduce the dimensionality of high-throughput gene expression data.
-3. **Biological Networks**: Formulated the connectivity and robustness of regulatory and interaction systems using adjacency and Laplacian matrices.
-4. **Distance Geometry**: Linked sequence metrics to phylogenetic trees and 3D structural reconstruction.
+1.  **Algebraic Metric of Evolution**: Through scoring matrices and Markov chains, this theory quantifies the passage of time and the accumulation of mutations as spectral properties, providing the mathematical skeleton for reconstructing the Tree of Life.
+2.  **Structural Constraints of Metabolism**: Stoichiometric matrices prove that life is not just a biochemical coincidence but a necessity under mass conservation and flux balance, establishing the computational cornerstone of systems biology.
+3.  **Automated Pattern Extraction**: Matrix decomposition techniques peel away the ordered regulatory modules from chaotic genomic data, proving that high-dimensional life signals follow surprisingly simple linear superposition logic at their core.

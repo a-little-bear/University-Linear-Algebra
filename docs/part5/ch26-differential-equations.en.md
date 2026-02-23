@@ -1,79 +1,147 @@
-# Chapter 26: Linear Systems of Differential Equations
+# Chapter 26: Linear Algebra in Differential Equations
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Exponential (Ch13) · Jordan Form (Ch12) · Eigenvalues (Ch6) · Diagonalization (Ch6)
+**Prerequisites**: Eigenvalues and Diagonalization (Ch06) · Jordan Canonical Form (Ch12) · Matrix Functions (Ch13)
 
-**Chapter Outline**: First-order Linear Systems $\dot{x} = Ax$ → Homogeneous and Non-homogeneous Systems → Solution via Matrix Exponential → Decoupling via Diagonalization → Stability Analysis of Equilibrium Points → Phase Portraits → Variation of Parameters → Higher-order Linear ODEs as First-order Systems → Fundamental Matrix Solution
+**Chapter Outline**: First-order Linear ODE Systems → The Matrix Exponential $e^{At}$ as a Fundamental Solution → Stability Analysis (Hurwitz Criteria) → Phase Plane Geometry (Classification of Singularities) → Converting High-order ODEs to Systems (Companion Matrices) → Non-homogeneous Systems and Duhamel's Principle → Spectral Methods for PDEs (Sturm-Liouville Theory) → Periodic Systems & Floquet Theory
 
-**Extension**: Systems of differential equations describe the time-evolution of almost all physical phenomena; linear algebra provides the exact solution for the "small oscillation" limit of these systems.
+**Extension**: Linear differential equations are the classical application of linear algebra; the long-term behavior of a dynamic system (stability, oscillation, decay) is entirely dictated by the spectrum of its coefficient matrix.
 
 </div>
 
-Systems of linear differential equations are the dynamic manifestation of linear algebra. The fundamental equation $\dot{x} = Ax$ describes a velocity field where the rate of change of the state $x$ is a linear transformation of the state itself. The solution is the **matrix exponential** $e^{At}$, which acts as a "propagator" mapping initial conditions to future states. This chapter shows how diagonalization and the Jordan form allow us to decouple complex interactions into independent modes, and how the eigenvalues of $A$ determine whether the system is stable, oscillating, or exploding.
+The study of change is the domain of differential equations, and the study of structured change is the domain of linear algebra. Linear ordinary differential equations (ODEs) can be completely solved using the matrix exponential $e^{At}$, and their stability—whether they converge to zero or explode—is determined by the real parts of their eigenvalues. This chapter builds the bridge between discrete operator theory and continuous dynamical evolution.
 
 ---
 
-## 26.1 The Matrix Propagator
+## 26.1 Linear Systems of ODEs
 
-!!! definition "Definition 26.1 (Homogeneous Linear System)"
-    A system of the form $\dot{x}(t) = Ax(t)$, where $x(0) = x_0$. The solution is $x(t) = e^{At}x_0$.
+<div class="context-flow" markdown>
 
-!!! theorem "Theorem 26.1 (Stability of the Origin)"
-    The equilibrium point $x=0$ is:
-    1. **Asymptotically Stable** if all $\operatorname{Re}(\lambda_i) < 0$.
-    2. **Unstable** if any $\operatorname{Re}(\lambda_i) > 0$.
-    3. **Marginally Stable** if all $\operatorname{Re}(\lambda_i) \le 0$ and those with $\operatorname{Re}(\lambda_i) = 0$ are non-defective.
+**The Core Structure**: The solution space of $\mathbf{x}' = A\mathbf{x}$ is an $n$-dimensional vector space. The fundamental matrix $\Phi(t)$ provides a basis for this space.
+
+</div>
+
+!!! definition "Definition 26.1 (Linear Constant-Coefficient ODE System)"
+    A system of $n$ first-order linear ODEs is written as:
+    $$\mathbf{x}'(t) = A\mathbf{x}(t), \quad \mathbf{x}(0) = \mathbf{x}_0$$
+    where $A$ is an $n \times n$ constant matrix and $\mathbf{x}(t) \in \mathbb{R}^n$.
+
+!!! theorem "Theorem 26.1 (The Fundamental Solution)"
+    The unique solution to the system $\mathbf{x}' = A\mathbf{x}$ with initial condition $\mathbf{x}(0) = \mathbf{x}_0$ is:
+    $$\mathbf{x}(t) = e^{At} \mathbf{x}_0$$
+    where $e^{At}$ is the **matrix exponential** (see Ch13).
+
+---
+
+## 26.2 Stability Analysis
+
+<div class="context-flow" markdown>
+
+**Crucial Insight**: A system is stable if its state does not grow without bound over time. This depends solely on the eigenvalues of $A$.
+
+</div>
+
+!!! definition "Definition 26.2 (Stability Classifications)"
+    1.  **Asymptotically Stable**: $\mathbf{x}(t) \to \mathbf{0}$ as $t \to \infty$ for all $\mathbf{x}_0$.
+    2.  **Stable (Lyapunov Stable)**: $\|\mathbf{x}(t)\|$ remains bounded for all $t \ge 0$.
+    3.  **Unstable**: $\|\mathbf{x}(t)\| \to \infty$ for some $\mathbf{x}_0$.
+
+!!! theorem "Theorem 26.2 (Eigenvalue Stability Criterion)"
+    Let $\sigma(A) = \{\lambda_1, \ldots, \lambda_n\}$ be the eigenvalues of $A$.
+    - The system is **asymptotically stable** iff $\operatorname{Re}(\lambda_i) < 0$ for all $i$ ($A$ is a **Hurwitz matrix**).
+    - The system is **stable** if $\operatorname{Re}(\lambda_i) \le 0$ for all $i$, and for any $\lambda_i$ with $\operatorname{Re}(\lambda_i) = 0$, its algebraic multiplicity equals its geometric multiplicity.
+    - The system is **unstable** if any $\operatorname{Re}(\lambda_i) > 0$.
+
+---
+
+## 26.3 Phase Plane Analysis (2D Systems)
+
+!!! technique "Classification of 2D Equilibrium Points"
+    For a $2 \times 2$ system, the origin is classified based on $\lambda_1, \lambda_2$:
+    - **Node**: Real eigenvalues of the same sign.
+    - **Saddle**: Real eigenvalues of opposite signs.
+    - **Spiral (Focus)**: Complex conjugate eigenvalues with $\operatorname{Re}(\lambda) \neq 0$.
+    - **Center**: Purely imaginary eigenvalues ($\operatorname{Re}(\lambda) = 0$).
+
+---
+
+## 26.4 High-order ODEs and Companion Matrices
+
+!!! technique "Reduction of Order"
+    An $n$-th order scalar ODE $y^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_0 y = 0$ can be converted into a first-order system $\mathbf{x}' = C\mathbf{x}$ where $C$ is the **companion matrix**:
+    $$C = \begin{pmatrix} 0 & 1 & 0 & \cdots & 0 \\ 0 & 0 & 1 & \cdots & 0 \\ \vdots & \vdots & \ddots & \ddots & \vdots \\ -a_0 & -a_1 & -a_2 & \cdots & -a_{n-1} \end{pmatrix}$$
+    The eigenvalues of $C$ are exactly the roots of the original characteristic equation.
+
+---
+
+## 26.5 Non-homogeneous Systems: Duhamel's Principle
+
+!!! theorem "Theorem 26.3 (Variation of Parameters)"
+    The solution to $\mathbf{x}' = A\mathbf{x} + \mathbf{f}(t)$ is:
+    $$\mathbf{x}(t) = e^{At} \mathbf{x}_0 + \int_0^t e^{A(t-s)} \mathbf{f}(s) \, ds$$
+    The integral term represents the "forced response" of the system.
+
+---
+
+## 26.6 Spectral Methods for PDEs (Sturm-Liouville)
+
+!!! theorem "Theorem 26.4 (Sturm-Liouville Eigenfunctions)"
+    Many linear PDEs (like the heat or wave equation) can be solved by separating variables, which leads to an eigenvalue problem for a differential operator. Sturm-Liouville theory guarantees that such operators have a complete set of orthogonal eigenfunctions, acting as a "Fourier basis" for the solution space.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Solve $\dot{x}=3x, \dot{y}=2y$ with $x(0)=1, y(0)=4$.**
-   ??? success "Solution"
-       The system is decoupled. $x(t) = e^{3t}$ and $y(t) = 4e^{2t}$.
-
-2. **[Diagonalization] Solve $\dot{x} = Ax$ where $A = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$.**
-   ??? success "Solution"
-       Eigenvalues are 1 and 2. $A = PDP^{-1}$ with $D = \operatorname{diag}(1, 2)$ and $P = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$. Solution is $x(t) = P e^{Dt} P^{-1} x_0 = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} e^t & 0 \\ 0 & e^{2t} \end{pmatrix} \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} x_0$.
-
-3. **[Stability] Is the system with $A = \begin{pmatrix} -1 & 100 \\ 0 & -2 \end{pmatrix}$ stable?**
-   ??? success "Solution"
-       Yes, asymptotically stable. The eigenvalues are $\{-1, -2\}$, both of which have negative real parts. Note that the large off-diagonal element may cause transient growth (Ch43).
-
-4. **[Higher Order] Convert $\ddot{y} + 3\dot{y} + 2y = 0$ into a first-order system.**
-   ??? success "Solution"
-       Let $x_1 = y, x_2 = \dot{y}$. Then $\dot{x}_1 = x_2$ and $\dot{x}_2 = -2x_1 - 3x_2$. Matrix $A = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix}$.
-
-5. **[Non-homogeneous] State the Variation of Parameters formula for $\dot{x} = Ax + f(t)$.**
-   ??? success "Solution"
-       $x(t) = e^{At}x_0 + \int_0^t e^{A(t-\tau)} f(\tau) d\tau$. This is the convolution of the impulse response with the input.
-
-6. **[Jordan Form] Solve $\dot{x} = Jx$ for $J = \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$.**
-   ??? success "Solution"
-       $e^{Jt} = e^{\lambda t} \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$. Thus $x_1(t) = e^{\lambda t}(x_1(0) + t x_2(0))$ and $x_2(t) = e^{\lambda t} x_2(0)$.
-
-7. **[Phase Portrait] Describe the trajectories of a system with eigenvalues $\pm i\omega$.**
-   ??? success "Solution"
-       They are concentric ellipses centered at the origin. The system is a harmonic oscillator (center).
-
-8. **[Invariance] If $v$ is an eigenvector of $A$, what happens to the trajectory starting at $x_0 = v$?**
-   ??? success "Solution"
-       $x(t) = e^{At}v = e^{\lambda t}v$. The state stays on the line spanned by $v$, merely scaling by $e^{\lambda t}$.
-
-9. **[Fundamental Matrix] What is the Fundamental Matrix $\Phi(t)$?**
-   ??? success "Solution"
-       A matrix whose columns are linearly independent solutions. For LTI systems, $\Phi(t) = e^{At}$. It satisfy $\dot{\Phi} = A\Phi$.
-
-10. **[Symmetry] If $A$ is skew-symmetric, what property does $e^{At}$ have?**
+1.  **[System Solve] Solve $\mathbf{x}' = \begin{pmatrix} 0 & 1 \\ -2 & -3 \end{pmatrix} \mathbf{x}$ with $\mathbf{x}(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$.**
     ??? success "Solution"
-        $e^{At}$ is an orthogonal matrix. Trajectories preserve the Euclidean norm $\|x(t)\|_2 = \|x_0\|_2$, corresponding to pure rotation in phase space.
+        Eigenvalues: $\lambda^2 + 3\lambda + 2 = 0 \implies \lambda_1 = -1, \lambda_2 = -2$.
+        Eigenvectors: $\mathbf{v}_1 = (1, -1)^T, \mathbf{v}_2 = (1, -2)^T$.
+        $\mathbf{x}(t) = c_1 e^{-t} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + c_2 e^{-2t} \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.
+        $\mathbf{x}(0) = \begin{pmatrix} 1 \\ 0 \end{pmatrix} \implies c_1 = 2, c_2 = -1$.
+        $\mathbf{x}(t) = \begin{pmatrix} 2e^{-t} - e^{-2t} \\ -2e^{-t} + 2e^{-2t} \end{pmatrix}$.
+
+2.  **[Stability] Is the system $\mathbf{x}' = \begin{pmatrix} -1 & 10 \\ 0 & -2 \end{pmatrix} \mathbf{x}$ stable?**
+    ??? success "Solution"
+        Yes, asymptotically stable. The eigenvalues are -1 and -2 (diagonal entries of a triangular matrix), both of which have negative real parts.
+
+3.  **[Phase Plane] Describe the origin for $\mathbf{x}' = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \mathbf{x}$.**
+    ??? success "Solution"
+        Eigenvalues: $\lambda^2 + 1 = 0 \implies \lambda = \pm i$. The origin is a **Center**, representing periodic oscillatory motion (closed orbits).
+
+4.  **[Duhamel] Write the solution formula for $\mathbf{x}' = A\mathbf{x} + \mathbf{b}$ where $\mathbf{b}$ is constant.**
+    ??? success "Solution"
+        $\mathbf{x}(t) = e^{At} \mathbf{x}_0 + (e^{At} - I)A^{-1} \mathbf{b}$ (if $A$ is invertible).
+
+5.  **[Companion] Write the companion matrix for $y'' + 5y' + 6y = 0$.**
+    ??? success "Solution"
+        $\begin{pmatrix} 0 & 1 \\ -6 & -5 \end{pmatrix}$.
+
+6.  **[Matrix Exp] Find $e^{At}$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
+    ??? success "Solution"
+        $A^2 = O$, so $e^{At} = I + At = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$.
+
+7.  **[Lyapunov] How does the Lyapunov equation $A^T P + PA = -Q$ relate to stability?**
+    ??? success "Solution"
+        If there exists a positive definite $P$ for a given $Q \succ 0$, then $A$ is Hurwitz (asymptotically stable). $V(x) = x^T P x$ acts as an energy function that strictly decreases over time.
+
+8.  **[Defective] What happens to the solution when $A$ has a Jordan block of size 2?**
+    ??? success "Solution"
+        The solution will contain terms like $t e^{\lambda t}$ in addition to $e^{\lambda t}$, representing slower-than-exponential decay or growth (or linear growth at resonance).
+
+9.  **[Orthogonality] In Sturm-Liouville theory, why are eigenfunctions orthogonal?**
+    ??? success "Solution"
+        Because the Sturm-Liouville operator is **self-adjoint** under a specific inner product, and the spectral theorem for self-adjoint operators guarantees orthogonal eigenspaces.
+
+10. **[Philosophy] Why is the spectrum of a matrix called the "DNA" of a differential system?**
+    ??? success "Solution"
+        Because eigenvalues (frequencies/decay rates) and eigenvectors (mode shapes) encode every possible behavior the system can exhibit, from its vibration patterns to its ultimate stability.
 
 ## Chapter Summary
 
-This chapter establishes the analytic solution to linear evolution:
+Linear algebra provides the universal solution template for continuous change:
 
-1. **Propagator Calculus**: Defined the matrix exponential as the universal solution to linear time-invariant systems.
-2. **Modal Decoupling**: Utilized spectral decomposition to transform coupled equations into independent scalar growth laws.
-3. **Equilibrium Topology**: Formulated the stability criteria based on the real parts of eigenvalues, categorizing phase space behaviors.
-4. **Convolution Logic**: Extended the theory to non-homogeneous systems, providing the mathematical basis for control and signal response.
+1.  **Unified Solution Operator**: Identified $e^{At}$ as the fundamental operator that maps initial states to future states, unifying all linear ODE systems.
+2.  **Spectral Stability**: Linked the geometric position of eigenvalues in the complex plane to the qualitative physical behavior of systems (convergence vs. explosion).
+3.  **Dimensional Reduction**: Showed how high-order physical laws (like Newton's second law) can be linearized into first-order matrix systems.
+4.  **Spectral Decomposition**: Extended the theory to PDEs via Sturm-Liouville eigenfunctions, demonstrating that complex waves are just linear combinations of independent modal vibrations.
