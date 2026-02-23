@@ -2,130 +2,121 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues & SVD (Ch06, 11) · Positive Definite Matrices (Ch16) · Least Squares (Ch07) · Matrix Decompositions (Ch10)
+**Prerequisites**: Singular Value Decomposition (Ch11) · Matrix Calculus (Ch47A) · Projections and Least Squares (Ch07)
 
-**Chapter Outline**: Multivariate Statistics & Covariance Matrices → Principal Component Analysis (PCA) → Linear Regression & Normal Equations → Regularization (Ridge and LASSO) → Linear Discriminant Analysis (LDA) → Kernel Methods & Gram Matrices → Support Vector Machines (SVM) → Neural Networks (Forward/Backward Pass) → Matrix Factorization in Recommender Systems
+**Chapter Outline**: Data as Matrices → Data Preprocessing: Centering and Scaling → Matrix Expression of Statistics: The Covariance Matrix $\Sigma$ → Core Dimensionality Reduction: PCA derived via SVD → Regression Analysis: The Projection View of OLS → Linear Classification: Hyperplane Geometry in SVM and Logistic Regression → Regularization: Algebraic Meaning of the Ridge Parameter $\lambda$ → Applications: Feature Extraction, Denoising, and Latent Semantic Analysis (LSA)
 
-**Extension**: Linear algebra is the "operating system" of machine learning; from the covariance analysis of classical statistics to the backpropagation of deep learning, matrices are the primary objects of computation.
-
-</div>
-
-Machine learning is essentially large-scale, high-dimensional geometry. Every data sample is a vector, every dataset is a matrix, and every algorithm is a series of matrix transformations. Whether it's reducing the dimensions of a massive dataset using SVD or calculating the gradients of a neural network using chain rules, linear algebra provides the unified language and efficient computational engine. This chapter explores how these mathematical structures power modern AI.
-
----
-
-## 29.1 Foundations: Covariance and PCA
-
-<div class="context-flow" markdown>
-
-**Matrix Perspective**: $n$ samples, $p$ features → Data matrix $X \in \mathbb{R}^{n \times p}$. The **Sample Covariance Matrix** $\Sigma$ captures the relationships between features.
+**Extension**: Linear algebra is the "underlying architecture" of machine learning; it transforms tedious data points into geometric distributions in high-dimensional space. It proves that the process of learning is essentially finding optimal projection subspaces and separating hyperplanes—the mathematical common term for understanding all deep learning algorithms.
 
 </div>
 
-!!! definition "Definition 29.1 (Covariance Matrix)"
-    For a centered data matrix $X_c = X - \mathbf{1}\bar{x}^T$, the sample covariance matrix is:
-    $$\Sigma = \frac{1}{n-1} X_c^T X_c$$
-    $\Sigma$ is symmetric positive semi-definite. Its diagonal entries are the variances of the features.
-
-!!! technique "Principal Component Analysis (PCA)"
-    PCA seeks to project data onto a lower-dimensional subspace while preserving the maximum variance.
-    - The directions of maximum variance are the **eigenvectors** of $\Sigma$.
-    - This is equivalent to taking the **SVD** of the centered data matrix $X_c$.
+In machine learning, every sample is a vector, and every feature is a dimension. **Linear Algebra** weaves these scattered data points into matrices, allowing us to use geometric intuition to find patterns. Whether compressing information via **PCA** or predicting trends via **Least Squares**, the underlying logic is always finding an optimal projection in vector space. This chapter introduces the algebraic framework serving as the engine for AI.
 
 ---
 
-## 29.2 Linear Regression and Regularization
+## 29.1 Data Matrices and Covariance
 
-!!! theorem "Theorem 29.1 (The Normal Equation)"
-    The Ordinary Least Squares (OLS) solution to $X\beta = y$ is:
-    $$\hat{\beta} = (X^T X)^{-1} X^T y$$
-    This projects $y$ onto the column space of $X$.
-
-!!! definition "Definition 29.2 (Ridge and LASSO)"
-    - **Ridge Regression (L2)**: $\min \|y - X\beta\|^2 + \lambda \|\beta\|^2$. The solution is $(X^T X + \lambda I)^{-1} X^T y$, which is more stable for ill-conditioned $X$.
-    - **LASSO (L1)**: $\min \|y - X\beta\|^2 + \lambda \|\beta\|_1$. This promotes sparsity, setting some coefficients exactly to zero.
+!!! definition "Definition 29.1 (Centered Data Matrix $X$)"
+    Given $n$ samples and $d$ features, the matrix $X \in \mathbb{R}^{n \times d}$ obtained by subtracting the mean of each column is the centered matrix.
+    The **Covariance Matrix** is: $\Sigma = \frac{1}{n-1} X^T X$.
+    It describes the linear correlation between features.
 
 ---
 
-## 29.3 Kernel Methods and SVMs
+## 29.2 Principal Component Analysis (PCA)
 
-<div class="context-flow" markdown>
-
-**The Kernel Trick**: Non-linear mapping $\phi(x)$ into a high-dimensional space can be handled implicitly using the inner product $K(x, y) = \langle \phi(x), \phi(y) \rangle$.
-
-</div>
-
-!!! theorem "Theorem 29.2 (Mercer's Theorem)"
-    A symmetric function $K(x, y)$ can be represented as an inner product in some Hilbert space if and only if its **Gram matrix** $K_{ij} = K(x_i, x_j)$ is positive semi-definite for any set of points.
+!!! technique "Technique: SVD-based PCA"
+    To reduce dimensionality while preserving maximum variance:
+    1.  Perform SVD on the centered matrix $X$: $X = U \Sigma V^T$.
+    2.  The columns of the right singular matrix $V$ are the principal component directions.
+    3.  The eigenvalues (squares of singular values) represent the data variance along these directions.
+    **Significance**: PCA is essentially finding the "principal axes" of the data distribution.
 
 ---
 
-## 29.4 Neural Networks and Backpropagation
+## 29.3 Linear Regression and Regularization
 
-!!! technique "Matrix Calculus in Deep Learning"
-    - **Forward Pass**: A layer is a matrix-vector product followed by a non-linear activation: $a^{(l)} = \sigma(W^{(l)} a^{(l-1)} + b^{(l)})$.
-    - **Backward Pass**: Gradient updates involve the **Jacobian** of the loss function. The error signal flows back through the chain rule as a sequence of matrix-transpose multiplications: $\delta^{(l)} = ((W^{(l+1)})^T \delta^{(l+1)}) \odot \sigma'(z^{(l)})$.
+!!! theorem "Theorem 29.1 (Normal Equation)"
+    The least squares solution $\mathbf{w} = (X^T X)^{-1} X^T \mathbf{y}$ is the orthogonal projection of the target vector $\mathbf{y}$ onto the column space of $X$. When $X^T X$ is ill-conditioned, we introduce Ridge Regression: $\mathbf{w} = (X^T X + \lambda I)^{-1} X^T \mathbf{y}$.
 
 ---
 
 ## Exercises
 
+**1. [Basics] If feature 1 has variance 4, feature 2 has variance 9, and their covariance is 3, write the $2 \times 2$ covariance matrix.**
 
-****
 ??? success "Solution"
-     Because $\Sigma = \frac{1}{n-1} X_c^T X_c$. For any $v$, $v^T \Sigma v = \frac{1}{n-1} \|X_c v\|^2 \ge 0$.
+    **Construction:**
+    1. Diagonals are variances: $a_{11}=4, a_{22}=9$.
+    2. Off-diagonals are covariances: $a_{12}=a_{21}=3$.
+    **Conclusion**: $\Sigma = \begin{pmatrix} 4 & 3 \\ 3 & 9 \end{pmatrix}$.
 
+**2. [PCA] In PCA, why do we keep the directions with the largest eigenvalues?**
 
-****
 ??? success "Solution"
-     It is the direction of the major axis of the hyper-ellipsoid formed by the data distribution.
+    **Algebraic Explanation:**
+    1. The eigenvalue represents the **variance** of the data along that direction.
+    2. Greater variance implies higher discriminability and information content.
+    3. Discarding small eigenvalue directions is equivalent to removing low-energy noise or unimportant details, achieving optimal information compression (see Ch11 Best Low-Rank Approximation).
 
+**3. [Calculation] Given data points $(1, 1)^T$ and $(-1, -1)^T$, find the covariance matrix.**
 
-****
 ??? success "Solution"
-     $X^T X$ becomes singular (not invertible). One must use the Moore-Penrose pseudoinverse $X^+$ or add regularization (Ridge).
+    **Steps:**
+    1. Mean is $(0, 0)^T$. Data is already centered.
+    2. Matrix $X = \begin{pmatrix} 1 & 1 \\ -1 & -1 \end{pmatrix}$.
+    3. $X^T X = \begin{pmatrix} 1 & -1 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ -1 & -1 \end{pmatrix} = \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix}$.
+    4. $\Sigma = \frac{1}{2-1} \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix} = \begin{pmatrix} 2 & 2 \\ 2 & 2 \end{pmatrix}$.
 
+**4. [Geometry] What does the decision boundary $w^T x + b = 0$ represent geometrically?**
 
-****
 ??? success "Solution"
-    Its Gram matrix is $X X^T$ (for data matrix $X$), which is always PSD.
+    **Conclusion: A Hyperplane.**
+    The vector $w$ is the **normal vector** of the hyperplane, determining its orientation. The bias $b$ determines the displacement from the origin. Classification is essentially determining which side of the hyperplane a point $x$ lies on.
 
+**5. [Logistic Regression] Briefly explain the origin of matrix multiplication in the gradient update for logistic regression.**
 
-****
 ??? success "Solution"
-     $10 \times 100$.
+    The gradient of the loss function with respect to $w$ can be written as $\nabla J(w) = X^T (\mathbf{p} - \mathbf{y})$. Here $X^T$ is the transpose of the feature matrix, and $(\mathbf{p} - \mathbf{y})$ is the error vector. This matrix-vector product computes the update for all parameters simultaneously, serving as the basis for parallelized training.
 
+**6. [Regularization] Why does adding $\lambda I$ in Ridge regression solve the non-invertibility of $X^T X$?**
 
-****
 ??? success "Solution"
-     If the singular values of the weight matrices are all significantly less than 1, the product of Jacobians in backpropagation will shrink exponentially, causing the gradient to vanish.
+    **Algebraic Reason:**
+    1. $X^T X$ is positive semi-definite, so eigenvalues are $\ge 0$. If columns are dependent, the smallest eigenvalue is 0.
+    2. The eigenvalues of $X^T X + \lambda I$ are $\lambda_i + \lambda$.
+    3. As long as $\lambda > 0$, all eigenvalues are strictly positive.
+    **Conclusion**: The matrix becomes strictly positive definite, guaranteeing the existence of the inverse and numerical stability.
 
+**7. [Application] What is a "Fully Connected Layer" in a neural network?**
 
-****
 ??? success "Solution"
-     Original: $10^{11}$ entries. Factorized: $(10^6 + 10^5) \times 100 \approx 1.1 \times 10^8$. Compression is roughly 1000x.
+    A fully connected layer is essentially a **matrix multiplication** $y = Wx + b$. Each row of matrix $W$ represents the weight vector of one neuron. Linear algebra proves that every layer performs a linear transformation (rotation, scaling, shear) of the space.
 
+**8. [Calculation] If the singular values of data matrix $X$ are $\{10, 5, 0.1\}$, find the proportion of variance explained by the first two principal components.**
 
-****
 ??? success "Solution"
-     It solves a generalized eigenvalue problem $S_B w = \lambda S_W w$, where $S_B$ is the between-class scatter and $S_W$ is the within-class scatter.
+    **Steps:**
+    1. Total variance is proportional to the sum of squared singular values: $10^2 + 5^2 + 0.1^2 = 125.01$.
+    2. Variance contribution of the first two: $100 + 25 = 125$.
+    3. Ratio: $125 / 125.01 \approx 99.99\%$.
+    **Conclusion**: The first two principal components capture nearly all the information.
 
+**9. [Convexity] Prove the loss function of logistic regression is convex.**
 
-****
 ??? success "Solution"
-     $d = \sqrt{(x-\mu)^T \Sigma^{-1} (x-\mu)}$. It scales distances by the inverse of the data's variance.
+    **Proof Key:**
+    The Hessian of the loss function takes the form $X^T D X$, where $D$ is a diagonal matrix with entries $p_i(1-p_i) > 0$. Since this is a Gram-matrix form, the Hessian is positive semi-definite. According to convexity criteria (Ch64B), the optimization problem has a unique global minimum.
 
-****
+**10. [Application] Describe the role of SVD in recommendation systems (LSA).**
+
 ??? success "Solution"
-    ## Chapter Summary
+    By performing truncated SVD on the "User-Item" interaction matrix, $X \approx U_k \Sigma_k V_k^T$. The columns of $U_k$ extract latent user preferences, while columns of $V_k$ extract latent item features. This low-rank decomposition automatically merges similar features, solving the data sparsity problem.
 
-Statistics and Machine Learning are the practical realizations of high-dimensional matrix analysis:
+## Chapter Summary
 
+Linear algebra is the "geometric skeleton" of modern intelligent algorithms:
 
-****: PCA and SVD show that high-dimensional data often live on lower-dimensional "manifolds," and linear algebra is the tool to find them.
-
-****: Identified OLS and SVM as specific linear systems or quadratic programs, proving that training AI is a form of matrix optimization.
-
-****: Explained Neural Networks as matrix chains, linking the stability of deep learning to the spectral properties of weight matrices.
-
-****: Used Kernel methods to prove that linear algebra can solve non-linear problems by working in the right feature space.
+1.  **Compression of Space**: Through PCA and SVD, linear algebra proves that high-dimensional data often collapses onto low-dimensional linear manifolds, establishing the mathematical standard for feature extraction.
+2.  **Projection of Errors**: From OLS to Logistic Regression, the learning process is unified as finding an algebraic solution that is closest to the target vector (projection) or separates classes most cleanly (hyperplane).
+3.  **Acceleration of Computation**: Matrix-based symbolic expressions not only simplify derivations but also leverage high-performance libraries like BLAS/LAPACK to turn training into lightning-fast parallel matrix operations, supporting today's massive AI models.

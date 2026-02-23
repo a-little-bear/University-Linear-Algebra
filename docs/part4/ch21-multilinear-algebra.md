@@ -2,586 +2,122 @@
 
 <div class="context-flow" markdown>
 
-**前置**：线性映射(Ch3) · 行列式(Ch5) · 内积空间(Ch7)
+**前置**：向量空间 (Ch04) · 线性变换 (Ch05) · 对偶空间 (Ch13A)
 
-**脉络**：对偶空间 → 张量积（泛性质） → 外代数（行列式的真正家园） → 张量分解（高维数据）
+**本章脉络**：从线性到多线性 $\to$ 多线性映射定义 $\to$ 张量积 (Tensor Product) 的泛性质与公理化构造 $\to$ 张量的分量表示与指标记号 $\to$ 张量空间 $V \otimes W$ 的维数 $\to$ 张量秩 (Tensor Rank) 与 CP 分解 $\to$ Tucker 分解 $\to$ 算子与张量的对应关系 $\to$ 应用：多变量统计分析、量子纠缠态描述、高维数据压缩
 
-**延伸**：张量在广义相对论（Riemann 曲率张量）、连续介质力学（应力张量）、机器学习（高阶数据分析）中无处不在；外代数是微分形式的基础，微分形式是现代物理（电磁场的 Maxwell 方程、规范场论）的数学语言
-
-</div>
-
-多线性代数是线性代数的自然推广，它研究多个向量空间之间的多线性关系。张量（tensor）作为多线性代数的核心对象，不仅为微分几何、广义相对论提供了基本语言，也在近年来的机器学习、量子计算和数据科学中扮演着越来越重要的角色。本章从对偶空间出发，系统建立多线性映射、张量积、外代数等基本理论，并介绍张量分解等现代应用方向。
-
-## 21.1 对偶空间
-
-<div class="context-flow" markdown>
-
-**动机**：向量空间 $V$ 上的线性泛函 $V \to \mathbb{F}$ 本身构成空间 $V^*$ → 对偶基与原基"对偶配对" → $V \cong V^{**}$（自然同构，无需选基）
+**延伸**：张量是线性代数向高维空间的自然推广；它打破了矩阵“行与列”的二元限制，引入了多轴耦合的代数结构，是现代深度学习（张量流）和广义相对论的底层数学骨架
 
 </div>
 
-### 线性泛函与对偶空间
+线性代数主要研究向量（1 阶张量）和矩阵（2 阶张量）。然而，在现代物理和数据科学中，我们需要处理具有多个指标的量（如 3 阶或更高阶张量）。**多线性代数**（Multilinear Algebra）通过**张量积**（Tensor Product）将线性变换的理论扩展到了任意维度。本章将介绍张量的泛性质定义及其在描述复杂高维交互中的核心作用。
 
-!!! definition "定义 21.1 (线性泛函)"
-    设 $V$ 是数域 $\mathbb{F}$（$\mathbb{F} = \mathbb{R}$ 或 $\mathbb{C}$）上的向量空间。一个**线性泛函**（linear functional）是从 $V$ 到 $\mathbb{F}$ 的线性映射 $f: V \to \mathbb{F}$，即满足：
+---
 
-    $$f(\alpha \mathbf{u} + \beta \mathbf{v}) = \alpha f(\mathbf{u}) + \beta f(\mathbf{v}), \quad \forall \mathbf{u}, \mathbf{v} \in V, \ \alpha, \beta \in \mathbb{F}.$$
+## 21.1 张量积的定义
 
-!!! definition "定义 21.2 (对偶空间)"
-    设 $V$ 是 $\mathbb{F}$ 上的向量空间。$V$ 的**对偶空间**（dual space）定义为 $V$ 上所有线性泛函构成的集合，记作 $V^*$：
+!!! definition "定义 21.1 (张量积)"
+    向量空间 $V$ 和 $W$ 的**张量积** $V \otimes W$ 是一个新的向量空间，它配备了一个双线性映射 $\otimes: V \times W \to V \otimes W$，满足**泛性质**：任何从 $V \times W$ 到 $U$ 的双线性映射都可以唯一地诱导一个从 $V \otimes W$ 到 $U$ 的线性映射。
 
-    $$V^* = \text{Hom}(V, \mathbb{F}) = \{ f: V \to \mathbb{F} \mid f \text{ 是线性映射} \}.$$
+!!! note "维数性质"
+    $\dim(V \otimes W) = \dim(V) \cdot \dim(W)$。
 
-    $V^*$ 在逐点加法和标量乘法下构成 $\mathbb{F}$ 上的向量空间。
+---
 
-### 对偶基
+## 21.2 张量的阶与秩
 
-!!! definition "定义 21.3 (对偶基)"
-    设 $V$ 是 $n$ 维向量空间，$\{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n\}$ 是 $V$ 的一组基。**对偶基**（dual basis）$\{\mathbf{e}^1, \mathbf{e}^2, \ldots, \mathbf{e}^n\}$ 是 $V^*$ 中满足以下条件的一组线性泛函：
+!!! definition "定义 21.2 (张量的阶与秩)"
+    1.  **阶 (Order/Mode)**：指标的个数。矩阵是 2 阶张量。
+    2.  **张量秩 (Rank)**：将张量写成最小数量的纯张量（Rank-1 tensors，即 $v_1 \otimes v_2 \otimes \cdots$）之和所需的项数。
+    **注意**：与矩阵秩不同，高阶张量秩的计算是 NP-难的。
 
-    $$\mathbf{e}^i(\mathbf{e}_j) = \delta^i_j = \begin{cases} 1, & i = j, \\ 0, & i \neq j. \end{cases}$$
+---
 
-    其中 $\delta^i_j$ 是 Kronecker delta。
+## 21.3 张量分解
 
-!!! theorem "定理 21.1 (对偶基的存在性与唯一性)"
-    设 $V$ 是有限维向量空间，$\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ 是 $V$ 的一组基，则对偶基 $\{\mathbf{e}^1, \ldots, \mathbf{e}^n\}$ 存在且唯一，并且构成 $V^*$ 的一组基。特别地，$\dim V^* = \dim V$。
+!!! technique "核心分解模型"
+    1.  **CP 分解 (CANDECOMP/PARAFAC)**：将张量分解为 Rank-1 张量的和。
+    2.  **Tucker 分解**：将张量分解为一个核心张量与各个维度上的因子矩阵的乘积（类似于高阶 SVD）。
 
-??? proof "证明"
-    **存在性**：对每个 $i = 1, \ldots, n$，定义 $\mathbf{e}^i: V \to \mathbb{F}$ 如下。对任意 $\mathbf{v} = \sum_{j=1}^n v_j \mathbf{e}_j \in V$，令
-
-    $$\mathbf{e}^i(\mathbf{v}) = v_i.$$
-
-    显然 $\mathbf{e}^i$ 是线性的，且 $\mathbf{e}^i(\mathbf{e}_j) = \delta^i_j$。
-
-    **唯一性**：若 $f \in V^*$ 满足 $f(\mathbf{e}_j) = \delta^i_j$，则对任意 $\mathbf{v} = \sum_j v_j \mathbf{e}_j$，
-
-    $$f(\mathbf{v}) = \sum_j v_j f(\mathbf{e}_j) = \sum_j v_j \delta^i_j = v_i = \mathbf{e}^i(\mathbf{v}).$$
-
-    故 $f = \mathbf{e}^i$。
-
-    **$\{\mathbf{e}^1, \ldots, \mathbf{e}^n\}$ 是 $V^*$ 的基**：
-
-    - *线性无关*：设 $\sum_i c_i \mathbf{e}^i = 0$。将此等式作用于 $\mathbf{e}_j$，得 $c_j = 0$，$\forall j$。
-    - *生成 $V^*$*：设 $f \in V^*$，令 $c_i = f(\mathbf{e}_i)$。则 $f$ 和 $\sum_i c_i \mathbf{e}^i$ 在基向量上的值相同，由线性性知它们相等，即 $f = \sum_i c_i \mathbf{e}^i$。
-
-!!! example "例 21.1"
-    设 $V = \mathbb{R}^3$，取标准基 $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$。对偶基为 $\{\mathbf{e}^1, \mathbf{e}^2, \mathbf{e}^3\}$，其中
-
-    $$\mathbf{e}^i(x_1, x_2, x_3) = x_i.$$
-
-    即 $\mathbf{e}^i$ 是"提取第 $i$ 个坐标"的投影函数。
-
-    例如 $\mathbf{e}^2(3, -1, 5) = -1$。
-
-### 双对偶空间与自然同构
-
-<div class="context-flow" markdown>
-
-**关键洞察**：$V \to V^*$ 的同构依赖基的选取；$V \to V^{**}$ 的同构 $\Phi(\mathbf{v})(f) = f(\mathbf{v})$ **不依赖基**——这就是"自然"的含义，预示了范畴论思想
-
-</div>
-
-!!! definition "定义 21.4 (双对偶空间)"
-    $V$ 的**双对偶空间**（double dual space）定义为 $(V^*)^*$，记作 $V^{**}$。$V^{**}$ 的元素是 $V^*$ 上的线性泛函。
-
-!!! theorem "定理 21.2 (自然同构)"
-    设 $V$ 是有限维向量空间。定义映射 $\Phi: V \to V^{**}$，
-
-    $$\Phi(\mathbf{v})(f) = f(\mathbf{v}), \quad \forall \mathbf{v} \in V, \ f \in V^*.$$
-
-    则 $\Phi$ 是一个**自然同构**（canonical isomorphism），即 $\Phi$ 是不依赖于基的选取的向量空间同构。
-
-??? proof "证明"
-    **$\Phi$ 是线性映射**：对任意 $\alpha, \beta \in \mathbb{F}$，$\mathbf{u}, \mathbf{v} \in V$，$f \in V^*$，
-
-    $$\Phi(\alpha \mathbf{u} + \beta \mathbf{v})(f) = f(\alpha \mathbf{u} + \beta \mathbf{v}) = \alpha f(\mathbf{u}) + \beta f(\mathbf{v}) = (\alpha \Phi(\mathbf{u}) + \beta \Phi(\mathbf{v}))(f).$$
-
-    **$\Phi$ 是单射**：设 $\Phi(\mathbf{v}) = 0$，即对所有 $f \in V^*$，$f(\mathbf{v}) = 0$。取对偶基 $\mathbf{e}^i$，有 $\mathbf{e}^i(\mathbf{v}) = v_i = 0$，故 $\mathbf{v} = \mathbf{0}$。
-
-    **$\Phi$ 是同构**：因为 $\dim V = \dim V^{**}$（$V$ 有限维），而 $\Phi$ 是单射，故 $\Phi$ 是同构。
-
-    **自然性**：$\Phi$ 的定义不涉及任何基的选取，因此是"自然的"。在范畴论的意义下，$\Phi$ 构成从恒等函子到双对偶函子的自然变换。
-
-!!! note "注"
-    当 $V$ 是无限维空间时，$V$ 与 $V^*$ 不再同构（$V^*$ 可能"更大"），自然映射 $\Phi: V \to V^{**}$ 仍是单射但不再是满射。这一区别在泛函分析中尤为重要，引出了自反空间（reflexive space）的概念。
-
-!!! example "例 21.2"
-    设 $V = \mathbb{R}^2$，基为 $\{\mathbf{e}_1, \mathbf{e}_2\}$。对偶基为 $\{\mathbf{e}^1, \mathbf{e}^2\}$。对 $\mathbf{v} = 3\mathbf{e}_1 + 2\mathbf{e}_2$，
-
-    $$\Phi(\mathbf{v})(\mathbf{e}^1) = \mathbf{e}^1(\mathbf{v}) = 3, \quad \Phi(\mathbf{v})(\mathbf{e}^2) = \mathbf{e}^2(\mathbf{v}) = 2.$$
-
-    因此 $\Phi(\mathbf{v}) = 3(\mathbf{e}^1)^* + 2(\mathbf{e}^2)^*$，其中 $\{(\mathbf{e}^1)^*, (\mathbf{e}^2)^*\}$ 是 $V^{**}$ 中 $\{\mathbf{e}^1, \mathbf{e}^2\}$ 的对偶基。
-
-## 21.2 多线性映射
-
-<div class="context-flow" markdown>
-
-**过渡**：对偶空间 = 1-线性型 → 推广到 $k$-线性型 · 内积、行列式、矩阵乘法都是多线性映射的实例
-
-**核心**：$k$-线性映射由基上的 $n_1 n_2 \cdots n_k$ 个值唯一确定 → 维数相乘
-
-</div>
-
-### 双线性映射
-
-!!! definition "定义 21.5 (双线性映射)"
-    设 $V, W, U$ 是 $\mathbb{F}$ 上的向量空间。映射 $B: V \times W \to U$ 称为**双线性映射**（bilinear map），如果它关于每个变量都是线性的：
-
-    - 固定 $\mathbf{w} \in W$，映射 $\mathbf{v} \mapsto B(\mathbf{v}, \mathbf{w})$ 是线性的；
-    - 固定 $\mathbf{v} \in V$，映射 $\mathbf{w} \mapsto B(\mathbf{v}, \mathbf{w})$ 是线性的。
-
-    即对任意 $\alpha, \beta \in \mathbb{F}$：
-
-    $$B(\alpha \mathbf{v}_1 + \beta \mathbf{v}_2, \mathbf{w}) = \alpha B(\mathbf{v}_1, \mathbf{w}) + \beta B(\mathbf{v}_2, \mathbf{w}),$$
-
-    $$B(\mathbf{v}, \alpha \mathbf{w}_1 + \beta \mathbf{w}_2) = \alpha B(\mathbf{v}, \mathbf{w}_1) + \beta B(\mathbf{v}, \mathbf{w}_2).$$
-
-!!! example "例 21.3"
-    **内积是双线性映射**。设 $V$ 是实内积空间，则内积 $\langle \cdot, \cdot \rangle: V \times V \to \mathbb{R}$ 是双线性映射。
-
-    **矩阵乘法是双线性映射**。映射 $B: \mathbb{R}^{m \times n} \times \mathbb{R}^{n \times p} \to \mathbb{R}^{m \times p}$，$B(A, B) = AB$ 是双线性的。
-
-    **行列式作为行向量的函数**。将 $n \times n$ 矩阵看作 $n$ 个行向量 $(\mathbf{r}_1, \ldots, \mathbf{r}_n)$，则 $\det(\mathbf{r}_1, \ldots, \mathbf{r}_n)$ 关于每个 $\mathbf{r}_i$ 是线性的（即行列式是多线性映射）。
-
-### 多线性映射
-
-!!! definition "定义 21.6 (多线性映射)"
-    设 $V_1, V_2, \ldots, V_k, U$ 是 $\mathbb{F}$ 上的向量空间。映射 $f: V_1 \times V_2 \times \cdots \times V_k \to U$ 称为 **$k$-线性映射**（$k$-linear map 或 multilinear map），如果固定其余 $k-1$ 个变量后，$f$ 关于每个变量都是线性的。
-
-    所有从 $V_1 \times \cdots \times V_k$ 到 $U$ 的 $k$-线性映射构成的集合记为 $\mathcal{L}^k(V_1, \ldots, V_k; U)$。当 $U = \mathbb{F}$ 时，称为 **$k$-线性型**（$k$-linear form）。
-
-!!! theorem "定理 21.3 (多线性映射由基上的值决定)"
-    设 $V_i$ 是有限维向量空间，$\dim V_i = n_i$，$\{\mathbf{e}^{(i)}_1, \ldots, \mathbf{e}^{(i)}_{n_i}\}$ 是 $V_i$ 的基（$i = 1, \ldots, k$）。则 $k$-线性映射 $f: V_1 \times \cdots \times V_k \to U$ 完全由它在各基向量组上的值
-
-    $$f(\mathbf{e}^{(1)}_{j_1}, \mathbf{e}^{(2)}_{j_2}, \ldots, \mathbf{e}^{(k)}_{j_k}), \quad 1 \leq j_i \leq n_i$$
-
-    唯一确定。这些值共有 $n_1 n_2 \cdots n_k$ 个，可以自由指定。从而
-
-    $$\dim \mathcal{L}^k(V_1, \ldots, V_k; U) = n_1 n_2 \cdots n_k \cdot \dim U.$$
-
-??? proof "证明"
-    设 $\mathbf{v}_i = \sum_{j_i=1}^{n_i} v^{j_i}_i \mathbf{e}^{(i)}_{j_i} \in V_i$。由多线性性，
-
-    $$f(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \sum_{j_1=1}^{n_1} \cdots \sum_{j_k=1}^{n_k} v^{j_1}_1 \cdots v^{j_k}_k \, f(\mathbf{e}^{(1)}_{j_1}, \ldots, \mathbf{e}^{(k)}_{j_k}).$$
-
-    这表明 $f$ 完全由 $f(\mathbf{e}^{(1)}_{j_1}, \ldots, \mathbf{e}^{(k)}_{j_k})$ 的取值决定。
-
-    反之，对任意给定的值 $\mathbf{u}_{j_1 \cdots j_k} \in U$，可以用上述公式定义 $f$，直接验证可知 $f$ 是 $k$-线性的。
-
-    当 $U = \mathbb{F}$ 时，$\dim \mathcal{L}^k(V_1, \ldots, V_k; \mathbb{F}) = n_1 n_2 \cdots n_k$。
-
-## 21.3 张量积
-
-<div class="context-flow" markdown>
-
-**核心思想**：张量积将"双线性问题"线性化——**泛性质**：任意双线性 $B: V \times W \to U$ 唯一分解为 $V \otimes W \xrightarrow{\tilde{B}} U$
-
-**维数**：$\dim(V \otimes W) = \dim V \cdot \dim W$ · $V^* \otimes W \cong \operatorname{Hom}(V, W)$ 统一了线性映射与张量
-
-</div>
-
-### 泛性质定义
-
-!!! definition "定义 21.7 (张量积的泛性质)"
-    设 $V, W$ 是 $\mathbb{F}$ 上的向量空间。$V$ 和 $W$ 的**张量积**（tensor product）是一个向量空间 $V \otimes W$ 连同一个双线性映射 $\otimes: V \times W \to V \otimes W$，使得以下泛性质成立：
-
-    对于任意向量空间 $U$ 和任意双线性映射 $B: V \times W \to U$，存在唯一的线性映射 $\tilde{B}: V \otimes W \to U$，使得 $B = \tilde{B} \circ \otimes$，即以下图表交换：
-
-    $$V \times W \xrightarrow{\otimes} V \otimes W$$
-
-    $$\searrow^{B} \quad \downarrow^{\tilde{B}}$$
-
-    $$\qquad \quad U$$
-
-    元素 $\mathbf{v} \otimes \mathbf{w}$（$\mathbf{v} \in V, \mathbf{w} \in W$）称为**简单张量**（simple tensor 或 decomposable tensor）。
-
-<div class="context-flow" markdown>
-
-**洞察**：泛性质保证张量积在同构意义下唯一——构造方法（商空间）只是存在性证明，唯一性来自范畴论的抽象论证
-
-</div>
-
-!!! theorem "定理 21.4 (张量积的存在性与唯一性)"
-    对任意向量空间 $V, W$，张量积 $V \otimes W$ 存在且在同构意义下唯一。
-
-??? proof "证明"
-    **存在性（构造法）**：设 $F(V \times W)$ 是以 $V \times W$ 中所有元素 $(\mathbf{v}, \mathbf{w})$ 为基的自由向量空间。设 $R$ 是由以下形式的元素生成的子空间：
-
-    - $(\alpha \mathbf{v}_1 + \beta \mathbf{v}_2, \mathbf{w}) - \alpha(\mathbf{v}_1, \mathbf{w}) - \beta(\mathbf{v}_2, \mathbf{w})$
-    - $(\mathbf{v}, \alpha \mathbf{w}_1 + \beta \mathbf{w}_2) - \alpha(\mathbf{v}, \mathbf{w}_1) - \beta(\mathbf{v}, \mathbf{w}_2)$
-
-    定义 $V \otimes W = F(V \times W) / R$，并令 $\mathbf{v} \otimes \mathbf{w}$ 为 $(\mathbf{v}, \mathbf{w})$ 在商空间中的像。则映射 $\otimes: V \times W \to V \otimes W$ 是双线性的，且满足泛性质。
-
-    **唯一性**：设 $(T_1, \otimes_1)$ 和 $(T_2, \otimes_2)$ 均满足泛性质。由 $T_1$ 的泛性质，对双线性映射 $\otimes_2$，存在唯一的线性映射 $\varphi: T_1 \to T_2$，使得 $\otimes_2 = \varphi \circ \otimes_1$。同理存在 $\psi: T_2 \to T_1$，使得 $\otimes_1 = \psi \circ \otimes_2$。则 $\psi \circ \varphi \circ \otimes_1 = \otimes_1$，由泛性质的唯一性，$\psi \circ \varphi = \text{id}_{T_1}$。同理 $\varphi \circ \psi = \text{id}_{T_2}$。故 $T_1 \cong T_2$。
-
-### 张量积的基与维数
-
-!!! theorem "定理 21.5 (张量积的基)"
-    设 $\{\mathbf{e}_1, \ldots, \mathbf{e}_m\}$ 是 $V$ 的基，$\{\mathbf{f}_1, \ldots, \mathbf{f}_n\}$ 是 $W$ 的基，则
-
-    $$\{\mathbf{e}_i \otimes \mathbf{f}_j : 1 \leq i \leq m, \ 1 \leq j \leq n\}$$
-
-    是 $V \otimes W$ 的基。特别地，
-
-    $$\dim(V \otimes W) = \dim V \cdot \dim W.$$
-
-??? proof "证明"
-    **生成**：$V \otimes W$ 由简单张量 $\mathbf{v} \otimes \mathbf{w}$ 的线性组合生成。设 $\mathbf{v} = \sum_i a_i \mathbf{e}_i$，$\mathbf{w} = \sum_j b_j \mathbf{f}_j$，则
-
-    $$\mathbf{v} \otimes \mathbf{w} = \left(\sum_i a_i \mathbf{e}_i\right) \otimes \left(\sum_j b_j \mathbf{f}_j\right) = \sum_{i,j} a_i b_j \, \mathbf{e}_i \otimes \mathbf{f}_j.$$
-
-    **线性无关**：设 $\sum_{i,j} c_{ij} \, \mathbf{e}_i \otimes \mathbf{f}_j = 0$。对每对 $(p, q)$，取线性泛函 $\mathbf{e}^p \in V^*$，$\mathbf{f}^q \in W^*$，定义双线性映射 $B_{pq}(\mathbf{v}, \mathbf{w}) = \mathbf{e}^p(\mathbf{v}) \mathbf{f}^q(\mathbf{w})$。由泛性质，存在线性映射 $\tilde{B}_{pq}: V \otimes W \to \mathbb{F}$，使得 $\tilde{B}_{pq}(\mathbf{e}_i \otimes \mathbf{f}_j) = \delta^p_i \delta^q_j$。将 $\tilde{B}_{pq}$ 应用于等式两端，得 $c_{pq} = 0$。
-
-!!! example "例 21.4"
-    设 $V = \mathbb{R}^2$，$W = \mathbb{R}^3$。则 $V \otimes W$ 是 $6$ 维空间。取 $V$ 的标准基 $\{\mathbf{e}_1, \mathbf{e}_2\}$，$W$ 的标准基 $\{\mathbf{f}_1, \mathbf{f}_2, \mathbf{f}_3\}$，则 $V \otimes W$ 的基为：
-
-    $$\{\mathbf{e}_1 \otimes \mathbf{f}_1, \mathbf{e}_1 \otimes \mathbf{f}_2, \mathbf{e}_1 \otimes \mathbf{f}_3, \mathbf{e}_2 \otimes \mathbf{f}_1, \mathbf{e}_2 \otimes \mathbf{f}_2, \mathbf{e}_2 \otimes \mathbf{f}_3\}.$$
-
-    $V \otimes W$ 与 $\mathbb{R}^{2 \times 3}$（$2 \times 3$ 矩阵空间）同构：$\mathbf{v} \otimes \mathbf{w} \mapsto \mathbf{v}\mathbf{w}^T$。
-
-    例如 $\begin{pmatrix} 1 \\ 2 \end{pmatrix} \otimes \begin{pmatrix} 3 \\ 0 \\ -1 \end{pmatrix} \mapsto \begin{pmatrix} 3 & 0 & -1 \\ 6 & 0 & -2 \end{pmatrix}$。
-
-!!! proposition "命题 21.1 (张量积的基本性质)"
-    张量积满足以下性质：
-
-    1. **结合律**：$(V \otimes W) \otimes U \cong V \otimes (W \otimes U)$；
-    2. **交换律**：$V \otimes W \cong W \otimes V$；
-    3. **分配律**：$V \otimes (W \oplus U) \cong (V \otimes W) \oplus (V \otimes U)$；
-    4. **与标量域的张量积**：$V \otimes \mathbb{F} \cong V$；
-    5. **与对偶空间的关系**：$V^* \otimes W \cong \text{Hom}(V, W)$。
-
-??? proof "证明"
-    我们证明第 5 条。定义映射 $\Phi: V^* \otimes W \to \text{Hom}(V, W)$，在简单张量上定义为
-
-    $$\Phi(f \otimes \mathbf{w})(\mathbf{v}) = f(\mathbf{v}) \mathbf{w}, \quad f \in V^*, \ \mathbf{w} \in W, \ \mathbf{v} \in V.$$
-
-    由张量积的泛性质，映射 $(f, \mathbf{w}) \mapsto [\ \mathbf{v} \mapsto f(\mathbf{v})\mathbf{w}\ ]$ 是双线性的，故 $\Phi$ 存在且是线性的。
-
-    取 $V$ 的基 $\{\mathbf{e}_i\}$ 和 $W$ 的基 $\{\mathbf{f}_j\}$，对偶基 $\{\mathbf{e}^i\}$。则 $\Phi(\mathbf{e}^i \otimes \mathbf{f}_j)$ 是将 $\mathbf{e}_i$ 映为 $\mathbf{f}_j$，其余基向量映为 $\mathbf{0}$ 的线性映射，这恰好是 $\text{Hom}(V, W)$ 的标准基。因此 $\Phi$ 将基映为基，是同构。
-
-## 21.4 张量的分量表示
-
-<div class="context-flow" markdown>
-
-**过渡**：抽象张量积 → 坐标表示 · $(r,s)$ 型张量 = $r$ 个逆变 + $s$ 个协变指标 → **Einstein 约定**简化书写 → 变换律体现"张量是不依赖基的几何对象"
-
-</div>
-
-### 指标记法
-
-在物理学和工程学中，张量通常用**指标记法**（index notation）来表示。设 $V$ 是 $n$ 维向量空间，基为 $\{\mathbf{e}_i\}$，对偶基为 $\{\mathbf{e}^i\}$。
-
-!!! definition "定义 21.8 ($(r, s)$ 型张量)"
-    一个 **$(r, s)$ 型张量**（type $(r, s)$ tensor）是一个多线性映射
-
-    $$T: \underbrace{V^* \times \cdots \times V^*}_{r} \times \underbrace{V \times \cdots \times V}_{s} \to \mathbb{F}.$$
-
-    在给定基下，$T$ 的**分量**（components）为
-
-    $$T^{i_1 \cdots i_r}_{j_1 \cdots j_s} = T(\mathbf{e}^{i_1}, \ldots, \mathbf{e}^{i_r}, \mathbf{e}_{j_1}, \ldots, \mathbf{e}_{j_s}).$$
-
-    上标称为**逆变指标**（contravariant indices），下标称为**协变指标**（covariant indices）。
-
-### Einstein 求和约定
-
-!!! definition "定义 21.9 (Einstein 求和约定)"
-    **Einstein 求和约定**（Einstein summation convention）规定：当一个指标在表达式中同时作为上标和下标出现时（称为**哑指标**），自动对该指标求和。例如：
-
-    $$a^i b_i \equiv \sum_{i=1}^n a^i b_i, \quad T^i_{\ j} v^j \equiv \sum_{j=1}^n T^i_{\ j} v^j.$$
-
-!!! example "例 21.5"
-    使用 Einstein 约定，以下是一些常见的张量运算：
-
-    1. **向量的分量**：$\mathbf{v} = v^i \mathbf{e}_i$（对 $i$ 求和）。
-    2. **线性泛函的作用**：$f(\mathbf{v}) = f_i v^i$。
-    3. **矩阵乘向量**：$(A\mathbf{v})^i = A^i_{\ j} v^j$。
-    4. **矩阵乘法**：$(AB)^i_{\ k} = A^i_{\ j} B^j_{\ k}$。
-    5. **迹**：$\text{tr}(A) = A^i_{\ i}$。
-
-!!! theorem "定理 21.6 (张量分量的变换律)"
-    设 $\{\mathbf{e}_i\}$ 和 $\{\tilde{\mathbf{e}}_i\}$ 是 $V$ 的两组基，基变换矩阵为 $P$：$\tilde{\mathbf{e}}_j = P^i_{\ j} \mathbf{e}_i$。则 $(r, s)$ 型张量 $T$ 的分量变换律为：
-
-    $$\tilde{T}^{i_1 \cdots i_r}_{j_1 \cdots j_s} = (P^{-1})^{i_1}_{\ k_1} \cdots (P^{-1})^{i_r}_{\ k_r} \, P^{l_1}_{\ j_1} \cdots P^{l_s}_{\ j_s} \, T^{k_1 \cdots k_r}_{l_1 \cdots l_s}.$$
-
-??? proof "证明"
-    对偶基的变换为 $\tilde{\mathbf{e}}^i = (P^{-1})^i_{\ j} \mathbf{e}^j$（利用 $\tilde{\mathbf{e}}^i(\tilde{\mathbf{e}}_k) = \delta^i_k$ 可导出）。因此
-
-    $$\tilde{T}^{i_1 \cdots i_r}_{j_1 \cdots j_s} = T(\tilde{\mathbf{e}}^{i_1}, \ldots, \tilde{\mathbf{e}}^{i_r}, \tilde{\mathbf{e}}_{j_1}, \ldots, \tilde{\mathbf{e}}_{j_s}).$$
-
-    将 $\tilde{\mathbf{e}}^{i_\alpha} = (P^{-1})^{i_\alpha}_{\ k_\alpha} \mathbf{e}^{k_\alpha}$ 和 $\tilde{\mathbf{e}}_{j_\beta} = P^{l_\beta}_{\ j_\beta} \mathbf{e}_{l_\beta}$ 代入，由 $T$ 的多线性性即得结果。
-
-## 21.5 对称张量与反对称张量
-
-<div class="context-flow" markdown>
-
-**分支**：$V^{\otimes k}$ 按置换群作用分解 → **对称**部分(Sym) + **反对称**部分(Alt) · Alt 是投影算子，$\text{Alt}^2 = \text{Alt}$ → 引出外代数
-
-</div>
-
-!!! definition "定义 21.10 (对称张量与反对称张量)"
-    设 $T \in V^{\otimes k} = \underbrace{V \otimes \cdots \otimes V}_{k}$ 是一个 $k$ 阶张量。
-
-    - $T$ 是**对称的**（symmetric），如果对任意置换 $\sigma \in S_k$，$T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}) = T(\mathbf{v}_1, \ldots, \mathbf{v}_k)$；分量上即 $T_{i_{\sigma(1)} \cdots i_{\sigma(k)}} = T_{i_1 \cdots i_k}$。
-    - $T$ 是**反对称的**（antisymmetric / alternating），如果 $T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}) = \text{sgn}(\sigma) \, T(\mathbf{v}_1, \ldots, \mathbf{v}_k)$；分量上即 $T_{i_{\sigma(1)} \cdots i_{\sigma(k)}} = \text{sgn}(\sigma) \, T_{i_1 \cdots i_k}$。
-
-!!! definition "定义 21.11 (对称化与反对称化算子)"
-    **对称化算子**（symmetrization operator）$\text{Sym}$ 和**反对称化算子**（antisymmetrization operator）$\text{Alt}$ 定义为：
-
-    $$\text{Sym}(T)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\sigma \in S_k} T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}),$$
-
-    $$\text{Alt}(T)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\sigma \in S_k} \text{sgn}(\sigma) \, T(\mathbf{v}_{\sigma(1)}, \ldots, \mathbf{v}_{\sigma(k)}).$$
-
-!!! theorem "定理 21.7 (对称化与反对称化的性质)"
-    1. $\text{Sym}$ 和 $\text{Alt}$ 是从 $V^{\otimes k}$ 到自身的投影算子（即 $\text{Sym}^2 = \text{Sym}$，$\text{Alt}^2 = \text{Alt}$）。
-    2. $\text{Sym}(T)$ 是对称张量，$\text{Alt}(T)$ 是反对称张量。
-    3. $T$ 是对称的当且仅当 $\text{Sym}(T) = T$；$T$ 是反对称的当且仅当 $\text{Alt}(T) = T$。
-
-??? proof "证明"
-    证明 $\text{Alt}$ 是投影算子。设 $S = \text{Alt}(T)$，则
-
-    $$\text{Alt}(S)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\tau \in S_k} \text{sgn}(\tau) S(\mathbf{v}_{\tau(1)}, \ldots, \mathbf{v}_{\tau(k)}).$$
-
-    由于 $S = \text{Alt}(T)$ 是反对称的，$S(\mathbf{v}_{\tau(1)}, \ldots, \mathbf{v}_{\tau(k)}) = \text{sgn}(\tau) S(\mathbf{v}_1, \ldots, \mathbf{v}_k)$。故
-
-    $$\text{Alt}(S)(\mathbf{v}_1, \ldots, \mathbf{v}_k) = \frac{1}{k!} \sum_{\tau \in S_k} \text{sgn}(\tau)^2 S(\mathbf{v}_1, \ldots, \mathbf{v}_k) = S(\mathbf{v}_1, \ldots, \mathbf{v}_k).$$
-
-    即 $\text{Alt}^2 = \text{Alt}$。其余性质类似可证。
-
-!!! example "例 21.6"
-    设 $T: \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R}$ 定义为 $T(\mathbf{u}, \mathbf{v}) = u_1 v_2$。则：
-
-    $$\text{Sym}(T)(\mathbf{u}, \mathbf{v}) = \frac{1}{2}(u_1 v_2 + u_2 v_1),$$
-
-    $$\text{Alt}(T)(\mathbf{u}, \mathbf{v}) = \frac{1}{2}(u_1 v_2 - u_2 v_1).$$
-
-    注意 $\text{Alt}(T)(\mathbf{u}, \mathbf{v})$ 恰好是 $\frac{1}{2} \det \begin{pmatrix} u_1 & u_2 \\ v_1 & v_2 \end{pmatrix}$。
-
-## 21.6 外代数
-
-<div class="context-flow" markdown>
-
-**核心**：楔积 $\wedge$ = 反对称化的张量积 → $\dim \Lambda^k(V) = \binom{n}{k}$ → $\Lambda^n(V)$ 一维 → **行列式是 $n$ 个向量的楔积在 $\Lambda^n$ 中的坐标**
-
-**链接**：Ch5 行列式的代数性质（多线性+反对称）在这里获得几何解释 · 叉积 = $\mathbb{R}^3$ 中 $\Lambda^2$ 的对偶
-
-</div>
-
-### 楔积与外幂
-
-!!! definition "定义 21.12 (外积/楔积)"
-    设 $V$ 是 $n$ 维向量空间。对 $\omega \in \Lambda^p(V^*)$，$\eta \in \Lambda^q(V^*)$（其中 $\Lambda^k(V^*)$ 是 $V^*$ 上的 $k$ 阶反对称张量空间），定义**楔积**（wedge product）$\omega \wedge \eta \in \Lambda^{p+q}(V^*)$ 为：
-
-    $$\omega \wedge \eta = \frac{(p+q)!}{p! \, q!} \, \text{Alt}(\omega \otimes \eta).$$
-
-    对于向量空间 $V$ 本身，**外幂**（exterior power）$\Lambda^k(V)$ 定义为 $V^{\otimes k}$ 中所有反对称张量构成的子空间。对 $\mathbf{v}_1, \ldots, \mathbf{v}_k \in V$，定义
-
-    $$\mathbf{v}_1 \wedge \mathbf{v}_2 \wedge \cdots \wedge \mathbf{v}_k = \sum_{\sigma \in S_k} \text{sgn}(\sigma) \, \mathbf{v}_{\sigma(1)} \otimes \cdots \otimes \mathbf{v}_{\sigma(k)}.$$
-
-!!! theorem "定理 21.8 (楔积的性质)"
-    楔积满足以下性质：
-
-    1. **双线性性**：$(\alpha \omega_1 + \beta \omega_2) \wedge \eta = \alpha (\omega_1 \wedge \eta) + \beta (\omega_2 \wedge \eta)$；
-    2. **结合律**：$(\omega \wedge \eta) \wedge \zeta = \omega \wedge (\eta \wedge \zeta)$；
-    3. **分次交换律**：$\omega \wedge \eta = (-1)^{pq} \eta \wedge \omega$，其中 $\omega \in \Lambda^p$，$\eta \in \Lambda^q$；
-    4. **反对称性**：$\mathbf{v} \wedge \mathbf{v} = 0$，$\forall \mathbf{v} \in V$。
-
-??? proof "证明"
-    证明第 3 条。设 $\sigma_0$ 是将 $(1, \ldots, p, p+1, \ldots, p+q)$ 变为 $(p+1, \ldots, p+q, 1, \ldots, p)$ 的置换。这个置换需要 $pq$ 次对换（将 $q$ 个元素依次移过 $p$ 个元素），因此 $\text{sgn}(\sigma_0) = (-1)^{pq}$。
-
-    由反对称张量的性质：
-
-    $$(\omega \wedge \eta)(\mathbf{v}_{\sigma_0(1)}, \ldots, \mathbf{v}_{\sigma_0(p+q)}) = (-1)^{pq} (\omega \wedge \eta)(\mathbf{v}_1, \ldots, \mathbf{v}_{p+q}).$$
-
-    而 $(\mathbf{v}_{\sigma_0(1)}, \ldots, \mathbf{v}_{\sigma_0(p+q)}) = (\mathbf{v}_{p+1}, \ldots, \mathbf{v}_{p+q}, \mathbf{v}_1, \ldots, \mathbf{v}_p)$，由楔积定义，这恰好给出 $(\eta \wedge \omega)(\mathbf{v}_1, \ldots, \mathbf{v}_{p+q})$。
-
-!!! theorem "定理 21.9 (外幂的维数)"
-    设 $\dim V = n$，则
-
-    $$\dim \Lambda^k(V) = \binom{n}{k}.$$
-
-    特别地，$\Lambda^0(V) = \mathbb{F}$，$\Lambda^1(V) = V$，$\Lambda^n(V)$ 是 $1$ 维的，$\Lambda^k(V) = \{0\}$（$k > n$）。
-
-??? proof "证明"
-    设 $\{\mathbf{e}_1, \ldots, \mathbf{e}_n\}$ 是 $V$ 的基。则
-
-    $$\{\mathbf{e}_{i_1} \wedge \mathbf{e}_{i_2} \wedge \cdots \wedge \mathbf{e}_{i_k} : 1 \leq i_1 < i_2 < \cdots < i_k \leq n\}$$
-
-    构成 $\Lambda^k(V)$ 的基（可直接验证线性无关和生成）。这些基向量的个数为 $\binom{n}{k}$。
-
-    当 $k > n$ 时，在 $\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_k}$ 中必有重复的基向量，由反对称性得 $\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_k} = 0$。
-
-!!! definition "定义 21.13 (外代数)"
-    $V$ 上的**外代数**（exterior algebra）定义为
-
-    $$\Lambda(V) = \bigoplus_{k=0}^{n} \Lambda^k(V),$$
-
-    配以楔积运算。$\Lambda(V)$ 是一个分次反交换代数（graded anti-commutative algebra），总维数为 $\sum_{k=0}^n \binom{n}{k} = 2^n$。
-
-### 行列式作为外积
-
-<div class="context-flow" markdown>
-
-**洞察**：$\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \det(A) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n$ ——行列式的 Leibniz 公式不再是"凭空定义"，而是楔积多线性+反对称的自然结果
-
-</div>
-
-!!! theorem "定理 21.10 (行列式的外积解释)"
-    设 $\mathbf{v}_1, \ldots, \mathbf{v}_n \in V$（$\dim V = n$），且 $\mathbf{v}_i = \sum_j a_{ji} \mathbf{e}_j$（即 $a_{ji}$ 是 $\mathbf{v}_i$ 的第 $j$ 个分量）。则
-
-    $$\mathbf{v}_1 \wedge \mathbf{v}_2 \wedge \cdots \wedge \mathbf{v}_n = \det(A) \, \mathbf{e}_1 \wedge \mathbf{e}_2 \wedge \cdots \wedge \mathbf{e}_n,$$
-
-    其中 $A = (a_{ij})$ 是以 $\mathbf{v}_j$ 为列的矩阵。
-
-??? proof "证明"
-    由楔积的多线性性和反对称性：
-
-    $$\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \left(\sum_{i_1} a_{i_1 1} \mathbf{e}_{i_1}\right) \wedge \cdots \wedge \left(\sum_{i_n} a_{i_n n} \mathbf{e}_{i_n}\right)$$
-
-    $$= \sum_{i_1, \ldots, i_n} a_{i_1 1} \cdots a_{i_n n} \, \mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_n}.$$
-
-    由于 $\mathbf{e}_{i_1} \wedge \cdots \wedge \mathbf{e}_{i_n} = 0$ 若 $(i_1, \ldots, i_n)$ 中有重复指标，非零项仅当 $(i_1, \ldots, i_n)$ 是 $(1, \ldots, n)$ 的置换 $\sigma$ 时出现。此时 $\mathbf{e}_{\sigma(1)} \wedge \cdots \wedge \mathbf{e}_{\sigma(n)} = \text{sgn}(\sigma) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n$。故
-
-    $$\mathbf{v}_1 \wedge \cdots \wedge \mathbf{v}_n = \left(\sum_{\sigma \in S_n} \text{sgn}(\sigma) \, a_{\sigma(1),1} \cdots a_{\sigma(n),n}\right) \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n = \det(A) \, \mathbf{e}_1 \wedge \cdots \wedge \mathbf{e}_n.$$
-
-!!! example "例 21.7"
-    设 $V = \mathbb{R}^3$，$\mathbf{v}_1 = \begin{pmatrix} 1 \\ 2 \\ 0 \end{pmatrix}$，$\mathbf{v}_2 = \begin{pmatrix} 0 \\ 1 \\ 3 \end{pmatrix}$。则
-
-    $$\mathbf{v}_1 \wedge \mathbf{v}_2 = (1 \cdot 1 - 2 \cdot 0)(\mathbf{e}_1 \wedge \mathbf{e}_2) + (1 \cdot 3 - 0 \cdot 0)(\mathbf{e}_1 \wedge \mathbf{e}_3) + (2 \cdot 3 - 0 \cdot 1)(\mathbf{e}_2 \wedge \mathbf{e}_3)$$
-
-    $$= \mathbf{e}_1 \wedge \mathbf{e}_2 + 3 \, \mathbf{e}_1 \wedge \mathbf{e}_3 + 6 \, \mathbf{e}_2 \wedge \mathbf{e}_3.$$
-
-    这对应于 $\mathbf{v}_1 \times \mathbf{v}_2 = (6, -3, 1)^T$（外积与叉积的联系）。
-
-## 21.7 张量分解
-
-<div class="context-flow" markdown>
-
-**过渡**：理论 → 应用 · 矩阵 SVD(Ch8) 推广到高阶 → **CP 分解**（秩一之和）/**Tucker 分解**（核心张量+因子矩阵）
-
-**警告**：张量秩 ≠ 矩阵秩——计算 NP-hard，实秩 ≠ 复秩 · 链接 Ch25 低秩近似/推荐系统
-
-</div>
-
-张量分解（tensor decomposition）是将高阶张量表示为简单张量之和的技术，在信号处理、机器学习和化学计量学中有广泛应用。
-
-### CP 分解
-
-!!! definition "定义 21.14 (CP 分解)"
-    **CP 分解**（Canonical Polyadic decomposition，也称 CANDECOMP/PARAFAC 分解）将一个 $k$ 阶张量 $\mathcal{T} \in \mathbb{R}^{n_1 \times n_2 \times \cdots \times n_k}$ 表示为秩一张量之和：
-
-    $$\mathcal{T} = \sum_{r=1}^{R} \lambda_r \, \mathbf{a}^{(1)}_r \otimes \mathbf{a}^{(2)}_r \otimes \cdots \otimes \mathbf{a}^{(k)}_r,$$
-
-    其中 $\lambda_r \in \mathbb{R}$，$\mathbf{a}^{(i)}_r \in \mathbb{R}^{n_i}$。使上式成立的最小正整数 $R$ 称为 $\mathcal{T}$ 的**张量秩**（tensor rank）。
-
-!!! theorem "定理 21.11 (张量秩与矩阵秩的区别)"
-    与矩阵秩不同，张量秩具有以下性质：
-
-    1. 张量秩可能超过其任意模展开（mode unfolding）的矩阵秩；
-    2. 在实数域和复数域上，同一张量的秩可能不同；
-    3. 计算张量秩是 NP-hard 问题。
-
-??? proof "证明"
-    第 1 条的经典反例：考虑 $2 \times 2 \times 2$ 张量 $\mathcal{T}$，其分量为 $\mathcal{T}_{111} = \mathcal{T}_{222} = 1$，其余分量为 $0$。可验证其三个模展开的矩阵秩均为 $2$，但 $\mathcal{T}$ 的张量秩为 $2$（在实数域上）。
-
-    第 2 条的例子：存在张量使得实秩为 $3$ 但复秩为 $2$。例如某些 $2 \times 2 \times 2$ 张量的实秩为 $3$，而在 $\mathbb{C}$ 上可分解为 $2$ 个秩一张量之和。
-
-    第 3 条已由 Hillar 和 Lim (2013) 严格证明。
-
-### Tucker 分解
-
-!!! definition "定义 21.15 (Tucker 分解)"
-    **Tucker 分解**（Tucker decomposition）将 $k$ 阶张量表示为一个核心张量（core tensor）与各模因子矩阵的乘积：
-
-    $$\mathcal{T} = \mathcal{G} \times_1 U^{(1)} \times_2 U^{(2)} \times_3 \cdots \times_k U^{(k)},$$
-
-    其中 $\mathcal{G} \in \mathbb{R}^{r_1 \times r_2 \times \cdots \times r_k}$ 是核心张量，$U^{(i)} \in \mathbb{R}^{n_i \times r_i}$ 是因子矩阵，$\times_i$ 表示第 $i$ 模的矩阵乘积。
-
-    在分量形式下：
-
-    $$\mathcal{T}_{i_1 i_2 \cdots i_k} = \sum_{j_1=1}^{r_1} \cdots \sum_{j_k=1}^{r_k} \mathcal{G}_{j_1 j_2 \cdots j_k} \, U^{(1)}_{i_1 j_1} U^{(2)}_{i_2 j_2} \cdots U^{(k)}_{i_k j_k}.$$
-
-!!! example "例 21.8"
-    考虑一个 $3 \times 4 \times 2$ 的三阶张量 $\mathcal{T}$，它的 CP 分解为
-
-    $$\mathcal{T} = \mathbf{a}_1 \otimes \mathbf{b}_1 \otimes \mathbf{c}_1 + \mathbf{a}_2 \otimes \mathbf{b}_2 \otimes \mathbf{c}_2,$$
-
-    其中 $\mathbf{a}_r \in \mathbb{R}^3$，$\mathbf{b}_r \in \mathbb{R}^4$，$\mathbf{c}_r \in \mathbb{R}^2$。分量形式为
-
-    $$\mathcal{T}_{ijk} = a_{1i} b_{1j} c_{1k} + a_{2i} b_{2j} c_{2k}, \quad 1 \leq i \leq 3, \ 1 \leq j \leq 4, \ 1 \leq k \leq 2.$$
-
-    这是一个秩为 $2$ 的张量。Tucker 分解则可以取 $U^{(1)} \in \mathbb{R}^{3 \times 2}$，$U^{(2)} \in \mathbb{R}^{4 \times 2}$，$U^{(3)} \in \mathbb{R}^{2 \times 2}$，核心张量 $\mathcal{G} \in \mathbb{R}^{2 \times 2 \times 2}$。
-
-## 21.8 张量的应用
-
-<div class="context-flow" markdown>
-
-**应用面**：推荐系统(用户⊗物品⊗时间) · 量子计算($(\mathbb{C}^2)^{\otimes n}$，纠缠 = 张量秩 > 1) → 张量网络、MPS 是量子多体物理的计算语言
-
-</div>
-
-### 多维数据分析
-
-张量方法在数据科学中的应用越来越广泛。多维数据（如用户-物品-时间推荐数据、彩色图像序列、脑电信号等）自然地用张量来表示。
-
-!!! example "例 21.9"
-    **推荐系统中的张量分解**：设有 $m$ 个用户、$n$ 个物品和 $p$ 个时间点。用户 $i$ 在时间 $k$ 对物品 $j$ 的评分构成一个三阶张量 $\mathcal{T} \in \mathbb{R}^{m \times n \times p}$。CP 分解将其表示为
-
-    $$\mathcal{T} \approx \sum_{r=1}^{R} \mathbf{u}_r \otimes \mathbf{v}_r \otimes \mathbf{w}_r,$$
-
-    其中 $\mathbf{u}_r \in \mathbb{R}^m$ 编码用户特征，$\mathbf{v}_r \in \mathbb{R}^n$ 编码物品特征，$\mathbf{w}_r \in \mathbb{R}^p$ 编码时间模式。低秩近似自然地进行数据补全和降维。
-
-### 量子信息中的张量
-
-!!! example "例 21.10"
-    **量子纠缠态**。在量子计算中，$n$ 个量子比特（qubit）的状态空间是 $(\mathbb{C}^2)^{\otimes n}$，即 $n$ 个 $\mathbb{C}^2$ 的张量积，维数为 $2^n$。一般的量子态 $|\psi\rangle \in (\mathbb{C}^2)^{\otimes n}$ 可以写为
-
-    $$|\psi\rangle = \sum_{i_1, \ldots, i_n \in \{0,1\}} c_{i_1 \cdots i_n} |i_1\rangle \otimes \cdots \otimes |i_n\rangle.$$
-
-    当 $|\psi\rangle$ 不能写成 $|\phi_1\rangle \otimes \cdots \otimes |\phi_n\rangle$ 的形式时，称该态是**纠缠的**（entangled）。例如，Bell 态
-
-    $$|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$$
-
-    是纠缠态。判定纠缠与张量秩密切相关。
-
-!!! proposition "命题 21.2 (纠缠与张量秩)"
-    纯态 $|\psi\rangle \in \mathcal{H}_A \otimes \mathcal{H}_B$ 是可分的（separable）当且仅当它作为张量的秩为 $1$，即可以写成 $|\psi\rangle = |\phi_A\rangle \otimes |\phi_B\rangle$。纠缠态对应张量秩大于 $1$ 的情形。
-
-??? proof "证明"
-    这是张量积定义的直接推论。$|\psi\rangle$ 可分意味着 $|\psi\rangle = |\phi_A\rangle \otimes |\phi_B\rangle$，这恰好是一个简单（秩一）张量。反之，若 $|\psi\rangle$ 的张量秩为 $1$，则由定义它可以写成一个简单张量，即可分态。
+---
 
 ## 练习题
 
-****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ****
-??? success "参考答案"
-    ## 本章小结
+**1. [基础] 若 $V$ 维数为 2，$W$ 维数为 3，求 $V \otimes W$ 的维数并列出其基向量。**
 
-本章将线性映射的概念推广到多变元情形，建立了几何与代数的统一语言——张量理论：
+??? success "参考答案"
+    **计算：**
+    1. $\dim(V \otimes W) = 2 \cdot 3 = 6$。
+    2. 设 $V$ 的基为 $\{e_1, e_2\}$，$W$ 的基为 $\{f_1, f_2, f_3\}$。
+    **基向量**：$\{e_1 \otimes f_1, e_1 \otimes f_2, e_1 \otimes f_3, e_2 \otimes f_1, e_2 \otimes f_2, e_2 \otimes f_3\}$。
 
+**2. [张量积性质] 证明：$(v_1 + v_2) \otimes w = v_1 \otimes w + v_2 \otimes w$。**
 
-****：将线性泛函视为独立的空间 $V^*$，引出了双对偶的自然同构。
+??? success "参考答案"
+    **理由：**
+    这是由张量积定义中的**双线性性**（Bilinearity）直接保证的。张量积算子 $\otimes$ 关于每一个输入位置都是线性的。
 
-****：通过泛性质严格定义了张量积 $V \otimes W$，揭示了它如何将所有的双线性问题转化为单线性问题。
+**3. [矩阵视角] 证明：任何 $m \times n$ 矩阵都可以视为 $V \otimes W^*$ 中的一个张量。**
 
-****：用上下指标区分逆变和协变，推导了张量在坐标变换下必须遵循的代数规则。
+??? success "参考答案"
+    **代数映射：**
+    1. 线性变换 $T: W \to V$ 构成了空间 $\mathcal{L}(W, V)$。
+    2. 存在经典同构：$\mathcal{L}(W, V) \cong V \otimes W^*$。
+    3. 一个纯张量 $v \otimes f$ 对应于算子 $T(w) = f(w)v$，这正是一个秩为 1 的矩阵。
+    **结论**：矩阵的加法与张量积的性质完全相容。
 
-****：通过反对称化算子定义了楔积 $\wedge$，优雅地证明了行列式的多线性、反对称和体积缩放的几何本质。
+**4. [计算] 给定 $v = (1, 2)^T, w = (0, 3)^T$，写出其张量积 $v \otimes w$（作为矩阵表示）。**
 
-****：超越了传统的矩阵分解（SVD），简述了高阶张量的 CP 和 Tucker 分解，以及它们在表示量子纠缠态和高维数据挖掘中的前沿应用。
+??? success "参考答案"
+    **计算步骤：**
+    对于坐标空间，张量积对应于外积 $v w^T$。
+    $v \otimes w = \begin{pmatrix} 1 \cdot 0 & 1 \cdot 3 \\ 2 \cdot 0 & 2 \cdot 3 \end{pmatrix} = \begin{pmatrix} 0 & 3 \\ 0 & 6 \end{pmatrix}$。
+
+**5. [张量秩] 判定上述张量 $\begin{pmatrix} 0 & 3 \\ 0 & 6 \end{pmatrix}$ 的秩。**
+
+??? success "参考答案"
+    **结论：秩为 1。**
+    **理由**：该矩阵已经由两个向量的张量积（外积）直接给出。按照定义，能由单个纯张量表示的量，其秩为 1。
+
+**6. [高阶张量] 一个 $3 \times 3 \times 3$ 的张量有多少个元素？**
+
+??? success "参考答案"
+    **计算：**
+    $3 \cdot 3 \cdot 3 = 27$。
+    随着阶数的增加，元素的个数呈指数级增长，这就是所谓的“维度灾难”。
+
+**7. [指标记号] 写出张量缩并 (Contraction) $C_{ik} = \sum_j A_{ij} B_{jk}$ 的爱因斯坦求和约定形式。**
+
+??? success "参考答案"
+    **结论：**
+    $C_{ik} = A_{ij} B^{jk}$。
+    在爱因斯坦约定中，上下重复出现的指标隐含了求和。这极大地简化了多线性算子的书写。
+
+**8. [CP分解] 简述 CP 分解在数据分析中的作用。**
+
+??? success "参考答案"
+    **解释：**
+    CP 分解旨在寻找数据中最本质的、独立的分量。例如在分析（时间 $\times$ 频率 $\times$ 空间）的三维信号时，CP 分解可以将复杂的张量拆解为若干个简单的“特征时间线”、“特征频谱”和“特征位置图”的组合，实现跨维度的特征提取。
+
+**9. [唯一性] 与矩阵 SVD 相比，高阶张量的 CP 分解在唯一性上有什么特点？**
+
+??? success "参考答案"
+    **核心优势：**
+    在非常宽松的条件下，高阶张量的 CP 分解是**唯一**的（不计缩放和排列顺序）。
+    对比：矩阵分解 $A=BC$ 存在无限多种旋转可能性（除非施加正交性或非负性约束）。这使得张量分解在不需要人为约束的情况下就能实现自动的信号分离（盲源分离）。
+
+**10. [应用] 为什么量子纠缠态不能进行简单的张量分解？**
+
+??? success "参考答案"
+    **物理深度：**
+    1. 一个多粒子联合态 $|\psi\rangle$ 属于 Hilbert 空间的张量积 $H_1 \otimes H_2$。
+    2. 如果 $|\psi\rangle$ 可以写成 $v_1 \otimes v_2$（秩 1 张量），则称其为可分态（无纠缠）。
+    3. **纠缠态**定义为那些秩大于 1 的张量。由于无法分解为独立的成分，测量其中一个粒子会瞬间影响另一个粒子的描述，这正是张量叠加性的物理体现。
+
+## 本章小结
+
+多线性代数将线性思维推向了全维度空间：
+
+1.  **构造的通用性**：张量积通过泛性质确立了多轴数据交互的唯一合法方式，为描述力学应力、电磁场和量子态提供了统一模板。
+2.  **秩的进化**：从矩阵秩到张量秩的演进揭示了高维空间中“结构简化”的复杂性，同时也带来了分解唯一性等优良特征。
+3.  **信息的编织**：张量理论证明了复杂的系统性质往往隐藏在指标间的相互耦合中，是现代大数据分析和高能物理不可或缺的代数基石。

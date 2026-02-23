@@ -1,104 +1,123 @@
-# Chapter 70B: Linear Algebra in Molecular Biology
+# Chapter 70B: Molecular Biology and Genomics
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Graph Theory (Ch27) · Matrix Decompositions (Ch10) · Non-negative Matrices (Ch17) · Probability Theory
+**Prerequisites**: Probability Theory · Matrix Exponential (Ch13) · Markov Chains (Ch71) · Vector Spaces (Ch04)
 
-**Chapter Outline**: Scoring Matrices for Sequence Alignment (BLOSUM, PAM) → Markov Models of Evolution (Jukes-Cantor, Kimura) → Phylogenetic Trees & Distance Matrices → Gene Expression Profiling (PCA and NMF) → Metabolic Network Analysis: The Stoichiometric Matrix $S$ → Flux Balance Analysis (FBA) and the Null Space of $S$ → Protein Folding & Graph Laplacians → Applications: Drug Discovery, Cancer Subtyping, and Gene Regulatory Networks
+**Chapter Outline**: Digital Encoding of Genetic Information → Vector Representation of DNA Bases $\{A, C, G, T\}$ → Substitution Probability Matrices → Core Model: The Jukes-Cantor (JC69) Model and its Algebraic Structure → The Kimura Two-Parameter Model → Algebraic Derivation of Evolutionary Distance via Matrix Logarithms → Linear Scoring Functions in Sequence Alignment → Applications: Phylogenetic Tree Construction, Paternity Testing, and Clustering of Gene Expression Profiles
 
-**Extension**: Molecular biology is the digital encoding of life; it uses linear algebra to link microscopic chemical reactions to macroscopic biological phenotypes, proving that metabolic processes are essentially linear programs under stoichiometric constraints.
+**Extension**: Genomics is the "informational reconstruction" of linear algebra; it simplifies the history of life's evolution into the cumulative product of mutation matrices over millions of years. It proves that differences between species can be quantified as the distance between operators in a state space—the algebraic engine for understanding molecular evolution and precision medicine.
 
 </div>
 
-How can we find evidence of species evolution within massive DNA sequences? How can gene chip data predict the occurrence of cancer? **Molecular Biology Linear Algebra** transforms the interactions of biological macromolecules into matrix operations. From scoring matrices describing amino acid substitution probabilities to null-space analysis of metabolic flows, linear algebra provides precise mathematical tools for decoding the blueprint of life.
+The code of life is a sequence woven from four bases: A, C, G, and T. At the molecular level, evolution is essentially the stochastic substitution of these bases over time. **Linear Algebra** provides the framework to describe this probabilistic evolution via **Substitution Matrices**. Using matrix exponentials and logarithms, we can infer common ancestors from millions of years ago based on current sequence discrepancies. This chapter introduces the algebraic theory at the heart of computational biology and evolutionary genomics.
 
 ---
 
-## 70B.1 Sequence Alignment and Scoring Matrices
+## 70B.1 Base States and Substitution Matrices
 
-!!! definition "Definition 70B.1 (Substitution Matrix)"
-    In sequence alignment, a **substitution matrix** (e.g., BLOSUM62 or PAM) is a $20 \times 20$ symmetric matrix whose entries $s_{ij}$ represent the log-likelihood score of amino acid $i$ being replaced by amino acid $j$ through evolution.
-    **Function**: it transforms biological "similarity" into computable algebraic sums.
-
----
-
-## 70B.2 Metabolic Networks and Stoichiometry
-
-!!! definition "Definition 70B.2 (Stoichiometric Matrix $S$)"
-    For a system with $m$ metabolites and $n$ reactions, the **Stoichiometric Matrix** $S$ is an $m \times n$ matrix where $s_{ij}$ is the participating coefficient of metabolite $i$ in reaction $j$ (positive for products, negative for reactants).
-
-!!! theorem "Theorem 70B.1 (Steady-State Flux)"
-    At metabolic steady state, the rate of change of metabolite concentrations is zero:
-    $$S \mathbf{v} = 0$$
-    where $\mathbf{v}$ is the vector of reaction rates (fluxes). This means all possible steady-state fluxes lie in the **null space of $S$**, $N(S)$.
+!!! definition "Definition 70B.1 (State Space)"
+    The state of a DNA site is represented by 4D basis vectors:
+    $|A\rangle = (1,0,0,0)^T, |C\rangle = (0,1,0,0)^T, |G\rangle = (0,0,1,0)^T, |T\rangle = (0,0,0,1)^T$.
+    A substitution matrix $M(t)$ has entries $m_{ij}$ representing the probability that base $j$ changes to base $i$ over time $t$.
 
 ---
 
-## 70B.3 Flux Balance Analysis (FBA)
+## 70B.2 The Jukes-Cantor (JC69) Model
 
-!!! technique "FBA Optimization"
-    Since the dimension of $N(S)$ is typically large (the system is redundant), organisms choose fluxes to optimize specific objectives, such as maximizing biomass yield.
-    $$\max \mathbf{c}^T \mathbf{v} \quad \text{subject to } S\mathbf{v} = 0, \quad \mathbf{v}_{\min} \le \mathbf{v} \le \mathbf{v}_{\max}$$
-    This is a classic **linear programming** problem.
+!!! definition "Definition 70B.2 (JC69 Model)"
+    Assuming equal mutation rates among all bases, the rate matrix $Q$ has a symmetric structure:
+    $$Q = \begin{pmatrix} -3\alpha & \alpha & \alpha & \alpha \\ \alpha & -3\alpha & \alpha & \alpha \\ \alpha & \alpha & -3\alpha & \alpha \\ \alpha & \alpha & \alpha & -3\alpha \end{pmatrix}$$
+    The evolution matrix is $M(t) = e^{Qt}$.
+
+---
+
+## 70B.3 Algebraic Calculation of Evolutionary Distance
+
+!!! theorem "Theorem 70B.1 (Distance Formula)"
+    If the observed proportion of mismatched sites between two sequences is $p$, the evolutionary distance $d$ under the JC69 model is:
+    $$d = -\frac{3}{4} \ln(1 - \frac{4}{3}p)$$
+    **Significance**: This logarithmic formula corrects for underestimation caused by multiple mutations returning a site to its original state (back-mutations).
 
 ---
 
 ## Exercises
 
+**1. [Basics] Prove that each row of the JC69 rate matrix $Q$ sums to 0.**
 
-****
 ??? success "Solution"
-     Assuming the metabolite order is $(A, B, C)^T$, the vector is $(-1, -1, 1)^T$.
+    **Proof:**
+    1. Each row contains one $-3\alpha$ and three $\alpha$s.
+    2. Total sum $S = -3\alpha + \alpha + \alpha + \alpha = 0$.
+    **Physical Meaning**: This ensures the rows of the transition matrix $M(t) = e^{Qt}$ sum to 1 (probability conservation), consistent with the definition of a stochastic matrix.
 
+**2. [Calculation] Find the multiplicity of the non-zero eigenvalue $-4\alpha$ for the matrix $Q$ in the JC69 model.**
 
-****
 ??? success "Solution"
-     $\dim N(S) = 15 - 8 = 7$.
+    **Analysis:**
+    1. $Q$ can be written as $4\alpha (\frac{1}{4}J - I)$, where $J$ is the all-ones matrix.
+    2. The eigenvalues of $J$ are $\{4, 0, 0, 0\}$.
+    3. The eigenvalues of $Q$ are $4\alpha(\frac{1}{4} \cdot 4 - 1) = 0$ and three instances of $4\alpha(\frac{1}{4} \cdot 0 - 1) = -4\alpha$.
+    **Conclusion**: The multiplicity is 3.
 
+**3. [Calculation] Find the diagonal entry $P_{AA}(t)$ of the JC69 transition matrix $M(t)$.**
 
-****
 ??? success "Solution"
-     Positive values mean the substitution occurs more frequently in evolution than expected by chance (conserved); negative values mean the substitution is rare and likely disrupts protein function.
+    **Using the Matrix Exponential:**
+    1. Diagonalizing $Q$ yields eigenvalues 0 and $-4\alpha$.
+    2. The exponential map gives $e^0=1$ and $e^{-4\alpha t}$.
+    3. The combination yields $P_{AA}(t) = \frac{1}{4} + \frac{3}{4}e^{-4\alpha t}$.
+    **Conclusion**: As $t \to \infty$, the probability of remaining base A approaches $1/4$ (uniform distribution).
 
+**4. [Distance] For two DNA sequences of 100 bp with 10 differences, calculate the JC distance.**
 
-****
 ??? success "Solution"
-     Gene data is extremely high-dimensional (tens of thousands of genes). PCA extracts the principal components that define cell states (e.g., healthy vs. diseased), significantly reducing noise.
+    **Steps:**
+    1. Proportion of differences $p = 10/100 = 0.1$.
+    2. Formula: $d = -0.75 \ln(1 - 1.333 \cdot 0.1) = -0.75 \ln(0.8667)$.
+    3. $\ln(0.8667) \approx -0.143$.
+    4. $d \approx -0.75 \cdot (-0.143) \approx 0.107$.
+    **Conclusion**: The estimated actual number of mutations is 10.7 per 100 sites (correcting for hidden mutations).
 
+**5. [Kimura] What is the Kimura Two-Parameter (K2P) model, and how does its matrix structure differ?**
 
-****
 ??? success "Solution"
-     It is a symmetric stochastic matrix where the eigenvalues reflect the rate at which nucleotide distributions tend toward uniformity over time.
+    **Difference:**
+    K2P distinguishes between **Transitions** (A-G or C-T) and **Transversions**. In the rate matrix, the single rate $\alpha$ is split into $\alpha$ and $\beta$. This reflects the biological reality that substitutions between bases with similar chemical structures are more frequent.
 
+**6. [Property] Prove that the eigenvalues $\lambda$ of a substitution matrix $M(t)$ satisfy $|\lambda| \le 1$.**
 
-****
 ??? success "Solution"
-     A reaction such that setting its rate to zero in the $S\mathbf{v}=0$ constraint forces the objective function (e.g., growth rate) to zero.
+    **Reasoning:**
+    $M(t)$ is a stochastic matrix (rows sum to 1 and entries are non-negative). By spectral radius properties (Ch17), the maximum eigenvalue of a stochastic matrix is 1, and all others lie within the unit circle.
 
+**7. [Phylogeny] Briefly state the role of linear algebra in building phylogenetic trees.**
 
-****
 ??? success "Solution"
-     It represents the structural compactness or "folding rate" of the protein; a smaller $\lambda_2$ corresponds to more loosely connected, flexible regions.
+    By computing a distance matrix $D$ between species, algorithms like **Neighbor-Joining** use linear transformations to recursively reduce the matrix and group the closest nodes, reconstructing the branching structure of life's evolution.
 
+**8. [Limits] If two sequences are completely random ($p=0.75$), what happens to the JC distance?**
 
-****
 ??? success "Solution"
-     $\mathbf{v} = (1, 1)^T$. Physical meaning: This is a reversible reaction ($A \leftrightarrow B$) where rates are equal at steady state.
+    **Calculation:**
+    $1 - \frac{4}{3}(0.75) = 1 - 1 = 0$.
+    $\ln(0) \to -\infty$.
+    **Significance**: When differences reach 75% (the limit for 4 random bases), all information of a common ancestor is lost. The distance tends to infinity, and algebraic reconstruction becomes impossible.
 
+**9. [PCA] Why is PCA useful for gene expression data?**
 
-****
 ??? success "Solution"
-     NMF results are non-negative, allowing the decomposition of gene expression into additive "modules," which is more consistent with biological intuitions of gene co-regulation.
+    Gene expression matrices have thousands of dimensions. PCA projects this data onto principal components like "tissue type" or "disease state." By finding the eigenvectors of the covariance matrix, linear algebra automatically identifies clusters of core genes responsible for sample variance.
 
-****
+**10. [Application] What is matrix analysis of "Codon Usage Bias"?**
+
 ??? success "Solution"
-    ## Chapter Summary
+    Different species favor different triplets (codons) to encode the same amino acid. By constructing a $64 \times N$ matrix of codon frequencies and performing Correspondence Analysis (a generalized SVD), researchers can reveal differences in translation efficiency and evolutionary positioning between species.
 
-Linear algebra in molecular biology establishes the rigorous format of life processes:
+## Chapter Summary
 
+Linear algebra is the "molecular clock" decoding the history of life:
 
-****: Through scoring matrices and Markov chains, this theory quantifies the passage of time and the accumulation of mutations as spectral properties, providing the mathematical skeleton for reconstructing the Tree of Life.
-
-****: Stoichiometric matrices prove that life is not just a biochemical coincidence but a necessity under mass conservation and flux balance, establishing the computational cornerstone of systems biology.
-
-****: Matrix decomposition techniques peel away the ordered regulatory modules from chaotic genomic data, proving that high-dimensional life signals follow surprisingly simple linear superposition logic at their core.
+1.  **Algebraization of Probability**: Substitution matrices transform microscopic random changes into macroscopic matrix exponential evolutions, establishing dynamical standards for evolutionary processes.
+2.  **Topological Correction of Distance**: The matrix logarithm formula proves that visible variations are just the tip of the iceberg, providing the only reliable algebraic correction for true genetic distance.
+3.  **Dimension Reduction of Information**: From sequence alignment to gene clustering, linear algebra extracts critical structural modes from massive biological datasets, supporting modern computational biology and precision medicine.

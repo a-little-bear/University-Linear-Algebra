@@ -2,120 +2,127 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: State-Space Control (Ch66A) · Positive Definite Matrices (Ch16) · Matrix Equations (Ch20) · Matrix Inequalities (Ch18)
+**Prerequisites**: State-Space and System Realization (Ch66A) · Matrix Equations (Ch20) · Matrix Inequalities (Ch18) · Convex Optimization (Ch25)
 
-**Chapter Outline**: From Stabilization to Optimization → The Linear Quadratic Regulator (LQR) Model → Solving the Algebraic Riccati Equation (ARE) → Linear Quadratic Gaussian (LQG) Control and the Separation Principle → Motivation for Robustness (System Uncertainty) → Definition of $H_2$ and $H_\infty$ Norms → The Small Gain Theorem → Robust Control Design via LMIs → Applications: High-Performance Aircraft, Active Suspension, and Precision Manufacturing
+**Chapter Outline**: From Feedback to Performance Optimality → Mathematical Model of the Linear Quadratic Regulator (LQR) → The Core Operator: Algebraic Riccati Equation (ARE) → Optimal Feedback Gain $K = R^{-1} B^T P$ → System Stability: Matrix Form of Lyapunov Stability Theorem → Motivation for Robustness → $H_\infty$ Control and the Small Gain Theorem → Modern Methods: Dominance of Linear Matrix Inequalities (LMI) in Control Synthesis → Applications: UAV Balance Control, Robust Disturbance Rejection in Chemical Processes, and Satellite Orbit Precision Optimization
 
-**Extension**: Optimal control seeks the "least-cost" path of evolution, while robust control seeks the "most-resilient" defense strategy against disturbances; they elevate controller design from simple pole placement to multi-objective, matrix-norm optimization.
+**Extension**: Optimal control is the "pinnacle of performance" in linear algebra; it transforms controller design into finding roots of specific matrix equations. It proves that system stability and disturbance rejection can be guaranteed entirely by the spectral distribution of operators and the feasible regions of matrix inequalities—the mathematical core of modern precision industry.
 
 </div>
 
-After achieving basic stabilization, the next engineering goal is often "optimality." We want the system to reach its target with minimum energy consumption or maximum speed. **Optimal Control** utilizes quadratic cost functions to provide standard algebraic solutions. Meanwhile, facing real-world fluctuations in model parameters, **Robust Control** ensures system safety by minimizing operator norms. This chapter explores these advanced algebraic topics in modern control theory.
+After solving the problem of whether a system is controllable, engineers focus on how to control it "best." **Optimal Control** seeks a control law that minimizes a cost function (such as energy consumption or error accumulation). **Robust Control** further considers model uncertainties. This chapter demonstrates how matrix equations and inequalities in linear algebra serve as the ultimate blueprint for designing stable, efficient, and robust control systems.
 
 ---
 
 ## 66B.1 Linear Quadratic Regulator (LQR)
 
-!!! definition "Definition 66B.1 (The LQR Problem)"
-    Given a system $\dot{\mathbf{x}} = A\mathbf{x} + B\mathbf{u}$, find the control sequence $\mathbf{u}(t)$ that minimizes the cost function $J$:
-    $$J = \int_0^\infty (\mathbf{x}^T Q \mathbf{x} + \mathbf{u}^T R \mathbf{u}) dt$$
-    where $Q \succeq 0$ penalizes state deviation and $R \succ 0$ penalizes energy consumption.
+!!! definition "Definition 66B.1 (LQR Problem)"
+    Given a system $\dot{x} = Ax + Bu$, minimize the quadratic cost function:
+    $$J = \int_0^\infty (x^T Q x + u^T R u) dt$$
+    where $Q \succeq 0$ penalizes state deviations and $R \succ 0$ penalizes control energy.
 
-!!! theorem "Theorem 66B.1 (Optimal LQR Solution)"
-    The optimal control law is a state feedback $\mathbf{u} = -K\mathbf{x}$, where:
+!!! theorem "Theorem 66B.1 (LQR Optimal Solution)"
+    The optimal control law is the linear feedback $\mathbf{u}(t) = -K \mathbf{x}(t)$, where the gain matrix is:
     $$K = R^{-1} B^T P$$
     and $P$ is the unique positive definite solution to the **Algebraic Riccati Equation (ARE)**:
     $$A^T P + PA - P B R^{-1} B^T P + Q = 0$$
 
 ---
 
-## 66B.2 Linear Quadratic Gaussian (LQG) and Separation
+## 66B.2 $H_\infty$ Control and Robustness
 
-!!! technique "LQG Control"
-    In the presence of measurement and process noise, LQG combines optimal estimation (the Kalman filter) with optimal control (LQR).
-    **Separation Principle**: Proves that the gains for the optimal estimator and the optimal controller can be designed independently. This greatly simplifies the synthesis of complex systems.
-
----
-
-## 66B.3 Robust Control and the $H_\infty$ Norm
-
-!!! definition "Definition 66B.2 (The $H_\infty$ Norm)"
-    For a system transfer function $G(s)$, the $H_\infty$ norm is the maximum singular value of its frequency response:
-    $$\|G\|_\infty = \sup_{\omega} \sigma_{\max}(G(i\omega))$$
-    It represents the maximum amplification factor of external disturbances.
-
-!!! theorem "Theorem 66B.2 (Small Gain Theorem)"
-    A closed-loop system with uncertainty feedback $\Delta$ is stable if the product of the loop gains satisfies:
-    $$\|G\|_\infty \|\Delta\|_\infty < 1$$
-    This provides a rigorous mathematical criterion for evaluating model simplification errors.
+!!! definition "Definition 66B.2 ($H_\infty$ Norm)"
+    The $H_\infty$ norm of a system represents the maximum amplification the system can exert on an external disturbance.
+    **Small Gain Theorem**: If the $H_\infty$ norm of a closed-loop system is less than 1, then the system is robustly stable against any non-linear perturbation with a norm less than 1.
 
 ---
 
-## 66B.4 Controller Design via LMIs
+## 66B.3 LMI and Control Synthesis
 
-!!! technique "LMI-based Design"
-    Modern control design often avoids explicit equation solving, instead framing stability, decay rate, and $H_\infty$ performance as a set of **Linear Matrix Inequalities (LMI)**.
-    $$A^T P + PA + P B R^{-1} B^T P + Q \prec 0 \quad (\text{solved for } P \text{ via interior point methods})$$
+!!! technique "Technique: Linear Matrix Inequalities (LMI)"
+    Modern control design often solves a set of LMIs rather than explicit equations. For example, determining stability is equivalent to finding $P \succ 0$ such that:
+    $$A^T P + PA \prec 0$$
+    Using convex optimization tools, we can satisfy multiple constraints simultaneously, such as stability, decay rates, and actuator saturation.
 
 ---
 
 ## Exercises
 
+**1. [Basics] In an LQR problem, what happens to the controller's behavior if the $R$ matrix becomes very large?**
 
-****
 ??? success "Solution"
-     It decreases control energy. A larger $R$ penalizes the control input $u$ more heavily, causing the system to favor gentler actions.
+    **Algebraic Analysis:**
+    1. $R$ represents the penalty on control effort $u$.
+    2. As $R \to \infty$, the term $u^T Ru$ in the cost function explodes unless $u \to 0$.
+    **Conclusion**: The controller becomes very "conservative" (lazy), leading to slower response times as it prioritizes saving control energy over rapid state regulation.
 
+**2. [Riccati] For a scalar system $A=1, B=1, Q=3, R=1$, solve the Riccati equation for $P$.**
 
-****
 ??? success "Solution"
-     $1P + P1 - P(1)(1)^{-1}(1)P + 3 = 0 \implies 2P - P^2 + 3 = 0$.
-     Solving gives $P = 3$ (taking the positive root).
+    **Steps:**
+    1. Write the ARE: $1P + P(1) - P(1)(1^{-1})(1)P + 3 = 0$.
+    2. Simplify: $2P - P^2 + 3 = 0$.
+    3. Rearrange: $P^2 - 2P - 3 = 0$.
+    4. Factor: $(P-3)(P+1) = 0$.
+    **Conclusion**: The positive definite solution is $P = 3$.
 
+**3. [Calculation] Using the result above, find the optimal gain $K$ and the closed-loop system matrix.**
 
-****
 ??? success "Solution"
-     $K = R^{-1} B^T P = 1^{-1} \cdot 1 \cdot 3 = 3$. The optimal closed-loop system is $\dot{x} = (1-3)x = -2x$.
+    **Calculation:**
+    1. $K = R^{-1} B^T P = (1)^{-1}(1)(3) = 3$.
+    2. Closed-loop: $\dot{x} = (A - BK)x = (1 - 1 \cdot 3)x = -2x$.
+    **Conclusion**: The closed-loop system is stable since the eigenvalue is $-2 < 0$.
 
+**4. [Stability] Prove: If there exists $P \succ 0$ such that $A^T P + PA \prec 0$, then $A$ is Hurwitz stable.**
 
-****
 ??? success "Solution"
-     It is determined by the process noise covariance $W$ and the measurement noise covariance $V$ (by solving a dual Riccati equation, yielding the Kalman gain).
+    **Using Lyapunov Functions:**
+    1. Let $V(x) = x^T P x$. Since $P \succ 0$, $V(x)$ is a valid energy function.
+    2. Time derivative: $\dot{V} = \dot{x}^T P x + x^T P \dot{x} = (Ax)^T P x + x^T P (Ax) = x^T(A^T P + PA)x$.
+    3. Since $A^T P + PA \prec 0$, then $\dot{V} < 0$ for all non-zero $x$.
+    **Conclusion**: Energy decreases monotonically and is bounded below, so the system must converge to the origin.
 
+**5. [LMI] How is $A^T P + PA + Q \prec 0$ transformed into standard LMI form?**
 
-****
 ??? success "Solution"
-     $|G(i\omega)| = 1/\sqrt{\omega^2+1}$. The maximum occurs at $\omega=0$, so $\|G\|_\infty = 1$.
+    Since the expression is linear in the unknown matrix $P$ (involving only addition and constant multiplication) and satisfies a semi-definite cone constraint, it is already a standard Linear Matrix Inequality. In solvers like YALMIP or CVX, it is entered directly as a constraint.
 
+**6. [Application] How are weights in the $Q$ matrix typically set in autonomous driving?**
 
-****
 ??? success "Solution"
-     Less than $1/0.2 = 5$.
+    **Explanation:**
+    Usually, $Q$ is diagonal. High weights are assigned to components like "deviation from lane center" to enforce strict tracking. Lower weights are assigned to components like "steering wheel jitter" to allow some flexibility. This algebraically prioritizes safety over smoothness.
 
+**7. [Robustness] What is a system's "Uncertainty Set"?**
 
-****
 ??? success "Solution"
-     The boundedness of $J$ and $Q \succ 0$ ensures that energy dissipates over time. Using the Lyapunov function $V(x) = x^T P x$, one can show $\dot{V} = -(x^T Q x + u^T R u) < 0$.
+    It is the range of possible values for the actual system matrix $A$, often represented as $A_{real} = A_{nom} + \Delta$ where $\|\Delta\| \le \epsilon$. Robust control aims to find a single $K$ that stabilizes the system for **all** $A$ in the set.
 
+**8. [Stability] If a system's eigenvalues are $\{-1, -2\}$ and a perturbation $E = \begin{pmatrix} 0 & 0.1 \\ 0.1 & 0 \end{pmatrix}$ is applied, is the system necessarily still stable?**
 
-****
 ??? success "Solution"
-     It often fails for non-linear systems or robust control systems with specific types of structured uncertainty where estimation and control become coupled.
+    **Determination:**
+    Using eigenvalue perturbation theory (Ch15/42), since the eigenvalues are far from the imaginary axis and the perturbation is small, the shift in eigenvalues is not enough to cross the axis.
+    **Conclusion**: Due to the "stability margin," the system remains stable under small perturbations.
 
+**9. [Duality] How does LQG control combine LQR and Kalman filtering?**
 
-****
 ??? success "Solution"
-     LMIs can handle more flexible constraints (e.g., bounds on control gains, pole region restrictions) and benefit from the universality of convex optimization solvers.
+    **Separation Principle:**
+    1. Use a Kalman filter to estimate the optimal state $\hat{x}$ from noisy data.
+    2. Apply the LQR gain $K$ to the estimated state: $u = -K\hat{x}$.
+    Linear algebra proves these two processes can be designed independently without affecting overall optimality.
 
-****
+**10. [Application] Briefly state the role of $H_\infty$ control in suppressing wind disturbance for UAVs.**
+
 ??? success "Solution"
-    ## Chapter Summary
+    Wind is modeled as an external energy source with bounded $L_2$ norm. The $H_\infty$ controller designs a gain matrix that minimizes the maximum singular value (gain) of the transfer operator from "wind" to "pose error." This guarantees that even in strong winds, pose deviations are strictly limited within algebraic bounds.
 
-Optimal and robust control theories define the performance limits of engineering control:
+## Chapter Summary
 
+Optimal and Robust control represent the "supreme command" of linear algebra in complex systems:
 
-****: LQR transforms subjective human preferences for "performance" and "cost" into rigorous quadratic optimization problems through the configuration of $Q$ and $R$ matrices.
-
-****: LQG and the separation principle prove that optimal information extraction and optimal execution strategies are perfectly compatible under statistical uncertainty, establishing the logical pillars of feedback control.
-
-****: The $H_\infty$ norm and the small gain theorem provide quantitative geometric measures for system "safety," proving that the operator norm theory of linear algebra is the mathematical floodgate preventing real-world catastrophes.
+1.  **Algebraic Performance**: Through Riccati equations, it transforms the philosophical question of "what is best" into the arithmetic task of finding specific positive definite matrices, enabling hardcore quantification of performance.
+2.  **Geometric Bounds of Robustness**: Via norms and LMIs, it establishes a "resilience radius" for systems, proving that robustness is essentially the tolerance of spectral structures to perturbation spaces.
+3.  **Synthesis of Control**: This theory unifies observation (Kalman), decision-making (LQR), and defense (H-infinity) within matrix analysis, supporting the modern industrial backbone from deep-space exploration to precision manufacturing.

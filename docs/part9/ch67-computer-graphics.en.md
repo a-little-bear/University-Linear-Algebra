@@ -2,112 +2,118 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch02) · Linear Transformations (Ch05) · Quaternion Matrices (Ch51) · Orthogonality (Ch07)
+**Prerequisites**: Linear Transformations (Ch05) · Homogeneous Coordinates · Geometric Algebra (Ch50) · Projections (Ch07)
 
-**Chapter Outline**: Introduction of Homogeneous Coordinates → Unified Matrix Representation of Translation, Rotation, and Scaling → 2D and 3D Transformation Matrices → Projection Transforms: Orthographic and Perspective → View and Camera Models → Barycentric Coordinates & Triangle Rasterization → Linear Intersection Equations in Ray Tracing → Shading Models: Dot Products and Lambertian Reflectance → Animation Interpolation: LERP and SLERP
+**Chapter Outline**: From Geometric Entities to Pixel Mappings → Algebraic Construction of Homogeneous Coordinates → Unified Representation of Affine Transforms: Translation, Rotation, and Scaling → View Transformations and Perspective Projection → Depth Buffering and Z-transformations → Normal Vector Transformation via the Inverse-Transpose Matrix → Linear Control Point Representation of Splines → Applications: 3D Game Engine Architectures, Skeletal Animation in Movies, Ray Tracing, and Virtual Reality (VR)
 
-**Extension**: Computer graphics is essentially "real-time visualization" of linear algebra; it projects the geometry of a 3D world onto a 2D screen using 4x4 matrices, forming the mathematical heart of modern game engines (Unreal, Unity) and visual effects.
+**Extension**: Computer graphics is the "visual manifestation" of linear algebra; it maps rigid body motion and light propagation in the 3D world into a series of concatenated 4x4 matrix multiplications. It proves that realistic visual experiences are essentially matrix operations in homogeneous projective geometry—the mathematical soul of modern visual computing power.
 
 </div>
 
-Every 3D character or scene you see on a computer screen is the result of millions of matrix multiplications. To handle translation (non-linear) and rotation (linear) within a unified framework, graphics utilizes **Homogeneous Coordinates**. This chapter demonstrates how to build the complete geometric path from a virtual world to a pixel plane using 4x4 matrices.
+In 3D games or movies, every frame on the screen is generated through millions of matrix multiplications. The core task of **Computer Graphics** is to project virtual 3D models onto a 2D screen. **Linear Algebra** provides the necessary tools: it uses homogeneous coordinates to unify translation and rotation into matrix operations and employs projection matrices to simulate the perspective effects of human vision. This chapter introduces the algebraic techniques serving as the bedrock of virtual reality.
 
 ---
 
-## 67.1 Homogeneous Coordinates and Basic Transforms
+## 67.1 Homogeneous Coordinates and Affine Transforms
 
 !!! definition "Definition 67.1 (Homogeneous Coordinates)"
-    To represent translation as matrix multiplication, we augment a 3D vector $(x, y, z)$ into a 4D vector $(x, y, z, w)$, typically setting $w=1$.
-    - **Translation Matrix**: $T(\mathbf{t}) = \begin{pmatrix} 1 & 0 & 0 & t_x \\ 0 & 1 & 0 & t_y \\ 0 & 0 & 1 & t_z \\ 0 & 0 & 0 & 1 \end{pmatrix}$.
-
-!!! technique "Composition of Transformations"
-    Using matrix multiplication, we can combine scaling ($S$), rotation ($R$), and translation ($T$) into a single transformation matrix $M = T \cdot R \cdot S$. Note that the order of multiplication determines the relative coordinate frame of each transform.
+    To unify translation with linear operations, a 3D point $(x, y, z)$ is extended to a 4D vector $(x, y, z, 1)^T$.
+    - **Translation Matrix $T(\mathbf{d})$**: $\begin{pmatrix} I_3 & \mathbf{d} \\ 0 & 1 \end{pmatrix}$.
+    - **Rotation Matrix $R$**: $\begin{pmatrix} R_{3\times 3} & 0 \\ 0 & 1 \end{pmatrix}$.
 
 ---
 
-## 67.2 Projection Transformations
+## 67.2 Perspective Projection Matrices
 
-!!! definition "Definition 67.2 (Perspective Projection Matrix)"
-    Perspective projection simulates the "smaller when farther" characteristic of human vision. Given frustum parameters, its standard matrix form is:
-    $$P = \begin{pmatrix} \frac{1}{\tan(\alpha/2)} & 0 & 0 & 0 \\ 0 & \frac{1}{\tan(\alpha/2)} & 0 & 0 \\ 0 & 0 & \frac{f+n}{f-n} & \frac{-2fn}{f-n} \\ 0 & 0 & 1 & 0 \end{pmatrix}$$
-    The last row copies the $z$ coordinate into the $w$ component to enable perspective division ($x/w, y/w$).
-
----
-
-## 67.3 Barycentric Coordinates and Rasterization
-
-!!! technique "Barycentric Coordinates"
-    Any point $P$ inside a triangle can be expressed as a linear combination of its three vertices $A, B, C$:
-    $$P = \alpha A + \beta B + \gamma C, \quad \alpha + \beta + \gamma = 1$$
-    **Application**: This is the core algorithm for attribute interpolation (color, texture coordinates) and for testing whether a point lies inside a triangle.
+!!! technique "Technique: Perspective Projection"
+    Perspective projection uses the principle of similar triangles to make distant objects appear smaller. Its standard matrix form is:
+    $$P = \begin{pmatrix} \frac{1}{\tan(\alpha/2) \cdot aspect} & 0 & 0 & 0 \\ 0 & \frac{1}{\tan(\alpha/2)} & 0 & 0 \\ 0 & 0 & -\frac{f+n}{f-n} & -\frac{2fn}{f-n} \\ 0 & 0 & -1 & 0 \end{pmatrix}$$
+    The final "w-divide" step achieves the non-linear perspective effect.
 
 ---
 
-## 67.4 Shading and Lighting
+## 67.3 Transformation of Normal Vectors
 
-!!! theorem "Theorem 67.1 (Lambertian Reflectance)"
-    The intensity $I$ of light at a point on a surface is proportional to the dot product of the surface normal $\mathbf{N}$ and the light direction $\mathbf{L}$:
-    $$I = I_0 \max(0, \mathbf{N} \cdot \mathbf{L})$$
-    This shows how the **Inner Product** in linear algebra determines shadows and the sense of 3D volume.
+!!! theorem "Theorem 67.1 (Normal Transformation Rule)"
+    If a surface undergoes a non-uniform scaling transformation $M$, its normal vector $\mathbf{n}$ must be transformed using the **Inverse-Transpose Matrix** $(M^{-1})^T$ to remain perpendicular to the tangent plane.
 
 ---
 
 ## Exercises
 
+**1. [Basics] Write the $4 \times 4$ homogeneous rotation matrix for a 90-degree rotation around the $z$-axis.**
 
-****
 ??? success "Solution"
-     $\begin{pmatrix} \cos\theta & -\sin\theta & 0 \\ \sin\theta & \cos\theta & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
+    **Construction:**
+    1. The 3D rotation part: $R_z(90^\circ) = \begin{pmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}$.
+    2. Embed in a $4 \times 4$ matrix:
+    **Conclusion**: $R = \begin{pmatrix} 0 & -1 & 0 & 0 \\ 1 & 0 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$.
 
+**2. [Calculation] Translate the point $P = (1, 2, 3)^T$ by the vector $\mathbf{d} = (1, 1, 1)^T$ using a homogeneous matrix.**
 
-****
 ??? success "Solution"
-     $(1+5, 2+0, 3-1, 1) = (6, 2, 2, 1)$.
+    **Matrix Multiplication:**
+    $\begin{pmatrix} 1 & 0 & 0 & 1 \\ 0 & 1 & 0 & 1 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \\ 3 \\ 1 \end{pmatrix} = \begin{pmatrix} 1(1) + 1(1) \\ 1(2) + 1(1) \\ 1(3) + 1(1) \\ 1 \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \\ 4 \\ 1 \end{pmatrix}$.
+    **Conclusion**: The new coordinates are $(2, 3, 4)$.
 
+**3. [Scaling] If a transformation matrix is $\operatorname{diag}(2, 2, 2, 1)$, how does the volume of the object change?**
 
-****
 ??? success "Solution"
-     To store the $z$-value in the homogeneous $w$-component. Hardware then performs the normalization $x/w, y/w, z/w$, creating the perspective effect.
+    **Analysis:**
+    1. This is a uniform scaling factor of 2 along all three axes.
+    2. The determinant $\det(M_{3\times 3}) = 2^3 = 8$.
+    **Conclusion**: The volume of the object increases 8-fold.
 
+**4. [Commutativity] In graphics, why is $TR \neq RT$?**
 
-****
 ??? success "Solution"
-     It is at the midpoint of the edge connecting the first two vertices ($AB$).
+    **Geometric Logic:**
+    - $TR$: Rotate first, then translate in the world coordinate system.
+    - $RT$: Translate first, then rotate around the world origin.
+    Since matrix multiplication is non-commutative, the order determines whether the object rotates "in place" or "swings in an arc" around the origin.
 
+**5. [Projection] What is the role of the last component $w$ in homogeneous coordinates?**
 
-****
 ??? success "Solution"
-     To avoid **Gimbal Lock**, and because spherical linear interpolation (SLERP) is smooth and more computationally efficient.
+    **Multiple Roles:**
+    1. **Distinguish Vector vs Point**: $w=1$ for points, $w=0$ for vectors (translation has no effect on directions).
+    2. **Enable Perspective**: After perspective transformation, $w$ becomes $-z$. By dividing all coordinates by $w$, the non-linear "near-large, far-small" mapping is realized.
 
+**6. [Normals] Why can't normal vectors be multiplied directly by the transformation matrix $M$?**
 
-****
 ??? success "Solution"
-     Substitute: $\mathbf{n} \cdot (\mathbf{o} + t\mathbf{d}) + d = 0 \implies t = \frac{-(d + \mathbf{n} \cdot \mathbf{o})}{\mathbf{n} \cdot \mathbf{d}}$.
+    **Reasoning:**
+    Consider non-uniform scaling, e.g., a stretch by 2 along the $x$-axis. If a tangent vector is $(1, 1)$, the normal is $(-1, 1)$. After transformation, the tangent becomes $(2, 1)$. If the normal were multiplied by $M$, it would become $(-2, 1)$. Their dot product $(2)(-2) + (1)(1) = -3 \neq 0$; they are no longer perpendicular. Using $(M^{-1})^T$ yields the normal $(-0.5, 1)$, whose dot product with $(2, 1)$ is 0.
 
+**7. [View Matrix] What is the "View Matrix" in graphics?**
 
-****
 ??? success "Solution"
-     $T \cdot R \neq R \cdot T$. Matrix multiplication is non-commutative; translating and then rotating will cause the translation vector itself to rotate.
+    It is the matrix that transforms objects from the "World Coordinate System" to the "Camera Coordinate System." It is essentially the **inverse** of the camera's own pose matrix. Linear algebra proves that "moving the camera forward" is mathematically identical to "moving the entire world backward."
 
+**8. [Calculation] Convert the homogeneous coordinates $(4, 2, 8, 2)^T$ back to standard 3D coordinates.**
 
-****
 ??? success "Solution"
-     To preserve the orthogonality between the normal and the tangent plane. Under non-uniform scaling, $M$ would distort the normal's direction.
+    **Perform Perspective Divide:**
+    $x = 4/2 = 2$
+    $y = 2/2 = 1$
+    $z = 8/2 = 4$
+    **Conclusion**: The 3D coordinates are $(2, 1, 4)$.
 
+**9. [Animation] Briefly explain the idea of Linear Blend Skinning (LBS).**
 
-****
 ??? success "Solution"
-     Constant angular velocity interpolation between two unit quaternions (points on a 4D sphere) along a great-circle path.
+    A vertex $v$ on an avatar's skin is influenced by adjacent bones (represented by matrices $M_1, M_2$). The final position is $v' = (\alpha M_1 + (1-\alpha) M_2) v$. This utilizes the **linear combination** of matrix space to allow skin to bend smoothly with bones.
 
-****
+**10. [Application] Why are GPUs designed as parallel matrix calculation architectures?**
+
 ??? success "Solution"
-    ## Chapter Summary
+    **Reasoning:**
+    Rendering involves performing the exact same $4 \times 4$ matrix multiplication on millions of independent vertices. This task lacks logical dependency, making it a classic Single-Instruction Multiple-Data (SIMD) problem. By executing these matrix operations across thousands of cores, GPUs reduce rendering time from minutes to milliseconds.
 
-Computer graphics is the most spectacular stage for linear algebra:
+## Chapter Summary
 
+Linear algebra serves as the "laws of physics" for virtual worlds:
 
-****: Through homogeneous coordinates, graphics unifies non-linear rigid body motion into linear matrix arithmetic, establishing the algebraic basis for pipelined rendering.
-
-****: The perspective matrix demonstrates how to utilize the rank-deficiency tendencies of linear algebra (via $w$-division) to simulate the collapse of high-dimensional space into low-dimensional vision, constructing the sense of depth in digital worlds.
-
-****: From barycentric interpolation to dot-product lighting, graphics proves that all real-world sensory experiences (color, shape, light) can be reduced to elegant vector operations at the underlying level.
+1.  **Homogeneous Harmony**: Homogeneous coordinates unify complex Euclidean transformations into simple matrix multiplications, establishing the standard computation protocol for the graphics pipeline.
+2.  **Dimensional Projection**: The perspective projection matrix proves that depth perception is essentially a non-linear projection operator, revealing the algebraic essence of optical imaging.
+3.  **The Art of Computation**: From the inverse-transpose of normals to linear blend skinning, every realistic detail in graphics stems from precise control over the geometric properties of matrix space, supporting the visual revolution of modern digital media.

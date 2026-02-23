@@ -2,112 +2,125 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Distributions (Ch72A) · Matrix Analysis (Ch14) · Quadratic Forms (Ch09) · Linear Equations (Ch01)
+**Prerequisites**: Matrix Distributions (Ch72A) · Positive Definite Matrices (Ch16) · Generalized Inverses (Ch33) · Projections (Ch07)
 
-**Chapter Outline**: From Univariate to Multivariate Inference → Hotelling's $T^2$ Distribution (Matrix Version of Student's t) → Wilks' Lambda Distribution (Ratio of Determinants) → Multivariate Analysis of Variance (MANOVA) → Likelihood Ratio Tests (LRT) → Testing Equality of Covariance Matrices → Canonical Correlation Analysis (CCA) → Multivariate Regression Inference → Challenges of High-dimensional Inference ($p > n$) → Applications: Social Sciences, Psychometrics, and Medical Clinical Trials
+**Chapter Outline**: From Univariate to Multivariate → Definition of the Multivariate Normal (MVN) Distribution and its Quadratic Density → Parameter Estimation: Maximum Likelihood Estimation (MLE) of Mean Vectors and Covariance Matrices → Hypothesis Testing: Hotelling’s $T^2$ Statistic (Matrix version of the $t$-test) → Wilks’s Lambda ($\Lambda$) Distribution and Likelihood Ratio Tests → Linear Algebraic Essence of Discriminant Analysis (LDA) → Canonical Correlation Analysis (CCA) as a Generalized Eigenvalue Problem → Applications: Multi-indicator Difference Testing in Clinical Medicine, Psychological Measurement, and Multivariate Control Charts in Quality Control
 
-**Extension**: Multivariate inference is the highest application of linear algebra in decision theory; by investigating the weighted sums or products of eigenvalues, it determines whether observed differences in high-dimensional space stem from true effects or random noise.
+**Extension**: Multivariate statistical inference is the supreme application of linear algebra in "verifying the truth"; it transforms complex hypothesis tests into interval estimations of operator spectra and matrix quadratic forms. It proves that the reliability of scientific conclusions depends on the geometric stability of statistical operators in high-dimensional space—the mathematical judge of modern empirical research.
 
 </div>
 
-After establishing the matrix-based description of data (Ch72A), the core task of statistics becomes: how to make rigorous inferences based on observed matrix samples. **Multivariate Statistical Inference** utilizes the trace, determinant, and eigenvalues of matrices to construct test statistics. It answers questions such as "Do two groups of multidimensional data differ significantly?" or "Is there a latent link between two sets of variables?"
+In statistics, when we observe multiple variables simultaneously (e.g., height, weight, blood pressure), analyzing each individually ignores their correlations. **Multivariate Statistical Inference** achieves a unified analysis by integrating observations into vectors and matrices. Using matrix-based statistics like **Hotelling’s $T^2$** and **Wilks’s Lambda**, we can determine whether group differences are essential within a probabilistic framework. This chapter introduces this algebraic inference framework serving as the bedrock of scientific evidence.
 
 ---
 
-## 72B.1 Hotelling's $T^2$ Test
+## 72B.1 Multivariate Normal Distribution and MLE
 
-!!! definition "Definition 72B.1 (Hotelling's $T^2$ Statistic)"
-    To test whether a mean vector $\boldsymbol{\mu}$ equals a hypothesized $\boldsymbol{\mu}_0$, we define the statistic:
-    $$T^2 = n (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)^T \mathbf{S}^{-1} (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)$$
-    where $\mathbf{S}$ is the sample covariance matrix.
-    **Algebraic Essence**: This is the square of the Mahalanobis distance, which utilizes the inverse of the covariance matrix to normalize fluctuations across different dimensions.
+!!! definition "Definition 72B.1 (MVN Distribution)"
+    A vector $\mathbf{x} \in \mathbb{R}^p$ follows a multivariate normal distribution $N(\boldsymbol{\mu}, \Sigma)$ if its probability density function is:
+    $$f(\mathbf{x}) = \frac{1}{(2\pi)^{p/2} |\Sigma|^{1/2}} \exp \left( -\frac{1}{2} (\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu}) \right)$$
+    where the exponent is a **positive-definite quadratic form**, defining hyper-ellipsoidal contours of equal probability.
 
 ---
 
-## 72B.2 Multivariate Analysis of Variance (MANOVA)
+## 72B.2 Hotelling’s $T^2$ Statistic
 
-!!! technique "Matrix Decomposition Perspective"
-    In MANOVA, we decompose the total sum of squares and cross-products matrix $\mathbf{T}$ into the within-group error matrix $\mathbf{E}$ and the between-group effect matrix $\mathbf{H}$:
-    $$\mathbf{T} = \mathbf{H} + \mathbf{E}$$
-    **Statistics**:
-    - **Wilks' Lambda**: $\Lambda = \frac{\det(\mathbf{E})}{\det(\mathbf{H} + \mathbf{E})}$. Its distribution is determined by the product of eigenvalues.
-    - **Pillai’s Trace**: Based on $\operatorname{tr}(\mathbf{H}(\mathbf{H}+\mathbf{E})^{-1})$.
+!!! theorem "Theorem 72B.1 (Mean Testing)"
+    To test $H_0: \boldsymbol{\mu} = \boldsymbol{\mu}_0$, we construct the $T^2$ statistic:
+    $$T^2 = n (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)^T S^{-1} (\bar{\mathbf{x}} - \boldsymbol{\mu}_0)$$
+    where $S$ is the sample covariance matrix.
+    **Algebraic Essence**: This is the square of the **Mahalanobis Distance**, quantifying the statistical distance of the sample center from the target.
 
 ---
 
 ## 72B.3 Canonical Correlation Analysis (CCA)
 
-!!! definition "Definition 72B.2 (CCA)"
-    Given two sets of variables $\mathbf{x}$ and $\mathbf{y}$, find projection vectors $\mathbf{a}, \mathbf{b}$ such that the correlation between the linear combinations $u = \mathbf{a}^T \mathbf{x}$ and $v = \mathbf{b}^T \mathbf{y}$ is maximized.
-    **Solution**: This is equivalent to solving a generalized eigenvalue problem involving the cross-covariance matrices.
-
----
-
-## 72B.4 Challenges of High-dimensional Inference ($p > n$)
-
-!!! warning "Curse of Dimensionality"
-    When the number of variables $p$ exceeds the sample size $n$, the sample covariance matrix $\mathbf{S}$ is **singular** (not invertible), causing the $T^2$ statistic to fail.
-    **Strategies**: Use ridge regularization (shrinkage estimators) or projection-based non-parametric methods.
+!!! technique "Technique: Generalized Eigenvalue Problem"
+    CCA seeks the maximum correlation between two sets of variables $X$ and $Y$. This is equivalent to solving a generalized eigenvalue problem involving cross-covariance matrices:
+    $$\Sigma_{XY} \Sigma_{YY}^{-1} \Sigma_{YX} \mathbf{a} = \rho^2 \Sigma_{XX} \mathbf{a}$$
+    This demonstrates how linear algebra uncovers deep consistency across different dimensions through operator composition.
 
 ---
 
 ## Exercises
 
+**1. [Basics] Let $\mathbf{x} \sim N(\boldsymbol{\mu}, \Sigma)$. Find the distribution of the linear transform $\mathbf{y} = A\mathbf{x} + \mathbf{b}$.**
 
-****
 ??? success "Solution"
-     It reduces to the square of the univariate $t$-statistic: $t^2 = \frac{n(\bar{x}-\mu_0)^2}{s^2}$.
+    **Using Linearity of Expectation and Variance:**
+    1. $E[\mathbf{y}] = A E[\mathbf{x}] + \mathbf{b} = A\boldsymbol{\mu} + \mathbf{b}$.
+    2. $\operatorname{Var}(\mathbf{y}) = A \operatorname{Var}(\mathbf{x}) A^T = A\Sigma A^T$.
+    **Conclusion**: $\mathbf{y} \sim N(A\boldsymbol{\mu} + \mathbf{b}, A\Sigma A^T)$. This proves normality is preserved under affine transformations.
 
+**2. [MLE] Prove that the MLE $\hat{\boldsymbol{\mu}}$ for the multivariate mean is the sample mean $\bar{\mathbf{x}}$.**
 
-****
 ??? success "Solution"
-     The determinant represents "generalized variance" (volume) in high-dimensional space. The ratio reflects the proportion of residual volume to total fluctuation volume; a smaller ratio indicates more significant differences between groups.
+    **Matrix Differentiation:**
+    1. The log-likelihood involves the term $-\sum (\mathbf{x}_i - \boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}_i - \boldsymbol{\mu})$.
+    2. Differentiate with respect to $\boldsymbol{\mu}$ (using Ch47A formulas): $\sum 2\Sigma^{-1} (\mathbf{x}_i - \boldsymbol{\mu}) = 0$.
+    3. Since $\Sigma^{-1}$ is non-singular, $\sum \mathbf{x}_i - n\boldsymbol{\mu} = 0$.
+    **Conclusion**: $\hat{\boldsymbol{\mu}} = \frac{1}{n} \sum \mathbf{x}_i$.
 
+**3. [Calculation] For $n=100, p=2$, if the sample mean difference $\mathbf{d} = (1, 1)^T$ and covariance $S = \begin{pmatrix} 1 & 0.5 \\ 0.5 & 1 \end{pmatrix}$, compute $T^2$.**
 
-****
 ??? success "Solution"
-     $\det(\mathbf{E}) = 1$. $\det(\mathbf{H}+\mathbf{E}) = \det(\operatorname{diag}(11, 1)) = 11$.
-     $\Lambda = 1/11 \approx 0.09$.
+    **Steps:**
+    1. $S^{-1} = \frac{1}{0.75} \begin{pmatrix} 1 & -0.5 \\ -0.5 & 1 \end{pmatrix} = \begin{pmatrix} 4/3 & -2/3 \\ -2/3 & 4/3 \end{pmatrix}$.
+    2. $\mathbf{d}^T S^{-1} \mathbf{d} = (1, 1) \begin{pmatrix} 2/3 \\ 2/3 \end{pmatrix} = 4/3$.
+    3. $T^2 = 100 \cdot (4/3) \approx 133.3$.
+    **Conclusion**: Since $T^2$ is large, we reject the null hypothesis and conclude a significant difference in means.
 
+**4. [Wishart] What distribution does the sample covariance matrix $S$ follow?**
 
-****
 ??? success "Solution"
-     $\frac{\det(\mathbf{E})}{\det(\mathbf{H}+\mathbf{E})} = \det(\mathbf{E}(\mathbf{H}+\mathbf{E})^{-1}) = \det(I + \mathbf{E}^{-1}\mathbf{H})^{-1}$. The result follows from the property of determinants.
+    **Conclusion: The Wishart Distribution.**
+    Specifically, $(n-1)S \sim W_p(n-1, \Sigma)$. This is the natural matrix-space generalization of the scalar Chi-squared distribution, forming the sampling distribution foundation for multivariate inference.
 
+**5. [LDA] What equation defines the optimal direction $\mathbf{w}$ in Fisher Linear Discriminant Analysis?**
 
-****
 ??? success "Solution"
-     Pillai's trace is generally more robust when the assumption of equal covariance matrices (homoscedasticity) is violated.
+    **Conclusion: The generalized eigenvalue equation $S_B \mathbf{w} = \lambda S_W \mathbf{w}$.**
+    Where $S_B$ is the between-class scatter and $S_W$ is the within-class scatter. The goal is to maximize the Rayleigh quotient $J(w) = \frac{w^T S_B w}{w^T S_W w}$, a classic problem of finding the direction of maximum scaling.
 
+**6. [Properties] Prove that the contours of an MVN density are hyper-ellipsoids.**
 
-****
 ??? success "Solution"
-     It is related to the singular values of the cross-covariance matrix between the two groups (after variance normalization).
+    **Reasoning:**
+    1. Constant density requires the exponent $(\mathbf{x}-\boldsymbol{\mu})^T \Sigma^{-1} (\mathbf{x}-\boldsymbol{\mu}) = c$.
+    2. Since $\Sigma$ is PD, $\Sigma^{-1}$ is PD.
+    3. In analytic geometry, the set defined by a PD quadratic form equal to a constant is a **hyper-ellipsoid** with axes determined by the eigenvectors.
 
+**7. [Independence] What does it imply if the covariance matrix $\Sigma$ is diagonal?**
 
-****
 ??? success "Solution"
-     If $\mathbf{x} \to \mathbf{Ax}$, then the mean becomes $\mathbf{A}\bar{\mathbf{x}}$ and the covariance becomes $\mathbf{ASA}^T$. Substituting these into the formula, the $\mathbf{A}$ matrices cancel out.
+    **Conclusion: The variables are mutually independent.**
+    For the normal distribution, being uncorrelated (zero covariance) is equivalent to independence. Matrix-wise, this means the joint density factors into the product of marginal densities.
 
+**8. [Limits] Can the $T^2$ statistic be computed if $p > n$?**
 
-****
 ??? success "Solution"
-     It uses the weighted difference between the log-determinants of the sample covariance matrices.
+    **Conclusion: No (not directly).**
+    **Reasoning**: If the sample size is less than the number of variables, the sample covariance matrix $S$ is singular ($\operatorname{rank} \le n-1 < p$). Thus $S^{-1}$ does not exist. One must use **generalized inverses** (Ch33) or regularization.
 
+**9. [Wilks] What is Wilks’s Lambda ($\Lambda$)?**
 
-****
 ??? success "Solution"
-     It corresponds to the total sum of squared residuals (Total SSE) across all dependent variables.
+    **Definition:**
+    $\Lambda = \frac{|S_W|}{|S_W + S_B|}$. It is the core metric in Multivariate ANOVA (MANOVA).
+    **Algebraic meaning**: It is the ratio of the "unexplained residual volume" to the "total deviation volume." A smaller $\Lambda$ implies stronger group separation.
 
-****
+**10. [Application] Briefly state how Principal Component Regression (PCR) solves multi-collinearity.**
+
 ??? success "Solution"
-    ## Chapter Summary
+    1. If features $X$ are multi-collinear, $X^T X$ is near singular.
+    2. Extract the first $k$ principal components $Z = U_k \Sigma_k$ via SVD.
+    3. Perform regression on $Z$.
+    **Conclusion**: Since the columns of $Z$ are orthogonal, the new gram matrix $Z^T Z = \Sigma_k^2$ is diagonal and perfectly conditioned, eliminating numerical instability.
 
-Multivariate statistical inference is the ultimate algebraic judgment in empirical science:
+## Chapter Summary
 
+Multivariate statistical inference is the "rule of truth" for empirical science in linear algebra:
 
-****: Hotelling's $T^2$ proves that through matrix inversion, we can correct complex anisotropic fluctuations into standard statistical distances, establishing benchmarks for multi-dimensional difference testing.
-
-****: Wilks' Lambda reduces complex group comparisons to a "game of determinants" (volumes), revealing the algebraic share of explanatory power within multi-dimensional space.
-
-****: CCA demonstrates how to utilize generalized eigenvalue problems to extract resonant linear signals from two seemingly chaotic data streams, providing a mathematical scalpel for understanding coupling mechanisms in complex systems.
+1.  **Geometric Evidence**: It quantifies statistical differences as distances (Hotelling) and volume ratios (Wilks) in vector space, providing rigorous geometric criteria for scientific observations.
+2.  **Operator Insight**: Through generalized eigenvalue problems, CCA and LDA reveal core correlation modes hidden behind massive data noise, showcasing the feature extraction power of linear algebra.
+3.  **Completeness of Distributions**: From MVN to Wishart matrices, this chapter establishes the algebraic order of the high-dimensional stochastic world, proving that statistical inference is an extension of operator properties under probability measures.

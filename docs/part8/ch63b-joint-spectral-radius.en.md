@@ -2,110 +2,121 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Spectral Radius (Ch14) · Matrix Norms (Ch15) · Matrix Analysis (Ch14) · Switched Systems Basics
+**Prerequisites**: Spectral Radius (Ch14) · Matrix Norms (Ch15) · Simultaneous Triangularization (Ch63A)
 
-**Chapter Outline**: From Single Matrices to Matrix Sets → Definition of the Joint Spectral Radius (JSR) → Generalization of Gelfand’s Formula → Relationship with Individual Spectral Radii → Computational Challenges: NP-hardness and Undecidability → Extremal Norms and Barabanov Norms → The Rise and Fall of the Finiteness Conjecture → Numerical Approximation (Polyhedral Norms, SOS Programming) → Applications: Stability of Switched Systems, Fractal Geometry, and Regularity of Wavelets
+**Chapter Outline**: From Single Matrices to Matrix Sets → Definition of the Joint Spectral Radius (JSR) → Asymptotic Growth of Product Sequences → Key Identity: The Rota-Strang Identity → The Generalized Spectral Radius Formula → The Berger-Wang Theorem (Relation to standard spectral radius) → Extremality Principles and Computational Hardness → Applications: Stability of Switched Linear Systems, Smoothness of Wavelets, and Global Attractors in Discrete Dynamics
 
-**Extension**: The Joint Spectral Radius characterizes the long-term growth rate of a system under "worst-case" switching; it reveals that even if every matrix in a set is individually stable, their combinations can still lead to divergence, marking the "red line" for complex dynamical systems.
+**Extension**: The JSR measures the "worst-case" evolution rate of a system; it extends spectral theory from a single trajectory to all possible combinations of paths, serving as the ultimate mathematical criterion for studying dynamical systems with uncertain switching logic.
 
 </div>
 
-When we study a time-varying linear system $\mathbf{x}_{k+1} = A_k \mathbf{x}_k$, where $A_k$ is chosen arbitrarily or randomly from a set $\mathcal{A}$, the traditional concept of spectral radius is no longer sufficient. The **Joint Spectral Radius** (JSR) was introduced to characterize the asymptotic growth rate of such a family of matrices under the worst-possible switching sequence. It is not only central to stability analysis but also bridges algebra, combinatorics, and measure theory.
+In Ch14, we saw that the spectral radius $\rho(A)$ determines the convergence of $A^k$. However, in many modern applications (e.g., autonomous driving, wavelet construction), a system may choose, at each step, one matrix from a set $\{A_1, \ldots, A_m\}$ to execute. The **Joint Spectral Radius** (JSR) describes the growth rate under such a "worst-case" path. It reveals that even if every individual matrix is stable, their arbitrary combination can still lead to exponential explosion. This chapter explores this concept that is as computationally challenging as it is vital for stability.
 
 ---
 
-## 63B.1 Definition and Core Formulas
+## 63B.1 Definition of the Joint Spectral Radius
 
-!!! definition "Definition 63B.1 (Joint Spectral Radius)"
-    Let $\mathcal{A}$ be a finite set of square matrices. Its **Joint Spectral Radius** $\rho(\mathcal{A})$ is defined as:
-    $$\rho(\mathcal{A}) = \lim_{k \to \infty} \max_{A_{i_j} \in \mathcal{A}} \|A_{i_k} \cdots A_{i_1}\|^{1/k}$$
-    This limit exists and is independent of the choice of norm $\|\cdot\|$.
-
-!!! theorem "Theorem 63B.1 (Generalized Gelfand Formula)"
-    For any matrix norm, we have:
-    $$\rho(\mathcal{A}) = \inf_{k \ge 1} \max_{A \in \mathcal{A}^k} \|A\|^{1/k}$$
-    This establishes JSR as the intrinsic growth rate of the norm of infinite products.
+!!! definition "Definition 63B.1 (Joint Spectral Radius $\rho(\mathcal{F})$)"
+    For a finite set of matrices $\mathcal{F} = \{A_1, \ldots, A_m\}$, the **Joint Spectral Radius** is defined as:
+    $$\rho(\mathcal{F}) = \lim_{k \to \infty} \max_{A \in \mathcal{F}^k} \|A\|^{1/k}$$
+    where $\mathcal{F}^k$ is the set of all possible products of length $k$ using elements from $\mathcal{F}$.
+    **Intuition**: It is the maximum average scaling factor per step among all possible switching paths.
 
 ---
 
-## 63B.2 Stability and Counter-Intuitive Phenomena
+## 63B.2 Core Theorems
 
-!!! note "Stability Mismatch"
-    It is possible for $\rho(\mathcal{A}) > 1$ even if every matrix $A \in \mathcal{A}$ satisfies $\rho(A) < 1$.
-    **Reason**: The invariant subspaces of different matrices may not align. This leads to transient growth during switching which, over infinite sequences, can accumulate into a global explosion of the state.
+!!! theorem "Theorem 63B.1 (Rota-Strang Identity)"
+    $$\rho(\mathcal{F}) = \inf_{\|\cdot\|} \max_{A \in \mathcal{F}} \|A\|$$
+    where the infimum is taken over all operator norms. This means JSR can be viewed as the maximum single-step gain in some "optimal coordinate system."
 
----
-
-## 63B.3 Computational Complexity
-
-!!! challenge "NP-hardness and Undecidability"
-    Computing $\rho(\mathcal{A})$ is proven to be **NP-hard**. Furthermore, the problem of determining whether $\rho(\mathcal{A}) \le 1$ is undecidable. This implies there is no general polynomial-time algorithm for exact JSR computation. Current research relies on numerical approximations using convex optimization.
+!!! theorem "Theorem 63B.2 (Berger-Wang Theorem)"
+    For a finite set $\mathcal{F}$, the joint spectral radius equals the supremum of the spectral radii of all finite products:
+    $$\rho(\mathcal{F}) = \limsup_{k \to \infty} \max_{A \in \mathcal{F}^k} \rho(A)^{1/k}$$
 
 ---
 
-## 63B.4 Applications: Wavelets and Fractals
+## 63B.3 Stability Criterion
 
-!!! technique "Wavelet Regularity"
-    In the construction of compactly supported wavelets, the regularity (smoothness) of the wavelet function is directly determined by the joint spectral radius of a set of refinement matrices. A smaller JSR implies a smoother wavelet.
+!!! technique "Stability of Switched Systems"
+    A switched linear system $x_{k+1} = A_{\sigma_k} x_k$ is absolutely stable under arbitrary switching $\sigma_k$ iff:
+    $$\rho(\{A_1, \ldots, A_m\}) < 1$$
 
 ---
 
 ## Exercises
 
+**1. [Basics] Determine the JSR of the set $\mathcal{F} = \{ \begin{pmatrix} 0.5 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 0.5 \end{pmatrix} \}$.**
 
-****
 ??? success "Solution"
-     It equals the standard spectral radius $\rho(A)$.
+    **Analysis:**
+    1. Products of these matrices always contain zeros.
+    2. Any product $A_{i_1} \cdots A_{i_k}$ has a norm that does not exceed $0.5^k$ (if all factors are the same) or 0 (if they are mixed).
+    3. The eigenvalues are always 0.5 or 0.
+    **Conclusion**: $\rho(\mathcal{F}) = 0.5$. Since the spectral radii are consistent and there is no constructive interference, switching does not increase growth.
 
+**2. [Pitfall] Give an example where $\rho(A_1) < 1$ and $\rho(A_2) < 1$ but $\rho(\{A_1, A_2\}) > 1$.**
 
-****
 ??? success "Solution"
-     Consider a sequence that repeatedly uses the same matrix $A$. Its growth rate is $\rho(A)$. Since the JSR is the supremum over all possible sequences, it must be at least as large as the maximum individual growth rate.
+    **Construction:**
+    Let $A_1 = \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}$ and $A_2 = \begin{pmatrix} 0 & 0 \\ 2 & 0 \end{pmatrix}$.
+    1. Individually, $\rho(A_1) = 0$ and $\rho(A_2) = 0$. Any power is 0.
+    2. Consider the product $A_1 A_2 = \begin{pmatrix} 4 & 0 \\ 0 & 0 \end{pmatrix}$.
+    3. The eigenvalue of the product is 4.
+    4. The modulus of the product sequence grows like $4^k$.
+    **Conclusion**: $\rho(\{A_1, A_2\}) \ge \sqrt{4} = 2 > 1$. This proves that even if subsystems are stable, improper switching can lead to exponential instability.
 
+**3. [Calculation] If $\mathcal{F} = \{A\}$ (a singleton), what does the JSR equal?**
 
-****
 ??? success "Solution"
-     Since $A_1 A_2 = 0$ and $A_2 A_1 = 0$, any product of length $\ge 2$ is the zero matrix. The maximum norm is provided by the individual matrices, so $\rho = 0.8$.
+    **Conclusion: It equals the standard spectral radius $\rho(A)$.**
+    This is exactly the definition of Gelfand's formula (Ch14). JSR is the natural generalization of Gelfand's formula to sets.
 
+**4. [Property] Prove $\rho(\mathcal{F}) \le \max_{A \in \mathcal{F}} \|A\|$ for any consistent matrix norm.**
 
-****
 ??? success "Solution"
-     $A_1 = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, A_2 = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$. $\rho(A_1)=\rho(A_2)=0$. However, $A_1 A_2 = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$, which has spectral radius 1. Thus $\rho(\{A_1, A_2\}) = 1^{1/2} = 1$.
+    **Proof:**
+    1. For any product $P = A_{i_1} \cdots A_{i_k}$, by sub-multiplicativity:
+    2. $\|P\| \le \|A_{i_1}\| \cdots \|A_{i_k}\| \le (\max \|A\|)^k$.
+    3. Taking the $k$-th root and the limit yields $\rho(\mathcal{F}) \le \max \|A\|$.
 
+**5. [Hardness] What is the computational complexity of determining JSR?**
 
-****
 ??? success "Solution"
-     $\rho(\mathcal{A}) \le \gamma$. This follows from the sub-multiplicativity of norms: $\|A_k \cdots A_1\| \le \prod \|A_i\| \le \gamma^k$.
+    **Conclusion: Extremely difficult (NP-hard, even undecidable).**
+    Determining whether $\rho(\mathcal{F}) \le 1$ has been proven undecidable in general. In practice, one uses Semidefinite Programming (SDP) to find quadratic Lyapunov functions to obtain upper bounds.
 
+**6. [Wavelets] How does the JSR determine the smoothness of wavelet functions?**
 
-****
 ??? success "Solution"
-     It conjectured that for any finite set of matrices, the JSR is always achieved by the spectral radius of some finite product. This has been disproven by counter-examples.
+    A wavelet subdivision scheme is essentially a switched linear system. The regularity (differentiability) of the wavelet is directly determined by the JSR of the associated mask matrix set. A smaller JSR implies faster convergence of the subdivision and a smoother function.
 
+**7. [Consistency] Prove: If the matrices in $\mathcal{F}$ are simultaneously triangularizable, then $\rho(\mathcal{F}) = \max \rho(A_i)$.**
 
-****
 ??? success "Solution"
-     By searching for a common homogeneous polynomial Lyapunov function (which corresponds to a higher-order norm), the estimation of the upper bound of JSR is transformed into a semidefinite program.
+    **Reasoning:**
+    If simultaneously triangularizable, the diagonal entries of any product are simply the products of the diagonal entries of the factors in the same basis. The largest possible eigenvalue must come from a combination of the largest eigenvalues of individual matrices. Since they commute (or are solvable), there is no cross-term reinforcement as seen in Problem 2.
 
+**8. [Convergence] If $\rho(\mathcal{F}) = 0.99$, is the system necessarily stable?**
 
-****
 ??? success "Solution"
-     It is the necessary and sufficient condition for the switched linear system to be asymptotically stable for **arbitrary** switching sequences.
+    **Yes.**
+    This means any product of length $k$ will eventually behave like $0.99^k$, converging to zero as $k$ goes to infinity.
 
+**9. [Extremality] What is an "Extremal Cycle"?**
 
-****
 ??? success "Solution"
-     In the commutative case, $\rho(\mathcal{A}) = \max \rho(A_i)$. Commutativity eliminates the transient growth caused by basis mismatch.
+    If there exists a finite-length product $A_{i_1} \cdots A_{i_k}$ whose spectral radius exactly matches the growth rate dictated by the JSR ($\rho(P)^{1/k} = \rho(\mathcal{F})$), it is called an extremal cycle. It represents the most dangerous switching mode of the system.
 
-****
+**10. [Application] Briefly state the significance of JSR in autonomous obstacle avoidance.**
+
 ??? success "Solution"
-    ## Chapter Summary
+    Autonomous controllers switch laws depending on road conditions. To guarantee the vehicle remains controlled regardless of environment changes, engineers must ensure the JSR of the set of all possible control matrices is less than 1. This is the gold standard for robust stability in switched systems.
 
-The Joint Spectral Radius characterizes extreme instability under multi-operator interaction:
+## Chapter Summary
 
+The Joint Spectral Radius is the ultimate measure for uncertain dynamical systems:
 
-****: Proved that local (individual) stability is insufficient for global balance, revealing the geometric cost of non-commutativity in dynamical evolution.
-
-****: The difficulty of computing JSR reflects the essential leap from single to mixed evolution, representing a core barrier in computational algebra for infinite products.
-
-****: Through extremal norms and numerical approximations, JSR theory provides a metric for risk in modern control, signal processing, and fractal research, establishing the algebraic boundaries for the robust operation of complex systems.
+1.  **Early Warning for Worst-case**: It reveals the boundaries of survival in dynamic environments, proving that local stability does not imply global safety without considering algebraic coherence between paths.
+2.  **Unification of Norms and Spectra**: The Rota-Strang identity transforms complex asymptotic limits into a static search for an optimal norm, providing a theoretical pivot for stability assessment.
+3.  **Scientific Limits of Computation**: The hardness of JSR marks the intersection of linear algebra and complexity theory, reminding us that when facing systems with infinite switching possibilities, we must rely on advanced optimization tools like convex relaxations.

@@ -1,113 +1,116 @@
-# Chapter 68B: Robot Dynamics
+# Chapter 68B: Robot Dynamics and Perception
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Robot Kinematics (Ch68A) · Positive Definite Matrices (Ch16) · Matrix Calculus (Ch47A) · Matrix Equations (Ch20)
+**Prerequisites**: Robot Kinematics (Ch68A) · Matrix Analysis (Ch14) · Positive Definite Matrices (Ch16) · Probability and Statistics
 
-**Chapter Outline**: Matrix Form of the Robot Dynamic Equations → Properties of the Mass Matrix $M(q)$ (Symmetry & Positive Definiteness) → The Coriolis and Centrifugal Matrix $C(q, \dot{q})$ → The Gravity Vector $G(q)$ → The Fundamental Identity: Skew-symmetry of $\dot{M}-2C$ and Energy Conservation → Operational Space Dynamics → Recursive Newton-Euler Algorithm (RNEA) → Applications: Model Predictive Control (MPC), Force/Position Control, and Parameter Identification
+**Chapter Outline**: From Geometry to Mechanics → Matrix Formulation of Lagrangian Dynamics → The Core Operator: The **Mass Matrix** $M(q)$ → Linear Representation of Centrifugal, Coriolis, and Gravity Terms → Forward Dynamics (Finding Acceleration) vs. Inverse Dynamics (Finding Torques) → Robot Perception: Sensor Calibration and Coordinate Transforms → Data Fusion: Introduction to Linear Kalman Filtering → Covariance Evolution in State Estimation → Applications: Dynamic Compensation Control, Collision Detection, and Mobile Robot Localization (SLAM)
 
-**Extension**: Robot dynamics is "linear algebra with mass"; it extends static geometric transforms into second-order matrix differential equations involving inertia, damping, and potential energy, forming the theoretical basis for high-performance motion control.
+**Extension**: Robot dynamics is the "energy expression" of linear algebra; it proves that complex mechanical behavior can be encapsulated as a positive-definite matrix operator evolving with configuration. Perception is the process of seeking truth through the propagation of matrix uncertainty—the physical core of building closed-loop intelligent systems.
 
 </div>
 
-Kinematics tells us *where* a robot is, but **Robot Dynamics** tells us *how much force* is needed to get there. The dynamic equations link joint accelerations to the torques produced by the motors. in high-dimensional state space, these equations manifest as a highly non-linear matrix system. This chapter exploits the structural properties of linear algebra (e.g., positive definiteness, skew-symmetry) to simplify this complex physical description.
+If kinematics studies "where" a robot is, **Dynamics** studies "how" it moves. **Robot Dynamics** describes the causal relationship between joint torques and the resulting accelerations. By defining the **Mass Matrix** $M(q)$, we transform the distribution of mechanical energy into algebraic properties of a matrix. Simultaneously, **Robot Perception** uses matrix transformations and statistical filtering (such as the Kalman Filter) to turn noisy sensor data into precise estimates of the true state. This chapter introduces the algebraic system serving as the link between a robot's "brain" and its "muscles."
 
 ---
 
-## 68B.1 Matrix Form of the Dynamic Equations
+## 68B.1 Matrix Form of the Equations of Motion
 
-!!! definition "Definition 68B.1 (Standard Dynamic Model)"
-    The dynamic equation for a robot with $n$ joints is written as:
-    $$M(q)\ddot{q} + C(q, \dot{q})\dot{q} + G(q) = \tau$$
-    - $q, \dot{q}, \ddot{q}$: Joint positions, velocities, and accelerations.
-    - $M(q)$: $n \times n$ **Inertia Matrix** (or Mass Matrix).
-    - $C(q, \dot{q})$: $n \times n$ **Coriolis and Centrifugal Matrix**.
-    - $G(q)$: $n \times 1$ **Gravity Vector**.
-    - $\tau$: Vector of joint torques.
+!!! definition "Definition 68B.1 (Standard Dynamics Equation)"
+    $$M(q) \ddot{q} + C(q, \dot{q})\dot{q} + g(q) = \tau$$
+    - $M(q)$: **Inertia (Mass) Matrix** (Symmetric and Positive Definite).
+    - $C(q, \dot{q})$: **Coriolis and Centrifugal Matrix**.
+    - $g(q)$: **Gravity Vector**.
+    - $\tau$: **Joint Torque Inputs**.
 
 ---
 
-## 68B.2 Algebraic Properties of the Inertia Matrix
+## 68B.2 Perception and the Kalman Filter
 
-!!! theorem "Theorem 68B.1 (Positive Definiteness of the Mass Matrix)"
-    The inertia matrix $M(q)$ is always **symmetric and positive definite** ($M \succ 0$).
-    **Physical Meaning**: The kinetic energy $K = \frac{1}{2} \dot{q}^T M(q) \dot{q}$ is always positive for any non-zero velocity, and the matrix is invertible, ensuring a unique acceleration for any given torque: $\ddot{q} = M^{-1}(\tau - C\dot{q} - G)$.
-
----
-
-## 68B.3 Energy Conservation and Skew-Symmetry
-
-!!! theorem "Theorem 68B.2 (Skew-Symmetry Identity)"
-    The matrix $N = \dot{M}(q) - 2C(q, \dot{q})$ is a **skew-symmetric matrix**, satisfying $x^T N x = 0$ for any vector $x$.
-    **Significance**: This property reflects the cancellation of internal work within the system and is a core technique for proving the stability of controllers, especially in Lyapunov-based adaptive control.
+!!! technique "Technique: Linear State Estimation"
+    In perception, system state updates follow linear equations: $x_k = Ax_{k-1} + Bu_k + w$. The **Kalman Filter** uses the evolution of the covariance matrix $P$ to weight the reliability of "prediction" versus "observation." The update step involves matrix inversion, which is essentially solving a weighted least-squares problem.
 
 ---
 
-## 68B.4 Linear Structure of Parameter Identification
+## 68B.3 Coordinate Transforms and Calibration
 
-!!! technique "Linear Parameterization"
-    The dynamic equations are **linear** with respect to the physical parameters (mass, center of mass, inertia tensor):
-    $$\tau = Y(q, \dot{q}, \ddot{q}) \boldsymbol{\phi}$$
-    where $Y$ is the **Regressor Matrix** and $\boldsymbol{\phi}$ is the vector of parameters to be identified. This allows for the use of **Least Squares** (Ch07) to accurately reconstruct the robot's dynamic model.
+!!! definition "Definition 68B.2 (Sensor Extrinsics)"
+    The transformation matrix $T_{sensor}^{body}$ from a sensor (like LiDAR) to the robot body is called the extrinsic calibration. It can be determined by solving matrix equations of the form $AX=XB$ (Hand-Eye Calibration).
 
 ---
 
 ## Exercises
 
+**1. [Basics] Prove that the robot's inertia matrix $M(q)$ is always positive definite.**
 
-****
 ??? success "Solution"
-     Kinetic energy $K = \frac{1}{2} m (l\dot{q})^2 = \frac{1}{2} (ml^2) \dot{q}^2$. Thus $M(q) = ml^2$ (a scalar inertia matrix).
+    **Physical Proof:**
+    1. The kinetic energy of the system is $K = \frac{1}{2} \dot{q}^T M(q) \dot{q}$.
+    2. According to physics, as long as there is motion ($\dot{q} \neq 0$), kinetic energy must be strictly positive.
+    3. The quadratic form $v^T M v > 0$ is exactly the definition of a **Positive Definite Matrix** (Ch16).
+    **Significance**: This ensures the numerical stability of the dynamics equations during integration.
 
+**2. [Calculation] Let $M = \operatorname{diag}(2, 1)$. To generate acceleration $\ddot{q} = (1, 5)^T$, neglecting other terms, what torques are required?**
 
-****
 ??? success "Solution"
-     Because kinetic energy is a positive definite quadratic form. If $M$ had non-positive eigenvalues, it would mean that moving in certain directions would result in zero or negative kinetic energy, which contradicts physical laws of mass distribution.
+    **Steps:**
+    $\tau = M \ddot{q} = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 5 \end{pmatrix} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}$.
+    **Conclusion**: Joint 1 requires 2 units of torque, and Joint 2 requires 5 units.
 
+**3. [Property] What is the "Skew-Symmetry Property" in robot dynamics?**
 
-****
 ??? success "Solution"
-     In a Lyapunov stability proof, the derivative of the kinetic energy term $\frac{1}{2} \frac{d}{dt}(\dot{q}^T M \dot{q})$ generates a $\frac{1}{2} \dot{q}^T \dot{M} \dot{q}$ term. By combining this with the $C$ matrix term, parts of the expression cancel out, simplifying the stability analysis.
+    **Conclusion: $\dot{M} - 2C$ is a skew-symmetric matrix.**
+    **Significance**: This property reflects **Conservation of Energy** in the physical system. It plays a core role in designing robust non-linear controllers (like adaptive control), allowing algebraic cancellation of terms to prove closed-loop stability.
 
+**4. [Perception] Sensor data has variance $\sigma^2$. Where does this reside in a matrix?**
 
-****
 ??? success "Solution"
-     $\dot{M} = \begin{pmatrix} -b\sin(q_2)\dot{q}_2 & 0 \\ 0 & 0 \end{pmatrix}$. Note the use of the chain rule.
+    **Conclusion: The diagonal.**
+    The diagonal entries $R_{ii}$ of the measurement noise covariance matrix $R$ represent the variance of the $i$-th sensor. Off-diagonal entries represent noise correlation between different sensors (usually assumed to be zero).
 
+**5. [Kalman Filter] In the Kalman Gain $K = PH^T(HPH^T + R)^{-1}$, what is the physical meaning of the inversion?**
 
-****
 ??? success "Solution"
-     $\Lambda(x) = (J M^{-1} J^T)^{-1}$. It describes the effective mass perceived at the end-effector in Cartesian space.
+    **Algebraic Interpretation:**
+    The inversion corresponds to the **inverse of information** (precision). When measurement noise $R$ is massive, the inverse matrix becomes small, leading to a smaller gain $K$. This means the algorithm trusts its prediction more and ignores the unreliable observation data.
 
+**6. [Calculation] Two sensors measure the same quantity with variances $P_1=1$ and $P_2=4$. What is the fused variance?**
 
-****
 ??? success "Solution"
-     It utilizes the inverse of the dynamic equations to algebraically cancel the non-linear terms $C\dot{q}$ and $G$, forcing the system to behave as a linear double integrator: $\ddot{q} = u$.
+    **Formula:**
+    $P_{combined} = (P_1^{-1} + P_2^{-1})^{-1} = (1 + 0.25)^{-1} = 1/1.25 = 0.8$.
+    This corresponds to the **operator harmonic mean** (Ch46B). By fusing more information, the total uncertainty is reduced.
 
+**7. [Calibration] Explain the meaning of the $AX=XB$ equation in robot calibration.**
 
-****
 ??? success "Solution"
-     This follows directly from the definition of the conservative force term in the Euler-Lagrange equations.
+    This is the standard form for **Hand-Eye Calibration**.
+    - $A$: Relative transform between two poses of the end-effector (known).
+    - $B$: Relative transform between two observations of a target by the camera (known).
+    - $X$: The unknown mounting pose of the camera relative to the end-effector.
+    Solving this equation is essentially finding the unique similarity transformation that closes the two motion chains.
 
+**8. [Dynamics] What is "Computed Torque" control?**
 
-****
 ??? success "Solution"
-     No, because of the non-linear velocity-squared terms $\dot{q}$ (Coriolis forces) and the constant gravity term $G$. It is only approximately linear in quasi-static conditions or when velocity is negligible.
+    **Explanation:**
+    High-speed computers calculate the required torque at each instant: $\tau_{calc} = M\ddot{q}_d + C\dot{q} + g$, and send this directly as a motor command. Linear algebra proves that through this algebraic compensation, a complex non-linear robot can be "linearized" into a set of simple second-order decoupled systems.
 
+**9. [Mobile Robots] In SLAM, why are map point coordinates stored in the state vector?**
 
-****
 ??? success "Solution"
-     $n^3$ symbols. Each $C_{ij} = \sum c_{ijk} \dot{q}_k$.
+    Because map point positions are uncertain. By merging landmark coordinates and robot pose into one massive state vector $\mathbf{X}$, the Kalman filter uses the **off-diagonal entries of the covariance matrix** to record the correlation between the "robot pose" and "landmark positions." When the robot sees a known landmark, this correlation helps correct accumulated errors in the entire historical trajectory.
 
-****
+**10. [Application] Briefly state the role of the "Mass Matrix" in collision detection.**
+
 ??? success "Solution"
-    ## Chapter Summary
+    By comparing the actual torque $\tau_{act}$ inferred from current measurements with the theoretical $\tau_{calc}$, we compute the difference $\Delta \tau$. If the energy term $\Delta \tau^T M^{-1} \Delta \tau$ exceeds a threshold, an unexpected collision is detected. Here $M^{-1}$ acts as a converter from torque space to acceleration (kinetic energy) space.
 
-Robot dynamics demonstrates the depth of linear algebra in handling non-linear physical laws:
+## Chapter Summary
 
+Robot dynamics and perception are the "closed-loop logic" of linear algebra in the physical world:
 
-****: Through the three operators $M, C$, and $G$, dynamics condenses complex Newtonian derivations into standard matrix equations, establishing a universal format for multi-body simulation.
-
-****: The positive definiteness of the mass matrix and the skew-symmetry of $\dot{M}-2C$ are not just mathematical tricks but projections of the Law of Conservation of Energy, providing a theoretical moat for robust control design.
-
-****: The parameter-linearization property proves that even extremely complex motions are governed by underlying physical constants that can be isolated via linear regression, showcasing linear algebra as a powerful tool for scientific analysis.
+1.  **Algebraization of Mechanics**: The mass matrix $M(q)$ transforms complex mass distributions into positive-definite operators, establishing a rigorous causal chain between control torques and motion response.
+2.  **Probabilistic Measure of Perception**: The Kalman filter, through the linear evolution of covariance matrices, proves that "truth" can be found by optimal weighted projection of residuals, providing mathematical criteria for handling real-world uncertainty.
+3.  **Synthesis of Systems**: From geometric calibration via $AX=XB$ to dynamic compensation control, linear algebra achieves complete mathematical encapsulation from mechanical structure to perceptual information—the underlying operating system for modern industrial robots and autonomous vehicles.

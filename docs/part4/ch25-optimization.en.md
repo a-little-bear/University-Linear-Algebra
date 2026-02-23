@@ -2,153 +2,112 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Analysis (Ch14) · Matrix Decompositions (Ch10) · Positive Definite Matrices (Ch16) · SVD (Ch11) · Vector Calculus
+**Prerequisites**: Linear Equations (Ch01) · Positive Definite Matrices (Ch16) · Matrix Manifolds (Ch24) · Convex Sets (Ch64A)
 
-**Chapter Outline**: The Geometry of Optimization → Linear Programming (LP) and the Simplex Method → Quadratic Programming (QP) & Hessian Matrices → Semidefinite Programming (SDP) → Matrix Completion & Nuclear Norm Minimization → Compressed Sensing & Sparsity → First-order Methods (Gradient Descent, Acceleration) → Second-order Methods (Newton, Quasi-Newton, BFGS) → Applications: Finance, Machine Learning, and Robotics
+**Chapter Outline**: The Linear Algebraic Essence of Optimization → Standard Form and Matrix Representation of Linear Programming (LP) → Algebraic Steps of the Simplex Method → Strong Duality and Farkas’s Lemma → Quadratic Programming (QP) and KKT Conditions → Core Advancement: Semidefinite Programming (SDP) → Algebraic Logic of Interior Point Methods → Applications: Portfolio Optimization, Support Vector Machines (SVM), Compressed Sensing, and Sparse Coding
 
-**Extension**: Linear Algebra is the "engine" of optimization; every step of an optimization algorithm involves solving a linear system or a spectral problem. Modern AI is essentially large-scale matrix optimization.
-
-</div>
-
-Optimization is the science of finding the "best" solution under constraints. Whether it's minimizing cost in a supply chain, maximizing return in a portfolio, or training a billion-parameter neural network, the underlying problem always reduces to linear algebra. This chapter explores the algebraic structures that enable efficient optimization, from the polyhedral geometry of Linear Programming to the cone-based theory of Semidefinite Programming.
-
----
-
-## 25.1 Linear and Quadratic Programming
-
-<div class="context-flow" markdown>
-
-**Linear Programming (LP)**: $\min c^T x$ subject to $Ax = b, x \ge 0$.
-**Quadratic Programming (QP)**: $\min \frac{1}{2} x^T Q x + c^T x$ subject to linear constraints.
+**Extension**: Optimization is the "action guide" of linear algebra; it elevates systems of equations from "finding equality" to "seeking optimality." It proves that matrix inequality constraints define the convex geometric boundaries of high-dimensional space, serving as the mathematical engine for parameter updates in all AI algorithms.
 
 </div>
 
-!!! theorem "Theorem 25.1 (Optimality Conditions for QP)"
-    For a QP problem with a symmetric positive definite matrix $Q$, the global minimum is achieved when the gradient vanishes:
-    $$\nabla f(x) = Qx + c = 0 \implies x^* = -Q^{-1}c$$
-    If $Q$ is not positive definite, the problem may be unbounded or have no local minimum.
-
-!!! technique "Interior Point Methods"
-    Unlike the Simplex method which walks along the edges of a polytope, Interior Point methods travel through the center of the feasible region. This requires solving a sequence of linear systems involving the matrix $A D A^T$, where $D$ is a diagonal scaling matrix.
+In previous chapters, we focused on solving $Ax = b$. In the real world, however, resources are finite, and our goal is often to maximize profit or minimize cost subject to a set of linear constraints. This is the domain of **Optimization Theory**. Linear algebra provides the core language for optimization: the basis rotations in the simplex method are essentially base changes, while semidefinite programming is the ultimate application of eigenvalue theory in constrained spaces. This chapter demonstrates how linear algebra serves as the mathematical tool for extracting maximum value from limited resources.
 
 ---
 
-## 25.2 Semidefinite Programming (SDP)
+## 25.1 Linear Programming and Simplex Algebra
 
-<div class="context-flow" markdown>
-
-**The Frontier of Optimization**: SDP is the most powerful generalization of LP, where variables are matrices and constraints involve the **Positive Definite Cone** ($\mathcal{S}_n^+$).
-
-</div>
-
-!!! definition "Definition 25.1 (Semidefinite Program)"
-    An SDP problem takes the form:
-    $$\min_{X \in \mathcal{S}_n} \langle C, X \rangle \quad \text{subject to } \langle A_i, X \rangle = b_i, \quad X \succeq 0$$
-    where $\langle A, B \rangle = \operatorname{tr}(A^T B)$ is the Frobenius inner product.
-
-!!! theorem "Theorem 25.2 (SDP Duality)"
-    Every SDP has a dual problem:
-    $$\max_{y \in \mathbb{R}^m} b^T y \quad \text{subject to } \sum y_i A_i \preceq C$$
-    Under strong duality (Slater's condition), the optimal values of the primal and dual are equal.
+!!! definition "Definition 25.1 (Standard LP Form)"
+    $$\min \mathbf{c}^T \mathbf{x} \quad \text{s.t. } A\mathbf{x} = \mathbf{b}, \mathbf{x} \ge 0$$
+    **Simplex Logic**: Start from a basic feasible solution (a vertex) of the augmented matrix and move to an adjacent vertex that decreases the objective function via elementary row operations (pivoting).
 
 ---
 
-## 25.3 Matrix Completion and Nuclear Norm
+## 25.2 Duality Theory and Farkas's Lemma
 
-!!! technique "The Nuclear Norm Trick"
-    In problems like the "Netflix Challenge" (recommender systems), we want to fill in a large matrix $M$ using only a few entries. This is a rank-minimization problem, which is NP-hard. We relax it to a convex problem using the **Nuclear Norm** (sum of singular values):
-    $$\min \|X\|_* \quad \text{subject to } X_{ij} = M_{ij} \text{ for observed } (i,j)$$
-    This is equivalent to an SDP and can be solved efficiently.
-
----
-
-## 25.4 Compressed Sensing and Sparsity
-
-!!! theorem "Theorem 25.3 (L1-Relaxation)"
-    Finding the sparsest solution to $Ax=b$ (minimizing $\|x\|_0$) is NP-hard. However, if $A$ satisfies the **Restricted Isometry Property** (RIP), the sparsest solution is exactly the same as the one that minimizes the $L_1$ norm ($\sum |x_i|$). $L_1$ minimization is a Linear Program.
+!!! theorem "Theorem 25.1 (Strong Duality)"
+    If the primal problem has an optimal solution, then its dual problem $\max \mathbf{b}^T \mathbf{y}$ also has an optimal solution, and their optimal values are equal.
+    **Algebraic Essence**: This is a direct consequence of Farkas’s Lemma, revealing the deep symmetry between "feasibility" and "hyperplane separation."
 
 ---
 
-## 25.5 Second-order Methods: Newton and BFGS
+## 25.3 Semidefinite Programming (SDP)
 
-<div class="context-flow" markdown>
-
-**Core Idea**: Second-order methods use the curvature of the function (the Hessian $H$) to take faster, smarter steps.
-
-</div>
-
-!!! algorithm "Algorithm 25.1 (Newton's Method)"
-    1.  Approximate $f(x)$ by a quadratic Taylor expansion at $x_k$.
-    2.  The update is $x_{k+1} = x_k - H(x_k)^{-1} \nabla f(x_k)$.
-    3.  **Linear Algebra cost**: Solving the linear system $H \Delta x = -\nabla f$ in each step.
-
-!!! technique "Quasi-Newton (BFGS)"
-    In many large-scale problems, computing the full Hessian $H$ is too expensive ($O(n^2)$ storage, $O(n^3)$ inversion). BFGS approximates $H^{-1}$ using only first-order gradients through a sequence of rank-2 updates, maintaining positive definiteness and requiring only $O(n^2)$ work.
+!!! definition "Definition 25.2 (Semidefinite Programming)"
+    $$\min \operatorname{tr}(CX) \quad \text{s.t. } \operatorname{tr}(A_i X) = b_i, X \succeq 0$$
+    **Significance**: SDP is the pinnacle of convex optimization, extending the variables of linear programming from vectors to matrices, enabling precise handling of complex matrix eigenvalue constraints.
 
 ---
 
 ## Exercises
 
+**1. [Basics] Transform $\min x_1 - x_2$ subject to $x_1+x_2 \le 4, x_1, x_2 \ge 0$ into standard form.**
 
-****
 ??? success "Solution"
-     The Hessian is $H = \begin{pmatrix} 2 & 0 \\ 0 & 4 \end{pmatrix}$, which is PD.
-     The gradient is $\nabla f = (2x-4, 4y+4)^T$.
-     Setting $\nabla f = 0$ gives $x=2, y=-1$.
-     The minimum value is $f(2, -1) = 4 + 2 - 8 - 4 + 7 = 1$.
+    **Conversion Steps:**
+    1. Introduce a slack variable $s_1 \ge 0$.
+    2. Convert the inequality to an equality: $x_1 + x_2 + s_1 = 4$.
+    3. The objective vector is $\mathbf{c} = (1, -1, 0)^T$.
+    **Standard Form**: $\min (1, -1, 0) \begin{pmatrix} x_1 \\ x_2 \\ s_1 \end{pmatrix}$ subject to $(1, 1, 1) \mathbf{x} = 4$ and $\mathbf{x} \ge 0$.
 
+**2. [Simplex] What is the algebraic basis for choosing an entering variable in the Simplex method?**
 
-****
 ??? success "Solution"
-     1. Primal feasibility: $h(x) = 0$.
-     2. Stationarity: $\nabla f(x) + \sum \lambda_i \nabla h_i(x) = 0$.
+    **Reasoning:**
+    Calculate the **Reduced Cost** $\bar{c}_j = c_j - \mathbf{c}_B^T B^{-1} A_j$. If the reduced cost of a non-basic variable is negative, increasing that variable (letting it enter the basis) will decrease the objective value. This is essentially finding the steepest descent direction along the edges of the feasible region.
 
+**3. [Duality] Write the dual of $\min \mathbf{c}^T \mathbf{x}, A\mathbf{x} \ge \mathbf{b}, \mathbf{x} \ge 0$.**
 
-****
 ??? success "Solution"
-     $X \preceq I$, or $I - X \succeq 0$.
+    **Conclusion:**
+    $\max \mathbf{b}^T \mathbf{y}, A^T \mathbf{y} \le \mathbf{c}, \mathbf{y} \ge 0$.
+    **Physical Meaning**: The primal problem seeks the lowest cost under constraints, while the dual seeks the highest revenue under resource pricing constraints.
 
+**4. [SDP] Is Linear Programming (LP) a special case of Semidefinite Programming (SDP)?**
 
-****
 ??? success "Solution"
-     The proximal operator of the nuclear norm involves a "singular value thresholding" step: computing the SVD and shrinking all singular values towards zero.
+    **Yes.**
+    **Reasoning**: If we restrict the matrix variable $X$ in SDP to be diagonal, the constraint $X \succeq 0$ reduces to $x_i \ge 0$ for its diagonal entries. The trace operations become standard dot products. Thus, LP is simply SDP performed on the subspace of diagonal matrices.
 
+**5. [KKT] In quadratic programming $\min \frac{1}{2}\mathbf{x}^T Q \mathbf{x} + \mathbf{c}^T \mathbf{x}$, what property of $Q$ guarantees a global optimum?**
 
-****
 ??? success "Solution"
-     $\sqrt{X^T X}$ has eigenvalues equal to the singular values $\sigma_i$ of $X$. Since $\|X\|_* = \sum \sigma_i$ and the trace is the sum of eigenvalues, the equality holds.
+    **Conclusion: $Q$ must be positive semi-definite ($Q \succeq 0$).**
+    **Reasoning**: Positive semi-definiteness ensures the objective function is convex. In convex optimization, any local minimum is a global minimum. If $Q$ had negative eigenvalues, the problem would be non-convex and finding a global solution would be extremely difficult.
 
+**6. [Calculation] Using duality: if a primal feasible solution has value 10 and a dual feasible solution has value 12, is this possible for a minimization primal?**
 
-****
 ??? success "Solution"
-     Gradient Descent only uses the first derivative (linear approximation), while Newton's uses the second derivative (quadratic approximation). Newton's method has quadratic convergence near the optimum, whereas Gradient Descent is linear.
+    **Conclusion: No.**
+    **Reasoning**: By the **Weak Duality Theorem**, the value of any dual feasible solution (maximization) is always less than or equal to the value of any primal feasible solution (minimization). Since $12 > 10$, this contradicts the duality principle.
 
+**7. [Application] How does the "Kernel Trick" in SVM demonstrate the power of linear algebra?**
 
-****
 ??? success "Solution"
-     High condition numbers result in "elongated" contours (ellipses). Gradient Descent "zig-zags" in these narrow valleys, leading to very slow convergence.
+    The primal SVM problem seeks a hyperplane in a high-dimensional space. Through duality, the problem is transformed into one involving only inner products $x_i^T x_j$ between samples. Using **Positive Definiteness**, we can replace these inner products with a kernel function $K(x_i, x_j)$, enabling non-linear classification without ever explicitly computing high-dimensional mappings.
 
+**8. [Interior Point] What is the core advantage of Interior Point methods over the Simplex method?**
 
-****
 ??? success "Solution"
-     $\max b^T y$ s.t. $A^T y \le c, y \ge 0$.
+    **Comparison:**
+    - **Simplex**: Moves along the boundary (vertices); worst-case complexity is exponential (Klee-Minty examples).
+    - **Interior Point**: Moves through the interior of the feasible set using Newton's method along a "central path."
+    **Conclusion**: Interior Point methods have **polynomial-time complexity**, making them superior for very large-scale problems or those with matrix constraints like SDP.
 
+**9. [Farkas] What does Farkas’s Lemma describe in terms of matrix equations?**
 
-****
 ??? success "Solution"
-     Training an SVM involves maximizing the margin $2/\|w\|$, which is equivalent to minimizing $\frac{1}{2} \|w\|^2$ (a quadratic objective) subject to linear constraints $y_i(w^T x_i + b) \ge 1$.
+    It describes an "either-or" alternative: Either there exists $x \ge 0$ such that $Ax=b$ (the target point is in the cone), or there exists $y$ such that $A^T y \ge 0$ and $b^T y < 0$ (a hyperplane separates the target from the cone). This is the algebraic template for existence proofs in constrained optimization.
 
-****
+**10. [Application] What is $\ell_1$-minimization in "Compressed Sensing"?**
+
 ??? success "Solution"
-    ## Chapter Summary
+    **Explanation:**
+    We seek the sparsest solution ($\min \|\mathbf{x}\|_0$) subject to $A\mathbf{x} = \mathbf{b}$. Since $\ell_0$ optimization is NP-hard, linear algebra proves that under certain conditions (the RIP property), it can be exactly replaced by **linear programming** ($\min \|\mathbf{x}\|_1$). This reduction to convex optimization is a milestone in modern signal processing.
 
-Optimization is the ultimate application of Matrix Analysis:
+## Chapter Summary
 
+Linear algebra is the engine and the measure of optimization theory:
 
-****: Established that solving optimization problems is synonymous with solving linear systems or finding spectral bounds.
-
-****: Generalized linear constraints to the positive definite cone, creating the powerful framework of SDP.
-
-****: Developed second-order methods that exploit the Hessian matrix to achieve superior convergence rates.
-
-****: Demonstrated how linear algebra tricks like the nuclear norm and L1-minimization can extract low-dimensional signals from high-dimensional noise.
+1.  **Geometric Perspective**: It transforms dry numerical constraints into polyhedra and cones in high-dimensional space, establishing geometric paths for finding optima.
+2.  **Duality Harmony**: Strong duality reveals the deep algebraic balance within optimization, proving that the lower bound of cost and the upper bound of value must coincide at the optimum.
+3.  **From Vectors to Operators**: The leap from LP to SDP marks the transition of linear algebra from handling simple discrete allocations to complex system stability and structural matrix optimization—the necessary path to modern AI algorithms.

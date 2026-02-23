@@ -2,110 +2,123 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Non-negative Matrices (Ch17) · Matrix Decompositions (Ch10) · SVD (Ch11) · Optimization (Ch25)
+**Prerequisites**: Non-negative Matrices (Ch17) · Singular Value Decomposition (Ch11) · Matrix Analysis (Ch14)
 
-**Chapter Outline**: Definition of NMF → The "Parts-based" Motivation → Fundamental Differences between NMF and PCA/SVD (Interpretability) → Non-convexity and NP-hardness → Geometric Interpretation: Simplicial Cones → Core Algorithms: Multiplicative Update Rules (Lee & Seung) and Alternating Least Squares (ALS) → Regularized NMF (Sparsity and Manifold Constraints) → Applications: Image Feature Extraction, Topic Modeling, and Bioinformatics (Gene Clustering)
+**Chapter Outline**: Motivation for NMF (The Non-negative Essence of Data) → Definition of Non-negative Matrix Factorization → The Concept of Non-negative Rank $rank_{nn}(V)$ → Differences from SVD: From Global Orthogonality to Local Non-negativity → Core Trait: Part-based Representation → Algorithmic Implementation: Multiplicative Update Rules → Objective Functions: Frobenius Distance vs. KL Divergence → Applications: Text Mining (Topic Modeling), Facial Recognition (Feature Detection), Hyperspectral Unmixing, and Recommender Systems
 
-**Extension**: NMF is one of the most important dimensionality reduction tools in data mining; by enforcing non-negativity constraints, it achieves an automated deconstruction of complex data into its constituent parts, providing the mathematical foundation for computers to understand the logic of "parts forming a whole."
+**Extension**: NMF is the product of linear algebra's compromise with "interpretability"; by sacrificing orthogonality for non-negativity, it reveals how complex data is composed of simple, physically meaningful components through "addition" rather than "cancellation." It is a cornerstone of modern unsupervised learning.
 
 </div>
 
-In traditional matrix decompositions like SVD, basis vectors and coefficients can be negative, which often lacks physical meaning when processing images or text. **Non-negative Matrix Factorization** (NMF) enforces that all components must be non-negative, ensuring that the results have a natural "parts-based" interpretability. For instance, a human face can be automatically decomposed into components like eyes, nose, and mouth. This chapter explores this decomposition technique, which presents both non-convex challenges and immense practical utility.
+In traditional SVD, basis vectors may contain negative values, which often lack intuitive meaning when processing image pixels or word counts. **Non-negative Matrix Factorization** (NMF) imposes a strong non-negativity constraint, forcing the system to synthesize data only through "addition." This "add-only" logic unexpectedly results in a **part-based** representation, allowing us to automatically extract meaningful "components" from raw data. This chapter explores this decomposition technique that balances computational challenge with explanatory power.
 
 ---
 
-## 58.1 Definition and Motivation
+## 58.1 Definition and Non-negative Rank
 
 !!! definition "Definition 58.1 (NMF)"
-    Given a non-negative matrix $V \in \mathbb{R}^{m \times n}$ ($V \ge 0$), NMF seeks to find two non-negative matrices $W \in \mathbb{R}^{m \times k}$ and $H \in \mathbb{R}^{k \times n}$ such that:
-    $$V \approx WH$$
-    where $k \ll \min(m, n)$ is the number of bases (the rank).
+    Given a non-negative matrix $V \in \mathbb{R}^{m \times n}$ ($V \ge 0$), find non-negative matrices $W \in \mathbb{R}^{m \times k}$ and $H \in \mathbb{R}^{k \times n}$ such that:
+    $$V \approx WH, \quad W, H \ge 0$$
+    - $W$ is usually called the **Basis Matrix** (features).
+    - $H$ is usually called the **Coefficient Matrix** (weights).
 
-!!! intuition "Interpretability: Local Representations"
-    Because subtraction is not allowed, each column of $V$ must be a purely additive combination of the columns of $W$. This forces the columns of $W$ to represent **fundamental local features** within the data, while the rows of $H$ represent the **activation intensities** of those features.
-
----
-
-## 58.2 Geometric Interpretation
-
-!!! technique "Geometry: Simplicial Cones"
-    The essence of NMF is finding a minimal **non-negative simplicial cone** that encloses all data points in $V$. Each column of data is restricted to the convex cone spanned by the columns of $W$. This contrasts sharply with PCA, which seeks a linear subspace along directions of maximum variance.
+!!! definition "Definition 58.2 (Non-negative Rank)"
+    The smallest dimension $k$ for which $V = WH$ holds exactly with $W, H \ge 0$ is the **non-negative rank** of $V$, denoted $rank_{nn}(V)$.
+    **Property**: $rank(V) \le rank_{nn}(V)$. Computing the non-negative rank is NP-hard.
 
 ---
 
-## 58.3 Core Algorithms
+## 58.2 Core Trait: Part-based Representation
 
-!!! algorithm "Algorithm 58.1 (Multiplicative Update Rules)"
-    The classic algorithm proposed by Lee & Seung ensures that the objective function $\|V-WH\|_F$ is non-increasing through the following iterations:
+!!! technique "Explanation: Why extract "parts"?"
+    Because entries of $W$ and $H$ are non-negative, a data point in $V$ can only be obtained through the **linear superposition** of basis vectors. To reconstruct complex patterns, the algorithm tends to make the basis vectors in $W$ sparse, representing distinct parts of an object (like eyes or a nose in a face). In SVD, basis vectors can cancel each other out (positive and negative), leading to overlapping global patterns that often lack physical meaning.
+
+---
+
+## 58.3 Algorithm: Multiplicative Update
+
+!!! algorithm "Algorithm 58.1 (Lee-Seung Multiplicative Update)"
+    For the Frobenius norm objective, the update rules are:
     $$H_{aj} \leftarrow H_{aj} \frac{(W^T V)_{aj}}{(W^T WH)_{aj}}, \quad W_{ia} \leftarrow W_{ia} \frac{(VH^T)_{ia}}{(WHH^T)_{ia}}$$
-    **Advantages**: Extremely simple to implement and automatically preserves non-negativity.
-    **Disadvantages**: Converges to local minima and may get stuck in saddle points.
-
----
-
-## 58.4 Variants and Extensions
-
-!!! technique "Sparse NMF"
-    By adding an $L_1$ regularization term $\lambda \|H\|_1$ to the objective, one can force the basis vectors to be more "pure" and sparse, further enhancing the discriminative power of the features.
+    **Trait**: As long as the initial values are positive, the update automatically maintains non-negativity and decreases the objective function at each step.
 
 ---
 
 ## Exercises
 
+**1. [Basics] Find the non-negative rank of $V = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$.**
 
-****
 ??? success "Solution"
-     $(WD)(D^{-1}H) = W(DD^{-1})H = WH = V$. Since both $D$ and its inverse have positive diagonals, non-negativity is preserved. This demonstrates the scale-indeterminacy of NMF.
+    **Analysis:**
+    1. The standard rank is 2.
+    2. Since it is a diagonal matrix with 1s, we cannot synthesize these two orthogonal directions using only one non-negative column vector.
+    **Conclusion**: The non-negative rank is 2. For the identity matrix, the non-negative rank equals the standard rank.
 
+**2. [Comparison] Briefly state the main difference between NMF and SVD regarding basis vectors.**
 
-****
 ??? success "Solution"
-     PCA allows negative values and seeks to maximize variance (often leading to global, non-interpretable features). NMF enforces non-negativity and seeks interpretable local parts.
+    **Comparison:**
+    - **SVD**: Basis vectors are mutually orthogonal and contain both positive and negative values. Ideal for variance explanation but often lacks interpretability (e.g., negative pixel values).
+    - **NMF**: Basis vectors are not necessarily orthogonal but must be non-negative. This produces "local" features with strong physical interpretability.
 
+**3. [Calculation] Find the non-negative rank and an NMF factorization for $V = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
 
-****
 ??? success "Solution"
-     NMF is a non-convex optimization problem and is equivalent to finding a specific nesting of simplices, for which no polynomial-time global solver exists in general dimensions.
+    **Construction:**
+    1. Standard rank is 1.
+    2. $V = \begin{pmatrix} 1 \\ 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \end{pmatrix}$.
+    3. Factors are non-negative.
+    **Conclusion**: The non-negative rank is 1.
 
+**4. [Existence] Does every non-negative matrix have an NMF where $k = rank(V)$?**
 
-****
 ??? success "Solution"
-     No. In multiplicative updates, 0 times any factor remains 0. Therefore, initialization is critical for NMF performance.
+    **Conclusion: Not necessarily.**
+    This is one of the deepest questions in NMF theory. There exist matrices (e.g., specific $5 \times 5$ constructions) with standard rank 3, but where every non-negative factorization requires $k \ge 4$ or $5$. This "rank gap" reflects the algebraic rigidity introduced by non-negativity constraints.
 
+**5. [Objective] Name another common loss function for NMF besides the Frobenius norm.**
 
-****
 ??? success "Solution"
-     Each column of $W$ represents a "topic" (a distribution over words); each column of $H$ represents a document's "membership" or weight in each topic.
+    **Conclusion: Kullback-Leibler (KL) Divergence.**
+    $$D(V || WH) = \sum (V_{ij} \log \frac{V_{ij}}{(WH)_{ij}} - V_{ij} + (WH)_{ij})$$
+    This performs better when handling data with Poisson noise, such as count data or word frequencies in text.
 
+**6. [Uniqueness] Is the NMF decomposition unique?**
 
-****
 ??? success "Solution"
-     Not necessarily. The non-negative rank is typically greater than or equal to the algebraic rank.
+    **Conclusion: Usually not.**
+    **Reasoning**: If $V = WH$, then for any diagonal matrix $D \succ 0$, $V = (WD)(D^{-1}H)$. There can also be complex rotational uncertainties. To obtain a unique solution, additional constraints such as **sparsity** are usually imposed.
 
+**7. [Text Mining] In text mining, what does the basis matrix $W$ represent?**
 
-****
 ??? success "Solution"
-     **KL Divergence** (Kullback-Leibler) is frequently used, especially for count data and probability distributions.
+    **Explanation:**
+    In a term-document matrix, each column of $W$ represents a **Topic**. Words with large values in a column are the core keywords for that topic. The coefficient matrix $H$ represents the distribution weights of each document over these topics.
 
+**8. [Sparsity] Why do NMF results tend to be sparse?**
 
-****
 ??? success "Solution"
-     The identity matrix $I = I \cdot I$. Due to scaling and potential rotations that preserve non-negativity, the decomposition is generally not unique.
+    **Algebraic Intuition:**
+    Since elements can only be added, to reconstruct a sparse data matrix, $W$ and $H$ must contain many zeros. The non-negativity constraint pushes the solution toward the "boundary" of the non-negative orthant (the axes), naturally inducing sparsity.
 
+**9. [Complexity] Why is NMF a non-convex optimization problem?**
 
-****
 ??? success "Solution"
-     Zeros are stationary points for the gradient; the iteration will never move and no features will be extracted. Randomized positive values or SVD-based initializations (like NNDSVD) are used instead.
+    **Reasoning:**
+    While the objective function is convex in $W$ (given $H$) and convex in $H$ (given $W$), it is **jointly non-convex** in $(W, H)$. This means algorithms may get stuck in local minima, and the choice of initialization is critical.
 
-****
+**10. [Application] Briefly describe NMF in a recommender system (e.g., movie ratings).**
+
 ??? success "Solution"
-    ## Chapter Summary
+    1. $V$ is the user-movie rating matrix.
+    2. $W$ represents user "latent preferences" (e.g., liking for sci-fi, action, romance).
+    3. $H$ represents movie "latent attributes" (e.g., how much a movie belongs to those genres).
+    4. Predicted ratings are the inner products of these non-negative vectors. Non-negativity ensures that preferences and attributes accumulate, which is intuitive.
 
-NMF achieves a harmony between linear algebra and human cognition:
+## Chapter Summary
 
+Non-negative matrix factorization represents a revolution of "interpretability" in linear algebra:
 
-****: Proved that mathematical constraints (non-negativity) are not just limitations but sources of "meaning" (local features), establishing the benchmark for interpretability in reduction algorithms.
-
-****: Demonstrated how even simple linear products evolve into complex non-convex landscapes when signs are restricted, driving the development of alternating optimization algorithms.
-
-****: From image recognition to genomics, NMF serves as a universal "pattern discovery" tool, proving that complex real-world data are often the superposition of a few pure, non-negative atomic components.
+1.  **Reward of Constraints**: It proves that by imposing seemingly restrictive non-negativity, we gain structured decompositions with real-world physical meaning beyond pure mathematical optimization.
+2.  **Part and Whole**: NMF successfully realizes the "part-based" decomposition, degrading complex signals into atomic components and establishing a new paradigm for feature extraction.
+3.  **Computational Challenge**: The hardness of non-negative rank and joint non-convexity show that "structural interpretation" comes at a cost, driving the evolution of randomized and alternating optimization algorithms.

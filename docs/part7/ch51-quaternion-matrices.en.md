@@ -2,112 +2,121 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch02) · Eigenvalues (Ch06) · Clifford Algebra (Ch50) · Matrix Groups (Ch55)
+**Prerequisites**: Clifford Algebra (Ch50) · Matrix Algebra (Ch02) · Eigenvalues (Ch06)
 
-**Chapter Outline**: Algebraic Structure of Quaternions $\mathbb{H}$ → Non-commutativity and its Challenges → Complex Representation $\chi(A)$ → Left vs. Right Eigenvalues → Diagonalization & SVD of Quaternion Matrices → Unitary Quaternions & the Symplectic Group $Sp(n)$ → Applications: 3D Rotation (Avoiding Gimbal Lock), Signal Processing, and Quaternion Neural Networks
+**Chapter Outline**: From Complex Numbers to Quaternions → Non-commutativity of the Quaternion Algebra $\mathbb{H}$ → Definitions and Operational Laws of Quaternion Matrices → The Divergence between Left and Right Eigenvalues → The Core Challenge: Non-commutative Determinants (Dieudonné Determinant) → Complex Representation of Quaternion Matrices → Spectral Structure Theorem → Unitary Quaternion Matrices ($Sp(n)$) → Applications: Robotic Pose Control, Quaternionic Quantum Mechanics, and Color Image Representation in Signal Processing
 
-**Extension**: Quaternion matrices provide the optimal tool for describing 3D rotations and attitude; they extend complex linear algebra into the non-commutative realm and are key to understanding Symplectic Geometry and Compact Lie Groups.
+**Extension**: Quaternion matrices are an attempt to place linear algebra on a "non-commutative field"; by introducing three imaginary units $i, j, k$, they perfectly encapsulate 3D rotation information—the ultimate mathematical framework for processing data with strong rotational correlation.
 
 </div>
 
-Complex numbers brought linear algebra into the realm of 2D rotations, but **Quaternions** ($\mathbb{H}$) extend this power to 3D space. Because quaternion multiplication is non-commutative ($ij \neq ji$), the theory of quaternion matrices exhibits a landscape starkly different from classical linear algebra. This chapter establishes rigorous methods for handling such non-commutative algebraic structures and demonstrates their immense power in computer graphics and attitude control.
+When we replace the entries of a matrix with **Quaternions**, we enter a non-commutative algebraic world. Since $ij \neq ji$, traditional determinant definitions and eigenvalue theories undergo drastic changes. **Quaternion Matrices** are not only theoretically challenging in pure mathematics but also demonstrate incredible elegance in describing robotic joint movements, spacecraft attitude, and color image processing. This chapter introduces how to re-establish order in this non-commutative domain.
 
 ---
 
-## 51.1 Foundations of Quaternions $\mathbb{H}$
+## 51.1 Foundations of Quaternion Algebra $\mathbb{H}$
 
-!!! definition "Definition 51.1 (Quaternions)"
-    A quaternion $q$ is expressed in the form $q = a + bi + cj + dk$, where $a, b, c, d \in \mathbb{R}$.
-    The fundamental imaginary units satisfy:
+!!! definition "Definition 51.1 (Quaternion)"
+    A quaternion $q \in \mathbb{H}$ is of the form $q = a + bi + cj + dk$, satisfying Hamilton's rules:
     $$i^2 = j^2 = k^2 = ijk = -1$$
-    **Core Property**: $ij = k, ji = -k$ (Non-commutativity).
-
-!!! definition "Definition 51.2 (Conjugate and Norm)"
-    - **Conjugate**: $\bar{q} = a - bi - cj - dk$.
-    - **Norm**: $|q| = \sqrt{q\bar{q}} = \sqrt{a^2 + b^2 + c^2 + d^2}$.
-    - **Inverse**: $q^{-1} = \bar{q} / |q|^2$ (if $q \neq 0$).
+    **Key Conflict**: $ij = k$, but $ji = -k$. Multiplication is not commutative.
 
 ---
 
-## 51.2 Quaternion Matrices and Complex Representation
+## 51.2 Eigenvalues: Left vs. Right
 
-!!! definition "Definition 51.3 (Complex Representation)"
-    Any quaternion $q = \alpha + \beta j$ ($\alpha, \beta \in \mathbb{C}$) can be represented as a $2 \times 2$ complex matrix:
-    $$\chi(q) = \begin{pmatrix} \alpha & \beta \\ -\bar{\beta} & \bar{\alpha} \end{pmatrix}$$
-    For an $n \times n$ quaternion matrix $A = A_1 + A_2 j$, its **complex adjoint matrix** $\chi(A)$ is a $2n \times 2n$ complex matrix:
-    $$\chi(A) = \begin{pmatrix} A_1 & A_2 \\ -\bar{A}_2 & \bar{A}_1 \end{pmatrix}$$
-    **Significance**: This allows us to transform non-commutative quaternion operations into well-established complex matrix operations.
+!!! definition "Definition 51.2 (Left and Right Eigenvalues)"
+    For a square quaternion matrix $A$:
+    1.  **Left Eigenvalue**: $A\mathbf{x} = \lambda \mathbf{x}$.
+    2.  **Right Eigenvalue**: $A\mathbf{x} = \mathbf{x} \lambda$.
+    **Difference**: Due to non-commutativity, right eigenvalues are far more research-worthy and exhibit "spectral" properties similar to complex eigenvalues.
 
 ---
 
-## 51.3 Eigenvalues: Left and Right
+## 51.3 Complex Representation
 
-!!! note "Warning: The Cost of Non-commutativity"
-    Since $Aq = \lambda q$ and $Aq = q\lambda$ are not equivalent over $\mathbb{H}$, quaternion matrices have two types of eigenvalues:
-    1.  **Left Eigenvalues**: satisfy $Ax = \lambda x$. These lack good properties and are rarely used.
-    2.  **Right Eigenvalues**: satisfy $Ax = x\lambda$. These are the focus of research and possess clear geometric meaning.
-
-!!! theorem "Theorem 51.1 (Properties of Right Eigenvalues)"
-    An $n \times n$ quaternion matrix $A$ has exactly $n$ right eigenvalues (in the sense of equivalence classes). If $\lambda$ is a right eigenvalue, then for any non-zero quaternion $u$, $u^{-1}\lambda u$ is also a right eigenvalue (forming an eigenvalue orbit).
+!!! technique "Technique: Mapping to Complex Matrices"
+    Every $n \times n$ quaternion matrix $A$ can be mapped to a $2n \times 2n$ complex matrix $\mathcal{X}(A)$:
+    $$q = \alpha + j\beta \to \begin{pmatrix} \alpha & \beta \\ -\bar{\beta} & \bar{\alpha} \end{pmatrix}$$
+    This allows us to leverage classical complex linear algebra tools to solve quaternionic problems.
 
 ---
 
 ## Exercises
 
+**1. [Basics] Calculate the quaternion product $(1+i)j$.**
 
-****
 ??? success "Solution"
-     $k + (-k) = 0$. This reflects the anti-commutativity of the imaginary units.
+    **Steps:**
+    1. Apply distributivity: $1 \cdot j + i \cdot j$.
+    2. Apply Hamilton's rules: $ij = k$.
+    **Conclusion**: The result is $j + k$. Note: $j(1+i) = j + ji = j - k$, which is different.
 
+**2. [Complex Rep] Represent $q = i$ as a $2 \times 2$ complex matrix.**
 
-****
 ??? success "Solution"
-     Expand using the definition. Note that due to non-commutativity, the order of multiplication must be reversed under conjugation.
+    **Construction:**
+    1. Write as $q = \alpha + j\beta$: here $\alpha = i, \beta = 0$.
+    2. Apply the formula: $\begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}$.
+    **Verification**: The square of this matrix is $-I$, consistent with $i^2 = -1$.
 
+**3. [Determinant] Why can't the Leibniz formula be used directly for quaternion determinants?**
 
-****
 ??? success "Solution"
-     $j = 0 + 1j \implies \alpha=0, \beta=1$. Thus $\chi(j) = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$.
+    **Reasoning:**
+    The Leibniz formula involves products of elements (e.g., $a_{1,\sigma(1)} a_{2,\sigma(2)} \cdots$). Since quaternion multiplication is non-commutative, changing the order of terms changes the value of the product. Thus, the traditional determinant loses its uniqueness. Mathematicians introduced the **Dieudonné determinant** to solve this.
 
+**4. [Right Eigenvalues] Prove: If $\lambda$ is a right eigenvalue of $A$, then $q^{-1}\lambda q$ is also an eigenvalue for any $q \in \mathbb{H}, q \neq 0$.**
 
-****
 ??? success "Solution"
-     It represents a rotation by angle $\theta$ around the unit axis $\mathbf{u}$.
+    **Proof:**
+    1. Given $A\mathbf{x} = \mathbf{x}\lambda$.
+    2. Consider vector $\mathbf{y} = \mathbf{x}q$.
+    3. $A\mathbf{y} = A(\mathbf{x}q) = (A\mathbf{x})q = (\mathbf{x}\lambda)q = \mathbf{x}q(q^{-1}\lambda q) = \mathbf{y}(q^{-1}\lambda q)$.
+    **Conclusion**: Eigenvalues form "conjugacy classes." This shows that every non-real eigenvalue of a quaternion matrix actually corresponds to a sphere in the 3D imaginary space.
 
+**5. [Transpose] Define the conjugate transpose $A^*$ for quaternion matrices.**
 
-****
 ??? success "Solution"
-     Utilizing the complex adjoint matrix $\chi(A)$. The eigenvalues of $\chi(A)$ appear in conjugate pairs, which correspond to the right eigenvalue orbits of the original quaternion matrix.
+    **Definition:**
+    $(A^*)_{ij} = \overline{a_{ji}}$.
+    Where the quaternion conjugate $\bar{q} = a - bi - cj - dk$. Note: $\overline{pq} = \bar{q}\bar{p}$.
 
+**6. [Unitary] What is a unitary quaternion matrix (Symplectic matrix)?**
 
-****
 ??? success "Solution"
-     A quaternion matrix satisfying $A^* A = I$. The group of such matrices is known as the compact symplectic group $Sp(n)$.
+    **Definition:**
+    A quaternion matrix satisfying $A^* A = I$. These matrices form the **Symplectic group** $Sp(n)$, describing symmetries that preserve a specific skew-symmetric structure in physics.
 
+**7. [Calculation] Find the conjugate transpose of $\begin{pmatrix} i & j \\ k & 1 \end{pmatrix}$.**
 
-****
 ??? success "Solution"
-     Because multiplication is non-commutative, the order of terms in an expansion cannot be uniquely determined. Typically, the determinant of the real representation or the Dieudonné determinant is used.
+    **Steps:**
+    1. Transpose and conjugate: $\begin{pmatrix} \bar{i} & \bar{k} \\ \bar{j} & \bar{1} \end{pmatrix}$.
+    2. Substitute conjugates: $\begin{pmatrix} -i & -k \\ -j & 1 \end{pmatrix}$.
 
+**8. [Real Spectra] Prove: Right eigenvalues of a Hermitian quaternion matrix ($A^*=A$) must be real.**
 
-****
 ??? success "Solution"
-     $|q|^2 = 1^2 + 1^2 = 2$. Thus $q^{-1} = (1-i)/2 = 0.5 - 0.5i$.
+    **Proof Sketch:**
+    Use the complex representation $\mathcal{X}(A)$. If $A$ is Hermitian, $\mathcal{X}(A)$ is a complex Hermitian matrix. Since complex Hermitian matrices have real eigenvalues, and quaternion right eigenvalues are contained within the spectrum of $\mathcal{X}(A)$, the result follows.
 
+**9. [Inversion] What is the condition for a quaternion matrix to be invertible?**
 
-****
 ??? success "Solution"
-     Because quaternions provide a continuous coverage of the sphere, avoiding the singularities (Gimbal lock) associated with Euler angles at specific orientations.
+    **Conclusion:**
+    Its complex representation $\mathcal{X}(A)$ must be non-singular. In the quaternion domain, this corresponds to its Dieudonné determinant being non-zero.
 
-****
+**10. [Application] Briefly state the advantage of quaternion matrices in color image processing.**
+
 ??? success "Solution"
-    ## Chapter Summary
+    Color images have R, G, B channels. Using pure quaternions $q = ri + gj + bk$ to represent a pixel treats the image as a quaternion matrix.
+    **Advantage**: When performing rotations or filtering, quaternion algebra automatically preserves the correlation between R, G, and B components, avoiding color shifts that occur when processing channels independently.
 
-Quaternion matrices are powerful tools for handling high-dimensional rotation and symmetry:
+## Chapter Summary
 
+Quaternion matrices are the pinnacle of non-commutative algebra applications:
 
-****: By sacrificing the commutative law, quaternions gain the ability to perform compact rotation arithmetic in 3D and 4D spaces, serving as the logical extension of complex numbers in geometric descriptive power.
-
-****: Complex adjoint matrices transform difficult non-commutative computations into established linear algebra algorithms, ensuring numerical stability for quaternion calculus.
-
-****: The theory of quaternion matrices is the natural gateway to Symplectic Geometry and Lie groups (e.g., $SU(2) \cong Sp(1)$), revealing deep connections between operator algebra and physical spatial symmetries.
+1.  **Fusion of Dimensions**: Quaternions are not just numbers but geometric entities with internal rotation; quaternion matrices weave 3D rotation perfectly into the framework of linear operators.
+2.  **Spherical Spectra**: The phenomenon of right eigenvalue conjugacy classes reveals that the spectrum of a non-commutative operator is no longer a set of isolated points but symmetric orbits, greatly enriching the geometry of operator theory.
+3.  **Representation Switching**: The complex representation technique bridges non-commutative algebra and classical complex analysis, proving that even in environments without commutativity, we can regain control through dimension doubling.
