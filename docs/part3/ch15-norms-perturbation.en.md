@@ -1,79 +1,82 @@
-# Chapter 15: Matrix Norms and Perturbation Theory
+# Chapter 15: Norms and Perturbation Theory
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Analysis (Ch14) · Eigenvalues (Ch6) · Singular Values (Ch11) · Vector Spaces (Ch4)
+**Prerequisites**: Inner Product Spaces (Ch8) · SVD (Ch11) · Matrix Analysis (Ch14)
 
-**Chapter Outline**: Vector Norms ($L_1, L_2, L_\infty$) → Induced Matrix Norms → Submultiplicativity → Spectral Norm vs. Frobenius Norm → Schatten Norms → Condition Number $\kappa(A)$ → Perturbation of Linear Systems → Error Bounds → Backward Stability Overview
+**Chapter Outline**: Vector Norms ($L_1, L_2, L_\infty$) → Induced Matrix Norms → Operator and Spectral Norms → Frobenius Norm → Equivalence of Norms → Condition Number $\kappa(A)$ → Perturbation Theory (Linear Systems and Eigenvalues) → Bauer-Fike Theorem
 
-**Extension**: Matrix norms quantify the "size" of an operator; the condition number is the definitive measure of how much rounding errors or noise in the data will be magnified in the solution.
+**Extension**: Norms are rulers for measuring the "size" of mathematical objects, while perturbation theory studies how results fluctuate when real-world noise interferes with the input.
 
 </div>
 
-Matrix norms extend the concept of length from vectors to operators. An induced matrix norm measures the maximum possible magnification a matrix can apply to a vector. This magnification factor is the core of **perturbation theory**: it allows us to estimate how errors in the input $b$ or the matrix $A$ affect the solution $x$ in $Ax=b$. The **condition number** $\kappa(A)$ is the critical sensitivity index that determines the numerical feasibility of solving a linear system.
+In pure mathematics, we talk about exact solutions, but in numerical linear algebra, we talk about error. **Norms** quantify the size of the error, and the **condition number** reveals the system's sensitivity to that error.
 
 ---
 
-## 15.1 Definitions and Structural Properties
+## 15.1 Core Definitions and Inequalities
 
-!!! definition "Definition 15.1 (Induced Matrix Norm)"
-    The matrix norm induced by a vector norm $\|\cdot\|$ is:
-    $$\|A\| = \sup_{x \neq 0} \frac{\|Ax\|}{\|x\|}$$
-    Common induced norms include the $L_1$ (max column sum), $L_\infty$ (max row sum), and $L_2$ (spectral norm, $\|A\|_2 = \sigma_{\max}(A)$).
+!!! definition "Definition 15.1 (Vector $p$-norm)"
+    For a vector $x$, its $p$-norm is defined as:
+    $$\|x\|_p = \left( \sum |x_i|^p \right)^{1/p}$$
+    Common cases are $p=1, 2, \infty$.
 
-!!! theorem "Theorem 15.1 (Sensitivity Bound)"
-    In the system $Ax = b$, if the input $b$ is perturbed by $\delta b$, the relative change in the solution satisfies:
-    $$\frac{\|\delta x\|}{\|x\|} \le \kappa(A) \frac{\|\delta b\|}{\|b\|}, \quad \text{where } \kappa(A) = \|A\| \|A^{-1}\|$$
+!!! theorem "Theorem 15.3 (Bauer-Fike Theorem)"
+    If $A$ is diagonalizable ($A = VDV^{-1}$) and $\mu$ is an eigenvalue of $A+E$, then there exists an eigenvalue $\lambda$ of $A$ such that:
+    $$|\mu - \lambda| \le \kappa_p(V) \|E\|_p$$
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute $\|A\|_1$ and $\|A\|_\infty$ for $A = \begin{pmatrix} 1 & -5 \\ 2 & 3 \end{pmatrix}$.**
+1. **[Vector Norms] Calculate the $L_1, L_2, L_\infty$ norms of $x = (3, -4)^T$.**
    ??? success "Solution"
-       $\|A\|_1 = \max(1+2, |-5|+3) = 8$ (column sums). $\|A\|_\infty = \max(1+|-5|, 2+3) = 6$ (row sums).
+       - $\|x\|_1 = |3| + |-4| = 7$.
+       - $\|x\|_2 = \sqrt{3^2 + (-4)^2} = 5$.
+       - $\|x\|_\infty = \max(|3|, |-4|) = 4$.
 
-2. **[Spectral Norm] Find $\|A\|_2$ for $A = \begin{pmatrix} 3 & 0 \\ 0 & -2 \end{pmatrix}$.**
+2. **[Frobenius] Calculate the Frobenius norm of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
    ??? success "Solution"
-       $\|A\|_2$ is the largest singular value. $\sigma = \{3, 2\}$. Thus $\|A\|_2 = 3$.
+       $\|A\|_F = \sqrt{1^2 + 2^2 + 3^2 + 4^2} = \sqrt{30} \approx 4.47$.
 
-3. **[Frobenius] Define the Frobenius norm and relate it to the trace.**
+3. **[Spectral Norm] What is the 2-norm (spectral norm) of $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$?**
    ??? success "Solution"
-       $\|A\|_F = \sqrt{\sum a_{ij}^2} = \sqrt{\operatorname{tr}(A^T A)}$. It is the Euclidean norm of the matrix viewed as a vector in $\mathbb{R}^{n^2}$.
+       For a diagonal matrix, the 2-norm is the maximum absolute value of the diagonal entries. Thus $\|A\|_2 = 3$.
 
-4. **[Condition Number] Calculate $\kappa_2(A)$ for $A = \begin{pmatrix} 10 & 0 \\ 0 & 0.1 \end{pmatrix}$.**
+4. **[Equivalence] Prove: In finite-dimensional spaces, any two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ are equivalent.**
    ??? success "Solution"
-       $\|A\|_2 = 10$, $\|A^{-1}\|_2 = 1/0.1 = 10$. $\kappa_2(A) = 10 \times 10 = 100$.
+       Since the unit sphere is compact in one norm, the other norm (as a continuous function) must have a maximum and minimum on this set. This guarantees constants $C_1, C_2$ such that $C_1 \|x\|_a \le \|x\|_b \le C_2 \|x\|_a$.
 
-5. **[Submultiplicativity] Prove $\|AB\| \le \|A\| \|B\|$ for induced norms.**
+5. **[Condition Number] If $A = \begin{pmatrix} 1 & 0 \\ 0 & 0.01 \end{pmatrix}$, calculate its condition number with respect to the 2-norm.**
    ??? success "Solution"
-       $\|ABx\| \le \|A\| \|Bx\| \le \|A\| (\|B\| \|x\|) = (\|A\| \|B\|) \|x\|$. Taking the supremum over unit $x$ gives the result. This property is vital for analyzing error propagation.
+       $\kappa_2(A) = \|A\|_2 \|A^{-1}\|_2 = 1 \cdot (1/0.01) = 100$. This indicates that the matrix amplifies errors 100 times during inversion.
 
-6. **[Unitary Invariance] Why is the Frobenius norm called unitarily invariant?**
+6. **[Submultiplicativity] Prove that induced matrix norms satisfy $\|AB\| \le \|A\| \|B\|$.**
    ??? success "Solution"
-       Because $\|UAV\|_F = \|A\|_F$ for any unitary $U, V$. This means the "size" of the matrix is independent of the orthonormal basis used.
+       $\|ABx\| \le \|A\| \|Bx\| \le \|A\| (\|B\| \|x\|)$.
+       By definition, $\|AB\| = \max \frac{\|ABx\|}{\|x\|} \le \|A\| \|B\|$.
 
-7. **[Consistency] Show that $\|Av\| \le \|A\| \|v\|$ for any consistent norm pair.**
+7. **[Perturbation Bound] If input $b$ in $Ax=b$ is perturbed by $\Delta b$, what is the relative error upper bound for the solution?**
    ??? success "Solution"
-       This is the defining property of induced norms. It allows us to treat matrices as bounded operators on vector spaces.
+       $\frac{\|\Delta x\|}{\|x\|} \le \kappa(A) \frac{\|\Delta b\|}{\|b\|}$. The condition number is the amplification factor for error propagation.
 
-8. **[Singular Matrices] What happens to $\kappa(A)$ as $A$ approaches a singular matrix?**
+8. **[Eigenvalue Sensitivity] Why are eigenvalues of normal matrices (like symmetric matrices) more robust than non-normal ones?**
    ??? success "Solution"
-       As $A$ becomes singular, $\sigma_{\min} \to 0$, so $\|A^{-1}\| \to \infty$. The condition number $\kappa(A)$ explodes to infinity, reflecting extreme sensitivity.
+       For normal matrices, the diagonalizing matrix $V$ can be chosen as unitary, making $\kappa_2(V) = 1$. The Bauer-Fike Theorem simplifies to $|\mu-\lambda| \le \|E\|_2$, meaning the eigenvalue shift is bounded by the perturbation size.
 
-9. **[Eigenvalues] Is $\|A\|_2 = \rho(A)$ for all matrices?**
+9. **[Calculation] Find the 1-norm (max absolute column sum) of $\begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       No. Only for normal matrices ($AA^* = A^*A$). For non-normal matrices, $\|A\|_2$ can be much larger than $\rho(A)$.
+       Column 1 sum: $1+0=1$. Column 2 sum: $2+1=3$.
+       Thus $\|A\|_1 = \max(1, 3) = 3$.
 
-10. **[Perturbation] If $\kappa(A) = 10^6$ and your data has 8 digits of precision, how many digits can you trust in the solution $x$?**
+10. **[Application] Why do we prefer unitary transformations (like Householder) in numerical methods?**
     ??? success "Solution"
-        Approximately $8 - \log_{10}(10^6) = 2$ digits. The condition number acts as a "precision destroyer" in linear solvers.
+        Because unitary transformations have a spectral norm of 1 and a condition number of 1. They do not amplify rounding errors, ensuring numerical stability of the algorithm.
 
 ## Chapter Summary
 
-This chapter explores the metric sensitivity of linear operators:
+Norms and perturbation theory are the red lines of computational mathematics:
 
-1. **Magnification Metrics**: Defined induced and entry-wise norms to quantify the scale of matrix actions.
-2. **Spectral Connection**: Established the $L_2$ norm as the maximum singular value, linking geometry to singular spectra.
-3. **Sensitivity Calculus**: Formulated the condition number as the definitive multiplier for error propagation.
-4. **Numerical Feasibility**: Linked the geometric properties of the operator to the precision limits of computational algorithms.
+1. **Size Measurement**: Norms translate matrix properties into comparable numerical values.
+2. **Stability Determination**: Condition number is the only barometer for algorithmic reliability.
+3. **Error Control**: Perturbation theory establishes the valid boundaries of linear algebra calculations in a precision-limited real world.

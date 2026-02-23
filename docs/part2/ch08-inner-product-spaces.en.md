@@ -2,80 +2,84 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Vector Spaces (Ch4) · Orthogonality (Ch7) · Fields (Ch00)
+**Prerequisites**: Vector Spaces (Ch4) · Orthogonality (Ch7)
 
-**Chapter Outline**: Definition of Inner Products → Axioms → Norms Induced by Inner Products → Cauchy-Schwarz Inequality → Triangle Inequality → Angles between Vectors → Orthogonal Complements → Adjoint of a Linear Operator → Self-Adjoint and Unitary Operators → Projection Theorem
+**Chapter Outline**: Definition of Abstract Inner Product → Norms and Metrics → Cauchy-Schwarz Inequality → Angle and Orthogonality → Completeness and Hilbert Spaces Introduction → Adjoint Operators $T^*$ → Normal and Unitary Operators → Spectral Theorem
 
-**Extension**: Inner product spaces add "geometry" (lengths and angles) to the "topology" of vector spaces; they are the starting point for Hilbert space theory in analysis.
+**Extension**: Inner product spaces enhance vector spaces by introducing continuity and geometry; they are finite-dimensional precursors to functional analysis.
 
 </div>
 
-While any vector space allows for addition and scaling, an **inner product space** adds the ability to measure lengths and angles. By defining a scalar-valued function $\langle u, v \rangle$, we can determine if vectors are "close" or "perpendicular." This geometric layer is essential for optimization and functional analysis. The **Cauchy-Schwarz Inequality** is the most fundamental result in this area, providing the bound that ensures the consistency of our definitions of length and angle across all dimensions.
+An inner product space is a vector space reinforced with an inner product. By defining this operation, we can talk not just about linear combinations, but also about lengths, angles, and approximations. It is the mathematical foundation for modern signal processing, quantum mechanics, and optimization theory.
 
 ---
 
-## 08.1 Definitions and Inequalities
+## 08.1 Definitions and Core Properties
 
 !!! definition "Definition 08.1 (Inner Product)"
-    An inner product on $V$ is a map $\langle \cdot, \cdot \rangle: V \times V \to F$ such that:
-    1. **Positivity**: $\langle v, v \rangle \ge 0$ and $\langle v, v \rangle = 0 \iff v = 0$
-    2. **Linearity**: $\langle au + bv, w \rangle = a \langle u, w \rangle + b \langle v, w \rangle$
-    3. **Conjugate Symmetry**: $\langle u, v \rangle = \overline{\langle v, u \rangle}$
-
-!!! theorem "Theorem 08.1 (Cauchy-Schwarz Inequality)"
-    For any $u, v \in V$:
-    $$|\langle u, v \rangle| \le \|u\| \|v\|$$
-    Equality holds if and only if $u$ and $v$ are linearly dependent.
+    A vector space $V$ over field $F$ is equipped with an inner product $\langle \cdot, \cdot \rangle$ if it satisfies:
+    1. **Positive Definiteness**: $\langle v, v \rangle \ge 0$, and equals 0 iff $v=0$.
+    2. **Conjugate Symmetry**: $\langle u, v \rangle = \overline{\langle v, u \rangle}$.
+    3. **Additivity/Homogeneity**: $\langle au+bv, w \rangle = a\langle u, w \rangle + b\langle v, w \rangle$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Verify that the standard dot product in $\mathbb{R}^n$ is an inner product.**
+1. **[Axioms] Verify if $\langle u, v \rangle = u_1 v_1 + 2u_2 v_2$ on $\mathbb{R}^2$ constitutes an inner product.**
    ??? success "Solution"
-       $\langle x, y \rangle = \sum x_i y_i$ satisfies linearity, symmetry (in $\mathbb{R}$), and positivity ($\sum x_i^2 \ge 0$). Thus it is an inner product.
+       Yes. It is a weighted version of the standard dot product. Since the coefficients 1 and 2 are positive, it satisfies positive definiteness. Linearity and symmetry follow trivially. This is called a weighted inner product.
 
-2. **[Norm] Define the norm induced by an inner product.**
+2. **[Cauchy-Schwarz] Prove: $|\langle u, v \rangle| \le \|u\| \|v\|$.**
    ??? success "Solution"
-       $\|v\| = \sqrt{\langle v, v \rangle}$. This generalizes the Euclidean notion of distance.
+       Consider $f(t) = \|u - tv\|^2 = \langle u-tv, u-tv \rangle \ge 0$. Expanding gives $t^2 \|v\|^2 - 2t \operatorname{Re}\langle u, v \rangle + \|u\|^2 \ge 0$. For this quadratic to be non-negative, its discriminant must be $\le 0$, which yields the Cauchy-Schwarz inequality.
 
-3. **[Triangle Inequality] Use Cauchy-Schwarz to prove the Triangle Inequality: $\|u+v\| \le \|u\| + \|v\|$.**
+3. **[Adjoint] Let $T$ have matrix $A$ in the standard basis. Prove its adjoint $T^*$ has matrix $A^*$.**
    ??? success "Solution"
-       $\|u+v\|^2 = \langle u+v, u+v \rangle = \|u\|^2 + 2\operatorname{Re}\langle u, v \rangle + \|v\|^2 \le \|u\|^2 + 2\|u\|\|v\| + \|v\|^2 = (\|u\| + \|v\|)^2$.
+       By definition: $\langle Tv, w \rangle = \langle v, T^* w \rangle$.
+       Left side $= (Av)^* w = v^* A^* w$.
+       Right side $= v^* (T^* w)$.
+       Since this holds for all $v, w$, the matrix for $T^*$ must be $A^*$ (conjugate transpose).
 
-4. **[Angle] Define the angle $\theta$ between two non-zero vectors in a real inner product space.**
+4. **[Unitary] Prove that unitary operators preserve the inner product: $\langle Uu, Uv \rangle = \langle u, v \rangle$.**
    ??? success "Solution"
-       $\cos \theta = \frac{\langle u, v \rangle}{\|u\| \|v\|}$. The Cauchy-Schwarz inequality ensures that this ratio is always in $[-1, 1]$.
+       $\langle Uu, Uv \rangle = \langle u, U^* U v \rangle$.
+       Since $U$ is unitary, $U^* U = I$.
+       Thus $\langle u, Iv \rangle = \langle u, v \rangle$. This explains why rotations and reflections do not change angles or distances.
 
-5. **[Orthogonal Complement] If $W$ is a subspace, define $W^\perp$.**
+5. **[Normal Operators] Determine if $A = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix}$ is a normal matrix.**
    ??? success "Solution"
-       $W^\perp = \{ v \in V : \langle v, w \rangle = 0, \; \forall w \in W \}$. It consists of all vectors perpendicular to the entire subspace.
+       $A^* = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}$.
+       $AA^* = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix} \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$.
+       $A^*A = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$.
+       $AA^* = A^*A$, so $A$ is normal.
 
-6. **[Adjoint] What is the adjoint $T^*$ of a linear operator $T$?**
+6. **[Calculation] Compute the inner product of $f(x)=1$ and $g(x)=x$ under $\langle f, g \rangle = \int_0^1 f(x)g(x) dx$.**
    ??? success "Solution"
-       The unique operator $T^*$ such that $\langle Tu, v \rangle = \langle u, T^*v \rangle$ for all $u, v$. For matrices, $T^* = \overline{T}^T$.
+       $\langle 1, x \rangle = \int_0^1 x dx = [\frac{1}{2}x^2]_0^1 = 1/2$.
 
-7. **[Self-Adjoint] Why are self-adjoint operators ($T^* = T$) important?**
+7. **[Polarization Identity] Write the formula for recovering the inner product from the norm in a real space.**
    ??? success "Solution"
-       They have real eigenvalues and their eigenvectors form an orthonormal basis (Spectral Theorem). They correspond to symmetric or Hermitian matrices.
+       $\langle u, v \rangle = \frac{1}{4}(\|u+v\|^2 - \|u-v\|^2)$. This shows that in real spaces, length information is sufficient to reconstruct angular information.
 
-8. **[Unitary] Define a unitary operator.**
+8. **[Projection Theorem] Let $W$ be a subspace of $V$. Prove $V = W \oplus W^\perp$.**
    ??? success "Solution"
-       An operator $U$ such that $U^* U = I$, or equivalently $\langle Uu, Uv \rangle = \langle u, v \rangle$. These operators preserve distances and angles (isometries).
+       For any $v \in V$, let $p = \operatorname{proj}_W v$. Let $e = v - p$. Clearly $p \in W$ and $\langle e, w \rangle = 0$ for all $w \in W$, so $e \in W^\perp$. This decomposition is unique.
 
-9. **[Projection] State the Projection Theorem for a subspace $W \subseteq V$.**
+9. **[Schur's Theorem App] Is every complex square matrix unitarily similar to an upper triangular matrix?**
    ??? success "Solution"
-       Every $v \in V$ has a unique decomposition $v = w + w^\perp$ where $w \in W$ and $w^\perp \in W^\perp$.
+       Yes. This is Schur Decomposition. It guarantees that through unitary transformations (numerically stable), we can reveal the eigenvalues of any matrix on the diagonal.
 
-10. **[Complex Numbers] How does conjugate symmetry differ from standard symmetry?**
+10. **[Spectral Theorem] Prove: If $T$ is self-adjoint, its eigenvalues must be real.**
     ??? success "Solution"
-        In complex spaces, $\langle u, v \rangle$ is the complex conjugate of $\langle v, u \rangle$. This ensures that $\langle v, v \rangle$ is always a real number, allowing for a well-defined norm.
+        Let $Tv = \lambda v$, then $\langle Tv, v \rangle = \langle \lambda v, v \rangle = \lambda \|v\|^2$.
+        Also $\langle Tv, v \rangle = \langle v, T^* v \rangle = \langle v, Tv \rangle = \bar{\lambda} \|v\|^2$.
+        Since $v \neq 0$, $\lambda = \bar{\lambda}$.
 
 ## Chapter Summary
 
-This chapter provides the geometric foundation for vector spaces:
+Inner product spaces establish the weights and measures of linear algebra:
 
-1. **Metric Definition**: Defined inner products as the source of length, distance, and angle in abstract spaces.
-2. **Fundamental Bounds**: Established the Cauchy-Schwarz inequality as the universal constraint on vector interactions.
-3. **Operator Duality**: Developed the theory of adjoints, providing a link between an operator and its "mirror" image in the inner product.
-4. **Geometric Decomposition**: Leveraged orthogonal complements and projections to solve best-approximation problems in high dimensions.
+1. **Geometrization**: Introduced norms, angles, and projections, giving abstract spaces physical intuition.
+2. **Operator Symmetry**: The classification of self-adjoint, normal, and unitary operators forms the core of spectral theory.
+3. **Essence of Approximation**: Orthogonal projection is the mathematical destination for all linear approximation and error minimization problems.

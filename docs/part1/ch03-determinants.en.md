@@ -2,77 +2,80 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Polynomials (Ch00) · Permutations
+**Prerequisites**: Matrix Basics (Ch2)
 
-**Chapter Outline**: Definition of the Determinant → Leibniz Formula (Sum over Permutations) → Properties of Determinants (Linearity, Alternating, Multiplicativity) → Calculation via Cofactor Expansion → Calculation via Row Reduction → Cramer's Rule → Determinants and Invertibility → Geometric Interpretation (Oriented Volume)
+**Chapter Outline**: Definition of Determinant (Permutations and Inversions) → 2nd and 3rd Order Expansion → Properties of Determinants (Effect of Row/Column Ops) → Cofactors and Laplace Expansion → Cramer's Rule → Adjoint Matrix $A^*$ → Determinant Formula for Inverses
 
-**Extension**: The determinant is the scalar "signature" of a linear map; it is the unique alternating multilinear form that measures how a transformation scales space.
+**Extension**: Geometrically, the determinant represents the "volume scaling factor" caused by a linear mapping.
 
 </div>
 
-The determinant is a scalar value that encapsulates the essence of a square matrix. Geometrically, it measures the factor by which a transformation scales $n$-dimensional volume. Algebraically, it provides a definitive test for invertibility: a matrix is invertible if and only if its determinant is non-zero. From the combinatorial Leibniz formula to the practical cofactor expansion, this chapter explores the properties that make the determinant an essential tool in spectral theory and geometry.
+The determinant is a function that maps a square matrix to a scalar. Although complex to compute, it plays an irreplaceable role in determining matrix invertibility, solving linear systems, and studying eigenvalues.
 
 ---
 
-## 03.1 Definitions and Volume Scaling
+## 03.1 Properties of Determinants
 
-!!! definition "Definition 03.1 (Leibniz Formula)"
-    For an $n \times n$ matrix $A$, the determinant is:
-    $$\det A = \sum_{\sigma \in S_n} \operatorname{sgn}(\sigma) \prod_{i=1}^n a_{i, \sigma(i)}$$
-    This sum over all permutations captures the alternating nature of the volume form.
-
-!!! theorem "Theorem 03.1 (Multiplicativity)"
-    For any two square matrices $A$ and $B$, $\det(AB) = \det A \cdot \det B$. This mirrors the property that the volume scaling of a composed transformation is the product of the individual scalings.
+!!! theorem "Theorem 03.1 (Key Properties)"
+    1. $\det(AB) = \det(A) \det(B)$
+    2. $\det(A^T) = \det(A)$
+    3. If a row is multiplied by $k$, the determinant is multiplied by $k$.
+    4. Swapping two rows flips the sign.
+    5. Adding a multiple of one row to another **leaves the determinant unchanged**.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute the determinant of $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$.**
+1. **[Calculation] Compute the $2 \times 2$ determinant $\begin{vmatrix} a & b \\ c & d \end{vmatrix}$.**
    ??? success "Solution"
-       $\det A = ad - bc$. This represents the oriented area of the parallelogram spanned by the columns.
+       $\det = ad - bc$$.
 
-2. **[Triangular] Show that the determinant of a triangular matrix is the product of its diagonal entries.**
+2. **[Property App] If $\det(A) = 5$ and $A$ is a $3 \times 3$ matrix, calculate $\det(2A)$.**
    ??? success "Solution"
-       In the Leibniz sum, any permutation that picks an entry from below (or above) the diagonal for a triangular matrix will eventually be forced to pick a zero entry. The only non-zero product corresponds to the identity permutation $\sigma = id$.
+       According to the properties, each row pulls out a factor of 2. For an $n \times n$ matrix, $\det(kA) = k^n \det(A)$.
+       Thus $\det(2A) = 2^3 \cdot 5 = 8 \cdot 5 = 40$.
 
-3. **[Row Ops] How does a row swap affect the determinant? What about scaling a row by $k$?**
+3. **[Triangular] Compute $\begin{vmatrix} 1 & 2 & 3 \\ 0 & 4 & 5 \\ 0 & 0 & 6 \end{vmatrix}$.**
    ??? success "Solution"
-       A row swap multiplies the determinant by $-1$ (alternating property). Scaling a single row by $k$ multiplies the determinant by $k$ (linearity).
+       For upper/lower triangular matrices, the determinant is the product of the diagonal entries.
+       $\det = 1 \cdot 4 \cdot 6 = 24$.
 
-4. **[Cramer] Solve $x+y=3, x+2y=5$ using Cramer's Rule.**
+4. **[Laplace Expansion] Expand along the first column to calculate $\begin{vmatrix} 1 & 0 & 2 \\ 0 & 3 & 0 \\ 4 & 0 & 5 \end{vmatrix}$.**
    ??? success "Solution"
-       $D = \det \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix} = 1$. $D_x = \det \begin{pmatrix} 3 & 1 \\ 5 & 2 \end{pmatrix} = 1$. $D_y = \det \begin{pmatrix} 1 & 3 \\ 1 & 5 \end{pmatrix} = 2$. Solution: $x = D_x/D = 1, y = D_y/D = 2$.
+       $\det = 1 \cdot \begin{vmatrix} 3 & 0 \\ 0 & 5 \end{vmatrix} - 0 + 4 \cdot \begin{vmatrix} 0 & 2 \\ 3 & 0 \end{vmatrix} = 1(15) + 4(-6) = 15 - 24 = -9$.
 
-5. **[Invertibility] Prove that $\det A \neq 0$ iff $A$ is invertible.**
+5. **[Invertibility] If $\det(A) = 0$, is $A$ invertible?**
    ??? success "Solution"
-       If $A$ is invertible, $A A^{-1} = I \implies \det A \det A^{-1} = 1$, so $\det A \neq 0$. If $\det A \neq 0$, the adjoint matrix formula $A^{-1} = \frac{1}{\det A} \operatorname{adj}(A)$ provides an explicit inverse.
+       No (singular matrix). A matrix is invertible if and only if $\det(A) \neq 0$.
 
-6. **[Transpose] Prove that $\det(A^T) = \det A$.**
+6. **[Cramer's Rule] Use Cramer's Rule to determine if $x+y=1, x+y=2$ has a unique solution.**
    ??? success "Solution"
-       The Leibniz formula can be summed over columns instead of rows. Since the sign of a permutation is the same as the sign of its inverse, the sum remains invariant.
+       The coefficient determinant $D = \begin{vmatrix} 1 & 1 \\ 1 & 1 \end{vmatrix} = 0$. Since $D=0$, the system has no unique solution.
 
-7. **[Vandermonde] Compute the determinant of $\begin{pmatrix} 1 & a & a^2 \\ 1 & b & b^2 \\ 1 & c & c^2 \end{pmatrix}$.**
+7. **[Adjoint Matrix] Known that $AA^* = \det(A)I$. If $\det(A) = 2$, find $AA^*$.**
    ??? success "Solution"
-       The Vandermonde determinant is $(b-a)(c-a)(c-b)$. It is non-zero iff the nodes $a, b, c$ are distinct.
+       $AA^* = 2I = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$ (assuming $2 \times 2$).
 
-8. **[Nilpotency] If $A^k = 0$, what is $\det A$?**
+8. **[Transpose] Prove: If $A$ is skew-symmetric ($A^T = -A$) and has odd order, then $\det(A) = 0$.**
    ??? success "Solution"
-       $(\det A)^k = \det(A^k) = \det(0) = 0$. Thus $\det A = 0$. Nilpotent matrices are always singular.
+       $\det(A) = \det(A^T) = \det(-A) = (-1)^n \det(A)$.
+       When $n$ is odd, $\det(A) = -\det(A) \implies 2\det(A) = 0 \implies \det(A) = 0$.
 
-9. **[Orthogonality] If $Q$ is an orthogonal matrix, what are the possible values for $\det Q$?**
+9. **[Product] Prove $\det(A^{-1}) = 1/\det(A)$.**
    ??? success "Solution"
-       $Q^T Q = I \implies \det(Q^T) \det Q = 1 \implies (\det Q)^2 = 1$. Thus $\det Q = \pm 1$. $+1$ corresponds to rotations, $-1$ to reflections.
+       Since $AA^{-1} = I$, taking the determinant gives $\det(A)\det(A^{-1}) = \det(I) = 1$.
+       Thus $\det(A^{-1}) = 1/\det(A)$.
 
-10. **[Block Matrix] Compute the determinant of $\begin{pmatrix} A & B \\ 0 & D \end{pmatrix}$.**
+10. **[Permutations] What is the number of inversions in $(3, 1, 2)$? What sign does its term carry in the expansion?**
     ??? success "Solution"
-        The determinant is $\det A \cdot \det D$. This follows from the block LU decomposition or by observing that any permutation contributing a non-zero term must stay within the diagonal blocks.
+        Inversion pairs: (3,1), (3,2). Number of inversions is 2.
+        Since 2 is even, the term carries a positive $(+)$ sign.
 
 ## Chapter Summary
 
-This chapter explores the scalar invariant that governs solvability and geometry:
+The determinant is the numerical essence of a square matrix:
 
-1. **Combinatorial Definition**: Formulated the determinant via permutations, establishing its alternating multilinear structure.
-2. **Computational Paths**: Contrasted cofactor expansion with the efficiency of row reduction.
-3. **Analytic Criterion**: Defined the non-zero determinant as the unique requirement for operator invertibility.
-4. **Geometric Scaling**: Linked the determinant to the magnification of volumes under linear maps.
+1. **Volumetric Meaning**: It captures how much a linear transformation changes the size of a space.
+2. **Existence Indicator**: A non-zero determinant is the mark of a "well-behaved" system (invertible, unique solution).
+3. **Computational Core**: Laplace expansion and elementary transformation properties form the two wings of determinant calculation.

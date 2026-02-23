@@ -2,77 +2,87 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Determinants (Ch3) · Linear Transformations (Ch5) · Polynomials (Ch00)
+**Prerequisites**: Matrix Operations (Ch2) · Determinants (Ch3) · Linear Transformations (Ch5)
 
-**Chapter Outline**: The Eigenvalue Equation $Av = \lambda v$ → Characteristic Polynomial $\det(\lambda I - A) = 0$ → Algebraic and Geometric Multiplicities → Diagonalization ($A = PDP^{-1}$) → Powers of Matrices → Eigenspaces → Defective Matrices → Trace and Determinant via Eigenvalues → Cayley-Hamilton Theorem → Gershgorin Disc Theorem
+**Chapter Outline**: Eigenvalue Equation $Av = \lambda v$ → Characteristic Polynomial → Algebraic and Geometric Multiplicity → Conditions for Matrix Diagonalization → Similarity Transformation $P^{-1}AP = D$ → Spectral Theorem for Symmetric Matrices → Cayley-Hamilton Theorem
 
-**Extension**: Eigenvalues reveal the "natural frequencies" and scaling factors of an operator; diagonalization is the ultimate tool for solving linear difference and differential equations.
+**Extension**: Eigenvalues reveal the pure scaling behavior of a linear operator in certain specific directions and are the golden key to analyzing the stability of dynamical systems.
 
 </div>
 
-Eigenvalues and eigenvectors capture the invariant directions of a linear transformation. When a matrix $A$ acts on an eigenvector $v$, it simply scales it by a factor $\lambda$ without changing its direction. This "spectral" decomposition allows us to decouple complex systems of equations and simplify the calculation of matrix powers and exponentials. This chapter details the process of finding eigenvalues via the characteristic polynomial and establishes the criteria for matrix **diagonalization**.
+Eigenvalue theory is one of the most profound parts of linear algebra. It reduces complex matrix operations to scalar multiplications. By finding the "natural frequencies" (eigenvalues) and "mode shapes" (eigenvectors) of a matrix, we can deconstruct the core structure of an operator.
 
 ---
 
-## 06.1 Eigenvalue Theory and Diagonalization
+## 06.1 Core Definitions
 
-!!! definition "Definition 06.1 (Eigenvalue Equation)"
-    A scalar $\lambda$ is an **eigenvalue** of $A$ and $v \neq 0$ is the corresponding **eigenvector** if:
+!!! definition "Definition 06.1 (Eigenvalues and Eigenvectors)"
+    For an $n \times n$ matrix $A$, if there exists a non-zero vector $v$ and a scalar $\lambda$ such that:
     $$Av = \lambda v$$
-    This is equivalent to $(\lambda I - A)v = 0$, meaning $(\lambda I - A)$ must be singular.
+    then $\lambda$ is an **eigenvalue** of $A$ and $v$ is an **eigenvector** corresponding to $\lambda$.
 
-!!! theorem "Theorem 06.1 (Diagonalization Criterion)"
-    An $n \times n$ matrix $A$ is diagonalizable if and only if it has $n$ linearly independent eigenvectors. This occurs iff the geometric multiplicity equals the algebraic multiplicity for every eigenvalue.
+!!! theorem "Theorem 06.3 (Relation to Trace and Determinant)"
+    1. $\sum \lambda_i = \operatorname{tr}(A)$
+    2. $\prod \lambda_i = \det(A)$
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Find the eigenvalues of $A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}$.**
+1. **[Basic Calculation] Calculate the eigenvalues of $A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}$.**
    ??? success "Solution"
-       $\det(\lambda I - A) = (\lambda-4)(\lambda-3) - 2 = \lambda^2 - 7\lambda + 10 = (\lambda-2)(\lambda-5) = 0$. Eigenvalues are $\lambda_1 = 2, \lambda_2 = 5$.
+       Characteristic equation: $\det(\lambda I - A) = (\lambda-4)(\lambda-3) - 2 = \lambda^2 - 7\lambda + 10 = 0$.
+       Solving gives $\lambda_1 = 5, \lambda_2 = 2$.
 
-2. **[Eigenvectors] Find an eigenvector for $\lambda = 2$ from the previous matrix.**
+2. **[Eigenvectors] Find the eigenvector corresponding to $\lambda=5$ for $A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}$.**
    ??? success "Solution"
-       $(2I - A)v = \begin{pmatrix} -2 & -1 \\ -2 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = 0$. This implies $2x+y=0$. An eigenvector is $v = (1, -2)^T$.
+       Solve $(5I-A)v = 0 \implies \begin{pmatrix} 1 & -1 \\ -2 & 2 \end{pmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = 0$.
+       Thus $x_1 = x_2$. The eigenvector is $c \begin{pmatrix} 1 \\ 1 \end{pmatrix}$ (for $c \neq 0$).
 
-3. **[Diagonalization] Diagonalize $A = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$.**
+3. **[Diagonalization] Determine if $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ is diagonalizable.**
    ??? success "Solution"
-       Eigenvalues are 1 and 2. Eigenvectors are $v_1 = (1, 0)^T$ and $v_2 = (1, 1)^T$. Let $P = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ and $D = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}$. Then $A = PDP^{-1}$.
+       Eigenvalues are $\lambda = 1, 1$ (algebraic multiplicity 2).
+       Solving for eigenvectors: $(I-A)v = 0 \implies \begin{pmatrix} 0 & -1 \\ 0 & 0 \end{pmatrix} v = 0 \implies x_2 = 0$.
+       The dimension of the eigenspace (geometric multiplicity) is 1. Since geometric multiplicity < algebraic multiplicity, it is not diagonalizable.
 
-4. **[Powers] Calculate $A^{10}$ for $A = \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$.**
+4. **[Trace and Det] If the eigenvalues of a $3 \times 3$ matrix are 1, 2, 3, find $\operatorname{tr}(A)$ and $\det(A)$.**
    ??? success "Solution"
-       $A^{10} = P D^{10} P^{-1} = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 2^{10} \end{pmatrix} \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 2^{10}-1 \\ 0 & 2^{10} \end{pmatrix}$.
+       $\operatorname{tr}(A) = 1+2+3 = 6$.
+       $\det(A) = 1 \cdot 2 \cdot 3 = 6$.
 
-5. **[Trace and Det] Relate $\operatorname{tr}(A)$ and $\det A$ to eigenvalues.**
+5. **[Spectral Theorem Intro] Prove: The eigenvalues of a real symmetric matrix are always real.**
    ??? success "Solution"
-       $\operatorname{tr}(A) = \sum \lambda_i$ and $\det A = \prod \lambda_i$. This provides a quick check for eigenvalue calculations.
+       Let $Av = \lambda v$. Then $\bar{v}^T Av = \lambda \bar{v}^T v$.
+       Taking the conjugate transpose and using $A^T=A$ gives $\bar{v}^T A v = \bar{\lambda} \bar{v}^T v$.
+       Thus $\lambda \|v\|^2 = \bar{\lambda} \|v\|^2$. Since $v \neq 0$, we must have $\lambda = \bar{\lambda}$, so $\lambda$ is real.
 
-6. **[Cayley-Hamilton] What does the Cayley-Hamilton theorem state?**
+6. **[Powers] If $\lambda$ is an eigenvalue of $A$, prove $\lambda^k$ is an eigenvalue of $A^k$.**
    ??? success "Solution"
-       Every square matrix satisfies its own characteristic polynomial: $p(A) = 0$. This allows for expressing $A^n$ and $A^{-1}$ as polynomials in $A$ of degree $< n$.
+       $Av = \lambda v \implies A(Av) = A(\lambda v) = \lambda (Av) = \lambda^2 v$.
+       By induction, $A^k v = \lambda^k v$.
 
-7. **[Defect] Can $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$ be diagonalized?**
+7. **[Cayley-Hamilton] Verify that $A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}$ satisfies its characteristic equation.**
    ??? success "Solution"
-       No. Eigenvalues are 0 (algebraic multiplicity 2). $(0I-A) = \begin{pmatrix} 0 & -1 \\ 0 & 0 \end{pmatrix}$ has a null space of dimension 1. Geometric multiplicity (1) < Algebraic multiplicity (2). The matrix is **defective**.
+       Characteristic polynomial $p(\lambda) = (\lambda-1)(\lambda-2) = \lambda^2 - 3\lambda + 2$.
+       $p(A) = A^2 - 3A + 2I = \begin{pmatrix} 1 & 0 \\ 0 & 4 \end{pmatrix} - \begin{pmatrix} 3 & 0 \\ 0 & 6 \end{pmatrix} + \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}$.
 
-8. **[Invertibility] If $\lambda=0$ is an eigenvalue of $A$, is $A$ invertible?**
+8. **[Inverses] If $A$ is invertible with eigenvalue $\lambda$, prove $1/\lambda$ is an eigenvalue of $A^{-1}$.**
    ??? success "Solution"
-       No. $\det A = \prod \lambda_i$. If one eigenvalue is 0, then $\det A = 0$, so $A$ is singular.
+       $Av = \lambda v \implies v = A^{-1}(\lambda v) = \lambda A^{-1} v$.
+       Since $A$ is invertible, $\lambda \neq 0$. Dividing by $\lambda$ gives $A^{-1} v = (1/\lambda) v$.
 
-9. **[Symmetry] Why are real symmetric matrices always diagonalizable?**
+9. **[Similarity] Prove that similar matrices have the same eigenvalues.**
    ??? success "Solution"
-       The Spectral Theorem ensures that for symmetric $A$, eigenvectors corresponding to distinct eigenvalues are orthogonal, and there is always a full set of $n$ orthonormal eigenvectors.
+       $\det(\lambda I - P^{-1}AP) = \det(P^{-1}(\lambda I - A)P) = \det(P^{-1})\det(\lambda I - A)\det(P) = \det(\lambda I - A)$. The characteristic polynomials are identical, hence eigenvalues are the same.
 
-10. **[Gershgorin] Use the Gershgorin Disc Theorem to bound the eigenvalues of $\begin{pmatrix} 10 & 1 \\ 2 & 5 \end{pmatrix}$.**
+10. **[Algebraic Multiplicity] What is the algebraic multiplicity of eigenvalue 2 for $A = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 2 \end{pmatrix}$?**
     ??? success "Solution"
-        Discs are $D_1: |z-10| \le 1$ and $D_2: |z-5| \le 2$. All eigenvalues lie in the union of these two circles in the complex plane.
+        The characteristic polynomial is $(\lambda-2)^3$. Thus, the algebraic multiplicity is 3.
 
 ## Chapter Summary
 
-This chapter establishes the spectral analysis of linear operators:
+Eigenvalue theory is the soul of linear algebra:
 
-1. **Invariant Subspaces**: Defined eigenvalues and eigenvectors as the fundamental descriptors of scaling and direction.
-2. **Structural Simplification**: Developed diagonalization as the process of converting a complex operator into a simple coordinate-wise scaling.
-3. **Multiplicity Logic**: Distinguished between algebraic and geometric aspects of eigenvalues to identify defective matrices.
-4. **Polynomial Constraint**: Leveraged the Cayley-Hamilton theorem to link matrix powers to the characteristic polynomial.
+1. **Decoupling**: Diagonalization is essentially breaking a complex coupled system into independent linear components.
+2. **Multiplicity Balance**: The matching of algebraic and geometric multiplicities is the key to matrix simplification.
+3. **Structural Conservation**: Trace and determinant, as functions of eigenvalues, are the cornerstones of invariant theory.

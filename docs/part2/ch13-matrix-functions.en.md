@@ -2,77 +2,77 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Power (Ch2) · Jordan Form (Ch12) · Taylor Series · Diagonalization (Ch6)
+**Prerequisites**: Eigendecomposition (Ch10) · Jordan Form (Ch12) · Power Series
 
-**Chapter Outline**: Definition of $f(A)$ via Power Series → Definition via Jordan Form → Matrix Exponential $e^{At}$ → Matrix Logarithm $\ln(A)$ → Square Root of a Matrix $\sqrt{A}$ → Properties of Matrix Functions → Solving $\dot{x} = Ax$ → Commutativity and Matrix Functions → Cauchy Integral Formula for Matrices
+**Chapter Outline**: Definition of Matrix Power Series → Convergence → Matrix Exponential $e^A$ → Matrix Logarithm and Trigonometric Functions → Computation via Diagonalization → Computation via Jordan Form → Extension of Cauchy Integral Formula to Matrices → Applications (Solving Systems of Linear DEs)
 
-**Extension**: Matrix functions generalize scalar calculus to operators; the matrix exponential is the fundamental solution to systems of linear differential equations.
+**Extension**: Matrix exponential is the core operator in modern control theory and quantum mechanics, mapping algebraic addition to group multiplication.
 
 </div>
 
-Matrix functions allow us to apply standard mathematical functions—like $e^x, \sin x, \ln x$—directly to matrices. Instead of operating on individual entries, we operate on the operator as a whole. For a diagonalizable matrix $A = PDP^{-1}$, the definition is straightforward: $f(A) = P f(D) P^{-1}$. For general matrices, we use power series or the Jordan Canonical Form. The **matrix exponential** $e^{At}$ is the most critical function in this chapter, as it provides the explicit solution to the state-space equations of dynamical systems.
+Matrix functions extend the domain of a scalar function $f(z)$ to square matrices. This extension is not element-wise but maintains algebraic consistency. The most central tool is the **matrix exponential** $e^A$, which is the key to solving all linear continuous dynamical systems.
 
 ---
 
-## 13.1 Defining Functions of Matrices
+## 13.1 Definitions and Computation
 
-!!! definition "Definition 13.1 (Matrix Function via Series)"
-    If $f(z)$ has a Taylor series $\sum a_k z^k$, the matrix function $f(A)$ is defined as:
+!!! definition "Definition 13.1 (Matrix Power Series)"
+    If a scalar function $f(z) = \sum_{k=0}^\infty a_k z^k$ converges in some disk, the matrix function is defined as:
     $$f(A) = \sum_{k=0}^\infty a_k A^k$$
-    provided the series converges for all eigenvalues of $A$.
 
-!!! theorem "Theorem 13.1 (Spectral Mapping Theorem)"
-    The eigenvalues of $f(A)$ are exactly $\{f(\lambda_1), \dots, f(\lambda_n)\}$, where $\{\lambda_i\}$ are the eigenvalues of $A$.
+!!! theorem "Theorem 13.3 (Diagonalization Method)"
+    If $A = PDP^{-1}$, then $f(A) = P f(D) P^{-1} = P \operatorname{diag}(f(\lambda_i)) P^{-1}$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute $e^A$ for $A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}$.**
+1. **[Basic Calculation] If $A = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}$, calculate $e^A$.**
    ??? success "Solution"
-       For a diagonal matrix, $e^A = \begin{pmatrix} e^1 & 0 \\ 0 & e^2 \end{pmatrix}$.
+       $e^A = \begin{pmatrix} e^1 & 0 \\ 0 & e^2 \end{pmatrix}$. For diagonal matrices, simply apply the function to each diagonal element.
 
-2. **[Series] Use the series definition to find $e^A$ for $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
+2. **[Exponential Properties] Prove: If $AB = BA$, then $e^{A+B} = e^A e^B$.**
    ??? success "Solution"
-       $A^2 = 0$. $e^A = I + A + \frac{1}{2!}A^2 + \dots = I + A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.
+       Use the power series expansion and the binomial theorem. Since $A$ and $B$ commute, $(A+B)^k$ can be expanded like scalars. If they don't commute, this is generally false (requiring the BCH formula).
 
-3. **[Diagonalization] Compute $\sin A$ for $A = P \operatorname{diag}(\pi, \pi/2) P^{-1}$.**
+3. **[Nilpotent Matrix] Calculate $e^{At}$ where $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       $\sin A = P \operatorname{diag}(\sin \pi, \sin \pi/2) P^{-1} = P \operatorname{diag}(0, 1) P^{-1}$.
+       Since $A^2 = 0$, the series is $e^{At} = I + At + 0 = \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix}$.
 
-4. **[Logarithm] When does the matrix logarithm $\ln A$ exist?**
+4. **[Trace Identity] Prove $\det(e^A) = e^{\operatorname{tr}(A)}$.**
    ??? success "Solution"
-       A real matrix has a real logarithm iff it is non-singular and every Jordan block associated with a negative eigenvalue occurs an even number of times (ensuring complex conjugate pairings). Generally, $A$ must be non-singular.
+       Let the eigenvalues of $A$ be $\lambda_i$. The eigenvalues of $e^A$ are $e^{\lambda_i}$.
+       $\det(e^A) = \prod e^{\lambda_i} = e^{\sum \lambda_i} = e^{\operatorname{tr}(A)}$.
 
-5. **[Differential Equations] Solve $\dot{x} = Ax$ with $x(0) = x_0$.**
+5. **[Trigonometric] If $A$ is a projection matrix ($A^2=A$), calculate $\sin(\pi A)$.**
    ??? success "Solution"
-       The unique solution is $x(t) = e^{At} x_0$. The matrix exponential acts as the "propagator" of the system state.
+       $A^k = A$ for all $k \ge 1$.
+       $\sin(\pi A) = \sum \frac{(-1)^k}{(2k+1)!} (\pi A)^{2k+1} = A \sum \frac{(-1)^k \pi^{2k+1}}{(2k+1)!} = A \sin(\pi) = 0$.
 
-6. **[Commutativity] Is $e^{A+B} = e^A e^B$ always true?**
+6. **[Jordan Block Function] Write the formula for $f(J_2(\lambda))$.**
    ??? success "Solution"
-       No. It is true if and only if $A$ and $B$ commute ($AB = BA$).
+       $f \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix} = \begin{pmatrix} f(\lambda) & f'(\lambda) \\ 0 & f(\lambda) \end{pmatrix}$. This reflects the relationship between the off-diagonal coupling and the derivative.
 
-7. **[Square Root] Find a square root of $A = \begin{pmatrix} 4 & 0 \\ 0 & 9 \end{pmatrix}$.**
+7. **[Invertibility] Is $e^A$ always invertible?**
    ??? success "Solution"
-       One solution is $\operatorname{diag}(2, 3)$. Note that matrix square roots are not unique; $\operatorname{diag}(-2, 3)$ is also a square root.
+       Yes. Because its determinant $\det(e^A) = e^{\operatorname{tr}(A)}$ is never zero. Its inverse is $e^{-A}$.
 
-8. **[Determinant] Prove the identity $\det(e^A) = e^{\operatorname{tr}(A)}$.**
+8. **[Differentiation] Prove $\frac{d}{dt} e^{At} = A e^{At}$.**
    ??? success "Solution"
-       $\det(e^A) = \prod e^{\lambda_i} = e^{\sum \lambda_i} = e^{\operatorname{tr}(A)}$. This link between the trace and determinant is fundamental in Lie theory.
+       Differentiating the series $\sum \frac{t^k A^k}{k!}$ term-by-term gives $\sum \frac{k t^{k-1} A^k}{k!} = A \sum \frac{t^{k-1} A^{k-1}}{(k-1)!} = A e^{At}$.
 
-9. **[Jordan Form] Describe how to compute $f(J_k(\lambda))$ for a Jordan block.**
+9. **[Rotation] Calculate $e^{Jt}$ where $J = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$.**
    ??? success "Solution"
-       $f(J_k(\lambda))$ is an upper triangular matrix where the diagonal is $f(\lambda)$, the first super-diagonal is $f'(\lambda)$, the second is $f''(\lambda)/2!$, and so on.
+       Since $J^2 = -I$, separating the series into even and odd terms gives the rotation matrix: $e^{Jt} = \begin{pmatrix} \cos t & -\sin t \\ \sin t & \cos t \end{pmatrix}$.
 
-10. **[Inversion] Express $A^{-1}$ as a matrix function.**
+10. **[Application] How do you use matrix exponential to solve $\dot{x} = Ax, x(0)=x_0$?**
     ??? success "Solution"
-        $f(z) = 1/z$. For non-singular $A$, $A^{-1}$ can be computed via the Jordan form or power series (if within the radius of convergence).
+        The solution is $x(t) = e^{At} x_0$. The matrix exponential maps the initial state to the state at any time $t$.
 
 ## Chapter Summary
 
-This chapter extends the domain of calculus to linear operators:
+Matrix functions are the advanced calculus of linear algebra:
 
-1. **Analytical Mapping**: Defined matrix functions through Taylor series and spectral decompositions.
-2. **Spectral Propagation**: Established the Spectral Mapping Theorem as the rule for eigenvalue transformation.
-3. **Dynamic Solution**: Developed the matrix exponential as the definitive analytical tool for linear differential systems.
-4. **Algebraic Identity**: Leveraged the trace-determinant relation to link matrix functions to the core invariants of linear algebra.
+1. **Structural Mapping**: They translate analytical properties of scalars perfectly into the operator space.
+2. **Computational Core**: Diagonalization and Jordan chains are the standard paths for computing any matrix function.
+3. **Dynamical Value**: The matrix exponential is the "time operator" for continuous systems, the ultimate tool for describing evolution.

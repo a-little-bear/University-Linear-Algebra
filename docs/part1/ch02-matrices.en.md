@@ -1,78 +1,79 @@
-# Chapter 02: Matrices and Matrix Algebra
+# Chapter 02: Matrices and Matrix Operations
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Linear Equations (Ch1) · Vector Spaces (Ch4) · Function Composition
+**Prerequisites**: Basic Algebraic Operations
 
-**Chapter Outline**: Definition of Matrices → Matrix Operations (Addition, Scaling, Multiplication) → Properties of Matrix Multiplication (Non-commutativity) → Special Matrices (Identity, Zero, Symmetric, Diagonal) → Matrix Inversion → Transpose and Adjoint → Partitioned Matrices → Matrix Algebra Laws
+**Chapter Outline**: Matrix Definition and Representation → Addition and Scalar Multiplication → Matrix Multiplication (Non-commutativity) → Transpose → Special Matrices (Identity, Diagonal, Symmetric) → Matrix Inverses $A^{-1}$ → Matrix Powers and Polynomials
 
-**Extension**: Matrices are the concrete representations of linear operators; matrix multiplication is the algebraic expression of the composition of linear transformations.
+**Extension**: Matrices are not just tables of data, but mapping operators of linear spaces.
 
 </div>
 
-Matrices provide a compact and powerful notation for handling linear data. While they appear as simple rectangular arrays of numbers, they follow a rigorous algebraic structure. Matrix multiplication, in particular, is defined to match the composition of linear maps, leading to its non-commutative nature ($AB \neq BA$). This chapter transitions from solving equations to manipulating operators, establishing the rules for matrix inversion and the properties of the transpose.
+Matrices are the computational core of linear algebra. They condense linear transformations of vectors into rectangular arrays. The introduction of matrix multiplication is more than a stack of rules; it reflects the composition of linear maps.
 
 ---
 
-## 02.1 Matrix Multiplication and Inverses
+## 02.1 Matrix Operation Rules
 
 !!! definition "Definition 02.1 (Matrix Multiplication)"
-    Let $A \in M_{m \times n}$ and $B \in M_{n \times p}$. The product $C = AB$ is an $m \times p$ matrix where:
+    If $A$ is an $m \times n$ matrix and $B$ is an $n \times p$ matrix, their product $C = AB$ is an $m \times p$ matrix with entries:
     $$c_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$$
-    This row-by-column operation corresponds to applying operator $B$ followed by operator $A$.
-
-!!! theorem "Theorem 02.1 (Properties of the Inverse)"
-    If $A$ and $B$ are invertible, then $(AB)^{-1} = B^{-1} A^{-1}$. The order of factors is reversed, mirroring the "socks-then-shoes" logic of undoing compositions.
+    Note: In general, $AB \neq BA$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute $AB$ for $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$.**
+1. **[Basic Operations] Given $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$ and $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$. Compute $AB$ and $BA$.**
    ??? success "Solution"
-       $AB = \begin{pmatrix} 1(0)+2(1) & 1(1)+2(0) \\ 3(0)+4(1) & 3(1)+4(0) \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$. Multiplication by $B$ effectively swapped the columns of $A$.
+       $AB = \begin{pmatrix} 1(0)+2(1) & 1(1)+2(0) \\ 3(0)+4(1) & 3(1)+4(0) \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$.
+       $BA = \begin{pmatrix} 0(1)+1(3) & 0(2)+1(4) \\ 1(1)+0(3) & 1(2)+0(4) \end{pmatrix} = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$.
+       Thus $AB \neq BA$.
 
-2. **[Non-commutativity] Provide a $2 \times 2$ example where $AB \neq BA$.**
+2. **[Identity] Prove that for any $n \times n$ matrix $A$, $AI = IA = A$.**
    ??? success "Solution"
-       Let $A = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, B = \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}$. $AB = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$, but $BA = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$. Matrix algebra is generally non-commutative.
+       The entries $\delta_{ij}$ of the identity matrix $I$ are 1 if $i=j$ and 0 otherwise. Substituting into the multiplication formula: $(AI)_{ij} = \sum a_{ik} \delta_{kj} = a_{ij}$.
 
-3. **[Inversion] Calculate the inverse of $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ using the formula.**
+3. **[Transpose] Known that $(AB)^T = B^T A^T$. Use this to find $(A^T B)^T$.**
    ??? success "Solution"
-       $A^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$, provided $ad-bc \neq 0$.
+       $(A^T B)^T = B^T (A^T)^T = B^T A$.
 
-4. **[Transpose] Prove that $(AB)^T = B^T A^T$.**
+4. **[Symmetric] If $A$ is a symmetric matrix, prove that $A^2$ is also symmetric.**
    ??? success "Solution"
-       The $(i,j)$ entry of $(AB)^T$ is the $(j,i)$ entry of $AB$, which is $\sum_k a_{jk} b_{ki}$. The $(i,j)$ entry of $B^T A^T$ is $\sum_k (B^T)_{ik} (A^T)_{kj} = \sum_k b_{ki} a_{jk}$. The expressions are identical.
+       A symmetric matrix satisfies $A^T = A$. Then $(A^2)^T = (AA)^T = A^T A^T = AA = A^2$. Thus $A^2$ is symmetric.
 
-5. **[Block Matrices] Multiply $\begin{pmatrix} I & A \\ 0 & I \end{pmatrix} \begin{pmatrix} I & -A \\ 0 & I \end{pmatrix}$ using block matrix rules.**
+5. **[Inverses Intro] Find the inverse of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
    ??? success "Solution"
-       The product is $\begin{pmatrix} I \cdot I + A \cdot 0 & I(-A) + A \cdot I \\ 0 \cdot I + I \cdot 0 & 0(-A) + I \cdot I \end{pmatrix} = \begin{pmatrix} I & 0 \\ 0 & I \end{pmatrix} = I$. This shows the inverse of a shear-type block matrix.
+       Using the $2 \times 2$ formula: $A^{-1} = \frac{1}{ad-bc} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$.
+       $\det A = 1(4)-2(3) = -2$.
+       $A^{-1} = \frac{1}{-2} \begin{pmatrix} 4 & -2 \\ -3 & 1 \end{pmatrix} = \begin{pmatrix} -2 & 1 \\ 1.5 & -0.5 \end{pmatrix}$.
 
-6. **[Trace] Show that $\operatorname{tr}(AB) = \operatorname{tr}(BA)$ for any matrices where the products are defined.**
+6. **[Powers] Calculate $A^k$ where $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       $\operatorname{tr}(AB) = \sum_i (AB)_{ii} = \sum_i \sum_j a_{ij} b_{ji}$. $\operatorname{tr}(BA) = \sum_j (BA)_{jj} = \sum_j \sum_i b_{ji} a_{ij}$. Both are sums over the same $n \times m$ set of products $a_{ij} b_{ji}$.
+       $A^2 = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}, A^3 = \begin{pmatrix} 1 & 3 \\ 0 & 1 \end{pmatrix}$.
+       By induction, $A^k = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$.
 
-7. **[Orthogonality] Define an orthogonal matrix and state its property regarding the inverse.**
+7. **[Matrix Equations] If $AX = B$ and $A$ is invertible, solve for $X$.**
    ??? success "Solution"
-       A matrix $Q$ is orthogonal if $Q^T Q = I$. This implies $Q^{-1} = Q^T$. These matrices represent rotations and reflections.
+       Left-multiply by $A^{-1}$: $A^{-1}AX = A^{-1}B \implies X = A^{-1}B$. Note that you cannot right-multiply.
 
-8. **[Nilpotency] If $A^2 = 0$, what is $(I-A)^{-1}$?**
+8. **[Rank Intro] What is the rank of the matrix $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$?**
    ??? success "Solution"
-       $(I-A)(I+A) = I - A^2 = I$. Thus $(I-A)^{-1} = I+A$. This is a truncated geometric series.
+       The rank is 1. It has only one non-zero row (or one linearly independent column).
 
-9. **[Symmetry] If $A$ and $B$ are symmetric, is $AB$ symmetric?**
+9. **[Orthogonality Intro] Verify that $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$ is orthogonal (i.e., $AA^T = I$).**
    ??? success "Solution"
-       $(AB)^T = B^T A^T = BA$. Thus $AB$ is symmetric if and only if $A$ and $B$ commute ($AB = BA$).
+       $A^T = \begin{pmatrix} \cos & \sin \\ -\sin & \cos \end{pmatrix}$. Multiplication yields 1 on the diagonal ($\cos^2+\sin^2=1$) and 0 off-diagonal ($\cos\sin-\sin\cos=0$). Thus $AA^T = I$.
 
-10. **[Rank] What is the rank of the product $AB$ compared to the ranks of $A$ and $B$?**
+10. **[Diagonal] Is the product of two diagonal matrices still diagonal? What is the rule for its entries?**
     ??? success "Solution"
-        $\operatorname{rank}(AB) \le \min(\operatorname{rank}(A), \operatorname{rank}(B))$. Multiplication can only collapse dimensions, never create them.
+        Yes. The result is a diagonal matrix where entries are multiplied term-wise: $\operatorname{diag}(a_i) \operatorname{diag}(b_i) = \operatorname{diag}(a_i b_i)$.
 
 ## Chapter Summary
 
-This chapter defines the calculus of linear operators:
+Matrix operations build the computational syntax of linear algebra:
 
-1. **Operational Logic**: Formalized matrix multiplication as the algebraic counterpart to function composition.
-2. **Inversion Criteria**: Established the necessary and sufficient conditions for undoing linear transformations.
-3. **Symmetry and Transposition**: Analyzed the role of the adjoint and transpose in preserving and reflecting geometric properties.
-4. **Partitioned Calculus**: Developed block matrix arithmetic for managing high-dimensional systems efficiently.
+1. **Non-commutativity**: This is the most fundamental difference between matrix and scalar multiplication.
+2. **Structural Preservation**: Transpose and inverse operations maintain the internal algebraic logic.
+3. **Operational Simplification**: Special matrices (identity, diagonal) greatly simplify the analysis of complex systems.

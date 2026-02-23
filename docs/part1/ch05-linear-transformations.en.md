@@ -2,79 +2,84 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Vector Spaces (Ch4) · Matrix Algebra (Ch2) · Function Theory
+**Prerequisites**: Vector Spaces (Ch4) · Matrix Operations (Ch2)
 
-**Chapter Outline**: Definition of Linear Transformations → Kernel and Image (Range) → Rank-Nullity Theorem → Matrix Representation of a Transformation → Similarity and Coordinate Changes → Injective, Surjective, and Bijective Maps → Isomorphisms → Projections, Reflections, and Rotations → Composition of Transformations
+**Chapter Outline**: Definition of Linear Transformations → Kernel and Image → Matrix Representation $T \leftrightarrow A$ → Change of Basis and Similarity → Homomorphism and Isomorphism → Operator Forms of Projection, Reflection, and Rotation
 
-**Extension**: Linear transformations are the "actions" of linear algebra; they represent how space is distorted, projected, or rotated while preserving the origin and straight lines.
+**Extension**: Linear transformations provide an "active" perspective, describing how space is stretched, twisted, or compressed.
 
 </div>
 
-Linear transformations are the mappings that preserve the algebraic structure of vector spaces. They are the functions that satisfy $T(u+v) = T(u) + T(v)$ and $T(ku) = k T(u)$. By fixing bases, every linear transformation between finite-dimensional spaces can be represented as a matrix. This chapter bridges the gap between abstract operators and concrete matrix calculations, culminating in the **Rank-Nullity Theorem**, which links the dimension of the input space to the dimensions of the kernel and range.
+If vector spaces are the static stage, linear transformations are the movements performed on that stage. Every linear transformation, given a basis, can be uniquely represented by a matrix.
 
 ---
 
-## 05.1 Definitions and Fundamental Theorem
+## 05.1 Definitions and Core Properties
 
 !!! definition "Definition 05.1 (Linear Transformation)"
-    A function $T: V \to W$ is a linear transformation if for all $u, v \in V$ and $c \in F$:
-    1. $T(u + v) = T(u) + T(v)$
-    2. $T(cu) = c T(u)$
+    A mapping $T: V \to W$ is linear if for all $u, v \in V$ and scalar $c$:
+    1. $T(u+v) = T(u) + T(v)$
+    2. $T(cv) = cT(v)$
 
-!!! theorem "Theorem 05.1 (Rank-Nullity Theorem)"
-    For a linear transformation $T: V \to W$:
-    $$\dim(\ker T) + \dim(\operatorname{Im} T) = \dim V$$
-    The dimension of the kernel plus the dimension of the image equals the dimension of the domain.
+!!! theorem "Theorem 05.3 (Change of Basis Formula)"
+    Let $A$ be the matrix of $T$ in basis $B$, and $A'$ the matrix in $B'$. If $P$ is the transition matrix from $B'$ to $B$, then:
+    $$A' = P^{-1} A P$$
+    Such matrices are called **similar matrices**.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Is the map $T(x, y) = (x+1, y)$ a linear transformation?**
+1. **[Criteria] Is the mapping $T(x, y) = (x+1, y)$ a linear transformation? Explain.**
    ??? success "Solution"
-       No. $T(0, 0) = (1, 0) \neq (0, 0)$. A linear transformation must map the zero vector to the zero vector.
+       No. A linear transformation must satisfy $T(0) = 0$. Here $T(0, 0) = (1, 0) \neq (0, 0)$. It also fails the scalar multiplication property.
 
-2. **[Kernel] Find the kernel of the projection map $P(x, y, z) = (x, y, 0)$.**
+2. **[Matrix Representation] Let $T: \mathbb{R}^2 \to \mathbb{R}^2$ be the transformation that projects vectors onto the $x$-axis. Write its matrix in the standard basis.**
    ??? success "Solution"
-       The kernel consists of all vectors $(x, y, z)$ such that $(x, y, 0) = (0, 0, 0)$. This implies $x=0$ and $y=0$. Thus $\ker P = \{ (0, 0, z) : z \in \mathbb{R} \}$, which is the $z$-axis.
+       $T(1, 0) = (1, 0)$ and $T(0, 1) = (0, 0)$.
+       Thus the matrix is $A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$.
 
-3. **[Image] Describe the image of the differentiation operator $D: P_3 \to P_2$ where $D(p) = p'$.**
+3. **[Kernel and Image] Let $T$ have the matrix $A = \begin{pmatrix} 1 & 2 \\ 2 & 2 \end{pmatrix}$. Calculate $\dim(\ker T)$.**
    ??? success "Solution"
-       The image consists of all derivatives of polynomials of degree at most 3. Since every polynomial of degree 2 is the derivative of some polynomial of degree 3, $\operatorname{Im} D = P_2$.
+       $\det A = 2-4 = -2 \neq 0$. The matrix has full rank, so the kernel contains only the zero vector.
+       $\dim(\ker T) = 0$.
 
-4. **[Matrix Representation] Find the matrix of $T(x, y) = (2x-y, x+3y)$ relative to the standard basis.**
+4. **[Basis Change] Given $A = \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix}$. If the change of basis matrix is $P = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, find the similar matrix $A'$.**
    ??? success "Solution"
-       $T(1, 0) = (2, 1)$ and $T(0, 1) = (-1, 3)$. The matrix is $\begin{pmatrix} 2 & -1 \\ 1 & 3 \end{pmatrix}$.
+       $P^{-1} = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix}$.
+       $A' = \begin{pmatrix} 1 & -1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & -3 \\ 0 & 3 \end{pmatrix} \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 2 & -1 \\ 0 & 3 \end{pmatrix}$.
 
-5. **[Similarity] When are two matrices $A$ and $B$ called similar?**
+5. **[Differential Operator] Prove that the derivative $D: P_2 \to P_1$ ($D(p) = p'$) is a linear transformation.**
    ??? success "Solution"
-       $A$ and $B$ are similar if there exists an invertible matrix $P$ such that $B = P^{-1} A P$. Similar matrices represent the same linear transformation in different bases.
+       By calculus rules: $(f+g)' = f' + g'$ and $(cf)' = cf'$. Since it satisfies additivity and scalar homogeneity, $D$ is linear.
 
-6. **[Isomorphism] Define a linear isomorphism.**
+6. **[Isomorphism] Prove: Vector spaces of the same dimension are isomorphic.**
    ??? success "Solution"
-       A linear isomorphism is a bijective linear transformation. If such a map exists between $V$ and $W$, the spaces are structurally identical as vector spaces.
+       Let $V, W$ have dimension $n$. Choose bases for each and define a linear map mapping one basis to the other. This map is a bijection and preserves operations, so $V \cong W$.
 
-7. **[Rank-Nullity] If $T: \mathbb{R}^5 \to \mathbb{R}^3$ is surjective, what is $\dim \ker T$?**
+7. **[Rotation Matrix] Write the matrix for a $90^\circ$ counter-clockwise rotation in $\mathbb{R}^2$.**
    ??? success "Solution"
-       Surjective implies $\dim(\operatorname{Im} T) = 3$. By Rank-Nullity: $\dim \ker T + 3 = 5$, so $\dim \ker T = 2$.
+       $T(1, 0) = (0, 1)$; $T(0, 1) = (-1, 0)$.
+       The matrix is $R = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$.
 
-8. **[Injective] Show that $T$ is injective iff $\ker T = \{0\}$.**
+8. **[Idempotency] Prove: If $P$ is a projection operator ($P^2=P$), its eigenvalues can only be 0 or 1.**
    ??? success "Solution"
-       If $\ker T = \{0\}$, then $T(u) = T(v) \implies T(u-v) = 0 \implies u-v = 0 \implies u = v$. Conversely, if $T$ is injective, $T(v) = 0 = T(0)$ implies $v=0$.
+       Let $Pv = \lambda v$, then $P^2 v = \lambda^2 v$.
+       From $P^2=P$, $\lambda^2 v = \lambda v \implies (\lambda^2-\lambda)v = 0$.
+       For a non-zero eigenvector $v$, $\lambda^2-\lambda=0$, so $\lambda=0$ or $1$.
 
-9. **[Projection] Prove that for any projection operator $P^2 = P$, $V = \ker P \oplus \operatorname{Im} P$.**
+9. **[Similarity] Do similar matrices have the same characteristic polynomial?**
    ??? success "Solution"
-       For any $v$, $v = (v - Pv) + Pv$. Note $P(v - Pv) = Pv - P^2v = Pv - Pv = 0$, so $(v - Pv) \in \ker P$. Also $Pv \in \operatorname{Im} P$. The intersection is $\{0\}$ since if $Pv = 0$ and $v = Pu$, then $v = Pu = P^2u = P(Pu) = Pv = 0$.
+       Yes. $\det(\lambda I - P^{-1}AP) = \det(P^{-1}(\lambda I - A)P) = \det(P^{-1}) \det(\lambda I - A) \det(P) = \det(\lambda I - A)$.
 
-10. **[Trace] Why is $\operatorname{tr}(A) = \operatorname{tr}(P^{-1}AP)$?**
+10. **[Rank-Nullity App] What is the condition for $T: \mathbb{R}^n \to \mathbb{R}^m$ to be injective?**
     ??? success "Solution"
-        Using the property $\operatorname{tr}(XY) = \operatorname{tr}(YX)$, we have $\operatorname{tr}(P^{-1}(AP)) = \operatorname{tr}((AP)P^{-1}) = \operatorname{tr}(A)$. Thus the trace is a well-defined invariant of the linear transformation.
+        The kernel must be zero, i.e., $\dim(\ker T) = 0$. By the rank-nullity theorem, this is equivalent to $\operatorname{rank}(T) = n$ (full column rank).
 
 ## Chapter Summary
 
-This chapter explores the functional perspective of linear algebra:
+Linear transformations unify operators and matrices:
 
-1. **Structural Preservation**: Defined linear transformations as mappings that respect vector addition and scaling.
-2. **Space Partitioning**: Developed the kernel and image as the fundamental descriptors of an operator's behavior.
-3. **Dimensional Conservation**: Established the Rank-Nullity Theorem as the governing law for the mapping of dimensions.
-4. **Coordinate Independence**: Linked transformations to matrices, identifying similarity as the equivalence relation for basis changes.
+1. **Representation**: A matrix is the numerical expression of a linear transformation in a specific coordinate system (basis).
+2. **Internal Logic**: Similarity transformations reflect the description of the same operator from different viewpoints; its characteristic attributes remain invariant.
+3. **Classification**: The dimensional distribution of kernel and image defines how much information is preserved or compressed by the transformation.

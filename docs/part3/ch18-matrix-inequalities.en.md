@@ -2,77 +2,80 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Positive Definiteness (Ch16) · Matrix Norms (Ch15) · Trace (Ch2) · Majorization (Ch31)
+**Prerequisites**: Positive Definite Matrices (Ch16) · Eigenvalues (Ch6) · Norms (Ch15) · Matrix Analysis (Ch14)
 
-**Chapter Outline**: Lowner Partial Order ($A \preceq B$) → Cauchy-Schwarz for Matrices → Trace Inequalities (Hölder, Cauchy) → Minkowski Determinant Inequality → Kantorovich Inequality → Hadamard's Inequality → Weyl's Inequality for Eigenvalues → Golden-Thompson Inequality
+**Chapter Outline**: Löwner Partial Order $(\succeq)$ → Inequalities for PD Matrices (Weyl, Ky Fan) → Singular Value Inequalities → Norm Inequalities (Hadamard, Cauchy-Schwarz) → Trace Inequalities (Golden-Thompson) → Variational Characterization of Eigenvalue Sums → Operator Monotone and Operator Convex Functions
 
-**Extension**: Matrix inequalities are the bounding logic of optimization; they provide the limits on information capacity, energy dissipation, and computational error.
+**Extension**: Matrix inequalities are the analytical foundation for convex optimization, information theory, and quantum computing, generalizing scalar order to complex operator manifolds.
 
 </div>
 
-Matrix inequalities generalize scalar inequalities to linear operators. The foundation is the **Lowner partial order**, which compares matrices based on the positive definiteness of their difference. This chapter explores profound results like **Hadamard's Inequality** (bounding the determinant by the product of column lengths) and the **Golden-Thompson Inequality** (bounding the trace of matrix exponentials). These bounds are essential for information theory, control systems, and the analysis of non-linear operators.
+Matrix inequalities study the partial order relations between square matrices based on semi-definiteness. Compared to scalar inequalities, the existence of off-diagonal entries requires the use of spectral decomposition or variational principles to establish these relations.
 
 ---
 
-## 18.1 The Lowner Order and Basic Bounds
+## 18.1 Löwner Order and Spectral Inequalities
 
-!!! definition "Definition 18.1 (Lowner Partial Order)"
-    Let $A, B$ be symmetric matrices. We say $A \preceq B$ if $B - A$ is positive semi-definite ($B - A \succeq 0$). This defines a partial order on $S_n$.
+!!! definition "Definition 18.1 (Löwner Partial Order)"
+    Let $A, B$ be Hermitian matrices. We say $A$ is greater than or equal to $B$ in the Löwner order (denoted $A \succeq B$) if $A - B$ is a positive semi-definite matrix.
 
-!!! theorem "Theorem 18.1 (Hadamard's Inequality)"
-    For any $n \times n$ matrix $A = (a_1, \dots, a_n)$:
-    $$|\det A| \le \prod_{i=1}^n \|a_i\|_2$$
-    Volume is maximized when the column vectors are orthogonal.
+!!! theorem "Theorem 18.3 (Weyl's Inequalities)"
+    Let $\lambda_i(A)$ be the eigenvalues in descending order. For Hermitian matrices $A, B$:
+    $$\lambda_{i+j-1}(A+B) \le \lambda_i(A) + \lambda_j(B)$$
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] If $A \preceq B$, prove that $\operatorname{tr}(A) \le \operatorname{tr}(B)$.**
+1. **[Basic Property] Prove: If $A \succeq B \succeq 0$, then for any matrix $C$, $C^* A C \succeq C^* B C$.**
    ??? success "Solution"
-       $B - A \succeq 0 \implies \operatorname{tr}(B - A) \ge 0$. By linearity of the trace, $\operatorname{tr}(B) - \operatorname{tr}(A) \ge 0$, so $\operatorname{tr}(A) \le \operatorname{tr}(B)$. Trace is a monotonic function in the Lowner order.
+       Consider the quadratic form: $x^* (C^* A C - C^* B C) x = (Cx)^* (A-B) (Cx)$.
+       Let $y = Cx$. Since $A-B \succeq 0$, then $y^* (A-B) y \ge 0$.
+       Since this holds for all $x$, $C^* A C \succeq C^* B C$.
 
-2. **[Monotonicity] Is $A \preceq B$ imply $A^2 \preceq B^2$?**
+2. **[Spectral Monotonicity] If $A \succeq B$, prove $\lambda_i(A) \ge \lambda_i(B)$ for all $i$.**
    ??? success "Solution"
-       No. The map $X \mapsto X^2$ is **not** operator monotone. However, $X \mapsto \sqrt{X}$ and $X \mapsto -X^{-1}$ are operator monotone (Löwner's Theorem).
+       This follows from the Courant-Fischer variational characterization (minimax principle). Since $x^T Ax \ge x^T Bx$ for any subspace, the maximum/minimum values over those subspaces must satisfy the same order.
 
-3. **[Hadamard] Calculate the Hadamard bound for $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$.**
+3. **[Inversion] Let $A \succeq B \succ 0$. Prove $B^{-1} \succeq A^{-1}$.**
    ??? success "Solution"
-       $\|a_1\| = 1$, $\|a_2\| = \sqrt{2}$. Bound is $1 \cdot \sqrt{2} \approx 1.414$. Actual determinant is 1.
+       Use congruence transformation. $A \succeq B \implies B^{-1/2} A B^{-1/2} \succeq I$.
+       Let $X = B^{-1/2} A B^{-1/2}$, then $X \succeq I \implies X^{-1} \preceq I$.
+       Thus $(B^{-1/2} A B^{-1/2})^{-1} \preceq I \implies B^{1/2} A^{-1} B^{1/2} \preceq I$.
+       Multiply by $B^{-1/2}$ on both sides to get $A^{-1} \preceq B^{-1}$.
 
-4. **[Cauchy-Schwarz] State the trace version of the Cauchy-Schwarz inequality.**
+4. **[Hadamard] State Hadamard's Inequality and give its geometric interpretation.**
    ??? success "Solution"
-       $|\operatorname{tr}(A^* B)|^2 \le \operatorname{tr}(A^* A) \operatorname{tr}(B^* B)$. This is exactly the Cauchy-Schwarz inequality for the Hilbert-Schmidt (Frobenius) inner product.
+       $\det(A) \le \prod a_{ii}$ (for PD matrices). Geometrically, this means the volume of the parallelotope formed by column vectors is maximized when the vectors are orthogonal (diagonal matrix).
 
-5. **[Weyl] What does Weyl's Inequality say about the eigenvalues of $A+B$?**
+5. **[Trace Inequality] Is $\operatorname{tr}(AB) \le \operatorname{tr}(A) \operatorname{tr}(B)$ always true for $A, B \succeq 0$?**
    ??? success "Solution"
-       $\lambda_i(A+B) \le \lambda_j(A) + \lambda_k(B)$ for $i = j+k-n$. It bounds the spectrum of a sum by the sums of individual spectra.
+       No. Counterexample: $A = B = I_{2 \times 2}$. $\operatorname{tr}(I^2) = 2$, but $\operatorname{tr}(I)\operatorname{tr}(I) = 4$. While $2 \le 4$ holds, this is not a general rule. A correct upper bound is usually $\operatorname{tr}(AB) \le \lambda_{\max}(A) \operatorname{tr}(B)$.
 
-6. **[Kantorovich] What does the Kantorovich inequality bound?**
+6. **[Ky Fan] State the Ky Fan $k$-norm sum inequality.**
    ??? success "Solution"
-       The ratio $\frac{(x^T Ax)(x^T A^{-1}x)}{(x^T x)^2}$. It provides an upper bound on how much the "spread" of eigenvalues can amplify a quadratic form, often used in the analysis of the steepest descent method.
+       $\sum_{i=1}^k \lambda_i(A+B) \le \sum_{i=1}^k \lambda_i(A) + \sum_{i=1}^k \lambda_i(B)$. This reflects the subadditivity of the sum of the largest eigenvalues.
 
-7. **[Golden-Thompson] State the Golden-Thompson inequality.**
+7. **[Golden-Thompson] State the Golden-Thompson Inequality.**
    ??? success "Solution"
-       $\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$. This is a fundamental result in statistical mechanics, though note that the operator inequality $e^{A+B} \preceq e^A e^B$ is false.
+       $\operatorname{tr}(e^{A+B}) \le \operatorname{tr}(e^A e^B)$ for all Hermitian matrices $A, B$. This measures free energy bounds in statistical mechanics.
 
-8. **[Determinant] Prove Minkowski's determinant inequality for $A, B \succeq 0$.**
+8. **[Operator Monotone] Give an example of a function that is increasing on scalars but not in the operator order.**
    ??? success "Solution"
-       $(\det(A+B))^{1/n} \ge (\det A)^{1/n} + (\det B)^{1/n}$. The $n$-th root of the volume is a concave function on the PSD cone.
+       $f(t) = t^2$. Although $a > b > 0 \implies a^2 > b^2$, there exist $A \succeq B \succeq 0$ such that $A^2 \nsucceq B^2$. Only specific "operator monotone" functions like $\sqrt{t}, \log t, 1/t$ preserve the Löwner order.
 
-9. **[Fischer] What is Fischer's Inequality for partitioned matrices?**
+9. **[Fiedler] State Fiedler's inequality regarding eigenvalues of sums of symmetric matrices.**
    ??? success "Solution"
-       For a PSD matrix $M = \begin{pmatrix} A & B \\ B^* & D \end{pmatrix}$, $\det M \le \det A \cdot \det D$. This generalizes Hadamard's inequality to blocks.
+       $\lambda(A+B)$ is constrained by $\lambda(A) + \lambda(B)$ in the sense of Majorization.
 
-10. **[Entropy] How does matrix inequality relate to the Von Neumann entropy $S(\rho) = -\operatorname{tr}(\rho \log \rho)$?**
+10. **[Application] How are matrix inequalities used in Compressed Sensing?**
     ??? success "Solution"
-        Properties like the subadditivity of entropy follow from the operator concavity of $f(x) = -x \log x$ (Lieb's Theorem). Matrix inequalities provide the bounds for information processing.
+        Used to prove the Restricted Isometry Property (RIP). By bounding the fluctuation of singular values of the sensing matrix, it ensures that the energy of sparse signals is preserved after dimensionality reduction, allowing for exact reconstruction.
 
 ## Chapter Summary
 
-This chapter establishes the relational calculus of linear operators:
+Matrix inequalities are the "soft constraint" theory of linear algebra:
 
-1. **Partial Ordering**: Defined the Lowner order as the standard for comparing the "energy" of matrices.
-2. **Volume Constraints**: Utilized Hadamard and Minkowski inequalities to establish the limits of geometric scaling.
-3. **Spectral Bounds**: Formulated Weyl's inequalities to track the migration of eigenvalues under operator sums.
-4. **Analytic Limits**: Leveraged trace and exponential inequalities to provide the foundations for information and statistical theory.
+1. **Order Generalization**: Löwner order extends linear comparison from the real line to the PSD cone.
+2. **Variational Essence**: Behind every spectral inequality lies the shadow of an extremum optimization problem.
+3. **Analytical Rigidity**: Inequalities establish structural evolution boundaries for matrices under addition, multiplication, and functional mapping.

@@ -1,80 +1,79 @@
-# Chapter 09: Quadratic Forms and Inertia
+# Chapter 09: Quadratic Forms and Bilinear Forms
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Symmetry (Ch2) · Eigenvalues (Ch6) · Inner Product (Ch8) · Change of Basis (Ch4)
+**Prerequisites**: Matrix Operations (Ch2) · Orthogonality (Ch7) · Eigenvalues (Ch6)
 
-**Chapter Outline**: Definition of Quadratic Forms → Matrix Representation ($x^T A x$) → Congruence and Change of Variables → Sylvester's Law of Inertia → Definiteness (Positive, Negative, Indefinite) → Principal Axes Theorem (Diagonalization) → Quadratic Forms and Conic Sections → Signature of a Form
+**Chapter Outline**: Definition of Bilinear Forms → Symmetric Bilinear Forms → Definition of Quadratic Forms $x^T Ax$ → Canonical Forms (Completing the Square, Congruence) → Law of Inertia (Sylvester) → Normal Forms → Positivity Tests (Hurwitz/Sylvester Criterion) → Geometric Meaning (Classification of Quadrics)
 
-**Extension**: Quadratic forms describe the "energy surface" of a system; they are the second-order approximations used in optimization and general relativity.
+**Extension**: Quadratic forms are the algebraic heart of extremum analysis for multivariable functions, kinetic energy in classical mechanics, and optimization theory.
 
 </div>
 
-A **quadratic form** is a scalar-valued function $q(x) = x^T A x$ where $A$ is a symmetric matrix. Unlike linear forms, quadratic forms capture the curvature and curvature-like behavior of functions. By choosing the right coordinate system (the "principal axes"), we can simplify a quadratic form into a weighted sum of squares. This chapter details the classification of forms into positive definite, negative definite, or indefinite categories and establishes **Sylvester's Law of Inertia**, which ensures that the fundamental "shape" of the form is invariant under non-singular coordinate changes.
+The study of quadratic forms focuses on scalar functions that are quadratic polynomials of variables. Through linear substitution (congruence transformation), we can eliminate complex cross-terms to reveal the essential geometric features of the function.
 
 ---
 
-## 09.1 Matrix Representation and Definiteness
+## 09.1 Quadratic Forms and Congruence
 
 !!! definition "Definition 09.1 (Quadratic Form)"
-    A quadratic form on $\mathbb{R}^n$ is a function $q(\mathbf{x})$ that can be written as:
-    $$q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} = \sum_{i,j} a_{ij} x_i x_j$$
-    where $A$ is a symmetric matrix.
+    A quadratic form in $n$ variables is a homogeneous polynomial $Q(x) = x^T A x$, where $A$ is a symmetric matrix.
 
-!!! theorem "Theorem 09.1 (Sylvester's Law of Inertia)"
-    The number of positive, negative, and zero eigenvalues of a symmetric matrix $A$ is invariant under congruence transformations ($P^T A P$ for non-singular $P$). This triplet $(p, n, z)$ is called the **inertia** of the matrix.
+!!! theorem "Theorem 09.3 (Sylvester's Law of Inertia)"
+    For real symmetric matrices, the number of positive entries (positive inertia index) and negative entries (negative inertia index) in the normal form are invariants under non-singular linear substitutions.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Write the matrix representation of $q(x, y) = x^2 + 4xy + 3y^2$.**
+1. **[Fundamentals] Write the symmetric matrix representation for the quadratic form $f(x, y) = x^2 + 4xy + 3y^2$.**
    ??? success "Solution"
-       The diagonal entries are the coefficients of squares, and the off-diagonals are half the coefficient of the cross-term. $A = \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}$.
+       $A = \begin{pmatrix} 1 & 2 \\ 2 & 3 \end{pmatrix}$. Note the cross-term $4xy$ is split equally between $a_{12}$ and $a_{21}$.
 
-2. **[Principal Axes] Find the principal axes transformation for $q(x, y) = 5x^2 + 5y^2$.**
+2. **[Completing the Square] Transform $Q(x, y) = x^2 + 4xy$ into a canonical form by completing the square.**
    ??? success "Solution"
-       The matrix is $5I$, which is already diagonal. The principal axes are the standard $x$ and $y$ axes. The form represents a circular bowl.
+       $Q = (x+2y)^2 - 4y^2$. Let $u = x+2y, v = y$, then $Q = u^2 - 4v^2$.
 
-3. **[Definiteness] Is $q(x, y) = x^2 + 2xy + y^2$ positive definite?**
+3. **[Congruence] If $A$ and $B$ are congruent, must they have the same eigenvalues?**
    ??? success "Solution"
-       $q(x, y) = (x+y)^2$. It is $\ge 0$ for all $(x, y)$, but it is 0 for non-zero vectors like $(1, -1)$. Thus it is **positive semi-definite** but not positive definite.
+       No. Similarity transformations preserve eigenvalues, but congruence transformations $B = P^T A P$ only preserve the count of positive and negative inertia indices. For example, $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ is congruent to $\begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}$, but they have different eigenvalues.
 
-4. **[Eigenvalues] Relate the definiteness of $A$ to its eigenvalues.**
+4. **[Positivity Test] Use principal minors to determine if $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ is positive definite.**
    ??? success "Solution"
-       - **Positive Definite**: All $\lambda_i > 0$.
-       - **Positive Semi-definite**: All $\lambda_i \ge 0$.
-       - **Indefinite**: At least one $\lambda > 0$ and one $\lambda < 0$.
+       $D_1 = 2 > 0$.
+       $D_2 = \det A = 4-1 = 3 > 0$.
+       Since all leading principal minors are positive, $A$ is positive definite.
 
-5. **[Congruence] Show that $A$ and $P^T A P$ represent the same quadratic form in different coordinates.**
+5. **[Inertia Index] Find the inertia index for $Q = x^2 - y^2$.**
    ??? success "Solution"
-       Let $\mathbf{x} = P \mathbf{y}$. Then $\mathbf{x}^T A \mathbf{x} = (P\mathbf{y})^T A (P\mathbf{y}) = \mathbf{y}^T (P^T A P) \mathbf{y}$. Coordinate changes transform the matrix by congruence.
+       Positive inertia index $p = 1$, negative inertia index $q = 1$. The signature is $p-q = 0$.
 
-6. **[Sylvester] Find the inertia of $A = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$.**
+6. **[Geometric Classification] What shape does $x^2 + y^2 = 1$ represent in $\mathbb{R}^2$? How about $x^2 - y^2 = 1$?**
    ??? success "Solution"
-       The eigenvalues are 1 and -1. The inertia is $(1, 1, 0)$. The form is indefinite (a saddle shape).
+       - $x^2 + y^2 = 1$ represents a circle (ellipse).
+       - $x^2 - y^2 = 1$ represents a hyperbola.
 
-7. **[Signature] Define the signature of a quadratic form.**
+7. **[Rayleigh Quotient] What is the maximum value of the Rayleigh Quotient $R(x) = \frac{x^T A x}{x^T x}$?**
    ??? success "Solution"
-       The difference between the number of positive and negative eigenvalues: $s = p - n$. Together with the rank, it uniquely identifies the form under congruence.
+       The maximum value is the largest eigenvalue $\lambda_{\max}$ of $A$, attained at the corresponding eigenvector.
 
-8. **[Calculation] Check if $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ is positive definite using the leading principal minors.**
+8. **[Skew-symmetric] Prove: For any skew-symmetric matrix $A$ ($A^T = -A$), the quadratic form $x^T A x$ is identically 0.**
    ??? success "Solution"
-       Minors: $D_1 = 2 > 0$ and $D_2 = \det A = 3 > 0$. Since all leading principal minors are positive, the matrix is positive definite.
+       Since $x^T A x$ is a scalar, $(x^T A x)^T = x^T A^T x = x^T (-A) x = -x^T A x$.
+       A number equal to its own negative must be 0.
 
-9. **[Geometry] What geometric shape is represented by $x^2 - y^2 = 1$?**
+9. **[Normal Form] Transform $Q = 2x^2 + 2y^2$ into normal form (coefficients only $1, -1, 0$).**
    ??? success "Solution"
-       A hyperbola. In quadratic forms, indefinite matrices correspond to hyperbolic conic sections.
+       Let $u = \sqrt{2}x, v = \sqrt{2}y$, then $Q = u^2 + v^2$. The normal form is $\sum y_i^2$.
 
-10. **[Energy] In physics, why is the kinetic energy $T = \frac{1}{2} \dot{q}^T M \dot{q}$ always a positive definite quadratic form?**
+10. **[Application] How are quadratic forms used to determine extremum points in optimization?**
     ??? success "Solution"
-        Because kinetic energy must be positive for any non-zero motion. This requires the mass matrix $M$ to be positive definite, ensuring stable and realistic physical behavior.
+        By checking the Hessian matrix (second derivative matrix) of the objective function at a critical point. If the Hessian is a positive definite quadratic form, the point is a local minimum; if negative definite, a local maximum; if indefinite, a saddle point.
 
 ## Chapter Summary
 
-This chapter explores the second-order structure of linear operators:
+Quadratic forms bridge polynomial algebra and spatial geometry:
 
-1. **Functional Mapping**: Formalized quadratic forms as scalar fields governed by symmetric matrices.
-2. **Spectral Canonicalization**: Utilized the Principal Axes Theorem to decouple variables and reveal the core curvature of the form.
-3. **Inertia Invariance**: Established Sylvester's Law as the fundamental preservation law for the "shape" of space under transformation.
-4. **Classification Theory**: Developed definiteness criteria to characterize the stability and extremum properties of quadratic surfaces.
+1. **Structural Simplification**: Congruence transformations are the algebraic tools for eliminating cross-terms and simplifying coordinate systems.
+2. **Signature Dynamics**: The Law of Inertia reveals the deepest topological properties of quadratic functions.
+3. **Positivity**: As the core of energy, distance, and stability analysis, positive definiteness is the most applied part of quadratic form theory.

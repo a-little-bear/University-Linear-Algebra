@@ -1,80 +1,83 @@
-# Chapter 11: Singular Value Decomposition
+# Chapter 11: Singular Value Decomposition (SVD)
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Eigenvalues (Ch6) · Orthogonality (Ch7) · Matrix Factorization (Ch10) · Rank (Ch2)
+**Prerequisites**: Eigenvalues (Ch6) · Orthogonality (Ch7) · Matrix Decompositions (Ch10)
 
-**Chapter Outline**: Definition of SVD ($A = U \Sigma V^T$) → Existence and Uniqueness → Singular Values vs. Eigenvalues → Geometric Interpretation (Rotating and Stretching) → Low-Rank Approximation (Eckart-Young Theorem) → Matrix Norms and SVD → Image Compression → Principal Component Analysis (PCA) Overview → Pseudoinverse via SVD
+**Chapter Outline**: Definition $A = U \Sigma V^*$ → Geometric Meaning (Hyperellipsoidal Mapping) → Relation between Singular Values and Eigenvalues → Truncated SVD and Low-Rank Approximation (Eckart-Young Theorem) → SVD for Generalized Inverses → Applications (Image Compression, PCA, Collaborative Filtering)
 
-**Extension**: SVD is the "Swiss Army Knife" of linear algebra; it provides the definitive answers to the rank, condition number, and fundamental subspaces of any matrix.
+**Extension**: SVD is the most versatile decomposition in linear algebra, valid for rectangular and singular matrices alike, and is often called the "bedrock of linear algebra."
 
 </div>
 
-The **Singular Value Decomposition** (SVD) is the most powerful and versatile matrix factorization. While diagonalization ($A = PDP^{-1}$) only applies to specific square matrices, SVD ($A = U \Sigma V^T$) exists for *any* matrix, rectangular or square. It decomposes any linear map into a rotation ($V^T$), followed by a coordinate-wise scaling ($\Sigma$), followed by another rotation ($U$). This decomposition reveals the "energy" of the transformation in the singular values and allows for the optimal approximation of high-dimensional data by lower-dimensional structures.
+While eigendecomposition explores the intrinsic structure of square matrices, the **Singular Value Decomposition (SVD)** provides a comprehensive analysis of operators of any shape. It reveals that any linear mapping can be viewed as: rotation → anisotropic scaling → rotation. In the age of data science, SVD is the ultimate tool for extracting core features from high-dimensional data.
 
 ---
 
-## 11.1 The SVD Framework
+## 11.1 Definitions and Core Theorems
 
-!!! definition "Definition 11.1 (Singular Value Decomposition)"
-    For any $m \times n$ matrix $A$, the SVD is $A = U \Sigma V^T$, where:
-    - $U$ is an $m \times m$ orthogonal matrix (left singular vectors);
-    - $V$ is an $n \times n$ orthogonal matrix (right singular vectors);
-    - $\Sigma$ is an $m \times n$ diagonal matrix with non-negative entries $\sigma_1 \ge \sigma_2 \ge \dots \ge 0$ (singular values).
+!!! definition "Definition 11.1 (SVD)"
+    For any $m \times n$ complex matrix $A$, there exist an $m \times m$ unitary matrix $U$ and an $n \times n$ unitary matrix $V$ such that:
+    $$A = U \Sigma V^*$$
+    where $\Sigma$ is a diagonal-like matrix with non-negative real entries $\sigma_1 \ge \sigma_2 \dots \ge \sigma_r > 0$ on the diagonal.
 
-!!! theorem "Theorem 11.1 (Eckart-Young Theorem)"
-    The best rank-$k$ approximation of $A$ in the Frobenius norm is obtained by keeping the $k$ largest singular values and setting the rest to zero:
-    $$A_k = \sum_{i=1}^k \sigma_i u_i v_i^T$$
+!!! theorem "Theorem 11.3 (Eckart-Young Theorem)"
+    The optimal rank-$k$ approximation of $A$ in the Frobenius norm is given by the truncated SVD:
+    $$A_k = \sum_{i=1}^k \sigma_i u_i v_i^*$$
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Compute the singular values of $A = \begin{pmatrix} 3 & 0 \\ 0 & -2 \end{pmatrix}$.**
+1. **[Basic Calculation] Calculate the singular values of $A = \begin{pmatrix} 3 & 0 \\ 0 & -2 \end{pmatrix}$.**
    ??? success "Solution"
-       Singular values are the square roots of the eigenvalues of $A^T A = \begin{pmatrix} 9 & 0 \\ 0 & 4 \end{pmatrix}$. They are $\sigma_1 = 3, \sigma_2 = 2$. Note that singular values are always non-negative.
+       Singular values are the square roots of the eigenvalues of $A^* A$.
+       $A^* A = \begin{pmatrix} 9 & 0 \\ 0 & 4 \end{pmatrix}$. Eigenvalues are 9 and 4.
+       Thus $\sigma_1 = 3, \sigma_2 = 2$. Note singular values are always non-negative.
 
-2. **[Geometry] Describe the image of the unit circle under $A = U \Sigma V^T$.**
+2. **[SVD and Rank] If $A$ has 3 non-zero singular values, what is its rank?**
    ??? success "Solution"
-       It is an ellipse in $\mathbb{R}^m$ whose semi-axes have lengths $\sigma_i$ and are oriented along the directions of $u_i$.
+       The rank is 3. The number of non-zero singular values is exactly equal to the rank of the matrix.
 
-3. **[Rank] How does SVD identify the rank of a matrix?**
+3. **[Geometry] What shape does the linear transformation $A = U \Sigma V^*$ map the unit circle to?**
    ??? success "Solution"
-       The rank of $A$ is exactly the number of non-zero singular values. In practice, we count the number of singular values above a small numerical threshold.
+       It maps it to a **hyperellipse**. The lengths of the semi-axes are determined by $\sigma_i$, and the directions are determined by the left singular vectors $u_i$.
 
-4. **[Eigenvalues] Relate the singular values of $A$ to the eigenvalues of $A^T A$ and $A A^T$.**
+4. **[Spectral Norm] Prove that the spectral norm $\|A\|_2$ equals its maximum singular value $\sigma_{\max}$.**
    ??? success "Solution"
-       $\sigma_i(A) = \sqrt{\lambda_i(A^T A)} = \sqrt{\lambda_i(A A^T)}$. The right singular vectors are eigenvectors of $A^T A$, and left singular vectors are eigenvectors of $A A^T$.
+       $\|A\|_2 = \max \frac{\|Ax\|}{\|x\|} = \max \sqrt{\frac{x^* A^* A x}{x^* x}}$.
+       By the Rayleigh quotient, the maximum is $\sqrt{\lambda_{\max}(A^* A)} = \sigma_{\max}$.
 
-5. **[Norm] Find the spectral norm $\|A\|_2$ using SVD.**
+5. **[Condition Number] Define the condition number $\kappa(A)$ using singular values.**
    ??? success "Solution"
-       $\|A\|_2 = \max \sigma_i = \sigma_1$. The spectral norm is determined by the most dominant scaling factor of the operator.
+       $\kappa(A) = \sigma_{\max} / \sigma_{\min}$. It measures how much the matrix amplifies errors in the inversion process.
 
-6. **[Pseudo-inverse] Compute the Moore-Penrose inverse $A^\dagger$ using SVD.**
+6. **[Low-Rank Approx] If $A$ has singular values $100, 50, 1, 0.1$, what is the Frobenius norm error of its rank-2 approximation?**
    ??? success "Solution"
-       $A^\dagger = V \Sigma^\dagger U^T$, where $\Sigma^\dagger$ is the diagonal matrix formed by taking the reciprocal of non-zero singular values.
+       The error is the square root of the sum of squares of the discarded singular values: $\sqrt{1^2 + 0.1^2} \approx 1.005$.
 
-7. **[Compression] How is SVD used in image compression?**
+7. **[Eigenvalue Comparison] If $A$ is a positive definite symmetric matrix, how do its singular values relate to its eigenvalues?**
    ??? success "Solution"
-       By treating an image as a matrix and keeping only the first $k$ terms of the SVD. Since the singular values of natural images decay rapidly, a small $k$ can capture most of the visual information.
+       For a positive definite symmetric matrix, the singular values are exactly equal to the eigenvalues.
 
-8. **[Condition Number] Define the condition number of a matrix in terms of singular values.**
+8. **[Calculation] Find the SVD of $A = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.**
    ??? success "Solution"
-       $\kappa(A) = \sigma_{\max} / \sigma_{\min}$. It measures the sensitivity of the system $Ax = b$ to perturbations.
+       $A^* A = (2)$, eigenvalue 2, so $\sigma_1 = \sqrt{2}$.
+       $V = (1)$. $u_1 = Av_1/\sigma_1 = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix}$.
+       $A = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2} \end{pmatrix} \begin{pmatrix} \sqrt{2} \end{pmatrix} (1)$.
 
-9. **[Symmetry] If $A$ is symmetric and positive definite, how do its singular values relate to its eigenvalues?**
+9. **[Application] How does keeping the top $k$ singular values achieve compression in image processing?**
    ??? success "Solution"
-       In this case, singular values and eigenvalues are identical: $\sigma_i = \lambda_i$. If $A$ is symmetric but not positive definite, $\sigma_i = |\lambda_i|$.
+       The original image requires $m \times n$ storage. Keeping the top $k$ singular values and their $u, v$ vectors requires only $k(m+n+1)$ space. When $k \ll \min(m,n)$, the compression ratio is massive.
 
-10. **[PCA] What is the connection between SVD and Principal Component Analysis?**
+10. **[Pseudoinverse] Write the Moore-Penrose pseudoinverse $A^\dagger$ using SVD.**
     ??? success "Solution"
-        PCA is performed by taking the SVD of the zero-centered data matrix $X$. The right singular vectors are the principal components, and the singular values are proportional to the standard deviation along those components.
+        $A^\dagger = V \Sigma^\dagger U^*$, where $\Sigma^\dagger$ is obtained by inverting the non-zero singular values and transposing.
 
 ## Chapter Summary
 
-This chapter establishes the definitive structural decomposition of any linear operator:
+SVD is the crown jewel of applied mathematics:
 
-1. **Spectral Generality**: Positioned SVD as the universal counterpart to diagonalization, applicable to all rectangular matrices.
-2. **Optimal Compression**: Utilized the Eckart-Young theorem to establish SVD as the foundation for high-fidelity data approximation.
-3. **Geometric Analysis**: Linked singular values to the distortion of unit spheres into ellipses, revealing the geometric power of the operator.
-4. **Numerical Benchmarking**: Formulated rank, condition number, and norm analysis through the lens of singular value spectra.
+1. **Universality**: It breaks the limitations of square matrices, providing a unified view for all linear systems.
+2. **Energy Concentration**: Through the distribution of singular values, it reveals the dominant components in data.
+3. **Robustness**: As the core of low-rank approximation, SVD is the algebraic standard for noise filtering and info compression.

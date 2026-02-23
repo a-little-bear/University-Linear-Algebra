@@ -2,80 +2,78 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Eigenvalues (Ch6) · Graph Theory (Ch27) · Convergence (Ch14)
+**Prerequisites**: Eigenvalues (Ch6) · Matrix Analysis (Ch14) · Graph Theory Basics (Ch27)
 
-**Chapter Outline**: Definition of Nonnegative and Positive Matrices → Perron's Theorem for Positive Matrices → Reducibility and Irreducibility → Frobenius's Theorem for Irreducible Matrices → Primitive Matrices → Stochastic Matrices → Convergence of Markov Chains → Google PageRank Algorithm
+**Chapter Outline**: Definitions of Nonnegative and Positive Matrices → Irreducibility → Perron-Frobenius Theorem → Properties of the Perron Root $\rho(A)$ → Stochastic Matrices → Exponent of a Matrix → Power Method → Applications (PageRank, Population Models, Markov Chains)
 
-**Extension**: Nonnegative matrices are the mathematical language of probability, population dynamics, and economic networks; the Perron-Frobenius theorem is the "Spectral Theorem" for non-symmetric positive operators.
+**Extension**: Perron-Frobenius theory reveals the "dominant growth mode" of a system, serving as the link between algebraic structure and long-term behavior.
 
 </div>
 
-Nonnegative matrices—those with all entries $a_{ij} \ge 0$—govern systems where quantities cannot be negative, such as probability distributions, population counts, or economic values. The **Perron-Frobenius theorem** is one of the most elegant results in matrix theory: it guarantees that such a matrix always has a unique, positive "dominant" eigenvalue and a corresponding positive eigenvector. This theorem provides the rigorous justification for the convergence of Markov chains and the ranking logic of search engines like Google.
+Nonnegative matrices are ubiquitous in probability, economics, and biology. Perron-Frobenius theory is the crown of nonnegative matrix analysis, ensuring that under certain connectivity conditions, a unique, positive principal eigenvector exists.
 
 ---
 
-## 17.1 Perron-Frobenius Theory
+## 17.1 Perron-Frobenius Theorem
 
-!!! definition "Definition 17.1 (Positive and Irreducible)"
-    A matrix $A$ is **positive** ($A > 0$) if all $a_{ij} > 0$.
-    A nonnegative matrix $A$ is **irreducible** if its associated directed graph is strongly connected.
+!!! definition "Definition 17.1 (Irreducible Matrix)"
+    A nonnegative matrix $A$ is **irreducible** if its associated directed graph is strongly connected (a path exists between any two vertices).
 
-!!! theorem "Theorem 17.1 (Perron-Frobenius Theorem)"
+!!! theorem "Theorem 17.3 (Perron-Frobenius Theorem)"
     If $A$ is an irreducible nonnegative matrix, then:
-    1. The spectral radius $\rho(A)$ is an eigenvalue (the **Perron root**).
-    2. $\rho(A) > 0$ and it is a simple eigenvalue.
-    3. There exists a strictly positive eigenvector $v > 0$ such that $Av = \rho(A)v$.
-    4. $\rho(A)$ is the unique eigenvalue with a positive eigenvector.
+    1. The spectral radius $\lambda = \rho(A)$ is an eigenvalue of $A$ (the Perron root).
+    2. There exists a unique (normalized) positive eigenvector $v > 0$ such that $Av = \lambda v$.
+    3. $\lambda$ is a simple eigenvalue.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Is $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ irreducible? Is it positive?**
+1. **[Fundamentals] Is $A = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ irreducible? Is it primitive?**
    ??? success "Solution"
-       Irreducible: Yes, the graph $1 \leftrightarrow 2$ is strongly connected. Positive: No, it has zeros on the diagonal.
+       - It is irreducible because there are paths $1 \to 2$ and $2 \to 1$.
+       - It is not primitive because it is periodic. $A^2 = I, A^3 = A, \dots$ never becomes a strictly positive matrix. Its eigenvalues are $1, -1$, both with modulus 1.
 
-2. **[Perron Root] Find the Perron root of $\begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
+2. **[Perron Root] If each row sum of a nonnegative matrix $A$ is $s$, prove $\rho(A) = s$.**
    ??? success "Solution"
-       The eigenvalues are $\{2, 0\}$. The Perron root is 2. The corresponding eigenvector is $(1, 1)^T > 0$.
+       Let $\mathbf{1} = (1, \dots, 1)^T$. The row-sum condition implies $A \mathbf{1} = s \mathbf{1}$. Thus $s$ is an eigenvalue. Since $A \ge 0$ and all eigenvalues are bounded by the maximum row sum (Gershgorin), $\rho(A) = s$.
 
-3. **[Stochastic] Define a row-stochastic matrix and its Perron root.**
+3. **[Monotonicity] If $0 \le A \le B$, prove $\rho(A) \le \rho(B)$.**
    ??? success "Solution"
-       A matrix $P \ge 0$ where each row sum is 1. Its Perron root is always $\lambda=1$, with the all-ones vector $\mathbf{1}$ as the right eigenvector.
+       Since $A, B$ are nonnegative, $A^k \le B^k$ for all $k$. By Gelfand's formula $\rho(A) = \lim \|A^k\|^{1/k} \le \lim \|B^k\|^{1/k} = \rho(B)$. This reflects the monotonicity of the spectral radius for nonnegative matrices.
 
-4. **[Primitivity] What is a primitive matrix?**
+4. **[Primitivity] Determine if $A = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$ is primitive.**
    ??? success "Solution"
-       An irreducible matrix $A$ such that $A^k > 0$ for some $k$. Primitive matrices have a unique eigenvalue of maximum modulus, ensuring convergence to a steady state.
+       Calculate $A^2 = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix} > 0$. Since a power of the matrix is strictly positive, $A$ is primitive.
 
-5. **[PageRank] How does PageRank use Perron-Frobenius?**
+5. **[Collatz-Wielandt] Use row sums to estimate the spectral radius of $A = \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}$.**
    ??? success "Solution"
-       PageRank models the web as a graph and its link structure as a stochastic matrix. The PageRank scores are the entries of the principal eigenvector (Perron vector), which exists and is unique by the theorem.
+       Row sums are 3 and 7. Thus $3 \le \rho(A) \le 7$. The exact value is $\frac{5+\sqrt{13}}{2} \approx 5.30$.
 
-6. **[Reducibility] What happens if $A$ is reducible?**
+6. **[Application] In PageRank, why is a damping factor (adding a multiple of an all-ones matrix) used?**
    ??? success "Solution"
-       The matrix can be permuted to a block upper-triangular form. The Perron root still exists, but the corresponding eigenvector might only be non-negative (not strictly positive), and the root might not be simple.
+       To make the matrix **primitive**. This ensures the power method converges to a unique positive stationary distribution (the rank vector), eliminating convergence issues caused by isolated nodes or dead loops in the original graph.
 
-7. **[Collatz-Wielandt] State the Collatz-Wielandt formula for the Perron root.**
+7. **[Spectral Distribution] If $A > 0$, what condition do the other eigenvalues' moduli satisfy relative to the Perron root?**
    ??? success "Solution"
-       $\rho(A) = \max_{x > 0} \min_i \frac{(Ax)_i}{x_i}$. This provides a way to bound the Perron root using any positive vector.
+       For a primitive matrix (especially $A>0$), all other eigenvalues satisfy $|\lambda_i| < \rho(A)$ ($i \ge 2$).
 
-8. **[Cycle] If $A$ is irreducible and has period $h > 1$, what can you say about its eigenvalues?**
+8. **[Stochastic Matrix] Prove that the spectral radius of a stochastic matrix (row sums = 1) is 1.**
    ??? success "Solution"
-       The spectrum is invariant under rotation by $2\pi/h$ in the complex plane. There are $h$ eigenvalues on the spectral circle $|z| = \rho(A)$.
+       $A \mathbf{1} = 1 \mathbf{1}$ shows 1 is an eigenvalue. By Gershgorin, all eigenvalues have modulus $\le 1$. Thus $\rho(A) = 1$.
 
-9. **[Population] In a Leslie matrix model, what does the Perron root represent?**
+9. **[Irreducibility Test] Determine the irreducibility of $\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       The long-term growth rate of the population. If $\rho(L) > 1$, the population grows; if $\rho(L) < 1$, it faces extinction.
+       Reducible. Node 1 cannot reach node 2 (only $2 \to 1$ exists). The matrix is lower triangular, reflecting its reducibility.
 
-10. **[M-matrices] Relate nonnegative matrices to M-matrices (Ch38A).**
+10. **[Limit Behavior] If $A$ is primitive and $\rho(A)=1$, prove $\lim_{k \to \infty} A^k = v w^T$, where $v, w$ are the Perron eigenvectors.**
     ??? success "Solution"
-        If $A \ge 0$, then $M = sI - A$ is an M-matrix for any $s > \rho(A)$. M-matrices are the "inverse-positive" counterparts to nonnegative matrices.
+        Since all other eigenvalues have modulus $< 1$, in the spectral decomposition, only the term corresponding to $\lambda=1$ (the rank-1 projection) survives in the limit.
 
 ## Chapter Summary
 
-This chapter explores the spectral properties of operators that preserve the positive orthant:
+Nonnegative matrix theory interweaves analysis and combinatorics:
 
-1. **Spectral Positivity**: Established the Perron root as the unique dominant real eigenvalue for non-negative systems.
-2. **Structural Connectivity**: Linked the irreducibility of a matrix to the strong connectivity of its underlying graph.
-3. **Equilibrium Logic**: Formulated the theory of steady states for stochastic processes and search algorithms.
-4. **Dominant Invariants**: Developed the Perron vector as the definitive descriptor of long-term ratios in linear dynamical systems.
+1. **Growth Dominance**: Spectral radius is no longer just an abstract value but the actual expansion rate of the system.
+2. **Positivity Guarantee**: Irreducibility is the structural prerequisite for ensuring every component in the system can evolve positively.
+3. **Inevitability of Convergence**: Primitivity establishes the unique endpoint for the evolution of discrete dynamical systems toward a steady state.

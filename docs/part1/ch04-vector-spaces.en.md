@@ -2,75 +2,80 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Fields (Ch00) · Set Theory
+**Prerequisites**: Systems of Linear Equations (Ch1)
 
-**Chapter Outline**: Definition of Vector Spaces and Subspaces → Axioms → Linear Combinations and Span → Linear Independence → Bases and Dimension → Change of Basis Matrix → The Four Fundamental Subspaces → Direct Sums and Complements → Coordinates and Isomorphisms
+**Chapter Outline**: Definition of Abstract Vector Spaces → Subspaces → Linear Combinations and Span → Linear Independence → Basis and Dimension → Change of Basis → Four Fundamental Subspaces (Rank-Nullity Theorem)
 
-**Extension**: Vector spaces are the stage upon which all of linear algebra is performed; the concept of a basis allows us to assign coordinates to abstract objects like functions or polynomials.
+**Extension**: Vector spaces abstract the concept of "arrows," allowing us to treat functions, signals, and matrices just like geometric vectors.
 
 </div>
 
-Linear algebra is the study of **vector spaces** and the maps between them. A vector space is more than just a collection of arrows; it is any set of objects that can be added and scaled according to specific axioms. This abstraction allows us to treat functions, matrices, and signals as "vectors." The most important concept in this chapter is the **basis**, a minimal set of building blocks that uniquely describes every element in the space.
+Vector spaces are the stage for linear algebra. Starting from this chapter, we no longer focus solely on arrays of numbers, but move toward studying sets with specific algebraic structures. The concepts of linear independence and basis establish the "skeleton" of a space.
 
 ---
 
-## 04.1 Definitions and Fundamental Concepts
+## 04.1 Definitions and Core Concepts
 
 !!! definition "Definition 04.1 (Vector Space)"
-    A vector space $V$ over a field $F$ is a set equipped with addition ($+$) and scalar multiplication ($\cdot$) such that $(V, +)$ is an Abelian group and scalar multiplication distributes over addition and scaling.
+    A set $V$ equipped with addition and scalar multiplication is a vector space over a field $F$ if it satisfies 8 axioms (associativity, commutativity, distributivity, etc.).
 
-!!! theorem "Theorem 04.1 (Basis Uniqueness)"
-    Every basis of a finite-dimensional vector space has the same number of vectors. This number is the **dimension** ($\dim V$) of the space.
+!!! theorem "Theorem 04.1 (Rank-Nullity Theorem)"
+    For an $m \times n$ matrix $A$:
+    $$\operatorname{rank}(A) + \operatorname{nullity}(A) = n$$
+    The dimension of the column space plus the dimension of the nullspace equals the number of columns.
 
 ---
 
 ## Exercises
 
-1. **[Subspaces] Show that the set of all symmetric $n \times n$ matrices is a subspace of $M_n(\mathbb{R})$.**
+1. **[Axioms] Verify if the set of all $2 \times 2$ matrices $M_{2,2}$ is a vector space.**
    ??? success "Solution"
-       If $A, B$ are symmetric, $(A+B)^T = A^T + B^T = A+B$, and $(kA)^T = k A^T = kA$. The zero matrix is symmetric. Since it is closed under addition and scaling, it is a subspace.
+       Yes. Matrix addition is commutative and associative, there is a zero matrix, every matrix has an additive inverse, and scalar multiplication distributes. All vector space axioms hold.
 
-2. **[Linear Independence] Are the vectors $\{(1, 0), (0, 1), (1, 1)\}$ linearly independent in $\mathbb{R}^2$?**
+2. **[Subspace Criteria] Determine if $W = \{(x, y) : x \ge 0\}$ is a subspace of $\mathbb{R}^2$.**
    ??? success "Solution"
-       No. The third vector is the sum of the first two. Since $v_3 = 1 v_1 + 1 v_2$, the set is linearly dependent.
+       No. A subspace must be closed under scalar multiplication. If we take $(1, 0) \in W$ and scalar $c = -1$, then $c(1, 0) = (-1, 0) \notin W$. Thus $W$ is not a subspace.
 
-3. **[Basis] Find a basis for the space of polynomials of degree at most 2.**
+3. **[Linear Independence] Determine if $v_1 = (1, 0), v_2 = (0, 1), v_3 = (1, 1)$ are linearly independent.**
    ??? success "Solution"
-       The standard basis is $\{1, x, x^2\}$. Any polynomial $ax^2 + bx + c$ is a unique linear combination of these elements.
+       Linearly dependent. Notice $v_3 = v_1 + v_2$. There exists a non-trivial linear combination that equals the zero vector.
 
-4. **[Dimension] What is the dimension of the subspace of $\mathbb{R}^3$ defined by $x+y+z=0$?**
+4. **[Basis and Dimension] Find the dimension of the subspace of $\mathbb{R}^3$ spanned by $(1, 0, 0)$ and $(0, 1, 0)$.**
    ??? success "Solution"
-       The equation represents a plane through the origin. Since there is one constraint on 3 variables, the dimension is $3 - 1 = 2$.
+       The dimension is 2. These two vectors are linearly independent and form a basis for that plane.
 
-5. **[Span] Describe the span of $\{(1, 0, 0), (0, 1, 0)\}$.**
+5. **[Nullspace] Find the nullspace $N(A)$ for $A = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       The span is the $xy$-plane in $\mathbb{R}^3$, i.e., the set of all vectors $(x, y, 0)$.
+       Solve $Ax=0$, which is $x_1 + x_2 = 0 \implies x_1 = -x_2$.
+       The nullspace is $\{ c(1, -1)^T : c \in \mathbb{R} \}$. Its dimension (nullity) is 1.
 
-6. **[Four Subspaces] Define the null space $\ker(A)$ and the column space $\operatorname{Im}(A)$.**
+6. **[Column Space] How is the column space $C(A)$ related to the consistency of $Ax=b$?**
    ??? success "Solution"
-       $\ker(A) = \{x : Ax = 0\}$. $\operatorname{Im}(A) = \{Ax : x \in \mathbb{R}^n\}$. These characterize the solution set and the range of the operator $A$.
+       The system $Ax=b$ has a solution if and only if the vector $b$ belongs to the column space $C(A)$.
 
-7. **[Change of Basis] If $[v]_B = (1, 2)^T$ and the basis change matrix from $B$ to $C$ is $\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$, find $[v]_C$.**
+7. **[Coordinates] What are the coordinates of $v = (2, 0)$ in the basis $B = \{(1, 1), (1, -1)\}$?**
    ??? success "Solution"
-       $[v]_C = P_{C \leftarrow B} [v]_B = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} 3 \\ 2 \end{pmatrix}$.
+       Solve $c_1(1, 1) + c_2(1, -1) = (2, 0)$.
+       Adding: $2c_1=2 \implies c_1=1$. Subtracting: $2c_2=2 \implies c_2=1$.
+       The coordinates are $[1, 1]_B^T$.
 
-8. **[Direct Sum] When is a vector space the direct sum $V = U \oplus W$?**
+8. **[Rank] Prove: If $A$ is a $3 \times 5$ matrix, what is its maximum rank? What is its minimum nullity?**
    ??? success "Solution"
-       When every $v \in V$ can be uniquely written as $u + w$ ($u \in U, w \in W$). This requires $U + W = V$ and $U \cap W = \{0\}$.
+       Rank is limited by rows and columns, so $\operatorname{rank}(A) \le \min(3, 5) = 3$.
+       By the rank-nullity theorem, $\operatorname{nullity}(A) = 5 - \operatorname{rank}(A) \ge 5 - 3 = 2$.
 
-9. **[Coordinate Mapping] Explain why every $n$-dimensional vector space over $F$ is isomorphic to $F^n$.**
+9. **[Polynomial Spaces] Prove that the dimension of $P_n$ (polynomials of degree less than $n$) is $n$.**
    ??? success "Solution"
-       Fixing a basis $\{b_1, \dots, b_n\}$ allows us to map each vector $v = \sum x_i b_i$ to its coordinate vector $(x_1, \dots, x_n) \in F^n$. This mapping is a linear bijection.
+       The standard basis is $\{1, x, x^2, \dots, x^{n-1}\}$. Since there are $n$ elements in the basis, the dimension is $n$.
 
-10. **[Rank-Nullity] If $A$ is a $4 \times 7$ matrix with $\operatorname{rank}(A) = 3$, what is $\dim \ker(A)$?**
+10. **[Sum and Union] If $U, W$ are subspaces, is $U \cup W$ always a subspace?**
     ??? success "Solution"
-        By the Rank-Nullity Theorem, $\operatorname{rank}(A) + \dim \ker(A) = n$. Thus $3 + \dim \ker(A) = 7$, so $\dim \ker(A) = 4$.
+        No. For example, the $x$-axis and $y$-axis in $\mathbb{R}^2$. Their union does not contain $(1, 1)$ (since $(1, 0) + (0, 1) = (1, 1)$ is not on the axes). A union is a subspace only if one contains the other.
 
 ## Chapter Summary
 
-This chapter provides the axiomatic framework for linear structures:
+Vector spaces upgrade geometric intuition into algebraic rigor:
 
-1. **Axiomatic Abstraction**: Defined vector spaces through operational laws, extending linear analysis to matrices and functions.
-2. **Structural Composition**: Developed the concepts of span and linear independence to describe the reach and redundancy of vector sets.
-3. **Dimensional Scaling**: Established the basis as the unique coordinate system for finite-dimensional spaces.
-4. **Subspace Analysis**: Linked matrix rank to the dimensions of the four fundamental subspaces, providing a geometric view of solvability.
+1. **Structural Abstraction**: Any objects satisfying linear operation rules (functions, matrices) are vectors.
+2. **Basis and Dimension**: Dimension is the "degrees of freedom," and a basis provides the "navigation coordinates."
+3. **Subspace Analysis**: The four fundamental subspaces reveal the underlying logic of linear systems' inputs and outputs.

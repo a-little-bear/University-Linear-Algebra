@@ -1,76 +1,80 @@
-# Chapter 10: Matrix Factorizations
+# Chapter 10: Matrix Decompositions
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Multiplication (Ch2) · Gaussian Elimination (Ch1) · Positive Definiteness (Ch16) · QR Decomposition (Ch7)
+**Prerequisites**: Matrix Operations (Ch2) · Gaussian Elimination (Ch1) · Eigenvalues (Ch6) · Orthogonality (Ch7)
 
-**Chapter Outline**: LU Factorization ($A = LU$) → Partial Pivoting ($PA = LU$) → Cholesky Factorization ($A = LL^T$) → LDL Factorization ($A = LDL^T$) → Spectral Decomposition ($A = Q \Lambda Q^T$) → Singular Value Decomposition (SVD) Overview → Computational Efficiency → Uniqueness of Factorizations
+**Chapter Outline**: LU Decomposition (Matrix-based Elimination) → Cholesky Decomposition (Positive Definite Matrices) → QR Decomposition (Orthogonalization) → Eigendecomposition → Schur Decomposition (Unitary Similarity) → Polar Decomposition → Numerical Stability of Decompositions
 
-**Extension**: Matrix factorizations are the "atomic decompositions" of operators; they break down a complex transformation into a sequence of simpler, more manageable steps.
+**Extension**: Matrix decomposition is the soul of numerical linear algebra, decomposing a "black box" operator into components with excellent physical or geometric properties.
 
 </div>
 
-Matrix factorizations (or decompositions) express a matrix as a product of simpler matrices with specific structures (triangular, orthogonal, diagonal). These representations are the foundation of numerical linear algebra. The **LU factorization** automates Gaussian elimination for repeated solving, while the **Cholesky factorization** provides a highly efficient method for symmetric positive definite matrices. This chapter details the derivation and properties of these core factorizations and discusses their role in optimizing computational resources.
+Matrix decomposition is the engineering art of handling large-scale computational problems. Instead of operating directly on a complex matrix $A$, it is better to break it down into simple triangular, diagonal, or orthogonal matrices. Different decompositions correspond to different application perspectives: LU for solving equations, QR for stability, and eigendecomposition for the fundamental behavior of the operator.
 
 ---
 
-## 10.1 Triangular Factorizations
+## 10.1 Core Decomposition Models
 
-!!! definition "Definition 10.1 (LU Factorization)"
-    The LU factorization of $A$ is $A = LU$, where $L$ is a lower triangular matrix with 1s on the diagonal and $U$ is an upper triangular matrix. It corresponds to the row operations of Gaussian elimination.
+!!! definition "Definition 10.1 (LU Decomposition)"
+    If a square matrix $A$ can be written as $A = LU$, where $L$ is lower triangular and $U$ is upper triangular, it is called LU decomposition. This corresponds to Gaussian elimination without row swaps.
 
-!!! theorem "Theorem 10.1 (Cholesky Existence)"
-    If $A$ is a symmetric positive definite matrix, there exists a unique lower triangular matrix $L$ with positive diagonal entries such that $A = LL^T$.
+!!! theorem "Theorem 10.3 (Cholesky Decomposition)"
+    Every symmetric positive definite matrix $A$ can be uniquely factored as $A = LL^T$, where $L$ is a lower triangular matrix with positive diagonal entries.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Find the LU factorization of $A = \begin{pmatrix} 2 & 1 \\ 4 & 4 \end{pmatrix}$.**
+1. **[LU Decomposition] Perform LU decomposition on $A = \begin{pmatrix} 2 & 1 \\ 4 & 7 \end{pmatrix}$.**
    ??? success "Solution"
-       Step 1: $R_2 \to R_2 - 2R_1$. The upper triangular result is $U = \begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$. The multiplier was 2, so $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$.
+       $L = \begin{pmatrix} 1 & 0 \\ 2 & 1 \end{pmatrix}$, $U = \begin{pmatrix} 2 & 1 \\ 0 & 5 \end{pmatrix}$.
+       Check: $LU = \begin{pmatrix} 2 & 1 \\ 4 & 2+5 \end{pmatrix} = A$.
 
-2. **[Cholesky] Compute the Cholesky factorization of $A = \begin{pmatrix} 4 & 2 \\ 2 & 2 \end{pmatrix}$.**
+2. **[Cholesky] Compute the Cholesky decomposition of $A = \begin{pmatrix} 4 & 12 \\ 12 & 37 \end{pmatrix}$.**
    ??? success "Solution"
-       Let $L = \begin{pmatrix} l_{11} & 0 \\ l_{21} & l_{22} \end{pmatrix}$. $l_{11} = \sqrt{4} = 2$. $l_{21} = 2/2 = 1$. $l_{22} = \sqrt{2 - 1^2} = 1$. Thus $L = \begin{pmatrix} 2 & 0 \\ 1 & 1 \end{pmatrix}$.
+       Let $L = \begin{pmatrix} l_{11} & 0 \\ l_{21} & l_{22} \end{pmatrix}$.
+       $l_{11} = \sqrt{4} = 2$.
+       $l_{21} = 12/2 = 6$.
+       $l_{22} = \sqrt{37 - 6^2} = 1$.
+       Thus $L = \begin{pmatrix} 2 & 0 \\ 6 & 1 \end{pmatrix}$.
 
-3. **[Pivoting] Why is $PA = LU$ used instead of $A = LU$?**
+3. **[QR Meaning] In the QR decomposition $A=QR$, what geometric property do the columns of $Q$ have?**
    ??? success "Solution"
-       For numerical stability. Partial pivoting ($P$) ensures that the largest available entry is used as a pivot, avoiding division by zero or very small numbers that amplify rounding errors.
+       The columns of $Q$ form an orthonormal basis for the column space of $A$. They are obtained by performing Gram-Schmidt orthogonalization on the columns of $A$.
 
-4. **[Complexity] Compare the FLOP count of Cholesky versus LU.**
+4. **[Eigendecomposition] If $A$ is diagonalizable, write its eigendecomposition form.**
    ??? success "Solution"
-       Cholesky requires approximately $n^3/3$ operations, whereas LU requires $2n^3/3$. By exploiting symmetry, Cholesky is twice as fast.
+       $A = PDP^{-1}$, where $D$ is the diagonal matrix of eigenvalues and the columns of $P$ are the corresponding eigenvectors.
 
-5. **[Solving] Solve $Ax = b$ using $A = LU$.**
+5. **[Schur Decomposition] Prove that the diagonal entries of the Schur decomposition $A = U T U^*$ are the eigenvalues of $A$.**
    ??? success "Solution"
-       1. Solve $Ly = b$ via forward substitution. 2. Solve $Ux = y$ via back substitution. This approach is efficient when solving for multiple $b$ vectors.
+       Since $A$ is similar to the upper triangular matrix $T$, they share the same characteristic polynomial. The eigenvalues of an upper triangular matrix are its diagonal entries.
 
-6. **[LDL] What is the LDL factorization?**
+6. **[Polar Decomposition] In the polar decomposition $A = UP$, what do $U$ and $P$ represent?**
    ??? success "Solution"
-       $A = LDL^T$ where $L$ is unit lower triangular and $D$ is diagonal. It generalizes Cholesky to symmetric matrices that are not necessarily positive definite (it avoids square roots).
+       $U$ is an isometry (rotation or reflection) and $P$ is a positive semi-definite Hermitian matrix (stretch). This is analogous to the polar form of a complex number $z = re^{i\theta}$.
 
-7. **[Uniqueness] Under what condition is the LU factorization unique?**
+7. **[Existence] Does every matrix have an LU decomposition?**
    ??? success "Solution"
-       When all leading principal minors of $A$ are non-zero. This ensures that Gaussian elimination can proceed without row swaps.
+       No. An LU decomposition exists only if all leading principal minors are non-zero. If row swaps are needed during elimination, a PLU decomposition (with permutation matrix $P$) is required.
 
-8. **[Determinant] Use LU to compute $\det A$.**
+8. **[Computational Cost] Is solving $Ax=b$ via LU decomposition faster than direct inversion?**
    ??? success "Solution"
-       $\det A = \det L \cdot \det U = (1) \cdot \prod u_{ii}$. The determinant is simply the product of the pivots.
+       Yes. LU decomposition has complexity $O(n^3/3)$, and subsequent back-substitution takes only $O(n^2)$. Direct inversion is generally more computationally expensive and numerically less stable.
 
-9. **[Symmetry] Show that if $A = LU$ and $A$ is symmetric, then $U = DL^T$.**
+9. **[Orthogonal Similarity] What is special about the eigendecomposition if $A$ is symmetric?**
    ??? success "Solution"
-       $A = A^T \implies LU = U^T L^T$. Since $L$ is unit lower triangular and $U^T$ is unit lower triangular (if scaled), the unique $LDU$ factorization implies the relation.
+       It can be written as $A = QDQ^T$, where $Q$ is an orthogonal matrix. This means symmetric matrices are orthogonally diagonalizable.
 
-10. **[Memory] How can $L$ and $U$ be stored in the same memory space as $A$?**
+10. **[Application] Why is QR decomposition often used for least squares in computer vision?**
     ??? success "Solution"
-        Since $L$ has 1s on the diagonal, only the off-diagonal entries of $L$ need to be stored. These can occupy the lower triangular part of the original matrix $A$, while $U$ occupies the upper triangular part (including the diagonal).
+        QR decomposition is numerically more stable (lower condition number) than directly using the normal equations $A^T A x = A^T b$, significantly reducing rounding errors in floating-point calculations.
 
 ## Chapter Summary
 
-This chapter establishes the core structural decompositions of matrices:
+Matrix decomposition is the "anatomy" of linear algebra:
 
-1. **Procedural Encoding**: Formulated LU factorization as the persistent record of Gaussian elimination steps.
-2. **Symmetry Optimization**: Developed Cholesky and LDL factorizations to halve computational costs for symmetric systems.
-3. **Numerical Robustness**: Introduced partial pivoting as the essential mechanism for stable matrix computation.
-4. **Hierarchical Solving**: Linked factorizations to forward and back substitution, providing the standard template for large-scale linear solvers.
+1. **Structure Revelation**: Reducing complex operators to basic geometric actions (rotation, projection, stretching).
+2. **Computational Optimization**: Lowering $O(n^3)$ complexity to $O(n^2)$ for repeated use through triangulation or diagonalization.
+3. **Theoretical Unity**: Different decomposition theorems (e.g., Schur, Spectral Theorem) delineate the boundaries of matrix theory.

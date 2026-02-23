@@ -2,75 +2,78 @@
 
 <div class="context-flow" markdown>
 
-**Prerequisites**: Matrix Algebra (Ch2) · Kronecker Product (Ch19) · Stability (Ch36) · Eigenvalues (Ch6)
+**Prerequisites**: Kronecker Product (Ch19) · Eigenvalues (Ch6) · Matrix Analysis (Ch14) · Matrix Stability (Ch36)
 
-**Chapter Outline**: Sylvester Equation ($AX - XB = C$) → Lyapunov Equation ($AX + XA^T = Q$) → Existence and Uniqueness of Solutions → Solvability Conditions (Spectral Disjointness) → Solving via Kronecker Products → Solving via Schur Decomposition (Bartels-Stewart Algorithm) → Algebraic Riccati Equation (ARE) Overview → Applications in Control Theory and Stability
+**Chapter Outline**: Sylvester Equation $AX - XB = C$ → Existence and Uniqueness Conditions → Lyapunov Equation $AX + XA^* = Q$ → Stability Determination and Inertia Theorem → Algebraic Riccati Equation (ARE) → Iterative Solution Methods → Applications (Controllability and Observability in Modern Control Theory)
 
-**Extension**: Matrix equations are the "algebraic laws" of systems theory; solving them is the primary way to construct Lyapunov functions and design optimal controllers.
+**Extension**: Matrix equations are the language for transforming static algebra into dynamic characteristics; the solution to the Lyapunov equation directly maps the "energy" distribution of a dynamical system.
 
 </div>
 
-Matrix equations are algebraic relationships where the unknown is a matrix $X$. Unlike the standard $Ax=b$, these equations involve transformations acting on $X$ from both sides. The **Sylvester equation** $AX - XB = C$ is the most fundamental, governing the existence of similarity transformations and the decoupling of blocks. Its special case, the **Lyapunov equation**, is the primary tool for verifying the stability of linear systems. This chapter details the solvability conditions for these equations and introduces the **Bartels-Stewart algorithm**, the standard numerical method for their solution.
+Matrix equations study algebraic equations where the unknowns are matrices. They typically appear in control system design, equilibrium analysis, and numerical analysis. The most famous, the Sylvester and Lyapunov equations, provide the mathematical framework for understanding the interactions between operators.
 
 ---
 
 ## 20.1 Sylvester and Lyapunov Equations
 
 !!! definition "Definition 20.1 (Sylvester Equation)"
-    The Sylvester equation is $AX - XB = C$, where $A \in M_m, B \in M_n, C \in M_{m \times n}$ are given and $X$ is unknown.
+    The matrix equation $AX - XB = C$ is called the Sylvester equation.
 
-!!! theorem "Theorem 20.1 (Existence and Uniqueness)"
-    The Sylvester equation has a unique solution $X$ if and only if $A$ and $B$ have no common eigenvalues ($\sigma(A) \cap \sigma(B) = \emptyset$).
+!!! theorem "Theorem 20.3 (Existence and Uniqueness)"
+    The Sylvester equation $AX - XB = C$ has a unique solution if and only if $A$ and $B$ have no common eigenvalues: $\sigma(A) \cap \sigma(B) = \emptyset$.
 
 ---
 
 ## Exercises
 
-1. **[Fundamentals] Rewrite $AX - XB = C$ as a standard linear system $Mx = c$.**
+1. **[Existence] Does the equation $AX - XA = 0$ always have non-zero solutions?**
    ??? success "Solution"
-       Using the vec-Kronecker identity (Ch19): $(I \otimes A - B^T \otimes I) \operatorname{vec}(X) = \operatorname{vec}(C)$. The matrix $M = I \otimes A - B^T \otimes I$ has eigenvalues $\{\lambda_i(A) - \mu_j(B)\}$.
+       Yes. Any matrix that commutes with $A$ is a solution. In particular, $X=I$ and $X=A$ are always solutions. Since $\sigma(A) \cap \sigma(A) \neq \emptyset$ (unless the set is empty), the equation does not have a unique solution by Theorem 20.3.
 
-2. **[Solvability] Why is $\sigma(A) \cap \sigma(B) = \emptyset$ required for uniqueness?**
+2. **[Lyapunov] Assume $A$ is Hurwitz stable. Prove that for any $Q$, the solution to $AX + XA^* = Q$ can be expressed in integral form.**
    ??? success "Solution"
-       The eigenvalues of the Kronecker sum $M$ are $\lambda_i - \mu_j$. If $A$ and $B$ share an eigenvalue, then $\lambda_i - \mu_j = 0$ for some pair, making $M$ singular. A singular $M$ means the solution is either non-unique or does not exist.
+       The solution is $X = -\int_0^\infty e^{At} Q e^{A^*t} dt$. Since $A$ is stable, the exponential terms decay over time, guaranteeing the convergence of the integral.
 
-3. **[Lyapunov] State the Continuous Lyapunov Equation and its role in stability.**
+3. **[Calculation] Solve $\begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix} X - X \begin{pmatrix} 0 & 0 \\ 0 & 3 \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.**
    ??? success "Solution"
-       $A^T P + PA = -Q$. For a Hurwitz stable matrix $A$, there exists a unique $P \succ 0$ for any $Q \succ 0$. $P$ defines the Lyapunov function $V(x) = x^T P x$.
+       Let $X = \begin{pmatrix} x_{11} & x_{12} \\ x_{21} & x_{22} \end{pmatrix}$.
+       Substitute: $\begin{pmatrix} 1x_{11} & 1x_{12} \\ 2x_{21} & 2x_{22} \end{pmatrix} - \begin{pmatrix} 0 & 3x_{12} \\ 0 & 3x_{22} \end{pmatrix} = \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$.
+       Solve the system: $x_{11}=1, -2x_{12}=1, 2x_{21}=1, -x_{22}=1$.
+       Thus $X = \begin{pmatrix} 1 & -0.5 \\ 0.5 & -1 \end{pmatrix}$.
 
-4. **[Calculation] Solve $AX - XA = 0$.**
+4. **[Stability] Prove: If there exists $P \succ 0$ such that $A^T P + PA \prec 0$, then $A$ is stable.**
    ??? success "Solution"
-       The solutions are exactly the matrices that commute with $A$. This set forms the **centralizer** of $A$ and includes all polynomials in $A$.
+       This is the Lyapunov stability theorem. Consider the energy function $V(x) = x^T P x$.
+       Its derivative is $\dot{V} = x^T (A^T P + PA) x$. Since $A^T P + PA$ is negative definite, $\dot{V} < 0$, which means energy decreases over time and the system converges.
 
-5. **[Schur Method] Describe the Bartels-Stewart Algorithm.**
+5. **[Trace Application] In the Lyapunov equation $AX + XA^T + BB^T = 0$, what does the trace of $X$ represent?**
    ??? success "Solution"
-       1. Reduce $A$ and $B$ to Schur form ($T_A, T_B$) using unitary transformations. 2. Transform $C$ accordingly. 3. Solve the resulting triangular system $T_A \tilde{X} - \tilde{X} T_B = \tilde{C}$ using back-substitution.
+       If the equation describes the controllability Gramian of a control system, the trace of $X$ (sum of eigenvalues) represents the "average gain" or overall degree of controllability for control energy input from all directions.
 
-6. **[Riccati] How does the Algebraic Riccati Equation (ARE) differ from the Sylvester equation?**
+6. **[Riccati Intro] What is the Algebraic Riccati Equation (ARE)? How does it differ from the Sylvester equation?**
    ??? success "Solution"
-       The ARE, $A^T P + PA - PBR^{-1}B^T P + Q = 0$, is **quadratic** in the unknown $P$. It arises in optimal control (LQR) and requires more sophisticated solvers (like the Schur method on Hamiltonian matrices).
+       ARE has the form $A^T P + PA - PBR^{-1}B^T P + Q = 0$. Unlike the linear Sylvester equation, ARE is a **quadratic** matrix equation. It plays a central role in optimal control (LQR).
 
-7. **[Block Decoupling] Show how the Sylvester equation is used to block-diagonalize $\begin{pmatrix} A & C \\ 0 & B \end{pmatrix}$.**
+7. **[Controllability] If the system controllability matrix is $W_c$, what matrix equation does it satisfy?**
    ??? success "Solution"
-       A similarity transform with $\begin{pmatrix} I & X \\ 0 & I \end{pmatrix}$ results in $\begin{pmatrix} A & AX-XB+C \\ 0 & B \end{pmatrix}$. If $X$ solves $AX-XB = -C$, the off-diagonal block becomes zero.
+       It satisfies the Lyapunov equation $A W_c + W_c A^T + BB^T = 0$. The positive definiteness of the solution $W_c$ directly corresponds to the system's controllability.
 
-8. **[Inertia] State the relationship between the Lyapunov equation and the inertia of $A$.**
+8. **[Symmetry] If $A$ is stable and $Q$ is symmetric, is the solution $X$ to $AX + XA^T = Q$ always symmetric?**
    ??? success "Solution"
-       This is the Lyapunov Inertia Theorem: if $A^T P + PA = Q \succ 0$, then $A$ and $P$ have the same number of eigenvalues in the right and left half-planes.
+       Yes. Taking the transpose of the original equation gives $XA^T + AX^T = Q^T = Q$. Since the solution is unique and both $X$ and $X^T$ satisfy the same equation, $X = X^T$.
 
-9. **[Iterative] Mention an iterative method for solving matrix equations.**
+9. **[Elementary Operator] The Sylvester equation can be viewed as an inverse problem for which linear operator?**
    ??? success "Solution"
-       The Smith iteration: $X_{k+1} = A^T X_k A + Q$ for the discrete Lyapunov equation. It converges if $\rho(A) < 1$.
+       It can be viewed as inverting the elementary operator $\mathcal{L}(X) = AX - XB$ acting on the space of matrices. Its eigenvalues are $\lambda_i(A) - \mu_j(B)$.
 
-10. **[Trace] If $A^T P + PA = -I$, express $\operatorname{tr}(P)$ in terms of $A$.**
+10. **[Application] How do matrix equations model degradation in image restoration?**
     ??? success "Solution"
-        $\operatorname{tr}(P) = \int_0^\infty \operatorname{tr}(e^{A^T t} e^{At}) dt = \int_0^\infty \|e^{At}\|_F^2 dt$. The trace of $P$ measures the total energy dissipation of the system.
+        Blurring is often modeled as $Y = AXB + N$, where $A$ and $B$ represent horizontal and vertical blurring operators. Restoring the image involves solving this matrix equation (usually with a regularization term).
 
 ## Chapter Summary
 
-This chapter establishes the algebraic theory of matrix-valued unknowns:
+Matrix equations are the dynamic logic of linear algebra:
 
-1. **Spectral Disjointness**: Defined the universal condition for the existence and uniqueness of solutions to Sylvester-type equations.
-2. **Stability Engine**: Formulated the Lyapunov equation as the definitive algebraic test for dynamical equilibrium.
-3. **Triangular Reduction**: Introduced the Bartels-Stewart algorithm as the numerically stable path for solving high-dimensional matrix systems.
-4. **Structural Decoupling**: Demonstrated the role of matrix equations in the canonical reduction and block-diagonalization of operators.
+1. **Spectral Interaction**: The existence of a solution depends on the separation of the spectra of the two operators.
+2. **Energy Mapping**: Lyapunov equations build a direct bridge between algebra and dynamical stability.
+3. **Optimization Core**: From linear to quadratic equations (Riccati), matrix equations form the computational base of modern control theory.
