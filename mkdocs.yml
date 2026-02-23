@@ -50,13 +50,15 @@ plugins:
           site_name: "Linear Algebra Compendium"
           nav_translations:
             首页: Home
-            第一部分 基础线性代数: "Part I  Foundations"
-            第二部分 中级与抽象线性代数: "Part II  Intermediate & Abstract"
-            第三部分 矩阵分析与高级理论: "Part III  Matrix Analysis & Advanced Theory"
-            第四部分 特殊矩阵类与结构: "Part IV  Special Matrix Classes & Structures"
-            第五部分 代数结构推广: "Part V  Algebraic Generalizations"
-            第六部分 数值、随机与现代专题: "Part VI  Numerical, Random & Modern"
-            第七部分 线性代数应用全览: "Part VII  Applications"
+            第一部分 基础线性代数: "Part I: Foundations"
+            第二部分 中级与抽象线性代数: "Part II: Intermediate"
+            第三部分 矩阵分析与高级理论: "Part III: Advanced Theory"
+            第四部分 特殊矩阵类与结构: "Part IV: Structures"
+            第五部分 代数结构推广: "Part V: Generalizations"
+            第六部分 数值与随机专题: "Part VI: Numerical & Random"
+            第七部分 矩阵几何与优化: "Part VII: Geometry & Opt"
+            第八部分 组合与代数专题: "Part VIII: Combinatorial"
+            第九部分 线性代数应用全览: "Part IX: Applications"
   - search:
       separator: '[\s\-\.\u200b\u3000]+'
       lang:
@@ -129,19 +131,9 @@ nav:
     - 第18章 矩阵不等式: part3/ch18-matrix-inequalities.md
     - 第19章 Kronecker积与Vec算子: part3/ch19-kronecker.md
     - 第20章 矩阵方程: part3/ch20-matrix-equations.md
+  - 第四部分 特殊矩阵类与结构:
     - 第31章 Majorization与双随机矩阵: part6/ch31-majorization.md
     - 第32章 数值域与数值半径: part6/ch32-numerical-range.md
-    - 第36章 矩阵稳定性与惯性: part6/ch36-matrix-stability.md
-    - 第41A章 正则矩阵束: part6/ch41a-regular-pencils.md
-    - 第41B章 Kronecker标准形与应用: part6/ch41b-kronecker-applications.md
-    - 第42章 不变子空间与扰动: part6/ch42-invariant-subspaces.md
-    - 第43章 伪谱与非正规矩阵分析: part6/ch43-pseudospectra.md
-    - 第44章 Weyr标准形: part6/ch44-weyr-form.md
-    - 第46A章 算子单调函数: part6/ch46a-operator-monotone.md
-    - 第46B章 矩阵均值: part6/ch46b-matrix-means.md
-    - 第47A章 矩阵微积分基础: part6/ch47a-matrix-calculus-elementary.md
-    - 第47B章 Fréchet导数与高阶理论: part6/ch47b-frechet-derivatives.md
-  - 第四部分 特殊矩阵类与结构:
     - 第33章 广义逆: part6/ch33-generalized-inverses.md
     - 第34章 Schur补: part6/ch34-schur-complement.md
     - 第35章 Hadamard积: part6/ch35-hadamard-product.md
@@ -152,10 +144,6 @@ nav:
     - 第39章 全正矩阵: part6/ch39-totally-positive.md
     - 第40A章 永久式: part6/ch40a-permanents.md
     - 第40B章 Immanant: part6/ch40b-immanants.md
-    - 第45A章 完全正矩阵: part6/ch45a-completely-positive.md
-    - 第45B章 共正矩阵与共正规划: part6/ch45b-copositive-programming.md
-    - 第65A章 符号模式矩阵: part8/ch65a-sign-patterns.md
-    - 第65B章 组合矩阵结构: part8/ch65b-combinatorial-structures.md
   - 第五部分 代数结构推广:
     - 第21章 多线性代数与张量: part4/ch21-multilinear-algebra.md
     - 第49章 外代数与Grassmannian: part7/ch49-exterior-algebra.md
@@ -168,22 +156,35 @@ nav:
     - 第55章 矩阵群与经典Lie群: part7/ch55-matrix-groups.md
     - 第55B章 李代数与无限小生成元: part7/ch55b-lie-algebras.md
     - 第56章 Pfaffian: part7/ch56-pfaffian.md
-    - 第59A章 热带半环与热带矩阵: part8/ch59a-tropical-semiring.md
-    - 第59B章 热带几何与应用: part8/ch59b-tropical-geometry.md
-    - 第60章 线性保持问题: part8/ch60-linear-preservers.md
-    - 第63A章 同时三角化: part8/ch63a-simultaneous-triangularization.md
-  - 第六部分 数值、随机与现代专题:
+  - 第六部分 数值与随机专题:
     - 第22章 数值线性代数: part4/ch22-numerical-linear-algebra.md
     - 第23章 随机矩阵初步: part4/ch23-random-matrices.md
-    - 第24章 矩阵流形: part4/ch24-matrix-manifolds.md
+    - 第41A章 正则矩阵束: part6/ch41a-regular-pencils.md
+    - 第41B章 Kronecker标准形与应用: part6/ch41b-kronecker-applications.md
+    - 第43章 伪谱与非正规矩阵分析: part6/ch43-pseudospectra.md
     - 第57章 矩阵浓度不等式: part8/ch57-matrix-concentration.md
-    - 第58章 非负矩阵分解: part8/ch58-nmf.md
+  - 第七部分 矩阵几何与优化:
+    - 第24章 矩阵流形: part4/ch24-matrix-manifolds.md
+    - 第42章 不变子空间与扰动: part6/ch42-invariant-subspaces.md
+    - 第44章 Weyr标准形: part6/ch44-weyr-form.md
+    - 第46A章 算子单调函数: part6/ch46a-operator-monotone.md
+    - 第46B章 矩阵均值: part6/ch46b-matrix-means.md
     - 第61章 逆特征值问题: part8/ch61-inverse-eigenvalue.md
     - 第62章 矩阵补全问题: part8/ch62-matrix-completion.md
     - 第63B章 联合谱半径: part8/ch63b-joint-spectral-radius.md
     - 第64A章 矩阵空间中的凸集: part8/ch64a-convex-sets-matrices.md
     - 第64B章 矩阵凸函数: part8/ch64b-matrix-convex-functions.md
-  - 第七部分 线性代数应用全览:
+  - 第八部分 组合与代数专题:
+    - 第45A章 完全正矩阵: part6/ch45a-completely-positive.md
+    - 第45B章 共正矩阵与共正规划: part6/ch45b-copositive-programming.md
+    - 第58章 非负矩阵分解: part8/ch58-nmf.md
+    - 第59A章 热带半环与热带矩阵: part8/ch59a-tropical-semiring.md
+    - 第59B章 热带几何与应用: part8/ch59b-tropical-geometry.md
+    - 第60章 线性保持问题: part8/ch60-linear-preservers.md
+    - 第63A章 同时三角化: part8/ch63a-simultaneous-triangularization.md
+    - 第65A章 符号模式矩阵: part8/ch65a-sign-patterns.md
+    - 第65B章 组合矩阵结构: part8/ch65b-combinatorial-structures.md
+  - 第九部分 线性代数应用全览:
     - 第25章 线性代数在优化中的应用: part4/ch25-optimization.md
     - 第26章 线性代数在微分方程中的应用: part5/ch26-differential-equations.md
     - 第27章 线性代数在图论与网络中的应用: part5/ch27-graph-theory.md
